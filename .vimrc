@@ -12,23 +12,25 @@
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
-set number 				"line numbers
-colorscheme spacegray			"color scheme
-set showcmd				"show commands at the bottom
-set linebreak				"allow linebreaks between words
-"set hlsearch				"highlight search results
-set ruler				"show line and cursor position
-set encoding=utf-8			"default encode
-set guicursor+=i:ver25-iCursor		"insert cursor in GVIM, need for coloring
-set guicursor+=a:blinkon0		"disable cursor blinking
-set guioptions=aegimrLt			"remove Toolbar
-set guioptions-=mrL			"remove: menu bar, right scroolbar, left scrollbar (NERDTree)
-set guifont=DejaVu\ Sans\ Mono\ 10	"font type for GVim
-set t_Co=256				"set terminal to 256 color
-"set lines=25 columns=90		"set in ~/.gvimrc for GVIM
-set rnu					"relative line numbering
-set cursorline				"highlight current line
-let NERDTreeShowBookmarks=1		"show NERDTree Bookmarks
+set number 										"line numbers
+colorscheme spacegray							"color scheme
+set showcmd										"show commands at the bottom
+set linebreak									"allow linebreaks between words
+"set hlsearch									"highlight search results
+set ruler										"show line and cursor position
+set tabstop=4									"tab width
+set shiftwidth=4								"indent width
+set encoding=utf-8								"default encode
+set guicursor+=i:ver25-iCursor					"insert cursor in GVIM, need for coloring
+set guicursor+=a:blinkon0						"disable cursor blinking
+set guioptions=aegimrLt							"remove Toolbar
+set guioptions-=mrL								"remove: menu bar & scroll bars
+set guifont=DejaVu\ Sans\ Mono\ 10				"font type for GVim
+set t_Co=256									"set terminal to 256 color
+"set lines=25 columns=90						"set in ~/.gvimrc for GVIM
+set rnu											"relative line numbering
+set cursorline									"highlight current line
+let NERDTreeShowBookmarks=1						"show NERDTree Bookmarks
 
 "Colorize cursor in terminal vim
 if &term =~ "xterm\\|rxvt"
@@ -75,6 +77,7 @@ endif
 """"""""""""
 imap éé <Esc>
 imap űű <Esc>"*p
+imap úú <Esc>"+p
 map <Enter> o<ESC>
 map <S-Enter> O<ESC>
 map őő gT
