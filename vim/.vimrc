@@ -66,7 +66,7 @@ command! Menu if &go=~'m'|set go-=m|else|set go+=m|endif
 command! QQ tabnew|tabprevious|bd
 
 "Remove Trailing White Space
-command! Rtws %s/\s\+$//|echom "Removing trailing white spaces"
+command! RWS %s/\s\+$//|echom "Removing trailing white spaces"
 
 "Source .vimrc
 if !exists("*ReloadVimrc")
