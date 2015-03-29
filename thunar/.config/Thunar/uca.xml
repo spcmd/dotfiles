@@ -1,0 +1,43 @@
+<?xml encoding="UTF-8" version="1.0"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<unique-id>1423303908868589-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>edit-copy</icon>
+	<name>Quick backup here</name>
+	<unique-id>1424777356326757-3</unique-id>
+	<command>cp %f %f.bak &amp;&amp; notify-send &quot;Quick backup done&quot;</command>
+	<description>Make a quick backup of a file</description>
+	<patterns>*</patterns>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>video-x-generic</icon>
+	<name>Move videos here from subdirs </name>
+	<unique-id>1425226777633170-10</unique-id>
+	<command>find . -type f \( -name &quot;*.avi&quot; -or -name &quot;*.mkv&quot; \) -exec mv {} ./ \;</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>sublime-text</icon>
+	<name>Boomark to Sublime Text</name>
+	<unique-id>1427468534130459-12</unique-id>
+	<command>ln -s %F ~/.config/sublime-text-3/Packages/User/Bookmarks &amp;&amp; notify-send -i sublime-text &quot;Bookmark to Sublime Text&quot; &quot;File bookmarked&quot;</command>
+	<description>Symlink file to Sublime Text&apos;s Bookmarks folder</description>
+	<patterns>*</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+</actions>

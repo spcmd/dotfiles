@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/file:///usr/share/openbox/menu.xsd">
+	<menu id="root-menu" label="Openbox 3">
+		<item label="Start the day!">
+			<action name="Execute">
+				<execute>/home/spc/bin/start-the-day</execute>
+			</action>
+		</item>
+		<separator/>
+		<item label="Terminal">
+			<action name="Execute">
+				<execute>x-terminal-emulator</execute>
+			</action>
+		</item>
+		<item label="Thunar">
+			<action name="Execute">
+				<execute>thunar ~/Downloads</execute>
+			</action>
+		</item>
+		<item label="Firefox">
+			<action name="Execute">
+				<execute>firefox</execute>
+			</action>
+		</item>
+		<item label="Sublime Text">
+			<action name="Execute">
+				<execute>/opt/sublime_text/sublime_text</execute>
+			</action>
+		</item>
+		<item label="GVIM">
+			<action name="Execute">
+				<execute>gvim</execute>
+			</action>
+		</item>
+		<item label="Leafpad">
+			<action name="Execute">
+				<execute>leafpad</execute>
+			</action>
+		</item>
+		<!-- This requires the presence of the 'menu' package to work -->
+		<item label="Spotify">
+			<action name="Execute">
+				<execute>spotify --ui.track_notifications_enabled=false</execute>
+			</action>
+		</item>
+		<item label="Transmission">
+			<action name="Execute">
+				<execute>transmission-gtk</execute>
+			</action>
+		</item>
+		<item label="Galculator">
+			<action name="Execute">
+				<execute>galculator</execute>
+			</action>
+		</item>
+		<item label="Gpick">
+			<action name="Execute">
+				<execute>gpick</execute>
+			</action>
+		</item>
+		<separator/>
+		<menu id="client-list-menu"/>
+		<separator/>
+		<menu id="root-menu-801327" label="RFKill">
+			<item label="Unblock Wifi">
+				<action name="Execute">
+					<execute>sudo rfkill unblock wifi</execute>
+				</action>
+			</item>
+			<item label="Block Wifi">
+				<action name="Execute">
+					<execute>sudo rfkill block wifi</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-34364" label="Config">
+			<item label="Lxappearance">
+				<action name="Execute">
+					<execute>lxappearance</execute>
+				</action>
+			</item>
+			<item label="Obmenu">
+				<action name="Execute">
+					<execute>obmenu</execute>
+				</action>
+			</item>
+			<item label="ObConf">
+				<action name="Execute">
+					<execute>obconf</execute>
+				</action>
+			</item>
+			<item label="Nitrogen">
+				<action name="Execute">
+					<execute>nitrogen</execute>
+				</action>
+			</item>
+			<item label="XFCE4 notifyd config">
+				<action name="Execute">
+					<execute>xfce4-notifyd-config</execute>
+				</action>
+			</item>
+			<item label="Thunar Volman Settings">
+				<action name="Execute">
+					<execute>thunar-volman-settings</execute>
+				</action>
+			</item>
+			<item label="Configure Printers">
+				<action name="Execute">
+					<execute>system-config-printer</execute>
+				</action>
+			</item>
+			<item label="Reconfigure Openbox">
+				<action name="Reconfigure"/>
+			</item>
+		</menu>
+		<separator/>
+		<menu id="root-menu-994244" label="Office &amp; Scan">
+			<item label="LibreOffice Calc">
+				<action name="Execute">
+					<execute>libreoffice --calc</execute>
+				</action>
+			</item>
+			<item label="LibreOffice Writer">
+				<action name="Execute">
+					<execute>libreoffice --writer</execute>
+				</action>
+			</item>
+			<item label="Simple Scan">
+				<action name="Execute">
+					<execute>simple-scan</execute>
+				</action>
+			</item>
+			<item label="Clear Admin Számlázó">
+				<action name="Execute">
+					<execute>env LANG=hu_HU.UTF-8 wine &quot;/home/spc/.wine/drive_c/Program Files (x86)/Clear Admin Szamlazo/Szamlazo.exe&quot;</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-955110" label="Graphics">
+			<item label="GIMP">
+				<action name="Execute">
+					<execute>gimp</execute>
+				</action>
+			</item>
+			<item label="Inkscape">
+				<action name="Execute">
+					<execute>inkscape</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-69569" label="Other Apps">
+			<item label="Xfce4 Task Manager">
+				<action name="Execute">
+					<execute>xfce4-taskmanager</execute>
+				</action>
+			</item>
+			<item label="Google Chrome">
+				<action name="Execute">
+					<execute>google-chrome-stable</execute>
+				</action>
+			</item>
+			<item label="GTKPod">
+				<action name="Execute">
+					<execute>gtkpod</execute>
+				</action>
+			</item>
+			<item label="Virtualbox">
+				<action name="Execute">
+					<execute>virtualbox</execute>
+				</action>
+			</item>
+			<item label="XAMPP">
+				<action name="Execute">
+					<execute>gksudo &quot;python /opt/lampp/share/xampp-control-panel/xampp-control-panel.py&quot;</execute>
+				</action>
+			</item>
+		</menu>
+		<separator/>
+		<item label="Restart tint2">
+			<action name="Execute">
+				<execute>/home/spc/bin/tint2-restart</execute>
+			</action>
+		</item>
+		<item label="Restart Openbox">
+			<action name="Restart"/>
+		</item>
+		<separator/>
+		<item label="Logout">
+			<action name="Exit"/>
+		</item>
+		<item label="Reboot">
+			<action name="Execute">
+				<prompt>
+            Are you sure you want to reboot?
+        </prompt>
+				<execute>sudo reboot</execute>
+			</action>
+		</item>
+		<item label="Suspend">
+			<action name="Execute">
+				<prompt>
+            Are you sure you want to suspend?
+        </prompt>
+				<execute>sudo pm-suspend</execute>
+			</action>
+		</item>
+		<item label="Shutdown">
+			<action name="Execute">
+				<prompt>
+            Are you sure you want to shutdown?
+        </prompt>
+				<execute>
+            sudo shutdown -h now
+        </execute>
+			</action>
+		</item>
+	</menu>
+</openbox_menu>
