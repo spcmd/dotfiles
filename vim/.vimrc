@@ -6,14 +6,14 @@
 "          https://gist.github.com/spcmd                    "
 " ========================================================= "
 
-""""""""""""
+"----------"
 " Settings "
-""""""""""""
+"----------"
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
 set number                                          "line numbers
-colorscheme spacegray                               "color scheme
+colorscheme spcmd                                   "color scheme
 set showcmd                                         "show commands at the bottom
 set linebreak                                       "allow linebreaks between words
 "set hlsearch                                       "highlight search results
@@ -26,7 +26,8 @@ set guicursor+=i:ver25-iCursor                      "insert cursor in GVIM, need
 set guicursor+=a:blinkon0                           "disable cursor blinking
 set guioptions=aegimrLt                             "remove Toolbar
 set guioptions-=mrL                                 "remove: menu bar & scroll bars
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10  "font type for GVim
+"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10  "font type for GVim
+set guifont=Liberation\ Mono\ for\ Powerline\ 10    "font type for GVim"
 set t_Co=256                                        "set terminal to 256 color
 "set lines=25 columns=90                            "set in ~/.gvimrc for GVIM
 set rnu                                             "relative line numbering
@@ -36,11 +37,12 @@ set laststatus=2                                    "always show statusline/airl
 set noshowmode                                      "disable default mode indicator (using airline's)
 let g:airline#extensions#tabline#enabled = 1        "display buffers at top
 let g:airline_powerline_fonts = 1                   "load patched powerline fonts
+let g:airline_theme='spcmd'                         "set airline theme
 
 "Colorize cursor in terminal vim
 if &term =~ "xterm\\|rxvt"
   "color in insert mode
-  let &t_SI = "\<Esc>]12;cyan\x7"
+  let &t_SI = "\<Esc>]12;DodgerBlue\x7"
   "color in other modes
   let &t_EI = "\<Esc>]12;yellow\x7"
   silent !echo -ne "\033]12;yellow\007"
@@ -49,13 +51,12 @@ if &term =~ "xterm\\|rxvt"
 endif
 
 "Colorize cursor in GVim
-hi Cursor guifg=black guibg=yellow
-hi iCursor guifg=white guibg=cyan
+hi Cursor guifg=#000000 guibg=#dfff00
+hi iCursor guifg=#ffffff guibg=#005fff
 
-""""""""""""""""""""""""
+"----------------------"
 " Commands & Functions "
-""""""""""""""""""""""""
-
+"----------------------"
 "Toggle Relative Line Numbering
 command! RL if &relativenumber == 1|set nornu|else|set rnu|endif
 
@@ -77,32 +78,38 @@ if !exists("*ReloadVimrc")
  command! Vimrc :call ReloadVimrc()
 endif
 
-""""""""""""
+"----------"
 " Keybinds "
-""""""""""""
+"----------"
 imap éé <Esc>
+vmap éé <Esc>
 imap űű <Esc>"*pA
-imap úú <Esc>"+p
+imap áá <Esc>"+p
 map <Enter> o<ESC>
 map <S-Enter> O<ESC>
 map őő gT
 map úú gt
 map <C-b> :NERDTreeToggle<CR>
 
-"yank & copy to system clipboard
+map <Up> :resize -5<CR>
+map <Down> :resize +5<CR>
+map <Left> :vertical resize +5<CR>
+map <Right> :vertical resize -5<CR>
+
+"yank/copy to system clipboard
 nnoremap y "+y
 vnoremap y "+y
 
 "Unmap the arrow keys (normal, insert, visual)
-no <up> <Nop>
-no <down> <Nop>
-no <left> <Nop>
-no <right> <Nop>
-ino <up> <Nop>
-ino <down> <Nop>
-ino <left> <Nop>
-ino <right> <Nop>
-vno <up> <Nop>
-vno <down> <Nop>
-vno <left> <Nop>
-vno <right> <Nop>
+"no <up> <Nop>
+"no <down> <Nop>
+"no <left> <Nop>
+"no <right> <Nop>
+"ino <up> <Nop>
+"ino <down> <Nop>
+"ino <left> <Nop>
+"ino <right> <Nop>
+"vno <up> <Nop>
+"vno <down> <Nop>
+"vno <left> <Nop>
+"vno <right> <Nop>
