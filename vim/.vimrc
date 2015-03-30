@@ -18,6 +18,7 @@ set showcmd                                         "show commands at the bottom
 set linebreak                                       "allow linebreaks between words
 "set hlsearch                                       "highlight search results
 set ruler                                           "show line and cursor position
+set hidden                                          "hide buffer, do not warn about unsaved
 set expandtab                                       "convert tabs to spaces
 set tabstop=4                                       "tab width
 set shiftwidth=4                                    "indent width
@@ -35,7 +36,8 @@ set cursorline                                      "highlight current line
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
 set laststatus=2                                    "always show statusline/airline
 set noshowmode                                      "disable default mode indicator (using airline's)
-let g:airline#extensions#tabline#enabled = 1        "display buffers at top
+let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
+let g:airline#extensions#tabline#fnamemod = ':t'    "show filenames only on tabs
 let g:airline_powerline_fonts = 1                   "load patched powerline fonts
 let g:airline_theme='spcmd'                         "set airline theme
 
@@ -63,9 +65,6 @@ command! RL if &relativenumber == 1|set nornu|else|set rnu|endif
 "Toggle GVim menu
 command! Menu if &go=~'m'|set go-=m|else|set go+=m|endif
 
-"Keep GVim window open: make new empty tab then close (the last) file
-command! QQ tabnew|tabprevious|bd
-
 "Remove Trailing White Space
 command! RWS %s/\s\+$//|echom "Removing trailing white spaces"
 
@@ -78,6 +77,9 @@ if !exists("*ReloadVimrc")
  command! Vimrc :call ReloadVimrc()
 endif
 
+"Quick delete/close buffer
+command! QQ bd
+
 "----------"
 " Keybinds "
 "----------"
@@ -87,8 +89,10 @@ imap űű <Esc>"*pA
 imap áá <Esc>"+p
 map <Enter> o<ESC>
 map <S-Enter> O<ESC>
-map őő gT
-map úú gt
+"map úú :tabnext<CR>
+"map őő :tabprevious<CR>
+map úú :bnext<CR>
+map őő :bprevious<CR>
 map <C-b> :NERDTreeToggle<CR>
 
 map <Up> :resize -5<CR>
