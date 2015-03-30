@@ -22,14 +22,14 @@ set expandtab                                       "convert tabs to spaces
 set tabstop=4                                       "tab width
 set shiftwidth=4                                    "indent width
 set encoding=utf-8                                  "default encode
-set guicursor+=i:ver25-iCursor                      "insert cursor in GVIM, need for coloring
+set guicursor+=i:ver25-iCursor                      "insert cursor in GVim, need for coloring
 set guicursor+=a:blinkon0                           "disable cursor blinking
 set guioptions=aegimrLt                             "remove Toolbar
 set guioptions-=mrL                                 "remove: menu bar & scroll bars
 "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10  "font type for GVim
-set guifont=Liberation\ Mono\ for\ Powerline\ 10    "font type for GVim"
+set guifont=Liberation\ Mono\ for\ Powerline\ 10    "font type for GVim
 set t_Co=256                                        "set terminal to 256 color
-"set lines=25 columns=90                            "set in ~/.gvimrc for GVIM
+"set lines=25 columns=90                            "set in ~/.gvimrc for GVim
 set rnu                                             "relative line numbering
 set cursorline                                      "highlight current line
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
@@ -60,10 +60,10 @@ hi iCursor guifg=#ffffff guibg=#005fff
 "Toggle Relative Line Numbering
 command! RL if &relativenumber == 1|set nornu|else|set rnu|endif
 
-"Toggle GVIM menu
+"Toggle GVim menu
 command! Menu if &go=~'m'|set go-=m|else|set go+=m|endif
 
-"Keep GVIM window open: make new empty tab then close (the last) file
+"Keep GVim window open: make new empty tab then close (the last) file
 command! QQ tabnew|tabprevious|bd
 
 "Remove Trailing White Space
