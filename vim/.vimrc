@@ -16,7 +16,7 @@ set number                                          "line numbers
 colorscheme spcmd                                   "color scheme
 set showcmd                                         "show commands at the bottom
 set linebreak                                       "allow linebreaks between words
-"set hlsearch                                       "highlight search results
+set hlsearch                                        "highlight search results
 set ruler                                           "show line and cursor position
 set hidden                                          "hide buffer, do not warn about unsaved
 set expandtab                                       "convert tabs to spaces
@@ -34,6 +34,7 @@ set t_Co=256                                        "set terminal to 256 color
 set rnu                                             "relative line numbering
 set cursorline                                      "highlight current line
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
+let mapleader = "\<Space>"                          "remap leader key, instead of using \
 set laststatus=2                                    "always show statusline/airline
 set noshowmode                                      "disable default mode indicator (using airline's)
 let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
@@ -87,33 +88,32 @@ imap éé <Esc>
 vmap éé <Esc>
 imap űű <Esc>"*pA
 imap áá <Esc>"+p
-map <Enter> o<ESC>
-map <S-Enter> O<ESC>
-"map úú :tabnext<CR>
-"map őő :tabprevious<CR>
+map <Enter> O<ESC>
+map <S-Enter> o<ESC>
 map úú :bnext<CR>
 map őő :bprevious<CR>
 map <C-b> :NERDTreeToggle<CR>
 
+"Faster scrolling
+nmap <C-j> <C-d>
+nmap <C-k> <C-u>
+
+"Toggle search highlight
+let hlstate=0
+nnoremap <leader><space> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
+
+"Split window resize
 map <Up> :resize -5<CR>
 map <Down> :resize +5<CR>
 map <Left> :vertical resize +5<CR>
 map <Right> :vertical resize -5<CR>
 
+"Split window navigation
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+
 "yank/copy to system clipboard
 nnoremap y "+y
 vnoremap y "+y
-
-"Unmap the arrow keys (normal, insert, visual)
-"no <up> <Nop>
-"no <down> <Nop>
-"no <left> <Nop>
-"no <right> <Nop>
-"ino <up> <Nop>
-"ino <down> <Nop>
-"ino <left> <Nop>
-"ino <right> <Nop>
-"vno <up> <Nop>
-"vno <down> <Nop>
-"vno <left> <Nop>
-"vno <right> <Nop>
