@@ -49,6 +49,14 @@ echo "nerdcommenter moved to: $VIM_BUNDLE_DIR"
 git clone git://github.com/ajh17/Spacegray.vim.git
 mv Spacegray.vim $VIM_BUNDLE_DIR
 echo "Spacegray.vim moved to: $VIM_BUNDLE_DIR"
+# vim-misc (needed for vim-session)
+git clone https://github.com/xolox/vim-misc.git
+mv vim-misc $VIM_BUNDLE_DIR
+echo "vim-misc moved to: $VIM_BUNDLE_DIR"
+# vim-session
+git clone https://github.com/xolox/vim-session.git
+mv vim-session $VIM_BUNDLE_DIR
+echo "vim-session moved to: $VIM_BUNDLE_DIR"
 
 # YouCompleteMe plugin have some dependencies, so it's better to install it manually
 echo "YouCompleteMe isn't installed automatically. This bundle have some dependencies, so please visit https://github.com/Valloric/YouCompleteMe or http://valloric.github.io/YouCompleteMe for more information, and install it manually."

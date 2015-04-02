@@ -23,6 +23,8 @@ set expandtab                                       "convert tabs to spaces
 set tabstop=4                                       "tab width
 set shiftwidth=4                                    "indent width
 set encoding=utf-8                                  "default encode
+set splitbelow                                      "horizontal split: open below
+set splitright                                      "vertical split: open to the right
 set guicursor+=i:ver25-iCursor                      "insert cursor in GVim, need for coloring
 set guicursor+=a:blinkon0                           "disable cursor blinking
 set guioptions=aegimrLt                             "remove Toolbar
@@ -41,6 +43,8 @@ let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the
 let g:airline#extensions#tabline#fnamemod = ':t'    "show filenames only on tabs
 let g:airline_powerline_fonts = 1                   "load patched powerline fonts
 let g:airline_theme='spcmd'                         "set airline theme
+let g:session_autosave="yes"                        "autosave session
+let g:session_autoload="yes"                        "autosave session
 
 "Colorize cursor in terminal vim
 if &term =~ "xterm\\|rxvt"

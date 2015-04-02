@@ -27,7 +27,12 @@
 				<execute>/opt/sublime_text/sublime_text</execute>
 			</action>
 		</item>
-		<item label="GVIM">
+		<item label="Vim">
+			<action name="Execute">
+				<execute>x-terminal-emulator -e 'vim'</execute>
+			</action>
+		</item>
+		<item label="GVim">
 			<action name="Execute">
 				<execute>gvim</execute>
 			</action>
