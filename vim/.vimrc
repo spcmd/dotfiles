@@ -19,6 +19,7 @@ set linebreak                                       "allow linebreaks between wo
 set hlsearch                                        "highlight search results
 set ruler                                           "show line and cursor position
 set hidden                                          "hide buffer, do not warn about unsaved
+set confirm                                         "save confirmation dialog
 set expandtab                                       "convert tabs to spaces
 set tabstop=4                                       "tab width
 set shiftwidth=4                                    "indent width
@@ -32,19 +33,19 @@ set guioptions-=mrL                                 "remove: menu bar & scroll b
 "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10  "font type for GVim
 set guifont=Liberation\ Mono\ for\ Powerline\ 10    "font type for GVim
 set t_Co=256                                        "set terminal to 256 color
-"set lines=25 columns=90                            "set in ~/.gvimrc for GVim
+set lines=35 columns=110                            "set in ~/.gvimrc for GVim
 set rnu                                             "relative line numbering
 set cursorline                                      "highlight current line
-let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
-let mapleader = "\<Space>"                          "remap leader key, instead of using \
 set laststatus=2                                    "always show statusline/airline
 set noshowmode                                      "disable default mode indicator (using airline's)
+let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
+let mapleader = "\<Space>"                          "remap leader key, instead of using \
 let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
 let g:airline#extensions#tabline#fnamemod = ':t'    "show filenames only on tabs
 let g:airline_powerline_fonts = 1                   "load patched powerline fonts
 let g:airline_theme='spcmd'                         "set airline theme
 let g:session_autosave="yes"                        "autosave session
-let g:session_autoload="yes"                        "autosave session
+let g:session_autoload="yes"                        "autoload session
 
 "Colorize cursor in terminal vim
 if &term =~ "xterm\\|rxvt"
@@ -67,23 +68,29 @@ hi iCursor guifg=#ffffff guibg=#005fff
 "Toggle Relative Line Numbering
 command! RL if &relativenumber == 1|set nornu|else|set rnu|endif
 
-"Toggle GVim menu
-command! Menu if &go=~'m'|set go-=m|else|set go+=m|endif
-
 "Remove Trailing White Space
 command! RWS %s/\s\+$//|echom "Removing trailing white spaces"
 
-"Source .vimrc
-if !exists("*ReloadVimrc")
- function! ReloadVimrc()
-  source ~/.vimrc
-  echom "Done: sourcing .vimrc"
- endfunction
- command! Vimrc :call ReloadVimrc()
-endif
-
 "Quick delete/close buffer
-command! QQ bd
+command! QQ bd!
+
+"Delete file and buffer
+command! DF :call delete(expand('%'))|bd!
+
+"Create new buffer and save it automatically
+command! BB enew|exec 'w ~/.vim/backup/autosave'.localtime()
+
+"Fix accidentally shifted commands
+command! WQ wq
+command! Wq wq
+command! W w
+command! Q q
+
+"Reload .vimrc (save & source)
+command! RR write|source ~/.vimrc
+
+"Resize (terminal) window on quit
+autocmd VimLeavePre * silent set lines=25 columns=90
 
 "----------"
 " Keybinds "
@@ -92,11 +99,11 @@ imap éé <Esc>
 vmap éé <Esc>
 imap űű <Esc>"*pA
 imap áá <Esc>"+p
-map <Enter> O<ESC>
-map <S-Enter> o<ESC>
-map úú :bnext<CR>
-map őő :bprevious<CR>
-map <C-b> :NERDTreeToggle<CR>
+nmap <Enter> o<ESC>
+nmap <S-Enter> O<ESC>
+nmap ú :bnext<CR>
+nmap ő :bprevious<CR>
+nmap <C-b> :NERDTreeToggle<CR>
 
 "Faster scrolling
 nmap <C-j> <C-d>

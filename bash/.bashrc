@@ -52,9 +52,9 @@ case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
 
-if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
-    export TERM=xterm-256color
-fi
+# if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
+#     export TERM=xterm-256color
+# fi
 
 # color prompt
 force_color_prompt=yes
