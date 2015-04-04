@@ -438,6 +438,10 @@
         </else>
       </action>
     </keybind>
+    <!-- Toggle window decorations -->
+    <keybind key="W-w">
+      <action name="ToggleDecorations"/>
+    </keybind>
   </keyboard>
   <mouse>
     <dragThreshold>1</dragThreshold>

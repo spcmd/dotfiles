@@ -22,7 +22,9 @@ set hidden                                          "hide buffer, do not warn ab
 set confirm                                         "save confirmation dialog
 set expandtab                                       "convert tabs to spaces
 set tabstop=4                                       "tab width
+set softtabstop=4                                   "fix backspace width in insert mode
 set shiftwidth=4                                    "indent width
+set smarttab                                        "backspace behaviour on indented lines
 set encoding=utf-8                                  "default encode
 set splitbelow                                      "horizontal split: open below
 set splitright                                      "vertical split: open to the right
@@ -30,7 +32,6 @@ set guicursor+=i:ver25-iCursor                      "insert cursor in GVim, need
 set guicursor+=a:blinkon0                           "disable cursor blinking
 set guioptions=aegimrLt                             "remove Toolbar
 set guioptions-=mrL                                 "remove: menu bar & scroll bars
-"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10  "font type for GVim
 set guifont=Liberation\ Mono\ for\ Powerline\ 10    "font type for GVim
 set t_Co=256                                        "set terminal to 256 color
 set lines=35 columns=110                            "set in ~/.gvimrc for GVim
@@ -38,10 +39,12 @@ set rnu                                             "relative line numbering
 set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline
 set noshowmode                                      "disable default mode indicator (using airline's)
+set listchars=tab:▸\ ,eol:¬                         "tab and EOL chars
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
 let mapleader = "\<Space>"                          "remap leader key, instead of using \
 let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
 let g:airline#extensions#tabline#fnamemod = ':t'    "show filenames only on tabs
+let g:airline_section_b = '%{getcwd()}'             "show present working directory
 let g:airline_powerline_fonts = 1                   "load patched powerline fonts
 let g:airline_theme='spcmd'                         "set airline theme
 let g:session_autosave="yes"                        "autosave session
@@ -72,13 +75,34 @@ command! RL if &relativenumber == 1|set nornu|else|set rnu|endif
 command! RWS %s/\s\+$//|echom "Removing trailing white spaces"
 
 "Quick delete/close buffer
-command! QQ bd!
+command! QQ bd
 
 "Delete file and buffer
 command! DF :call delete(expand('%'))|bd!
 
 "Create new buffer and save it automatically
-command! BB enew|exec 'w ~/.vim/backup/autosave'.localtime()
+command! BB enew|exec 'w ~/.vim/backup/autosave'.strftime('%Y%m%d%H%M%S')
+
+"Save autosaved file in another filename and delete the autosaved file
+function! AS_SaveAsAndDelete()
+    if @% =~# 'autosave'
+        let currentfile = @%
+        let cwd = getcwd()
+        call inputsave()
+        let newfilename = input('Save as: '.cwd.'/')
+        call inputrestore()
+        execute 'save '.newfilename.''
+        call delete(expand(currentfile))
+        bd! #
+    else
+        echom "No-no! You can't use AS command on non-autosave files."
+    endif
+endfunction
+
+command! SA :call AS_SaveAsAndDelete()
+
+"Dump unused stuff to another file (save for later)
+command! -range Dump <line1>,<line2> write >> ~/Documents/vimdump.txt|<line1>,<line2> d
 
 "Fix accidentally shifted commands
 command! WQ wq
@@ -104,6 +128,13 @@ nmap <S-Enter> O<ESC>
 nmap ú :bnext<CR>
 nmap ő :bprevious<CR>
 nmap <C-b> :NERDTreeToggle<CR>
+nmap <leader>, :set list!<CR>
+
+"Indenting
+nmap <S-tab> <<
+nmap <tab> >>
+vmap <S-tab> <gv
+vmap <tab> >gv
 
 "Faster scrolling
 nmap <C-j> <C-d>
