@@ -26,6 +26,8 @@ set softtabstop=4                                   "fix backspace width in inse
 set shiftwidth=4                                    "indent width
 set smarttab                                        "backspace behaviour on indented lines
 set encoding=utf-8                                  "default encode
+set ttimeout                                        "reduce timeout after <Esc>
+set ttimeoutlen=10                                  "reduce timeout after <Esc>
 set splitbelow                                      "horizontal split: open below
 set splitright                                      "vertical split: open to the right
 set guicursor+=i:ver25-iCursor                      "insert cursor in GVim, need for coloring
@@ -72,7 +74,7 @@ hi iCursor guifg=#ffffff guibg=#005fff
 command! RL if &relativenumber == 1|set nornu|else|set rnu|endif
 
 "Remove Trailing White Space
-command! RWS %s/\s\+$//|echom "Removing trailing white spaces"
+command! RWS %s/\s\+$//|echo "Removing trailing white spaces"
 
 "Quick delete/close buffer
 command! QQ bd
@@ -83,26 +85,15 @@ command! DF :call delete(expand('%'))|bd!
 "Create new buffer and save it automatically
 command! BB enew|exec 'w ~/.vim/backup/autosave'.strftime('%Y%m%d%H%M%S')
 
-"Save autosaved file in another filename and delete the autosaved file
-function! AS_SaveAsAndDelete()
-    if @% =~# 'autosave'
-        let currentfile = @%
-        let cwd = getcwd()
-        call inputsave()
-        let newfilename = input('Save as: '.cwd.'/')
-        call inputrestore()
-        execute 'save '.newfilename.''
-        call delete(expand(currentfile))
-        bd! #
-    else
-        echom "No-no! You can't use AS command on non-autosave files."
-    endif
-endfunction
-
-command! SA :call AS_SaveAsAndDelete()
-
-"Dump unused stuff to another file (save for later)
-command! -range Dump <line1>,<line2> write >> ~/Documents/vimdump.txt|<line1>,<line2> d
+"DumpDelete (dump unused stuff to another file > save for later) + Open Dump
+let DUMPFILE = "~/.vim/backup/vimdump.vim"
+if !empty(glob(DUMPFILE))
+    command! OD exec 'edit '.DUMPFILE
+    command! -range DD exec 'redir! >> '.DUMPFILE.'|echo "\r\r"|redir end|<line1>,<line2> write >> '.DUMPFILE.'|<line1>,<line2> d'
+else
+    command! OD echo "ERROR: Dump file doesn't exist."
+    command! -range DD echo "ERROR: Dump file doesn't exist."
+endif
 
 "Fix accidentally shifted commands
 command! WQ wq
@@ -119,8 +110,8 @@ autocmd VimLeavePre * silent set lines=25 columns=90
 "----------"
 " Keybinds "
 "----------"
-imap éé <Esc>
-vmap éé <Esc>
+"map éé <Esc>
+"vmap éé <Esc>
 imap űű <Esc>"*pA
 imap áá <Esc>"+p
 nmap <Enter> o<ESC>
@@ -129,6 +120,10 @@ nmap ú :bnext<CR>
 nmap ő :bprevious<CR>
 nmap <C-b> :NERDTreeToggle<CR>
 nmap <leader>, :set list!<CR>
+
+"move up/down on displayed lines, not real lines
+noremap k gk
+noremap j gj
 
 "Indenting
 nmap <S-tab> <<
