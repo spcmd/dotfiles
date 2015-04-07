@@ -80,7 +80,18 @@ command! RWS %s/\s\+$//|echo "Removing trailing white spaces"
 command! QQ bd
 
 "Delete file and buffer
-command! DF :call delete(expand('%'))|bd!
+function! DFchecker()
+    if expand("%:t:r") == '.vimrc'
+        echo "ERROR! You can't delete the .vimrc"
+    elseif expand("%:t:r") == '.gvimrc'
+        echo "ERROR! You can't delete the .gvimrc"
+    elseif expand("%:t:r") == 'vimdump'
+        echo "ERROR! You can't delete the vimdump"
+    else
+        call delete(expand('%'))|bd!
+    endif
+endfunction
+command! DF :call DFchecker()
 
 "Create new buffer and save it automatically
 command! BB enew|exec 'w ~/.vim/backup/autosave'.strftime('%Y%m%d%H%M%S')

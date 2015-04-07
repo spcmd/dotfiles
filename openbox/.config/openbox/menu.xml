@@ -63,6 +63,11 @@
 				<execute>gpick</execute>
 			</action>
 		</item>
+		<item label="urxvt">
+			<action name="Execute">
+				<execute>urxvt</execute>
+			</action>
+		</item>
 		<separator/>
 		<menu id="client-list-menu"/>
 		<separator/>
@@ -177,6 +182,11 @@
 			<item label="XAMPP">
 				<action name="Execute">
 					<execute>gksudo &quot;python /opt/lampp/share/xampp-control-panel/xampp-control-panel.py&quot;</execute>
+				</action>
+			</item>
+			<item label="Font Manager">
+				<action name="Execute">
+					<execute>font-manager</execute>
 				</action>
 			</item>
 		</menu>
