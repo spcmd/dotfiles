@@ -36,12 +36,13 @@ set guioptions=aegimrLt                             "remove Toolbar
 set guioptions-=mrL                                 "remove: menu bar & scroll bars
 set guifont=Liberation\ Mono\ for\ Powerline\ 10    "font type for GVim
 set t_Co=256                                        "set terminal to 256 color
-set lines=35 columns=110                            "set in ~/.gvimrc for GVim
+set lines=40 columns=130                            "set in ~/.gvimrc for GVim
 set rnu                                             "relative line numbering
 set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline
 set noshowmode                                      "disable default mode indicator (using airline's)
 set listchars=tab:▸\ ,eol:¬                         "tab and EOL chars
+set nofoldenable                                    "disable automatic folding
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
 let mapleader = "\<Space>"                          "remap leader key, instead of using \
 let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
@@ -106,6 +107,10 @@ else
     command! -range DD echo "ERROR: Dump file doesn't exist."
 endif
 
+"Todo list check (keybinds below)
+command! TodoCheck :normal 0i✓ <ESC>lxxA ^DONE (<C-R>=strftime("%Y-%m-%d %a %H:%M:%S")<CR>)<ESC>
+command! TodoUncheck :normal 0xi-<ESC>f^Dx
+
 "Fix accidentally shifted commands
 command! WQ wq
 command! Wq wq
@@ -114,6 +119,9 @@ command! Q q
 
 "Reload .vimrc (save & source)
 command! RR write|source ~/.vimrc
+
+"Save all when Vim window lost focus
+:au FocusLost * silent! wa
 
 "Resize (terminal) window on quit
 autocmd VimLeavePre * silent set lines=25 columns=90
@@ -131,6 +139,8 @@ nmap ú :bnext<CR>
 nmap ő :bprevious<CR>
 nmap <C-b> :NERDTreeToggle<CR>
 nmap <leader>, :set list!<CR>
+nmap <leader>c :TodoCheck<CR>
+nmap <leader>x :TodoUncheck<CR>
 
 "move up/down on displayed lines, not real lines
 noremap k gk
