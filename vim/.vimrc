@@ -47,7 +47,7 @@ let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
 let mapleader = "\<Space>"                          "remap leader key, instead of using \
 let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
 let g:airline#extensions#tabline#fnamemod = ':t'    "show filenames only on tabs
-let g:airline_section_b = '%{getcwd()}'             "show present working directory
+let g:airline_section_b = '%{getcwd()}'             "show current working directory
 let g:airline_powerline_fonts = 1                   "load patched powerline fonts
 let g:airline_theme='spcmd'                         "set airline theme
 let g:session_autosave="yes"                        "autosave session
@@ -72,7 +72,7 @@ hi iCursor guifg=#ffffff guibg=#005fff
 " Commands & Functions "
 "----------------------"
 "Toggle Relative Line Numbering
-command! RL if &relativenumber == 1|set nornu|else|set rnu|endif
+command! RL set rnu!
 
 "Remove Trailing White Space
 command! RWS %s/\s\+$//|echo "Removing trailing white spaces"
@@ -107,21 +107,17 @@ else
     command! -range DD echo "ERROR: Dump file doesn't exist."
 endif
 
-"Todo list check (keybinds below)
-command! TodoCheck :normal 0i✓ <ESC>lxxA ^DONE (<C-R>=strftime("%Y-%m-%d %a %H:%M:%S")<CR>)<ESC>
-command! TodoUncheck :normal 0xi-<ESC>f^Dx
-
 "Fix accidentally shifted commands
 command! WQ wq
 command! Wq wq
 command! W w
 command! Q q
 
-"Reload .vimrc (save & source)
+"Reload .vimrc (save & source) + todo syntax reset fix
 command! RR write|source ~/.vimrc
 
 "Save all when Vim window lost focus
-:au FocusLost * silent! wa
+autocmd FocusLost * silent! wa
 
 "Resize (terminal) window on quit
 autocmd VimLeavePre * silent set lines=25 columns=90
@@ -139,8 +135,11 @@ nmap ú :bnext<CR>
 nmap ő :bprevious<CR>
 nmap <C-b> :NERDTreeToggle<CR>
 nmap <leader>, :set list!<CR>
-nmap <leader>c :TodoCheck<CR>
-nmap <leader>x :TodoUncheck<CR>
+
+"vim-easy-todo
+nmap <leader>d :TodoDone<CR>
+nmap <leader>u :TodoUndone<CR>
+nmap <leader>x :TodoCancel<CR>
 
 "move up/down on displayed lines, not real lines
 noremap k gk
