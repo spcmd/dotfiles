@@ -13,7 +13,7 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 set number                                          "line numbers
-colorscheme spcmd                                   "color scheme
+colorscheme Tomorrow-Night-spcmd                    "color scheme
 set showcmd                                         "show commands at the bottom
 set linebreak                                       "allow linebreaks between words
 set hlsearch                                        "highlight search results
@@ -43,6 +43,8 @@ set laststatus=2                                    "always show statusline/airl
 set noshowmode                                      "disable default mode indicator (using airline's)
 set listchars=tab:▸\ ,eol:¬                         "tab and EOL chars
 set nofoldenable                                    "disable automatic folding
+set autoread                                        "auto-reload files if they were modified outside Vim
+set ignorecase                                      "case-insensitive mode
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
 let mapleader = "\<Space>"                          "remap leader key, instead of using \
 let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
@@ -88,6 +90,8 @@ function! DFchecker()
         echo "ERROR! You can't delete the .gvimrc"
     elseif expand("%:t:r") == 'vimdump'
         echo "ERROR! You can't delete the vimdump"
+    elseif expand("%:e") == 'todo'
+        echo "ERROR! You can't delete a .todo file"
     else
         call delete(expand('%'))|bd!
     endif
@@ -113,7 +117,7 @@ command! Wq wq
 command! W w
 command! Q q
 
-"Reload .vimrc (save & source) + todo syntax reset fix
+"Reload .vimrc (save & source)
 command! RR write|source ~/.vimrc
 
 "Save all when Vim window lost focus
@@ -157,7 +161,7 @@ nmap <C-k> <C-u>
 
 "Toggle search highlight
 let hlstate=0
-nnoremap <leader><space> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
+nnoremap <leader><space> :set hlsearch!<CR>
 
 "Split window resize
 map <Up> :resize -5<CR>

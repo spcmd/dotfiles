@@ -1,10 +1,14 @@
 " ========================================================= "
-" spcmd color scheme for Vim                                "
-" Created by: spcmd                                         "
+" jellybeans spcmd color scheme for Vim                     "
+" Modified by: spcmd                                        "
 " Website: http://spcmd.github.io                           "
 "          https://github.com/spcmd                         "
 "          https://gist.github.com/spcmd                    "
 " ========================================================= "
+" Original version: jellybeans                              "
+" From: http://bytefluent.com/vivify                        "
+" ========================================================= "
+
 set background=dark
 if version > 580
 	hi clear
