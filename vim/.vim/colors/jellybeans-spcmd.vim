@@ -18,7 +18,7 @@ if version > 580
 endif
 
 set t_Co=256
-let g:colors_name = "spcmd"
+let g:colors_name = "jellybeans-spcmd"
 
 hi Normal guifg=#e8e8d3 guibg=#151515 guisp=#151515 gui=NONE ctermfg=187 ctermbg=233 cterm=NONE
 hi SignColumn guifg=#a0a8b0 guibg=#384048 guisp=#384048 gui=NONE ctermfg=103 ctermbg=238 cterm=NONE

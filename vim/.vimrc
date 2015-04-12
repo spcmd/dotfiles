@@ -6,9 +6,10 @@
 "          https://gist.github.com/spcmd                    "
 " ========================================================= "
 
-"----------"
-" Settings "
-"----------"
+"--------------------------------------------"
+"   Settings                                 "
+"--------------------------------------------"
+
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
@@ -30,21 +31,22 @@ set ttimeout                                        "reduce timeout after <Esc>
 set ttimeoutlen=10                                  "reduce timeout after <Esc>
 set splitbelow                                      "horizontal split: open below
 set splitright                                      "vertical split: open to the right
-set guicursor+=i:ver25-iCursor                      "insert cursor in GVim, need for coloring
-set guicursor+=a:blinkon0                           "disable cursor blinking
-set guioptions=aegimrLt                             "remove Toolbar
-set guioptions-=mrL                                 "remove: menu bar & scroll bars
-set guifont=Liberation\ Mono\ for\ Powerline\ 10    "font type for GVim
 set t_Co=256                                        "set terminal to 256 color
 set lines=40 columns=130                            "set in ~/.gvimrc for GVim
 set rnu                                             "relative line numbering
 set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline
 set noshowmode                                      "disable default mode indicator (using airline's)
-set listchars=tab:▸\ ,eol:¬                         "tab and EOL chars
+set listchars=tab:▸\ ,eol:¬,trail:⋅                 "tab and EOL chars
 set nofoldenable                                    "disable automatic folding
 set autoread                                        "auto-reload files if they were modified outside Vim
 set ignorecase                                      "case-insensitive mode
+set smartcase                                       "case-sensitive if search contains a capital letter
+set incsearch                                       "jump to the first search result instantly
+set wildmenu                                        "enhanced command line completion
+set scrolloff=10                                    "lines above and below the cursor
+
+"Plugin/Bundle specific settings
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
 let mapleader = "\<Space>"                          "remap leader key, instead of using \
 let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
@@ -66,13 +68,28 @@ if &term =~ "xterm\\|rxvt"
   autocmd VimLeave * silent !echo -ne "\033]12;white\007"
 endif
 
-"Colorize cursor in GVim
-hi Cursor guifg=#000000 guibg=#dfff00
-hi iCursor guifg=#ffffff guibg=#005fff
+"--------------------------------------------"
+"   GUI settings (only when running)         "
+"--------------------------------------------"
 
-"----------------------"
-" Commands & Functions "
-"----------------------"
+if (has("gui_running"))
+
+    set guicursor+=i:ver25-iCursor                      "insert cursor in GVim, need for coloring
+    set guicursor+=a:blinkon0                           "disable cursor blinking
+    set guioptions=aegimrLt                             "remove Toolbar
+    set guioptions-=mrL                                 "remove: menu bar & scroll bars
+    set guifont=Liberation\ Mono\ for\ Powerline\ 10    "font type for GVim
+
+    "Colorize cursor in GVim
+    hi Cursor guifg=#000000 guibg=#dfff00
+    hi iCursor guifg=#ffffff guibg=#005fff
+
+endif
+
+"--------------------------------------------"
+"   Commands & Functions                     "
+"--------------------------------------------"
+
 "Toggle Relative Line Numbering
 command! RL set rnu!
 
@@ -120,17 +137,20 @@ command! Q q
 "Reload .vimrc (save & source)
 command! RR write|source ~/.vimrc
 
+"--------------------------------------------"
+"   Autocommands                             "
+"--------------------------------------------"
+
 "Save all when Vim window lost focus
 autocmd FocusLost * silent! wa
 
 "Resize (terminal) window on quit
 autocmd VimLeavePre * silent set lines=25 columns=90
 
-"----------"
-" Keybinds "
-"----------"
-"map éé <Esc>
-"vmap éé <Esc>
+"--------------------------------------------"
+"   Key mappings                             "
+"--------------------------------------------"
+
 imap űű <Esc>"*pA
 imap áá <Esc>"+p
 nmap <Enter> o<ESC>
@@ -140,12 +160,43 @@ nmap ő :bprevious<CR>
 nmap <C-b> :NERDTreeToggle<CR>
 nmap <leader>, :set list!<CR>
 
-"vim-easy-todo
+"Delete surrounding quotes, brackets etc.
+noremap <leader>d{ F{xf}x
+noremap <leader>d" F"x,x
+noremap <leader>d' F'x,x
+noremap <leader>d( F(xf)x
+noremap <leader>d) F(xf)x
+noremap <leader>d[ F[xf]x
+noremap <leader>d] F[xf]x
+noremap <leader>d< F<xf>x
+noremap <leader>d> F<xf>x
+
+"Surround words with quotes, brackets etc.
+noremap <leader>a{ lbi{<ESC>ea}<ESC>
+noremap <leader>a} lbi{<ESC>ea}<ESC>
+noremap <leader>a" lbi"<ESC>ea"<ESC>
+noremap <leader>a' lbi'<ESC>ea'<ESC>
+noremap <leader>a( lbi(<ESC>ea)<ESC>
+noremap <leader>a) lbi(<ESC>ea)<ESC>
+noremap <leader>a[ lbi[<ESC>ea]<ESC>
+noremap <leader>a] lbi[<ESC>ea]<ESC>
+noremap <leader>a< lbi<<ESC>ea><ESC>
+noremap <leader>a> lbi<<ESC>ea><ESC>
+
+"Quick pair of quotes, brackets etc.
+imap <leader>{ {}<ESC>i
+imap <leader>' ''<ESC>i
+imap <leader>" ""<ESC>i
+imap <leader>( ()<ESC>i
+imap <leader>[ []<ESC>i
+imap <leader>< <><ESC>i
+
+"Vim Easy TODO
 nmap <leader>d :TodoDone<CR>
 nmap <leader>u :TodoUndone<CR>
 nmap <leader>x :TodoCancel<CR>
 
-"move up/down on displayed lines, not real lines
+"Move up/down on displayed lines, not real lines
 noremap k gk
 noremap j gj
 
@@ -155,7 +206,7 @@ nmap <tab> >>
 vmap <S-tab> <gv
 vmap <tab> >gv
 
-"Faster scrolling
+"Faster navigation
 nmap <C-j> <C-d>
 nmap <C-k> <C-u>
 
@@ -175,6 +226,6 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 
-"yank/copy to system clipboard
+"Yank to system clipboard
 nnoremap y "+y
 vnoremap y "+y
