@@ -45,10 +45,10 @@ set smartcase                                       "case-sensitive if search co
 set incsearch                                       "jump to the first search result instantly
 set wildmenu                                        "enhanced command line completion
 set scrolloff=10                                    "lines above and below the cursor
+let mapleader = "\<Space>"                          "remap leader key, instead of using \
 
 "Plugin/Bundle specific settings
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
-let mapleader = "\<Space>"                          "remap leader key, instead of using \
 let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
 let g:airline#extensions#tabline#fnamemod = ':t'    "show filenames only on tabs
 let g:airline_section_b = '%{getcwd()}'             "show current working directory
@@ -182,14 +182,6 @@ noremap <leader>a[ lbi[<ESC>ea]<ESC>
 noremap <leader>a] lbi[<ESC>ea]<ESC>
 noremap <leader>a< lbi<<ESC>ea><ESC>
 noremap <leader>a> lbi<<ESC>ea><ESC>
-
-"Quick pair of quotes, brackets etc.
-imap <leader>{ {}<ESC>i
-imap <leader>' ''<ESC>i
-imap <leader>" ""<ESC>i
-imap <leader>( ()<ESC>i
-imap <leader>[ []<ESC>i
-imap <leader>< <><ESC>i
 
 "Vim Easy TODO
 nmap <leader>d :TodoDone<CR>

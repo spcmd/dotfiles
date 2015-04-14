@@ -9,7 +9,7 @@
 		<separator/>
 		<item label="Terminal">
 			<action name="Execute">
-				<execute>x-terminal-emulator</execute>
+				<execute>xfce4-terminal</execute>
 			</action>
 		</item>
 		<item label="Thunar">
@@ -61,11 +61,6 @@
 		<item label="Gpick">
 			<action name="Execute">
 				<execute>gpick</execute>
-			</action>
-		</item>
-		<item label="urxvt">
-			<action name="Execute">
-				<execute>urxvt</execute>
 			</action>
 		</item>
 		<separator/>
