@@ -1,0 +1,48 @@
+"                                      _
+"         ___ _ __   ___ _ __ ___   __| |
+"        / __| '_ \ / __| '_ ` _ \ / _` |
+"        \__ | |_) | (__| | | | | | (_| |
+"        |___| .__/ \___|_| |_| |_|\__,_|
+"             |_|
+"
+"                 .vimperatorrc
+"               Created by: spcmd
+"           http://spcmd.github.io
+"           https://github.com/spcmd
+"           https://gist.github.com/spcmd
+
+"source! ~/.vimperatorrc.local
+set hintchars=hjklasdfgyuiopqwertnmzxcvb
+let mapleader = "-"
+
+"Faster scrolling
+noremap j 3j
+noremap k 3k
+nmap <C-j> <C-d>
+nmap <C-k> <C-u>
+
+"Tabs
+nmap ú :tabnext<CR>
+nmap ő :tabprevious<CR>
+nmap á :tabmove +1<CR>
+nmap é :tabmove -1<CR>
+command! BB :tabnew
+
+"History navigation
+nmap , :back<CR>
+nmap . :forward<CR>
+
+"Context menu
+nnoremap cc ;c
+
+"Open addons page
+command! AA :addons
+
+"Search highlight
+nmap <leader>h :noh<CR>
+
+"Bookmarks
+nmap <C-b> :bmarks<CR>
+
+"Source this config
+command! RR source ~/.vimperatorrc

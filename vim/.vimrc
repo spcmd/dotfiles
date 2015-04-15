@@ -156,6 +156,7 @@ autocmd VimLeavePre * silent set lines=25 columns=90
 
 "Syntax highlight
 autocmd BufRead,BufWinEnter .rtorrent.rc set filetype=sh
+autocmd BufRead,BufWinEnter .vimperatorrc set filetype=vim
 
 "--------------------------------------------"
 "   Key mappings                             "
