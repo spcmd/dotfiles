@@ -35,8 +35,11 @@ nmap . :forward<CR>
 "Context menu
 nnoremap cc ;c
 
-"Open addons page
+"Quick open Addons
 command! AA :addons
+
+"Open private window
+command! private :normal i<C-S-p>
 
 "Search highlight
 nmap <leader>h :noh<CR>
