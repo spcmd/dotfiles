@@ -1,10 +1,15 @@
-# ========================================================= #
-# .bashrc                                                   #
-# Created by: spcmd                                         #
-# Website: http://spcmd.github.io                           #
-#          https://github.com/spcmd                         #
-#          https://gist.github.com/spcmd                    #
-# ========================================================= #
+#                                      _
+#         ___ _ __   ___ _ __ ___   __| |
+#        / __| '_ \ / __| '_ ` _ \ / _` |
+#        \__ | |_) | (__| | | | | | (_| |
+#        |___| .__/ \___|_| |_| |_|\__,_|
+#             |_|
+#
+#                   .bashrc
+#               Created by: spcmd
+#           http://spcmd.github.io
+#           https://github.com/spcmd
+#           https://gist.github.com/spcmd
 
 # ================================= #
 # ========== BASIC STUFF ========== #

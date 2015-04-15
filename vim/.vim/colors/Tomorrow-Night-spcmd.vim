@@ -1,13 +1,19 @@
-" ========================================================= "
-" Tomorrow Night spcmd color scheme for Vim                 "
-" Modified by: spcmd                                        "
-" Website: http://spcmd.github.io                           "
-"          https://github.com/spcmd                         "
-"          https://gist.github.com/spcmd                    "
-" ========================================================= "
-" Original version: Tomorrow Night                          "
-" Created by: http://chriskempson.com                       "
-" ========================================================= "
+"                                      _
+"         ___ _ __   ___ _ __ ___   __| |
+"        / __| '_ \ / __| '_ ` _ \ / _` |
+"        \__ | |_) | (__| | | | | | (_| |
+"        |___| .__/ \___|_| |_| |_|\__,_|
+"             |_|
+"
+"      Tomorrow-Night-spcmd color scheme for Vim
+"               Modified by: spcmd
+"           http://spcmd.github.io
+"           https://github.com/spcmd
+"           https://gist.github.com/spcmd
+"
+"           Original version: Tomorrow-Night
+"           Created by: http://chriskempson.com
+
 
 " Hex colour conversion functions borrowed from the theme "Desert256""
 

@@ -1,3 +1,16 @@
+#                                      _
+#         ___ _ __   ___ _ __ ___   __| |
+#        / __| '_ \ / __| '_ ` _ \ / _` |
+#        \__ | |_) | (__| | | | | | (_| |
+#        |___| .__/ \___|_| |_| |_|\__,_|
+#             |_|
+#
+#                  .rtorrent.rc
+#               Created by: spcmd
+#           http://spcmd.github.io
+#           https://github.com/spcmd
+#           https://gist.github.com/spcmd
+
 
 # Maximum and minimum number of peers to connect to per torrent.
 min_peers = 5
@@ -40,7 +53,7 @@ session = ~/.rtorrent-session
 #bind = rakshasa.no
 
 # Port range to use for listening.
-port_range = 50350-50500
+port_range = 50500-50500
 
 # Start opening ports at a random position within the port range.
 #port_random = no

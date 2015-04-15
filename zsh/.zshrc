@@ -1,10 +1,16 @@
-# ========================================================= #
-# .zshrc                                                    #
-# Created by: spcmd                                         #
-# Website: http://spcmd.github.io                           #
-#          https://github.com/spcmd                         #
-#          https://gist.github.com/spcmd                    #
-# ========================================================= #
+#                                      _
+#         ___ _ __   ___ _ __ ___   __| |
+#        / __| '_ \ / __| '_ ` _ \ / _` |
+#        \__ | |_) | (__| | | | | | (_| |
+#        |___| .__/ \___|_| |_| |_|\__,_|
+#             |_|
+#
+#                    .zshrc
+#               Created by: spcmd
+#           http://spcmd.github.io
+#           https://github.com/spcmd
+#           https://gist.github.com/spcmd
+
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -19,7 +25,7 @@ ZSH_THEME="spcmd"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+#ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 #COMPLETION_WAITING_DOTS="true"
@@ -60,31 +66,38 @@ else
   export EDITOR='vim'
 fi
 
+# ============================== #
+# ========== Vi MODE  ========== #
+# ============================== #
 
-# enable vim mode on commmand line
+# Enable Vi/Vim mode
 bindkey -v
-# no delay entering normal mode
+
+# No delay entering normal mode
 # https://coderwall.com/p/h63etq
 # https://github.com/pda/dotzsh/blob/master/keyboard.zsh#L10
 # 10ms for key sequences
 KEYTIMEOUT=1
-# show vim status
+
+# Show vim status
 # http://zshwiki.org/home/examples/zlewidgets
 function zle-line-init zle-keymap-select {
-RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-RPS2=$RPS1
-zle reset-prompt
+    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+    RPS2=$RPS1
+    zle reset-prompt
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
-# add missing vim hotkeys
+
+# Add missing vim hotkeys
 # fixes backspace deletion issues
 # http://zshwiki.org/home/zle/vi-mode
 bindkey -a u undo
 bindkey -a '^R' redo
 bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
-# history search in vim mode
+
+# History search in vim mode
 # http://zshwiki.org./home/zle/bindkeys#why_isn_t_control-r_working_anymore
 bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
@@ -114,7 +127,7 @@ alias install=installfunc
 alias remove='sudo apt-get remove --purge'
 alias repo='sudo add-apt-repository'
 
-# bash
+# zsh
 alias zcat='history | tail -n 15'
 alias zz='source ~/.zshrc && echo "source zshrc: done!"'
 

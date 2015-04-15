@@ -1,13 +1,19 @@
-" ========================================================= "
-" jellybeans spcmd color scheme for Vim                     "
-" Modified by: spcmd                                        "
-" Website: http://spcmd.github.io                           "
-"          https://github.com/spcmd                         "
-"          https://gist.github.com/spcmd                    "
-" ========================================================= "
-" Original version: jellybeans                              "
-" From: http://bytefluent.com/vivify                        "
-" ========================================================= "
+"                                      _
+"         ___ _ __   ___ _ __ ___   __| |
+"        / __| '_ \ / __| '_ ` _ \ / _` |
+"        \__ | |_) | (__| | | | | | (_| |
+"        |___| .__/ \___|_| |_| |_|\__,_|
+"             |_|
+"
+"      jellybeans-spcmd color scheme for Vim
+"               Modified by: spcmd
+"           http://spcmd.github.io
+"           https://github.com/spcmd
+"           https://gist.github.com/spcmd
+"
+"           Original version: jellybeans
+"           From: http://bytefluent.com/vivify
+
 
 set background=dark
 if version > 580

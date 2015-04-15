@@ -1,10 +1,15 @@
-" ========================================================= "
-" .vimrc                                                    "
-" Created by: spcmd                                         "
-" Website: http://spcmd.github.io                           "
-"          https://github.com/spcmd                         "
-"          https://gist.github.com/spcmd                    "
-" ========================================================= "
+"                                      _
+"         ___ _ __   ___ _ __ ___   __| |
+"        / __| '_ \ / __| '_ ` _ \ / _` |
+"        \__ | |_) | (__| | | | | | (_| |
+"        |___| .__/ \___|_| |_| |_|\__,_|
+"             |_|
+"
+"                    .vimrc
+"               Created by: spcmd
+"           http://spcmd.github.io
+"           https://github.com/spcmd
+"           https://gist.github.com/spcmd
 
 "--------------------------------------------"
 "   Settings                                 "
@@ -37,7 +42,7 @@ set rnu                                             "relative line numbering
 set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline
 set noshowmode                                      "disable default mode indicator (using airline's)
-set listchars=tab:▸\ ,eol:¬,trail:⋅                 "tab and EOL chars
+set listchars=tab:▸\ ,eol:¬                         "tab and EOL chars
 set nofoldenable                                    "disable automatic folding
 set autoread                                        "auto-reload files if they were modified outside Vim
 set ignorecase                                      "case-insensitive mode
@@ -56,6 +61,8 @@ let g:airline_powerline_fonts = 1                   "load patched powerline font
 let g:airline_theme='spcmd'                         "set airline theme
 let g:session_autosave="yes"                        "autosave session
 let g:session_autoload="yes"                        "autoload session
+let g:neocomplete#enable_at_startup = 1             "enable Neocomplete
+let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
 
 "Colorize cursor in terminal vim
 if &term =~ "xterm\\|rxvt"
@@ -147,18 +154,23 @@ autocmd FocusLost * silent! wa
 "Resize (terminal) window on quit
 autocmd VimLeavePre * silent set lines=25 columns=90
 
+"Syntax highlight
+autocmd BufRead,BufWinEnter .rtorrent.rc set filetype=sh
+
 "--------------------------------------------"
 "   Key mappings                             "
 "--------------------------------------------"
 
-imap űű <Esc>"*pA
-imap áá <Esc>"+p
+imap űű <Esc>"+pA
 nmap <Enter> o<ESC>
 nmap <S-Enter> O<ESC>
 nmap ú :bnext<CR>
 nmap ő :bprevious<CR>
 nmap <C-b> :NERDTreeToggle<CR>
 nmap <leader>, :set list!<CR>
+
+"Neocomplete
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 "Delete surrounding quotes, brackets etc.
 noremap <leader>d{ F{xf}x
