@@ -11,7 +11,7 @@
 "           https://github.com/spcmd
 "           https://gist.github.com/spcmd
 
-"source! ~/.vimperatorrc.local
+colorscheme spcmd-dark
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
 let mapleader = "-"
 
@@ -46,6 +46,10 @@ nmap <leader>h :noh<CR>
 
 "Bookmarks
 nmap <C-b> :bmarks<CR>
+
+"Select ALL
+nnoremap <C-a> i<C-a>
+inoremap <C-a> i<C-a>
 
 "Source this config
 command! RR source ~/.vimperatorrc

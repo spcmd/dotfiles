@@ -224,5 +224,10 @@
         </execute>
 			</action>
 		</item>
+		<item label="Hibernate">
+			<action name="Execute">
+				<execute>sudo pm-hibernate</execute>
+			</action>
+		</item>
 	</menu>
 </openbox_menu>

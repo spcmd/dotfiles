@@ -50,6 +50,8 @@ set smartcase                                       "case-sensitive if search co
 set incsearch                                       "jump to the first search result instantly
 set wildmenu                                        "enhanced command line completion
 set scrolloff=10                                    "lines above and below the cursor
+set backupdir=~/.vim/backup                         "put backup to backup dir
+set directory=~/.vim/backup                         "put swap to backup dir
 let mapleader = "\<Space>"                          "remap leader key, instead of using \
 
 "Plugin/Bundle specific settings
@@ -114,6 +116,12 @@ function! DFchecker()
         echo "ERROR! You can't delete the .gvimrc"
     elseif expand("%:t:r") == 'vimdump'
         echo "ERROR! You can't delete the vimdump"
+    elseif expand("%:t:r") == '.bashrc'
+        echo "ERROR! You can't delete the .bashrc"
+    elseif expand("%:t:r") == '.zshrc'
+        echo "ERROR! You can't delete the .zshrc"
+    elseif expand("%:t:r") == '.vimperatorrc'
+        echo "ERROR! You can't delete the .vimperatorrc"
     elseif expand("%:e") == 'todo'
         echo "ERROR! You can't delete a .todo file"
     else
