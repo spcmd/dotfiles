@@ -213,6 +213,12 @@ nmap <leader>x :TodoCancel<CR>
 noremap k gk
 noremap j gj
 
+"Move to the beginning/end of line
+nnoremap H ^
+nnoremap L $
+vmap H ^
+vmap L $
+
 "Indenting
 nmap <S-tab> <<
 nmap <tab> >>

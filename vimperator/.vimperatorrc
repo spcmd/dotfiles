@@ -13,7 +13,11 @@
 
 colorscheme spcmd-dark
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
+set editor="gvim"
 let mapleader = "-"
+
+"Quick search with search engines
+"command! -nargs=* wiki tabopen wikipedia "<args>"
 
 "Faster scrolling
 noremap j 3j
@@ -32,11 +36,18 @@ command! BB :tabnew
 nmap , :back<CR>
 nmap . :forward<CR>
 
+"Quick select text in CARET/VISUAL mode: move to the beginning/end of line
+vnoremap H ^
+vnoremap L $
+
 "Context menu
 nnoremap cc ;c
 
 "Quick open Addons
 command! AA :addons
+
+"stylish.js plugin
+command! ST :stylish toggle
 
 "Open private window
 command! private :normal i<C-S-p>
