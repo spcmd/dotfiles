@@ -37,7 +37,7 @@ set ttimeoutlen=10                                  "reduce timeout after <Esc>
 set splitbelow                                      "horizontal split: open below
 set splitright                                      "vertical split: open to the right
 set t_Co=256                                        "set terminal to 256 color
-set lines=40 columns=130                            "set in ~/.gvimrc for GVim
+set lines=35 columns=120                            "set in ~/.gvimrc for GVim
 set rnu                                             "relative line numbering
 set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline

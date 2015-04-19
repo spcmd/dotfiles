@@ -13,11 +13,12 @@
 
 colorscheme spcmd-dark
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
-set editor="gvim"
+set editor="gvim -f"
 let mapleader = "-"
 
-"Quick search with search engines
-"command! -nargs=* wiki tabopen wikipedia "<args>"
+"--------------------------------------------"
+"   Key mappings                             "
+"--------------------------------------------"
 
 "Faster scrolling
 noremap j 3j
@@ -30,7 +31,6 @@ nmap ú :tabnext<CR>
 nmap ő :tabprevious<CR>
 nmap á :tabmove +1<CR>
 nmap é :tabmove -1<CR>
-command! BB :tabnew
 
 "History navigation
 nmap , :back<CR>
@@ -43,24 +43,47 @@ vnoremap L $
 "Context menu
 nnoremap cc ;c
 
-"Quick open Addons
-command! AA :addons
-
-"stylish.js plugin
-command! ST :stylish toggle
-
-"Open private window
-command! private :normal i<C-S-p>
-
 "Search highlight
 nmap <leader>h :noh<CR>
 
 "Bookmarks
-nmap <C-b> :bmarks<CR>
+nmap <C-b> :sidebar Bookmarks<CR>
 
 "Select ALL
 nnoremap <C-a> i<C-a>
 inoremap <C-a> i<C-a>
 
+"--------------------------------------------"
+"   Commands                                 "
+"--------------------------------------------"
+
+"Quick open Addons
+command! -description="Open addons page (custom command)" AA :addons
+
+"stylish.js plugin
+command! -description="Toggle Stylish userstyle for this page (custom command)" ST :stylish toggle
+
+"Open private window
+command! -description="Open private window (custom command)" private :normal i<C-S-p>
+
 "Source this config
-command! RR source ~/.vimperatorrc
+command! -description="Source .vimperatorrc (custom command)" RR source ~/.vimperatorrc
+
+"PH/Logout search integration
+command! -description="PH! Fórum kereső: keresés a topikban" -nargs=* ph js window.content.window.location = window.content.window.location.href.match( /^(http.+\/)[^\/]+$/ )[1] +'keres.php?type=-&stext=<args>';
+
+command! -description="PH! Fórum kereső: keresés a topikban (csak a saját hozzászólásaim közt)" -nargs=* phmy js window.content.window.location = window.content.window.location.href.match( /^(http.+\/)[^\/]+$/ )[1] +'keres.php?type=-&stext=<args>&suser=spammer';
+
+"--------------------------------------------"
+"   Autocommands                             "
+"--------------------------------------------"
+
+"Autocommands won't be refreshed properly while Firefox is running!
+"To source/refresh them, we need to restart Firefox.
+
+"Enable angol-magyar-szotar.hu site functions with Adblocker
+"http://stackoverflow.com/questions/15995201/how-do-i-getelementbyid-in-vimperator
+autocmd PageLoad angol-magyar-szotar\.hu js window.content.window.document.getElementById("forditInput").removeAttribute('disabled'); window.content.window.document.getElementById("ForditGomb").removeAttribute('disabled');
+
+"Redirect IT Cafe, Prohardver, Mobilarena, Gamepod forum topic links to Logout
+autocmd DOMLoad ^http:\/\/(itcafe|prohardver|mobilarena|gamepod).*\/tema\/ js window.content.window.location = window.content.window.location.href.replace(/itcafe|prohardver|mobilarena|gamepod/, 'logout');liberator.echo('Vimperator forum redirection > logout domain');
