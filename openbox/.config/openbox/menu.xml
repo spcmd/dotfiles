@@ -179,6 +179,11 @@
 					<execute>gksudo &quot;python /opt/lampp/share/xampp-control-panel/xampp-control-panel.py&quot;</execute>
 				</action>
 			</item>
+			<item label="sqlitebrowser">
+				<action name="Execute">
+					<execute>sqlitebrowser</execute>
+				</action>
+			</item>
 			<item label="Font Manager">
 				<action name="Execute">
 					<execute>font-manager</execute>

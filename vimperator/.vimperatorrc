@@ -11,7 +11,7 @@
 "           https://github.com/spcmd
 "           https://gist.github.com/spcmd
 
-colorscheme spcmd-dark
+colorscheme vimperatorfox-dark
 set hintchars=hjklasdfgyuiopqwertnmzxcvb
 set editor="gvim -f"
 let mapleader = "-"
