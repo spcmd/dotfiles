@@ -58,7 +58,7 @@ inoremap <C-a> i<C-a>
 "--------------------------------------------"
 
 "Quick open Addons
-command! -description="Open addons page (custom command)" AA :addons
+command! -description="Open addons page (custom command)" AA :tabopen about:addons
 
 "stylish.js plugin
 command! -description="Toggle Stylish userstyle for this page (custom command)" ST :stylish toggle
