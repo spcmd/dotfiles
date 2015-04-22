@@ -36,6 +36,9 @@ nmap é :tabmove -1<CR>
 nmap , :back<CR>
 nmap . :forward<CR>
 
+"Quick help
+nnoremap h :help<Space>
+
 "Quick select text in CARET/VISUAL mode: move to the beginning/end of line
 vnoremap H ^
 vnoremap L $
@@ -86,4 +89,4 @@ command! -description="PH! Fórum kereső: keresés a topikban (csak a saját ho
 autocmd PageLoad angol-magyar-szotar\.hu js window.content.window.document.getElementById("forditInput").removeAttribute('disabled'); window.content.window.document.getElementById("ForditGomb").removeAttribute('disabled');
 
 "Redirect IT Cafe, Prohardver, Mobilarena, Gamepod forum topic links to Logout
-autocmd DOMLoad ^http:\/\/(itcafe|prohardver|mobilarena|gamepod).*\/tema\/ js window.content.window.location = window.content.window.location.href.replace(/itcafe|prohardver|mobilarena|gamepod/, 'logout');liberator.echo('Vimperator forum redirection > logout domain');
+autocmd LocationChange ^http:\/\/(itcafe|prohardver|mobilarena|gamepod).*\/tema\/ js window.content.window.location = window.content.window.location.href.replace(/itcafe|prohardver|mobilarena|gamepod/, 'logout')
