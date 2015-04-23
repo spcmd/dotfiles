@@ -46,7 +46,7 @@ mv emmet-vim $VIM_BUNDLE_DIR
 echo "emmet-vim moved to: $VIM_BUNDLE_DIR"
 
 # Multiple cursors
-git clone https://github.com/terryma/vim-multiple-cursors.git
+git clone https://github.com/kristijanhusak/vim-multiple-cursors.git
 mv vim-multiple-cursors $VIM_BUNDLE_DIR
 echo "vim-multiple-cursors moved to: $VIM_BUNDLE_DIR"
 
@@ -74,6 +74,16 @@ echo "vim-easy-todo moved to: $VIM_BUNDLE_DIR"
 git clone https://github.com/Shougo/neocomplete.vim.git
 mv neocomplete.vim $VIM_BUNDLE_DIR
 echo "neocomplete.vim moved to: $VIM_BUNDLE_DIR"
+
+# VCoolor
+git clone https://github.com/KabbAmine/vCoolor.vim.git
+mv vCoolor.vim $VIM_BUNDLE_DIR
+echo "vCoolor.vim moved to: $VIM_BUNDLE_DIR"
+
+# Colorizer
+git clone https://github.com/chrisbra/Colorizer.git
+mv Colorizer $VIM_BUNDLE_DIR
+echo "Colorizer moved to: $VIM_BUNDLE_DIR"
 
 # Patched powerline fonts needed, but you might have it, so not need to install automatically
 echo "Powerline fonts aren't installed automatically. If you don't have it already installed, please visit: https://github.com/powerline/fonts and install it manually. Then select one of the installed powerline font type in the terminal settings, and also set this font type in your .vimrc and/or .gvimrc"

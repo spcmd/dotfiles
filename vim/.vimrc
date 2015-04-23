@@ -65,6 +65,9 @@ let g:session_autosave="yes"                        "autosave session
 let g:session_autoload="yes"                        "autoload session
 let g:neocomplete#enable_at_startup = 1             "enable Neocomplete
 let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
+let g:vcoolor_disable_mappings = 1                  "disable VCoolor's default mappings
+let g:vcoolor_lowercase = 1                         "use lowercase color codes by default
+
 
 "Colorize cursor in terminal vim
 if &term =~ "xterm\\|rxvt"
@@ -143,6 +146,19 @@ else
     command! -range DD echo "ERROR: Dump file doesn't exist."
 endif
 
+" Fix the conflict with Neocomplete (slow performance)
+" https://github.com/kristijanhusak/vim-multiple-cursors
+" https://github.com/terryma/vim-multiple-cursors/issues/51#issuecomment-32344711
+function! Multiple_cursors_before()
+    exe 'NeoCompleteLock'
+    echo 'Disabled autocomplete'
+endfunction
+
+function! Multiple_cursors_after()
+    exe 'NeoCompleteUnlock'
+    echo 'Enabled autocomplete'
+endfunction
+
 "Fix accidentally shifted commands
 command! WQ wq
 command! Wq wq
@@ -165,6 +181,7 @@ autocmd VimLeavePre * silent set lines=25 columns=90
 "Syntax highlight
 autocmd BufRead,BufWinEnter .rtorrent.rc set filetype=sh
 autocmd BufRead,BufWinEnter .vimperatorrc set filetype=vim
+autocmd BufRead,BufWinEnter *.vimp set filetype=vim
 
 "--------------------------------------------"
 "   Key mappings                             "
@@ -175,11 +192,7 @@ nmap <Enter> o<ESC>
 nmap <S-Enter> O<ESC>
 nmap ú :bnext<CR>
 nmap ő :bprevious<CR>
-nmap <C-b> :NERDTreeToggle<CR>
 nmap <leader>, :set list!<CR>
-
-"Neocomplete
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 "Delete surrounding quotes, brackets etc.
 noremap <leader>d{ F{xf}x
@@ -203,11 +216,6 @@ noremap <leader>a[ lbi[<ESC>ea]<ESC>
 noremap <leader>a] lbi[<ESC>ea]<ESC>
 noremap <leader>a< lbi<<ESC>ea><ESC>
 noremap <leader>a> lbi<<ESC>ea><ESC>
-
-"Vim Easy TODO
-nmap <leader>d :TodoDone<CR>
-nmap <leader>u :TodoUndone<CR>
-nmap <leader>x :TodoCancel<CR>
 
 "Move up/down on displayed lines, not real lines
 noremap k gk
@@ -248,3 +256,23 @@ nnoremap <leader>l <C-w>l
 "Yank to system clipboard
 nnoremap y "+y
 vnoremap y "+y
+
+"NERDTree (https://github.com/scrooloose/nerdtree)
+nmap <C-b> :NERDTreeToggle<CR>
+
+"Neocomplete (https://github.com/Shougo/neocomplete.vim)
+"move to the next with Tab and to the previous with Shift-Tab
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+"Vim Easy TODO (https://github.com/spcmd/vim-easy-todo)
+nnoremap <silent> <leader>d :TodoDone<CR>
+nnoremap <silent> <leader>u :TodoUndone<CR>
+nnoremap <silent> <leader>x :TodoCancel<CR>
+
+"VCoolor (https://github.com/KabbAmine/vCoolor.vim)
+nnoremap <silent> <leader>vc :VCoolor<CR>
+inoremap <silent> <leader>vc <Esc>:VCoolor<CR>a
+
+"Colorizer (https://github.com/chrisbra/Colorizer)
+nnoremap <silent> <leader>cz :ColorToggle<CR>

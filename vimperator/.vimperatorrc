@@ -21,10 +21,10 @@ let mapleader = "-"
 "--------------------------------------------"
 
 "Faster scrolling
-noremap j 3j
-noremap k 3k
-nmap <C-j> <C-d>
-nmap <C-k> <C-u>
+nnoremap j 3j
+nnoremap k 3k
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
 
 "Tabs
 nmap ú :tabnext<CR>
@@ -49,8 +49,8 @@ nnoremap cc ;c
 "Search highlight
 nmap <leader>h :noh<CR>
 
-"Bookmarks
-nmap <C-b> :sidebar Bookmarks<CR>
+"Bookmarks toggle
+nmap <C-b> :ignorekeys<CR> :sidebar Bookmarks<CR>
 
 "Select ALL
 nnoremap <C-a> i<C-a>
@@ -90,3 +90,6 @@ autocmd PageLoad angol-magyar-szotar\.hu js window.content.window.document.getEl
 
 "Redirect IT Cafe, Prohardver, Mobilarena, Gamepod forum topic links to Logout
 autocmd LocationChange ^http:\/\/(itcafe|prohardver|mobilarena|gamepod).*\/tema\/ js window.content.window.location = window.content.window.location.href.replace(/itcafe|prohardver|mobilarena|gamepod/, 'logout')
+
+"Redirect Youtube main page to subscriptions page
+autocmd DOMLoad ^(http|https):\/\/(www)?.youtube.com\/?$ js window.content.window.location = "https://www.youtube.com/feed/subscriptions"
