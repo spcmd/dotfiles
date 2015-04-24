@@ -188,8 +188,8 @@ autocmd BufRead,BufWinEnter *.vimp set filetype=vim
 "--------------------------------------------"
 
 imap űű <Esc>"+pA
-nmap <Enter> o<ESC>
-nmap <S-Enter> O<ESC>
+nnoremap <Enter> o<ESC>
+nnoremap O ko<ESC>
 nmap ú :bnext<CR>
 nmap ő :bprevious<CR>
 nmap <leader>, :set list!<CR>
@@ -236,6 +236,9 @@ vmap <tab> >gv
 "Faster navigation
 nmap <C-j> <C-d>
 nmap <C-k> <C-u>
+
+"Select the whole line in Visual mode
+vnoremap j j$
 
 "Toggle search highlight
 let hlstate=0
