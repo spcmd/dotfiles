@@ -68,7 +68,6 @@ let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
 let g:vcoolor_disable_mappings = 1                  "disable VCoolor's default mappings
 let g:vcoolor_lowercase = 1                         "use lowercase color codes by default
 
-
 "Colorize cursor in terminal vim
 if &term =~ "xterm\\|rxvt"
   "color in insert mode
