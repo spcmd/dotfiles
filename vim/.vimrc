@@ -52,7 +52,7 @@ set wildmenu                                        "enhanced command line compl
 set scrolloff=10                                    "lines above and below the cursor
 set backupdir=~/.vim/backup                         "put backup to backup dir
 set directory=~/.vim/backup                         "put swap to backup dir
-let mapleader = "\<Space>"                          "remap leader key, instead of using \
+let mapleader = "-"                                 "remap leader key, instead of using \
 
 "Plugin/Bundle specific settings
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
@@ -110,27 +110,15 @@ command! RWS %s/\s\+$//|echo "Removing trailing white spaces"
 "Quick delete/close buffer
 command! QQ bd
 
-"Delete file and buffer
-function! DFchecker()
-    if expand("%:t:r") == '.vimrc'
-        echo "ERROR! You can't delete the .vimrc"
-    elseif expand("%:t:r") == '.gvimrc'
-        echo "ERROR! You can't delete the .gvimrc"
-    elseif expand("%:t:r") == 'vimdump'
-        echo "ERROR! You can't delete the vimdump"
-    elseif expand("%:t:r") == '.bashrc'
-        echo "ERROR! You can't delete the .bashrc"
-    elseif expand("%:t:r") == '.zshrc'
-        echo "ERROR! You can't delete the .zshrc"
-    elseif expand("%:t:r") == '.vimperatorrc'
-        echo "ERROR! You can't delete the .vimperatorrc"
-    elseif expand("%:e") == 'todo'
-        echo "ERROR! You can't delete a .todo file"
+"Quick delete file and buffer
+function! QuickDFCheck()
+    if expand("%:t") == match(expand('%:t'),'.vimrc\|.gvimrc\|.vimperatorrc\|TODO\|vimdump\|.zshrc\|.bashrc\|.rtorrent.rc')
+        echo expand("%:t:r") "is a protected file. Can\'t quick delete it."
     else
         call delete(expand('%'))|bd!
     endif
 endfunction
-command! DF :call DFchecker()
+command! DF :call QuickDFCheck()
 
 "Create new buffer and save it automatically
 command! BB enew|exec 'w ~/.vim/backup/autosave'.strftime('%Y%m%d%H%M%S')
@@ -178,9 +166,9 @@ autocmd FocusLost * silent! wa
 autocmd VimLeavePre * silent set lines=25 columns=90
 
 "Syntax highlight
-autocmd BufRead,BufWinEnter .rtorrent.rc set filetype=sh
-autocmd BufRead,BufWinEnter .vimperatorrc set filetype=vim
-autocmd BufRead,BufWinEnter *.vimp set filetype=vim
+autocmd BufRead .rtorrent.rc set filetype=sh
+autocmd BufRead .vimperatorrc set filetype=vim
+autocmd BufRead *.vimp set filetype=vim
 
 "--------------------------------------------"
 "   Key mappings                             "
@@ -194,31 +182,31 @@ nmap ő :bprevious<CR>
 nmap <leader>, :set list!<CR>
 
 "Delete surrounding quotes, brackets etc.
-noremap <leader>d{ F{xf}x
-noremap <leader>d" F"x,x
-noremap <leader>d' F'x,x
-noremap <leader>d( F(xf)x
-noremap <leader>d) F(xf)x
-noremap <leader>d[ F[xf]x
-noremap <leader>d] F[xf]x
-noremap <leader>d< F<xf>x
-noremap <leader>d> F<xf>x
+nnoremap <leader>d{ F{xf}x
+nnoremap <leader>d" F"x,x
+nnoremap <leader>d' F'x,x
+nnoremap <leader>d( F(xf)x
+nnoremap <leader>d) F(xf)x
+nnoremap <leader>d[ F[xf]x
+nnoremap <leader>d] F[xf]x
+nnoremap <leader>d< F<xf>x
+nnoremap <leader>d> F<xf>x
 
 "Surround words with quotes, brackets etc.
-noremap <leader>a{ lbi{<ESC>ea}<ESC>
-noremap <leader>a} lbi{<ESC>ea}<ESC>
-noremap <leader>a" lbi"<ESC>ea"<ESC>
-noremap <leader>a' lbi'<ESC>ea'<ESC>
-noremap <leader>a( lbi(<ESC>ea)<ESC>
-noremap <leader>a) lbi(<ESC>ea)<ESC>
-noremap <leader>a[ lbi[<ESC>ea]<ESC>
-noremap <leader>a] lbi[<ESC>ea]<ESC>
-noremap <leader>a< lbi<<ESC>ea><ESC>
-noremap <leader>a> lbi<<ESC>ea><ESC>
+nnoremap <leader>a{ lbi{<ESC>ea}<ESC>
+nnoremap <leader>a} lbi{<ESC>ea}<ESC>
+nnoremap <leader>a" lbi"<ESC>ea"<ESC>
+nnoremap <leader>a' lbi'<ESC>ea'<ESC>
+nnoremap <leader>a( lbi(<ESC>ea)<ESC>
+nnoremap <leader>a) lbi(<ESC>ea)<ESC>
+nnoremap <leader>a[ lbi[<ESC>ea]<ESC>
+nnoremap <leader>a] lbi[<ESC>ea]<ESC>
+nnoremap <leader>a< lbi<<ESC>ea><ESC>
+nnoremap <leader>a> lbi<<ESC>ea><ESC>
 
 "Move up/down on displayed lines, not real lines
-noremap k gk
-noremap j gj
+nnoremap k gk
+nnoremap j gj
 
 "Move to the beginning/end of line
 nnoremap H ^

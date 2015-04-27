@@ -11,11 +11,20 @@
 "           https://github.com/spcmd
 "           https://gist.github.com/spcmd
 
+"--------------------------------------------"
+"   Settings                                 "
+"--------------------------------------------"
+
 colorscheme vimperatorfox-dark
-set hintchars=hjklasdfgyuiopqwertnmzxcvb
+set hintchars=hjklasdfgrtzu
 set editor="gvim -f"
-set newtab=all
 let mapleader = "-"
+
+"Hide navigation/url bar
+set toolbars=nonavigation
+
+"Load all Firefox page and help page in new tab
+set newtab=all
 
 "--------------------------------------------"
 "   Key mappings                             "
@@ -61,7 +70,7 @@ nmap <C-b> :ignorekeys<CR> :sidebar Bookmarks<CR>
 
 "Select ALL
 nnoremap <C-a> i<C-a>
-inoremap <C-a> i<C-a>
+inoremap <C-a> <Ins><C-a><Ins>
 
 "--------------------------------------------"
 "   Commands                                 "
