@@ -56,9 +56,10 @@ let mapleader = "-"                                 "remap leader key, instead o
 
 "Plugin/Bundle specific settings
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
+let NERDTreeShowHidden=1                            "show hidden files by default (needed for dotfiles)
 let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
 let g:airline#extensions#tabline#fnamemod = ':t'    "show filenames only on tabs
-let g:airline_section_b = '%{getcwd()}'             "show current working directory
+let g:airline_section_c = '%F'                      "show the full path of the file in section c
 let g:airline_powerline_fonts = 1                   "load patched powerline fonts
 let g:airline_theme='spcmd'                         "set airline theme
 let g:session_autosave="yes"                        "autosave session

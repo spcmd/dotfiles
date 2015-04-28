@@ -85,6 +85,11 @@ git clone https://github.com/chrisbra/Colorizer.git
 mv Colorizer $VIM_BUNDLE_DIR
 echo "Colorizer moved to: $VIM_BUNDLE_DIR"
 
+# Fugitive
+git clone https://github.com/tpope/vim-fugitive.git
+mv vim-fugitive $VIM_BUNDLE_DIR
+echo "vim-fugitive moved to: $VIM_BUNDLE_DIR"
+
 # Patched powerline fonts needed, but you might have it, so not need to install automatically
 echo "Powerline fonts aren't installed automatically. If you don't have it already installed, please visit: https://github.com/powerline/fonts and install it manually. Then select one of the installed powerline font type in the terminal settings, and also set this font type in your .vimrc and/or .gvimrc"
 
