@@ -211,6 +211,11 @@
 				<execute>sudo reboot</execute>
 			</action>
 		</item>
+		<item label="Hibernate">
+			<action name="Execute">
+				<execute>sudo pm-hibernate</execute>
+			</action>
+		</item>
 		<item label="Suspend">
 			<action name="Execute">
 				<prompt>
@@ -227,11 +232,6 @@
 				<execute>
             sudo shutdown -h now
         </execute>
-			</action>
-		</item>
-		<item label="Hibernate">
-			<action name="Execute">
-				<execute>sudo pm-hibernate</execute>
 			</action>
 		</item>
 	</menu>
