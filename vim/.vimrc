@@ -18,8 +18,8 @@
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
-set number                                          "line numbers
 colorscheme Tomorrow-Night-spcmd                    "color scheme
+set number                                          "line numbers
 set showcmd                                         "show commands at the bottom
 set linebreak                                       "allow linebreaks between words
 set hlsearch                                        "highlight search results
@@ -55,13 +55,24 @@ set directory=~/.vim/backup                         "put swap to backup dir
 let mapleader = "-"                                 "remap leader key, instead of using \
 
 "Plugin/Bundle specific settings
+
+ if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = ""                         "no arrows
+let g:airline_right_sep = ""                        "no arrows
+let g:airline_left_alt_sep = ""                     "no buffer/tab arrows
+let g:airline_symbols.linenr = "␊"                  "line nr symbol
+let g:airline_symbols.branch = "⎇ "                 "git branch
+let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
+let g:airline#extensions#tabline#fnamemod = ":t"    "show filenames only on tabs
+let g:airline_section_c = "%F"                      "show the full path of the file in section c
+let g:airline_powerline_fonts = 1                   "load patched powerline fonts
+let g:airline_theme="spcmd"                         "set airline theme
+
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
 let NERDTreeShowHidden=1                            "show hidden files by default (needed for dotfiles)
-let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
-let g:airline#extensions#tabline#fnamemod = ':t'    "show filenames only on tabs
-let g:airline_section_c = '%F'                      "show the full path of the file in section c
-let g:airline_powerline_fonts = 1                   "load patched powerline fonts
-let g:airline_theme='spcmd'                         "set airline theme
 let g:session_autosave="yes"                        "autosave session
 let g:session_autoload="yes"                        "autoload session
 let g:neocomplete#enable_at_startup = 1             "enable Neocomplete
@@ -78,24 +89,6 @@ if &term =~ "xterm\\|rxvt"
   silent !echo -ne "\033]12;yellow\007"
   "reset cursor color when vim exits
   autocmd VimLeave * silent !echo -ne "\033]12;white\007"
-endif
-
-"--------------------------------------------"
-"   GUI settings (only when running)         "
-"--------------------------------------------"
-
-if (has("gui_running"))
-
-    set guicursor+=i:ver25-iCursor                      "insert cursor in GVim, need for coloring
-    set guicursor+=a:blinkon0                           "disable cursor blinking
-    set guioptions=aegimrLt                             "remove Toolbar
-    set guioptions-=mrL                                 "remove: menu bar & scroll bars
-    set guifont=Liberation\ Mono\ for\ Powerline\ 10    "font type for GVim
-
-    "Colorize cursor in GVim
-    hi Cursor guifg=#000000 guibg=#dfff00
-    hi iCursor guifg=#ffffff guibg=#005fff
-
 endif
 
 "--------------------------------------------"
@@ -233,10 +226,10 @@ let hlstate=0
 nnoremap <leader><space> :set hlsearch!<CR>
 
 "Split window resize
-map <Up> :resize -5<CR>
-map <Down> :resize +5<CR>
-map <Left> :vertical resize +5<CR>
-map <Right> :vertical resize -5<CR>
+nnoremap <C-Up> :resize -5<CR>
+nnoremap <C-Down> :resize +5<CR>
+nnoremap <C-Left> :vertical resize +5<CR>
+nnoremap <C-Right> :vertical resize -5<CR>
 
 "Split window navigation
 nnoremap <leader>h <C-w>h
