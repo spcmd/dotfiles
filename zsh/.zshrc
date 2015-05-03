@@ -146,3 +146,4 @@ alias faenzaicon='find /usr/share/icons/Faenza -type f | grep'
 alias findicon='find /usr/share/icons -type f | grep'
 alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
 alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
+alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default

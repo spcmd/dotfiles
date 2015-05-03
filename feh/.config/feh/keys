@@ -1,0 +1,24 @@
+#                                      _
+#         ___ _ __   ___ _ __ ___   __| |
+#        / __| '_ \ / __| '_ ` _ \ / _` |
+#        \__ | |_) | (__| | | | | | (_| |
+#        |___| .__/ \___|_| |_| |_|\__,_|
+#             |_|
+#
+#                  keys for feh
+#               Created by: spcmd
+#           http://spcmd.github.io
+#           https://github.com/spcmd
+#           https://gist.github.com/spcmd
+
+
+# The default keybind needs to be unset (cleared) if a key has a 'default' function (bind).
+# Use <command> without a <key> to unset the default keybind.
+
+zoom_in period
+zoom_out comma
+zoom_fit minus
+action_0                        #unbind the 'Return' key
+toggle_fullscreen Return
+mirror C-m
+flip C-f

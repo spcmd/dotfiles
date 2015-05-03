@@ -61,5 +61,5 @@ let g:airline#themes#spcmd#palette.tabline = {
       \ 'airline_tabtype':  ['#ffffff' , '#444444' , 255 , 238 , '' ],
       \ 'airline_tabfill':  ['#ffffff' , '#1c1c1c' , 255 , 234 , '' ],
       \ 'airline_tabmod':   ['#ffffff' , '#444444' , 255 , 238 , '' ],
-      \ 'airline_tabhid':   ['#ffffff' , '#1c1c1c' , 242 , 234 , '' ],
+      \ 'airline_tabhid':   ['#666666' , '#1c1c1c' , 242 , 234 , '' ],
       \ }
