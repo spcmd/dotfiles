@@ -184,6 +184,11 @@
 					<execute>sqlitebrowser</execute>
 				</action>
 			</item>
+			<item label="Gnome Disks">
+				<action name="Execute">
+					<execute>gnome-disks</execute>
+				</action>
+			</item>
 			<item label="Font Manager">
 				<action name="Execute">
 					<execute>font-manager</execute>

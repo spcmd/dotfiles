@@ -139,6 +139,9 @@ alias gpush='git push origin master'
 alias gcommit='git commit -m'
 alias gdiff='git diff'
 
+# ssh with X (to run GUI apps)
+alias sshx='ssh -X -C -c blowfish-cbc,arcfour'
+
 #misc
 alias lf='ls -ACF'
 alias hdapm='sudo hdparm -I /dev/sda | grep level'

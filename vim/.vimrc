@@ -170,7 +170,7 @@ autocmd BufRead *.vimp set filetype=vim
 
 imap űű <Esc>"+pA
 nnoremap <Enter> o<ESC>
-nnoremap O ko<ESC>
+nnoremap <S-Enter> O<ESC>
 nmap ú :bnext<CR>
 nmap ő :bprevious<CR>
 nmap <leader>, :set list!<CR>
