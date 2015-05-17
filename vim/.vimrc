@@ -39,7 +39,7 @@ set splitright                                      "vertical split: open to the
 set t_Co=256                                        "set terminal to 256 color
 set lines=35 columns=120                            "set in ~/.gvimrc for GVim
 set rnu                                             "relative line numbering
-set cursorline                                      "highlight current line
+"set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline
 set noshowmode                                      "disable default mode indicator (using airline's)
 set listchars=tab:▸\ ,eol:¬                         "tab and EOL chars
@@ -79,6 +79,7 @@ let g:neocomplete#enable_at_startup = 1             "enable Neocomplete
 let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
 let g:vcoolor_disable_mappings = 1                  "disable VCoolor's default mappings
 let g:vcoolor_lowercase = 1                         "use lowercase color codes by default
+
 
 "Colorize cursor in terminal vim
 if &term =~ "xterm\\|rxvt"
@@ -163,6 +164,7 @@ autocmd VimLeavePre * silent set lines=25 columns=90
 autocmd BufRead .rtorrent.rc set filetype=sh
 autocmd BufRead .vimperatorrc set filetype=vim
 autocmd BufRead *.vimp set filetype=vim
+autocmd BufRead .xinitrc set filetype=sh
 
 "--------------------------------------------"
 "   Key mappings                             "

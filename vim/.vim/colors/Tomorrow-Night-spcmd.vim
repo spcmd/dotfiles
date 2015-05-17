@@ -34,7 +34,7 @@ let s:window = "4d5057"
 
 " Console 256 Colours
 if !has("gui_running")
-	let s:background = "1c1c1c"
+	let s:background = ""
 	let s:window = "5e5e5e"
 	let s:line = "262626"
 	let s:selection = "585858"

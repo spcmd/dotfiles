@@ -18,7 +18,8 @@
 zoom_in period
 zoom_out comma
 zoom_fit minus
-action_0                        #unbind the 'Return' key
+#action_0 <no key> = unbind the 'Return' key
+action_0
 toggle_fullscreen Return
 mirror C-m
 flip C-f

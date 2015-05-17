@@ -102,30 +102,17 @@ bindkey '^H' backward-delete-char
 bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
 
-# ====================================== #
-# ========== CUSTOM FUNCTIONS ========== #
-# ====================================== #
 
-updatefunc() {
-    sudo apt-get update && notify-send -i terminal "Update finished!"
-}
-upgradefunc() {
-    sudo apt-get upgrade && notify-send -i terminal "Upgrade finished!"
-}
-installfunc() {
-    sudo apt-get install --no-install-recommends $1 && notify-send -i terminal "Finished installing $1"
-}
+# ================================================ #
+# ========== CUSTOM FUNCTIONS & ALIASES ========== #
+# ================================================ #
 
-# ==================================== #
-# ========== CUSTOM ALIASES ========== #
-# ==================================== #
-
-# apt
-alias update=updatefunc
-alias upgrade=upgradefunc
-alias install=installfunc
-alias remove='sudo apt-get remove --purge'
-alias repo='sudo add-apt-repository'
+#apt
+apt-update() { sudo apt-get update && notify-send -i terminal "Update finished!" }
+apt-upgrade() { sudo apt-get upgrade && notify-send -i terminal "Upgrade finished!" }
+apt-install() { sudo apt-get install --no-install-recommends $1 && notify-send -i terminal "Finished installing $1" }
+alias apt-remove='sudo apt-get remove --purge'
+alias apt-ppa='sudo add-apt-repository'
 
 # zsh
 alias zcat='history | tail -n 15'
