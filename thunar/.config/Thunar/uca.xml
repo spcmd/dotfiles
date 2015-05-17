@@ -31,13 +31,22 @@
 	<directories/>
 </action>
 <action>
-	<icon>sublime-text</icon>
+	<icon>bookmark-new</icon>
 	<name>Boomark to Sublime Text</name>
-	<unique-id>1427468534130459-12</unique-id>
+	<unique-id>1431859678988682-1</unique-id>
 	<command>ln -s %F ~/.config/sublime-text-3/Packages/User/Bookmarks &amp;&amp; notify-send -i sublime-text &quot;Bookmark to Sublime Text&quot; &quot;File bookmarked&quot;</command>
 	<description>Symlink file to Sublime Text&apos;s Bookmarks folder</description>
 	<patterns>*</patterns>
 	<other-files/>
 	<text-files/>
+</action>
+<action>
+	<icon>preferences-desktop-wallpaper</icon>
+	<name>feh: set wallpaper</name>
+	<unique-id>1431859773276597-2</unique-id>
+	<command>feh --bg-scale %f</command>
+	<description>Set this images as a wallpaper with feh</description>
+	<patterns>*</patterns>
+	<image-files/>
 </action>
 </actions>
