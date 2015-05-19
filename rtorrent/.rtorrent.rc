@@ -89,10 +89,10 @@ dht_port = 50500
 # Enable peer exchange (for torrents not marked private)
 peer_exchange = yes
 
- 
+
 # Set colors
-# Options: color_inactive_fg, color_inactive_bg, color_dead_fg, color_dead_bg, 
-#          color_active_fg, color_active_bg, color_finished_fg, color_finished_bg, 
+# Options: color_inactive_fg, color_inactive_bg, color_dead_fg, color_dead_bg,
+#          color_active_fg, color_active_bg, color_finished_fg, color_finished_bg,
 # Colors: 0 = black 1 = red 2 = green 3 = yellow 4 = blue 5 = magenta 6 = cyan 7 = white
 #
 # Nice example-config:   color_inactive_fg = 4
@@ -106,12 +106,12 @@ peer_exchange = yes
 #   Active:   Active and downloading
 #   Finished: Download done
 #   If the torrent is highlighted (using bold text) you're uploading data
- 
+
 color_inactive_bg = 3
 color_inactive_fg = 0
 color_active_bg = 4
 color_active_fg = 7
 color_finished_bg = 2
 color_finished_fg = 0
-color_dead_bg = 2
-color_dead_fg = 0
+color_dead_bg = 0
+color_dead_fg = 7

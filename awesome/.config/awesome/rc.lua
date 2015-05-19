@@ -2,7 +2,7 @@
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
-require("awful.autofocus")
+--require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
 -- Theme handling library
@@ -43,10 +43,11 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
+--beautiful.init("~/.config/awesome/themes/default-spcmd/theme.lua")
 beautiful.init("~/.config/awesome/themes/default-spcmd/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xfce4-terminal"
+terminal = "termite"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -97,14 +98,15 @@ end
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+                                    { "terminal", terminal },
+                                    { "clear admin", "/home/spcmd/.local/share/applications/ClearAdmin.desktop" },
+                                    { "-------------", "" },
+                                    { "shutdown", "systemctl poweroff" }
                                   }
                         })
 
@@ -541,7 +543,7 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
 
      -- Float rules
-     { rule_any = { class = { "mpv", "Zathura", "feh", "Gifview", "Wine", "gimp" } },
+     { rule_any = { class = { "mpv", "Zathura", "feh", "Gcolor2", "Gifview", "Wine", "gimp" } },
        properties = { floating = true } },
 
     -- Tag rules
@@ -592,8 +594,10 @@ client.connect_signal("manage", function (c, startup)
     if titlebars_enabled and (
                               c.class == "mpv" or
                               c.class == "feh" or
+                              c.class == "Gcolor2" or
                               c.class == "Gifview" or
                               c.class == "Zathura" or
+                              c.class == "Wine" or
                               c.type == "dialog"
                              )
     then

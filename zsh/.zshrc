@@ -102,6 +102,8 @@ bindkey '^H' backward-delete-char
 bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
 
+# Load dircolors (needed for termite)
+eval $(dircolors ~/.dircolors)
 
 # ================================================ #
 # ========== CUSTOM FUNCTIONS & ALIASES ========== #
@@ -113,6 +115,21 @@ apt-upgrade() { sudo apt-get upgrade && notify-send -i terminal "Upgrade finishe
 apt-install() { sudo apt-get install --no-install-recommends $1 && notify-send -i terminal "Finished installing $1" }
 alias apt-remove='sudo apt-get remove --purge'
 alias apt-ppa='sudo add-apt-repository'
+
+#pacman
+pacmirror() {
+    echo "Use the new pacman mirrorlist as the default mirrorlist and create a backup of the current mirrorlist? (y = yes)"
+    read answer_list
+    if [[ $answer_list == "y" ]] || [[ $answer_list == "Y" ]]; then
+        sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+        sudo mv /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist
+        echo "New mirrorlist: done!"
+        echo "Opening the new mirrorlist for editing."
+        sudo vim /etc/pacman.d/mirrorlist
+    else
+        echo "pacmirror script stopped. Nothing changed."
+    fi
+}
 
 # zsh
 alias zcat='history | tail -n 15'
