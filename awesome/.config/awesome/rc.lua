@@ -1,8 +1,26 @@
+--                                      _
+--         ___ _ __   ___ _ __ ___   __| |
+--        / __| '_ \ / __| '_ ` _ \ / _` |
+--        \__ | |_) | (__| | | | | | (_| |
+--        |___| .__/ \___|_| |_| |_|\__,_|
+--             |_|
+--
+--                    rc.lua
+--               Created by: spcmd
+--           http://spcmd.github.io
+--           https://github.com/spcmd
+--           https://gist.github.com/spcmd
+
+
+--------------------------------------
+----------- Load libraries -----------
+--------------------------------------
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
---require("awful.autofocus")
+require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
 -- Theme handling library
@@ -12,9 +30,19 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 -- Vicious library
 vicious = require("vicious")
+-- blingbling library
+blingbling = require("blingbling")
+
+--------------------------------------
+-------------- Autostart --------------
+--------------------------------------
 
 -- Enable compositing
 awful.util.spawn_with_shell("compton --backend glx --paint-on-overlay --vsync opengl-swc &")
+
+--------------------------------------
+--------------- Errors ---------------
+--------------------------------------
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -41,22 +69,23 @@ do
 end
 -- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
---beautiful.init("~/.config/awesome/themes/default-spcmd/theme.lua")
-beautiful.init("~/.config/awesome/themes/default-spcmd/theme.lua")
+-------------------------------------
+------------- Variables -------------
+-------------------------------------
 
--- This is used later as the default terminal and editor to run.
+-- Applications
 terminal = "termite"
 editor = os.getenv("EDITOR") or "nano"
-editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
+
+------------------------------------------
+------------- Theme & Layout -------------
+------------------------------------------
+
+-- Theme
+beautiful.init("~/.config/awesome/themes/default-spcmd/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
@@ -76,33 +105,29 @@ local layouts =
     -- awful.layout.suit.magnifier
 
 }
--- }}}
 
--- {{{ Wallpaper
+--  Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
     end
 end
--- }}}
 
--- {{{ Tags
--- Define a tag table which hold all screen tags.
+-- Tags
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
     tags[s] = awful.tag({ ">term", "🌍 web", " files", "♫music", "⇣torr", "⛬misc", 7, 8, 9 }, s, layouts[1])
 end
--- }}}
 
--- {{{ Menu
--- Create a laucher widget and a main menu
+-- Menu
 myawesomemenu = {
-   { "restart", awesome.restart },
-   { "quit", awesome.quit }
-}
+                    { "restart", awesome.restart },
+                    { "quit", awesome.quit }
+                }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+mymainmenu = awful.menu({ items = {
+                                    { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "terminal", terminal },
                                     { "clear admin", "/home/spcmd/.local/share/applications/ClearAdmin.desktop" },
                                     { "-------------", "" },
@@ -110,14 +135,20 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+mylauncher = awful.widget.launcher({
+                                     image = beautiful.awesome_icon,
+                                     menu = mymainmenu
+                                  })
+
+-- Add margin to the launcher icon
+local mylauncher_margin = wibox.layout.margin(mylauncher,0,1,0,0)
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
 
--- {{{ Wibox
+-------------------------------------------
+------------- Wibox & Widgets -------------
+-------------------------------------------
 
 -- Vicious: Volume (unicode icons (ttf-symbola needed!): 🔊  ♫ )
 volumewidget = wibox.widget.textbox()
@@ -214,7 +245,7 @@ eth_timer:connect_signal("timeout",eth_status)
 eth_timer:start()
 
 -- Wifi connection widget
--- symbols (unicode and fontawesome ttf): 📶    
+-- symbols (unicode and fontawesome ttf): 📶     
 function check_wls()
  local wls_file = io.open("/sys/class/net/wls2/operstate", "r")
  local wls_state = wls_file:read()
@@ -240,8 +271,6 @@ wls_timer:start()
 -- toggle Wifi with mouse click (using NetworkManager: nmcli)
 wls_widget:buttons (awful.util.table.join (
 	awful.button ({}, 1, function()
-		--[[local wifiCheck = awful.util.pread("awk 'NR==3' /proc/net/wireless")]]
-		--[[if wifiCheck == "" then]]
         if (check_wls() == "down") then
 			awful.util.spawn("nmcli r wifi on")
 			wls_widget:set_text("  on ")
@@ -254,6 +283,23 @@ wls_widget:buttons (awful.util.table.join (
 
 -- Textclock widget
 mytextclock = awful.widget.textclock()
+
+-- Clock & Date with Calendar ( https://github.com/cedlemo/blingbling )
+-- styling:
+    --background_color
+    --background_text_color
+    --h_margin v_margin
+    --rounded_size
+    --text_color, font, font_size
+calendar = blingbling.calendar()
+calendar:set_link_to_external_calendar(false)
+calendar:set_current_day_widget_style({
+    background_color = beautiful.bg_focus,
+    text_color = beautiful.fg_focus,
+})
+calendar:set_weeks_number_widget_style({
+    text_color = beautiful.bg_normal -- hide the week numbers
+})
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -327,7 +373,8 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(mylauncher)
+    --left_layout:add(mylauncher)
+    left_layout:add(mylauncher_margin)
     left_layout:add(mytaglist[s])
     left_layout:add(mypromptbox[s])
 
@@ -338,7 +385,8 @@ for s = 1, screen.count() do
     right_layout:add(wls_widget)
     right_layout:add(volumewidget)
     right_layout:add(battwidget)
-    right_layout:add(mytextclock)
+    --right_layout:add(mytextclock)
+    right_layout:add(calendar)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -349,22 +397,24 @@ for s = 1, screen.count() do
 
     mywibox[s]:set_widget(layout)
 end
--- }}}
 
--- {{{ Mouse bindings
+--------------------------------------------------
+------------- Key and Mouse bindings -------------
+--------------------------------------------------
+
+-- Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
--- }}}
 
--- {{{ Key bindings
+-- Key bindings
 globalkeys = awful.util.table.join(
 
-    ----------------------------
-    --- Custom key bindings  ---
-    ----------------------------
+    --~~~~~~~~~~~~~~~~~~~~~~~~~~
+    --~ Custom key bindings  ~~~
+    --~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     -- Spotify: Play/Pause, Prev, Next
     awful.key({ modkey,           }, "s", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end),
@@ -372,7 +422,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Right", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end),
 
     -- Volume
-    awful.key({ modkey,           }, "Up", function () awful.util.spawn ("amixer sset Master 2%+") vicious.force ({ volumewidget }) end),
+    awful.key({ modkey,           }, "Up", function () awful.util.spawn("amixer sset Master 2%+") vicious.force ({ volumewidget }) end),
     awful.key({ modkey,           }, "Down", function () awful.util.spawn ("amixer sset Master 2%-") vicious.force ({ volumewidget }) end),
 
     -- Run Applications
@@ -386,9 +436,12 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "Right", function () awful.util.spawn("/home/spcmd/bin/qxbacklight --up") end),
     awful.key({ modkey, "Control" }, "#90", function () awful.util.spawn("/home/spcmd/bin/qxbacklight --default") end),
 
-    -----------------------------------
-    --- end of Custom key bindings  ---
-    -----------------------------------
+    -- Set wallpaper with feh (useful when errors happen and Awesome falls back to the default wallpaper)
+    awful.key({ modkey, "Mod1"    }, "w", function () awful.util.spawn_with_shell("sh ~/.fehbg") end),
+
+    --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    --~ end of Custom key bindings ~~~
+    --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     awful.key({ modkey,           }, "#34",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "#35",  awful.tag.viewnext       ),
@@ -528,9 +581,11 @@ clientbuttons = awful.util.table.join(
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
 
--- {{{ Rules
+--------------------------------------------------
+--------------------- Rules ----------------------
+--------------------------------------------------
+
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -542,8 +597,8 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons } },
 
-     -- Float rules
-     { rule_any = { class = { "mpv", "Zathura", "feh", "Gcolor2", "Gifview", "Wine", "gimp" } },
+    -- Float rules
+    { rule_any = { class = { "mpv", "Zathura", "feh", "Gcolor2", "Gifview", "Wine", "gimp" } },
        properties = { floating = true } },
 
     -- Tag rules
@@ -561,9 +616,11 @@ awful.rules.rules = {
     properties = { tag = tags[1][6] } },
 
 }
--- }}}
 
--- {{{ Signals
+----------------------------------------------------
+--------------------- Signals ----------------------
+----------------------------------------------------
+
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
 
@@ -616,6 +673,9 @@ client.connect_signal("manage", function (c, startup)
                 end)
                 )
 
+
+        -- Window Titlebar Layout (buttons, title, etc.)
+
         -- Widgets that are aligned to the left
         local left_layout = wibox.layout.fixed.horizontal()
         --left_layout:buttons(buttons)
@@ -653,4 +713,3 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
