@@ -85,7 +85,7 @@ modkey = "Mod4"
 ------------------------------------------
 
 -- Theme
-beautiful.init("~/.config/awesome/themes/default-spcmd/theme.lua")
+beautiful.init("~/.config/awesome/themes/i3-blue/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
@@ -117,7 +117,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ ">term", "🌍 web", " files", "♫music", "⇣torr", "⛬misc", 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag({ " term", "🌍 web", "files", " mus", "⇣torr", "⛬misc", 7, 8, 9 }, s, layouts[1])
 end
 
 -- Menu
@@ -130,7 +130,7 @@ mymainmenu = awful.menu({ items = {
                                     { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "terminal", terminal },
                                     { "clear admin", "/home/spcmd/.local/share/applications/ClearAdmin.desktop" },
-                                    { "-------------", "" },
+                                    { "----------", "" },
                                     { "shutdown", "systemctl poweroff" }
                                   }
                         })
@@ -198,8 +198,8 @@ volumewidget:buttons (awful.util.table.join (
 
 vicious.register(volumewidget, vicious.widgets.volume,
                  function(widget, args)
-                    local label = { ["♫"] = "🔊", ["♩"] = "<span color='#d80000'>🔊</span>" }
-                    return " " .. label[args[2]] .. " " .. args[1]
+                    local label = { ["♫"] = "🔊", ["♩"] = "<span color='#d80000'>🔊 </span>" }
+                    return " " .. label[args[2]] .. " " .. args[1] .. " "
                  end, 300, "Master" -- 300 = 5 mins update time. We don't need fast widget refresh (low number/time) because the buttons will update the widget instantly.
                 )
 
@@ -233,9 +233,9 @@ eth_widget = wibox.widget.textbox()
 
 function eth_status()
     if (check_eth() == "up") then
-        eth_widget:set_text("  on ")
+        eth_widget:set_text("   on ")
     else
-        eth_widget:set_text("  off ")
+        eth_widget:set_text("   off ")
     end
 end
 eth_status()
@@ -257,9 +257,9 @@ wls_widget = wibox.widget.textbox()
 
 function wls_status()
     if (check_wls() == "up") then
-        wls_widget:set_text("  on ")
+        wls_widget:set_text(" on ")
     else
-        wls_widget:set_text("  off ")
+        wls_widget:set_text(" off ")
     end
 end
 wls_status()
@@ -273,10 +273,10 @@ wls_widget:buttons (awful.util.table.join (
 	awful.button ({}, 1, function()
         if (check_wls() == "down") then
 			awful.util.spawn("nmcli r wifi on")
-			wls_widget:set_text("  on ")
+			wls_widget:set_text(" on ")
 		else
 			awful.util.spawn("nmcli r wifi off")
-			wls_widget:set_text("  off ")
+			wls_widget:set_text(" off ")
 		end
 	end)
 ))
@@ -380,7 +380,7 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
+    --if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(eth_widget)
     right_layout:add(wls_widget)
     right_layout:add(volumewidget)
@@ -438,6 +438,9 @@ globalkeys = awful.util.table.join(
 
     -- Set wallpaper with feh (useful when errors happen and Awesome falls back to the default wallpaper)
     awful.key({ modkey, "Mod1"    }, "w", function () awful.util.spawn_with_shell("sh ~/.fehbg") end),
+
+    -- Scrot
+    awful.key({     }, "F1", function () awful.util.spawn_with_shell("scrot -d 1 ~/Pictures/scrot_%Y-%m-%d_%T.png") end),
 
     --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     --~ end of Custom key bindings ~~~
@@ -613,6 +616,8 @@ awful.rules.rules = {
     { rule = { class = "Chromium" },
     properties = { floating = false , tag = tags[1][2] } },
     { rule = { class = "Gimp" },
+    properties = { tag = tags[1][6] } },
+    { rule = { class = "Inkscape" },
     properties = { tag = tags[1][6] } },
 
 }

@@ -1,0 +1,55 @@
+"                                      _
+"         ___ _ __   ___ _ __ ___   __| |
+"        / __| '_ \ / __| '_ ` _ \ / _` |
+"        \__ | |_) | (__| | | | | | (_| |
+"        |___| .__/ \___|_| |_| |_|\__,_|
+"             |_|
+"
+"       awesome-default theme for Vimperator
+"               Created by: spcmd
+"           http://spcmd.github.io
+"           https://github.com/spcmd
+"           https://gist.github.com/spcmd
+
+
+"Command bar related
+hi ContentSeparator display: -moz-box;
+hi Normal background: #000; color:#fff;
+hi CmdLine background: #000; color:#fff;
+hi StatusLine color: #fff;
+
+hi InfoMsg background: #000; color: #34b0cd; "info msg (yank-copied to clipboard)
+hi ErrorMsg background: #AE0600; color: #fff;
+hi WarningMsg background: #AE0600; color: #fff;
+
+"Prompt > Follow Hint, Insert mode
+hi PromptText color: white; background: #ff5f00; padding-top:2px;
+hi ModeMsg color: white; background: #005fff; border-radius: 1px; padding: 0px 5px;
+
+"Completion list
+hi CompGroup background: #0E0D0D; color:#fff; border-top: 1px solid #a3a3a3;
+hi CompTitle background: #d9d9d9; font-weight:bold;
+hi CompTitle>* color: #000; padding:3px;
+hi CompItem background:#0E0D0D; color:#fff;
+hi CompItem[selected] color: #fff; background: #535d6c;
+hi CompDesc width: 500px; max-width: 500px; color: #ebebeb; padding-left:20px;
+hi CompMsg margin-left: 16px;
+
+hi Title color: #d9d9d9; font-weight: bold; "No Completions
+hi Filter color: #fff; background: #535d6c;
+hi NonText color: #ccc; min-height: 16px; padding-left: 2px;
+
+"Hint
+hi Hint font-size: 12px; color: #fff; background-color:#d60a00; padding:2px; text-transform: uppercase;
+hi Hint::after content: attr(number);
+hi HintActive background-color: #ff5f00; color: #fff;
+hi HintElem background-color: #4a4a4a; color: #fff;
+hi HintImage opacity: .5;
+
+"Etc
+"hi Tag color: #005F87;
+"hi Null color: #005F87;
+"hi Number color: #005F87;
+"hi Indicator color: #AE0600;
+"hi URL text-decoration: none; color: #34b0cd;
+"hi MoreMsg background: #000; color: #34b0cd;

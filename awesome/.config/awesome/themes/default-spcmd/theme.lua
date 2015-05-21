@@ -34,7 +34,8 @@ theme.border_marked = "#91231c"
 --theme.taglist_bg_focus = "#ff0000"
 
 theme.tasklist_bg_focus = theme.bg_focus
-theme.titlebar_bg_focus = theme.bg_normal
+--theme.titlebar_bg_focus = theme.bg_normal
+theme.titlebar_bg_focus = "#285577"
 
 -- Display the taglist squares
 theme.taglist_squares_sel = "~/.config/awesome/themes/default-spcmd/taglist/squarefw.png"

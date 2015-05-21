@@ -15,7 +15,7 @@
 "   Settings                                 "
 "--------------------------------------------"
 
-colorscheme vimperatorfox-dark
+colorscheme i3-blue
 set hintchars=hjklasdfgrtzu
 set editor="gvim -f"
 let mapleader = "-"
