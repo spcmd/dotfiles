@@ -43,9 +43,9 @@ highlight = #2f2f2f
 # colors from color0 to color254 can be set
 # black
 color0 = #000000
-color8 = #666
+color8 = #121212
 # red
-color1 = #ff4444
+color1 = #800000
 color9 = #DC0000
 # green
 color2  = #00AA00
@@ -54,13 +54,13 @@ color10 = #00AA00
 color3 = #ffff55
 color11 = #ffff55
 # blue
-color4 = #86a2be
+color4 = #0456C5
 color12 =#0456C5
 # magenta
-color5 = #cdb5cd
+color5 = #880088
 color13 = #AA00AA
 # cyan
-color6 = #b6defb
+color6 = #45AEA6
 color14 = #00AAAA
 # white
 color7 = #ffffff

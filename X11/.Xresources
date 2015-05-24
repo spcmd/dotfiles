@@ -5,3 +5,17 @@ Xft.hinting:    true
 Xft.rgba:       rgb
 Xft.hintstyle:  hintmedium
 
+! Compile xft: Attempt to find a visual with the given bit depth; option -depth.
+URxvt*depth: 32
+
+! Use the specified colour as the windows background colour [default White]; option -bg.
+URxvt*background: [90]#000000 
+
+! Use the specified colour as the windows foreground colour [default Black]; option -fg.
+URxvt*foreground: #ffffff
+
+! Select the fonts to be used. This is a comma separated list of font names that are checked in order when trying to find glyphs for
+URxvt*font: 9x15
+
+! True: enable the scrollbar [default]; option -sb. False: disable the scrollbar; option +sb.
+URxvt*scrollBar: false

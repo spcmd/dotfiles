@@ -13,7 +13,7 @@
 
 
 # The return status of the last command executed just before the prompt.
-local return_status="%(?:%{$fg_bold[green]%}❯ :%{$fg_bold[green]%}❯ %s)"
+local return_status="%(?:%{$fg_bold[green]%}❯ :%{$fg_bold[green]%}❯ )"
 
 PROMPT='%{$fg_bold[green]%}%~$(git_prompt_info)${return_status}%{$reset_color%}'
 

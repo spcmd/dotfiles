@@ -41,7 +41,7 @@ set lines=35 columns=120                            "set in ~/.gvimrc for GVim
 set rnu                                             "relative line numbering
 "set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline
-set noshowmode                                      "disable default mode indicator (using airline's)
+"set noshowmode                                      "disable default mode indicator (using airline's)
 set listchars=tab:▸\ ,eol:¬                         "tab and EOL chars
 set nofoldenable                                    "disable automatic folding
 set autoread                                        "auto-reload files if they were modified outside Vim
@@ -60,16 +60,16 @@ let mapleader = "-"                                 "remap leader key, instead o
     let g:airline_symbols = {}
 endif
 
-let g:airline_left_sep = ""                         "no arrows
-let g:airline_right_sep = ""                        "no arrows
-let g:airline_left_alt_sep = ""                     "no buffer/tab arrows
-let g:airline_symbols.linenr = "␊"                  "line nr symbol
-let g:airline_symbols.branch = "⎇ "                 "git branch
-let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
-let g:airline#extensions#tabline#fnamemod = ":t"    "show filenames only on tabs
-let g:airline_section_c = "%F"                      "show the full path of the file in section c
-let g:airline_powerline_fonts = 1                   "load patched powerline fonts
-let g:airline_theme="spcmd"                         "set airline theme
+"let g:airline_left_sep = ""                         "no arrows
+"let g:airline_right_sep = ""                        "no arrows
+"let g:airline_left_alt_sep = ""                     "no buffer/tab arrows
+"let g:airline_symbols.linenr = "␊"                  "line nr symbol
+"let g:airline_symbols.branch = "⎇ "                 "git branch
+"let g:airline#extensions#tabline#enabled = 1        "display buffers/tabs at the top
+"let g:airline#extensions#tabline#fnamemod = ":t"    "show filenames only on tabs
+"let g:airline_section_c = "%F"                      "show the full path of the file in section c
+"let g:airline_powerline_fonts = 1                   "load patched powerline fonts
+"let g:airline_theme="spcmd"                         "set airline theme
 
 let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
 let NERDTreeShowHidden=1                            "show hidden files by default (needed for dotfiles)
@@ -77,9 +77,17 @@ let g:session_autosave="yes"                        "autosave session
 let g:session_autoload="yes"                        "autoload session
 let g:neocomplete#enable_at_startup = 1             "enable Neocomplete
 let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
-let g:vcoolor_disable_mappings = 1                  "disable VCoolor's default mappings
-let g:vcoolor_lowercase = 1                         "use lowercase color codes by default
+"let g:vcoolor_disable_mappings = 1                  "disable VCoolor's default mappings
+"let g:vcoolor_lowercase = 1                         "use lowercase color codes by default
 
+let g:miniBufExplStatusLineText = "Buffers"
+let g:did_minibufexplorer_syntax_inits = 1
+hi mbenormal ctermfg=255 ctermbg=0
+hi mbechanged ctermfg=255 ctermbg=1
+hi mbevisiblenormal ctermfg=255 ctermbg=24
+hi mbevisiblechanged ctermfg=255 ctermbg=9
+hi mbevisibleactivenormal ctermfg=255 ctermbg=24
+hi mbevisibleactivechanged ctermfg=255 ctermbg=24
 
 "Colorize cursor in terminal vim
 if &term =~ "xterm\\|rxvt"

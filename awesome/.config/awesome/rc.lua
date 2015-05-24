@@ -85,7 +85,7 @@ modkey = "Mod4"
 ------------------------------------------
 
 -- Theme
-beautiful.init("~/.config/awesome/themes/i3-blue/theme.lua")
+beautiful.init("~/.config/awesome/themes/awmi3-blue/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
@@ -240,7 +240,7 @@ function eth_status()
 end
 eth_status()
 
-eth_timer = timer({timeout=30})
+eth_timer = timer({timeout=60})
 eth_timer:connect_signal("timeout",eth_status)
 eth_timer:start()
 
@@ -264,7 +264,7 @@ function wls_status()
 end
 wls_status()
 
-wls_timer = timer({timeout=30})
+wls_timer = timer({timeout=60})
 wls_timer:connect_signal("timeout",wls_status)
 wls_timer:start()
 
@@ -432,9 +432,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
 
     -- Backlight
-    awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/bin/qxbacklight --down") end),
-    awful.key({ modkey, "Control" }, "Right", function () awful.util.spawn("/home/spcmd/bin/qxbacklight --up") end),
-    awful.key({ modkey, "Control" }, "#90", function () awful.util.spawn("/home/spcmd/bin/qxbacklight --default") end),
+    awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --down") end),
+    awful.key({ modkey, "Control" }, "Right", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --up") end),
+    awful.key({ modkey, "Control" }, "#90", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --default") end),
 
     -- Set wallpaper with feh (useful when errors happen and Awesome falls back to the default wallpaper)
     awful.key({ modkey, "Mod1"    }, "w", function () awful.util.spawn_with_shell("sh ~/.fehbg") end),
@@ -460,7 +460,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
+    awful.key({ modkey,           }, "Menu", function () mymainmenu:show() end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -615,10 +615,11 @@ awful.rules.rules = {
     properties = { tag = tags[1][2] } },
     { rule = { class = "Chromium" },
     properties = { floating = false , tag = tags[1][2] } },
-    { rule = { class = "Gimp" },
+
+    -- Tag 6 (Misc) rules
+    { rule_any = { class = { "Gimp", "Inkscape", "libreoffice" } },
     properties = { tag = tags[1][6] } },
-    { rule = { class = "Inkscape" },
-    properties = { tag = tags[1][6] } },
+
 
 }
 
@@ -718,3 +719,14 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+-- Disabled clients bo be urgent by default
+-- https://awesome.naquadah.org/wiki/FAQ#Why_are_new_clients_urgent_by_default.3F
+client.disconnect_signal("request::activate", awful.ewmh.activate)
+   function awful.ewmh.activate(c)
+       if c:isvisible() then
+           client.focus = c
+           c:raise()
+       end
+   end
+   client.connect_signal("request::activate", awful.ewmh.activate)

@@ -49,11 +49,15 @@ ZSH_THEME="spcmd"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
-# User configuration
-
-export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+# Setting the $PATH
+export PATH="$HOME/bin:$HOME/Scripts:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+if [[ -d $HOME/.gem/ruby/2.2.0/bin ]]; then
+    PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
+fi
+
+# oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -105,18 +109,22 @@ bindkey -M vicmd '^s' history-incremental-search-backward
 # Load dircolors (needed for termite)
 eval $(dircolors ~/.dircolors)
 
-# ================================================ #
-# ========== CUSTOM FUNCTIONS & ALIASES ========== #
-# ================================================ #
+# ====================================================== #
+# ========== CUSTOM VARS, FUNCTIONS & ALIASES ========== #
+# ====================================================== #
 
-#apt
+# backup
+DIR_BACKUP=~/Backup
+alias bak_rclua='cp ~/.config/awesome/rc.lua $DIR_BACKUP && echo "rc.lua copied to: $DIR_BACKUP"'
+
+# apt
 apt-update() { sudo apt-get update && notify-send -i terminal "Update finished!" }
 apt-upgrade() { sudo apt-get upgrade && notify-send -i terminal "Upgrade finished!" }
 apt-install() { sudo apt-get install --no-install-recommends $1 && notify-send -i terminal "Finished installing $1" }
 alias apt-remove='sudo apt-get remove --purge'
 alias apt-ppa='sudo add-apt-repository'
 
-#pacman
+# pacman
 pacmirror() {
     echo "Use the new pacman mirrorlist as the default mirrorlist and create a backup of the current mirrorlist? (y = yes)"
     read answer_list
@@ -135,7 +143,7 @@ pacmirror() {
 alias zcat='history | tail -n 15'
 alias zz='source ~/.zshrc && echo "source zshrc: done!"'
 
-#dev
+# dev/git
 alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
 alias cdgit='cd ~/git'
 alias gadd='git add --all'
@@ -143,10 +151,30 @@ alias gpush='git push origin master'
 alias gcommit='git commit -m'
 alias gdiff='git diff'
 
+# Checking local git repos
+gitcheck() {
+    col_def=$(tput sgr0)
+    col_title=$(tput setaf 7; tput bold)
+    col_dir=$(tput setaf 4; tput bold)
+
+    echo -e "\n"
+    echo -e "$col_dir::$col_title Checking:$col_dir ~/git/spcmd.github.io $col_def"
+    git -C ~/git/spcmd.github.io status
+    echo -e "\n"
+    echo -e "$col_dir::$col_title Checking:$col_dir ~/git/themes $col_def"
+    git -C ~/git/themes status
+    echo -e "\n"
+    echo -e "$col_dir::$col_title Checking:$col_dir ~/Scripts $col_def"
+    git -C ~/Scripts status
+    echo -e "\n"
+    echo -e "$col_dir::$col_title Checking:$col_dir ~/dotfiles $col_def"
+    git -C ~/dotfiles status
+}
+
 # ssh with X (to run GUI apps)
 alias sshx='ssh -X -C -c blowfish-cbc,arcfour'
 
-#misc
+# misc
 alias lf='ls -ACF'
 alias hdapm='sudo hdparm -I /dev/sda | grep level'
 alias faenzaicon='find /usr/share/icons/Faenza -type f | grep'
