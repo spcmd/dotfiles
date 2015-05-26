@@ -70,6 +70,11 @@ else
   export EDITOR='vim'
 fi
 
+# Stop ranger from loading the both the default and the custom config files
+if [[ -f /usr/bin/ranger ]]; then
+    export RANGER_LOAD_DEFAULT_RC=FALSE
+fi
+
 # ============================== #
 # ========== Vi MODE  ========== #
 # ============================== #

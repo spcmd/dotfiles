@@ -6,7 +6,7 @@ Xft.rgba:       rgb
 Xft.hintstyle:  hintmedium
 
 ! Compile xft: Attempt to find a visual with the given bit depth; option -depth.
-URxvt*depth: 32
+!URxvt*depth: 32
 
 ! Use the specified colour as the windows background colour [default White]; option -bg.
 URxvt*background: [90]#000000 

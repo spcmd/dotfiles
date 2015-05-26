@@ -18,7 +18,8 @@
 " Hex colour conversion functions borrowed from the theme "Desert256""
 
 " Default GUI Colours
-let s:foreground = "c5c8c6"
+"let s:foreground = "c5c8c6"
+let s:foreground = "dedede"
 let s:background = "151515"
 let s:selection = "373b41"
 let s:line = "1f1f1f"
@@ -263,14 +264,16 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("NonText", s:selection, "", "")
 	call <SID>X("SpecialKey", s:selection, "", "")
 	call <SID>X("Search", s:background, s:yellow, "")
-	call <SID>X("TabLine", s:window, s:foreground, "reverse")
-	call <SID>X("TabLineFill", s:window, s:foreground, "reverse")
-	call <SID>X("StatusLine", s:window, s:yellow, "reverse")
+    call <SID>X("TabLine", "2d2d2d", "dedede", "reverse")
+    call <SID>X("TabLineFill", "2d2d2d", s:foreground, "reverse")
+    call <SID>X("StatusLine", s:window, s:yellow, "reverse")
+	call <SID>X("TabLineSel", "f5f5f5", "5f0000", "none")
+	call <SID>X("StatusLine", "2d2d2d", "f5f5f5", "reverse")
 	call <SID>X("StatusLineNC", s:window, s:foreground, "reverse")
 	call <SID>X("VertSplit", s:window, s:window, "none")
 	call <SID>X("Visual", "", s:selection, "")
 	call <SID>X("Directory", s:blue, "", "")
-	call <SID>X("ModeMsg", s:green, "", "")
+	call <SID>X("ModeMsg", "ffffff", "", "")
 	call <SID>X("MoreMsg", s:green, "", "")
 	call <SID>X("Question", s:green, "", "")
 	call <SID>X("WarningMsg", s:red, "", "")

@@ -54,14 +54,14 @@ color10 = #00AA00
 color3 = #ffff55
 color11 = #ffff55
 # blue
-color4 = #0456C5
-color12 =#0456C5
+color4 = #1C7EFF
+color12 =#1C7EFF
 # magenta
 color5 = #880088
 color13 = #AA00AA
 # cyan
-color6 = #45AEA6
-color14 = #00AAAA
+color6 = #2FC8C8
+color14 = #2FC8C8
 # white
 color7 = #ffffff
 color15 = #f5f5f5
