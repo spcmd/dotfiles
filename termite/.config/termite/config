@@ -57,14 +57,54 @@ color11 = #ffff55
 color4 = #1C7EFF
 color12 =#1C7EFF
 # magenta
-color5 = #880088
-color13 = #AA00AA
+color5 = #B53C7D
+color13 = #B53C7D
 # cyan
 color6 = #2FC8C8
 color14 = #2FC8C8
 # white
 color7 = #ffffff
 color15 = #f5f5f5
+
+# colors for ranger:
+color18 = #003967
+color19 = #AB4100
+color20 = #444
+color21 = #6D0021
+color22 = #285577
+color23 = #151515
+color24 = #CCCCCC
+color25 = #4D7A89
+color26 = #1E5D2C
+
+# Base16 style colors
+# https://github.com/chriskempson/base16#preview
+# black
+#color0 = #181818
+#color8 = #181818
+# red
+#color1 = #AB4642
+#color9 = #AB4642
+# green
+#color2  = #A1B56C
+#color10 = #A1B56C
+# yellow
+#color3 = #f7ca88
+#color11 = #f7ca88
+# blue
+#color4 = #7cafc2
+#color12 = #7cafc2
+# magenta
+#color5 = #56598C
+#color13 = #56598C
+# cyan
+#color6 = #86C1B9
+#color14 = #86C1B9
+# white
+#color7 = #f8f8f8
+#color15 = #f8f8f8
+
+
 
 [hints]
 #font = Monospace 12

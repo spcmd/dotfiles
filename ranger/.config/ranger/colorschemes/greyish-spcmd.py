@@ -4,6 +4,9 @@
 from ranger.gui.colorscheme import ColorScheme
 from ranger.gui.color import *
 
+RANGER_BG=24
+RANGER_FG=black
+
 class Default(ColorScheme):
     progress_bar_color = blue
 
@@ -12,41 +15,47 @@ class Default(ColorScheme):
 
         if context.reset:
             return default_colors
-
+                
         elif context.in_browser:
+            bg = RANGER_BG
+            fg = RANGER_FG
             if context.selected:
                 attr = reverse
             else:
+                bg = RANGER_BG
+                fg = RANGER_FG
                 attr = normal
             if context.empty or context.error:
                 bg = red
-            if context.border:
                 fg = white
+            if context.border:
+                fg = 20
             if context.media:
                 if context.image:
-                    fg = magenta
+                    fg = 21
                 else:
-                    fg = magenta
+                    fg = 21
             if context.container:
-                fg = red
+                fg = 19
                 attr |= bold
             if context.directory:
                 attr |= bold
-                fg = blue
+                bg = RANGER_BG
+                fg = RANGER_FG
             elif context.executable and not \
                     any((context.media, context.container,
                         context.fifo, context.socket)):
-                attr |= bold
-                fg = green
+                #attr |= bold
+                fg = 26
             if context.socket:
                 fg = magenta
                 attr |= bold
             if context.fifo or context.device:
-                fg = yellow
+                fg = 18
                 if context.device:
                     attr |= bold
             if context.link:
-                fg = context.good and cyan
+                fg = context.good and 25
             if context.tag_marker and not context.selected:
                 attr |= bold
                 if fg in (red, magenta):
@@ -57,11 +66,12 @@ class Default(ColorScheme):
                 #fg = black
                 #attr |= bold
             if context.main_column:
+                bg = RANGER_BG
                 if context.selected:
                     attr |= bold
                 if context.marked:
                     attr |= bold
-                    fg = yellow
+                    fg = 18
             if context.badinfo:
                 if attr & reverse:
                     bg = magenta
@@ -69,26 +79,31 @@ class Default(ColorScheme):
                     fg = magenta
 
         elif context.in_titlebar:
+            bg = RANGER_BG
+            fg = RANGER_FG
             attr |= bold
             if context.hostname:
-                fg = context.bad and red or green
+                #fg = context.bad and red or green
+                fg = RANGER_FG
             elif context.directory:
-                fg = blue
+                fg = RANGER_FG
             elif context.tab:
                 if context.good:
                     bg = green
             elif context.link:
-                fg = cyan
+                fg = 25
 
         elif context.in_statusbar:
+            bg = RANGER_BG
+            fg = RANGER_FG
             if context.permissions:
                 if context.good:
-                    fg = cyan
+                    fg = 21
                 elif context.bad:
                     fg = magenta
             if context.marked:
                 attr |= bold | reverse
-                fg = yellow
+                fg = 18
             if context.message:
                 if context.bad:
                     attr |= bold
@@ -96,11 +111,11 @@ class Default(ColorScheme):
             if context.loaded:
                 bg = self.progress_bar_color
             if context.vcsinfo:
-                fg = blue
-                attr &= ~bold
+                fg = 21
+                #attr &= ~bold
             if context.vcscommit:
-                fg = yellow
-                attr &= ~bold
+                fg = 21
+                #attr &= ~bold
 
 
         if context.text:
@@ -132,10 +147,10 @@ class Default(ColorScheme):
                 fg = red
                 attr |= bold
             elif context.vcsstaged:
-                fg = green
+                fg = 26
                 attr |= bold
             elif context.vcssync:
-                fg = green
+                fg = 26
                 attr |= bold
             elif context.vcsignored:
                 fg = default

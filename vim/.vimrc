@@ -86,29 +86,19 @@ let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
 "let g:vcoolor_disable_mappings = 1                  "disable VCoolor's default mappings
 "let g:vcoolor_lowercase = 1                         "use lowercase color codes by default
 
-"Colorize cursor in terminal vim
-if &term =~ "xterm\\|rxvt"
-  "color in insert mode
-  let &t_SI = "\<Esc>]12;DodgerBlue\x7"
-  "color in other modes
-  let &t_EI = "\<Esc>]12;yellow\x7"
-  silent !echo -ne "\033]12;yellow\007"
-  "reset cursor color when vim exits
-  autocmd VimLeave * silent !echo -ne "\033]12;white\007"
-endif
-
-if &term =~ "xterm\\|rxvt"
-"if &term =~ '^xterm'
-  " solid underscore
-  let &t_SI .= "\<Esc>[6 q"
-  " solid block
-  let &t_EI .= "\<Esc>[2 q"
-  " 1 or 0 -> blinking block
-  " 3 -> blinking underscore
-  " Recent versions of xterm (282 or above) also support
-  " 5 -> blinking vertical bar
-  " 6 -> solid vertical bar
-endif
+" Cursor color & shape
+" 1 or 0 -> blinking block
+" 2 -> normal block
+" 3 -> blinking underscore
+" 4 -> normal underscore
+" 5 -> blinking vertical bar
+" 6 -> normal vertical bar
+let &t_SI = "\<Esc>]12;DodgerBlue\x7"
+let &t_EI = "\<Esc>]12;yellow\x7"
+let &t_SI .= "\<Esc>[6 q"
+let &t_EI .= "\<Esc>[2 q"
+silent !echo -ne "\033]12;yellow\007"
+autocmd VimLeave * silent !echo -ne "\033]12;white\007"
 
 "--------------------------------------------"
 "   Commands & Functions                     "

@@ -145,8 +145,15 @@ pacmirror() {
 }
 
 # zsh
-alias zcat='history | tail -n 15'
-alias zz='source ~/.zshrc && echo "source zshrc: done!"'
+alias RR='source ~/.zshrc && echo "source zshrc: done!"'
+
+# trash-cli
+alias TL='trash-list'
+alias TE='trash-empty'
+alias TP='trash-put'
+alias DD='trash-put'
+alias TR='restore-trash'
+alias trash-restore='restore-trash'
 
 # dev/git
 alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
