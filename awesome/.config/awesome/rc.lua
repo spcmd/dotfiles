@@ -598,7 +598,8 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
+                     buttons = clientbuttons,
+                     size_hints_honor = false } },
 
     -- Float rules
     { rule_any = { class = { "mpv", "Zathura", "feh", "Gcolor2", "Gifview", "Wine", "gimp" } },

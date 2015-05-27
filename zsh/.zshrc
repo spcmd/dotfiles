@@ -149,11 +149,21 @@ alias RR='source ~/.zshrc && echo "source zshrc: done!"'
 
 # trash-cli
 alias TL='trash-list'
-alias TE='trash-empty'
 alias TP='trash-put'
 alias DD='trash-put'
 alias TR='restore-trash'
 alias trash-restore='restore-trash'
+
+TE() {
+    echo "trash-cli: emptying Trash, are you sure? (y = yes)"
+    read answer_trash
+    if [[ $answer_trash == "y" ]] || [[ $answer_trash == "Y" ]]; then
+        trash-empty 
+        echo "trash-cli: Done! Trash is empty."
+    else
+        echo "trash-cli: Exit. Trash hasn't been emptied." 
+    fi
+}
 
 # dev/git
 alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
