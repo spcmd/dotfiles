@@ -118,20 +118,50 @@ eval $(dircolors ~/.dircolors)
 # ========== CUSTOM VARS, FUNCTIONS & ALIASES ========== #
 # ====================================================== #
 
-# backup
-DIR_BACKUP=~/Backup
-alias bak_rclua='cp ~/.config/awesome/rc.lua $DIR_BACKUP && echo "rc.lua copied to: $DIR_BACKUP"'
+COLOR_DEFAULT=$(tput sgr0)
+COLOR_TITLE=$(tput setaf 7; tput bold)
+COLOR_HL1=$(tput setaf 4; tput bold)
 
-# apt
-apt-update() { sudo apt-get update && notify-send -i terminal "Update finished!" }
-apt-upgrade() { sudo apt-get upgrade && notify-send -i terminal "Upgrade finished!" }
-apt-install() { sudo apt-get install --no-install-recommends $1 && notify-send -i terminal "Finished installing $1" }
-alias apt-remove='sudo apt-get remove --purge'
-alias apt-ppa='sudo add-apt-repository'
+# zsh
+alias RR='source ~/.zshrc && echo "source zshrc: done!"'
+
+# trash-cli
+alias trash-restore='restore-trash'
+
+# trash-cli: list
+TL() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Listing Trash:"
+    trash-list
+}
+
+# trash-cli: put
+TP() {
+    trash-put $@
+    echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Files have been put to Trash:"
+    printf '%s\n' "$@"
+}
+
+# trash-cli: restore
+TR() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Restore file from Trash:"
+    restore-trash
+}
+
+# trash-cli: empty
+TE() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Emptying Trash, are you sure? (y = yes)"
+    read answer_trash
+    if [[ $answer_trash == "y" ]] || [[ $answer_trash == "Y" ]]; then
+        trash-empty 
+        echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Done! Trash is empty."
+    else
+        echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Exit. Trash hasn't been emptied."
+    fi
+}
 
 # pacman
 pacmirror() {
-    echo "Use the new pacman mirrorlist as the default mirrorlist and create a backup of the current mirrorlist? (y = yes)"
+    echo -e "$COLOR_HL1::$COLOR_TITLE pacmirror >$COLOR_DEFAULT Use the new pacman mirrorlist as the default mirrorlist and create a backup of the current mirrorlist? (y = yes)"
     read answer_list
     if [[ $answer_list == "y" ]] || [[ $answer_list == "Y" ]]; then
         sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
@@ -144,54 +174,28 @@ pacmirror() {
     fi
 }
 
-# zsh
-alias RR='source ~/.zshrc && echo "source zshrc: done!"'
-
-# trash-cli
-alias TL='trash-list'
-alias TP='trash-put'
-alias DD='trash-put'
-alias TR='restore-trash'
-alias trash-restore='restore-trash'
-
-TE() {
-    echo "trash-cli: emptying Trash, are you sure? (y = yes)"
-    read answer_trash
-    if [[ $answer_trash == "y" ]] || [[ $answer_trash == "Y" ]]; then
-        trash-empty 
-        echo "trash-cli: Done! Trash is empty."
-    else
-        echo "trash-cli: Exit. Trash hasn't been emptied." 
-    fi
+# git
+gitcheck() {
+    echo -e "\n"
+    echo -e "$COLOR_HL1::$COLOR_TITLE Checking:$COLOR_HL1 ~/git/spcmd.github.io $COLOR_DEFAULT"
+    git -C ~/git/spcmd.github.io status
+    echo -e "\n"
+    echo -e "$COLOR_HL1::$COLOR_TITLE Checking:$COLOR_HL1 ~/git/themes $COLOR_DEFAULT"
+    git -C ~/git/themes status
+    echo -e "\n"
+    echo -e "$COLOR_HL1::$COLOR_TITLE Checking:$COLOR_HL1 ~/Scripts $COLOR_DEFAULT"
+    git -C ~/Scripts status
+    echo -e "\n"
+    echo -e "$COLOR_HL1::$COLOR_TITLE Checking:$COLOR_HL1 ~/dotfiles $COLOR_DEFAULT"
+    git -C ~/dotfiles status
 }
 
-# dev/git
-alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
-alias cdgit='cd ~/git'
+alias gch='gitcheck'
 alias gadd='git add --all'
 alias gpush='git push origin master'
 alias gcommit='git commit -m'
 alias gdiff='git diff'
-
-# Checking local git repos
-gitcheck() {
-    col_def=$(tput sgr0)
-    col_title=$(tput setaf 7; tput bold)
-    col_dir=$(tput setaf 4; tput bold)
-
-    echo -e "\n"
-    echo -e "$col_dir::$col_title Checking:$col_dir ~/git/spcmd.github.io $col_def"
-    git -C ~/git/spcmd.github.io status
-    echo -e "\n"
-    echo -e "$col_dir::$col_title Checking:$col_dir ~/git/themes $col_def"
-    git -C ~/git/themes status
-    echo -e "\n"
-    echo -e "$col_dir::$col_title Checking:$col_dir ~/Scripts $col_def"
-    git -C ~/Scripts status
-    echo -e "\n"
-    echo -e "$col_dir::$col_title Checking:$col_dir ~/dotfiles $col_def"
-    git -C ~/dotfiles status
-}
+alias cdgit='cd ~/git'
 
 # ssh with X (to run GUI apps)
 alias sshx='ssh -X -C -c blowfish-cbc,arcfour'
@@ -199,8 +203,26 @@ alias sshx='ssh -X -C -c blowfish-cbc,arcfour'
 # misc
 alias lf='ls -ACF'
 alias hdapm='sudo hdparm -I /dev/sda | grep level'
-alias faenzaicon='find /usr/share/icons/Faenza -type f | grep'
-alias findicon='find /usr/share/icons -type f | grep'
+alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
 alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
 alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
 alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
+
+# apt
+apt-update() { sudo apt-get update && notify-send -i terminal "Update finished!" }
+apt-upgrade() { sudo apt-get upgrade && notify-send -i terminal "Upgrade finished!" }
+apt-install() { sudo apt-get install --no-install-recommends $1 && notify-send -i terminal "Finished installing $1" }
+alias apt-remove='sudo apt-get remove --purge'
+alias apt-ppa='sudo add-apt-repository'
+
+# Colored man pages (https://wiki.archlinux.org/index.php/Man_page#Using_less_.28Recommended.29)
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
+}

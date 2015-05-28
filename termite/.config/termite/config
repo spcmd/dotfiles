@@ -45,7 +45,7 @@ highlight = #2f2f2f
 color0 = #000000
 color8 = #121212
 # red
-color1 = #800000
+color1 = #DC0000
 color9 = #DC0000
 # green
 color2  = #00AA00
@@ -74,7 +74,7 @@ color19 = #AB4100
 #border
 color20 = #444
 #media/image
-color21 = #C26181
+color21 = #A09FAD
 #dir
 color22 = #A5BAC1
 #unused

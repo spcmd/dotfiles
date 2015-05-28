@@ -265,8 +265,8 @@ nnoremap <silent> <leader>u :TodoUndone<CR>
 nnoremap <silent> <leader>x :TodoCancel<CR>
 
 "VCoolor (https://github.com/KabbAmine/vCoolor.vim)
-nnoremap <silent> <leader>vc :VCoolor<CR>
-inoremap <silent> <leader>vc <Esc>:VCoolor<CR>a
+"nnoremap <silent> <leader>vc :VCoolor<CR>
+"inoremap <silent> <leader>vc <Esc>:VCoolor<CR>a
 
 "Colorizer (https://github.com/chrisbra/Colorizer)
-nnoremap <silent> <leader>cz :ColorToggle<CR>
+nnoremap <silent> <leader>cz :ColorHighlight syntax<CR>

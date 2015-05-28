@@ -440,7 +440,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"    }, "w", function () awful.util.spawn_with_shell("sh ~/.fehbg") end),
 
     -- Scrot
-    awful.key({     }, "F1", function () awful.util.spawn_with_shell("scrot -d 1 ~/Pictures/scrot_%Y-%m-%d_%T.png") end),
+    awful.key({     }, "F1", function () awful.util.spawn_with_shell("scrot ~/Pictures/scrot_%Y-%m-%d_%T.png && notify-send ' scrot ' ' taken '") end),
 
     --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     --~ end of Custom key bindings ~~~
