@@ -7,7 +7,7 @@ Xft.hintstyle:  hintmedium
 
 ! True transparency - Ranger w3m image display will not work when enabled -- using compton setting instead 
 !URxvt*depth: 32
-URxvt*background: [95]#000000 
+URxvt*background: [90]#000000 
 
 ! Native (fake) transparency
 !URxvt*.transparent: true
