@@ -12,6 +12,10 @@
 #           https://gist.github.com/spcmd
 
 
+# -----------------------------------------------------
+# ---------- Basic configuration
+# -----------------------------------------------------
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -41,13 +45,13 @@ ZSH_THEME="spcmd"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+#ZSH_CUSTOM=~/.oh-my-zsh/custom
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-syntax-highlighting)
 
 # Setting the $PATH
 export PATH="$HOME/bin:$HOME/Scripts:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
@@ -70,14 +74,17 @@ else
   export EDITOR='vim'
 fi
 
+#export TERM='rxvt-unicode-256color'
+#export COLORTERM='rxvt-unicode-256color'
+
 # Stop ranger from loading the both the default and the custom config files
 if [[ -f /usr/bin/ranger ]]; then
     export RANGER_LOAD_DEFAULT_RC=FALSE
 fi
 
-# ============================== #
-# ========== Vi MODE  ========== #
-# ============================== #
+# -----------------------------------------------------
+# ---------- Vi mode in zsh
+# -----------------------------------------------------
 
 # Enable Vi/Vim mode
 bindkey -v
@@ -114,18 +121,33 @@ bindkey -M vicmd '^s' history-incremental-search-backward
 # Load dircolors (needed for termite)
 eval $(dircolors ~/.dircolors)
 
-# ====================================================== #
-# ========== CUSTOM VARS, FUNCTIONS & ALIASES ========== #
-# ====================================================== #
+# -----------------------------------------------------
+# ---------- Custom vars
+# -----------------------------------------------------
 
 COLOR_DEFAULT=$(tput sgr0)
 COLOR_TITLE=$(tput setaf 7; tput bold)
 COLOR_HL1=$(tput setaf 4; tput bold)
 
-# zsh
+# -----------------------------------------------------
+# ---------- Zsh
+# -----------------------------------------------------
+
+# source/reload
 alias RR='source ~/.zshrc && echo "source zshrc: done!"'
 
-# trash-cli
+# -----------------------------------------------------
+# ---------- Xorg
+# -----------------------------------------------------
+
+# reload .Xresources
+rld-xresources() { xrdb -load ~/.Xresources && echo "reload .Xresources: done!" }
+
+# -----------------------------------------------------
+# ---------- Trash-CLI
+# -----------------------------------------------------
+
+# trash-cli aliases
 alias trash-restore='restore-trash'
 
 # trash-cli: list
@@ -159,7 +181,30 @@ TE() {
     fi
 }
 
-# pacman
+# -----------------------------------------------------
+# ---------- Pacman
+# -----------------------------------------------------
+
+# pacman aliases
+alias pacins='sudo pacman -S' # install
+alias pacinu='sudo pacman -U' # istall local pkg
+alias pacss='sudo pacman -Ss' # search
+alias pacsync='sudo pacman -Syy' # update repo lists
+alias pacupd='sudo pacman -Syyu' # update & upgrade
+alias pacupg='sudo pacman -Syyu' # update & upgrade
+
+# pacman: removed orphaned
+pacrmo() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE sudo pacman -Rns \$(pacman -Qdtq) $COLOR_DEFAULT:: Remove all orphaned packages, their configuration files and unneeded dependecies.\n"
+    sudo pacman -Rns $(pacman -Qdtq)
+}
+
+# pacman: remove packages
+pacrm() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE sudo pacman -Rns $COLOR_DEFAULT:: Remove packages, their configuration files and unneeded dependecies.\n"
+    sudo pacman -Rns $@ 
+}
+
 pacmirror() {
     echo -e "$COLOR_HL1::$COLOR_TITLE pacmirror >$COLOR_DEFAULT Use the new pacman mirrorlist as the default mirrorlist and create a backup of the current mirrorlist? (y = yes)"
     read answer_list
@@ -173,6 +218,10 @@ pacmirror() {
         echo "pacmirror script stopped. Nothing changed."
     fi
 }
+
+# -----------------------------------------------------
+# ---------- Git
+# -----------------------------------------------------
 
 # git
 gitcheck() {
@@ -190,6 +239,7 @@ gitcheck() {
     git -C ~/dotfiles status
 }
 
+# git aliases
 alias gch='gitcheck'
 alias gadd='git add --all'
 alias gpush='git push origin master'
@@ -197,16 +247,20 @@ alias gcommit='git commit -m'
 alias gdiff='git diff'
 alias cdgit='cd ~/git'
 
-# ssh with X (to run GUI apps)
-alias sshx='ssh -X -C -c blowfish-cbc,arcfour'
+# -----------------------------------------------------
+# ---------- Misc./Other stuff
+# -----------------------------------------------------
 
-# misc
+# other aliases
 alias lf='ls -ACF'
 alias hdapm='sudo hdparm -I /dev/sda | grep level'
 alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
 alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
 alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
 alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
+
+# ssh with X (to run GUI apps)
+alias sshx='ssh -X -C -c blowfish-cbc,arcfour'
 
 # apt
 apt-update() { sudo apt-get update && notify-send -i terminal "Update finished!" }

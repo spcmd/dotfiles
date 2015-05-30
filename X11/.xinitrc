@@ -17,6 +17,9 @@ sh ~/.fehbg &
 # Map caps lock to escape
 (sleep 1 && setxkbmap -option caps:escape) &
 
+# Start urxvt daemon
+urxvtd &
+
 # Policy shit
 #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 

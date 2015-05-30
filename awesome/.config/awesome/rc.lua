@@ -13,7 +13,7 @@
 
 
 --------------------------------------
------------ Load libraries -----------
+----------- Load libraries
 --------------------------------------
 
 -- Standard awesome library
@@ -34,14 +34,15 @@ vicious = require("vicious")
 blingbling = require("blingbling")
 
 --------------------------------------
--------------- Autostart --------------
+-------------- Autostart
 --------------------------------------
 
 -- Enable compositing
-awful.util.spawn_with_shell("compton --backend glx --paint-on-overlay --vsync opengl-swc &")
+--awful.util.spawn_with_shell("compton --backend glx --paint-on-overlay --vsync opengl-swc &")
+awful.util.spawn_with_shell("compton -b --config /home/spcmd/.config/compton/compton.conf")
 
 --------------------------------------
---------------- Errors ---------------
+--------------- Errors
 --------------------------------------
 
 -- {{{ Error handling
@@ -70,18 +71,18 @@ end
 -- }}}
 
 -------------------------------------
-------------- Variables -------------
+------------- Variables
 -------------------------------------
 
 -- Applications
-terminal = "termite"
+terminal = "urxvtc"
 editor = os.getenv("EDITOR") or "nano"
 
 -- Default modkey.
 modkey = "Mod4"
 
 ------------------------------------------
-------------- Theme & Layout -------------
+------------- Theme & Layout
 ------------------------------------------
 
 -- Theme
@@ -147,7 +148,7 @@ local mylauncher_margin = wibox.layout.margin(mylauncher,0,1,0,0)
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 
 -------------------------------------------
-------------- Wibox & Widgets -------------
+------------- Wibox & Widgets 
 -------------------------------------------
 
 -- Vicious: Volume (unicode icons (ttf-symbola needed!): 🔊  ♫ )
@@ -209,9 +210,9 @@ battwidget = wibox.widget.textbox()
 
 battwidget_tip = awful.tooltip({ objects = { battwidget }})
 vicious.register(battwidget, vicious.widgets.bat, function (widget, args)
-    battwidget_tip:set_text( args[3] )
-    return args[3]
-end, 60, 'BAT0')
+                    battwidget_tip:set_text( args[3] )
+                    return args[3]
+                end, 60, 'BAT0')
 
 battwidget:buttons (awful.util.table.join (
         awful.button ({}, 1, function()
@@ -219,7 +220,7 @@ battwidget:buttons (awful.util.table.join (
 	end)
 ))
 
-vicious.register(battwidget, vicious.widgets.bat, ' $1$2% ', 60, 'BAT0')
+vicious.register(battwidget, vicious.widgets.bat, ' $1$2 ', 60, 'BAT0')
 
 -- Ethernet connection widget
 function check_eth()
@@ -399,7 +400,7 @@ for s = 1, screen.count() do
 end
 
 --------------------------------------------------
-------------- Key and Mouse bindings -------------
+------------- Key and Mouse bindings
 --------------------------------------------------
 
 -- Mouse bindings
@@ -430,6 +431,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn("thunar") end),
     awful.key({ modkey, "Mod1"    }, "s", function () awful.util.spawn("spotify") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
+    awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -t ranger -e ranger") end),
 
     -- Backlight
     awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --down") end),
@@ -586,7 +588,7 @@ clientbuttons = awful.util.table.join(
 root.keys(globalkeys)
 
 --------------------------------------------------
---------------------- Rules ----------------------
+--------------------- Rules
 --------------------------------------------------
 
 -- Rules to apply to new clients (through the "manage" signal).
@@ -605,11 +607,15 @@ awful.rules.rules = {
     { rule_any = { class = { "mpv", "Zathura", "feh", "Gcolor2", "Gifview", "Wine", "gimp" } },
        properties = { floating = true } },
 
+    { rule = { class = "Thunar" },
+    properties = { tag = tags[1][3] } },
+
+    { rule = { name = "ranger" },
+    properties = { tag = tags[1][3] } },
+
     -- Tag rules
     { rule = { class = "Spotify" },
     properties = { tag = tags[1][4] } },
-    { rule = { class = "Thunar" },
-    properties = { tag = tags[1][3] } },
     { rule = { class = "Firefox" },
     properties = { tag = tags[1][2] } },
     { rule = { class = "Iceweasel" },
@@ -625,7 +631,7 @@ awful.rules.rules = {
 }
 
 ----------------------------------------------------
---------------------- Signals ----------------------
+--------------------- Signals
 ----------------------------------------------------
 
 -- Signal function to execute when a new client appears.

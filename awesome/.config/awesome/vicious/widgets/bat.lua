@@ -93,6 +93,15 @@ local function worker(format, warg)
 
         time = string.format("%02d:%02d", hoursleft, minutesleft)
     end
+    
+    -- Colorize percentage depending on the battery level
+    if state == bat_discharging and percent <= 20 then
+        percent = "<span color='#FF3B3B'>" .. percent .. "%%</span>"
+    elseif state == bat_discharging and percent <= 30 then
+        percent = "<span color='#FFE490'>" .. percent .. "%%</span>"
+    else
+       percent = percent .. "%%"
+    end
 
     return {state, percent, time, wear}
 end
