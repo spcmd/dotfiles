@@ -74,13 +74,18 @@ else
   export EDITOR='vim'
 fi
 
-#export TERM='rxvt-unicode-256color'
-#export COLORTERM='rxvt-unicode-256color'
+export TERM='rxvt-unicode-256color'
+export COLORTERM='rxvt-unicode-256color'
 
 # Stop ranger from loading the both the default and the custom config files
 if [[ -f /usr/bin/ranger ]]; then
     export RANGER_LOAD_DEFAULT_RC=FALSE
 fi
+
+# Load dircolors
+eval $(dircolors ~/.dircolors)
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  
+alias ls='ls --color=auto'
 
 # -----------------------------------------------------
 # ---------- Vi mode in zsh
@@ -117,9 +122,6 @@ bindkey '^H' backward-delete-char
 # http://zshwiki.org./home/zle/bindkeys#why_isn_t_control-r_working_anymore
 bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
-
-# Load dircolors (needed for termite)
-eval $(dircolors ~/.dircolors)
 
 # -----------------------------------------------------
 # ---------- Custom vars
@@ -252,7 +254,7 @@ alias cdgit='cd ~/git'
 # -----------------------------------------------------
 
 # other aliases
-alias lf='ls -ACF'
+alias lf='ls -AC'
 alias hdapm='sudo hdparm -I /dev/sda | grep level'
 alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
 alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'

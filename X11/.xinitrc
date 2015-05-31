@@ -20,6 +20,9 @@ sh ~/.fehbg &
 # Start urxvt daemon
 urxvtd &
 
+# Merge .Xresources
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
 # Policy shit
 #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
