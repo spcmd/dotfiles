@@ -56,14 +56,18 @@ URxvt.color10: #00AA00
 URxvt.color3: #FAE56B
 URxvt.color11: #FAE56B
 ! blue
-URxvt.color4: #1C7EFF
-URxvt.color12:#1C7EFF
+URxvt.color4: #71A6B7
+URxvt.color12:#71A6B7
+!URxvt.color4: #1C7EFF
+!URxvt.color12:#1C7EFF
 ! magenta
 URxvt.color5: #90A7D0
 URxvt.color13: #90A7D0
 ! cyan
-URxvt.color6: #2FC8C8
-URxvt.color14: #2FC8C8
+URxvt.color6: #4D7A89
+URxvt.color14: #4D7A89
+!URxvt.color6: #2FC8C8
+!URxvt.color14: #2FC8C8
 ! white
 URxvt.color7: #ffffff
 URxvt.color15: #f5f5f5
