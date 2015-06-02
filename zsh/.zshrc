@@ -253,6 +253,26 @@ alias cdgit='cd ~/git'
 # ---------- Misc./Other stuff
 # -----------------------------------------------------
 
+# set compton-urxvt transparency
+curxvtt() {
+    compton_config=~/.config/compton/compton.conf
+    if [[ -e  $compton_config ]]; then
+        # change the 4th line
+        sed -i "4s|.*|opacity-rule = [\"$1\:class_g = \'URxvt\' \&\& \!name = \'ranger\'\"];|" $compton_config 
+        echo -e "$COLOR_HL1::$COLOR_TITLE urxvt transparency in compton.conf has been set to:$COLOR_HL1 $1 $COLOR_DEFAULT"
+        echo -e "$COLOR_HL1::$COLOR_TITLE Restart compton? (y = yes) $COLOR_DEFAULT"
+        read compton_restart
+        if [[ $compton_restart == "y" ]] || [[ $compton_restart == "Y" ]]; then
+            pkill compton &&
+            sleep 1s &&
+            compton -b --config $compton_config &&
+            echo "Compton restart: done!"
+        fi
+    else
+        echo -e "$COLOR_HL1::$COLOR_TITLE Error! $compton_config doesn't exist. $COLOR_DEFAULT"
+    fi
+}
+
 # other aliases
 alias lf='ls -AC'
 alias hdapm='sudo hdparm -I /dev/sda | grep level'
