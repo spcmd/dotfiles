@@ -6,7 +6,7 @@ from ranger.gui.color import *
 # Colors vars | color codes need to be set in ~/.Xresources
 COLOR_BG_DEFAULT = 8
 COLOR_FG_DEFAULT = 7
-COLOR_ARCHIVE = 3
+COLOR_ARCHIVE = 1
 COLOR_BORDER = 5
 COLOR_MEDIA = 5
 COLOR_DIR = 4
