@@ -428,10 +428,10 @@ globalkeys = awful.util.table.join(
 
     -- Run Applications
     awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("firefox") end),
-    awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn("thunar") end),
     awful.key({ modkey, "Mod1"    }, "s", function () awful.util.spawn("spotify") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
     awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -t ranger -e ranger") end),
+    awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(terminal .. " -t rtorrent -e rtorrent") end),
 
     -- Backlight
     awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --down") end),
@@ -442,7 +442,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"    }, "w", function () awful.util.spawn_with_shell("sh ~/.fehbg") end),
 
     -- Scrot
-    awful.key({ modkey,           }, "p", function () awful.util.spawn_with_shell("scrot ~/Pictures/scrot_%Y-%m-%d_%T.png && notify-send ' scrot ' ' taken '") end),
+    awful.key({ modkey, "Mod1"    }, "p", function () awful.util.spawn_with_shell("scrot ~/Pictures/scrot_%Y-%m-%d_%T.png && notify-send ' scrot ' ' taken '") end),
 
     --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     --~ end of Custom key bindings ~~~
@@ -605,27 +605,27 @@ awful.rules.rules = {
 
     -- Float rules
     { rule_any = { class = { "mpv", "Zathura", "feh", "Gcolor2", "Gifview", "Wine", "gimp" } },
-       properties = { floating = true } },
+        properties = { floating = true } },
+    
+    -- Tag 2 rules
+    { rule_any = { class = { "Firefox", "Iceweasel", "Chromium", "Chrome" } },
+        properties = { tag = tags[1][2] } },
 
-    { rule = { class = "Thunar" },
-    properties = { tag = tags[1][3] } },
+    -- Tag 3 rules
+    { rule_any = { class = { "Thunar" } , name = { "ranger" }  },
+        properties = { tag = tags[1][3] } },
 
-    { rule = { name = "ranger" },
-    properties = { tag = tags[1][3] } },
+    -- Tag 4 rules
+    { rule_any = { class = { "Spotify" }  },
+        properties = { tag = tags[1][4] } },
+     
+    -- Tag 5 rules
+    { rule_any = { name = { "rtorrent" }  },
+        properties = { tag = tags[1][5] } },
 
-    -- Tag rules
-    { rule = { class = "Spotify" },
-    properties = { tag = tags[1][4] } },
-    { rule = { class = "Firefox" },
-    properties = { tag = tags[1][2] } },
-    { rule = { class = "Iceweasel" },
-    properties = { tag = tags[1][2] } },
-    { rule = { class = "Chromium" },
-    properties = { floating = false , tag = tags[1][2] } },
-
-    -- Tag 6 (Misc) rules
-    { rule_any = { class = { "Gimp", "Inkscape", "libreoffice" } },
-    properties = { tag = tags[1][6] } },
+    -- Tag 6 rules
+    { rule_any = { class = { "Gimp", "Inkscape", "libreoffice", "VirtualBox" } },
+        properties = { tag = tags[1][6] } },
 
 
 }

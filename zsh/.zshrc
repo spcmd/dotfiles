@@ -250,11 +250,27 @@ alias gdiff='git diff'
 alias cdgit='cd ~/git'
 
 # -----------------------------------------------------
+# ---------- Subtitles
+# -----------------------------------------------------
+
+# usage example: addic7ed "game of thrones" 
+# quotes ("") needed around the the tilte!
+addic7ed() {
+    xdg-open "http://www.addic7ed.com/search.php?search=$1&Submit=Search"
+}
+
+felirat() {
+    xdg-open "http://www.feliratok.info/?search=$1&nyelv=Angol"
+}
+alias sub-a='addic7ed'
+alias sub-f='felirat'
+
+# -----------------------------------------------------
 # ---------- Misc./Other stuff
 # -----------------------------------------------------
 
 # set compton-urxvt transparency
-curxvtt() {
+curxvt() {
     compton_config=~/.config/compton/compton.conf
     if [[ -e  $compton_config ]]; then
         # change the 4th line
