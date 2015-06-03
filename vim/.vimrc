@@ -11,8 +11,8 @@
 "           https://github.com/spcmd
 "           https://gist.github.com/spcmd
 
-"--------------------------------------------"
-"   Settings                                 "
+
+" {{{   Basic Settings
 "--------------------------------------------"
 
 execute pathogen#infect()
@@ -53,6 +53,8 @@ set wildmenu                                        "enhanced command line compl
 set scrolloff=10                                    "lines above and below the cursor
 set backupdir=~/.vim/backup                         "put backup to backup dir
 set directory=~/.vim/backup                         "put swap to backup dir
+set foldmethod=marker                               "folding with markers
+set foldenable                                      "auto fold
 let mapleader = "-"                                 "remap leader key, instead of using \
 
 "clear statusline (needed when reloading .vimrc)
@@ -60,7 +62,10 @@ set statusline=
 "set custom statusline format
 set statusline+=%f%m%=%y\ [%{strlen(&fenc)?&fenc:'none'}]\ L:%l/%L\ C:%c\ (%P)
 
-"Plugin/Bundle specific settings
+" }}}
+
+" {{{   Plugin/Bundle specific settings
+"--------------------------------------------
 
  if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -86,6 +91,11 @@ let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
 "let g:vcoolor_disable_mappings = 1                  "disable VCoolor's default mappings
 "let g:vcoolor_lowercase = 1                         "use lowercase color codes by default
 
+" }}}
+
+" {{{   Terminal cursor settings 
+"--------------------------------------------
+
 " Cursor color & shape
 " 1 or 0 -> blinking block
 " 2 -> normal block
@@ -100,9 +110,10 @@ let &t_EI .= "\<Esc>[2 q"
 silent !echo -ne "\033]12;yellow\007"
 autocmd VimLeave * silent !echo -ne "\033]12;white\007"
 
-"--------------------------------------------"
-"   Commands & Functions                     "
-"--------------------------------------------"
+" }}}
+
+" {{{   Commands & Functions
+"--------------------------------------------
 
 "Toggle Relative Line Numbering
 command! RL set rnu!
@@ -158,9 +169,10 @@ command! Q q
 "Reload .vimrc (save & source)
 command! RR write|source ~/.vimrc
 
-"--------------------------------------------"
-"   Autocommands                             "
-"--------------------------------------------"
+"}}}
+
+" {{{   Autocommands
+"--------------------------------------------
 
 "Save all when Vim window lost focus
 autocmd FocusLost * silent! wa
@@ -174,9 +186,10 @@ autocmd BufRead .vimperatorrc set filetype=vim
 autocmd BufRead *.vimp set filetype=vim
 autocmd BufRead .xinitrc set filetype=sh
 
-"--------------------------------------------"
-"   Key mappings                             "
-"--------------------------------------------"
+" }}}
+
+" {{{   Key mappings
+"--------------------------------------------
 
 imap űű <Esc>"+p
 nnoremap <Enter> o<ESC>
@@ -184,6 +197,7 @@ nnoremap <S-Enter> O<ESC>
 nmap ú :bnext<CR>
 nmap ő :bprevious<CR>
 nmap <leader>, :set list!<CR>
+nnoremap <space> za
 
 "Delete surrounding quotes, brackets etc.
 nnoremap <leader>d{ F{xf}x
@@ -270,3 +284,5 @@ nnoremap <silent> <leader>x :TodoCancel<CR>
 
 "Colorizer (https://github.com/chrisbra/Colorizer)
 nnoremap <silent> <leader>cz :ColorHighlight syntax<CR>
+
+" }}}

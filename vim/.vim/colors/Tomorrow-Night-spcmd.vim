@@ -44,6 +44,7 @@ end
 " Added by spcmd
 let s:cursorlinenr = "e4e4e4"
 let s:linenr = "8a8a8a"
+let s:folded_bg = "252525"
 
 hi clear
 syntax reset
@@ -278,7 +279,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("Question", s:green, "", "")
 	call <SID>X("WarningMsg", s:red, "", "")
 	call <SID>X("MatchParen", "", s:selection, "")
-	call <SID>X("Folded", s:comment, s:background, "")
+	call <SID>X("Folded", s:foreground, s:folded_bg, "")
 	call <SID>X("FoldColumn", "", s:background, "")
 	if version >= 700
 		call <SID>X("CursorLine", "", s:line, "none")

@@ -12,8 +12,7 @@
 #           https://gist.github.com/spcmd
 
 
-# -----------------------------------------------------
-# ---------- Basic configuration
+# {{{   Basic configuration
 # -----------------------------------------------------
 
 # Path to your oh-my-zsh installation.
@@ -87,8 +86,9 @@ eval $(dircolors ~/.dircolors)
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  
 alias ls='ls --color=auto'
 
-# -----------------------------------------------------
-# ---------- Vi mode in zsh
+# }}}
+
+# {{{   Vi mode in zsh
 # -----------------------------------------------------
 
 # Enable Vi/Vim mode
@@ -123,30 +123,18 @@ bindkey '^H' backward-delete-char
 bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
 
-# -----------------------------------------------------
-# ---------- Custom vars
+# }}}
+
+# {{{   Custom vars
 # -----------------------------------------------------
 
 COLOR_DEFAULT=$(tput sgr0)
 COLOR_TITLE=$(tput setaf 7; tput bold)
 COLOR_HL1=$(tput setaf 4; tput bold)
 
-# -----------------------------------------------------
-# ---------- Zsh
-# -----------------------------------------------------
+# }}}
 
-# source/reload
-alias RR='source ~/.zshrc && echo "source zshrc: done!"'
-
-# -----------------------------------------------------
-# ---------- Xorg
-# -----------------------------------------------------
-
-# reload .Xresources
-rld-xresources() { xrdb -load ~/.Xresources && echo "reload .Xresources: done!" }
-
-# -----------------------------------------------------
-# ---------- Trash-CLI
+# {{{   Trash-CLI
 # -----------------------------------------------------
 
 # trash-cli aliases
@@ -183,13 +171,14 @@ TE() {
     fi
 }
 
-# -----------------------------------------------------
-# ---------- Pacman
+# }}}
+
+# {{{   Pacman
 # -----------------------------------------------------
 
 # pacman aliases
 alias pacins='sudo pacman -S' # install
-alias pacinu='sudo pacman -U' # istall local pkg
+alias pacinsu='sudo pacman -U' # istall local pkg
 alias pacss='sudo pacman -Ss' # search
 alias pacsync='sudo pacman -Syy' # update repo lists
 alias pacupd='sudo pacman -Syyu' # update & upgrade
@@ -221,8 +210,9 @@ pacmirror() {
     fi
 }
 
-# -----------------------------------------------------
-# ---------- Git
+# }}}
+
+# {{{ Git
 # -----------------------------------------------------
 
 # git
@@ -249,8 +239,9 @@ alias gcommit='git commit -m'
 alias gdiff='git diff'
 alias cdgit='cd ~/git'
 
-# -----------------------------------------------------
-# ---------- Subtitles
+# }}}
+
+# {{{   Subtitles
 # -----------------------------------------------------
 
 # usage example: addic7ed "game of thrones" 
@@ -261,13 +252,25 @@ addic7ed() {
 
 felirat() {
     xdg-open "http://www.feliratok.info/?search=$1&nyelv=Angol"
-}
+
 alias sub-a='addic7ed'
 alias sub-f='felirat'
 
+# }}}
+
+# {{{   Misc./Other stuff
 # -----------------------------------------------------
-# ---------- Misc./Other stuff
-# -----------------------------------------------------
+
+# always verbose core commands
+for command in cp rm mv chmod chown rename; do
+    alias $command="$command -v"
+done
+
+# source/reload zshrc
+alias RR='source ~/.zshrc && echo "source zshrc: done!"'
+
+# reload .Xresources
+rld-xresources() { xrdb -load ~/.Xresources && echo "reload .Xresources: done!" }
 
 # set compton-urxvt transparency
 curxvt() {
@@ -301,11 +304,13 @@ alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by defau
 alias sshx='ssh -X -C -c blowfish-cbc,arcfour'
 
 # apt
-apt-update() { sudo apt-get update && notify-send -i terminal "Update finished!" }
-apt-upgrade() { sudo apt-get upgrade && notify-send -i terminal "Upgrade finished!" }
-apt-install() { sudo apt-get install --no-install-recommends $1 && notify-send -i terminal "Finished installing $1" }
-alias apt-remove='sudo apt-get remove --purge'
-alias apt-ppa='sudo add-apt-repository'
+if [[ -e /usr/bin/apt-get ]]; then
+    apt-update() { sudo apt-get update && notify-send -i terminal "Update finished!" }
+    apt-upgrade() { sudo apt-get upgrade && notify-send -i terminal "Upgrade finished!" }
+    apt-install() { sudo apt-get install --no-install-recommends $@ && notify-send -i terminal "Finished installing $@" }
+    alias apt-remove='sudo apt-get remove --purge'
+    alias apt-ppa='sudo add-apt-repository'
+fi
 
 # Colored man pages (https://wiki.archlinux.org/index.php/Man_page#Using_less_.28Recommended.29)
 man() {
@@ -318,3 +323,5 @@ man() {
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
 }
+
+# }}}

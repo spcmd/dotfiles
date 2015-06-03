@@ -12,8 +12,7 @@
 --           https://gist.github.com/spcmd
 
 
---------------------------------------
------------ Load libraries
+-- {{{  Load libraries
 --------------------------------------
 
 -- Standard awesome library
@@ -33,19 +32,21 @@ vicious = require("vicious")
 -- blingbling library
 blingbling = require("blingbling")
 
---------------------------------------
--------------- Autostart
+-- }}}
+
+-- {{{  Autostart
 --------------------------------------
 
 -- Enable compositing
 --awful.util.spawn_with_shell("compton --backend glx --paint-on-overlay --vsync opengl-swc &")
 awful.util.spawn_with_shell("compton -b --config /home/spcmd/.config/compton/compton.conf")
 
---------------------------------------
---------------- Errors
+-- }}}
+
+-- {{{  Errors
 --------------------------------------
 
--- {{{ Error handling
+-- Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -68,10 +69,10 @@ do
         in_error = false
     end)
 end
+
 -- }}}
 
--------------------------------------
-------------- Variables
+-- {{{  Variables
 -------------------------------------
 
 -- Applications
@@ -81,8 +82,9 @@ editor = os.getenv("EDITOR") or "nano"
 -- Default modkey.
 modkey = "Mod4"
 
-------------------------------------------
-------------- Theme & Layout
+-- }}}
+
+-- {{{  Theme, Layout, Wallpaper, Tags, Menu, Launcher
 ------------------------------------------
 
 -- Theme
@@ -147,8 +149,9 @@ local mylauncher_margin = wibox.layout.margin(mylauncher,0,1,0,0)
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 
--------------------------------------------
-------------- Wibox & Widgets 
+-- }}}
+
+--{{{   Wibox & Widgets 
 -------------------------------------------
 
 -- Vicious: Volume (unicode icons (ttf-symbola needed!): 🔊  ♫ )
@@ -399,8 +402,9 @@ for s = 1, screen.count() do
     mywibox[s]:set_widget(layout)
 end
 
---------------------------------------------------
-------------- Key and Mouse bindings
+-- }}}
+
+-- {{{  Key and Mouse bindings
 --------------------------------------------------
 
 -- Mouse bindings
@@ -587,8 +591,9 @@ clientbuttons = awful.util.table.join(
 -- Set keys
 root.keys(globalkeys)
 
---------------------------------------------------
---------------------- Rules
+-- }}}
+
+-- {{{  Rules
 --------------------------------------------------
 
 -- Rules to apply to new clients (through the "manage" signal).
@@ -630,8 +635,9 @@ awful.rules.rules = {
 
 }
 
-----------------------------------------------------
---------------------- Signals
+-- }}}
+
+-- {{{  Signals, Titlebar settings
 ----------------------------------------------------
 
 -- Signal function to execute when a new client appears.
@@ -737,3 +743,5 @@ client.disconnect_signal("request::activate", awful.ewmh.activate)
        end
    end
    client.connect_signal("request::activate", awful.ewmh.activate)
+
+-- }}}
