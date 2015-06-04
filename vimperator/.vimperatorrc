@@ -11,9 +11,8 @@
 "           https://github.com/spcmd
 "           https://gist.github.com/spcmd
 
-"--------------------------------------------"
-"   Settings                                 "
-"--------------------------------------------"
+" {{{   Settings
+"--------------------------------------------
 
 colorscheme i3-blue
 set hintchars=hjklasdfgrtzu
@@ -26,9 +25,10 @@ set toolbars=nonavigation
 "Load all Firefox page and help page in new tab
 set newtab=all
 
-"--------------------------------------------"
-"   Key mappings                             "
-"--------------------------------------------"
+" }}}
+
+" {{{   Key mappings
+"--------------------------------------------
 
 "Faster scrolling
 nnoremap j 3j
@@ -62,6 +62,9 @@ nnoremap cc ;c
 "Vimpv (Play videos with mpv)
 nmap m ;m
 
+"Gitfile (Download single file from Github)
+nmap gh ;g
+
 "Search highlight
 nmap <leader>h :noh<CR>
 
@@ -72,9 +75,10 @@ nmap <C-b> :ignorekeys<CR> :sidebar Bookmarks<CR>
 nnoremap <C-a> i<C-a>
 inoremap <C-a> <Ins><C-a><Ins>
 
-"--------------------------------------------"
-"   Commands                                 "
-"--------------------------------------------"
+" }}}
+
+" {{{   Commands
+"--------------------------------------------
 
 "Quick open Addons
 command! -description="Open addons page (custom command)" AA :tabopen about:addons
@@ -93,9 +97,10 @@ command! -description="PH! Fórum kereső: keresés a topikban" -nargs=* ph js w
 
 command! -description="PH! Fórum kereső: keresés a topikban (csak a saját hozzászólásaim közt)" -nargs=* phmy js window.content.window.location = window.content.window.location.href.match( /^(http.+\/)[^\/]+$/ )[1] +'keres.php?type=-&stext=<args>&suser=spammer';
 
-"--------------------------------------------"
-"   Autocommands                             "
-"--------------------------------------------"
+" }}}
+
+" {{{   Autocommands
+"--------------------------------------------
 
 "Autocommands won't be refreshed properly while Firefox is running!
 "To source/refresh them, we need to restart Firefox.
@@ -109,3 +114,5 @@ autocmd LocationChange ^http:\/\/(itcafe|prohardver|mobilarena|gamepod).*\/tema\
 
 "Redirect Youtube main page to subscriptions page
 autocmd DOMLoad ^(http|https):\/\/(www)?.youtube.com\/?$ js window.content.window.location = "https://www.youtube.com/feed/subscriptions"
+
+" }}}

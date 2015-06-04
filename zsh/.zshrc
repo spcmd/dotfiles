@@ -84,7 +84,6 @@ fi
 # Load dircolors
 eval $(dircolors ~/.dircolors)
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  
-alias ls='ls --color=auto'
 
 # }}}
 
@@ -125,7 +124,7 @@ bindkey -M vicmd '^s' history-incremental-search-backward
 
 # }}}
 
-# {{{   Custom vars
+# {{{   Custom Vars
 # -----------------------------------------------------
 
 COLOR_DEFAULT=$(tput sgr0)
@@ -255,25 +254,59 @@ felirat() {
 
 alias sub-a='addic7ed'
 alias sub-f='felirat'
+}
+
+# }}}
+
+# {{{   Config Files
+# -----------------------------------------------------
+
+# Edit config files
+alias cfg-awesome='$EDITOR ~/.config/awesome/rc.lua'
+alias cfg-bashrc='$EDITOR ~/.bashrc'
+alias cfg-dircolors='$EDITOR ~/.dircolors'
+alias cfg-fstab='sudo $EDITOR /etc/fstab'
+alias cfg-grub='sudo $EDITOR /etc/default/grub'
+alias cfg-hosts='sudo $EDITOR /etc/hosts'
+alias cfg-pacman='sudo $EDITOR /etc/pacman.conf'
+alias cfg-pacman-mirrorlist='sudo $EDITOR /etc/pacman.d/mirrorlist'
+alias cfg-ranger='$EDITOR ~/.config/ranger/rc.conf'
+alias cfg-ranger-rifle='$EDITOR ~/.config/ranger/rifle.conf'
+alias cfg-vimrc='$EDITOR ~/.vimrc'
+alias cfg-vimperatorrc='$EDITOR ~/.vimperatorrc'
+alias cfg-xinitrc='$EDITOR ~/.xinitrc'
+alias cfg-xresources='$EDITOR ~/.Xresources'
+alias cfg-zshrc='$EDITOR ~/.zshrc'
+
+# Reload config files 
+alias rld-bashrc='source ~/.bashrc && echo "source bashrc: done!"'
+alias rld-xresources='xrdb -load ~/.Xresources && echo "reload .Xresources: done!"'
+alias rld-zshrc='source ~/.zshrc && echo "source zshrc: done!"'
+alias RR='rld-zshrc'
 
 # }}}
 
 # {{{   Misc./Other stuff
 # -----------------------------------------------------
 
-# always verbose core commands
-for command in cp rm mv chmod chown rename; do
+# Always verbose core commands
+for command in cp rm mv mkdir chmod chown rename; do
     alias $command="$command -v"
 done
 
-# source/reload zshrc
-alias RR='source ~/.zshrc && echo "source zshrc: done!"'
+# List all custom function and alias names from this .zshrc
+alias lsmyfunc='cat .zshrc | cut -d "{" -f 1 | sed "s/ //g" | grep "()"'
+alias lsmyalias='cat .zshrc | cut -d "{" -f 1 | sed -e "s/^[ \t]*//" | grep -v "^#" | grep alias'
 
-# reload .Xresources
-rld-xresources() { xrdb -load ~/.Xresources && echo "reload .Xresources: done!" }
+# Gitfile (Download single file from github)
+gitfile() {
+    rawfile=$(echo $1 | sed "s#blob#raw#")
+    echo -e "$COLOR_HL1::$COLOR_TITLE gitfile: downloading a single file >$COLOR_HL1 $rawfile $COLOR_DEFAULT"
+    wget -P ~/Downloads $rawfile
+}
 
-# set compton-urxvt transparency
-curxvt() {
+# Set urxvt's transparency in compton's config
+compton-urxvt() {
     compton_config=~/.config/compton/compton.conf
     if [[ -e  $compton_config ]]; then
         # change the 4th line
@@ -292,7 +325,8 @@ curxvt() {
     fi
 }
 
-# other aliases
+# Other aliases
+alias ls='ls --color=auto'
 alias lf='ls -AC'
 alias hdapm='sudo hdparm -I /dev/sda | grep level'
 alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
@@ -300,10 +334,10 @@ alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -
 alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
 alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
 
-# ssh with X (to run GUI apps)
+# SSH with X (to run GUI apps)
 alias sshx='ssh -X -C -c blowfish-cbc,arcfour'
 
-# apt
+# APT
 if [[ -e /usr/bin/apt-get ]]; then
     apt-update() { sudo apt-get update && notify-send -i terminal "Update finished!" }
     apt-upgrade() { sudo apt-get upgrade && notify-send -i terminal "Upgrade finished!" }

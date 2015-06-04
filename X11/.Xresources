@@ -23,7 +23,7 @@ URxvt.foreground: #ffffff
 ! Select the fonts to be used. This is a comma separated list of font names that are checked in order when trying to find glyphs for
 !URxvt.font: 9x15
 
-URxvt.font: xft:DejaVu Sans Mono:pixelsize=14:antialias=true:hinting=true
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=14:antialias=true:hinting=true,xft:FontAwesome:pixelsize=14
 !URxvt.font: xft:Droid Sans Mono:pixelsize=14:antialias=true:hinting=true
 URxvt.letterSpace: -2
 URxvt.lineSpace: 1
@@ -31,7 +31,7 @@ URxvt.lineSpace: 1
 ! True: enable the scrollbar [default]; option -sb. False: disable the scrollbar; option +sb.
 URxvt.scrollBar: false
 
-URxvt.dynamicColors: on
+!URxvt.dynamicColors: on
 
 ! Perl Extensions: copy/paste, url-selection
 URxvt.perl-ext-common: default,clipboard,matcher

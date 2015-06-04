@@ -445,8 +445,11 @@ globalkeys = awful.util.table.join(
     -- Set wallpaper with feh (useful when errors happen and Awesome falls back to the default wallpaper)
     awful.key({ modkey, "Mod1"    }, "w", function () awful.util.spawn_with_shell("sh ~/.fehbg") end),
 
-    -- Scrot
+    -- Scrot (entire screen)
     awful.key({ modkey, "Mod1"    }, "p", function () awful.util.spawn_with_shell("scrot ~/Pictures/scrot_%Y-%m-%d_%T.png && notify-send ' scrot ' ' taken '") end),
+    -- Scrot (selected area)
+    awful.key({ modkey, "Mod1"    }, "o", function () awful.util.spawn_with_shell("sleep 1s && scrot -s ~/Pictures/scrot_%Y-%m-%d_%T.png && notify-send ' scrot ' ' taken '") end),
+
 
     --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     --~ end of Custom key bindings ~~~
