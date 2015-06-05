@@ -1,0 +1,22 @@
+
+Description = "Tommorow-Night-ranger"
+
+Default	= { Colour="#dedede" }
+Canvas	= { Colour="#272822" }
+Number	= { Colour="#de935f" }
+Escape	= { Colour="#dedede" , Italic=true}
+String	= { Colour="#E6DB74" }
+BlockComment	= { Colour="#75715E" }
+StringPreProc = String
+LineComment   = BlockComment
+Operator      = Default
+LineNum      = BlockComment
+PreProcessor      = { Colour="#defa25" }
+Interpolation  = Escape
+
+Keywords = {
+  { Colour="#B7C0D8" , Bold=true},
+  { Colour="#cc6666" },
+  { Colour="#dedede" },
+  { Colour="#dedede" },
+}

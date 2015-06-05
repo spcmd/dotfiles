@@ -238,6 +238,11 @@ alias gcommit='git commit -m'
 alias gdiff='git diff'
 alias cdgit='cd ~/git'
 
+# alias gitfile if gitfile.sh is executable and the Scripts dir is in the $PATH
+if [[ -e $HOME/Scripts/gitfile.sh ]] && [[ :$PATH: == *:$HOME/Scripts:* ]]; then
+    alias gitfile='gitfile.sh'
+fi
+
 # }}}
 
 # {{{   Subtitles
@@ -298,13 +303,6 @@ done
 alias lsmyfunc='cat .zshrc | cut -d "{" -f 1 | sed "s/ //g" | grep "()"'
 alias lsmyalias='cat .zshrc | cut -d "{" -f 1 | sed -e "s/^[ \t]*//" | grep -v "^#" | grep alias'
 
-# Gitfile (Download single file from github)
-gitfile() {
-    rawfile=$(echo $1 | sed "s#blob#raw#")
-    echo -e "$COLOR_HL1::$COLOR_TITLE gitfile: downloading a single file >$COLOR_HL1 $rawfile $COLOR_DEFAULT"
-    wget -P ~/Downloads $rawfile
-}
-
 # Set urxvt's transparency in compton's config
 compton-urxvt() {
     compton_config=~/.config/compton/compton.conf
@@ -326,6 +324,8 @@ compton-urxvt() {
 }
 
 # Other aliases
+alias q='exit'
+alias quit='exit'
 alias ls='ls --color=auto'
 alias lf='ls -AC'
 alias hdapm='sudo hdparm -I /dev/sda | grep level'

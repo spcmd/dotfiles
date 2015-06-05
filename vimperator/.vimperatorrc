@@ -46,9 +46,6 @@ nmap é :tabmove -1<CR>
 nmap , :back<CR>
 nmap . :forward<CR>
 
-"Quick help
-nnoremap h :help<Space>
-
 "Quick select text in CARET/VISUAL mode: move to the beginning/end of line
 vnoremap H ^
 vnoremap L $
@@ -56,14 +53,14 @@ vnoremap L $
 "Escape from focused textarea
 inoremap <C-e> <C-[>
 
+"Quick help
+nnoremap h :help<Space>
+
 "Context menu
 nnoremap cc ;c
 
-"Vimpv (Play videos with mpv)
+"vimpv.js (play videos with mpv)
 nmap m ;m
-
-"Gitfile (Download single file from Github)
-nmap gh ;g
 
 "Search highlight
 nmap <leader>h :noh<CR>
@@ -74,6 +71,25 @@ nmap <C-b> :ignorekeys<CR> :sidebar Bookmarks<CR>
 "Select ALL
 nnoremap <C-a> i<C-a>
 inoremap <C-a> <Ins><C-a><Ins>
+
+" }}}
+
+" {{{   Bookmarks
+"--------------------------------------------
+
+nmap gh :tabnew<CR>
+nmap gd :open github.com/spcmd/dotfiles<CR>
+nmap gl :open logout.hu/forum/index.html<CR>
+nmap gy :open youtube.com/feed/subscriptions<CR>
+nmap gp :open port.hu/tv/pls/tv/oldtv.prog<CR>
+
+command! bmkLogout :open logout.hu/forum/index.html
+command! bmkGithubDotfiles :open github.com/spcmd/dotfiles
+command! bmkGithubScripts :open github.com/spcmd/Scripts
+command! bmkGithubthemes :open github.com/spcmd/themes
+command! bmkYoutube :open youtube.com/feed/subscriptions
+command! bmkIMDB :open imdb.com
+command! bmkPort :open port.hu/tv/pls/tv/oldtv.prog
 
 " }}}
 
