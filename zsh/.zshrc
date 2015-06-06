@@ -53,8 +53,15 @@ ZSH_THEME="spcmd"
 plugins=(git zsh-syntax-highlighting)
 
 # Setting the $PATH
-export PATH="$HOME/bin:$HOME/Scripts:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games"
+
+if [[ -d $HOME/Scripts ]]; then
+    PATH=$PATH:$HOME/Scripts
+fi
+
+if [[ -d $HOME/bin ]]; then
+    PATH=$PATH:$HOME/bin
+fi
 
 if [[ -d $HOME/.gem/ruby/2.2.0/bin ]]; then
     PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
@@ -63,9 +70,6 @@ fi
 # oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
 #Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -73,6 +77,7 @@ else
   export EDITOR='vim'
 fi
 
+# Terminal
 export TERM='rxvt-unicode-256color'
 export COLORTERM='rxvt-unicode-256color'
 
@@ -238,9 +243,9 @@ alias gcommit='git commit -m'
 alias gdiff='git diff'
 alias cdgit='cd ~/git'
 
-# alias gitfile if gitfile.sh is executable and the Scripts dir is in the $PATH
-if [[ -e $HOME/Scripts/gitfile.sh ]] && [[ :$PATH: == *:$HOME/Scripts:* ]]; then
-    alias gitfile='gitfile.sh'
+# alias if gitfile.sh exists and executable
+if [[ -x $HOME/Scripts/gitfile.sh ]]; then
+    alias gitfile='$HOME/Scripts/gitfile.sh'
 fi
 
 # }}}
@@ -277,6 +282,7 @@ alias cfg-pacman='sudo $EDITOR /etc/pacman.conf'
 alias cfg-pacman-mirrorlist='sudo $EDITOR /etc/pacman.d/mirrorlist'
 alias cfg-ranger='$EDITOR ~/.config/ranger/rc.conf'
 alias cfg-ranger-rifle='$EDITOR ~/.config/ranger/rifle.conf'
+alias cfg-rtorrent='$EDITOR ~/.rtorrent.rc'
 alias cfg-vimrc='$EDITOR ~/.vimrc'
 alias cfg-vimperatorrc='$EDITOR ~/.vimperatorrc'
 alias cfg-xinitrc='$EDITOR ~/.xinitrc'
@@ -300,8 +306,8 @@ for command in cp rm mv mkdir chmod chown rename; do
 done
 
 # List all custom function and alias names from this .zshrc
-alias lsmyfunc='cat .zshrc | cut -d "{" -f 1 | sed "s/ //g" | grep "()"'
-alias lsmyalias='cat .zshrc | cut -d "{" -f 1 | sed -e "s/^[ \t]*//" | grep -v "^#" | grep alias'
+alias lsmyfunc='cat ~/.zshrc | cut -d "{" -f 1 | sed "s/ //g" | grep "()"'
+alias lsmyalias='cat ~/.zshrc | cut -d "{" -f 1 | sed -e "s/^[ \t]*//" | grep -v "^#" | grep alias'
 
 # Set urxvt's transparency in compton's config
 compton-urxvt() {
@@ -323,6 +329,11 @@ compton-urxvt() {
     fi
 }
 
+# alias if imgur-upload.sh exists and executable
+if [[ -x $HOME/Scripts/imgur-upload.sh ]]; then
+    alias imgur='$HOME/Scripts/imgur-upload.sh'
+fi
+
 # Other aliases
 alias q='exit'
 alias quit='exit'
@@ -338,7 +349,7 @@ alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by defau
 alias sshx='ssh -X -C -c blowfish-cbc,arcfour'
 
 # APT
-if [[ -e /usr/bin/apt-get ]]; then
+if [[ -x /usr/bin/apt-get ]]; then
     apt-update() { sudo apt-get update && notify-send -i terminal "Update finished!" }
     apt-upgrade() { sudo apt-get upgrade && notify-send -i terminal "Upgrade finished!" }
     apt-install() { sudo apt-get install --no-install-recommends $@ && notify-send -i terminal "Finished installing $@" }

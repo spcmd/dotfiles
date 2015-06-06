@@ -30,6 +30,9 @@ set newtab=all
 " {{{   Key mappings
 "--------------------------------------------
 
+"Do not paste&search
+map p <Nop>
+
 "Faster scrolling
 nnoremap j 3j
 nnoremap k 3k
