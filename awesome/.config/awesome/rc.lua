@@ -429,6 +429,14 @@ globalkeys = awful.util.table.join(
     -- Volume
     awful.key({ modkey,           }, "Up", function () awful.util.spawn("amixer sset Master 2%+") vicious.force ({ volumewidget }) end),
     awful.key({ modkey,           }, "Down", function () awful.util.spawn ("amixer sset Master 2%-") vicious.force ({ volumewidget }) end),
+    
+     -- Start several applications at the same time
+    awful.key({ modkey, "Mod1"    }, "1", function () 
+                                                awful.util.spawn("firefox") 
+                                                awful.util.spawn("spotify") 
+                                                awful.util.spawn(terminal .. " -t ranger -e ranger")
+                                                awful.util.spawn(terminal .. " -t rtorrent -e rtorrent")
+                                          end),
 
     -- Run Applications
     awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("firefox") end),

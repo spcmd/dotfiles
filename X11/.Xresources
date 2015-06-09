@@ -61,8 +61,10 @@ URxvt.color12:#71A6B7
 !URxvt.color4: #1C7EFF
 !URxvt.color12:#1C7EFF
 ! magenta
-URxvt.color5: #90A7D0
-URxvt.color13: #90A7D0
+URxvt.color5: #BDA1C5
+URxvt.color13: #BDA1C5
+!URxvt.color5: #90A7D0
+!URxvt.color13: #90A7D0
 ! cyan
 URxvt.color6: #4D7A89
 URxvt.color14: #4D7A89
