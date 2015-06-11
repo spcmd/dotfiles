@@ -138,40 +138,39 @@ COLOR_HL1=$(tput setaf 4; tput bold)
 
 # }}}
 
-# {{{   Trash-CLI
+# {{{   trashman (https://aur.archlinux.org/packages/trashman/) 
 # -----------------------------------------------------
 
-# trash-cli aliases
-alias trash-restore='restore-trash'
-
-# trash-cli: list
+# trashman: list
 TL() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Listing Trash:"
-    trash-list
+    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Listing Trash:"
+    trash --list
 }
 
-# trash-cli: put
+# trashman: put
 TP() {
-    trash-put $@
-    echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Files have been put to Trash:"
+    trash $@
+    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Files have been put to Trash:"
     printf '%s\n' "$@"
 }
 
-# trash-cli: restore
+# trashman: restore
 TR() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Restore file from Trash:"
-    restore-trash
+    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Restore file from Trash:"
+    trash --list 
+    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT To restore file(s), use the command: trash -r filename1 filename2 ..."
+    cd ~/.local/share/Trash/files
 }
 
-# trash-cli: empty
+# trashman: empty
 TE() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Emptying Trash, are you sure? (y = yes)"
+    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Emptying Trash, are you sure? (y = yes)"
     read answer_trash
     if [[ $answer_trash == "y" ]] || [[ $answer_trash == "Y" ]]; then
-        trash-empty 
-        echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Done! Trash is empty."
+        trash --empty 
+        echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Done! Trash is empty."
     else
-        echo -e "$COLOR_HL1::$COLOR_TITLE trash-cli >$COLOR_DEFAULT Exit. Trash hasn't been emptied."
+        echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Exit. Trash hasn't been emptied."
     fi
 }
 
