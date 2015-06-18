@@ -336,20 +336,29 @@ fi
 # mpv: list watch later dir's content and select from them
 mpv-watch-later() {
     dir=$HOME/.config/mpv/watch_later
+    number=0
 
     echo -e "$COLOR_HL1::$COLOR_TITLE mpv-watch-later >$COLOR_DEFAULT Listing watch_later:"
+    unset arr # needs to clear the array when executing the function, otherwise the elements will be added again and again...
     for file in $dir/*
     do
-        head -n 1 $file | sed 's/#//' | xsel -b && echo "=> $(xsel -b) [$COLOR_HL1 $(basename $file) $COLOR_DEFAULT]"
+        number=$((number + 1))
+        filepath=$(head -n 1 $file | sed 's/# //')
+        arr+=($filepath)
+        echo $filepath | xsel -b && echo "$number) $(xsel -b) [$COLOR_HL1 $(basename $file) $COLOR_DEFAULT]"
+        #head -n 1 $file | sed 's/# //' | xsel -b && echo "$number) $(xsel -b) [$COLOR_HL1 $(basename $file) $COLOR_DEFAULT]"
     done
-    
-    echo -e "\n$COLOR_HL1::$COLOR_TITLE mpv-watch-later >$COLOR_DEFAULT Select file to play with mpv:"
-    select watch_this in $dir/*
-    do
-        echo "You picked: $watch_this"
-        head -n 1 $watch_this | sed 's/#//' | xsel -b && mpv $(xsel -b)
-        break
-    done
+    echo -n "Play with mpv [select a number]: " ; read selectnumber
+    mpv "$arr[$selectnumber]"
+
+    # The "Select method"
+    #echo -e "\n$COLOR_HL1::$COLOR_TITLE mpv-watch-later >$COLOR_DEFAULT Select a file to play with mpv:"
+    #select watch_this in $dir/*
+    #do
+        #echo "You picked: $watch_this"
+        #head -n 1 $watch_this | sed 's/#//' | xsel -b && mpv $(xsel -b)
+        #break
+    #done
 }
 
 # Other aliases
