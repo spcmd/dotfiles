@@ -333,6 +333,25 @@ if [[ -x $HOME/Scripts/imgur-upload.sh ]]; then
     alias imgur='$HOME/Scripts/imgur-upload.sh'
 fi
 
+# mpv: list watch later dir's content and select from them
+mpv-watch-later() {
+    dir=$HOME/.config/mpv/watch_later
+
+    echo -e "$COLOR_HL1::$COLOR_TITLE mpv-watch-later >$COLOR_DEFAULT Listing watch_later:"
+    for file in $dir/*
+    do
+        head -n 1 $file | sed 's/#//' | xsel -b && echo "=> $(xsel -b) [$COLOR_HL1 $(basename $file) $COLOR_DEFAULT]"
+    done
+    
+    echo -e "\n$COLOR_HL1::$COLOR_TITLE mpv-watch-later >$COLOR_DEFAULT Select file to play with mpv:"
+    select watch_this in $dir/*
+    do
+        echo "You picked: $watch_this"
+        head -n 1 $watch_this | sed 's/#//' | xsel -b && mpv $(xsel -b)
+        break
+    done
+}
+
 # Other aliases
 alias q='exit'
 alias quit='exit'

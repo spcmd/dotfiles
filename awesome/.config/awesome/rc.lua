@@ -640,7 +640,7 @@ awful.rules.rules = {
         properties = { tag = tags[1][5] } },
 
     -- Tag 6 rules
-    { rule_any = { class = { "Gimp", "Inkscape", "libreoffice", "VirtualBox" } },
+    { rule_any = { class = { "Gimp", "Inkscape", "libreoffice", "VirtualBox", "Gtkpod" } },
         properties = { tag = tags[1][6] } },
 
 
