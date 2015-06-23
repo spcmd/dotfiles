@@ -129,7 +129,7 @@ bindkey -M vicmd '^s' history-incremental-search-backward
 
 # }}}
 
-# {{{   Custom Vars
+# {{{   Color vars for functions 
 # -----------------------------------------------------
 
 COLOR_DEFAULT=$(tput sgr0)
@@ -334,32 +334,9 @@ if [[ -x $HOME/Scripts/imgur-upload.sh ]]; then
 fi
 
 # mpv: list watch later dir's content and select from them
-mpv-watch-later() {
-    dir=$HOME/.config/mpv/watch_later
-    number=0
-
-    echo -e "$COLOR_HL1::$COLOR_TITLE mpv-watch-later >$COLOR_DEFAULT Listing watch_later:"
-    unset arr # needs to clear the array when executing the function, otherwise the elements will be added again and again...
-    for file in $dir/*
-    do
-        number=$((number + 1))
-        filepath=$(head -n 1 $file | sed 's/# //')
-        arr+=($filepath)
-        echo $filepath | xsel -b && echo "$number) $(xsel -b) [$COLOR_HL1 $(basename $file) $COLOR_DEFAULT]"
-        #head -n 1 $file | sed 's/# //' | xsel -b && echo "$number) $(xsel -b) [$COLOR_HL1 $(basename $file) $COLOR_DEFAULT]"
-    done
-    echo -n "Play with mpv [select a number]: " ; read selectnumber
-    mpv "$arr[$selectnumber]"
-
-    # The "Select method"
-    #echo -e "\n$COLOR_HL1::$COLOR_TITLE mpv-watch-later >$COLOR_DEFAULT Select a file to play with mpv:"
-    #select watch_this in $dir/*
-    #do
-        #echo "You picked: $watch_this"
-        #head -n 1 $watch_this | sed 's/#//' | xsel -b && mpv $(xsel -b)
-        #break
-    #done
-}
+if [[ -x $HOME/Scripts/mpv-watch-later.sh ]]; then
+    alias mpv-watch-later='$HOME/Scripts/mpv-watch-later.sh'
+fi
 
 # Other aliases
 alias q='exit'
@@ -371,9 +348,8 @@ alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -
 alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
 alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
 alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
-
-# SSH with X (to run GUI apps)
-alias sshx='ssh -X -C -c blowfish-cbc,arcfour'
+alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
+alias lscon='nmcli con show'
 
 # APT
 if [[ -x /usr/bin/apt-get ]]; then

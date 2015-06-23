@@ -19,11 +19,12 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 colorscheme Tomorrow-Night-spcmd                    "color scheme
+set nocompatible                                    "disable Vi compatibility
 set number                                          "line numbers
 set showcmd                                         "show commands at the bottom
 set linebreak                                       "allow linebreaks between words
 set hlsearch                                        "highlight search results
-set ruler                                           "show line and cursor position
+"set ruler                                           "show line and cursor position
 set hidden                                          "hide buffer, do not warn about unsaved
 set confirm                                         "save confirmation dialog
 set expandtab                                       "convert tabs to spaces
@@ -41,9 +42,8 @@ set lines=35 columns=120                            "set in ~/.gvimrc for GVim
 set rnu                                             "relative line numbering
 "set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline
-"set noshowmode                                      "disable default mode indicator (using airline's)
-set showmode                                        "show modes 
 set listchars=tab:▸\ ,eol:¬                         "tab and EOL chars
+set showmode                                        "show modes 
 set nofoldenable                                    "disable automatic folding
 set autoread                                        "auto-reload files if they were modified outside Vim
 set ignorecase                                      "case-insensitive mode
