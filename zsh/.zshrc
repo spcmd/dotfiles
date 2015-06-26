@@ -328,6 +328,12 @@ compton-urxvt() {
     fi
 }
 
+# Hint for wathing dd progress
+hint-dd() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE hint-dd >$COLOR_DEFAULT Use this command to watch the progress of the dd command:"
+    echo -e "\tdd bs=4M count=5 if=/dev/random of=/dev/null & pid=\$! ; watch -n 3 kill -USR1 \$pid"
+}
+
 # alias if imgur-upload.sh exists and executable
 if [[ -x $HOME/Scripts/imgur-upload.sh ]]; then
     alias imgur='$HOME/Scripts/imgur-upload.sh'
