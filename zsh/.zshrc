@@ -182,10 +182,24 @@ TE() {
 # pacman aliases
 alias pacins='sudo pacman -S' # install
 alias pacinsu='sudo pacman -U' # istall local pkg
-alias pacss='sudo pacman -Ss' # search
+alias pacss='pacman -Ss' # search
 alias pacsync='sudo pacman -Syy' # update repo lists
 alias pacupd='sudo pacman -Syyu' # update & upgrade
 alias pacupg='sudo pacman -Syyu' # update & upgrade
+alias paclog='less /var/log/pacman.log'
+alias cdpacpkg='cd /var/cache/pacman/pkg'
+
+# pacman: list or search in cache
+pacpkg() {
+    cache_dir=/var/cache/pacman/pkg
+    if [[ $1 == "" ]]; then
+    echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Listing $cache_dir:"
+        ls -l $cache_dir 
+    else
+    echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Search results for $1 in $cache_dir:"
+        ls -l $cache_dir | grep $1
+    fi
+}
 
 # pacman: removed orphaned
 pacrmo() {
@@ -326,6 +340,11 @@ compton-urxvt() {
     else
         echo -e "$COLOR_HL1::$COLOR_TITLE Error! $compton_config doesn't exist. $COLOR_DEFAULT"
     fi
+}
+
+hint-compton() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE hint-compton >$COLOR_DEFAULT the current opacity-rule in compton.conf:"
+    awk 'NR==4' $HOME/.config/compton/compton.conf
 }
 
 # Hint for wathing dd progress
