@@ -182,12 +182,23 @@ TE() {
 # pacman aliases
 alias pacins='sudo pacman -S' # install
 alias pacinsu='sudo pacman -U' # istall local pkg
-alias pacss='pacman -Ss' # search
+alias pacss='pacman -Ss' # search in remote packages
+alias pacqs='pacman -Qs' # search in installed packages
 alias pacsync='sudo pacman -Syy' # update repo lists
 alias pacupd='sudo pacman -Syyu' # update & upgrade
 alias pacupg='sudo pacman -Syyu' # update & upgrade
-alias paclog='less /var/log/pacman.log'
-alias cdpacpkg='cd /var/cache/pacman/pkg'
+alias pacinfo='pacman -Qi $@' # show package info
+alias paclsup='pacman -Qu' # show availabe updates
+alias paclspkg='pacman -Q' # list installed packages
+alias paclog='less /var/log/pacman.log' # show pacman log
+alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
+alias cdyaourtpkg='cd /var/cache/pacman/pkg-yaourt' # change to yaourt cache dir
+
+# pacman: show package dependencies
+pacdep() { pacman -Qi "$@" | grep Depends }
+
+# pacman: show size of the package
+pacsize() { pacman -Qi "$@" | grep Size }
 
 # pacman: list or search in cache
 pacpkg() {
@@ -210,9 +221,10 @@ pacrmo() {
 # pacman: remove packages
 pacrm() {
     echo -e "$COLOR_HL1::$COLOR_TITLE sudo pacman -Rns $COLOR_DEFAULT:: Remove packages, their configuration files and unneeded dependecies.\n"
-    sudo pacman -Rns $@ 
+    sudo pacman -Rns "$@"
 }
 
+# pacman: change to the new mirrorlist
 pacmirror() {
     echo -e "$COLOR_HL1::$COLOR_TITLE pacmirror >$COLOR_DEFAULT Use the new pacman mirrorlist as the default mirrorlist and create a backup of the current mirrorlist? (y = yes)"
     read answer_list
@@ -225,6 +237,14 @@ pacmirror() {
     else
         echo "pacmirror script stopped. Nothing changed."
     fi
+}
+
+# show hints/reminders for my pacman alises and functions
+hint-pacman() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE hint-pacman >$COLOR_DEFAULT Listing pacman aliases:"
+    lsmyalias | grep --color=never pac | grep -v 'lsmyalias' | grep -v 'echo'
+    echo -e "$COLOR_HL1::$COLOR_TITLE hint-pacman >$COLOR_DEFAULT Listing pacman functions:"
+    lsmyfunc | grep --color=never pac
 }
 
 # }}}
@@ -292,7 +312,7 @@ alias cfg-fstab='sudo $EDITOR /etc/fstab'
 alias cfg-grub='sudo $EDITOR /etc/default/grub'
 alias cfg-hosts='sudo $EDITOR /etc/hosts'
 alias cfg-pacman='sudo $EDITOR /etc/pacman.conf'
-alias cfg-pacman-mirrorlist='sudo $EDITOR /etc/pacman.d/mirrorlist'
+alias cfg-pacmirror='sudo $EDITOR /etc/pacman.d/mirrorlist'
 alias cfg-ranger='$EDITOR ~/.config/ranger/rc.conf'
 alias cfg-ranger-rifle='$EDITOR ~/.config/ranger/rifle.conf'
 alias cfg-rtorrent='$EDITOR ~/.rtorrent.rc'
@@ -319,8 +339,8 @@ for command in cp rm mv mkdir chmod chown rename; do
 done
 
 # List all custom function and alias names from this .zshrc
-alias lsmyfunc='cat ~/.zshrc | cut -d "{" -f 1 | sed "s/ //g" | grep "()"'
-alias lsmyalias='cat ~/.zshrc | cut -d "{" -f 1 | sed -e "s/^[ \t]*//" | grep -v "^#" | grep alias'
+lsmyfunc() {cat ~/.zshrc | cut -d "{" -f 1 | sed "s/ //g" | grep "()"}
+lsmyalias() {cat ~/.zshrc | cut -d "{" -f 1 | sed -e "s/^[ \t]*//" | grep -v "^#" | grep alias}
 
 # Set urxvt's transparency in compton's config
 compton-urxvt() {
@@ -375,6 +395,8 @@ alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
 alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
 alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 alias lscon='nmcli con show'
+alias pingg='ping google.com'
+alias kpass='kpcli --kdb' 
 
 # APT
 if [[ -x /usr/bin/apt-get ]]; then
