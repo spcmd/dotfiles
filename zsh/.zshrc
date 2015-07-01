@@ -179,7 +179,7 @@ TE() {
 # {{{   Pacman
 # -----------------------------------------------------
 
-# pacman aliases
+# aliases
 alias pacins='sudo pacman -S' # install
 alias pacinsu='sudo pacman -U' # istall local pkg
 alias pacss='pacman -Ss' # search in remote packages
@@ -194,13 +194,13 @@ alias paclog='less /var/log/pacman.log' # show pacman log
 alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
 alias cdyaourtpkg='cd /var/cache/pacman/pkg-yaourt' # change to yaourt cache dir
 
-# pacman: show package dependencies
+# show package dependencies
 pacdep() { pacman -Qi "$@" | grep Depends }
 
-# pacman: show size of the package
+# show size of the package
 pacsize() { pacman -Qi "$@" | grep Size }
 
-# pacman: list or search in cache
+# list or search in cache
 pacpkg() {
     cache_dir=/var/cache/pacman/pkg
     if [[ $1 == "" ]]; then
@@ -212,19 +212,19 @@ pacpkg() {
     fi
 }
 
-# pacman: removed orphaned
+# removed orphaned
 pacrmo() {
     echo -e "$COLOR_HL1::$COLOR_TITLE sudo pacman -Rns \$(pacman -Qdtq) $COLOR_DEFAULT:: Remove all orphaned packages, their configuration files and unneeded dependecies.\n"
     sudo pacman -Rns $(pacman -Qdtq)
 }
 
-# pacman: remove packages
+# remove packages
 pacrm() {
     echo -e "$COLOR_HL1::$COLOR_TITLE sudo pacman -Rns $COLOR_DEFAULT:: Remove packages, their configuration files and unneeded dependecies.\n"
     sudo pacman -Rns "$@"
 }
 
-# pacman: change to the new mirrorlist
+# change to the new mirrorlist
 pacmirror() {
     echo -e "$COLOR_HL1::$COLOR_TITLE pacmirror >$COLOR_DEFAULT Use the new pacman mirrorlist as the default mirrorlist and create a backup of the current mirrorlist? (y = yes)"
     read answer_list

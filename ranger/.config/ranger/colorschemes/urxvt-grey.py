@@ -44,7 +44,7 @@ class Default(ColorScheme):
                     fg = COLOR_MEDIA
             if context.container:
                 fg = COLOR_ARCHIVE
-                attr |= bold
+                #attr |= bold
             if context.directory:
                 attr |= bold
                 bg = COLOR_BG_DEFAULT
