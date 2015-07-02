@@ -26,7 +26,6 @@ set toolbars=nonavigation
 set newtab=all
 
 " }}}
-
 " {{{   Key mappings
 "--------------------------------------------
 
@@ -75,8 +74,16 @@ nmap <C-b> :ignorekeys<CR> :sidebar Bookmarks<CR>
 nnoremap <C-a> i<C-a>
 inoremap <C-a> <Ins><C-a><Ins>
 
-" }}}
+"Dict lookup
+nmap <leader>d :dict<CR>
 
+"Wikipedia lookup
+nmap <leader>w :wiki<CR>
+
+"Youtube lookup
+nmap <leader>y :yt<CR>
+
+" }}}
 " {{{   Bookmarks
 "--------------------------------------------
 
@@ -95,7 +102,6 @@ command! bmkIMDB :open imdb.com
 command! bmkPort :open port.hu/tv/pls/tv/oldtv.prog
 
 " }}}
-
 " {{{   Commands
 "--------------------------------------------
 
@@ -114,10 +120,19 @@ command! -description="Source .vimperatorrc (custom command)" RR source ~/.vimpe
 "PH/Logout search integration
 command! -description="PH! Fórum kereső: keresés a topikban" -nargs=* ph js window.content.window.location = window.content.window.location.href.match( /^(http.+\/)[^\/]+$/ )[1] +'keres.php?type=-&stext=<args>';
 
+"PH/Logout comment search
 command! -description="PH! Fórum kereső: keresés a topikban (csak a saját hozzászólásaim közt)" -nargs=* phmy js window.content.window.location = window.content.window.location.href.match( /^(http.+\/)[^\/]+$/ )[1] +'keres.php?type=-&stext=<args>&suser=spammer';
 
-" }}}
+"Lookup selected text in Dict
+command! -description="Lookup the selected text in a dictionary" dict js window.content.window.open("http://szotar.sztaki.hu/search?searchWord="+window.content.window.getSelection().toString(), '_blank')
 
+"Lookup selected text in Wikipedia
+command! -description="Lookup the selected text in wikipedia" wiki js window.content.window.open("https://en.wikipedia.org/wiki/"+window.content.window.getSelection().toString(), '_blank')
+
+"Lookup selected text in Wikipedia
+command! -description="Lookup the selected text in youtube" yt js window.content.window.open("https://www.youtube.com/results?search_query="+window.content.window.getSelection().toString(), '_blank')
+
+" }}}
 " {{{   Autocommands
 "--------------------------------------------
 

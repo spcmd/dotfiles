@@ -63,7 +63,6 @@ set statusline=
 set statusline+=%f%m%=%y\ [%{strlen(&fenc)?&fenc:'none'}]\ L:%l/%L\ C:%c\ (%P)
 
 " }}}
-
 " {{{   Plugin/Bundle specific settings
 "--------------------------------------------
 
@@ -92,7 +91,6 @@ let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
 "let g:vcoolor_lowercase = 1                         "use lowercase color codes by default
 
 " }}}
-
 " {{{   Terminal cursor settings 
 "--------------------------------------------
 
@@ -111,7 +109,6 @@ silent !echo -ne "\033]12;yellow\007"
 autocmd VimLeave * silent !echo -ne "\033]12;white\007"
 
 " }}}
-
 " {{{   Commands & Functions
 "--------------------------------------------
 
@@ -170,7 +167,6 @@ command! Q q
 command! RR write|source ~/.vimrc
 
 "}}}
-
 " {{{   Autocommands
 "--------------------------------------------
 
@@ -187,7 +183,6 @@ autocmd BufRead *.vimp set filetype=vim
 autocmd BufRead .xinitrc set filetype=sh
 
 " }}}
-
 " {{{   Key mappings
 "--------------------------------------------
 

@@ -91,7 +91,6 @@ eval $(dircolors ~/.dircolors)
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  
 
 # }}}
-
 # {{{   Vi mode in zsh
 # -----------------------------------------------------
 
@@ -128,8 +127,7 @@ bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
 
 # }}}
-
-# {{{   Color vars for functions 
+# {{{   Colors for functions 
 # -----------------------------------------------------
 
 COLOR_DEFAULT=$(tput sgr0)
@@ -137,7 +135,6 @@ COLOR_TITLE=$(tput setaf 7; tput bold)
 COLOR_HL1=$(tput setaf 4; tput bold)
 
 # }}}
-
 # {{{   trashman (https://aur.archlinux.org/packages/trashman/) 
 # -----------------------------------------------------
 
@@ -175,11 +172,10 @@ TE() {
 }
 
 # }}}
-
 # {{{   Pacman
 # -----------------------------------------------------
 
-# aliases
+# pacman: aliases
 alias pacins='sudo pacman -S' # install
 alias pacinsu='sudo pacman -U' # istall local pkg
 alias pacss='pacman -Ss' # search in remote packages
@@ -194,37 +190,54 @@ alias paclog='less /var/log/pacman.log' # show pacman log
 alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
 alias cdyaourtpkg='cd /var/cache/pacman/pkg-yaourt' # change to yaourt cache dir
 
-# show package dependencies
+# pacman: show package dependencies
 pacdep() { pacman -Qi "$@" | grep Depends }
 
-# show size of the package
+# pacman: show size of the package
 pacsize() { pacman -Qi "$@" | grep Size }
 
-# list or search in cache
+# pacman: list or search in cache
 pacpkg() {
+
     cache_dir=/var/cache/pacman/pkg
+    cache_dir_yaourt=/var/cache/pacman/pkg-yaourt
+
+    # fi $1 is empty, then just list all the packages
     if [[ $1 == "" ]]; then
     echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Listing $cache_dir:"
+
         ls -l $cache_dir 
+
+        if [[ -d $cache_dir_yaourt ]]; then
+            echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Listing $cache_dir_yaourt:"
+            ls -l $cache_dir_yaourt
+        fi
+    # if $1 is NOT empty, then it's a search
     else
     echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Search results for $1 in $cache_dir:"
+
         ls -l $cache_dir | grep $1
+
+        if [[ -d $cache_dir_yaourt ]]; then
+            echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Search results for $1 in $cache_dir_yaourt:"
+            ls -l $cache_dir_yaourt | grep $1
+        fi
     fi
 }
 
-# removed orphaned
+# pacman: removed orphaned
 pacrmo() {
     echo -e "$COLOR_HL1::$COLOR_TITLE sudo pacman -Rns \$(pacman -Qdtq) $COLOR_DEFAULT:: Remove all orphaned packages, their configuration files and unneeded dependecies.\n"
     sudo pacman -Rns $(pacman -Qdtq)
 }
 
-# remove packages
+# pacman: remove packages
 pacrm() {
     echo -e "$COLOR_HL1::$COLOR_TITLE sudo pacman -Rns $COLOR_DEFAULT:: Remove packages, their configuration files and unneeded dependecies.\n"
     sudo pacman -Rns "$@"
 }
 
-# change to the new mirrorlist
+# pacman: change to the new mirrorlist
 pacmirror() {
     echo -e "$COLOR_HL1::$COLOR_TITLE pacmirror >$COLOR_DEFAULT Use the new pacman mirrorlist as the default mirrorlist and create a backup of the current mirrorlist? (y = yes)"
     read answer_list
@@ -248,7 +261,6 @@ hint-pacman() {
 }
 
 # }}}
-
 # {{{ Git
 # -----------------------------------------------------
 
@@ -282,7 +294,6 @@ if [[ -x $HOME/Scripts/gitfile.sh ]]; then
 fi
 
 # }}}
-
 # {{{   Subtitles
 # -----------------------------------------------------
 
@@ -300,7 +311,6 @@ alias sub-f='felirat'
 }
 
 # }}}
-
 # {{{   Config Files
 # -----------------------------------------------------
 
@@ -327,10 +337,32 @@ alias rld-bashrc='source ~/.bashrc && echo "source bashrc: done!"'
 alias rld-xresources='xrdb -load ~/.Xresources && echo "reload .Xresources: done!"'
 alias rld-zshrc='source ~/.zshrc && echo "source zshrc: done!"'
 alias RR='rld-zshrc'
+alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
+
 
 # }}}
+# {{{ Net utils / Web service related
 
-# {{{   Misc./Other stuff
+# is this site down?
+isdown() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g;s/&#x2F;/\//g' }
+
+# what is my ip?
+myip()  { curl -s curl -s http://whatismyip.akamai.com | grep -o "[[:digit:].]\+" }
+
+# url shortener
+urlshort() { wget -qO - "http://is.gd/create.php?format=simple&url=$1" }
+
+# alias if imgur-upload.sh exists and executable
+if [[ -x $HOME/Scripts/imgur-upload.sh ]]; then
+    alias imgur='$HOME/Scripts/imgur-upload.sh'
+fi
+
+# Online radios
+classfm() { mpv "http://icast.connectmedia.hu/4784/live.mp3" & }
+
+
+# }}}
+# {{{   Misc/Other stuff
 # -----------------------------------------------------
 
 # Always verbose core commands
@@ -343,7 +375,7 @@ lsmyfunc() {cat ~/.zshrc | cut -d "{" -f 1 | sed "s/ //g" | grep "()"}
 lsmyalias() {cat ~/.zshrc | cut -d "{" -f 1 | sed -e "s/^[ \t]*//" | grep -v "^#" | grep alias}
 
 # Set urxvt's transparency in compton's config
-compton-urxvt() {
+compton-opacity() {
     compton_config=~/.config/compton/compton.conf
     if [[ -e  $compton_config ]]; then
         # change the 4th line
@@ -362,32 +394,45 @@ compton-urxvt() {
     fi
 }
 
+# Hint for compton opacity 
 hint-compton() {
     echo -e "$COLOR_HL1::$COLOR_TITLE hint-compton >$COLOR_DEFAULT the current opacity-rule in compton.conf:"
     awk 'NR==4' $HOME/.config/compton/compton.conf
 }
-
-# Hint for wathing dd progress
-hint-dd() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE hint-dd >$COLOR_DEFAULT Use this command to watch the progress of the dd command:"
-    echo -e "\tdd bs=4M count=5 if=/dev/random of=/dev/null & pid=\$! ; watch -n 3 kill -USR1 \$pid"
-}
-
-# alias if imgur-upload.sh exists and executable
-if [[ -x $HOME/Scripts/imgur-upload.sh ]]; then
-    alias imgur='$HOME/Scripts/imgur-upload.sh'
-fi
 
 # mpv: list watch later dir's content and select from them
 if [[ -x $HOME/Scripts/mpv-watch-later.sh ]]; then
     alias mpv-watch-later='$HOME/Scripts/mpv-watch-later.sh'
 fi
 
-# Other aliases
+# To-do list
+if [[ -f $HOME/Documents/TODO.todo ]]; then
+    alias todo='$EDITOR $HOME/Documents/TODO.todo'
+fi
+
+# create a backup copy
+cpbak() { cp $1{,.bak} ;}
+
+# list and grep, usage: lsgrep <keyword>
+lsgrep() {
+	keyword=$(echo "$@" |  sed 's/ /.*/g')
+	ls -la | grep -iE $keyword
+}
+
+# man and gep, usage: mangrep <command name> <keyword>
+mangrep() { man $1 | grep $2 }
+
+# Aliases
 alias q='exit'
 alias quit='exit'
-alias ls='ls --color=auto'
-alias lf='ls -AC'
+alias ls='ls --color=auto -A'
+alias lsl='ls -lA'
+alias lf='ls -lA1p $@ | grep -v "\/$"' # list files only
+alias free='free -h'
+alias lsblkf='lsblk -o "NAME,SIZE,MOUNTPOINT,RO,FSTYPE,LABEL,UUID"'
+alias dist-info='cat /etc/*-release'
+alias dist-name='cat /etc/*-release | grep -E "^NAME" | cut -c 6-'
+
 alias hdapm='sudo hdparm -I /dev/sda | grep level'
 alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
 alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
@@ -397,6 +442,12 @@ alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 alias lscon='nmcli con show'
 alias pingg='ping google.com'
 alias kpass='kpcli --kdb' 
+
+# Hint for watching dd progress
+hint-dd() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE hint-dd >$COLOR_DEFAULT Use this command to watch the progress of the dd command:"
+    echo -e "\tdd bs=4M count=5 if=/dev/random of=/dev/null & pid=\$! ; watch -n 3 kill -USR1 \$pid"
+}
 
 # APT
 if [[ -x /usr/bin/apt-get ]]; then

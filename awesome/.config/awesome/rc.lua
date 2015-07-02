@@ -33,7 +33,6 @@ vicious = require("vicious")
 blingbling = require("blingbling")
 
 -- }}}
-
 -- {{{  Autostart
 --------------------------------------
 
@@ -42,7 +41,6 @@ blingbling = require("blingbling")
 awful.util.spawn_with_shell("compton -b --config /home/spcmd/.config/compton/compton.conf")
 
 -- }}}
-
 -- {{{  Errors
 --------------------------------------
 
@@ -71,7 +69,6 @@ do
 end
 
 -- }}}
-
 -- {{{  Variables
 -------------------------------------
 
@@ -83,7 +80,6 @@ editor = os.getenv("EDITOR") or "nano"
 modkey = "Mod4"
 
 -- }}}
-
 -- {{{  Theme, Layout, Wallpaper, Tags, Menu, Launcher
 ------------------------------------------
 
@@ -150,7 +146,6 @@ local mylauncher_margin = wibox.layout.margin(mylauncher,0,1,0,0)
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 
 -- }}}
-
 --{{{   Wibox & Widgets 
 -------------------------------------------
 
@@ -403,7 +398,6 @@ for s = 1, screen.count() do
 end
 
 -- }}}
-
 -- {{{  Key and Mouse bindings
 --------------------------------------------------
 
@@ -603,7 +597,6 @@ clientbuttons = awful.util.table.join(
 root.keys(globalkeys)
 
 -- }}}
-
 -- {{{  Rules
 --------------------------------------------------
 
@@ -647,7 +640,6 @@ awful.rules.rules = {
 }
 
 -- }}}
-
 -- {{{  Signals, Titlebar settings
 ----------------------------------------------------
 
