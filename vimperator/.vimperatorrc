@@ -16,6 +16,7 @@
 
 colorscheme i3-blue
 set hintchars=hjklasdfgrtzu
+set titlestring=
 set editor="gvim -f"
 let mapleader = "-"
 
@@ -83,6 +84,9 @@ nmap <leader>w :wiki<CR>
 "Youtube lookup
 nmap <leader>y :yt<CR>
 
+"PH linkformat
+nmap Y :phlinkformat<CR>
+
 " }}}
 " {{{   Bookmarks
 "--------------------------------------------
@@ -91,7 +95,7 @@ nmap gh :tabnew<CR>
 nmap gd :open github.com/spcmd/dotfiles<CR>
 nmap gl :open logout.hu/forum/index.html<CR>
 nmap gy :open youtube.com/feed/subscriptions<CR>
-nmap gp :open port.hu/tv/pls/tv/oldtv.prog<CR>
+nmap gp :open http://www.port.hu/pls/tv/tv.prog?i_layout_id=1<CR>
 
 command! bmkLogout :open logout.hu/forum/index.html
 command! bmkGithubDotfiles :open github.com/spcmd/dotfiles
@@ -99,7 +103,7 @@ command! bmkGithubScripts :open github.com/spcmd/Scripts
 command! bmkGithubthemes :open github.com/spcmd/themes
 command! bmkYoutube :open youtube.com/feed/subscriptions
 command! bmkIMDB :open imdb.com
-command! bmkPort :open port.hu/tv/pls/tv/oldtv.prog
+command! bmkPort :open http://www.port.hu/pls/tv/tv.prog?i_layout_id=1 
 
 " }}}
 " {{{   Commands
@@ -131,6 +135,7 @@ command! -description="Lookup the selected text in wikipedia" wiki js window.con
 
 "Lookup selected text in Wikipedia
 command! -description="Lookup the selected text in youtube" yt js window.content.window.open("https://www.youtube.com/results?search_query="+window.content.window.getSelection().toString(), '_blank')
+
 
 " }}}
 " {{{   Autocommands

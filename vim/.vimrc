@@ -174,7 +174,7 @@ command! RR write|source ~/.vimrc
 autocmd FocusLost * silent! wa
 
 "Resize (terminal) window on quit
-autocmd VimLeavePre * silent set lines=25 columns=90
+"autocmd VimLeavePre * silent set lines=25 columns=90
 
 "Syntax highlight
 autocmd BufRead .rtorrent.rc set filetype=sh

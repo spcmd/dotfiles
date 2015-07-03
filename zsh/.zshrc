@@ -91,7 +91,7 @@ eval $(dircolors ~/.dircolors)
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  
 
 # }}}
-# {{{   Vi mode in zsh
+# {{{   Vi mode
 # -----------------------------------------------------
 
 # Enable Vi/Vim mode
@@ -184,7 +184,7 @@ alias pacsync='sudo pacman -Syy' # update repo lists
 alias pacupd='sudo pacman -Syyu' # update & upgrade
 alias pacupg='sudo pacman -Syyu' # update & upgrade
 alias pacinfo='pacman -Qi $@' # show package info
-alias paclsup='pacman -Qu' # show availabe updates
+alias paclsup='sudo pacman -Syy && pacman -Qu' # show availabe updates
 alias paclspkg='pacman -Q' # list installed packages
 alias paclog='less /var/log/pacman.log' # show pacman log
 alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
@@ -204,23 +204,26 @@ pacpkg() {
 
     # fi $1 is empty, then just list all the packages
     if [[ $1 == "" ]]; then
+    echo "--------------------------------------------------------------------------"
     echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Listing $cache_dir:"
-
         ls -l $cache_dir 
-
+    echo "--------------------------------------------------------------------------"
         if [[ -d $cache_dir_yaourt ]]; then
             echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Listing $cache_dir_yaourt:"
             ls -l $cache_dir_yaourt
+            echo "--------------------------------------------------------------------------"
         fi
     # if $1 is NOT empty, then it's a search
     else
+    echo "--------------------------------------------------------------------------"
     echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Search results for $1 in $cache_dir:"
-
         ls -l $cache_dir | grep $1
 
         if [[ -d $cache_dir_yaourt ]]; then
+            echo "--------------------------------------------------------------------------"
             echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Search results for $1 in $cache_dir_yaourt:"
             ls -l $cache_dir_yaourt | grep $1
+            echo "--------------------------------------------------------------------------"
         fi
     fi
 }
@@ -254,10 +257,13 @@ pacmirror() {
 
 # show hints/reminders for my pacman alises and functions
 hint-pacman() {
+    echo "--------------------------------------------------------------------------"
     echo -e "$COLOR_HL1::$COLOR_TITLE hint-pacman >$COLOR_DEFAULT Listing pacman aliases:"
     lsmyalias | grep --color=never pac | grep -v 'lsmyalias' | grep -v 'echo'
+    echo "--------------------------------------------------------------------------"
     echo -e "$COLOR_HL1::$COLOR_TITLE hint-pacman >$COLOR_DEFAULT Listing pacman functions:"
-    lsmyfunc | grep --color=never pac
+    lsmyfunc | grep --color=never -E "^pac"
+    echo "--------------------------------------------------------------------------"
 }
 
 # }}}
@@ -298,7 +304,7 @@ fi
 # -----------------------------------------------------
 
 # usage example: addic7ed "game of thrones" 
-# quotes ("") needed around the the tilte!
+# quotes ("") needed around the the title!
 addic7ed() {
     xdg-open "http://www.addic7ed.com/search.php?search=$1&Submit=Search"
 }
@@ -339,9 +345,14 @@ alias rld-zshrc='source ~/.zshrc && echo "source zshrc: done!"'
 alias RR='rld-zshrc'
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
+# To-do list
+if [[ -f $HOME/Documents/TODO.todo ]]; then
+    alias todo='$EDITOR $HOME/Documents/TODO.todo'
+fi
 
 # }}}
 # {{{ Net utils / Web service related
+# -----------------------------------------------------
 
 # is this site down?
 isdown() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g;s/&#x2F;/\//g' }
@@ -355,6 +366,11 @@ urlshort() { wget -qO - "http://is.gd/create.php?format=simple&url=$1" }
 # alias if imgur-upload.sh exists and executable
 if [[ -x $HOME/Scripts/imgur-upload.sh ]]; then
     alias imgur='$HOME/Scripts/imgur-upload.sh'
+fi
+
+# bbtv
+if [[ -x $HOME/Scripts/bbtv.sh ]]; then
+    alias bbtv='$HOME/Scripts/bbtv.sh'
 fi
 
 # Online radios
@@ -403,11 +419,6 @@ hint-compton() {
 # mpv: list watch later dir's content and select from them
 if [[ -x $HOME/Scripts/mpv-watch-later.sh ]]; then
     alias mpv-watch-later='$HOME/Scripts/mpv-watch-later.sh'
-fi
-
-# To-do list
-if [[ -f $HOME/Documents/TODO.todo ]]; then
-    alias todo='$EDITOR $HOME/Documents/TODO.todo'
 fi
 
 # create a backup copy
