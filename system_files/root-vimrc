@@ -1,0 +1,103 @@
+
+" spcmd's minimal vim config for /root
+" https://github.com/spcmd
+
+" -- Basic Settings --
+syntax on
+filetype plugin indent on
+colorscheme desert
+hi StatusLine ctermbg=white ctermfg=red
+set nocompatible
+set number
+set showcmd
+set linebreak
+set hlsearch
+set hidden
+set confirm
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set smarttab
+set encoding=utf-8
+set ttimeout
+set ttimeoutlen=10
+set splitbelow
+set splitright
+set t_Co=256
+set rnu
+set laststatus=2
+set listchars=tab:▸\ ,eol:¬
+set showmode
+set nofoldenable
+set autoread
+set ignorecase
+set smartcase
+set incsearch
+set wildmenu
+set scrolloff=10
+set foldmethod=marker
+set foldenable
+let mapleader = "-"
+
+" -- Status line --
+"clear statusline (needed when reloading .vimrc)
+set statusline=
+"set custom statusline format
+set statusline+=[Editing\ as\ root]\ %f%m%=%y\ [%{strlen(&fenc)?&fenc:'none'}]\ L:%l/%L\ C:%c\ (%P)
+
+" -- Terminal cursor settings --
+let &t_SI = "\<Esc>]12;DodgerBlue\x7"
+let &t_EI = "\<Esc>]12;yellow\x7"
+let &t_SI .= "\<Esc>[6 q"
+let &t_EI .= "\<Esc>[2 q"
+silent !echo -ne "\033]12;yellow\007"
+autocmd VimLeave * silent !echo -ne "\033]12;white\007"
+
+" -- Fix accidentally shifted commands --
+command! WQ wq
+command! Wq wq
+command! W w
+command! Q q
+
+"Reload .vimrc (save & source)
+command! RR write|source /root/.vimrc
+
+"-- Key mappings --
+
+imap űű <Esc>"+p
+nnoremap <Enter> o<ESC>
+nnoremap <S-Enter> O<ESC>
+nmap ú :bnext<CR>
+nmap ő :bprevious<CR>
+
+"Move up/down on displayed lines, not real lines
+nnoremap k gk
+nnoremap j gj
+
+"Move to the beginning/end of line
+nnoremap H ^
+nnoremap L $
+vmap H ^
+vmap L $
+
+"Indenting
+nmap <S-tab> <<
+nmap <tab> >>
+vmap <S-tab> <gv
+vmap <tab> >gv
+
+"Faster navigation
+nmap <C-j> <C-d>
+nmap <C-k> <C-u>
+
+"Select the whole line in Visual mode
+vnoremap j j$
+
+"Toggle search highlight
+let hlstate=0
+nnoremap <leader><space> :set hlsearch!<CR>
+
+"Yank to system clipboard
+nnoremap y "+y
+vnoremap y "+y

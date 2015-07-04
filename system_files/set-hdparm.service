@@ -1,0 +1,8 @@
+[Unit]
+Description=Set hdparm B255 on sda when booting
+
+[Service]
+ExecStart=/usr/sbin/hdparm -B255 /dev/sda
+
+[Install]
+WantedBy=multi-user.target 

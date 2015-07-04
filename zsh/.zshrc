@@ -333,6 +333,7 @@ alias cfg-ranger='$EDITOR ~/.config/ranger/rc.conf'
 alias cfg-ranger-rifle='$EDITOR ~/.config/ranger/rifle.conf'
 alias cfg-rtorrent='$EDITOR ~/.rtorrent.rc'
 alias cfg-vimrc='$EDITOR ~/.vimrc'
+alias cfg-vimrc-root='sudo $EDITOR /root/.vimrc'
 alias cfg-vimperatorrc='$EDITOR ~/.vimperatorrc'
 alias cfg-xinitrc='$EDITOR ~/.xinitrc'
 alias cfg-xresources='$EDITOR ~/.Xresources'
@@ -374,8 +375,13 @@ if [[ -x $HOME/Scripts/bbtv.sh ]]; then
 fi
 
 # Online radios
-classfm() { mpv "http://icast.connectmedia.hu/4784/live.mp3" & }
-
+classfm() { mpv "http://icast.connectmedia.hu/4784/live.mp3" }
+rockradio-60() { mpv "http://listen.rockradio.com/public1/60srock.pls" }
+rockradio-80() { mpv "http://listen.rockradio.com/public1/80srock.pls" }
+rockradio-90() { mpv "http://listen.rockradio.com/public1/90srock.pls" }
+rockradio-bluesrock() { mpv "http://listen.rockradio.com/public1/bluesrock.pls" }
+rockradio-classicrock() { mpv "http://listen.rockradio.com/public1/classicrock.pls" }
+rockradio-poprock() { mpv "http://listen.rockradio.com/public1/poprock.pls" }
 
 # }}}
 # {{{   Misc/Other stuff
@@ -422,7 +428,8 @@ if [[ -x $HOME/Scripts/mpv-watch-later.sh ]]; then
 fi
 
 # create a backup copy
-cpbak() { cp $1{,.bak} ;}
+cpbak() { for files in "$@"; do cp $files $files.bak; done }
+cpbakdir() { for files in "$@"; do cp $files ~/Backup; done }
 
 # list and grep, usage: lsgrep <keyword>
 lsgrep() {
@@ -453,6 +460,7 @@ alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 alias lscon='nmcli con show'
 alias pingg='ping google.com'
 alias kpass='kpcli --kdb' 
+alias kmpv='pkill mpv' # for backgrounded radios
 
 # Hint for watching dd progress
 hint-dd() {

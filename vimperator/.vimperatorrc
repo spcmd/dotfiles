@@ -78,6 +78,10 @@ inoremap <C-a> <Ins><C-a><Ins>
 "Dict lookup
 nmap <leader>d :dict<CR>
 
+"Translate the selected text with Translate Shell (https://github.com/soimort/translate-shell)
+nmap <leader>t :trans<CR>
+nmap <leader>T :transfull<CR>
+
 "Wikipedia lookup
 nmap <leader>w :wiki<CR>
 
@@ -91,12 +95,6 @@ nmap Y :phlinkformat<CR>
 " {{{   Bookmarks
 "--------------------------------------------
 
-nmap gh :tabnew<CR>
-nmap gd :open github.com/spcmd/dotfiles<CR>
-nmap gl :open logout.hu/forum/index.html<CR>
-nmap gy :open youtube.com/feed/subscriptions<CR>
-nmap gp :open http://www.port.hu/pls/tv/tv.prog?i_layout_id=1<CR>
-
 command! bmkLogout :open logout.hu/forum/index.html
 command! bmkGithubDotfiles :open github.com/spcmd/dotfiles
 command! bmkGithubScripts :open github.com/spcmd/Scripts
@@ -104,6 +102,12 @@ command! bmkGithubthemes :open github.com/spcmd/themes
 command! bmkYoutube :open youtube.com/feed/subscriptions
 command! bmkIMDB :open imdb.com
 command! bmkPort :open http://www.port.hu/pls/tv/tv.prog?i_layout_id=1 
+
+nmap gh :tabnew<CR>
+nmap gd :bmkGithubDotfiles<CR>
+nmap gl :bmkLogout<CR>
+nmap gy :bmkYoutube<CR>
+nmap gp :bmkPort<CR>
 
 " }}}
 " {{{   Commands
@@ -129,6 +133,12 @@ command! -description="PH! Fórum kereső: keresés a topikban (csak a saját ho
 
 "Lookup selected text in Dict
 command! -description="Lookup the selected text in a dictionary" dict js window.content.window.open("http://szotar.sztaki.hu/search?searchWord="+window.content.window.getSelection().toString(), '_blank')
+
+"Translate the selected text with Translate Shell (https://github.com/soimort/translate-shell)
+command! -description="Translate the selected text with Translate Shell" trans execute "!trans -b :hu "+window.content.window.getSelection().toString() 
+
+"Translate the selected text with Translate Shell (https://github.com/soimort/translate-shell)
+command! -description="Translate the selected text with Translate Shell" transfull silent execute "!urxvtc --hold -e trans :hu "+window.content.window.getSelection().toString() 
 
 "Lookup selected text in Wikipedia
 command! -description="Lookup the selected text in wikipedia" wiki js window.content.window.open("https://en.wikipedia.org/wiki/"+window.content.window.getSelection().toString(), '_blank')
