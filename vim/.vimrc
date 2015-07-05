@@ -166,6 +166,20 @@ command! Q q
 "Reload .vimrc (save & source)
 command! RR write|source ~/.vimrc
 
+"Quick Open configs
+cnoreabbrev cfg Cfg 
+command! CfgAwesome :e ~/.config/awesome/rc.lua
+command! CfgBashrc :e ~/.bashrc
+command! CfgDircolors :e ~/.dircolors
+command! CfgRanger :e ~/.config/ranger/rc.conf
+command! CfgRangerRifle :e ~/.config/ranger/rifle.conf
+command! CfgRtorrent :e ~/.rtorrent.rc
+command! CfgVimrc :e ~/.vimrc
+command! CfgVimperatorrc :e ~/.vimperatorrc
+command! CfgXinitrc :e ~/.xinitrc
+command! CfgXresources :e ~/.Xresources
+command! CfgZshrc :e ~/.zshrc
+
 "}}}
 " {{{   Autocommands
 "--------------------------------------------

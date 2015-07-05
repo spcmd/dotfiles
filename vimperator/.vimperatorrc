@@ -40,14 +40,14 @@ nnoremap <C-j> <C-d>
 nnoremap <C-k> <C-u>
 
 "Tabs
-nmap ú :tabnext<CR>
-nmap ő :tabprevious<CR>
-nmap á :tabmove +1<CR>
-nmap é :tabmove -1<CR>
+nnoremap ú :tabnext<CR>
+nnoremap ő :tabprevious<CR>
+nnoremap á :tabmove +1<CR>
+nnoremap é :tabmove -1<CR>
 
 "History navigation
-nmap , :back<CR>
-nmap . :forward<CR>
+nnoremap , :back<CR>
+nnoremap . :forward<CR>
 
 "Quick select text in CARET/VISUAL mode: move to the beginning/end of line
 vnoremap H ^
@@ -62,25 +62,28 @@ nnoremap h :help<Space>
 "Context menu
 nnoremap cc ;c
 
-"vimpv.js (play videos with mpv)
-nmap m ;m
-
-"Search highlight
-nmap <leader>h :noh<CR>
-
 "Bookmarks toggle
-nmap <C-b> :ignorekeys<CR> :sidebar Bookmarks<CR>
+nnoremap <C-b> :ignorekeys<CR> :sidebar Bookmarks<CR>
 
 "Select ALL
 nnoremap <C-a> i<C-a>
 inoremap <C-a> <Ins><C-a><Ins>
 
-"Dict lookup
-nmap <leader>d :dict<CR>
+"vimpv.js (play videos with mpv)
+nnoremap m ;m
+
+"vimphelper.sh
+nmap ? :silent execute "!vimphint.sh"<CR>
+
+"Search highlight
+nmap <leader>h :noh<CR>
 
 "Translate the selected text with Translate Shell (https://github.com/soimort/translate-shell)
 nmap <leader>t :trans<CR>
 nmap <leader>T :transfull<CR>
+
+"Sztaki lookup
+nmap <leader>s :sztaki<CR>
 
 "Wikipedia lookup
 nmap <leader>w :wiki<CR>
@@ -95,57 +98,59 @@ nmap Y :phlinkformat<CR>
 " {{{   Bookmarks
 "--------------------------------------------
 
+nmap gh :tabnew<CR>
+nmap gl :bmkLogout<CR>
+nmap gd :bmkGithubDotfiles<CR>
+nmap gs :bmkGithubScripts<CR>
+nmap gy :bmkYoutube<CR>
+nmap gp :bmkPort<CR>
+
 command! bmkLogout :open logout.hu/forum/index.html
 command! bmkGithubDotfiles :open github.com/spcmd/dotfiles
 command! bmkGithubScripts :open github.com/spcmd/Scripts
 command! bmkGithubthemes :open github.com/spcmd/themes
 command! bmkYoutube :open youtube.com/feed/subscriptions
-command! bmkIMDB :open imdb.com
 command! bmkPort :open http://www.port.hu/pls/tv/tv.prog?i_layout_id=1 
-
-nmap gh :tabnew<CR>
-nmap gd :bmkGithubDotfiles<CR>
-nmap gl :bmkLogout<CR>
-nmap gy :bmkYoutube<CR>
-nmap gp :bmkPort<CR>
 
 " }}}
 " {{{   Commands
 "--------------------------------------------
 
 "Quick open Addons
-command! -description="Open addons page (custom command)" AA :tabopen about:addons
+command! AA -description="Open addons page (custom command)" :tabopen about:addons
 
 "Toggle userstyle (stylish.js plugin)
-command! -description="Toggle Stylish userstyle for this page (custom command)" ST :stylish toggle
+command! ST -description="Toggle Stylish userstyle for this page (custom command)" :stylish toggle
 
 "Open private window
-command! -description="Open private window (custom command)" private :normal i<C-S-p>
+command! private -description="Open private window (custom command)" :normal i<C-S-p>
 
 "Source this config
-command! -description="Source .vimperatorrc (custom command)" RR source ~/.vimperatorrc
+command! RR -description="Source .vimperatorrc (custom command)" source ~/.vimperatorrc
 
 "PH/Logout search integration
-command! -description="PH! Fórum kereső: keresés a topikban" -nargs=* ph js window.content.window.location = window.content.window.location.href.match( /^(http.+\/)[^\/]+$/ )[1] +'keres.php?type=-&stext=<args>';
+command! ph -description="PH! Fórum kereső: keresés a topikban" -nargs=* js window.content.window.location = window.content.window.location.href.match( /^(http.+\/)[^\/]+$/ )[1] +'keres.php?type=-&stext=<args>';
 
 "PH/Logout comment search
-command! -description="PH! Fórum kereső: keresés a topikban (csak a saját hozzászólásaim közt)" -nargs=* phmy js window.content.window.location = window.content.window.location.href.match( /^(http.+\/)[^\/]+$/ )[1] +'keres.php?type=-&stext=<args>&suser=spammer';
-
-"Lookup selected text in Dict
-command! -description="Lookup the selected text in a dictionary" dict js window.content.window.open("http://szotar.sztaki.hu/search?searchWord="+window.content.window.getSelection().toString(), '_blank')
+command! phmy -description="PH! Fórum kereső: keresés a topikban (csak a saját hozzászólásaim közt)" -nargs=* js window.content.window.location = window.content.window.location.href.match( /^(http.+\/)[^\/]+$/ )[1] +'keres.php?type=-&stext=<args>&suser=spammer';
 
 "Translate the selected text with Translate Shell (https://github.com/soimort/translate-shell)
-command! -description="Translate the selected text with Translate Shell" trans execute "!trans -b :hu "+window.content.window.getSelection().toString() 
+command! trans -description="Translate the selected text with Translate Shell" execute "!trans -b :hu "+window.content.window.getSelection().toString() 
 
 "Translate the selected text with Translate Shell (https://github.com/soimort/translate-shell)
-command! -description="Translate the selected text with Translate Shell" transfull silent execute "!urxvtc --hold -e trans :hu "+window.content.window.getSelection().toString() 
+command! transfull -description="Translate the selected text with Translate Shell" silent execute "!urxvtc --hold -e trans :hu "+window.content.window.getSelection().toString() 
+
+"Translate page with Google Translate
+command! transpage -description="Translate page with Google Translate" js window.content.window.location = "https://translate.google.com/translate?sl=auto&tl=en&js=y&hl=en&ie=UTF-8&u="+window.content.window.location
+
+"Lookup selected text in Sztaki
+command! sztaki -description="Lookup the selected text in a dictionary" js window.content.window.open("http://szotar.sztaki.hu/search?searchWord="+window.content.window.getSelection().toString(), '_blank')
 
 "Lookup selected text in Wikipedia
-command! -description="Lookup the selected text in wikipedia" wiki js window.content.window.open("https://en.wikipedia.org/wiki/"+window.content.window.getSelection().toString(), '_blank')
+command! wiki -description="Lookup the selected text in wikipedia" js window.content.window.open("https://en.wikipedia.org/wiki/"+window.content.window.getSelection().toString(), '_blank')
 
-"Lookup selected text in Wikipedia
-command! -description="Lookup the selected text in youtube" yt js window.content.window.open("https://www.youtube.com/results?search_query="+window.content.window.getSelection().toString(), '_blank')
-
+"Lookup selected text in Youtube
+command! yt -description="Lookup the selected text in youtube" js window.content.window.open("https://www.youtube.com/results?search_query="+window.content.window.getSelection().toString(), '_blank')
 
 " }}}
 " {{{   Autocommands
