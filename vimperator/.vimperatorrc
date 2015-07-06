@@ -95,22 +95,15 @@ nmap <leader>y :yt<CR>
 nmap Y :phlinkformat<CR>
 
 " }}}
-" {{{   Bookmarks
+" {{{   Go To (Bookmarks)
 "--------------------------------------------
 
 nmap gh :tabnew<CR>
-nmap gl :bmkLogout<CR>
-nmap gd :bmkGithubDotfiles<CR>
-nmap gs :bmkGithubScripts<CR>
-nmap gy :bmkYoutube<CR>
-nmap gp :bmkPort<CR>
-
-command! bmkLogout :open logout.hu/forum/index.html
-command! bmkGithubDotfiles :open github.com/spcmd/dotfiles
-command! bmkGithubScripts :open github.com/spcmd/Scripts
-command! bmkGithubthemes :open github.com/spcmd/themes
-command! bmkYoutube :open youtube.com/feed/subscriptions
-command! bmkPort :open http://www.port.hu/pls/tv/tv.prog?i_layout_id=1 
+nmap gl :open logout.hu/forum/index.html<CR>
+nmap gd :open github.com/spcmd/dotfiles<CR>
+nmap gs :open github.com/spcmd/Scripts<CR>
+nmap gy :open youtube.com/feed/subscriptions<CR>
+nmap gp :open http://www.port.hu/pls/tv/tv.prog?i_layout_id=1<CR>
 
 " }}}
 " {{{   Commands
@@ -135,10 +128,10 @@ command! ph -description="PH! Fórum kereső: keresés a topikban" -nargs=* js w
 command! phmy -description="PH! Fórum kereső: keresés a topikban (csak a saját hozzászólásaim közt)" -nargs=* js window.content.window.location = window.content.window.location.href.match( /^(http.+\/)[^\/]+$/ )[1] +'keres.php?type=-&stext=<args>&suser=spammer';
 
 "Translate the selected text with Translate Shell (https://github.com/soimort/translate-shell)
-command! trans -description="Translate the selected text with Translate Shell" execute "!trans -b :hu "+window.content.window.getSelection().toString() 
+command! trans -description="Translate the selected text with Translate Shell" execute "!trans -b :hu "+window.content.window.getSelection().toString()
 
 "Translate the selected text with Translate Shell (https://github.com/soimort/translate-shell)
-command! transfull -description="Translate the selected text with Translate Shell" silent execute "!urxvtc --hold -e trans :hu "+window.content.window.getSelection().toString() 
+command! transfull -description="Translate the selected text with Translate Shell" silent execute "!urxvtc --hold -e trans :hu "+window.content.window.getSelection().toString()
 
 "Translate page with Google Translate
 command! transpage -description="Translate page with Google Translate" js window.content.window.location = "https://translate.google.com/translate?sl=auto&tl=en&js=y&hl=en&ie=UTF-8&u="+window.content.window.location

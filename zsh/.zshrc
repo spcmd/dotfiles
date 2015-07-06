@@ -12,26 +12,14 @@
 #           https://gist.github.com/spcmd
 
 
-# {{{   Basic configuration
+# {{{   Basic Zsh configuration
 # -----------------------------------------------------
 
-# Path to your oh-my-zsh installation.
+# Path to oh-my-zsh installation
 export ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+# Zsh Theme (~/.oh-my-zsh/themes/)
 ZSH_THEME="spcmd"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-#ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-#COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -46,17 +34,44 @@ ZSH_THEME="spcmd"
 # Would you like to use another custom folder than $ZSH/custom?
 #ZSH_CUSTOM=~/.oh-my-zsh/custom
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# Plugins (~/.oh-my-zsh/plugins/*)
+# Custom plugins (~/.oh-my-zsh/custom/plugins/)
 plugins=(git zsh-syntax-highlighting)
+
+# oh-my-zsh
+# some default zsh scripts were disabled in ".oh-my-zsh/lib" by "oh-my-zsh/.gitignore"
+source $ZSH/oh-my-zsh.sh
+
+# Load dircolors
+if [[ -f ~/.dircolors ]]; then
+    eval $(dircolors ~/.dircolors)
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+fi
+
+# }}}
+# {{{   Environmental Variables
+# -----------------------------------------------------
+
+export TERM='rxvt-unicode-256color'
+export COLORTERM='rxvt-unicode-256color'
+export MEDIAPLAYER='mpv'
+export DIR_BACKUP=$HOME/Backup
+export DIR_SCRIPTS=$HOME/Scripts
+
+# Stop ranger from loading the both the default and the custom config files
+if [[ -f /usr/bin/ranger ]]; then
+    export RANGER_LOAD_DEFAULT_RC=FALSE
+fi
+
+# }}}
+# {{{   PATH Settings
+# -----------------------------------------------------
 
 # Setting the $PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games"
 
-if [[ -d $HOME/Scripts ]]; then
-    PATH=$PATH:$HOME/Scripts
+if [[ -d $DIR_SCRIPTS ]]; then
+    PATH=$PATH:$DIR_SCRIPTS
 fi
 
 if [[ -d $HOME/bin ]]; then
@@ -66,29 +81,6 @@ fi
 if [[ -d $HOME/.gem/ruby/2.2.0/bin ]]; then
     PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
 fi
-
-# oh-my-zsh
-source $ZSH/oh-my-zsh.sh
-
-#Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vim'
-fi
-
-# Terminal
-export TERM='rxvt-unicode-256color'
-export COLORTERM='rxvt-unicode-256color'
-
-# Stop ranger from loading the both the default and the custom config files
-if [[ -f /usr/bin/ranger ]]; then
-    export RANGER_LOAD_DEFAULT_RC=FALSE
-fi
-
-# Load dircolors
-eval $(dircolors ~/.dircolors)
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  
 
 # }}}
 # {{{   Vi mode
@@ -127,7 +119,7 @@ bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
 
 # }}}
-# {{{   Colors for functions 
+# {{{   Colors for functions
 # -----------------------------------------------------
 
 COLOR_DEFAULT=$(tput sgr0)
@@ -135,7 +127,7 @@ COLOR_TITLE=$(tput setaf 7; tput bold)
 COLOR_HL1=$(tput setaf 4; tput bold)
 
 # }}}
-# {{{   trashman (https://aur.archlinux.org/packages/trashman/) 
+# {{{   trashman (https://aur.archlinux.org/packages/trashman/)
 # -----------------------------------------------------
 
 # trashman: list
@@ -154,7 +146,7 @@ TP() {
 # trashman: restore
 TR() {
     echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Restore file from Trash:"
-    trash --list 
+    trash --list
     echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT To restore file(s), use the command: trash -r filename1 filename2 ..."
     cd ~/.local/share/Trash/files
 }
@@ -164,7 +156,7 @@ TE() {
     echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Emptying Trash, are you sure? (y = yes)"
     read answer_trash
     if [[ $answer_trash == "y" ]] || [[ $answer_trash == "Y" ]]; then
-        trash --empty 
+        trash --empty
         echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Done! Trash is empty."
     else
         echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Exit. Trash hasn't been emptied."
@@ -183,12 +175,20 @@ alias pacqs='pacman -Qs' # search in installed packages
 alias pacsync='sudo pacman -Syy' # update repo lists
 alias pacupd='sudo pacman -Syyu' # update & upgrade
 alias pacupg='sudo pacman -Syyu' # update & upgrade
-alias pacinfo='pacman -Qi $@' # show package info
 alias paclsup='sudo pacman -Syy && pacman -Qu' # show availabe updates
 alias paclspkg='pacman -Q' # list installed packages
 alias paclog='less /var/log/pacman.log' # show pacman log
 alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
 alias cdyaourtpkg='cd /var/cache/pacman/pkg-yaourt' # change to yaourt cache dir
+
+#pacman: show package info
+pacinfo() {
+    if [[ -z $@ ]]; then
+        echo "Error! No package name was given."
+    else
+        pacman -Qi $@
+    fi
+}
 
 # pacman: show package dependencies
 pacdep() { pacman -Qi "$@" | grep Depends }
@@ -206,7 +206,7 @@ pacpkg() {
     if [[ $1 == "" ]]; then
     echo "--------------------------------------------------------------------------"
     echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Listing $cache_dir:"
-        ls -l $cache_dir 
+        ls -l $cache_dir
     echo "--------------------------------------------------------------------------"
         if [[ -d $cache_dir_yaourt ]]; then
             echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Listing $cache_dir_yaourt:"
@@ -279,8 +279,8 @@ gitcheck() {
     echo -e "$COLOR_HL1::$COLOR_TITLE Checking:$COLOR_HL1 ~/git/themes $COLOR_DEFAULT"
     git -C ~/git/themes status
     echo -e "\n"
-    echo -e "$COLOR_HL1::$COLOR_TITLE Checking:$COLOR_HL1 ~/Scripts $COLOR_DEFAULT"
-    git -C ~/Scripts status
+    echo -e "$COLOR_HL1::$COLOR_TITLE Checking:$COLOR_HL1 $DIR_SCRIPTS $COLOR_DEFAULT"
+    git -C $DIR_SCRIPTS status
     echo -e "\n"
     echo -e "$COLOR_HL1::$COLOR_TITLE Checking:$COLOR_HL1 ~/dotfiles $COLOR_DEFAULT"
     git -C ~/dotfiles status
@@ -294,16 +294,31 @@ alias gcommit='git commit -m'
 alias gdiff='git diff'
 alias cdgit='cd ~/git'
 
-# alias if gitfile.sh exists and executable
-if [[ -x $HOME/Scripts/gitfile.sh ]]; then
-    alias gitfile='$HOME/Scripts/gitfile.sh'
+# gitfile.sh, download single file from Github (https://github.com/spcmd/Scripts/blob/master/gitfile.sh)
+# using with gitfile.js vimperator plugin (https://github.com/spcmd/dotfiles/blob/master/vimperator/.vimperator/plugin/gitfile.js)
+if [[ -x $DIR_SCRIPTS/gitfile.sh ]]; then
+    alias gitfile='$DIR_SCRIPTS/gitfile.sh'
 fi
+
+# Copy updated site content generated by jekyll to the site directory under git
+if [[ -x $DIR_SCRIPTS/gitsiteup.sh ]]; then
+    alias gitsiteup='$DIR_SCRIPTS/gitsiteup.sh'
+fi
+
+# copy preview images to img directories
+gitprevimg() {
+    for images in "$@"; do
+       cp $images ~/.xampp/spcmd/img
+       cp $images ~/.xampp/spcmd/_site/img
+       cp $images ~/git/spcmd.github.io/img
+   done
+}
 
 # }}}
 # {{{   Subtitles
 # -----------------------------------------------------
 
-# usage example: addic7ed "game of thrones" 
+# usage example: addic7ed "game of thrones"
 # quotes ("") needed around the the title!
 addic7ed() {
     xdg-open "http://www.addic7ed.com/search.php?search=$1&Submit=Search"
@@ -339,7 +354,7 @@ alias cfg-xinitrc='$EDITOR ~/.xinitrc'
 alias cfg-xresources='$EDITOR ~/.Xresources'
 alias cfg-zshrc='$EDITOR ~/.zshrc'
 
-# Reload config files 
+# Reload config files
 alias rld-bashrc='source ~/.bashrc && echo "source bashrc: done!"'
 alias rld-xresources='xrdb -load ~/.Xresources && echo "reload .Xresources: done!"'
 alias rld-zshrc='source ~/.zshrc && echo "source zshrc: done!"'
@@ -364,24 +379,35 @@ myip()  { curl -s curl -s http://whatismyip.akamai.com | grep -o "[[:digit:].]\+
 # url shortener
 urlshort() { wget -qO - "http://is.gd/create.php?format=simple&url=$1" }
 
-# alias if imgur-upload.sh exists and executable
-if [[ -x $HOME/Scripts/imgur-upload.sh ]]; then
-    alias imgur='$HOME/Scripts/imgur-upload.sh'
+# imgur (Bart's Bash Script Uploader, http://imgur.com/tools )
+if [[ -x $DIR_SCRIPTS/imgur-upload.sh ]]; then
+    alias imgur='$DIR_SCRIPTS/imgur-upload.sh'
 fi
 
-# bbtv
-if [[ -x $HOME/Scripts/bbtv.sh ]]; then
-    alias bbtv='$HOME/Scripts/bbtv.sh'
+# bbtv.sh (https://github.com/spcmd/Scripts/blob/master/bbtv.sh)
+if [[ -x $DIR_SCRIPTS/bbtv.sh ]]; then
+    alias bbtv='$DIR_SCRIPTS/bbtv.sh'
+fi
+
+# speedtest-cli (https://github.com/sivel/speedtest-cli | https://aur.archlinux.org/packages/speedtest-cli)
+if [[ -x /bin/speedtest-cli ]]; then
+    speedtest() {
+        if [[ $1 = "-s" ]]; then
+           speedtest-cli --list | grep "Hungary"
+        elif [[ $1 = "" ]]; then
+            speedtest-cli --server 3715 # DIGI server
+        fi
+    }
 fi
 
 # Online radios
-classfm() { mpv "http://icast.connectmedia.hu/4784/live.mp3" }
-rockradio-60() { mpv "http://listen.rockradio.com/public1/60srock.pls" }
-rockradio-80() { mpv "http://listen.rockradio.com/public1/80srock.pls" }
-rockradio-90() { mpv "http://listen.rockradio.com/public1/90srock.pls" }
-rockradio-bluesrock() { mpv "http://listen.rockradio.com/public1/bluesrock.pls" }
-rockradio-classicrock() { mpv "http://listen.rockradio.com/public1/classicrock.pls" }
-rockradio-poprock() { mpv "http://listen.rockradio.com/public1/poprock.pls" }
+classfm() { $MEDIAPLAYER "http://icast.connectmedia.hu/4784/live.mp3" }
+rockradio-60s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/60srock.pls" }
+rockradio-80s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/80srock.pls" }
+rockradio-90s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/90srock.pls" }
+rockradio-bluesrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/bluesrock.pls" }
+rockradio-classicrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/classicrock.pls" }
+rockradio-poprock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/poprock.pls" }
 
 # }}}
 # {{{   Misc/Other stuff
@@ -401,7 +427,7 @@ compton-opacity() {
     compton_config=~/.config/compton/compton.conf
     if [[ -e  $compton_config ]]; then
         # change the 4th line
-        sed -i "4s|.*|opacity-rule = [\"$1\:class_g = \'URxvt\' \&\& \!name = \'ranger\'\"];|" $compton_config 
+        sed -i "4s|.*|opacity-rule = [\"$1\:class_g = \'URxvt\' \&\& \!name = \'ranger\'\"];|" $compton_config
         echo -e "$COLOR_HL1::$COLOR_TITLE urxvt transparency in compton.conf has been set to:$COLOR_HL1 $1 $COLOR_DEFAULT"
         echo -e "$COLOR_HL1::$COLOR_TITLE Restart compton? (y = yes) $COLOR_DEFAULT"
         read compton_restart
@@ -416,20 +442,24 @@ compton-opacity() {
     fi
 }
 
-# Hint for compton opacity 
+# Hint for compton opacity
 hint-compton() {
     echo -e "$COLOR_HL1::$COLOR_TITLE hint-compton >$COLOR_DEFAULT the current opacity-rule in compton.conf:"
     awk 'NR==4' $HOME/.config/compton/compton.conf
 }
 
 # mpv: list watch later dir's content and select from them
-if [[ -x $HOME/Scripts/mpv-watch-later.sh ]]; then
-    alias mpv-watch-later='$HOME/Scripts/mpv-watch-later.sh'
+if [[ -x $DIR_SCRIPTS/mpv-watch-later.sh ]]; then
+    alias mpv-watch-later='$DIR_SCRIPTS/mpv-watch-later.sh'
 fi
 
 # create a backup copy
 cpbak() { for files in "$@"; do cp $files $files.bak; done }
-cpbakdir() { for files in "$@"; do cp $files ~/Backup; done }
+cpbakdir() { for files in "$@"; do cp $files $DIR_BACKUP; done }
+
+# copy filename to clipboard, copy filepath to clipboard
+copyname() { echo -n $1 | xsel -b }
+copypath() { realpath $1 | xsel -b }
 
 # list and grep, usage: lsgrep <keyword>
 lsgrep() {
@@ -459,8 +489,7 @@ alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by defau
 alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 alias lscon='nmcli con show'
 alias pingg='ping google.com'
-alias kpass='kpcli --kdb' 
-alias kmpv='pkill mpv' # for backgrounded radios
+alias kpass='kpcli --kdb'
 
 # Hint for watching dd progress
 hint-dd() {
