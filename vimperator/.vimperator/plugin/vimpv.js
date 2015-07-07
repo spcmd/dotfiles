@@ -13,19 +13,31 @@
 //
 // Vimpv is a javascript plugin for Vimperator
 // which allows you to follow/open video urls with mpv.
-// Tested on Youtube and Vimeo.
+// Tested with Youtube and Vimeo videos.
 //
 // Usage: the default key map is ;m
 // You can map the default key to something else,
 // for example, if you don't use the 'mark' command
 // you can map it to 'm' in your .vimperatorrc:
 // nmap m ;m
+//
+// For embedded and iframe videos the default keymap
+// is ;e
 
-hints.addMode ("m", "Vimpv Play video: ",
+hints.addMode ("m", "Vimpv > Play video URL: ",
 
      function(elem) {
          liberator.echomsg("Vimpv Playing: "+elem.title),
          liberator.execute("silent !mpv '"+ elem.href+"'")
      },
-     function () "// a"
+     function () "//a" //<a> html tags for video URLs
+);
+
+hints.addMode ("e", "Vimpv > Play embedded video: ",
+
+     function(elem) {
+         liberator.echomsg("Vimpv Playing: "+elem.src)
+         liberator.execute("silent !mpv '"+ elem.src+"'")
+     },
+     function () "//embed | //iframe" //<embed> and <iframe> html tags for embedded videos
 );
