@@ -200,13 +200,22 @@ autocmd BufRead .xinitrc set filetype=sh
 " {{{   Key mappings
 "--------------------------------------------
 
-imap űű <Esc>"+p
+"Paste from clipboard
+inoremap űű <Esc>"+p
+
+"New line with enter
 nnoremap <Enter> o<ESC>
 nnoremap <S-Enter> O<ESC>
-nmap ú :bnext<CR>
-nmap ő :bprevious<CR>
-nmap <leader>, :set list!<CR>
+
+"Switch buffers
+nnoremap ú :bnext<CR>
+nnoremap ő :bprevious<CR>
+
+"Folding
 nnoremap <space> za
+
+"Select ALL
+nnoremap <C-a> ggVG
 
 "Delete surrounding quotes, brackets etc.
 nnoremap <leader>d{ F{xf}x
@@ -238,18 +247,18 @@ nnoremap j gj
 "Move to the beginning/end of line
 nnoremap H ^
 nnoremap L $
-vmap H ^
-vmap L $
+vnoremap H ^
+vnoremap L $
 
 "Indenting
-nmap <S-tab> <<
-nmap <tab> >>
-vmap <S-tab> <gv
-vmap <tab> >gv
+nnoremap <S-tab> <<
+nnoremap <tab> >>
+vnoremap <S-tab> <gv
+vnoremap <tab> >gv
 
 "Faster navigation
-nmap <C-j> <C-d>
-nmap <C-k> <C-u>
+nnoremap <C-j> <C-d>
+nnoremap <C-k> <C-u>
 
 "Select the whole line in Visual mode
 vnoremap j j$
