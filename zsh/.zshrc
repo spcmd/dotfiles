@@ -54,6 +54,7 @@ fi
 
 export TERM='rxvt-unicode-256color'
 export COLORTERM='rxvt-unicode-256color'
+export BROWSER='firefox'
 export MEDIAPLAYER='mpv'
 export DIR_BACKUP=$HOME/Backup
 export DIR_SCRIPTS=$HOME/Scripts
@@ -177,6 +178,7 @@ alias pacupd='sudo pacman -Syyu' # update & upgrade
 alias pacupg='sudo pacman -Syyu' # update & upgrade
 alias paclsup='sudo pacman -Syy && pacman -Qu' # show availabe updates
 alias paclspkg='pacman -Q' # list installed packages
+alias paclsaurpkg='pacman -Qm' # list installed AUR packages
 alias paclog='less /var/log/pacman.log' # show pacman log
 alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
 alias cdyaourtpkg='cd /var/cache/pacman/pkg-yaourt' # change to yaourt cache dir

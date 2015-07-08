@@ -94,6 +94,10 @@ nmap <leader>y :yt<CR>
 "PH linkformat
 nmap Y :phlinkformat<CR>
 
+"Search for the highlighted text on page & copy to the clipboard
+nmap <leader>f :js var selectedText = window.content.window.getSelection().toString(); window.content.window.find(selectedText); util.copyToClipboard(selectedText, true); liberator.echo("Searching for highlighted text: "+selectedText+" (copied to the clipboard)")<CR>
+ 
+
 " }}}
 " {{{   Go To (Bookmarks)
 "--------------------------------------------
@@ -144,6 +148,9 @@ command! wiki -description="Lookup the selected text in wikipedia" js window.con
 
 "Lookup selected text in Youtube
 command! yt -description="Lookup the selected text in youtube" js window.content.window.open("https://www.youtube.com/results?search_query="+window.content.window.getSelection().toString(), '_blank')
+
+"Lookup selected text in Urbandictionary
+command! urbandict -description="Lookup the selected text in urbandictionary" js window.content.window.open("http://www.urbandictionary.com/define.php?term="+window.content.window.getSelection().toString(), '_blank')
 
 " }}}
 " {{{   Autocommands

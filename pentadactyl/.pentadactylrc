@@ -1,0 +1,54 @@
+
+
+set hintkeys=hjklasdfgrtzu
+set titlestring=
+set editor="gvim -f"
+set scrollsteps=5
+set timeout
+set timeoutlen=10
+
+"Important! 
+"Vimperator's key map format is slow in Pentadactyl
+"Instead of: nmap <keys> :command<CR>
+"use: nmap -ex <keys> command
+"See: https://www.reddit.com/r/vim/comments/2xnp6t/what_can_pentadactyl_do_that_vimperator_cant/cp2ds59
+
+"Do not paste&search
+map p <Nop>
+
+"Faster scrolling
+nmap -builtin j 3j
+nmap -builtin k 3k
+nmap -builtin <C-j> <C-d>
+nmap -builtin <C-k> <C-u>
+
+"Tabs
+nmap -ex ú :tabnext
+nmap -ex ő :tabprevious
+nmap -ex á :tabmove +1
+nmap -ex é :tabmove -1
+
+"History navigation
+nmap -ex , :back
+nmap -ex . :forward
+
+"Quick help
+nmap h :help<Space>
+
+"Source this config
+command! RR -description="Source .pentadactylrc" source ~/.pentadactylrc
+
+" {{{   Go To (Bookmarks)
+"--------------------------------------------
+
+nmap -ex gh :tabopen file:///home/spcmd/.mozilla/firefox/ol49vr5b.default/customnewtab/newtab.html
+nmap -ex gl :open logout.hu/forum/index.html
+nmap -ex gd :open github.com/spcmd/dotfiles
+nmap -ex gs :open github.com/spcmd/Scripts
+nmap -ex gy :open youtube.com/feed/subscriptions
+nmap -ex gp :open http://www.port.hu/pls/tv/tv.prog?i_layout_id=1
+
+" }}}
+
+" example for adding hint mode
+js hints.addMode('d','Echo destination of element',function(elem) dactyl.echo(elem.href));

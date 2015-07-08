@@ -193,6 +193,7 @@ autocmd FocusLost * silent! wa
 "Syntax highlight
 autocmd BufRead .rtorrent.rc set filetype=sh
 autocmd BufRead .vimperatorrc set filetype=vim
+autocmd BufRead .pentadactylrc set filetype=vim
 autocmd BufRead *.vimp set filetype=vim
 autocmd BufRead .xinitrc set filetype=sh
 
