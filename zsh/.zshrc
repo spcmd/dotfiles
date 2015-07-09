@@ -12,7 +12,7 @@
 #           https://gist.github.com/spcmd
 
 
-# {{{   Basic Zsh configuration
+# {{{   ZSH Basic config 
 # -----------------------------------------------------
 
 # Path to oh-my-zsh installation
@@ -49,9 +49,10 @@ if [[ -f ~/.dircolors ]]; then
 fi
 
 # }}}
-# {{{   Environmental Variables
+# {{{   ENV Variables
 # -----------------------------------------------------
 
+export EDITOR='vim'
 export TERM='rxvt-unicode-256color'
 export COLORTERM='rxvt-unicode-256color'
 export BROWSER='firefox'
@@ -84,7 +85,7 @@ if [[ -d $HOME/.gem/ruby/2.2.0/bin ]]; then
 fi
 
 # }}}
-# {{{   Vi mode
+# {{{   Vi mode for Zsh
 # -----------------------------------------------------
 
 # Enable Vi/Vim mode
@@ -128,41 +129,125 @@ COLOR_TITLE=$(tput setaf 7; tput bold)
 COLOR_HL1=$(tput setaf 4; tput bold)
 
 # }}}
-# {{{   trashman (https://aur.archlinux.org/packages/trashman/)
+# {{{   Basic command hacks
 # -----------------------------------------------------
 
-# trashman: list
-TL() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Listing Trash:"
-    trash --list
+# Always verbose core commands
+for command in cp rm mv mkdir chmod chown rename; do
+    alias $command="$command -v"
+done
+
+# Create a backup copy
+cpbak() { for files in "$@"; do cp $files $files.bak; done }
+cpbakdir() { for files in "$@"; do cp $files $DIR_BACKUP; done }
+
+# Copy filename to clipboard, copy filepath to clipboard
+copyname() { echo -n $1 | xsel -b }
+copypath() { realpath $1 | xsel -b }
+
+# List and grep, usage: lsgrep <keyword>
+lsgrep() {
+	keyword=$(echo "$@" |  sed 's/ /.*/g')
+	ls -la | grep -iE $keyword
 }
 
-# trashman: put
-TP() {
-    trash $@
-    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Files have been put to Trash:"
-    printf '%s\n' "$@"
-}
+# Man and gep, usage: mangrep <command name> <keyword>
+mangrep() { man $1 | grep $2 }
 
-# trashman: restore
-TR() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Restore file from Trash:"
-    trash --list
-    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT To restore file(s), use the command: trash -r filename1 filename2 ..."
-    cd ~/.local/share/Trash/files
+# Colored man pages (https://wiki.archlinux.org/index.php/Man_page#Using_less_.28Recommended.29)
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
 }
+# }}}
+# {{{   Compton 
+# -----------------------------------------------------
 
-# trashman: empty
-TE() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Emptying Trash, are you sure? (y = yes)"
-    read answer_trash
-    if [[ $answer_trash == "y" ]] || [[ $answer_trash == "Y" ]]; then
-        trash --empty
-        echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Done! Trash is empty."
+# Set urxvt's transparency in compton's config
+compton-opacity() {
+    compton_config=~/.config/compton/compton.conf
+    if [[ -e  $compton_config ]]; then
+        # change the 4th line
+        sed -i "4s|.*|opacity-rule = [\"$1\:class_g = \'URxvt\' \&\& \!name = \'ranger\'\"];|" $compton_config
+        echo -e "$COLOR_HL1::$COLOR_TITLE urxvt transparency in compton.conf has been set to:$COLOR_HL1 $1 $COLOR_DEFAULT"
+        echo -e "$COLOR_HL1::$COLOR_TITLE Restart compton? (y = yes) $COLOR_DEFAULT"
+        read compton_restart
+        if [[ $compton_restart == "y" ]] || [[ $compton_restart == "Y" ]]; then
+            pkill compton &&
+            sleep 1s &&
+            compton -b --config $compton_config &&
+            echo "Compton restart: done!"
+        fi
     else
-        echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Exit. Trash hasn't been emptied."
+        echo -e "$COLOR_HL1::$COLOR_TITLE Error! $compton_config doesn't exist. $COLOR_DEFAULT"
     fi
 }
+
+# Hint for compton opacity
+hint-compton() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE hint-compton >$COLOR_DEFAULT the current opacity-rule in compton.conf:"
+    awk 'NR==4' $HOME/.config/compton/compton.conf
+}
+
+# }}}
+# {{{   Mediaplayer
+# -----------------------------------------------------
+
+# mpv: list watch later dir's content and select from them
+if [[ -x $DIR_SCRIPTS/mpv-watch-later.sh ]]; then
+    alias mpv-watch-later='$DIR_SCRIPTS/mpv-watch-later.sh'
+fi
+
+# Online radios
+classfm() { $MEDIAPLAYER "http://icast.connectmedia.hu/4784/live.mp3" }
+rockradio-60s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/60srock.pls" }
+rockradio-80s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/80srock.pls" }
+rockradio-90s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/90srock.pls" }
+rockradio-bluesrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/bluesrock.pls" }
+rockradio-classicrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/classicrock.pls" }
+rockradio-poprock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/poprock.pls" }
+
+# }}}
+# {{{   Config Files
+# -----------------------------------------------------
+
+# Edit config files
+alias cfg-awesome='$EDITOR ~/.config/awesome/rc.lua'
+alias cfg-bashrc='$EDITOR ~/.bashrc'
+alias cfg-dircolors='$EDITOR ~/.dircolors'
+alias cfg-dirbookmarks='$EDITOR ~/.dirbookmarks'
+alias cfg-fstab='sudo $EDITOR /etc/fstab'
+alias cfg-grub='sudo $EDITOR /etc/default/grub'
+alias cfg-hosts='sudo $EDITOR /etc/hosts'
+alias cfg-pacman='sudo $EDITOR /etc/pacman.conf'
+alias cfg-pacmirror='sudo $EDITOR /etc/pacman.d/mirrorlist'
+alias cfg-ranger='$EDITOR ~/.config/ranger/rc.conf'
+alias cfg-ranger-rifle='$EDITOR ~/.config/ranger/rifle.conf'
+alias cfg-rtorrent='$EDITOR ~/.rtorrent.rc'
+alias cfg-vimrc='$EDITOR ~/.vimrc'
+alias cfg-vimrc-root='sudo $EDITOR /root/.vimrc'
+alias cfg-vimperatorrc='$EDITOR ~/.vimperatorrc'
+alias cfg-xinitrc='$EDITOR ~/.xinitrc'
+alias cfg-xresources='$EDITOR ~/.Xresources'
+alias cfg-zshrc='$EDITOR ~/.zshrc'
+
+# Reload config files
+alias rld-bashrc='source ~/.bashrc && echo "source bashrc: done!"'
+alias rld-xresources='xrdb -load ~/.Xresources && echo "reload .Xresources: done!"'
+alias rld-zshrc='source ~/.zshrc && echo "source zshrc: done!"'
+alias RR='rld-zshrc'
+alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
+
+# To-do list
+if [[ -f $HOME/Documents/TODO.todo ]]; then
+    alias todo='$EDITOR $HOME/Documents/TODO.todo'
+fi
 
 # }}}
 # {{{   Pacman
@@ -179,7 +264,6 @@ alias pacupg='sudo pacman -Syyu' # update & upgrade
 alias paclsup='sudo pacman -Syy && pacman -Qu' # show availabe updates
 alias paclspkg='pacman -Q' # list installed packages
 alias paclsaurpkg='pacman -Qm' # list installed AUR packages
-alias paclog='less /var/log/pacman.log' # show pacman log
 alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
 alias cdyaourtpkg='cd /var/cache/pacman/pkg-yaourt' # change to yaourt cache dir
 
@@ -257,6 +341,48 @@ pacmirror() {
     fi
 }
 
+# pacman: log 
+# Based on: https://bbs.archlinux.org/viewtopic.php?pid=1281605#p1281605
+paclog(){
+	LOGFILE="/var/log/pacman.log"
+	case "$1" in
+		-h)	# Show help 
+		    echo "paclog"
+            echo "Usage: paclog [-option]"
+            echo ""
+            echo "\033[1;34m      -i\033[0m                Show log entries for installed."
+            echo "\033[1;34m      -r\033[0m                Show log entries for removed."
+            echo "\033[1;34m      -u\033[0m                Show log entries for upgraded."
+            echo "\033[1;34m      -m\033[0m                Show log entries for messages."
+            echo "\033[1;34m      -S <keyword>\033[0m      Search for <keyword> in the log entries."
+            echo "\033[1;34m      -h\033[0m                This help."
+            echo ""
+            echo "Without an option, the \033[1;34mpaclog\033[0m command shows the entire log."
+		    ;;
+		-i) # Show installed
+			grep 'installed' $LOGFILE | grep -v 'ALPM-SCRIPTLET' | less
+		    ;;
+		-r) # Show removed
+			grep 'removed' $LOGFILE | grep -v 'ALPM-SCRIPTLET' | less
+		    ;;
+		-u) # Show upgraded
+			grep 'upgraded' $LOGFILE | grep -v 'ALPM-SCRIPTLET' | less
+		    ;;
+		-S) # Search in history
+			grep $2 $LOGFILE | less
+		    ;;
+		-m) # Show messages 
+			grep 'ALPM-SCRIPTLET' -B 1 $LOGFILE | less
+			;;
+		*)  # Show the entire log
+		    less $LOGFILE 
+		esac
+}
+
+# pacman: last upgrade date/time
+# source: https://bbs.archlinux.org/viewtopic.php?pid=1345525#p1345525
+paclastupg() { awk '/upgraded/ {line=$0;} END { $0=line; gsub(/[\[\]]/,"",$0); printf "\033[1;34mPacman > Last Upgraded:\033[0m %s %s\n",$1,$2; exit;}' /var/log/pacman.log }
+
 # show hints/reminders for my pacman alises and functions
 hint-pacman() {
     echo "--------------------------------------------------------------------------"
@@ -317,58 +443,6 @@ gitprevimg() {
 }
 
 # }}}
-# {{{   Subtitles
-# -----------------------------------------------------
-
-# usage example: addic7ed "game of thrones"
-# quotes ("") needed around the the title!
-addic7ed() {
-    xdg-open "http://www.addic7ed.com/search.php?search=$1&Submit=Search"
-}
-
-felirat() {
-    xdg-open "http://www.feliratok.info/?search=$1&nyelv=Angol"
-
-alias sub-a='addic7ed'
-alias sub-f='felirat'
-}
-
-# }}}
-# {{{   Config Files
-# -----------------------------------------------------
-
-# Edit config files
-alias cfg-awesome='$EDITOR ~/.config/awesome/rc.lua'
-alias cfg-bashrc='$EDITOR ~/.bashrc'
-alias cfg-dircolors='$EDITOR ~/.dircolors'
-alias cfg-fstab='sudo $EDITOR /etc/fstab'
-alias cfg-grub='sudo $EDITOR /etc/default/grub'
-alias cfg-hosts='sudo $EDITOR /etc/hosts'
-alias cfg-pacman='sudo $EDITOR /etc/pacman.conf'
-alias cfg-pacmirror='sudo $EDITOR /etc/pacman.d/mirrorlist'
-alias cfg-ranger='$EDITOR ~/.config/ranger/rc.conf'
-alias cfg-ranger-rifle='$EDITOR ~/.config/ranger/rifle.conf'
-alias cfg-rtorrent='$EDITOR ~/.rtorrent.rc'
-alias cfg-vimrc='$EDITOR ~/.vimrc'
-alias cfg-vimrc-root='sudo $EDITOR /root/.vimrc'
-alias cfg-vimperatorrc='$EDITOR ~/.vimperatorrc'
-alias cfg-xinitrc='$EDITOR ~/.xinitrc'
-alias cfg-xresources='$EDITOR ~/.Xresources'
-alias cfg-zshrc='$EDITOR ~/.zshrc'
-
-# Reload config files
-alias rld-bashrc='source ~/.bashrc && echo "source bashrc: done!"'
-alias rld-xresources='xrdb -load ~/.Xresources && echo "reload .Xresources: done!"'
-alias rld-zshrc='source ~/.zshrc && echo "source zshrc: done!"'
-alias RR='rld-zshrc'
-alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
-
-# To-do list
-if [[ -f $HOME/Documents/TODO.todo ]]; then
-    alias todo='$EDITOR $HOME/Documents/TODO.todo'
-fi
-
-# }}}
 # {{{ Net utils / Web service related
 # -----------------------------------------------------
 
@@ -393,88 +467,135 @@ fi
 
 # speedtest-cli (https://github.com/sivel/speedtest-cli | https://aur.archlinux.org/packages/speedtest-cli)
 if [[ -x /bin/speedtest-cli ]]; then
-    speedtest() {
-        if [[ $1 = "-s" ]]; then
-           speedtest-cli --list | grep "Hungary"
-        elif [[ $1 = "" ]]; then
-            speedtest-cli --server 3715 # DIGI server
-        fi
+    speedtest(){
+        case "$1" in
+            -h)	# Show help 
+                echo "Speedtest (a wrapper for speedtest-cli)"
+                echo "Usage: speedtest [-option]"
+                echo ""
+                echo "\033[1;34m         -l\033[0m Show hungarian servers."
+                echo "\033[1;34m         -a\033[0m Show All servers."
+                echo "\033[1;34m         -s <number>\033[0m Connect to a server with a number from the listed servers."
+                echo "\033[1;34m         -h\033[0m This help."
+                echo ""
+                echo "Without an option, the \033[1;34mspeedtest\033[0m command connects to server 3715 (DIGI)"
+                echo "For full feature, use the \033[1;34mspeedtest-cli \033[0mcommand, see \033[1;34mspeedtest-cli -h \033[0mfor help. "
+                ;;
+            -l) # Show hungarian servers
+                speedtest-cli --list | grep "Hungary"
+                ;;
+            -a) # Show All servers
+                speedtest-cli --list
+                ;;
+            -s) # Connect to a sever
+                speedtest-cli --server $2
+                ;;
+            *)  # Connect to DIGI server
+                speedtest-cli --server 3715
+            esac
     }
 fi
 
-# Online radios
-classfm() { $MEDIAPLAYER "http://icast.connectmedia.hu/4784/live.mp3" }
-rockradio-60s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/60srock.pls" }
-rockradio-80s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/80srock.pls" }
-rockradio-90s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/90srock.pls" }
-rockradio-bluesrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/bluesrock.pls" }
-rockradio-classicrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/classicrock.pls" }
-rockradio-poprock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/poprock.pls" }
-
 # }}}
-# {{{   Misc/Other stuff
+# {{{   Trashman: use trash from CLI (https://aur.archlinux.org/packages/trashman/)
 # -----------------------------------------------------
 
-# Always verbose core commands
-for command in cp rm mv mkdir chmod chown rename; do
-    alias $command="$command -v"
-done
+# trashman: list
+TL() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Listing Trash:"
+    trash --list
+}
 
-# List all custom function and alias names from this .zshrc
-lsmyfunc() {cat ~/.zshrc | cut -d "{" -f 1 | sed "s/ //g" | grep "()"}
-lsmyalias() {cat ~/.zshrc | cut -d "{" -f 1 | sed -e "s/^[ \t]*//" | grep -v "^#" | grep alias}
+# trashman: put
+TP() {
+    trash $@
+    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Files have been put to Trash:"
+    printf '%s\n' "$@"
+}
 
-# Set urxvt's transparency in compton's config
-compton-opacity() {
-    compton_config=~/.config/compton/compton.conf
-    if [[ -e  $compton_config ]]; then
-        # change the 4th line
-        sed -i "4s|.*|opacity-rule = [\"$1\:class_g = \'URxvt\' \&\& \!name = \'ranger\'\"];|" $compton_config
-        echo -e "$COLOR_HL1::$COLOR_TITLE urxvt transparency in compton.conf has been set to:$COLOR_HL1 $1 $COLOR_DEFAULT"
-        echo -e "$COLOR_HL1::$COLOR_TITLE Restart compton? (y = yes) $COLOR_DEFAULT"
-        read compton_restart
-        if [[ $compton_restart == "y" ]] || [[ $compton_restart == "Y" ]]; then
-            pkill compton &&
-            sleep 1s &&
-            compton -b --config $compton_config &&
-            echo "Compton restart: done!"
-        fi
+# trashman: restore
+TR() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Restore file from Trash:"
+    trash --list
+    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT To restore file(s), use the command: trash -r filename1 filename2 ..."
+    cd ~/.local/share/Trash/files
+}
+
+# trashman: empty
+TE() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Emptying Trash, are you sure? (y = yes)"
+    read answer_trash
+    if [[ $answer_trash == "y" ]] || [[ $answer_trash == "Y" ]]; then
+        trash --empty
+        echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Done! Trash is empty."
     else
-        echo -e "$COLOR_HL1::$COLOR_TITLE Error! $compton_config doesn't exist. $COLOR_DEFAULT"
+        echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Exit. Trash hasn't been emptied."
     fi
 }
 
-# Hint for compton opacity
-hint-compton() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE hint-compton >$COLOR_DEFAULT the current opacity-rule in compton.conf:"
-    awk 'NR==4' $HOME/.config/compton/compton.conf
+# }}}
+# {{{   Dirbookmarks: mark directories & quick change dir from CLI (Based on: https://bbs.archlinux.org/viewtopic.php?pid=1318927#p1318927)
+# -----------------------------------------------------
+
+dirbookmarks() {
+    case "$1" in
+            -h|*)# Show help 
+                echo "dirbookmarks are stored in ~/.dirbookmarks"
+                echo "Commands:"
+                echo ""
+                echo "\033[1;34m         markdir <bookmarkname>                                 \033[0m Add current directory to bookmarks with name <bookmarkname>"
+                echo "\033[1;34m         unmarkdir <bookmarkname> [anotherbookmarkname...]      \033[0m Remove <bookmarkname> from bookmarks. You can specify multiple names in one command."
+                echo "\033[1;34m         lsmarks                                                \033[0m List bookmarked directories."
+                echo "\033[1;34m         cdm <bookmarkname>                                     \033[0m Change to bookmarked directory."
+                ;;
+    esac
 }
 
-# mpv: list watch later dir's content and select from them
-if [[ -x $DIR_SCRIPTS/mpv-watch-later.sh ]]; then
-    alias mpv-watch-later='$DIR_SCRIPTS/mpv-watch-later.sh'
-fi
-
-# create a backup copy
-cpbak() { for files in "$@"; do cp $files $files.bak; done }
-cpbakdir() { for files in "$@"; do cp $files $DIR_BACKUP; done }
-
-# copy filename to clipboard, copy filepath to clipboard
-copyname() { echo -n $1 | xsel -b }
-copypath() { realpath $1 | xsel -b }
-
-# list and grep, usage: lsgrep <keyword>
-lsgrep() {
-	keyword=$(echo "$@" |  sed 's/ /.*/g')
-	ls -la | grep -iE $keyword
+markdir() {
+    if [[ ! -z $1 ]] && [[ $1 != "-h" ]]; then
+        echo "$1|$(pwd)" >> $HOME/.dirbookmarks
+    elif [[ $1 = "-h" ]]; then
+        dirbookmarks # show help
+    else
+        echo "markdir Error: you have to name the bookmark! Usage:\033[1;34m markdir <bookmarkname>\033[0m"
+    fi
 }
 
-# man and gep, usage: mangrep <command name> <keyword>
-mangrep() { man $1 | grep $2 }
+unmarkdir() {
+    if [[ ! -z $1 ]] && [[ $1 != "-h" ]]; then
+        for marks in $@; do
+            sed -i "/^$marks|/d" $HOME/.dirbookmarks
+        done
+    elif [[ $1 = "-h" ]]; then
+        dirbookmarks # show help
+    else
+        echo -e "unmarkdir Error: you have to specify a bookmark name which you want to delete! Usage: \033[1;34munmarkdir <bookmarkname> [anotherbookmarkname...]\033[0m \nFor listing, use the \033[1;34mlsmarks \033[0mcommand."
+    fi
+}
 
-# Aliases
-alias q='exit'
-alias quit='exit'
+lsmarks() {
+    echo -e "Listing directories saved to .dirbookmarks:\n" 
+    awk -F "|" -v OFS="\033[0;36m ---> \033[0m" ' $1="\t\033[1;34m"$1 '  $HOME/.dirbookmarks
+}
+
+cdm() {
+	dir=$(grep $1 $HOME/.dirbookmarks)
+	dir=${dir/*|/}
+	cd $dir
+}
+
+# completion is zsh only!
+function _completemarks {
+	reply=($(sed 's/\(.*\)|.*/\1/' $HOME/.dirbookmarks))
+}
+compctl -K _completemarks cdm
+compctl -K _completemarks unmarkdir
+
+# }}}
+# {{{  Other Aliases and Functions 
+# -----------------------------------------------------
+
+alias q=' exit' # do not store the command in the history 
 alias ls='ls --color=auto -A'
 alias lsl='ls -lA'
 alias lf='ls -lA1p $@ | grep -v "\/$"' # list files only
@@ -499,6 +620,10 @@ hint-dd() {
     echo -e "\tdd bs=4M count=5 if=/dev/random of=/dev/null & pid=\$! ; watch -n 3 kill -USR1 \$pid"
 }
 
+# List all custom function and alias names from this .zshrc
+lsmyfunc() {cat ~/.zshrc | cut -d "{" -f 1 | sed "s/ //g" | grep "()"}
+lsmyalias() {cat ~/.zshrc | cut -d "{" -f 1 | sed -e "s/^[ \t]*//" | grep -v "^#" | grep alias}
+
 # APT
 if [[ -x /usr/bin/apt-get ]]; then
     apt-update() { sudo apt-get update && notify-send -i terminal "Update finished!" }
@@ -507,17 +632,5 @@ if [[ -x /usr/bin/apt-get ]]; then
     alias apt-remove='sudo apt-get remove --purge'
     alias apt-ppa='sudo add-apt-repository'
 fi
-
-# Colored man pages (https://wiki.archlinux.org/index.php/Man_page#Using_less_.28Recommended.29)
-man() {
-    env LESS_TERMCAP_mb=$'\E[01;31m' \
-    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
-    LESS_TERMCAP_me=$'\E[0m' \
-    LESS_TERMCAP_se=$'\E[0m' \
-    LESS_TERMCAP_so=$'\E[38;5;246m' \
-    LESS_TERMCAP_ue=$'\E[0m' \
-    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-    man "$@"
-}
 
 # }}}
