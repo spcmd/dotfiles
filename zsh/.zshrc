@@ -137,8 +137,18 @@ for command in cp rm mv mkdir chmod chown rename; do
     alias $command="$command -v"
 done
 
-# Create a backup copy
+# History grep
+hist() {
+    if [[ "$1" != "" ]]; then
+        fc -l 1 | grep "$1"
+    else
+        fc -l 1 
+    fi
+}
+
+# Create a backup copy in the current directory
 cpbak() { for files in "$@"; do cp $files $files.bak; done }
+# Create a backup copy in the Backup dir 
 cpbakdir() { for files in "$@"; do cp $files $DIR_BACKUP; done }
 
 # Copy filename to clipboard, copy filepath to clipboard
@@ -148,11 +158,11 @@ copypath() { realpath $1 | xsel -b }
 # List and grep, usage: lsgrep <keyword>
 lsgrep() {
 	keyword=$(echo "$@" |  sed 's/ /.*/g')
-	ls -la | grep -iE $keyword
+	ls -la | grep -iE --color=auto $keyword
 }
 
-# Man and gep, usage: mangrep <command name> <keyword>
-mangrep() { man $1 | grep $2 }
+# Man and grep. Usage: mangrep <command name> <keyword>
+mangrep() { man $1 | grep --color=auto $2 }
 
 # Colored man pages (https://wiki.archlinux.org/index.php/Man_page#Using_less_.28Recommended.29)
 man() {
@@ -368,7 +378,7 @@ paclog(){
 		-u) # Show upgraded
 			grep 'upgraded' $LOGFILE | grep -v 'ALPM-SCRIPTLET' | less
 		    ;;
-		-S) # Search in history
+		-S) # Search in log
 			grep $2 $LOGFILE | less
 		    ;;
 		-m) # Show messages 
@@ -613,6 +623,18 @@ alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 alias lscon='nmcli con show'
 alias pingg='ping google.com'
 alias kpass='kpcli --kdb'
+
+# Rsync to external Backup HDD
+if [[ -x /bin/rsync ]]; then
+    rsync-Documents() { 
+        RACK_BACKUP_DIR='/media/320GB_Rack/00Backup_spcmd/'
+        if [[ -d $RACK_BACKUP_DIR ]]; then
+            rsync -avr $HOME/Documents/ $RACK_BACKUP_DIR/Documents/
+        else 
+            echo "rsync-Documents Error! \033[1;34m$RACK_BACKUP_DIR \033[0mnot found. Is it mounted? Or has the directory changed?"
+        fi
+    }
+fi
 
 # Hint for watching dd progress
 hint-dd() {

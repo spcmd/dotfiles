@@ -59,6 +59,9 @@ inoremap <C-e> <C-[>
 "Quick help
 nnoremap h :help<Space>
 
+"Quick Bookmarks
+nnoremap b :bmarks<Space>
+
 "Context menu
 nnoremap cc ;c
 
@@ -108,6 +111,12 @@ nmap gd :open github.com/spcmd/dotfiles<CR>
 nmap gs :open github.com/spcmd/Scripts<CR>
 nmap gy :open youtube.com/feed/subscriptions<CR>
 nmap gp :open http://www.port.hu/pls/tv/tv.prog?i_layout_id=1<CR>
+
+nmap gL :tabopen logout.hu/forum/index.html<CR>
+nmap gD :tabopen github.com/spcmd/dotfiles<CR>
+nmap gS :tabopen github.com/spcmd/Scripts<CR>
+nmap gY :tabopen youtube.com/feed/subscriptions<CR>
+nmap gP :tabopen http://www.port.hu/pls/tv/tv.prog?i_layout_id=1<CR>
 
 " }}}
 " {{{   Commands
