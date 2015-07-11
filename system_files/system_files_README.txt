@@ -1,6 +1,9 @@
-# ===================
+# ==================================
 # Setup system files:
-# ===================
+# ==================================
+# Do NOT use stow in this directory!
+# Setup with the cp commands below!
+# ==================================
 
 # Setup root's minimal .vimrc
 sudo cp ~/dotfiles/system_files/root-vimrc /root/.vimrc

@@ -382,7 +382,7 @@ paclog(){
 			grep $2 $LOGFILE | less
 		    ;;
 		-m) # Show messages 
-			grep 'ALPM-SCRIPTLET' -B 1 $LOGFILE | less
+			grep 'ALPM-SCRIPTLET' -B 1 $LOGFILE | less 
 			;;
 		*)  # Show the entire log
 		    less $LOGFILE 
@@ -623,6 +623,9 @@ alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 alias lscon='nmcli con show'
 alias pingg='ping google.com'
 alias kpass='kpcli --kdb'
+
+# vless (use vim as a pager)
+vless() { vim -u $HOME/.vimlessrc $1 }
 
 # Rsync to external Backup HDD
 if [[ -x /bin/rsync ]]; then

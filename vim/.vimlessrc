@@ -1,0 +1,28 @@
+"                                      _
+"         ___ _ __   ___ _ __ ___   __| |
+"        / __| '_ \ / __| '_ ` _ \ / _` |
+"        \__ | |_) | (__| | | | | | (_| |
+"        |___| .__/ \___|_| |_| |_|\__,_|
+"             |_|
+"
+"                  .vimlessrc
+"               Created by: spcmd
+"           http://spcmd.github.io
+"           https://github.com/spcmd
+"           https://gist.github.com/spcmd
+"
+" Use vim as a PAGER (like less)
+
+set nocompatible
+set laststatus=0
+set cmdheight=1
+set nomodifiable
+set readonly
+set background=dark
+syntax enable
+nmap q :q!<CR>
+nmap <Space> <C-d>
+nmap <C-j> <C-d>
+nmap <C-k> <C-u>
+
+" vim:syntax=vim filetype=vim:

@@ -121,6 +121,7 @@ nmap gP :tabopen http://www.port.hu/pls/tv/tv.prog?i_layout_id=1<CR>
 " }}}
 " {{{   Commands
 "--------------------------------------------
+command! CC -description="Open the about:config" :tabopen about:config
 
 "Quick open Addons
 command! AA -description="Open addons page (custom command)" :tabopen about:addons
