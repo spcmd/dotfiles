@@ -433,7 +433,7 @@ globalkeys = awful.util.table.join(
                                           end),
 
     -- Run Applications
-    awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("firefox") end),
+    awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/firefox-38-esr/firefox") end),
     awful.key({ modkey, "Mod1"    }, "s", function () awful.util.spawn("spotify") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
     awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -t ranger -e ranger") end),
