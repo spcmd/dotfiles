@@ -116,7 +116,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ " term", "🌍 web", "files", " mus", "⇣torr", "⛬misc", 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag({ " term", "🌍 web", " files", " mus", " torr", " misc", " mail", 8, 9 }, s, layouts[1])
 end
 
 -- Menu
@@ -438,6 +438,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
     awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -t ranger -e ranger") end),
     awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(terminal .. " -t rtorrent -e rtorrent") end),
+    awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -t mutt -e mutt") end),
 
     -- Backlight
     awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --down") end),
@@ -636,6 +637,9 @@ awful.rules.rules = {
     { rule_any = { class = { "Gimp", "Inkscape", "libreoffice", "VirtualBox", "Gtkpod" } },
         properties = { tag = tags[1][6] } },
 
+    -- Tag 7 rules
+    { rule_any = { name = { "mutt" } },
+        properties = { tag = tags[1][7] } },
 
 }
 
@@ -735,6 +739,14 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+-- Mutt urgent & Notify about new mail
+-- http://netbuz.org/blog/2011/11/x-bells-and-urgency-hints/
+--client.connect_signal("property::urgent", function(c)
+    --if c.urgent and c.name == "mutt" then
+        --awful.util.spawn_with_shell("echo '1' > ~/.newmail-awesome")
+    --end
+--end)
 
 -- Disabled clients bo be urgent by default
 -- https://awesome.naquadah.org/wiki/FAQ#Why_are_new_clients_urgent_by_default.3F

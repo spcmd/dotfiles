@@ -57,6 +57,8 @@ export TERM='rxvt-unicode-256color'
 export COLORTERM='rxvt-unicode-256color'
 export BROWSER='firefox'
 export MEDIAPLAYER='mpv'
+export IMAGER='feh'
+export PDFER='zathura'
 export DIR_BACKUP=$HOME/Backup
 export DIR_SCRIPTS=$HOME/Scripts
 
@@ -236,6 +238,7 @@ alias cfg-firefox='$EDITOR ~/.config/firefox/user.js'
 alias cfg-fstab='sudo $EDITOR /etc/fstab'
 alias cfg-grub='sudo $EDITOR /etc/default/grub'
 alias cfg-hosts='sudo $EDITOR /etc/hosts'
+alias cfg-muttrc='$EDITOR ~/.muttrc'
 alias cfg-pacman='sudo $EDITOR /etc/pacman.conf'
 alias cfg-pacmirror='sudo $EDITOR /etc/pacman.d/mirrorlist'
 alias cfg-ranger='$EDITOR ~/.config/ranger/rc.conf'
@@ -292,6 +295,9 @@ pacdep() { pacman -Qi "$@" | grep Depends }
 
 # pacman: show size of the package
 pacsize() { pacman -Qi "$@" | grep Size }
+
+# pacman: size of the cache dir
+paccache() { du -hs /var/cache/pacman }
 
 # pacman: list or search in cache
 pacpkg() {

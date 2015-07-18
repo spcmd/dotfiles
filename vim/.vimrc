@@ -27,6 +27,7 @@ set hlsearch                                        "highlight search results
 "set ruler                                           "show line and cursor position
 set hidden                                          "hide buffer, do not warn about unsaved
 set confirm                                         "save confirmation dialog
+set backspace=indent,eol,start                      "backspace always works
 set expandtab                                       "convert tabs to spaces
 set tabstop=4                                       "tab width
 set softtabstop=4                                   "fix backspace width in insert mode
@@ -50,7 +51,7 @@ set ignorecase                                      "case-insensitive mode
 set smartcase                                       "case-sensitive if search contains a capital letter
 set incsearch                                       "jump to the first search result instantly
 set wildmenu                                        "enhanced command line completion
-set scrolloff=10                                    "lines above and below the cursor
+set scrolloff=5                                     "lines above and below the cursor
 set backupdir=~/.vim/backup                         "put backup to backup dir
 set directory=~/.vim/backup                         "put swap to backup dir
 set foldmethod=marker                               "folding with markers
@@ -171,6 +172,8 @@ cnoreabbrev cfg Cfg
 command! CfgAwesome :e ~/.config/awesome/rc.lua
 command! CfgBashrc :e ~/.bashrc
 command! CfgDircolors :e ~/.dircolors
+command! CfgFirefox :e ~/.config/firefox/user.js
+command! CfgMuttrc :e ~/.muttrc
 command! CfgRanger :e ~/.config/ranger/rc.conf
 command! CfgRangerRifle :e ~/.config/ranger/rifle.conf
 command! CfgRtorrent :e ~/.rtorrent.rc

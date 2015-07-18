@@ -33,6 +33,9 @@ URxvt.scrollBar: false
 
 !URxvt.dynamicColors: on
 
+! For Mutt to warn about new e-mails (and set this is the .muttrc: set beep_new)
+URxvt.urgentOnBell: true
+
 ! Perl Extensions: copy/paste, url-selection
 URxvt.perl-ext-common: default,clipboard,matcher
 URxvt.url-launcher: firefox
