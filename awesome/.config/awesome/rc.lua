@@ -202,7 +202,6 @@ vicious.register(volumewidget, vicious.widgets.volume,
                  end, 300, "Master" -- 300 = 5 mins update time. We don't need fast widget refresh (low number/time) because the buttons will update the widget instantly.
                 )
 
-
 -- Vicious: Battery widget
 battwidget = wibox.widget.textbox()
 
@@ -278,6 +277,38 @@ wls_widget:buttons (awful.util.table.join (
 			wls_widget:set_text(" off ")
 		end
 	end)
+))
+
+-- Mail checker
+function check_mail()
+ local mail_file = io.open("/home/spcmd/.mutt/newmails", "r")
+ local mail_state = mail_file:read()
+ mail_file:close()
+ return mail_state
+end
+
+mail_widget = wibox.widget.textbox()
+
+function mail_status()
+    if (tonumber(check_mail()) >= 1) then
+        mail_widget:set_markup(" <span background='" ..beautiful.bg_urgent .. "' color='" ..beautiful.fg_urgent .. "'>"..tonumber(check_mail()).."new</span> ")
+    else
+        mail_widget:set_text(" 0 ")
+    end
+end
+mail_status()
+
+mail_timer = timer({timeout=60})
+mail_timer:connect_signal("timeout",mail_status)
+mail_timer:start()
+
+-- Check mail or open mutt 
+mail_widget:buttons (awful.util.table.join (
+    awful.button ({}, 1, function()
+        check_mail()
+        mail_status()
+        naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
+    end)
 ))
 
 -- Textclock widget
@@ -380,6 +411,7 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     --if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(mail_widget)
     right_layout:add(eth_widget)
     right_layout:add(wls_widget)
     right_layout:add(volumewidget)

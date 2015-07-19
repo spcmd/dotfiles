@@ -634,6 +634,14 @@ alias kpass='kpcli --kdb'
 # vless (use vim as a pager)
 vless() { vim -u $HOME/.vimlessrc $1 }
 
+# stopwatch
+stopwatch() {
+    date1=$(date +%s)
+    while true; do 
+       echo -ne "$(date -u --date @$(($(date +%s) - $date1)) +%H:%M:%S)\r";
+    done
+}
+
 # Rsync to external Backup HDD
 if [[ -x /bin/rsync ]]; then
     rsync-Documents() { 
