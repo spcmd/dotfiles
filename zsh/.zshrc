@@ -253,6 +253,7 @@ alias cfg-zshrc='$EDITOR ~/.zshrc'
 
 # Reload config files
 alias rld-bashrc='source ~/.bashrc && echo "source bashrc: done!"'
+alias rld-gpg='echo RELOADAGENT | gpg-connect-agent'
 alias rld-xresources='xrdb -load ~/.Xresources && echo "reload .Xresources: done!"'
 alias rld-zshrc='source ~/.zshrc && echo "source zshrc: done!"'
 alias RR='rld-zshrc'
@@ -640,6 +641,12 @@ stopwatch() {
     while true; do 
        echo -ne "$(date -u --date @$(($(date +%s) - $date1)) +%H:%M:%S)\r";
     done
+}
+
+# calculator
+calc() { 
+    echo "Python calc (exit with Ctrl+D)"
+    python2 -ic "from __future__ import division; from math import *; from random import *"
 }
 
 # Rsync to external Backup HDD

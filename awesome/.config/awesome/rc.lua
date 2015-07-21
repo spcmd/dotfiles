@@ -279,8 +279,16 @@ wls_widget:buttons (awful.util.table.join (
 	end)
 ))
 
--- Mail checker
-function check_mail()
+-- Mail checker (run mail checker script)
+--[[function check_mail()]]
+    --awful.util.spawn_with_shell("gmailcheck.sh")
+--end
+--check_mail_timer = timer({timeout=60})
+--check_mail_timer:connect_signal("timeout",check_mail)
+--[[check_mail_timer:start()]]
+
+-- Mail widget
+function count_newmail()
  local mail_file = io.open("/home/spcmd/.mutt/newmails", "r")
  local mail_state = mail_file:read()
  mail_file:close()
@@ -290,24 +298,30 @@ end
 mail_widget = wibox.widget.textbox()
 
 function mail_status()
-    if (tonumber(check_mail()) >= 1) then
-        mail_widget:set_markup(" <span background='" ..beautiful.bg_urgent .. "' color='" ..beautiful.fg_urgent .. "'>"..tonumber(check_mail()).."new</span> ")
+    if (tonumber(count_newmail()) >= 1) then
+        mail_widget:set_markup(" <span background='" ..beautiful.bg_urgent .. "' color='" ..beautiful.fg_urgent .. "'>"..tonumber(count_newmail()).."new</span> ")
     else
         mail_widget:set_text(" 0 ")
     end
 end
 mail_status()
 
-mail_timer = timer({timeout=60})
-mail_timer:connect_signal("timeout",mail_status)
-mail_timer:start()
+mail_widge_timer = timer({timeout=30})
+mail_widge_timer:connect_signal("timeout",mail_status)
+mail_widge_timer:start()
+
+--[[mail_widget:connect_signal("button::press", function ()]]
+    --awful.util.spawn_with_shell("notify-send 'testing...'")
+    --naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
+--[[end)]]
 
 -- Check mail or open mutt 
 mail_widget:buttons (awful.util.table.join (
     awful.button ({}, 1, function()
-        check_mail()
-        mail_status()
-        naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
+        --awful.util.spawn_with_shell("gmailcheck.sh")
+       count_newmail()
+       mail_status()
+       naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
     end)
 ))
 

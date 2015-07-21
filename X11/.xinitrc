@@ -1,4 +1,3 @@
-
 # Num lock ON
 if [[ -e /usr/bin/numlockx ]]; then
     /usr/bin/numlockx &
@@ -22,6 +21,13 @@ urxvtd &
 
 # Merge .Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
+# Run gmail checker
+#sh ~/Scripts/gmailcheck.sh
+
+# Start gpg agent
+# https://www.debian-administration.org/article/378/Gnu_Privacy_Guard_Agent_GPG
+#eval "$(gpg-agent --daemon)"
 
 # Policy shit
 #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
