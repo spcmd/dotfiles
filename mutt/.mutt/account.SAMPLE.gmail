@@ -1,0 +1,90 @@
+
+# Account file SAMPLE for gmail
+# English and Hungarian version (different folder names)
+# Set chmod 600 on this file!
+
+# -----------------------------------------------------------------
+#  Account Settings 
+# -----------------------------------------------------------------
+
+set imap_user = "USERNAME@gmail.com"                       
+set imap_pass = $PASSWORD_FROM_GPG_FILE
+set smtp_url = "smtp://USERNAME@smtp.gmail.com:587/"       
+set smtp_pass = $PASSWORD_FROM_GPG_FILE
+set from = "USERNAME@gmail.com"                            
+set realname = "USERNAME"                                  
+set folder = "imaps://imap.gmail.com:993"                     
+set spoolfile = "+INBOX"                                      
+set postponed = "+[Gmail]/Drafts"
+set trash = "+[Gmail]/Trash"
+#set header_cache = ~/.mutt/USERNAME.gmail/cache/headers  # Have to be disabled for X-GM-LABELS to work!
+set message_cachedir = ~/.mutt/USERNAME.gmail/cache/bodies         
+set certificate_file = ~/.mutt/USERNAME.gmail/certificates  
+
+set status_format = "──[ $imap_user ]──[%r]───[ Folder: %f ]───[ %m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? %?F?(%F important) ?]───%>─%?p?( %p postponed )?───"
+
+# -----------------------------------------------------------------
+# English version settings
+# -----------------------------------------------------------------
+
+# Unset every mailbox to clear the sidebar when switching accounts
+unmailboxes *
+# Check these mailboxes/folders (if set imap_check_subscribed is set in .muttrc, itt will check ALL mailboxes/folders!)
+mailboxes +INBOX +[Gmail]/Drafts +[Gmail]/Sent\ Mail +[Gmail]/Spam +[Gmail]/Starred +[Gmail]/Trash +[Gmail]/All\ Mail
+
+# Remove, Spam, Trash, Restore to INBOX
+folder-hook ! *INBOX* 'macro index R "<save-message>=INBOX<enter>y" "Remove label, Restore to INBOX (save/move to INBOX folder)"'
+folder-hook   *INBOX*  bind index R noop # We are in the INBOX folder, so the Restore shouldn't work, therefore we unbind it
+
+folder-hook ! *Spam* 'macro index S "<save-message>+[Gmail]/Spam<enter>" "Mark message as spam (save/move to Spam folder)"'
+folder-hook   *Spam* bind index S noop # We are in the Spam folder, so the 'Mark as spam' shouldn't work, therefore we unbind it
+
+folder-hook *INBOX*|*Sent\ Mail* 'macro index A "<save-message>+[Gmail]/All Mail<enter>" "Archive message (copy to All Mail folder)"'
+folder-hook ! *INBOX*|*Sent\ Mail* bind index A noop # Archive only from the INBOX and Sent Mail folder
+
+folder-hook ! *Trash* 'macro index D "<save-message>+[Gmail]/Trash<enter>" "Trash message (save/move to Trash folder)"'
+folder-hook   *Trash* bind index D noop # We are in the Trash folder, so the 'Delete' shouldn't work, therefore we unbind it
+
+# Quick jump to folders
+macro index gh "<change-folder>+INBOX<enter>" "Go to INBOX"
+macro index gi "<change-folder>+INBOX<enter>" "Go to INBOX"
+macro index gd "<change-folder>+[Gmail]/Drafts<enter>" "Go to Drafts"
+macro index gs "<change-folder>+[Gmail]/Starred<enter>" "Go to Starred"
+macro index gp "<change-folder>+[Gmail]/Spam<enter>" "Go to Spam"
+macro index gn "<change-folder>+[Gmail]/Sent Mail<enter>" "Go to Sent"
+macro index gt "<change-folder>+[Gmail]/Trash<enter>" "Go to Sent"
+macro index ga "<change-folder>+[Gmail]/All Mail<enter>" "Go to Archive/All Mail"
+macro index gl "<change-folder>?3<enter>" "Go to Label"
+
+# -----------------------------------------------------------------
+# Hungarian version settings
+# -----------------------------------------------------------------
+
+# Unset every mailbox to clear the sidebar when switching accounts
+unmailboxes *
+# Check these mailboxes/folders (if set imap_check_subscribed is set in .muttrc, itt will check ALL mailboxes/folders!)
+mailboxes +INBOX +[Gmail]/Csillagozott +[Gmail]/Elküldött\ levelek +[Gmail]/Piszkozatok +[Gmail]/Spam +[Gmail]/Kuka +[Gmail]/Összes\ levél
+
+# Remove, Spam, Trash, Restore to INBOX
+folder-hook ! *INBOX* 'macro index R "<save-message>=INBOX<enter>y" "Remove label, Restore to INBOX (save/move to INBOX folder)"'
+folder-hook   *INBOX*  bind index R noop # We are in the INBOX folder, so the Restore shouldn't work, therefore we unbind it
+
+folder-hook ! *Spam* 'macro index S "<save-message>+[Gmail]/Spam<enter>" "Mark message as spam (save/move to Spam folder)"'
+folder-hook   *Spam* bind index S noop # We are in the Spam folder, so the 'Mark as spam' shouldn't work, therefore we unbind it
+
+folder-hook *INBOX*|*Elküldött\ levelek* 'macro index A "<save-message>+[Gmail]/Összes levél<enter>" "Archive message (copy to All Mail folder)"'
+folder-hook ! *INBOX*|*Elküldött\ levelek* bind index A noop # Archive only from the INBOX and Sent Mail folder
+
+folder-hook ! *Kuka* 'macro index D "<save-message>+[Gmail]/Kuka<enter>" "Kuka message (save/move to Trash folder)"'
+folder-hook   *Kuka* bind index D noop # We are in the Kuka folder, so the 'Delete' shouldn't work, therefore we unbind it
+
+# Quick jump to folders
+macro index gh "<change-folder>+INBOX<enter>" "Go to INBOX"
+macro index gi "<change-folder>+INBOX<enter>" "Go to INBOX"
+macro index gd "<change-folder>+[Gmail]/Piszkozatok<enter>" "Go to Drafts"
+macro index gs "<change-folder>+[Gmail]/Csillagozott<enter>" "Go to Starred"
+macro index gp "<change-folder>+[Gmail]/Spam<enter>" "Go to Spam"
+macro index gn "<change-folder>+[Gmail]/Elküldött levelek<enter>" "Go to Sent"
+macro index gt "<change-folder>+[Gmail]/Kuka<enter>" "Go to Sent"
+macro index ga "<change-folder>+[Gmail]/Összes levél<enter>" "Go to Archive/All Mail"
+macro index gl "<change-folder>?3<enter>" "Go to Label"

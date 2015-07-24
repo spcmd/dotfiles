@@ -38,6 +38,9 @@ ZSH_THEME="spcmd"
 # Custom plugins (~/.oh-my-zsh/custom/plugins/)
 plugins=(git zsh-syntax-highlighting)
 
+# globbing
+unsetopt nomatch
+
 # oh-my-zsh
 # some default zsh scripts were disabled in ".oh-my-zsh/lib" by "oh-my-zsh/.gitignore"
 source $ZSH/oh-my-zsh.sh
@@ -238,7 +241,7 @@ alias cfg-firefox='$EDITOR ~/.config/firefox/user.js'
 alias cfg-fstab='sudo $EDITOR /etc/fstab'
 alias cfg-grub='sudo $EDITOR /etc/default/grub'
 alias cfg-hosts='sudo $EDITOR /etc/hosts'
-alias cfg-muttrc='$EDITOR ~/.muttrc'
+alias cfg-muttrc='$EDITOR ~/.mutt/muttrc'
 alias cfg-pacman='sudo $EDITOR /etc/pacman.conf'
 alias cfg-pacmirror='sudo $EDITOR /etc/pacman.d/mirrorlist'
 alias cfg-ranger='$EDITOR ~/.config/ranger/rc.conf'

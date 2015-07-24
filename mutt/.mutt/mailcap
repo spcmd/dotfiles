@@ -1,0 +1,16 @@
+# MS Word documents
+#application/msword; libreoffice %s 
+
+# Images
+image/*; $IMAGER %s
+
+# PDFs
+application/pdf; $PDFER %s 
+
+# Text, HTML
+#text/html; w3m -I %{charset} -dump %s; nametemplate=%s.html; copiousoutput
+text/html; w3m -I %{charset} -T text/html -dump; copiousoutput; 
+#text/html; w3m -I %{charset} -T text/html; copiousoutput;
+text/plain; $EDITOR %s
+#text/html; $BROWSER %s
+#text/html; w3m -dump -I $(echo %{charset} | sed s/gb2312/gbk/I) %s; nametemplate=%s.html; copiousoutput

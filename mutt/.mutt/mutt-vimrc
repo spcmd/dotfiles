@@ -1,0 +1,111 @@
+"                                      _
+"         ___ _ __   ___ _ __ ___   __| |
+"        / __| '_ \ / __| '_ ` _ \ / _` |
+"        \__ | |_) | (__| | | | | | (_| |
+"        |___| .__/ \___|_| |_| |_|\__,_|
+"             |_|
+"
+"                   mutt-vimrc
+"               Created by: spcmd
+"           http://spcmd.github.io
+"           https://github.com/spcmd
+"           https://gist.github.com/spcmd
+
+set formatoptions=tcq
+set tw=72
+hi StatusLine ctermbg=white ctermfg=cyan
+set nocompatible
+set number
+set showcmd
+set linebreak
+set hlsearch
+set hidden
+set confirm
+set backspace=indent,eol,start
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set smarttab
+set encoding=utf-8
+set ttimeout
+set ttimeoutlen=10
+set splitbelow
+set splitright
+set t_Co=256
+set rnu
+set laststatus=2
+set listchars=tab:▸\ ,eol:¬
+set showmode
+set nofoldenable
+set autoread
+set ignorecase
+set smartcase
+set incsearch
+set wildmenu
+set scrolloff=5
+set foldmethod=marker
+set foldenable
+let mapleader = "-"
+
+" -- Status line --
+"clear statusline (needed when reloading .vimrc)
+set statusline=
+"set custom statusline format
+set statusline+=[Mutt]\ %f%m%=%y\ [%{strlen(&fenc)?&fenc:'none'}]\ L:%l/%L\ C:%c\ (%P)
+
+" -- Terminal cursor settings --
+let &t_SI = "\<Esc>]12;DodgerBlue\x7"
+let &t_EI = "\<Esc>]12;yellow\x7"
+let &t_SI .= "\<Esc>[6 q"
+let &t_EI .= "\<Esc>[2 q"
+silent !echo -ne "\033]12;yellow\007"
+autocmd VimLeave * silent !echo -ne "\033]12;white\007"
+
+" -- Fix accidentally shifted commands --
+command! WQ wq
+command! Wq wq
+command! W w
+command! Q q
+
+"Reload .vimrc (save & source)
+command! RR write|source ~/.vimrc-mutt 
+
+"-- Key mappings --
+
+imap űű <Esc>"+p
+nnoremap <Enter> o<ESC>
+nnoremap <S-Enter> O<ESC>
+nmap ú :bnext<CR>
+nmap ő :bprevious<CR>
+
+"Move up/down on displayed lines, not real lines
+nnoremap k gk
+nnoremap j gj
+
+"Move to the beginning/end of line
+nnoremap H ^
+nnoremap L $
+vmap H ^
+vmap L $
+
+"Indenting
+nmap <S-tab> <<
+nmap <tab> >>
+vmap <S-tab> <gv
+vmap <tab> >gv
+
+"Faster navigation
+nmap <C-j> <C-d>
+nmap <C-k> <C-u>
+
+"Select the whole line in Visual mode
+vnoremap j j$
+
+"Toggle search highlight
+let hlstate=0
+nnoremap <leader><space> :set hlsearch!<CR>
+
+"Yank to system clipboard
+nnoremap y "+y
+vnoremap y "+y

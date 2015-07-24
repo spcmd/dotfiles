@@ -173,7 +173,7 @@ command! CfgAwesome :e ~/.config/awesome/rc.lua
 command! CfgBashrc :e ~/.bashrc
 command! CfgDircolors :e ~/.dircolors
 command! CfgFirefox :e ~/.config/firefox/user.js
-command! CfgMuttrc :e ~/.muttrc
+command! CfgMuttrc :e ~/.mutt/muttrc
 command! CfgRanger :e ~/.config/ranger/rc.conf
 command! CfgRangerRifle :e ~/.config/ranger/rifle.conf
 command! CfgRtorrent :e ~/.rtorrent.rc
