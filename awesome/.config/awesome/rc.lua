@@ -149,7 +149,9 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 --{{{   Wibox & Widgets 
 -------------------------------------------
 
+----------------------------------------------------------------
 -- Vicious: Volume (unicode icons (ttf-symbola needed!): 🔊  ♫ )
+----------------------------------------------------------------
 volumewidget = wibox.widget.textbox()
 
 local amixer =
@@ -202,7 +204,9 @@ vicious.register(volumewidget, vicious.widgets.volume,
                  end, 300, "Master" -- 300 = 5 mins update time. We don't need fast widget refresh (low number/time) because the buttons will update the widget instantly.
                 )
 
+----------------------------------------------------------------
 -- Vicious: Battery widget
+----------------------------------------------------------------
 battwidget = wibox.widget.textbox()
 
 battwidget_tip = awful.tooltip({ objects = { battwidget }})
@@ -242,8 +246,10 @@ eth_timer = timer({timeout=60})
 eth_timer:connect_signal("timeout",eth_status)
 eth_timer:start()
 
+----------------------------------------------------------------
 -- Wifi connection widget
 -- symbols (unicode and fontawesome ttf): 📶     
+----------------------------------------------------------------
 function check_wls()
  local wls_file = io.open("/sys/class/net/wls2/operstate", "r")
  local wls_state = wls_file:read()
@@ -280,10 +286,12 @@ wls_widget:buttons (awful.util.table.join (
 ))
 
 
+----------------------------------------------------------------
 -- Mail widget
+----------------------------------------------------------------
 mail_widget = wibox.widget.textbox()
 
--- Mail checker (run mail checker script)
+------ Mail checker (run mail checker script)
 --[[function check_mail()]]
     --awful.util.spawn_with_shell("gmailcheck.sh")
 --end
@@ -311,17 +319,26 @@ mail_widget_timer = timer({timeout=30})
 mail_widget_timer:connect_signal("timeout",mail_status)
 mail_widget_timer:start()
 
------------Mail widget mouse button action 
---[[mail_widget:buttons (awful.util.table.join (]]
-    --awful.button ({}, 1, function()
-        ----awful.util.spawn_with_shell("gmailcheck.sh")
+------ Mail widget mouse button action 
+mail_widget:buttons (awful.util.table.join (
+    awful.button ({}, 1, function()
+        awful.util.spawn(terminal .. " -T mutt -e run_once.sh mutt")
+        --awful.util.spawn_with_shell("run_once.sh mutt")
+        --awful.util.spawn_with_shell("gmailcheck.sh")
+    end),
+    awful.button ({}, 2, function()
+       awful.util.spawn_with_shell("gmailcheck.sh")
        --newmail_count()
        --mail_status()
-       --naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
-    --end)
---[[))]]
+       naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
+    end)
+    --[[awful.button ({}, 3, function()]]
+       --awful.util.spawn_with_shell("gmailcheck.sh")
+       --naughty.notify({ title = "gmailcheck.sh", text = "Check done!" })
+    --[[end)]]
+))
 
------------Mail info tooltip 
+------ Mail list tooltip
 function newmail_list()
     local newmail_list_file = io.open("/home/spcmd/.mutt/newmail_list")
     newmail_list_content = newmail_list_file:read("*all")
@@ -337,8 +354,9 @@ mail_widget:connect_signal("mouse::enter", function ()
 end)
 
 
-
--- Textclock widget
+----------------------------------------------------------------
+-- Textclock & Calendar widget
+----------------------------------------------------------------
 mytextclock = awful.widget.textclock()
 
 -- Clock & Date with Calendar ( https://github.com/cedlemo/blingbling )
@@ -358,7 +376,9 @@ calendar:set_weeks_number_widget_style({
     text_color = beautiful.bg_normal -- hide the week numbers
 })
 
+----------------------------------------------------------------
 -- Create a wibox for each screen and add it
+----------------------------------------------------------------
 mywibox = {}
 mypromptbox = {}
 mylayoutbox = {}
@@ -495,9 +515,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/firefox-38-esr/firefox") end),
     awful.key({ modkey, "Mod1"    }, "s", function () awful.util.spawn("spotify") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
-    awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -t ranger -e ranger") end),
-    awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(terminal .. " -t rtorrent -e rtorrent") end),
-    awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -t mutt -e mutt") end),
+    awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -T ranger -e ranger") end),
+    awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(terminal .. " -T rtorrent -e rtorrent") end),
+    awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -T mutt -e mutt") end),
 
     -- Backlight
     awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --down") end),

@@ -100,7 +100,6 @@ macro index \CK "<previous-entry><previous-entry><previous-entry>" "Move quickly
 bind index p recall-message
 bind index \CR recall-message 
 bind index \CN imap-fetch-mail
-bind index \CS sync-mailbox
 macro index,pager \CL "<refresh><redraw-screen>" "Refresh and Redraw screen"
 bind index,pager N search-opposite
 macro index f "<search>~B " "Search in the messages' body" #  / is searching in the To: and Subject: fields only!
