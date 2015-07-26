@@ -179,4 +179,7 @@ autocmd LocationChange ^http:\/\/(itcafe|prohardver|mobilarena|gamepod).*\/tema\
 "Redirect Youtube main page to subscriptions page
 autocmd DOMLoad ^(http|https):\/\/(www)?.youtube.com\/?$ js window.content.window.location = "https://www.youtube.com/feed/subscriptions"
 
+"Reorder Logout.hu forum topics 
+autocmd DOMLoad logout\.hu\/forum\/index\.html source ~/.vimperator/plugin/logout-forum-faradtgoz-listazas.js
+
 " }}}

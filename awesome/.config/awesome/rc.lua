@@ -323,8 +323,12 @@ mail_widget_timer:start()
 mail_widget:buttons (awful.util.table.join (
     awful.button ({}, 1, function()
         awful.util.spawn(terminal .. " -T mutt -e run_once.sh mutt")
-        --awful.util.spawn_with_shell("run_once.sh mutt")
-        --awful.util.spawn_with_shell("gmailcheck.sh")
+        -- jump to mail tag
+        local screen = mouse.screen
+        local tag = awful.tag.gettags(screen)[7]
+        if tag then
+           awful.tag.viewonly(tag)
+        end
     end),
     awful.button ({}, 2, function()
        awful.util.spawn_with_shell("gmailcheck.sh")
@@ -698,7 +702,7 @@ awful.rules.rules = {
     
     -- Tag 2 rules
     { rule_any = { class = { "Firefox", "Iceweasel", "Chromium", "Chrome" } },
-        properties = { tag = tags[1][2] } },
+        properties = { tag = tags[1][2] }},
 
     -- Tag 3 rules
     { rule_any = { class = { "Thunar" } , name = { "ranger" }  },
@@ -816,7 +820,21 @@ client.connect_signal("manage", function (c, startup)
     end
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+-- Focus highlight/border
+-- Based on: http://blog.lazut.in/2012/11/awesome-wm-remove-border-from-maximized.html
+client.connect_signal("focus",
+        function(c)
+                -- Disable focus highlight for Firefox
+                if c.class == "Firefox" then
+                        c.border_width = "0"
+                        c.border_color = beautiful.border_focus
+                else
+                        c.border_width = beautiful.border_width
+                        c.border_color = beautiful.border_focus
+                end
+        end)
+
+--client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 -- Mutt urgent & Notify about new mail
