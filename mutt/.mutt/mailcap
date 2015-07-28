@@ -8,8 +8,9 @@ image/*; $IMAGER %s
 application/pdf; $PDFER %s 
 
 # Text, HTML
-text/html; w3m -I %{charset} -T text/html -dump; copiousoutput; 
+#text/html; w3m -I %{charset} -T text/html -dump; copiousoutput; 
 #text/html; w3m -I %{charset} -dump %s; nametemplate=%s.html; copiousoutput
-#text/html; w3m -I %{charset} -T text/html; copiousoutput;
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
 #text/html; $BROWSER %s
-text/plain; $EDITOR %s
+text/plain; cat %s; copiousoutput;
+

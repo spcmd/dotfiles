@@ -33,17 +33,17 @@ unmailboxes *
 mailboxes +INBOX +[Gmail]/Drafts +[Gmail]/Sent\ Mail +[Gmail]/Spam +[Gmail]/Starred +[Gmail]/Trash +[Gmail]/All\ Mail
 
 # Remove, Spam, Trash, Restore to INBOX
-folder-hook ! *INBOX* 'macro index R "<save-message>=INBOX<enter>y" "Remove label, Restore to INBOX (save/move to INBOX folder)"'
-folder-hook   *INBOX*  bind index R noop # We are in the INBOX folder, so the Restore shouldn't work, therefore we unbind it
+folder-hook ! *INBOX* 'macro index,pager R "<save-message>=INBOX<enter>y" "Remove label, Restore to INBOX (save/move to INBOX folder)"'
+folder-hook   *INBOX*  bind index,pager R noop # We are in the INBOX folder, so the Restore shouldn't work, therefore we unbind it
 
-folder-hook ! *Spam* 'macro index S "<save-message>+[Gmail]/Spam<enter>" "Mark message as spam (save/move to Spam folder)"'
-folder-hook   *Spam* bind index S noop # We are in the Spam folder, so the 'Mark as spam' shouldn't work, therefore we unbind it
+folder-hook ! *Spam* 'macro index,pager S "<save-message>+[Gmail]/Spam<enter>" "Mark message as spam (save/move to Spam folder)"'
+folder-hook   *Spam* bind index,pager S noop # We are in the Spam folder, so the 'Mark as spam' shouldn't work, therefore we unbind it
 
-folder-hook *INBOX*|*Sent\ Mail* 'macro index A "<save-message>+[Gmail]/All Mail<enter>" "Archive message (copy to All Mail folder)"'
-folder-hook ! *INBOX*|*Sent\ Mail* bind index A noop # Archive only from the INBOX and Sent Mail folder
+folder-hook *INBOX*|*Sent\ Mail* 'macro index,pager A "<save-message>+[Gmail]/All Mail<enter>" "Archive message (copy to All Mail folder)"'
+folder-hook ! *INBOX*|*Sent\ Mail* bind index,pager A noop # Archive only from the INBOX and Sent Mail folder
 
-folder-hook ! *Trash* 'macro index D "<save-message>+[Gmail]/Trash<enter>" "Trash message (save/move to Trash folder)"'
-folder-hook   *Trash* bind index D noop # We are in the Trash folder, so the 'Delete' shouldn't work, therefore we unbind it
+folder-hook ! *Trash* 'macro index,pager D "<save-message>+[Gmail]/Trash<enter>" "Trash message (save/move to Trash folder)"'
+folder-hook   *Trash* bind index,pager D noop # We are in the Trash folder, so the 'Delete' shouldn't work, therefore we unbind it
 
 # Quick jump to folders
 macro index gh "<change-folder>+INBOX<enter>" "Go to INBOX"
@@ -66,17 +66,17 @@ unmailboxes *
 mailboxes +INBOX +[Gmail]/Csillagozott +[Gmail]/Elküldött\ levelek +[Gmail]/Piszkozatok +[Gmail]/Spam +[Gmail]/Kuka +[Gmail]/Összes\ levél
 
 # Remove, Spam, Trash, Restore to INBOX
-folder-hook ! *INBOX* 'macro index R "<save-message>=INBOX<enter>y" "Remove label, Restore to INBOX (save/move to INBOX folder)"'
-folder-hook   *INBOX*  bind index R noop # We are in the INBOX folder, so the Restore shouldn't work, therefore we unbind it
+folder-hook ! *INBOX* 'macro index,pager R "<save-message>=INBOX<enter>y" "Remove label, Restore to INBOX (save/move to INBOX folder)"'
+folder-hook   *INBOX*  bind index,pager R noop # We are in the INBOX folder, so the Restore shouldn't work, therefore we unbind it
 
-folder-hook ! *Spam* 'macro index S "<save-message>+[Gmail]/Spam<enter>" "Mark message as spam (save/move to Spam folder)"'
-folder-hook   *Spam* bind index S noop # We are in the Spam folder, so the 'Mark as spam' shouldn't work, therefore we unbind it
+folder-hook ! *Spam* 'macro index,pager S "<save-message>+[Gmail]/Spam<enter>" "Mark message as spam (save/move to Spam folder)"'
+folder-hook   *Spam* bind index,pager S noop # We are in the Spam folder, so the 'Mark as spam' shouldn't work, therefore we unbind it
 
-folder-hook *INBOX*|*Elküldött\ levelek* 'macro index A "<save-message>+[Gmail]/Összes levél<enter>" "Archive message (copy to All Mail folder)"'
-folder-hook ! *INBOX*|*Elküldött\ levelek* bind index A noop # Archive only from the INBOX and Sent Mail folder
+folder-hook *INBOX*|*Elküldött\ levelek* 'macro index,pager A "<save-message>+[Gmail]/Összes levél<enter>" "Archive message (copy to All Mail folder)"'
+folder-hook ! *INBOX*|*Elküldött\ levelek* bind index,pager A noop # Archive only from the INBOX and Sent Mail folder
 
-folder-hook ! *Kuka* 'macro index D "<save-message>+[Gmail]/Kuka<enter>" "Kuka message (save/move to Trash folder)"'
-folder-hook   *Kuka* bind index D noop # We are in the Kuka folder, so the 'Delete' shouldn't work, therefore we unbind it
+folder-hook ! *Kuka* 'macro index,pager D "<save-message>+[Gmail]/Kuka<enter>" "Kuka message (save/move to Trash folder)"'
+folder-hook   *Kuka* bind index,pager D noop # We are in the Kuka folder, so the 'Delete' shouldn't work, therefore we unbind it
 
 # Quick jump to folders
 macro index gh "<change-folder>+INBOX<enter>" "Go to INBOX"

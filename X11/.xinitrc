@@ -9,9 +9,8 @@ xmodmap ~/.Xmodmap &
 # Set the wallpaper
 sh ~/.fehbg &
 
-# Set keyboard layout
-# disabled (set with 'localectl set-x11-keymap hu')
-#setxkbmap hu &
+# Set/Restore backlight
+xbacklight -set 20 &
 
 # Map caps lock to escape
 (sleep 1 && setxkbmap -option caps:escape) &
@@ -21,16 +20,6 @@ urxvtd &
 
 # Merge .Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
-
-# Run gmail checker
-#sh ~/Scripts/gmailcheck.sh
-
-# Start gpg agent
-# https://www.debian-administration.org/article/378/Gnu_Privacy_Guard_Agent_GPG
-#eval "$(gpg-agent --daemon)"
-
-# Policy shit
-#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Start X
 exec dbus-launch --exit-with-session --sh-syntax awesome

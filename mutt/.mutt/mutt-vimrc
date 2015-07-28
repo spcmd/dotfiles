@@ -46,6 +46,8 @@ set wildmenu
 set scrolloff=5
 set foldmethod=marker
 set foldenable
+set spell
+set spelllang=hu
 let mapleader = "-"
 
 " -- Status line --
@@ -76,8 +78,8 @@ command! RR write|source ~/.vimrc-mutt
 imap űű <Esc>"+p
 nnoremap <Enter> o<ESC>
 nnoremap <S-Enter> O<ESC>
-nmap ú :bnext<CR>
-nmap ő :bprevious<CR>
+
+nnoremap <leader>s z= 
 
 "Move up/down on displayed lines, not real lines
 nnoremap k gk
@@ -109,3 +111,6 @@ nnoremap <leader><space> :set hlsearch!<CR>
 "Yank to system clipboard
 nnoremap y "+y
 vnoremap y "+y
+
+
+" vim:syntax=vim filetype=vim:
