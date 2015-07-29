@@ -11,7 +11,7 @@
 "           https://github.com/spcmd
 "           https://gist.github.com/spcmd
 
-set formatoptions=tcq
+set formatoptions+=tcqaw
 set tw=72
 hi StatusLine ctermbg=white ctermfg=cyan
 set nocompatible
@@ -47,7 +47,7 @@ set scrolloff=5
 set foldmethod=marker
 set foldenable
 set spell
-set spelllang=hu
+set spelllang=hu,en
 let mapleader = "-"
 
 " -- Status line --
@@ -64,6 +64,19 @@ let &t_EI .= "\<Esc>[2 q"
 silent !echo -ne "\033]12;yellow\007"
 autocmd VimLeave * silent !echo -ne "\033]12;white\007"
 
+" -- Go above the quoted text and enter insert mode automatically --
+" http://www.mdlerch.com/emailing-mutt-and-vim-advanced-config.html
+function IsReply()
+    if line('$') > 1
+        :1
+        :put! =\"\n\n\"
+        :1
+    endif
+endfunction
+
+autocmd BufRead * :call IsReply()
+autocmd BufRead * :exe 'startinsert'
+
 " -- Fix accidentally shifted commands --
 command! WQ wq
 command! Wq wq
@@ -71,7 +84,7 @@ command! W w
 command! Q q
 
 "Reload .vimrc (save & source)
-command! RR write|source ~/.vimrc-mutt 
+command! RR write|source ~/.vimrc-mutt
 
 "-- Key mappings --
 
@@ -79,7 +92,7 @@ imap űű <Esc>"+p
 nnoremap <Enter> o<ESC>
 nnoremap <S-Enter> O<ESC>
 
-nnoremap <leader>s z= 
+nnoremap <leader>s z=
 
 "Move up/down on displayed lines, not real lines
 nnoremap k gk
@@ -113,4 +126,4 @@ nnoremap y "+y
 vnoremap y "+y
 
 
-" vim:syntax=vim filetype=vim:
+" vim: syntax=vim filetype=vim:

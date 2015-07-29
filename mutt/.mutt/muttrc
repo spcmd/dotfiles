@@ -5,7 +5,7 @@
 #        |___| .__/ \___|_| |_| |_|\__,_|
 #             |_|
 #
-#                   .muttrc 
+#                   .muttrc
 #               Created by: spcmd
 #           http://spcmd.github.io
 #           https://github.com/spcmd
@@ -48,7 +48,7 @@ source $alias_file
 set editor = "vim -u ~/.mutt/mutt-vimrc"
 set send_charset="utf-8"
 set mailcap_path = ~/.mutt/mailcap                                          # Mime type settings, open attachments with...
-set mail_check = 30                                                         # Time between new checks 
+set mail_check = 30                                                         # Time between new checks
 set imap_keepalive = 30                                                     # Keep IMAP connection alive by polling intermittently (time in seconds).
 set timeout = 60                                                            # Time to wait for idle mutt (no key pressed) before the status is updated again
 set wait_key = no                                                           # Do not wait for key press (when shell escape, etc.)
@@ -56,11 +56,12 @@ set mark_old = no                                                           # Do
 set move = no                                                               # Stop asking to "move read messages to mbox"!
 #set imap_check_subscribed                                                  # Check all folder (Unset when using multiple accounts!)
 
-set implicit_autoview = yes                                                 # Auto view html format
+set implicit_autoview = yes                                                 # Use autoview, if a "copiousoutput" is in mailcap
 auto_view text/html                                                         # Auto view html format
 #alternative_order text/enriched text/plain text/html text
 set display_filter="sed '/^.*\\[-- .*--]$/d'"                           # Remove Attachments and Auto view blocks from message body
 #set display_filter="sed '/^.*\\[-- Autoview using .* --]$/d'"
+#set edit_headers
 
 set beep = yes                                                              # Send signal to the terminal (have to set: URxvt.urgentOnBell: true)
 set beep_new =yes                                                           # Send signal to the terminal (have to set: URxvt.urgentOnBell: true)
@@ -68,18 +69,22 @@ set beep_new =yes                                                           # Se
 set sort = 'threads'                                                        # Like gmail
 set sort_aux = 'reverse-last-date-received'                                 # Like gmail
 set uncollapse_jump                                                         # Don't collapse on an unread message
+unset collapse_unread                                                       # Don't collapse threads with unread mails
 set sleep_time = 0                                                          # Faster folder switch (this should be default!)
 
-set include                                                                 # Copy of the message(s) you are replying to is included in your reply.
+set include                                                                 # Quote message, when replying
 set mime_forward                                                            # Forward attachments as part of body
 set mime_forward_rest                                                       # Include attachments
 set fast_reply                                                              # Skip to compose when replying
+set text_flowed = yes                                                       # Plain text formatting and quote formatting
 
 set pager_index_lines = 10                                                  # Show the mail list above (index) when reading an email (pager)
 set pager_context = 3                                                       # Number of context lines to show
 set pager_stop                                                              # Don't go to next message automatically
 set menu_scroll                                                             # Scroll in menus
 set tilde                                                                   # Show tildes like in vim
+set prompt_after = no                                                       # Do not prompt after using external pager (e.g.: less)
+#set pager = less
 
 ignore *                                                                    # Ignore all headers
 unignore from: to: cc: date: subject:                                       # Show only these headers
@@ -88,7 +93,7 @@ unignore from: to: cc: date: subject:                                       # Sh
 # {{{   Key Bindings
 # -----------------------------------------------------
 
-# Basic 
+# Basic
 bind index gg first-entry
 bind index G last-entry
 bind index h noop
@@ -98,14 +103,16 @@ bind index <space> tag-entry
 macro index \CJ "<next-entry><next-entry><next-entry>" "Move quickly down (3j)"
 macro index \CK "<previous-entry><previous-entry><previous-entry>" "Move quickly up (3k)"
 bind index p recall-message
-bind index \CR recall-message 
+bind index \CR recall-message
 bind index \CN imap-fetch-mail
+bind index x sync-mailbox
 macro index,pager \CL "<refresh><redraw-screen>" "Refresh and Redraw screen"
 bind index,pager N search-opposite
 macro index f "<search>~B " "Search in the messages' body" #  / is searching in the To: and Subject: fields only!
 #macro index,pager q "<sync-mailbox><shell-escape>gmailcheck.sh<enter><quit>" "update local mail counter and quit"
+macro index -r "<enter-command>source ~/.mutt/muttrc<enter>" "Source muttrc"
 
-# Labels / Folders 
+# Labels / Folders
 macro index cd "<change-folder>?" "Select Folder/Label"
 macro index L "<copy-message>?3<enter>" "Add label (copy to folder)"
 
@@ -115,6 +122,7 @@ bind pager j  next-line
 bind pager l  view-attachments
 bind pager gg top
 bind pager G  bottom
+bind pager \CH display-toggle-weed
 
 # Compose
 bind compose dd detach-file
@@ -144,7 +152,8 @@ macro pager \CB "<enter-command>toggle sidebar_visible<enter><redraw-screen>"
 
 set date_format="%b %d %R"
 set index_format = "%4C [%Z]  %D  %-15.15F [%-15.15y] %?X?[%X]&   ? %s"
-set status_chars = "-MRA" 
+set to_chars = "  TCSL"
+set status_chars = "-MRA"
 set status_on_top
 set pager_format = "Reading e-mail %C of %m |%>────%lL [%P]"
 #set pager_format = "Reading e-mail %C of %m  |───[ From: %F ]───[ Subject: %s ]%?y?───[ Labels: %y ]───?%>────%lL [%P]"
@@ -166,16 +175,16 @@ color sidebar_new   default         default                     # Folders that c
 color hdrdefault    white           cyan                        # Header (in the pager)
 color attachment    white           green                       # Attachments (in the pager)
 
-color quoted        cyan            default                     # Quoted text in messages 
-color quoted1       white           default                     # Quoted text in messages 
-color quoted2       cyan            default                     # Quoted text in messages 
-color quoted3       white           default                     # Quoted text in messages 
+color quoted        cyan            default                     # Quoted text in messages
+color quoted1       white           default                     # Quoted text in messages
+color quoted2       cyan            default                     # Quoted text in messages
+color quoted3       white           default                     # Quoted text in messages
 
 color error         white           red                         # Error messages
 color message       white           default                     # Message  informational messages
 color indicator     brightblack     brightwhite                 # Selection highlight (on the current message)
-color status        white           cyan                        # "Window" color (statusbar) 
-color tree          yellow          default                     # Tree indicator (of threads) 
+color status        white           cyan                        # "Window" color (statusbar)
+color tree          yellow          default                     # Tree indicator (of threads)
 color search        white           blue                        # Search matches found with search within the internal pager
 color markers       red             default                     # The markers indicate a wrapped line
 
