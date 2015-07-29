@@ -4,22 +4,23 @@
 # Set chmod 600 on this file!
 
 # -----------------------------------------------------------------
-#  Account Settings 
+#  Account Settings
 # -----------------------------------------------------------------
 
-set imap_user = "USERNAME@gmail.com"                       
+set imap_user = "USERNAME@gmail.com"
 set imap_pass = $PASSWORD_FROM_GPG_FILE
-set smtp_url = "smtp://USERNAME@smtp.gmail.com:587/"       
+set smtp_url = "smtp://USERNAME@smtp.gmail.com:587/"
 set smtp_pass = $PASSWORD_FROM_GPG_FILE
-set from = "USERNAME@gmail.com"                            
-set realname = "USERNAME"                                  
-set folder = "imaps://imap.gmail.com:993"                     
-set spoolfile = "+INBOX"                                      
+set from = "USERNAME@gmail.com"
+set realname = "USERNAME"
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
 set postponed = "+[Gmail]/Drafts"
 set trash = "+[Gmail]/Trash"
 #set header_cache = ~/.mutt/USERNAME.gmail/cache/headers  # Have to be disabled for X-GM-LABELS to work!
-set message_cachedir = ~/.mutt/USERNAME.gmail/cache/bodies         
-set certificate_file = ~/.mutt/USERNAME.gmail/certificates  
+set message_cachedir = ~/.mutt/USERNAME.gmail/cache/bodies
+set certificate_file = ~/.mutt/USERNAME.gmail/certificates
+#set hostname = "www.testdomain.com"
 
 set status_format = "──[ $imap_user ]──[%r]───[ Folder: %f ]───[ %m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? %?F?(%F important) ?]───%>─%?p?( %p postponed )?───"
 

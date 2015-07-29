@@ -11,6 +11,10 @@
 "           https://github.com/spcmd
 "           https://gist.github.com/spcmd
 
+"----------------------------------------
+" Basic Settings
+"----------------------------------------
+
 set formatoptions+=tcqaw
 set tw=72
 hi StatusLine ctermbg=white ctermfg=cyan
@@ -50,13 +54,19 @@ set spell
 set spelllang=hu,en
 let mapleader = "-"
 
-" -- Status line --
+"----------------------------------------
+" Status line
+"----------------------------------------
+
 "clear statusline (needed when reloading .vimrc)
 set statusline=
 "set custom statusline format
 set statusline+=[Mutt]\ %f%m%=%y\ [%{strlen(&fenc)?&fenc:'none'}]\ L:%l/%L\ C:%c\ (%P)
 
-" -- Terminal cursor settings --
+"----------------------------------------
+" Terminal cursor settings
+"----------------------------------------
+
 let &t_SI = "\<Esc>]12;DodgerBlue\x7"
 let &t_EI = "\<Esc>]12;yellow\x7"
 let &t_SI .= "\<Esc>[6 q"
@@ -64,8 +74,11 @@ let &t_EI .= "\<Esc>[2 q"
 silent !echo -ne "\033]12;yellow\007"
 autocmd VimLeave * silent !echo -ne "\033]12;white\007"
 
-" -- Go above the quoted text and enter insert mode automatically --
+"------------------------------------------------------------------
+" Go above the quoted text and enter insert mode automatically
 " http://www.mdlerch.com/emailing-mutt-and-vim-advanced-config.html
+"-------------------------------------------------------------------
+
 function IsReply()
     if line('$') > 1
         :1
@@ -77,7 +90,29 @@ endfunction
 autocmd BufRead * :call IsReply()
 autocmd BufRead * :exe 'startinsert'
 
-" -- Fix accidentally shifted commands --
+"----------------------------------------
+" Insert snippets
+"----------------------------------------
+
+function! InsertSignature()
+    r ~/.mutt/snippet-signature.txt
+endfunction
+command! IS :call InsertSignature()
+
+function! InsertBank()
+    r ~/.mutt/snippet-bank.txt
+endfunction
+command! IB :call InsertBank()
+
+function! InsertOrderAnswser()
+    0r ~/.mutt/snippet-order-answer.txt
+endfunction
+command! IO :call InsertOrderAnswser()
+
+"----------------------------------------
+" Fix accidentally shifted commands
+"----------------------------------------
+
 command! WQ wq
 command! Wq wq
 command! W w
@@ -86,7 +121,9 @@ command! Q q
 "Reload .vimrc (save & source)
 command! RR write|source ~/.vimrc-mutt
 
-"-- Key mappings --
+"----------------------------------------
+" Key mappings
+"----------------------------------------
 
 imap űű <Esc>"+p
 nnoremap <Enter> o<ESC>

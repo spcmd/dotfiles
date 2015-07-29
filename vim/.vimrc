@@ -21,6 +21,7 @@ filetype plugin indent on
 colorscheme Tomorrow-Night-spcmd                    "color scheme
 set nocompatible                                    "disable Vi compatibility
 set modeline                                        "enable modeline
+set modelines=5                                     "enable modeline
 set number                                          "line numbers
 set showcmd                                         "show commands at the bottom
 set linebreak                                       "allow linebreaks between words
