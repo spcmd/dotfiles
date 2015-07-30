@@ -87,6 +87,7 @@ function IsReply()
     endif
 endfunction
 
+"autocmd BufRead * :silent! %s/^>/|/g
 autocmd BufRead * :call IsReply()
 autocmd BufRead * :exe 'startinsert'
 

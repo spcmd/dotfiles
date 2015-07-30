@@ -1,4 +1,4 @@
-#                                      _
+    #                                      _
 #         ___ _ __   ___ _ __ ___   __| |
 #        / __| '_ \ / __| '_ ` _ \ / _` |
 #        \__ | |_) | (__| | | | | | (_| |
@@ -88,29 +88,34 @@ set prompt_after = no                                                       # Do
 
 ignore *                                                                    # Ignore all headers
 unignore from: to: cc: date: subject:                                       # Show only these headers
+unhdr_order *                                                               # Ignore default header order
+hdr_order from: to: cc: date: subject:                                      # show headers in this order
 
 # }}}
 # {{{   Key Bindings
 # -----------------------------------------------------
 
 # Basic
+macro index -r "<enter-command>source ~/.mutt/muttrc<enter>" "Source muttrc"
 bind index gg first-entry
 bind index G last-entry
 bind index h noop
 bind index l display-message
 bind pager h exit
-bind index <space> tag-entry
 macro index \CJ "<next-entry><next-entry><next-entry>" "Move quickly down (3j)"
 macro index \CK "<previous-entry><previous-entry><previous-entry>" "Move quickly up (3k)"
+bind index , collapse-thread 
+bind index . collapse-all
+bind index <space> tag-entry
 bind index p recall-message
 bind index \CR recall-message
 bind index \CN imap-fetch-mail
 bind index x sync-mailbox
 macro index,pager \CL "<refresh><redraw-screen>" "Refresh and Redraw screen"
 bind index,pager N search-opposite
+macro index \CF "<search>~B " "Search in the messages' body" #  / is searching in the To: and Subject: fields only!
 macro index f "<search>~B " "Search in the messages' body" #  / is searching in the To: and Subject: fields only!
 #macro index,pager q "<sync-mailbox><shell-escape>gmailcheck.sh<enter><quit>" "update local mail counter and quit"
-macro index -r "<enter-command>source ~/.mutt/muttrc<enter>" "Source muttrc"
 
 # Labels / Folders
 macro index cd "<change-folder>?" "Select Folder/Label"
@@ -189,11 +194,12 @@ color search        white           blue                        # Search matches
 color markers       red             default                     # The markers indicate a wrapped line
 
 # Pattern modifiers: http://www.mutt.org/doc/devel/manual.html#tab-patterns
-color index         yellow          default '~O'                # Old flagged messages
+color index         green          default '~O'                # Old flagged messages
 color index         white           red     '~N'                # New messages
 color index         red             yellow  '~F'                # Important (Starred) messages
 color index         brightred       black   '~D'                # Marked for deletion
 color index         brightyellow    default '~T'                # Tagged messages
 color body          yellow          default '\[cid\]'           # Inline content/image indicator when using html view with w3m
+#color index         white green '~y LABELNAME'
 
 # }}}
