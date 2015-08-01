@@ -17,9 +17,9 @@ set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
 set postponed = "+[Gmail]/Drafts"
 set trash = "+[Gmail]/Trash"
-#set header_cache = ~/.mutt/USERNAME.gmail/cache/headers  # Have to be disabled for X-GM-LABELS to work!
-set message_cachedir = ~/.mutt/USERNAME.gmail/cache/bodies
-set certificate_file = ~/.mutt/USERNAME.gmail/certificates
+#set header_cache = ~/.mutt/$imap_user/cache/headers  # Have to be disabled for X-GM-LABELS to work!
+set message_cachedir = ~/.mutt/$imap_user/cache/bodies
+set certificate_file = ~/.mutt/$imap_user/certificates
 #set hostname = "www.testdomain.com"
 
 set status_format = "──[ $imap_user ]──[%r]───[ Folder: %f ]───[ %m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? %?F?(%F important) ?]───%>─%?p?( %p postponed )?───"
@@ -32,6 +32,11 @@ set status_format = "──[ $imap_user ]──[%r]───[ Folder: %f ]──
 unmailboxes *
 # Check these mailboxes/folders (if set imap_check_subscribed is set in .muttrc, itt will check ALL mailboxes/folders!)
 mailboxes +INBOX +[Gmail]/Drafts +[Gmail]/Sent\ Mail +[Gmail]/Spam +[Gmail]/Starred +[Gmail]/Trash +[Gmail]/All\ Mail
+
+# Add Label/Folder to mailboxes in the account file
+macro browser a "<shell-escape>$my_script_mailboxes --acc_file ~/.mutt/account.SAMPLE.muttrc --add <LABELNAME>" "Add Label/Folder to mailboxes in the account file"
+# Remove Label/Folder from mailboxes in the account file
+macro browser r "<shell-escape>$my_script_mailboxes --acc_file ~/.mutt/account.SAMPLE.muttrc --remove <LABELNAME>" "Remove Label/Folder from mailboxes in the account file"
 
 # Remove, Spam, Trash, Restore to INBOX
 folder-hook ! *INBOX* 'macro index,pager R "<save-message>=INBOX<enter>y" "Remove label, Restore to INBOX (save/move to INBOX folder)"'
@@ -65,6 +70,11 @@ macro index gl "<change-folder>?3<enter>" "Go to Label"
 unmailboxes *
 # Check these mailboxes/folders (if set imap_check_subscribed is set in .muttrc, itt will check ALL mailboxes/folders!)
 mailboxes +INBOX +[Gmail]/Csillagozott +[Gmail]/Elküldött\ levelek +[Gmail]/Piszkozatok +[Gmail]/Spam +[Gmail]/Kuka +[Gmail]/Összes\ levél
+
+# Add Label/Folder to mailboxes in the account file
+macro browser a "<shell-escape>$my_script_mailboxes --acc_file ~/.mutt/account.SAMPLE.muttrc --add <LABELNAME>" "Add Label/Folder to mailboxes in the account file"
+# Remove Label/Folder from mailboxes in the account file
+macro browser r "<shell-escape>$my_script_mailboxes --acc_file ~/.mutt/account.SAMPLE.muttrc --remove <LABELNAME>" "Remove Label/Folder from mailboxes in the account file"
 
 # Remove, Spam, Trash, Restore to INBOX
 folder-hook ! *INBOX* 'macro index,pager R "<save-message>=INBOX<enter>y" "Remove label, Restore to INBOX (save/move to INBOX folder)"'
