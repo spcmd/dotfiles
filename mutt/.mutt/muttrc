@@ -62,7 +62,6 @@ set pager_stop                                                              # Do
 set menu_scroll                                                             # Scroll in menus
 set tilde                                                                   # Show tildes like in vim
 set prompt_after = no                                                       # Do not prompt after using external pager (e.g.: less)
-#set pager = less
 
 ignore *                                                                    # Ignore all headers
 unignore from: to: cc: date: subject:                                       # Show only these headers
@@ -154,7 +153,6 @@ set status_chars = "-MRA"
 set status_on_top
 set pager_format = "Reading e-mail %C of %m |%>────%lL [%P]"
 #set pager_format = "Reading e-mail %C of %m  |───[ From: %F ]───[ Subject: %s ]%?y?───[ Labels: %y ]───?%>────%lL [%P]"
-set attribution="%Y %d %n <%a>:"
 
 # Sidebar (http://www.lunar-linux.org/mutt-sidebar)
 set sidebar_width=25
@@ -193,7 +191,7 @@ color index         red             yellow  '~F'                # Important (Sta
 color index         brightred       black   '~D'                # Marked for deletion
 color index         brightyellow    default '~T'                # Tagged messages
 color body          yellow          default '\[cid\]'           # Inline content/image indicator when using html view with w3m
-#color index         white green '~y LABELNAME'
+#color index        white green '~y LABELNAME'
 
 # }}}
 # {{{   Address book (Aliases)

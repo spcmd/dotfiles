@@ -28,6 +28,8 @@ set status_format = "──[ $imap_user ]──[%r]───[ Folder: %f ]──
 # English version settings
 # -----------------------------------------------------------------
 
+set attribution="On %d, %n <%a> wrote:"
+
 # Unset every mailbox to clear the sidebar when switching accounts
 unmailboxes *
 # Check these mailboxes/folders (if set imap_check_subscribed is set in .muttrc, itt will check ALL mailboxes/folders!)
@@ -65,6 +67,8 @@ macro index gl "<change-folder>?3<enter>" "Go to Label"
 # -----------------------------------------------------------------
 # Hungarian version settings
 # -----------------------------------------------------------------
+
+set attribution="Ekkor: %d, %n <%a> írta:"
 
 # Unset every mailbox to clear the sidebar when switching accounts
 unmailboxes *

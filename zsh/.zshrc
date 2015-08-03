@@ -260,7 +260,7 @@ alias rld-gpg='echo RELOADAGENT | gpg-connect-agent'
 alias rld-xresources='xrdb -load ~/.Xresources && echo "reload .Xresources: done!"'
 alias rld-zshrc='source ~/.zshrc && echo "source zshrc: done!"'
 alias RR='rld-zshrc'
-alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # To-do list
 if [[ -f $HOME/Documents/TODO.todo ]]; then
@@ -441,6 +441,7 @@ alias gadd='git add --all'
 alias gpush='git push origin master'
 alias gcommit='git commit -m'
 alias gdiff='git diff'
+alias grm='git rm --cached' # Removes remote file copy only. (eg.: removing ignored files that are already pushed without removing the local copies)
 alias cdgit='cd ~/git'
 
 # gitfile.sh, download single file from Github (https://github.com/spcmd/Scripts/blob/master/gitfile.sh)
