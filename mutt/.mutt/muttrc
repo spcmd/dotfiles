@@ -14,7 +14,7 @@
 # {{{   Security
 # -----------------------------------------------------
 
-source "gpg2 -dq $HOME/.my-pwds.gpg |"
+source "gpg2 -dq $HOME/.pwds-mutt.gpg |"
 bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' noop
 
 # }}}
@@ -23,11 +23,12 @@ bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' no
 
 set editor = "vim -u ~/.mutt/mutt-vimrc"
 set send_charset="utf-8"
+set allow_8bit
 set mailcap_path = ~/.mutt/mailcap                                          # Mime type settings, open attachments with...
 set my_script_mailboxes = ~/.mutt/mailboxes.sh                              # Add/remove folder/label names to mailboxes in the account files
-set mail_check = 30                                                         # Time between new checks
-set imap_keepalive = 30                                                     # Keep IMAP connection alive by polling intermittently (time in seconds).
-set timeout = 60                                                            # Time to wait for idle mutt (no key pressed) before the status is updated again
+set mail_check = 280                                                        # Time between new checks
+set imap_keepalive = 250                                                    # Keep IMAP connection alive by polling intermittently (time in seconds).
+set timeout = 300                                                           # Time to wait for idle mutt (no key pressed) before the status is updated again
 set wait_key = no                                                           # Do not wait for key press (when shell escape, etc.)
 set mark_old = no                                                           # Do not mark old unread mail from the last session
 set move = no                                                               # Stop asking to "move read messages to mbox"!
@@ -37,7 +38,8 @@ set auto_tag = yes                                                          # Au
 set implicit_autoview = yes                                                 # Use autoview, if a "copiousoutput" is in mailcap
 auto_view text/html                                                         # Auto view html format
 #alternative_order text/enriched text/plain text/html text
-set display_filter="sed '/^.*\\[-- .*--]$/d'"                           # Remove Attachments and Auto view blocks from message body
+#set display_filter="sed '/^.*\\[-- .*--]$/d'"                           # Remove Attachments and Auto view blocks from message body
+set display_filter="sed -e '/^.*\\[-- .*--]$/d;/cid/d'"                           # Remove Attachments and Auto view blocks from message body
 #set display_filter="sed '/^.*\\[-- Autoview using .* --]$/d'"
 #set edit_headers
 
@@ -147,7 +149,7 @@ macro pager \CB "<enter-command>toggle sidebar_visible<enter><redraw-screen>"
 # -----------------------------------------------------
 
 set date_format="%Y %b %d %R"
-set index_format = "%4C [%Z]  %D  %-16.16F [%-15.15y] %?X?[%X]&   ?%?M?+& ?%1M %s"
+set index_format = "%4C [%Z]  %D  %-18.18F [%-20.20y] %?X?[%X]&   ?%?M?+& ?%1M %s"
 set to_chars = "  TCSL"
 set status_chars = "-MRA"
 set status_on_top
@@ -172,9 +174,9 @@ color hdrdefault    white           cyan                        # Header (in the
 color attachment    white           green                       # Attachments (in the pager)
 
 color quoted        cyan            default                     # Quoted text in messages
-color quoted1       white           default                     # Quoted text in messages
+color quoted1       magenta         default                     # Quoted text in messages
 color quoted2       cyan            default                     # Quoted text in messages
-color quoted3       white           default                     # Quoted text in messages
+color quoted3       magenta         default                     # Quoted text in messages
 
 color error         white           red                         # Error messages
 color message       white           default                     # Message  informational messages
@@ -185,12 +187,12 @@ color search        white           blue                        # Search matches
 color markers       red             default                     # The markers indicate a wrapped line
 
 # Pattern modifiers: http://www.mutt.org/doc/devel/manual.html#tab-patterns
-color index         green          default '~O'                # Old flagged messages
+color index         green          default '~O'                 # Old flagged messages
 color index         white           red     '~N'                # New messages
 color index         red             yellow  '~F'                # Important (Starred) messages
 color index         brightred       black   '~D'                # Marked for deletion
 color index         brightyellow    default '~T'                # Tagged messages
-color body          yellow          default '\[cid\]'           # Inline content/image indicator when using html view with w3m
+color body          yellow          default '.+\[cid.+\]'           # Inline content/image indicator when using html view with w3m
 #color index        white green '~y LABELNAME'
 
 # }}}

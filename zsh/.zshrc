@@ -235,6 +235,7 @@ rockradio-poprock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/poprock.
 # Edit config files
 alias cfg-awesome='$EDITOR ~/.config/awesome/rc.lua'
 alias cfg-bashrc='$EDITOR ~/.bashrc'
+alias cfg-compton='$EDITOR ~/.config/compton/compton.conf'
 alias cfg-dircolors='$EDITOR ~/.dircolors'
 alias cfg-dirbookmarks='$EDITOR ~/.dirbookmarks'
 alias cfg-firefox='$EDITOR ~/.config/firefox/user.js'
@@ -261,6 +262,7 @@ alias rld-xresources='xrdb -load ~/.Xresources && echo "reload .Xresources: done
 alias rld-zshrc='source ~/.zshrc && echo "source zshrc: done!"'
 alias RR='rld-zshrc'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+rld-compton() { pkill compton && sleep 1s && compton -b --config ~/.config/compton/compton.conf ; }
 
 # To-do list
 if [[ -f $HOME/Documents/TODO.todo ]]; then
@@ -635,6 +637,7 @@ alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 alias lscon='nmcli con show'
 alias pingg='ping google.com'
 alias kpass='kpcli --kdb'
+alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
 
 # vless (use vim as a pager)
 vless() { vim -u $HOME/.vimlessrc $1 }

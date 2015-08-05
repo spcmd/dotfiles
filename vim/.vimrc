@@ -173,6 +173,7 @@ command! RR write|source ~/.vimrc
 cnoreabbrev cfg Cfg 
 command! CfgAwesome :e ~/.config/awesome/rc.lua
 command! CfgBashrc :e ~/.bashrc
+command! CfgCompton :e ~/.config/compton/compton.conf
 command! CfgDircolors :e ~/.dircolors
 command! CfgFirefox :e ~/.config/firefox/user.js
 command! CfgMuttrc :e ~/.mutt/muttrc

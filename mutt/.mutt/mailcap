@@ -8,9 +8,11 @@ image/*; $IMAGER %s
 application/pdf; $PDFER %s 
 
 # Text, HTML
+#text/html; w3m -I %{charset} -T text/html; copiousoutput;
 #text/html; w3m -I %{charset} -T text/html -dump; copiousoutput; 
 #text/html; w3m -I %{charset} -dump %s; nametemplate=%s.html; copiousoutput
-text/html; w3m -I %{charset} -T text/html; copiousoutput;
-text/html; $BROWSER %s
-text/plain; cat %s; copiousoutput;
-
+#text/html; elinks -dump -no-references -no-numbering; copiousoutput;
+text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -nolist -cfg ~/.config/lynx/lynx.cfg -dump %s; nametemplate=%s.html; copiousoutput
+#text/html; w3m -I %{charset} -O 'utf-8' -T text/html -dump; copiousoutput;
+#text/html; $BROWSER %s
+#text/plain; less %s;

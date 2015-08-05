@@ -291,13 +291,13 @@ wls_widget:buttons (awful.util.table.join (
 ----------------------------------------------------------------
 mail_widget = wibox.widget.textbox()
 
------- Mail checker (run mail checker script)
---[[function check_mail()]]
-    --awful.util.spawn_with_shell("gmailcheck.sh")
---end
---check_mail_timer = timer({timeout=60})
---check_mail_timer:connect_signal("timeout",check_mail)
---[[check_mail_timer:start()]]
+-- Mail checker (run mail checker script)
+function check_mail()
+    awful.util.spawn_with_shell("gmailcheck.sh")
+end
+check_mail_timer = timer({timeout=180})
+check_mail_timer:connect_signal("timeout",check_mail)
+check_mail_timer:start()
 
 function newmail_count()
  local newmail_count_file = io.open("/home/spcmd/.mutt/newmail_count", "r")
@@ -331,15 +331,9 @@ mail_widget:buttons (awful.util.table.join (
         end
     end),
     awful.button ({}, 2, function()
-       awful.util.spawn_with_shell("gmailcheck.sh")
-       --newmail_count()
-       --mail_status()
-       naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
+        awful.util.spawn_with_shell("gmailcheck.sh")
+        naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
     end)
-    --[[awful.button ({}, 3, function()]]
-       --awful.util.spawn_with_shell("gmailcheck.sh")
-       --naughty.notify({ title = "gmailcheck.sh", text = "Check done!" })
-    --[[end)]]
 ))
 
 ------ Mail list tooltip

@@ -16,7 +16,7 @@
 "----------------------------------------
 
 set formatoptions+=tcqaw
-set tw=72
+set tw=100
 hi StatusLine ctermbg=white ctermfg=cyan
 set nocompatible
 set number
