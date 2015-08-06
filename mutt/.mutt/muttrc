@@ -14,8 +14,8 @@
 # {{{   Security
 # -----------------------------------------------------
 
-source "gpg2 -dq $HOME/.pwds-mutt.gpg |"
-bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' noop
+#source "gpg2 -dq $HOME/.pwds-mutt.gpg |"
+#bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' noop
 
 # }}}
 # {{{   Basic settings
@@ -209,14 +209,14 @@ source $alias_file
 # -----------------------------------------------------
 
 # Folder hooks
-folder-hook 'account.1.muttrc' 'source ~/.mutt/account.1.muttrc'
-folder-hook 'account.2.muttrc' 'source ~/.mutt/account.2.muttrc'
+#folder-hook 'account.1.muttrc' 'source ~/.mutt/account.1.muttrc'
+#folder-hook 'account.2.muttrc' 'source ~/.mutt/account.2.muttrc'
 
 # Switching accounts
-macro index \' '<sync-mailbox><enter-command>source ~/.mutt/account.1.muttrc <enter><change-folder>!<enter>'
-macro index \" '<sync-mailbox><enter-command>source ~/.mutt/account.2.muttrc <enter><change-folder>!<enter>'
+#macro index \' '<sync-mailbox><enter-command>source ~/.mutt/account.1.muttrc <enter><change-folder>!<enter>'
+#macro index \" '<sync-mailbox><enter-command>source ~/.mutt/account.2.muttrc <enter><change-folder>!<enter>'
 
 # Default account
-source ~/.mutt/account.1.muttrc
+#source ~/.mutt/account.1.muttrc
 
 # }}}

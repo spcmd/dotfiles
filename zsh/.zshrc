@@ -638,6 +638,22 @@ alias lscon='nmcli con show'
 alias pingg='ping google.com'
 alias kpass='kpcli --kdb'
 alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
+alias mutt1='mutt -F ~/.mutt/account.1.muttrc'
+alias mutt2='mutt -F ~/.mutt/account.2.muttrc'
+
+# Send mail using mutt cli
+mailthis() {
+    message=$1
+    subject=$2
+    to=$3
+    if [[ -z $message || -z $subject || -z $to ]]; then
+        echo "Error! You have to specify MESSAGE SUBJECT TO"
+        echo "For example:"
+        echo "mailthis \"This is a my message\" \"Subject\" somebody@domain.com"
+    else
+        echo "$message" | mutt -F ~/.mutt/account.1.muttrc -s "$subject" "$to"
+    fi
+}
 
 # vless (use vim as a pager)
 vless() { vim -u $HOME/.vimlessrc $1 }

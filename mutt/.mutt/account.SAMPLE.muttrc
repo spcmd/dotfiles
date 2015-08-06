@@ -7,6 +7,7 @@
 #  Account Settings
 # -----------------------------------------------------------------
 
+source "gpg2 -dq PASSWORDS.gpg |"
 set imap_user = "USERNAME@gmail.com"
 set imap_pass = $PASSWORD_FROM_GPG_FILE
 set smtp_url = "smtp://USERNAME@smtp.gmail.com:587/"
@@ -64,6 +65,12 @@ macro index gt "<change-folder>+[Gmail]/Trash<enter>" "Go to Sent"
 macro index ga "<change-folder>+[Gmail]/All Mail<enter>" "Go to Archive/All Mail"
 macro index gl "<change-folder>?3<enter>" "Go to Label"
 
+# Security
+bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' noop
+
+# Source common muttrc
+source ~/.mutt/muttrc
+
 # -----------------------------------------------------------------
 # Hungarian version settings
 # -----------------------------------------------------------------
@@ -103,3 +110,9 @@ macro index gn "<change-folder>+[Gmail]/Elküldött levelek<enter>" "Go to Sent"
 macro index gt "<change-folder>+[Gmail]/Kuka<enter>" "Go to Sent"
 macro index ga "<change-folder>+[Gmail]/Összes levél<enter>" "Go to Archive/All Mail"
 macro index gl "<change-folder>?3<enter>" "Go to Label"
+
+# Security
+bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' noop
+
+# Source common muttrc
+source ~/.mutt/muttrc
