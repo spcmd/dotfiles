@@ -514,15 +514,15 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"    }, "1", function () 
                                                 awful.util.spawn("firefox") 
                                                 awful.util.spawn("spotify") 
-                                                awful.util.spawn(terminal .. " -t ranger -e ranger")
-                                                awful.util.spawn(terminal .. " -t rtorrent -e rtorrent")
+                                                awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger")
+                                                awful.util.spawn(terminal .. " -T rtorrent -e rtorrent")
                                           end),
 
     -- Run Applications
     awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/firefox-38-esr/firefox") end),
     awful.key({ modkey, "Mod1"    }, "s", function () awful.util.spawn("spotify") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
-    awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -T ranger -e ranger") end),
+    awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger") end),
     awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(terminal .. " -T rtorrent -e rtorrent") end),
     awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -T mutt -e mutt -F ~/.mutt/account.1.muttrc") end),
 

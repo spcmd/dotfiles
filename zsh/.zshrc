@@ -188,8 +188,8 @@ man() {
 compton-opacity() {
     compton_config=~/.config/compton/compton.conf
     if [[ -e  $compton_config ]]; then
-        # change the 4th line
-        sed -i "4s|.*|opacity-rule = [\"$1\:class_g = \'URxvt\' \&\& \!name = \'ranger\'\"];|" $compton_config
+        # change the opacity value in the 4th line
+        sed -i "4s/[0-9][0-9]/$1/" $compton_config
         echo -e "$COLOR_HL1::$COLOR_TITLE urxvt transparency in compton.conf has been set to:$COLOR_HL1 $1 $COLOR_DEFAULT"
         echo -e "$COLOR_HL1::$COLOR_TITLE Restart compton? (y = yes) $COLOR_DEFAULT"
         read compton_restart

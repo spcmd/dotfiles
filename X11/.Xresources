@@ -1,37 +1,47 @@
+!                                      _
+!         ___ _ __   ___ _ __ ___   __| |
+!        / __| '_ \ / __| '_ ` _ \ / _` |
+!        \__ | |_) | (__| | | | | | (_| |
+!        |___| .__/ \___|_| |_| |_|\__,_|
+!             |_|
+!
+!                  .Xresources
+!               Created by: spcmd
+!           http://spcmd.github.io
+!           https://github.com/spcmd
+!           https://gist.github.com/spcmd
+
+! ------------------------------------------
 ! Render setting for cairo -> pango -> gtk
+! ------------------------------------------
+
 Xft.dpi:        96
 Xft.antialias:  true
 Xft.hinting:    true
 Xft.rgba:       rgb
 Xft.hintstyle:  hintmedium
 
+! ------------------------------------------
+! Urxvt settings
+! ------------------------------------------
+
 URxvt.termName: rxvt-unicode-256color
 URxvt.terminalName: rxvt-unicode-256color
 
-! True transparency - Ranger w3m image display will not work when enabled -- using compton setting instead 
+! Background: True transparency - Ranger w3m image display will not work when enabled -- using compton setting instead
 !URxvt.depth: 32
-URxvt.background: [90]#000000 
+URxvt.background: [90]#000000
 
-! Native (fake) transparency
-!URxvt..transparent: true
-! URxvt..shading: 0 to 99 darkens, 101 to 200 lightens
-!URxvt..shading: 10
-
-! Use the specified colour as the windows foreground colour [default Black]; option -fg.
+! Foreground
 URxvt.foreground: #ffffff
 
-! Select the fonts to be used. This is a comma separated list of font names that are checked in order when trying to find glyphs for
-!URxvt.font: 9x15
-
+! Fonts
 URxvt.font: xft:DejaVu Sans Mono:pixelsize=14:antialias=true:hinting=true,xft:FontAwesome:pixelsize=14
-!URxvt.font: xft:Droid Sans Mono:pixelsize=14:antialias=true:hinting=true
 URxvt.letterSpace: -2
 URxvt.lineSpace: 1
 
-! True: enable the scrollbar [default]; option -sb. False: disable the scrollbar; option +sb.
+! Disable scrollbar
 URxvt.scrollBar: false
-
-!URxvt.dynamicColors: on
 
 ! For Mutt to warn about new e-mails (and set this is the .muttrc: set beep_new)
 URxvt.urgentOnBell: true
@@ -45,7 +55,10 @@ URxvt.iso14755: False
 URxvt.keysym.Shift-Control-C: perl:clipboard:copy
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 
-! Basic colors
+! ------------------------------------------
+! Urxvt colors
+! ------------------------------------------
+
 ! black
 URxvt.color0: #000000
 URxvt.color8: #121212
@@ -76,3 +89,34 @@ URxvt.color14: #4D7A89
 ! white
 URxvt.color7: #ffffff
 URxvt.color15: #f5f5f5
+
+! ------------------------------------------
+! Ranger colors
+! ------------------------------------------
+
+! background
+ranger.background: [100]#4A4A4A
+! black
+ranger.color0: #000000
+ranger.color8: #121212
+! red
+ranger.color1: #FF434A
+ranger.color9: #FF434A
+! green
+ranger.color2: #46CB50
+ranger.color10: #46CB50
+! yellow
+ranger.color3: #FAE56B
+ranger.color11: #FAE56B
+! blue
+ranger.color4: #71A6B7
+ranger.color12:#71A6B7
+! magenta
+ranger.color5: #BA86C9
+ranger.color13: #BA86C9
+! cyan
+ranger.color6: #4D7A89
+ranger.color14: #4D7A89
+! white
+ranger.color7: #ffffff
+ranger.color15: #f5f5f5
