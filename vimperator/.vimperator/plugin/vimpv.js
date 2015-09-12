@@ -37,7 +37,7 @@ hints.addMode ("e", "Vimpv > Play embedded video: ",
 
      function(elem) {
          liberator.echomsg("Vimpv Playing: "+elem.src)
-         liberator.execute("silent !mpv '"+ elem.src+"'")
+         liberator.execute("silent !mpv '"+ elem.src+"'&")
      },
      function () "//embed | //iframe" //<embed> and <iframe> html tags for embedded videos
 );
