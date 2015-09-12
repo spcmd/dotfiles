@@ -640,6 +640,7 @@ alias kpass='kpcli --kdb'
 alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
 alias mutt1='mutt -F ~/.mutt/account.1.muttrc'
 alias mutt2='mutt -F ~/.mutt/account.2.muttrc'
+alias re-nm='sudo systemctl restart NetworkManager'
 
 # Send mail using mutt cli
 mailthis() {

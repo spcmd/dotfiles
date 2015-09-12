@@ -95,7 +95,7 @@ URxvt.color15: #f5f5f5
 ! ------------------------------------------
 
 ! background
-ranger.background: [100]#4A4A4A
+ranger.background: [100]#121212
 ! black
 ranger.color0: #000000
 ranger.color8: #121212
