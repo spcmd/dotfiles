@@ -194,7 +194,6 @@ volumewidget:buttons (awful.util.table.join (
 		awful.util.spawn ("amixer sset " .. amixer.channel .. " " .. amixer.step .. "+")
 		vicious.force ({ volumewidget }) -- force refresh the widget when using the mouse on it
 	end)
-
 ))
 
 vicious.register(volumewidget, vicious.widgets.volume,

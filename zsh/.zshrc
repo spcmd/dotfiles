@@ -303,7 +303,7 @@ pacdep() { pacman -Qi "$@" | grep Depends }
 pacsize() { pacman -Qi "$@" | grep Size }
 
 # pacman: size of the cache dir
-paccache() { du -hs /var/cache/pacman }
+paccachesize() { du -hs /var/cache/pacman }
 
 # pacman: list or search in cache
 pacpkg() {
@@ -641,6 +641,9 @@ alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
 alias mutt1='mutt -F ~/.mutt/account.1.muttrc'
 alias mutt2='mutt -F ~/.mutt/account.2.muttrc'
 alias re-nm='sudo systemctl restart NetworkManager'
+alias lampp-start='sudo /opt/lampp/lampp start'
+alias lampp-stop='sudo /opt/lampp/lampp stop'
+alias lampp-restart='sudo /opt/lampp/lampp restart'
 
 # Send mail using mutt cli
 mailthis() {

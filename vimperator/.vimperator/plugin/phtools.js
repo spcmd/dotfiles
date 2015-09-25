@@ -14,7 +14,7 @@
 // Tools for prohardver.hu forum
 
 // phlinkformat
-// Az akutális oldal linkjéből és címéből készít
+// Az aktuális oldal linkjéből és címéből készít
 // egy PH fórum kompatiblis link taget.
 // Használat: 
 // :phlinkformat
