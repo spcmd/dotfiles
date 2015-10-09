@@ -644,6 +644,8 @@ alias re-nm='sudo systemctl restart NetworkManager'
 alias lampp-start='sudo /opt/lampp/lampp start'
 alias lampp-stop='sudo /opt/lampp/lampp stop'
 alias lampp-restart='sudo /opt/lampp/lampp restart'
+alias awesome-checkmail-off="echo off > $HOME/.config/awesome/mailchecker"
+alias awesome-checkmail-on="echo on > $HOME/.config/awesome/mailchecker"
 
 # Send mail using mutt cli
 mailthis() {

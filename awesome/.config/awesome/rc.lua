@@ -305,8 +305,17 @@ function newmail_count()
  return newmail_count_content
 end
 
+function mailchecker_set()
+    local mailchecker_set_file = io.open("/home/spcmd/.config/awesome/mailchecker", "r")
+    local mailchecker_set_content = mailchecker_set_file:read()
+    mailchecker_set_file:close()
+    return mailchecker_set_content
+end
+
 function mail_status()
-    if (tonumber(newmail_count()) >= 1) then
+    if mailchecker_set() == "off" then
+        mail_widget:set_markup(" <span background='#E9AD00' color='" ..beautiful.bg_normal .. "'>OFF</span> ")
+    elseif (mailchecker_set() ~= "off" and tonumber(newmail_count()) >= 1) then
         mail_widget:set_markup(" <span background='" ..beautiful.bg_urgent .. "' color='" ..beautiful.fg_urgent .. "'>"..tonumber(newmail_count()).."new</span> ")
     else
         mail_widget:set_text(" 0 ")
