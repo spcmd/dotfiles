@@ -84,7 +84,7 @@ modkey = "Mod4"
 ------------------------------------------
 
 -- Theme
-beautiful.init("~/.config/awesome/themes/archie-blue/theme.lua")
+beautiful.init("~/.config/awesome/themes/back_to_the_future/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
@@ -384,8 +384,8 @@ mytextclock = awful.widget.textclock()
 calendar = blingbling.calendar()
 calendar:set_link_to_external_calendar(false)
 calendar:set_current_day_widget_style({
-    background_color = beautiful.bg_focus,
-    text_color = beautiful.fg_focus,
+    background_color = beautiful.fg_focus,
+    text_color = beautiful.bg_focus,
 })
 calendar:set_weeks_number_widget_style({
     text_color = beautiful.bg_normal -- hide the week numbers
