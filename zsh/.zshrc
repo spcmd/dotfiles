@@ -12,7 +12,7 @@
 #           https://gist.github.com/spcmd
 
 
-# {{{   ZSH Basic config 
+# {{{   ZSH Basic config
 # -----------------------------------------------------
 
 # Path to oh-my-zsh installation
@@ -147,13 +147,13 @@ hist() {
     if [[ "$1" != "" ]]; then
         fc -l 1 | grep "$1"
     else
-        fc -l 1 
+        fc -l 1
     fi
 }
 
 # Create a backup copy in the current directory
 cpbak() { for files in "$@"; do cp $files $files.bak; done }
-# Create a backup copy in the Backup dir 
+# Create a backup copy in the Backup dir
 cpbakdir() { for files in "$@"; do cp $files $DIR_BACKUP; done }
 
 # Copy filename to clipboard, copy filepath to clipboard
@@ -181,7 +181,7 @@ man() {
     man "$@"
 }
 # }}}
-# {{{   Compton 
+# {{{   Compton
 # -----------------------------------------------------
 
 # Set urxvt's transparency in compton's config
@@ -211,7 +211,7 @@ hint-compton() {
 }
 
 # }}}
-# {{{   Mediaplayer
+# {{{   Mediaplayer / Radio
 # -----------------------------------------------------
 
 # mpv: list watch later dir's content and select from them
@@ -220,13 +220,85 @@ if [[ -x $DIR_SCRIPTS/mpv-watch-later.sh ]]; then
 fi
 
 # Online radios
-classfm() { $MEDIAPLAYER "http://icast.connectmedia.hu/4784/live.mp3" }
-rockradio-60s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/60srock.pls" }
-rockradio-80s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/80srock.pls" }
-rockradio-90s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/90srock.pls" }
-rockradio-bluesrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/bluesrock.pls" }
-rockradio-classicrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/classicrock.pls" }
-rockradio-poprock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/poprock.pls" }
+radio-classfm() { $MEDIAPLAYER "http://icast.connectmedia.hu/4784/live.mp3" }
+radio-radio1() { $MEDIAPLAYER "http://stream.radio1pecs.hu:8200/pecs.mp3" }
+radio-mr2petofi() { $MEDIAPLAYER "http://109.199.58.90/4738/mr2.mp3" }
+radio-rockradio-60s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/60srock.pls" }
+radio-rockradio-80s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/80srock.pls" }
+radio-rockradio-90s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/90srock.pls" }
+radio-rockradio-bluesrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/bluesrock.pls" }
+radio-rockradio-classicrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/classicrock.pls" }
+radio-rockradio-poprock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/poprock.pls" }
+
+radioplayer() {
+
+    # Define radios
+    radio1="http://stream.radio1pecs.hu:8200/pecs.mp3"
+    classfm="http://icast.connectmedia.hu/4784/live.mp3"
+    mr2petofi="http://109.199.58.90/4738/mr2.mp3"
+
+    # Check if mpv is installed
+    if [[ ! -x /bin/mpv ]]; then
+        echo '>>> Error: mpv is not installed. Please install mpv first.<<<'
+        exit
+    fi
+
+    # Play
+    mpv --quiet $radio1 &
+    echo -e '                  _ _             _                       '
+    echo -e '                 | (_)           | |                      '
+    echo -e '    ____ ____  __| |_  ___  ____ | | ____ _   _  ___ ____ '
+    echo -e '   |  __/ _  |/ _` | |/ _ \|  _ \| |/ _  | | | |/ _ \  __|'
+    echo -e '   | | | (_| | (_| | | (_) | |_) | | (_| | |_| |  __/ |   '
+    echo -e '   |_|  \____|\____|_|\___/| ___/|_|\____|\___ |\___|_|   '
+    echo -e '                           | |             __/ |          '
+    echo -e '                           |_|            |___/           '
+    echo "$(tput setaf 4;tput bold)>>> Playing: Radio 1 <<<$(tput sgr0)"
+    echo "$(tput setaf 4;tput bold)>>> To switch channel, press a number (1-3) and hit Enter <<<$(tput sgr0)"
+    while true
+        do
+            read switch_to
+            if [[ $switch_to == "2" ]]; then
+                pkill mpv
+                echo -e '                  _ _             _                       '
+                echo -e '                 | (_)           | |                      '
+                echo -e '    ____ ____  __| |_  ___  ____ | | ____ _   _  ___ ____ '
+                echo -e '   |  __/ _  |/ _` | |/ _ \|  _ \| |/ _  | | | |/ _ \  __|'
+                echo -e '   | | | (_| | (_| | | (_) | |_) | | (_| | |_| |  __/ |   '
+                echo -e '   |_|  \____|\____|_|\___/| ___/|_|\____|\___ |\___|_|   '
+                echo -e '                           | |             __/ |          '
+                echo -e '                           |_|            |___/           '
+                echo "$(tput setaf 4;tput bold)>>> Switching to channel: Class FM <<<$(tput sgr0)"
+                mpv --quiet $classfm &
+            elif [[ $switch_to == "3" ]]; then
+                pkill mpv
+                echo -e '                  _ _             _                       '
+                echo -e '                 | (_)           | |                      '
+                echo -e '    ____ ____  __| |_  ___  ____ | | ____ _   _  ___ ____ '
+                echo -e '   |  __/ _  |/ _` | |/ _ \|  _ \| |/ _  | | | |/ _ \  __|'
+                echo -e '   | | | (_| | (_| | | (_) | |_) | | (_| | |_| |  __/ |   '
+                echo -e '   |_|  \____|\____|_|\___/| ___/|_|\____|\___ |\___|_|   '
+                echo -e '                           | |             __/ |          '
+                echo -e '                           |_|            |___/           '
+echo "$(tput setaf 4;tput bold)>>> Switching to channel: mr2 Petofi <<<$(tput sgr0)"
+                mpv --quiet $mr2petofi &
+            elif [[ $switch_to == "1" ]]; then
+                pkill mpv
+                echo -e '                  _ _             _                       '
+                echo -e '                 | (_)           | |                      '
+                echo -e '    ____ ____  __| |_  ___  ____ | | ____ _   _  ___ ____ '
+                echo -e '   |  __/ _  |/ _` | |/ _ \|  _ \| |/ _  | | | |/ _ \  __|'
+                echo -e '   | | | (_| | (_| | | (_) | |_) | | (_| | |_| |  __/ |   '
+                echo -e '   |_|  \____|\____|_|\___/| ___/|_|\____|\___ |\___|_|   '
+                echo -e '                           | |             __/ |          '
+                echo -e '                           |_|            |___/           '
+echo "$(tput setaf 4;tput bold)>>> Switching to channel: Radio1 <<<$(tput sgr0)"
+                mpv --quiet $radio1 &
+            elif [[ $switch_to == "q" ]]; then
+                pkill mpv
+            fi
+        done
+}
 
 # }}}
 # {{{   Config Files
@@ -364,12 +436,12 @@ pacmirror() {
     fi
 }
 
-# pacman: log 
+# pacman: log
 # Based on: https://bbs.archlinux.org/viewtopic.php?pid=1281605#p1281605
 paclog(){
 	LOGFILE="/var/log/pacman.log"
 	case "$1" in
-		-h)	# Show help 
+		-h)	# Show help
 		    echo "paclog"
             echo "Usage: paclog [-option]"
             echo ""
@@ -394,11 +466,11 @@ paclog(){
 		-S) # Search in log
 			grep $2 $LOGFILE | less
 		    ;;
-		-m) # Show messages 
-			grep 'ALPM-SCRIPTLET' -B 1 $LOGFILE | less 
+		-m) # Show messages
+			grep 'ALPM-SCRIPTLET' -B 1 $LOGFILE | less
 			;;
 		*)  # Show the entire log
-		    less $LOGFILE 
+		    less $LOGFILE
 		esac
 }
 
@@ -493,7 +565,7 @@ fi
 if [[ -x /bin/speedtest-cli ]]; then
     speedtest(){
         case "$1" in
-            -h)	# Show help 
+            -h)	# Show help
                 echo "Speedtest (a wrapper for speedtest-cli)"
                 echo "Usage: speedtest [-option]"
                 echo ""
@@ -563,7 +635,7 @@ TE() {
 
 dirbookmarks() {
     case "$1" in
-            -h|*)# Show help 
+            -h|*)# Show help
                 echo "dirbookmarks are stored in ~/.dirbookmarks"
                 echo "Commands:"
                 echo ""
@@ -598,7 +670,7 @@ unmarkdir() {
 }
 
 lsmarks() {
-    echo -e "Listing directories saved to .dirbookmarks:\n" 
+    echo -e "Listing directories saved to .dirbookmarks:\n"
     awk -F "|" -v OFS="\033[0;36m ---> \033[0m" ' $1="\t\033[1;34m"$1 '  $HOME/.dirbookmarks
 }
 
@@ -616,10 +688,10 @@ compctl -K _completemarks cdm
 compctl -K _completemarks unmarkdir
 
 # }}}
-# {{{  Other Aliases and Functions 
+# {{{  Other Aliases and Functions
 # -----------------------------------------------------
 
-alias q=' exit' # do not store the command in the history 
+alias q=' exit' # do not store the command in the history
 alias ls='ls --color=auto -A'
 alias lsl='ls -lA'
 alias lf='ls -lA1p $@ | grep -v "\/$"' # list files only
@@ -667,24 +739,24 @@ vless() { vim -u $HOME/.vimlessrc $1 }
 # stopwatch
 stopwatch() {
     date1=$(date +%s)
-    while true; do 
+    while true; do
        echo -ne "$(date -u --date @$(($(date +%s) - $date1)) +%H:%M:%S)\r";
     done
 }
 
 # calculator
-calc() { 
+calc() {
     echo "Python calc (exit with Ctrl+D)"
     python2 -ic "from __future__ import division; from math import *; from random import *"
 }
 
 # Rsync to external Backup HDD
 if [[ -x /bin/rsync ]]; then
-    rsync-Documents() { 
+    rsync-Documents() {
         RACK_BACKUP_DIR='/media/320GB_Rack/00Backup_spcmd/'
         if [[ -d $RACK_BACKUP_DIR ]]; then
             rsync -avr $HOME/Documents/ $RACK_BACKUP_DIR/Documents/
-        else 
+        else
             echo "rsync-Documents Error! \033[1;34m$RACK_BACKUP_DIR \033[0mnot found. Is it mounted? Or has the directory changed?"
         fi
     }

@@ -84,7 +84,7 @@ modkey = "Mod4"
 ------------------------------------------
 
 -- Theme
-beautiful.init("~/.config/awesome/themes/back_to_the_future/theme.lua")
+beautiful.init("~/.config/awesome/themes/archie-blue/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
@@ -532,7 +532,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
     awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger") end),
     awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(terminal .. " -T rtorrent -e rtorrent") end),
-    awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -T mutt -e mutt -F ~/.mutt/account.1.muttrc") end),
+    --awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -T mutt -e mutt -F ~/.mutt/account.1.muttrc") end),
+    awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -T moc -e mocp") end),
 
     -- Backlight
     awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --down") end),
@@ -720,7 +721,7 @@ awful.rules.rules = {
         properties = { tag = tags[1][3] } },
 
     -- Tag 4 rules
-    { rule_any = { class = { "Spotify" }  },
+    { rule_any = { class = { "Spotify" }, name = { "moc" }  },
         properties = { tag = tags[1][4] } },
      
     -- Tag 5 rules
