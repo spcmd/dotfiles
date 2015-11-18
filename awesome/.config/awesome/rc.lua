@@ -116,7 +116,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ " term", "🌍 web", " files", " mus", " torr", " misc", " mail", 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag({ " term", "🌍 web", " files", " mus", " torr", " misc", " mail", " games" }, s, layouts[1])
 end
 
 -- Menu
@@ -142,8 +142,16 @@ mylauncher = awful.widget.launcher({
 -- Add margin to the launcher icon
 local mylauncher_margin = wibox.layout.margin(mylauncher,0,1,0,0)
 
--- Menubar configuration
+-- Menubar configuration (http://awesome.naquadah.org/wiki/Menubar/3.5)
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+menubar.cache_entries = true
+menubar.show_categories = false
+menubar.geometry = { height=25 }
+menubar.menu_gen.all_menu_dirs = {
+  "/usr/share/applications",
+  "/usr/local/share/applications",
+  "/home/spcmd/Games"
+}
 
 -- }}}
 --{{{   Wibox & Widgets 
@@ -198,7 +206,7 @@ volumewidget:buttons (awful.util.table.join (
 
 vicious.register(volumewidget, vicious.widgets.volume,
                  function(widget, args)
-                    local label = { ["♫"] = "🔊", ["♩"] = "<span color='#d80000'>🔊 </span>" }
+                    local label = { ["♫"] = "", ["♩"] = "<span color='#d80000'> </span>" }
                     return " " .. label[args[2]] .. " " .. args[1] .. " "
                  end, 300, "Master" -- 300 = 5 mins update time. We don't need fast widget refresh (low number/time) because the buttons will update the widget instantly.
                 )
@@ -314,11 +322,11 @@ end
 
 function mail_status()
     if mailchecker_set() == "off" then
-        mail_widget:set_markup(" <span background='#E9AD00' color='" ..beautiful.bg_normal .. "'>OFF</span> ")
+        mail_widget:set_markup(" <span background='#E9AD00' color='" ..beautiful.bg_normal .. "'>OFF</span> ")
     elseif (mailchecker_set() ~= "off" and tonumber(newmail_count()) >= 1) then
-        mail_widget:set_markup(" <span background='" ..beautiful.bg_urgent .. "' color='" ..beautiful.fg_urgent .. "'>"..tonumber(newmail_count()).."new</span> ")
+        mail_widget:set_markup(" <span background='" ..beautiful.bg_urgent .. "' color='" ..beautiful.fg_urgent .. "'>"..tonumber(newmail_count()).."new</span> ")
     else
-        mail_widget:set_text(" 0 ")
+        mail_widget:set_text(" 0 ")
     end
 end
 mail_status()
@@ -372,6 +380,8 @@ end)
 ----------------------------------------------------------------
 -- Textclock & Calendar widget
 ----------------------------------------------------------------
+-- clock and calendar icons are set in calendar.lua!
+
 mytextclock = awful.widget.textclock()
 
 -- Clock & Date with Calendar ( https://github.com/cedlemo/blingbling )
@@ -520,7 +530,7 @@ globalkeys = awful.util.table.join(
     
      -- Start several applications at the same time
     awful.key({ modkey, "Mod1"    }, "1", function () 
-                                                awful.util.spawn("firefox") 
+                                                awful.util.spawn("/home/spcmd/bin/firefox-38-esr/firefox") 
                                                 awful.util.spawn("spotify") 
                                                 awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger")
                                                 awful.util.spawn(terminal .. " -T rtorrent -e rtorrent")
@@ -721,7 +731,7 @@ awful.rules.rules = {
         properties = { tag = tags[1][3] } },
 
     -- Tag 4 rules
-    { rule_any = { class = { "Spotify" }, name = { "moc" }  },
+    { rule_any = { name = { "Spotify", "moc" }, class = { "Spotify", "spotify", "moc" }  },
         properties = { tag = tags[1][4] } },
      
     -- Tag 5 rules
@@ -735,6 +745,10 @@ awful.rules.rules = {
     -- Tag 7 rules
     { rule_any = { name = { "mutt" } },
         properties = { tag = tags[1][7] } },
+
+     -- Tag 8 rules
+    { rule_any = { class = { "dosbox", "Wine" } },
+        properties = { tag = tags[1][8] } },
 
 }
 

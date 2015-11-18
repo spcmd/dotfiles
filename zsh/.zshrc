@@ -355,6 +355,7 @@ alias pacupd='sudo pacman -Syyu' # update & upgrade
 alias pacupg='sudo pacman -Syyu' # update & upgrade
 alias paclsup='sudo pacman -Syy && pacman -Qu' # show availabe updates
 alias paclspkg='pacman -Q' # list installed packages
+alias paclsaur='pacman -Qmq' #list AUR and manually installed packages
 alias paclsaurpkg='pacman -Qm' # list installed AUR packages
 alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
 alias cdyaourtpkg='cd /var/cache/pacman/pkg-yaourt' # change to yaourt cache dir
@@ -561,6 +562,10 @@ if [[ -x $DIR_SCRIPTS/bbtv.sh ]]; then
     alias bbtv='$DIR_SCRIPTS/bbtv.sh'
 fi
 
+# translate cli (google translate)
+gthu() { trans :hu "$@" }
+gten() { trans hu:en "$@" }
+
 # speedtest-cli (https://github.com/sivel/speedtest-cli | https://aur.archlinux.org/packages/speedtest-cli)
 if [[ -x /bin/speedtest-cli ]]; then
     speedtest(){
@@ -693,7 +698,7 @@ compctl -K _completemarks unmarkdir
 
 alias q=' exit' # do not store the command in the history
 alias ls='ls --color=auto -A'
-alias lsl='ls -lA'
+alias lsl='ls -Alh --group-directories-first --color=auto'
 alias lf='ls -lA1p $@ | grep -v "\/$"' # list files only
 alias free='free -h'
 alias lsblkf='lsblk -o "NAME,SIZE,MOUNTPOINT,RO,FSTYPE,LABEL,UUID"'
@@ -718,6 +723,19 @@ alias lampp-stop='sudo /opt/lampp/lampp stop'
 alias lampp-restart='sudo /opt/lampp/lampp restart'
 alias awesome-checkmail-off="echo off > $HOME/.config/awesome/mailchecker"
 alias awesome-checkmail-on="echo on > $HOME/.config/awesome/mailchecker"
+
+# Load ISO to loop device and mount (for Games)
+iso-load() {
+    if [[ -z $1 ]]; then
+        echo "Error: no ISO file specified."
+        echo "Usage:"
+        echo -e "\t iso-load /path/to/file.iso"
+    else
+        udisksctl loop-setup -r -f $1 && sudo mount /dev/loop0 /media/ISO
+    fi
+}
+# Unmount and unload ISO
+iso-unload() { sudo umount /media/ISO && udisksctl loop-delete -b /dev/loop0 }
 
 # Send mail using mutt cli
 mailthis() {
