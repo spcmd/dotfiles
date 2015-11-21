@@ -739,7 +739,7 @@ awful.rules.rules = {
         properties = { tag = tags[1][5] } },
 
     -- Tag 6 rules
-    { rule_any = { class = { "Gimp", "Inkscape", "libreoffice", "VirtualBox", "Gtkpod" } },
+    { rule_any = { class = { "Gimp", "Inkscape", "libreoffice", "VirtualBox", "Gtkpod", "Szamlazo.exe" }, instance = { "Szamlazo.exe" } },
         properties = { tag = tags[1][6] } },
 
     -- Tag 7 rules
@@ -747,7 +747,7 @@ awful.rules.rules = {
         properties = { tag = tags[1][7] } },
 
      -- Tag 8 rules
-    { rule_any = { class = { "dosbox", "Wine" } },
+    { rule_any = { class = { "dosbox" }, name = { "WineGame" } },
         properties = { tag = tags[1][8] } },
 
 }

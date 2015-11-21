@@ -56,6 +56,16 @@ URxvt.keysym.Shift-Control-C: perl:clipboard:copy
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 
 ! ------------------------------------------
+! App icons
+! ------------------------------------------
+! pixbuf enabled urxvt needed!
+! Download at: https://aur.archlinux.org/packages/rxvt-unicode-pixbuf/
+! If fonts are messed up, disable the font width and/or line spacing patches in the PKGBUILD
+
+URxvt.iconFile: /home/spcmd/.icons/urxvt.png
+ranger.iconFile: /home/spcmd/.icons/ranger.png
+
+! ------------------------------------------
 ! Urxvt colors
 ! ------------------------------------------
 
