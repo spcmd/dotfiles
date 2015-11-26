@@ -64,6 +64,9 @@ URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 
 URxvt.iconFile: /home/spcmd/.icons/urxvt.png
 ranger.iconFile: /home/spcmd/.icons/ranger.png
+rTorrent.iconFile: /home/spcmd/.icons/rtorrent.png
+mutt.iconFile: /home/spcmd/.icons/mutt.png
+moc.iconFile: /home/spcmd/.icons/moc.png
 
 ! ------------------------------------------
 ! Urxvt colors

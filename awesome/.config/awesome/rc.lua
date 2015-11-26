@@ -90,10 +90,10 @@ beautiful.init("~/.config/awesome/themes/archie-blue/theme.lua")
 local layouts =
 {
 
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.floating,
@@ -338,7 +338,7 @@ mail_widget_timer:start()
 ------ Mail widget mouse button action 
 mail_widget:buttons (awful.util.table.join (
     awful.button ({}, 1, function()
-        awful.util.spawn(terminal .. " -T mutt -e run_once.sh mutt -F ~/.mutt/account.1.muttrc")
+        awful.util.spawn(terminal .. " -name mutt -T mutt -e run_once.sh mutt -F ~/.mutt/account.1.muttrc")
         -- jump to mail tag
         local screen = mouse.screen
         local tag = awful.tag.gettags(screen)[7]
@@ -351,7 +351,7 @@ mail_widget:buttons (awful.util.table.join (
         naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
     end),
     awful.button ({}, 3, function()
-        awful.util.spawn(terminal .. " -T mutt -e run_once.sh mutt -F ~/.mutt/account.2.muttrc")
+        awful.util.spawn(terminal .. " -name mutt -T mutt -e run_once.sh mutt -F ~/.mutt/account.2.muttrc")
         -- jump to mail tag
         local screen = mouse.screen
         local tag = awful.tag.gettags(screen)[7]
@@ -533,17 +533,18 @@ globalkeys = awful.util.table.join(
                                                 awful.util.spawn("/home/spcmd/bin/firefox-38-esr/firefox") 
                                                 awful.util.spawn("spotify") 
                                                 awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger")
-                                                awful.util.spawn(terminal .. " -T rtorrent -e rtorrent")
+                                                awful.util.spawn(terminal .. " -name rTorrent -T rTorrent -e rtorrent")
                                           end),
 
     -- Run Applications
-    awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/firefox-38-esr/firefox") end),
+    --awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/firefox-38-esr/firefox") end),
+    awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/icecat/icecat") end),
     awful.key({ modkey, "Mod1"    }, "s", function () awful.util.spawn("spotify") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
     awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger") end),
-    awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(terminal .. " -T rtorrent -e rtorrent") end),
+    awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(terminal .. " -name rTorrent -T rTorrent -e rtorrent") end),
     --awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -T mutt -e mutt -F ~/.mutt/account.1.muttrc") end),
-    awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -T moc -e mocp") end),
+    awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -name moc -T moc -e mocp") end),
 
     -- Backlight
     awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --down") end),
@@ -723,7 +724,7 @@ awful.rules.rules = {
         properties = { floating = true } },
     
     -- Tag 2 rules
-    { rule_any = { class = { "Firefox", "Iceweasel", "Chromium", "Chrome" } },
+    { rule_any = { class = { "Firefox", "Iceweasel", "Chromium", "Chrome", "IceCat", "Icecat" } },
         properties = { tag = tags[1][2] }},
 
     -- Tag 3 rules
@@ -735,7 +736,7 @@ awful.rules.rules = {
         properties = { tag = tags[1][4] } },
      
     -- Tag 5 rules
-    { rule_any = { name = { "rtorrent" }  },
+    { rule_any = { name = { "rtorrent", "rTorrent" }  },
         properties = { tag = tags[1][5] } },
 
     -- Tag 6 rules

@@ -27,10 +27,11 @@ local bat = {}
 local function worker(format, warg)
     if not warg then return end
 
-    -- symbols (unicode and fontawesome ttf): ⌁ ↯ ⚡ 
+    -- symbols (unicode and fontawesome ttf): ⌁ ↯ ⚡  
     local bat_charging = "<span color='#55BF47' weight='bold'> </span>"
-    local bat_discharging = "<span color='#d90000' weight='bold'> </span>"
-    local bat_full = "  "
+    local bat_discharging = " "
+    --local bat_discharging = "<span color='#d90000' weight='bold'> </span>"
+    local bat_full = " "
 
     local battery = helpers.pathtotable("/sys/class/power_supply/"..warg)
     local battery_state = {
@@ -96,9 +97,9 @@ local function worker(format, warg)
     
     -- Colorize percentage depending on the battery level
     if state == bat_discharging and percent <= 20 then
-        percent = "<span color='#FF3B3B'>" .. percent .. "%%</span>"
+        percent = "<span color='#FF3B3B' weight='bold'>" .. percent .. "%%</span>"
     elseif state == bat_discharging and percent <= 30 then
-        percent = "<span color='#FFE490'>" .. percent .. "%%</span>"
+        percent = "<span color='#FFE490' weight='bold'>" .. percent .. "%%</span>"
     else
        percent = percent .. "%%"
     end
