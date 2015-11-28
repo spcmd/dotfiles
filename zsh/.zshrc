@@ -449,8 +449,9 @@ paclog(){
             echo "\033[1;34m      -i\033[0m                Show log entries for installed."
             echo "\033[1;34m      -r\033[0m                Show log entries for removed."
             echo "\033[1;34m      -u\033[0m                Show log entries for upgraded."
+            echo "\033[1;34m      -d\033[0m                Show log entries for downgraded."
             echo "\033[1;34m      -m\033[0m                Show log entries for messages."
-            echo "\033[1;34m      -S <keyword>\033[0m      Search for <keyword> in the log entries."
+            echo "\033[1;34m      -s <keyword>\033[0m      Search for <keyword> in the log entries."
             echo "\033[1;34m      -h\033[0m                This help."
             echo ""
             echo "Without an option, the \033[1;34mpaclog\033[0m command shows the entire log."
@@ -464,7 +465,10 @@ paclog(){
 		-u) # Show upgraded
 			grep 'upgraded' $LOGFILE | grep -v 'ALPM-SCRIPTLET' | less
 		    ;;
-		-S) # Search in log
+        -d) # Show downgraded
+            grep 'downgraded' $LOGFILE | grep -v 'ALPM-SCRIPTLET' | less
+		    ;;
+        -s) # Search in log
 			grep $2 $LOGFILE | less
 		    ;;
 		-m) # Show messages
