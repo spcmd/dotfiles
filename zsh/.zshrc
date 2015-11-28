@@ -58,7 +58,6 @@ fi
 export EDITOR='vim'
 export TERM='rxvt-unicode-256color'
 export COLORTERM='rxvt-unicode-256color'
-export BROWSER='firefox'
 export MEDIAPLAYER='mpv'
 export IMAGER='feh'
 export PDFER='zathura'
@@ -170,12 +169,13 @@ lsgrep() {
 mangrep() { man $1 | grep --color=auto $2 }
 
 # Colored man pages (https://wiki.archlinux.org/index.php/Man_page#Using_less_.28Recommended.29)
+# LESS_TERMCAP_so's last number is the highlight color (e.g.:3m is yellow, or 33m is blue)
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
     LESS_TERMCAP_me=$'\E[0m' \
     LESS_TERMCAP_se=$'\E[0m' \
-    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_so=$'\E[38;5;3m' \
     LESS_TERMCAP_ue=$'\E[0m' \
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
@@ -473,6 +473,13 @@ paclog(){
 		*)  # Show the entire log
 		    less $LOGFILE
 		esac
+}
+
+# locate pac* files
+# https://wiki.archlinux.org/index.php/Pacnew_and_Pacsave_files#Locating_.pac.2A_files
+pacfilesfinder() {
+    echo -e "$COLOR_HL1::$COLOR_TITLE pacfilesfinder >$COLOR_DEFAULT Listing pac* files in /etc:"
+    find /etc -regextype posix-extended -regex ".+\.pac(new|save|orig)" 2> /dev/null
 }
 
 # pacman: last upgrade date/time

@@ -530,11 +530,16 @@ globalkeys = awful.util.table.join(
     
      -- Start several applications at the same time
     awful.key({ modkey, "Mod1"    }, "1", function () 
-                                                awful.util.spawn("/home/spcmd/bin/firefox-38-esr/firefox") 
+                                                awful.util.spawn("/home/spcmd/bin/icecat/icecat")
                                                 awful.util.spawn("spotify") 
                                                 awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger")
                                                 awful.util.spawn(terminal .. " -name rTorrent -T rTorrent -e rtorrent")
                                           end),
+    -- Check mail
+    awful.key({ modkey, "Control" }, "m", function ()
+        awful.util.spawn_with_shell("gmailcheck.sh")
+        naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
+     end),
 
     -- Run Applications
     --awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/firefox-38-esr/firefox") end),
