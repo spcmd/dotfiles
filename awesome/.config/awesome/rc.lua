@@ -530,7 +530,7 @@ globalkeys = awful.util.table.join(
     
      -- Start several applications at the same time
     awful.key({ modkey, "Mod1"    }, "1", function () 
-                                                awful.util.spawn("/home/spcmd/bin/icecat/icecat")
+                                                awful.util.spawn("/home/spcmd/bin/firefox-esr/firefox")
                                                 awful.util.spawn("spotify") 
                                                 awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger")
                                                 awful.util.spawn(terminal .. " -name rTorrent -T rTorrent -e rtorrent")
@@ -542,8 +542,8 @@ globalkeys = awful.util.table.join(
      end),
 
     -- Run Applications
-    --awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/firefox-38-esr/firefox") end),
-    awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/icecat/icecat") end),
+    awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/firefox-esr/firefox") end),
+    --awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/icecat/icecat") end),
     awful.key({ modkey, "Mod1"    }, "s", function () awful.util.spawn("spotify") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
     awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger") end),
