@@ -85,15 +85,15 @@ URxvt.color10: #00AA00
 URxvt.color3: #FAE56B
 URxvt.color11: #FAE56B
 ! blue
-URxvt.color4: #71A6B7
-URxvt.color12:#71A6B7
-!URxvt.color4: #1C7EFF
-!URxvt.color12:#1C7EFF
+!URxvt.color4: #71A6B7
+!URxvt.color12:#71A6B7
+URxvt.color4: #41A0B9
+URxvt.color12:#41A0B9
 ! magenta
-URxvt.color5: #BDA1C5
-URxvt.color13: #BDA1C5
-!URxvt.color5: #90A7D0
-!URxvt.color13: #90A7D0
+URxvt.color5: #FFA97A
+URxvt.color13: #FFA97A
+!URxvt.color5: #BDA1C5
+!URxvt.color13: #BDA1C5
 ! cyan
 URxvt.color6: #4D7A89
 URxvt.color14: #4D7A89
@@ -108,10 +108,10 @@ URxvt.color15: #f5f5f5
 ! ------------------------------------------
 
 ! background
-ranger.background: [100]#121212
+ranger.background: [100]#080808
 ! black
 ranger.color0: #000000
-ranger.color8: #121212
+ranger.color8: #080808
 ! red
 ranger.color1: #FF434A
 ranger.color9: #FF434A
@@ -122,11 +122,15 @@ ranger.color10: #46CB50
 ranger.color3: #FAE56B
 ranger.color11: #FAE56B
 ! blue
-ranger.color4: #71A6B7
-ranger.color12:#71A6B7
+!ranger.color4: #71A6B7
+!ranger.color12:#71A6B7
+ranger.color4: #41A0B9
+ranger.color12:#41A0B9
 ! magenta
-ranger.color5: #BA86C9
-ranger.color13: #BA86C9
+!ranger.color5: #BA86C9
+!ranger.color13: #BA86C9
+ranger.color5: #FFA97A
+ranger.color13: #FFA97A
 ! cyan
 ranger.color6: #4D7A89
 ranger.color14: #4D7A89
