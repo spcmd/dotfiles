@@ -11,9 +11,10 @@
 #           https://github.com/spcmd
 #           https://gist.github.com/spcmd
 
-nitrogen --restore &
+sh ~/.fehbg &
+urxvtd &
 tint2 &
+(sleep 1 && setxkbmap -option caps:escape) &
 volumeicon &
-xfce4-power-manager &
 (sleep 3s && compton --backend glx --paint-on-overlay --vsync opengl-swc) &
 xmodmap ~/.Xmodmap &

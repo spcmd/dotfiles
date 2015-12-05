@@ -734,6 +734,7 @@ alias lampp-stop='sudo /opt/lampp/lampp stop'
 alias lampp-restart='sudo /opt/lampp/lampp restart'
 alias awesome-checkmail-off="echo off > $HOME/.config/awesome/mailchecker"
 alias awesome-checkmail-on="echo on > $HOME/.config/awesome/mailchecker"
+alias zzz='systemctl suspend'
 
 # Load ISO to loop device and mount (for Games)
 iso-load() {

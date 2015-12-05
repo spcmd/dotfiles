@@ -137,3 +137,11 @@ ranger.color14: #4D7A89
 ! white
 ranger.color7: #ffffff
 ranger.color15: #f5f5f5
+
+! ------------------------------------------
+! mutt colors
+! ------------------------------------------
+
+! background
+mutt.background: [100]#080808
+

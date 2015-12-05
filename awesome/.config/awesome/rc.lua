@@ -117,6 +117,7 @@ tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
     tags[s] = awful.tag({ " term", "🌍 web", " files", " mus", " torr", " misc", " mail", " games" }, s, layouts[1])
+    --tags[s] = awful.tag({ " 1: ", "2:🌍 ", "3: ", "4: ", "5: ", "6: ", "7: ", "8: " }, s, layouts[1])
 end
 
 -- Menu
@@ -541,6 +542,9 @@ globalkeys = awful.util.table.join(
         naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
      end),
 
+    -- Sleep
+    awful.key({ modkey, "Control"    }, "z", function () awful.util.spawn("systemctl suspend") end),
+
     -- Run Applications
     awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/firefox-esr/firefox") end),
     --awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/icecat/icecat") end),
@@ -725,7 +729,7 @@ awful.rules.rules = {
                      size_hints_honor = false } },
 
     -- Float rules
-    { rule_any = { class = { "mpv", "Zathura", "feh", "Gcolor2", "Gifview", "Wine", "gimp" } },
+    { rule_any = { class = { "Zathura", "feh", "Gcolor2", "Gifview", "Wine", "gimp" } },
         properties = { floating = true } },
     
     -- Tag 2 rules
@@ -790,7 +794,7 @@ client.connect_signal("manage", function (c, startup)
     -- Enable titlbar for floating applications
     local titlebars_enabled = true
     if titlebars_enabled and (
-                              c.class == "mpv" or
+                              --c.class == "mpv" or
                               c.class == "feh" or
                               c.class == "Gcolor2" or
                               c.class == "Gifview" or
