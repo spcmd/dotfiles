@@ -729,7 +729,7 @@ awful.rules.rules = {
                      size_hints_honor = false } },
 
     -- Float rules
-    { rule_any = { class = { "Zathura", "feh", "Gcolor2", "Gifview", "Wine", "gimp" } },
+    { rule_any = { class = { "Gifview", "Wine", "gimp" } },
         properties = { floating = true } },
     
     -- Tag 2 rules
@@ -794,11 +794,11 @@ client.connect_signal("manage", function (c, startup)
     -- Enable titlbar for floating applications
     local titlebars_enabled = true
     if titlebars_enabled and (
-                              --c.class == "mpv" or
-                              c.class == "feh" or
+                              c.class == "mpv" or
+                              --c.class == "feh" or
                               c.class == "Gcolor2" or
                               c.class == "Gifview" or
-                              c.class == "Zathura" or
+                              --c.class == "Zathura" or
                               c.class == "Wine" or
                               c.type == "dialog"
                              )

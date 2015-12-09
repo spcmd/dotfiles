@@ -86,7 +86,7 @@ nmap <leader>t :trans<CR>
 nmap <leader>T :transfull<CR>
 
 "Sztaki lookup
-nmap <leader>s :sztaki<CR>
+nmap <leader>d :sztaki<CR>
 
 "Wikipedia lookup
 nmap <leader>w :wiki<CR>
@@ -100,6 +100,8 @@ nmap Y :phlinkformat<CR>
 "Search for the highlighted text on page & copy to the clipboard
 nmap <leader>f :js var selectedText = window.content.window.getSelection().toString(); window.content.window.find(selectedText); util.copyToClipboard(selectedText, true); liberator.echo("Searching for highlighted text: "+selectedText+" (copied to the clipboard)")<CR>
  
+"Duckduckgo to Startpage (needs dddgtostartpage.js plugin for vimperator)
+nmap <leader>s :sp<CR>
 
 " }}}
 " {{{   Go To (Bookmarks)

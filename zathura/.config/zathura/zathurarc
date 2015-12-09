@@ -2,16 +2,11 @@
 # https://www.mankier.com/5/zathurarc
 
 # primary: paste with middle mouse button | clipboard: paste with ctrl+v
-set selection-clipboard primary
+set selection-clipboard clipboard
 set show-v-scrollbar
 
 # keymap
-map 0 zoom 0.0
-map 1 zoom out
-map 2 zoom in
-map 3 zoom best-fit
-map 4 zoom width
-map b search back
-map n search forward
-map <Return> toggle_inputbar
-
+map <C-j> scroll half-down
+map <C-k> scroll half-up
+map , zoom out
+map . zoom in
