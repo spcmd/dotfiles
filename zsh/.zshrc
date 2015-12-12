@@ -715,6 +715,7 @@ alias free='free -h'
 alias lsblkf='lsblk -o "NAME,SIZE,MOUNTPOINT,RO,FSTYPE,LABEL,UUID"'
 alias dist-info='cat /etc/*-release'
 alias dist-name='cat /etc/*-release | grep -E "^NAME" | cut -c 6-'
+alias grep='grep --color'
 
 alias hdapm='sudo hdparm -I /dev/sda | grep level'
 alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'

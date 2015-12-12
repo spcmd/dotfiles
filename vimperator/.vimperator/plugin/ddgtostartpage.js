@@ -32,7 +32,7 @@
                     //  _blank   (new tab)
                     var target='_parent' 
                     
-                    // Extract the query form the URL
+                    // Extract the query from the URL
                     var extractedQuery = window.content.window.location.search;
 
                     // We don't need the '?q=' part, just the plain expression

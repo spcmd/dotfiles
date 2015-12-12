@@ -60,7 +60,7 @@ inoremap <C-e> <C-[>
 nnoremap h :help<Space>
 
 "Quick Bookmarks
-nnoremap b :bmarks<Space>
+nnoremap b :bmarks!<Space>
 
 "Context menu
 nnoremap cc ;c
