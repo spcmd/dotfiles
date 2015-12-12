@@ -155,7 +155,7 @@ menubar.menu_gen.all_menu_dirs = {
 }
 
 -- }}}
---{{{   Wibox & Widgets 
+--{{{   Wibox & Widgets
 -------------------------------------------
 
 ----------------------------------------------------------------
@@ -336,7 +336,7 @@ mail_widget_timer = timer({timeout=30})
 mail_widget_timer:connect_signal("timeout",mail_status)
 mail_widget_timer:start()
 
------- Mail widget mouse button action 
+------ Mail widget mouse button action
 mail_widget:buttons (awful.util.table.join (
     awful.button ({}, 1, function()
         awful.util.spawn(terminal .. " -name mutt -T mutt -e run_once.sh mutt -F ~/.mutt/account.1.muttrc")
@@ -377,6 +377,35 @@ mail_widget:connect_signal("mouse::enter", function ()
     list_newmail_tooltip:set_text(newmail_list())
 end)
 
+----------------------------------------------------------------
+--  Note/Reminder widget
+----------------------------------------------------------------
+--  Note:
+--  widget format also set by awm-note() function in the .zshrc
+----------------------------------------------------------------
+note_widget = wibox.widget.textbox()
+
+function read_notes()
+ local note_file = io.open("/home/spcmd/Documents/awm-note.txt")
+ if note_file~=nil then
+     local note_contents = note_file:read("*all")
+     note_file:close()
+     return note_contents
+ end
+end
+
+function note_status()
+    if (read_notes() ~= nil) then
+        note_widget:set_markup(" <span font_weight='bold' color='red'>notes</span>")
+    end
+end
+note_status()
+
+note_list = awful.tooltip({ objects = { note_widget }})
+
+note_widget:connect_signal("mouse::enter", function ()
+    note_list:set_text(read_notes())
+end)
 
 ----------------------------------------------------------------
 -- Textclock & Calendar widget
@@ -485,6 +514,7 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     --if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mail_widget)
+    right_layout:add(note_widget)
     right_layout:add(eth_widget)
     right_layout:add(wls_widget)
     right_layout:add(volumewidget)
@@ -528,11 +558,11 @@ globalkeys = awful.util.table.join(
     -- Volume
     awful.key({ modkey,           }, "Up", function () awful.util.spawn("amixer sset Master 2%+") vicious.force ({ volumewidget }) end),
     awful.key({ modkey,           }, "Down", function () awful.util.spawn ("amixer sset Master 2%-") vicious.force ({ volumewidget }) end),
-    
+
      -- Start several applications at the same time
-    awful.key({ modkey, "Mod1"    }, "1", function () 
+    awful.key({ modkey, "Mod1"    }, "1", function ()
                                                 awful.util.spawn("/home/spcmd/bin/firefox-esr/firefox")
-                                                awful.util.spawn("spotify") 
+                                                awful.util.spawn("spotify")
                                                 awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger")
                                                 awful.util.spawn(terminal .. " -name rTorrent -T rTorrent -e rtorrent")
                                           end),
@@ -731,7 +761,7 @@ awful.rules.rules = {
     -- Float rules
     { rule_any = { class = { "Gifview", "Wine", "gimp" } },
         properties = { floating = true } },
-    
+
     -- Tag 2 rules
     { rule_any = { class = { "Firefox", "Iceweasel", "Chromium", "Chrome", "IceCat", "Icecat" } },
         properties = { tag = tags[1][2] }},
@@ -743,7 +773,7 @@ awful.rules.rules = {
     -- Tag 4 rules
     { rule_any = { name = { "Spotify", "moc" }, class = { "Spotify", "spotify", "moc" }  },
         properties = { tag = tags[1][4] } },
-     
+
     -- Tag 5 rules
     { rule_any = { name = { "rtorrent", "rTorrent" }  },
         properties = { tag = tags[1][5] } },
