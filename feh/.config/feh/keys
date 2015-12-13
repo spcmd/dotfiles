@@ -15,11 +15,26 @@
 # The default keybind needs to be unset (cleared) if a key has a 'default' function (bind).
 # Use <command> without a <key> to unset the default keybind.
 
-zoom_in period
-zoom_out comma
-zoom_fit minus
-#action_0 <no key> = unbind the 'Return' key
+#moving
+next_img j
+prev_img k
+
+#unset the 'z' key
+jump_random
+
+# map zoom
+zoom_fit z
+zoom_in l
+zoom_out h
+
+#unset the 'Enter' (Return) key
 action_0
 toggle_fullscreen Return
-mirror C-m
-flip C-f
+
+#unset the 'm' and 'f' keys
+save_filelist
+toggle_menu
+
+#image manipulation
+mirror m
+flip f

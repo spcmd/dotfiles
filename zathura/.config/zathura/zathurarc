@@ -8,5 +8,5 @@ set show-v-scrollbar
 # keymap
 map <C-j> scroll half-down
 map <C-k> scroll half-up
-map , zoom out
-map . zoom in
+map h zoom out
+map l zoom in
