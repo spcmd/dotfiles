@@ -506,6 +506,22 @@ hint-pacman() {
 }
 
 # }}}
+# {{{   Void / xbps
+# -----------------------------------------------------
+sv-status() {
+    if [[ ! -z $1 ]]; then
+        sudo sv status $1
+    else
+        sudo sv status /var/service/*
+    fi
+}
+sv-stop() { sudo sv down $1 }
+sv-start() { sudo sv up $1 }
+sv-restart() { sudo sv restart $1 }
+sv-enable() { sudo ln -s /etc/sv/$1 /var/service/ }
+sv-disable() { sudo rm /var/service/$1 }
+sv-list() { ls -l /etc/sv }
+# }}}
 # {{{ Git
 # -----------------------------------------------------
 
