@@ -1,0 +1,14 @@
+# Use the the 'lesskey' command to compile a .less
+# lesskey -o ~/.less /path/to/lesskey
+
+# Key map
+^J        forw-screen
+^K        back-screen
+
+# Options
+# case-insensitive search by default (-i)
+# display color (-R).
+# statusbar at the bottom (-J)
+
+#env
+#LESS=-RJi
