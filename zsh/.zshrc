@@ -189,7 +189,9 @@ compton-opacity() {
     compton_config=~/.config/compton/compton.conf
     if [[ -e  $compton_config ]]; then
         if [[ -z $1 ]]; then
+            VALUE=$(awk 'NR==4' $HOME/.config/compton/compton.conf)
             echo "Error! Opacity value cannot be empty. You need to set a number."
+            echo "The current setting is: $VALUE"
         else
             # change the opacity value in the 4th line
             sed -i "4s/[0-9][0-9]/$1/" $compton_config
@@ -834,6 +836,7 @@ alias lampp-start='sudo /opt/lampp/lampp start'
 alias lampp-stop='sudo /opt/lampp/lampp stop'
 alias lampp-restart='sudo /opt/lampp/lampp restart'
 alias zzz='systemctl suspend'
+alias sss='systemctl poweroff'
 
 # Load ISO to loop device and mount (for Games)
 iso-load() {
