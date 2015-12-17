@@ -508,6 +508,8 @@ hint-pacman() {
 # }}}
 # {{{   Void / xbps
 # -----------------------------------------------------
+
+# services
 sv-status() {
     if [[ ! -z $1 ]]; then
         sudo sv status $1
@@ -521,6 +523,15 @@ sv-restart() { sudo sv restart $1 }
 sv-enable() { sudo ln -s /etc/sv/$1 /var/service/ }
 sv-disable() { sudo rm /var/service/$1 }
 sv-list() { ls -l /etc/sv }
+
+#xbps
+xbps-pkglist() { xbps-query -l | awk '{print $2;}' | sed 's/-[0-9].*//' }
+xbps-pkglistver() { xbps-query -l | awk '{print $2;}' }
+xbps-pkgcount() { xbps-query -l | wc -l }
+xbps-pkgsize() { xbps-query "$1" | grep --color=never "size" }
+xbps-pkgver() { xbps-query --property=pkgver "$1" }
+xbps-pkgdep() { xbps-query -x "$1" }
+
 # }}}
 # {{{ Git
 # -----------------------------------------------------
