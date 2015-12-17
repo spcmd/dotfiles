@@ -84,7 +84,7 @@ modkey = "Mod4"
 ------------------------------------------
 
 -- Theme
-beautiful.init("~/.config/awesome/themes/archie-blue/theme.lua")
+beautiful.init("~/.config/awesome/themes/dwm-blue/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
@@ -499,6 +499,7 @@ for s = 1, screen.count() do
 
     -- Create a tasklist widget
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
+    mytasklist_margin = wibox.layout.margin(mytasklist[s],0,5,0,0)
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", height = 20, screen = s })
@@ -526,7 +527,7 @@ for s = 1, screen.count() do
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
     layout:set_left(left_layout)
-    layout:set_middle(mytasklist[s])
+    layout:set_middle(mytasklist_margin)
     layout:set_right(right_layout)
 
     mywibox[s]:set_widget(layout)
