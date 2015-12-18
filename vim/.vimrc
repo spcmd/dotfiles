@@ -11,11 +11,21 @@
 "           https://github.com/spcmd
 "           https://gist.github.com/spcmd
 
+" {{{   Load plugins
+"--------------------------------------------"
+call plug#begin('~/.vim/plugged')
 
+    Plug 'ap/vim-buftabline'
+    Plug 'chrisbra/Colorizer', { 'on': 'ColorHighlight' }
+    Plug 'Shougo/neocomplete.vim'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'spcmd/vim-easy-todo', { 'for': 'todo' }
+    Plug 'kristijanhusak/vim-multiple-cursors'
+
+call plug#end()
+" }}}
 " {{{   Basic Settings
 "--------------------------------------------"
-
-execute pathogen#infect()
 syntax on
 filetype plugin indent on
 colorscheme Tomorrow-Night-spcmd                    "color scheme
@@ -46,7 +56,7 @@ set rnu                                             "relative line numbering
 "set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline
 set listchars=tab:▸\ ,eol:¬                         "tab and EOL chars
-set showmode                                        "show modes 
+set showmode                                        "show modes
 set nofoldenable                                    "disable automatic folding
 set autoread                                        "auto-reload files if they were modified outside Vim
 set ignorecase                                      "case-insensitive mode
@@ -69,15 +79,15 @@ set statusline+=%f%m%=%y\ [%{strlen(&fenc)?&fenc:'none'}]\ L:%l/%L\ C:%c\ (%P)
 " {{{   Plugin/Bundle specific settings
 "--------------------------------------------
 
- if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
+" if !exists('g:airline_symbols')
+    "let g:airline_symbols = {}
+"endif
 
 let g:buftabline_indicators = 1                     "indicate modified state of the buffer
-let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
-let NERDTreeShowHidden=1                            "show hidden files by default (needed for dotfiles)
-let g:session_autosave="yes"                        "autosave session
-let g:session_autoload="yes"                        "autoload session
+"let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
+"let NERDTreeShowHidden=1                            "show hidden files by default (needed for dotfiles)
+"let g:session_autosave="yes"                        "autosave session
+"let g:session_autoload="yes"                        "autoload session
 let g:neocomplete#enable_at_startup = 1             "enable Neocomplete
 let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
 "let g:airline_left_sep = ""                         "no arrows
@@ -94,7 +104,7 @@ let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
 "let g:vcoolor_lowercase = 1                         "use lowercase color codes by default
 
 " }}}
-" {{{   Terminal cursor settings 
+" {{{   Terminal cursor settings
 "--------------------------------------------
 
 " Cursor color & shape
@@ -170,7 +180,7 @@ command! Q q
 command! RR write|source ~/.vimrc
 
 "Quick Open configs
-cnoreabbrev cfg Cfg 
+cnoreabbrev cfg Cfg
 command! CfgAwesome :e ~/.config/awesome/rc.lua
 command! CfgBashrc :e ~/.bashrc
 command! CfgCompton :e ~/.config/compton/compton.conf
