@@ -760,8 +760,10 @@ awful.rules.rules = {
                      size_hints_honor = false } },
 
     -- Float rules
-    { rule_any = { class = { "Gifview", "Wine", "gimp" } },
+    { rule_any = { class = { "Gifview", "Wine" } },
         properties = { floating = true } },
+
+    { rule = { class = "Gcolor2" }, properties = { floating = false } },
 
     -- Tag 2 rules
     { rule_any = { class = { "Firefox", "Iceweasel", "Chromium", "Chrome", "IceCat", "Icecat" } },

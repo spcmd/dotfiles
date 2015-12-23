@@ -675,9 +675,10 @@ if [[ -x $DIR_SCRIPTS/bbtv.sh ]]; then
     alias bbtv='$DIR_SCRIPTS/bbtv.sh'
 fi
 
-# translate cli (google translate)
+# translate shell (google translate) (https://github.com/soimort/translate-shell)
 gthu() { trans :hu "$@" }
 gten() { trans hu:en "$@" }
+alias trans-update='wget -N -P ~/Scripts https://raw.githubusercontent.com/soimort/translate-shell/gh-pages/trans'
 
 # speedtest-cli (https://github.com/sivel/speedtest-cli | https://aur.archlinux.org/packages/speedtest-cli)
 if [[ -x /bin/speedtest-cli ]]; then
