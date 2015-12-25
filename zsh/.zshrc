@@ -334,10 +334,10 @@ alias cfg-xresources='$EDITOR ~/.Xresources'
 alias cfg-zshrc='$EDITOR ~/.zshrc'
 
 # Reload config files
-alias rld-bashrc='source ~/.bashrc && echo "source bashrc: done!"'
+alias rld-bashrc='source ~/.bashrc'
 alias rld-gpg='echo RELOADAGENT | gpg-connect-agent'
 alias rld-xresources='xrdb -load ~/.Xresources && echo "reload .Xresources: done!"'
-alias rld-zshrc='source ~/.zshrc && echo "source zshrc: done!"'
+alias rld-zshrc='source ~/.zshrc'
 alias RR='rld-zshrc'
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 rld-compton() { pkill compton && sleep 1s && compton -b --config ~/.config/compton/compton.conf ; }
@@ -653,6 +653,71 @@ awm-note() {
 
 
 # }}}
+# {{{ Note
+note() {
+
+    FILE_NOTES=~/.notes
+
+    case "$1" in
+
+        -r|--remove)
+                        sed -i "/$2/d" $FILE_NOTES
+                        ;;
+        -R|--remove-all)
+                        echo "Remove ALL notes? Are you sure [yY/nN]"
+                        read answer
+                        if [[ $answer == "y" ]] || [[ $answer == "Y" ]]; then
+                            cp $FILE_NOTES /tmp
+                            rm $FILE_NOTES
+                            echo "$FILE_NOTES has been deleted. Now you can find a copy in /tmp (for emergency) until the next reboot. Delete manually if you wish."
+                        else
+                            echo "Cancelled."
+                        fi
+                        ;;
+        -l|--list)
+                        tac $FILE_NOTES
+                        ;;
+
+        -L|--list-oldest-first)
+                        cat $FILE_NOTES
+                        ;;
+        -s|--search)
+                        grep -i "$2" $FILE_NOTES
+                        ;;
+        -S|--search-case-sensitive)
+                        grep "$2" $FILE_NOTES
+                        ;;
+        -h|--help)
+cat <<EOF
+Usage: note [option] <note|keyword>
+
+    <note>                                      Add a note (you can add a note without using the -a or the --all option)
+    -a, --add <note>                            Add a note
+    -r, --remove <keyword>                      Remove note(s) by keyword (a keyword can be any word, tag, date or time)
+    -R, --remove-all                            Remove ALL notes (emergency backup will be created in /tmp)
+    -l, --list                                  List notes (show newer first)
+    -L, --list-oldest-first                     List notes (show oldest first)
+    -s, --search <keyword>                      Search in the notes (case-insensitive)
+    -S, --search-case-sensitive <keyword>       Search in the notes (case-sensitive)
+    -h, --help                                  This help
+
+Important: Use quoting for the notes! Use @ for tagging, e.g.:
+
+    note "This is my first note @mytag"         This will add a note with the tag @mytag
+    note -r "13:22"                             This will remove note(s) with the 13:22 timestamp
+    note -r "@mytag"                            This will remove note(s) with the tag @mytag
+
+EOF
+                        ;;
+        -a|--add)
+                        echo "$(date +"[%Y-%b-%d %H:%M]") $2" >> $FILE_NOTES
+                        ;;
+        *)
+                        echo "$(date +"[%Y-%b-%d %H:%M]") $1" >> $FILE_NOTES
+                        ;;
+    esac
+}
+# }}}
 # {{{ Net utils / Web service related
 # -----------------------------------------------------
 
@@ -916,3 +981,5 @@ if [[ -x /usr/bin/apt-get ]]; then
 fi
 
 # }}}
+
+
