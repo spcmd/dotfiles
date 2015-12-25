@@ -590,12 +590,12 @@ gitprevimg() {
 # mailchecker switch
 awm-chkmail-off() {
     echo 'off' > $HOME/.config/awesome/mailchecker &&
-    echo 'awm checkmail has been set to OFF' &&
+    echo '==> awm checkmail OFF' &&
     echo 'mail_widget_timer:connect_signal("timeout",mail_status)' | awesome-client
 }
 awm-chkmail-on() {
     echo 'on' > $HOME/.config/awesome/mailchecker &&
-    echo 'awm checkmail has been set to ON' &&
+    echo '==> awm checkmail ON' &&
     echo 'mail_widget_timer:connect_signal("timeout",mail_status)' | awesome-client
 }
 
@@ -656,10 +656,13 @@ awm-note() {
 # {{{ Note
 note() {
 
-    FILE_NOTES=~/.notes
+    FILE_NOTES=~/Documents/Notes
 
     case "$1" in
 
+        -b|--backup)
+                        cp $FILE_NOTES $FILE_NOTES.bak
+                        ;;
         -r|--remove)
                         sed -i "/$2/d" $FILE_NOTES
                         ;;
@@ -689,10 +692,12 @@ note() {
                         ;;
         -h|--help)
 cat <<EOF
+Notes file's location: $FILE_NOTES
 Usage: note [option] <note|keyword>
 
     <note>                                      Add a note (you can add a note without using the -a or the --all option)
     -a, --add <note>                            Add a note
+    -b, --backup                                Create a backup copy in the same directory
     -r, --remove <keyword>                      Remove note(s) by keyword (a keyword can be any word, tag, date or time)
     -R, --remove-all                            Remove ALL notes (emergency backup will be created in /tmp)
     -l, --list                                  List notes (show newer first)
@@ -904,6 +909,30 @@ alias lampp-restart='sudo /opt/lampp/lampp restart'
 alias zzz='systemctl suspend'
 alias sss='systemctl poweroff'
 
+# NetworkManager wifi switcher
+wifi() {
+
+    case "$1" in
+        on)
+            nmcli radio wifi on
+            echo "==> Wifi switched ON"
+            if [[ -f /bin/awesome ]]; then
+                awm-chkmail-on
+            fi
+            ;;
+        off)
+            nmcli radio wifi off
+            echo "==> Wifi switched OFF"
+            if [[ -f /bin/awesome ]]; then
+                awm-chkmail-off
+            fi
+            ;;
+        status)
+            nmcli radio wifi
+            ;;
+    esac
+}
+
 # Load ISO to loop device and mount (for Games)
 iso-load() {
     if [[ -z $1 ]]; then
@@ -981,5 +1010,3 @@ if [[ -x /usr/bin/apt-get ]]; then
 fi
 
 # }}}
-
-
