@@ -15,7 +15,7 @@
 "--------------------------------------------"
 call plug#begin('~/.vim/plugged')
 
-    Plug 'ap/vim-buftabline'
+    "Plug 'ap/vim-buftabline'
     Plug 'chrisbra/Colorizer', { 'on': 'ColorHighlight' }
     Plug 'Shougo/neocomplete.vim'
     Plug 'scrooloose/nerdcommenter'
@@ -83,7 +83,7 @@ set statusline+=%f%m%=%y\ [%{strlen(&fenc)?&fenc:'none'}]\ L:%l/%L\ C:%c\ (%P)
     "let g:airline_symbols = {}
 "endif
 
-let g:buftabline_indicators = 1                     "indicate modified state of the buffer
+"let g:buftabline_indicators = 1                     "indicate modified state of the buffer
 "let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
 "let NERDTreeShowHidden=1                            "show hidden files by default (needed for dotfiles)
 "let g:session_autosave="yes"                        "autosave session

@@ -14,10 +14,10 @@
 " {{{   Settings
 "--------------------------------------------
 
-colorscheme i3-blue
+colorscheme dwm-blue
 set hintchars=hjklasdfgrtzu
 set titlestring=
-set editor="gvim -f"
+"set editor="gvim -f"
 let mapleader = "-"
 
 "Hide navigation/url bar
