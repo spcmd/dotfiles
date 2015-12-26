@@ -15,35 +15,25 @@
 # {{{   ZSH Basic config
 # -----------------------------------------------------
 
-# Path to oh-my-zsh installation
-export ZSH=$HOME/.oh-my-zsh
+# Dir for ZSH
+export ZSH=$HOME/.zsh
 
-# Zsh Theme (~/.oh-my-zsh/themes/)
+# Theme
 ZSH_THEME="spcmd"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+# Plugins
+plugins=(zsh-syntax-highlighting)
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+# Options
+autoload -U colors && colors
+setopt auto_cd          # Change dir without the cd command
+setopt multios          # Perform implicit tees or cats when multiple redirections are attempted
+setopt cdablevars       # Try to expand the expression as if it were preceded by a ‘~’
+setopt prompt_subst     # Needed for prompt coloring (expasion)
+unsetopt nomatch        # Globbing
 
-# Would you like to use another custom folder than $ZSH/custom?
-#ZSH_CUSTOM=~/.oh-my-zsh/custom
-
-# Plugins (~/.oh-my-zsh/plugins/*)
-# Custom plugins (~/.oh-my-zsh/custom/plugins/)
-plugins=(git zsh-syntax-highlighting)
-
-# globbing
-unsetopt nomatch
-
-# oh-my-zsh
-# some default zsh scripts were disabled in ".oh-my-zsh/lib" by "oh-my-zsh/.gitignore"
-source $ZSH/oh-my-zsh.sh
+# Load ZSH stuff (defaults, plugins, themes)
+source $ZSH/zsh-loader.sh
 
 # Load dircolors
 if [[ -f ~/.dircolors ]]; then
@@ -556,6 +546,7 @@ gitcheck() {
 
 # git aliases
 alias gch='gitcheck'
+alias gst='git status'
 alias gadd='git add --all'
 alias gpush='git push origin master'
 alias gcommit='git commit -m'
@@ -584,7 +575,7 @@ gitprevimg() {
 }
 
 # }}}
-# {{{ awesome WM related
+# {{{ awesome WM
 # -----------------------------------------------------
 
 # mailchecker switch
@@ -695,6 +686,7 @@ cat <<EOF
 Notes file's location: $FILE_NOTES
 Usage: note [option] <note|keyword>
 
+Options:
     <note>                                      Add a note (you can add a note without using the -a or the --all option)
     -a, --add <note>                            Add a note
     -b, --backup                                Create a backup copy in the same directory
@@ -908,6 +900,8 @@ alias lampp-stop='sudo /opt/lampp/lampp stop'
 alias lampp-restart='sudo /opt/lampp/lampp restart'
 alias zzz='systemctl suspend'
 alias sss='systemctl poweroff'
+alias cal='cal -m'
+alias cal-next='cal -mn 2'
 
 # NetworkManager wifi switcher
 wifi() {
