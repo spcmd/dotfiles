@@ -17,7 +17,7 @@
 colorscheme dwm-blue
 set hintchars=hjklasdfgrtzu
 set titlestring=
-"set editor="gvim -f"
+set editor="urxvt -e vim"
 let mapleader = "-"
 
 "Hide navigation/url bar
@@ -102,6 +102,9 @@ nmap <leader>f :js var selectedText = window.content.window.getSelection().toStr
  
 "Duckduckgo to Startpage (needs dddgtostartpage.js plugin for vimperator)
 nmap <leader>s :sp<CR>
+
+"Stylish quick reload
+nmap ss :stylish toggle<CR>:stylish toggle<CR>
 
 " }}}
 " {{{   Go To (Bookmarks)
