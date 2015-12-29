@@ -1,0 +1,12 @@
+@-moz-document domain(imgur.com) {
+
+.fixed-share-container,
+#side-gallery,
+.advertisement,
+#cta-container-placeholder,
+.side-footer-links,
+#scroll-ad {display:none!important;}  
+  
+  
+/* end of style */  
+}

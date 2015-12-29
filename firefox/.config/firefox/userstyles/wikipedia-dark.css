@@ -1,0 +1,50 @@
+@-moz-document domain(wikipedia.org) {
+  
+body,
+#mw-head,
+#mw-panel,
+div.vectorTabs ul li,
+.mw-body,
+#content,
+h1,h2,h3,h4,h5,h6,
+.thumbinner,
+.metadata,
+.plainlinks,
+.ambox,
+.ambox-style,
+.ambox-More_footnotes,
+.toc,
+.infobox,
+.vevent,
+.navbox,
+.navbar,
+.navbox-title,
+.navbox-abovebelow,
+.navbox-group,
+.navbox-list,
+.navbox-odd,
+.hlist,
+.mini,
+.plainlinks,
+.catlinks{
+  background-color: #000!important;
+  color: #fff!important;
+  background-image:none!important;
+}
+a {
+  color: #5A8690!important;
+  filter: brightness(175%)!important;
+}
+#firstHeading, .firstHeading, .mw-headline {
+  color:#fff!important;
+}
+ul {
+  list-style-image:none!important;
+}
+#footer ul li {
+  color:#fff!important;
+}
+
+  
+/* end of style */ 
+}

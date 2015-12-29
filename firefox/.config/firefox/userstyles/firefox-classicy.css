@@ -1,0 +1,247 @@
+/*                                     _
+*         ___ _ __   ___ _ __ ___   __| |
+*        / __| '_ \ / __| '_ ` _ \ / _` |
+*        \__ | |_) | (__| | | | | | (_| |
+*        |___| .__/ \___|_| |_| |_|\__,_|
+*             |_|
+*
+*         Classicy theme for Firefox
+*               Created by: spcmd
+*           http://spcmd.github.io
+*           https://github.com/spcmd
+*           https://gist.github.com/spcmd
+*
+* Not fully customized!
+
+@namespace xul url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+
+/* Blank page color while loading pages 
+http://forums.mozillazine.org/viewtopic.php?f=38&t=571141&sid=c413eb487a7a83f16bb7b9b526a9dd9f
+*/
+ browser { background-color: #151515 !important; }
+
+/* Remove the 1px border under the top panel (remove 'display:none!important' if you want a separator border) */
+#navigator-toolbox::after {
+  background-color:#2d2d2d!important;
+  /*display:none!important;*/
+}
+
+/* Top panel background */
+#TabsToolbar {
+  -moz-appearance:none!important;
+  /*background-color:#242424!important;*/
+  /* border-bottom:2px solid #00344B!important; */
+}
+
+/* Remove toolbarbuttons/icons padding */
+toolbarbutton { padding:0!important; }
+
+/* Remove the "hover effect" from toolbar buttons */
+:root {
+  --toolbarbutton-hover-background: none!important;
+  --toolbarbutton-hover-boxshadow: none!important;
+  --toolbarbutton-hover-bordercolor: transparent!important;
+
+  --toolbarbutton-active-boxshadow: none!important;
+  --toolbarbutton-active-bordercolor: transparent!important;
+  --toolbarbutton-active-background: none!important;
+
+  --toolbarbutton-checkedhover-backgroundcolor: none!important;
+
+  --toolbarbutton-combined-boxshadow: none!important;
+  --toolbarbutton-combined-backgroundimage: none!important;
+}
+ 
+/* ============================ */
+/* ====== DOWNLOAD STUFF ====== */
+/* ============================ */
+
+/* Download icon */
+#downloads-button > image {
+  background: url("file:///home/spcmd/.config/firefox/download2.png")!important;
+  background-position: 8px 4px!important;
+  background-repeat: no-repeat!important;
+  list-style:none!important;
+  
+}
+  
+#downloads-indicator-icon {
+  background: url("file:///home/spcmd/.config/firefox/download2.png")!important;
+  background-position: 2px 2px!important;
+  background-repeat: no-repeat!important;
+  list-style:none!important;
+  
+}  
+  
+/* ================================= */
+/* ====== BOOKMARK ICON STUFF ====== */
+/* ================================= */
+
+/* Toolbar: Bookmark icon: remove star */
+.box-inherit.toolbarbutton-menubutton-button {display:none!important;}
+
+/* Toolbar: Bookmark list icon */
+#bookmarks-menu-button > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
+  list-style-image: none!important;
+}
+#bookmarks-menu-button {
+  background: url("file:///home/spcmd/.config/firefox/bookmark2.png")!important;
+  background-position: 3px 5px!important;
+  background-repeat: no-repeat!important;
+  width: 17px!important;
+  height: 16px!important;
+}
+#bookmarks-menu-button:hover {}
+
+/* ================================== */
+/* ====== BOOKMARKS LIST STUFF ====== */
+/* ================================== */
+  
+/* Hide Bookmark list top arrow */
+.panel-arrow {display:none!important;}
+
+/* Sub lists */
+.menu-iconic.bookmark-item.subviewbutton menupopup .popup-internal-box {
+  -moz-appearance:none!important;
+  background:#ededed!important;
+  border:1px solid #ccc!important;
+}
+/* Remove system theme from Sub lists */
+.menu-iconic.bookmark-item.subviewbutton menupopup {
+  -moz-appearance:none!important;
+}
+   
+/*
+   We can open the Bookmark Organizer with Ctrl+Shift+o
+   Thus we can clear some stuff from the Bookmarks menu
+*/
+
+/* Subscribe to this page */
+#BMB_subscribeToPageMenupopup,
+#BMB_subscribeToPageMenuitem {display:none!important;}
+
+/* Bookmarks Toolbar menu */
+#BMB_bookmarksToolbar {display:none!important;}
+
+/* Unsorted Bookmarks */
+#BMB_unsortedBookmarks {display:none!important;}
+
+/* Show all Bookmarks */
+#BMB_bookmarksShowAllTop {display:none!important;}
+
+/* View Bookmarks Sidebar */
+#BMB_viewBookmarksSidebar {display:none!important;}
+
+/* Show All Bookmarks */
+#BMB_bookmarksShowAll {display:none!important;}
+
+/* Separators in the bookmark list -> Not needed */
+menuseparator { display: none!important; }
+
+/* ================== */
+/* ====== TABS ====== */
+/* ================== */
+
+/* Tab width  */
+.tabbrowser-tab:not([pinned]) {
+  /*width:100%!important;
+  max-width:100%!important;*/
+  min-width:150px!important;
+}
+  
+/* Hide List All Tabs button */
+
+
+/* Tab style */
+#TabsToolbar .arrowscrollbox-scrollbox { padding: 2px!important; }
+#TabsToolbar .tabbrowser-tabs {min-height:26px!important;max-height:26px!important;}
+#TabsToolbar .tabbrowser-tab {
+  text-shadow: none !important;
+  background-clip: padding-box !important;
+  /*margin: 1px 1px 1px 0 !important;*/
+  background: linear-gradient(to top, #999 5%,#B9B9B9 100%);!important;
+  border-top:solid 1px #424242!important;
+  border-left:solid 1px #424242!important;
+  border-right:solid 1px #424242!important;
+  border-top-left-radius: 5px!important;
+  border-top-right-radius: 5px!important;
+  margin-right:2px!important;
+}
+
+#TabsToolbar .tabbrowser-tab:first-child {
+  -moz-border-left-colors: #424242 !important;
+  -moz-border-top-colors: #424242 !important;
+  -moz-border-right-colors: none !important;
+  -moz-border-bottom-colors: none !important;
+/*
+  border-top:solid 1px #424242!important;
+  border-right:solid 1px #424242!important;
+  border-top-left-radius: 5px!important;
+  border-top-right-radius: 5px!important;
+  margin-right:2px!important;
+*/
+}
+
+#TabsToolbar .tabbrowser-tab:not(:first-child) {
+  -moz-border-top-colors: none !important;
+  -moz-border-left-colors: none !important;
+  -moz-border-right-colors: none !important;
+  -moz-border-bottom-colors: none !important;
+/*  
+  border-left:solid 1px #424242!important;
+  border-right:solid 1px #424242!important;
+  border-top:solid 1px #424242!important;
+  border-top-left-radius: 5px!important;
+  border-top-right-radius: 5px!important;
+  margin-right:2px!important;
+*/
+}
+
+/* Selected Tab */
+#TabsToolbar .tabbrowser-tab[selected] { 
+  background: linear-gradient(to bottom, #f6f4f5 0%,#C7C7C7 100%);!important;}
+
+/* Tab title/label */
+.tab-text {text-align:center!important;margin-top:1px!important;}
+.tabbrowser-tab:not([selected]) .tab-text.tab-label { color: #121212!important; }
+.tabbrowser-tab[selected] .tab-text.tab-label { font-weight:bold!important; }
+
+/* Hide Tab close button */
+.tab-close-button.close-icon {display:none!important;}
+
+/* Fixing the curved tab style */
+#TabsToolbar .tab-background {
+  margin: 0 !important;
+  background: transparent !important;
+}
+#TabsToolbar .tab-background-start,
+#TabsToolbar .tab-background-end { display: none !important; }
+#TabsToolbar .tab-background-middle {
+  margin: -4px -2px !important;
+  background: transparent !important;
+}
+#TabsToolbar .tabbrowser-tab:after,
+#TabsToolbar .tabbrowser-tab:before { display: none !important; }
+#TabsToolbar .tab-throbber:not([pinned]),
+#TabsToolbar .tab-icon-image:not([pinned]) { -moz-margin-start: -4px !important; }
+.tab-close-button:not([pinned]) { -moz-margin-end: -4px !important; }
+#TabsToolbar .toolbarbutton-1 { margin-bottom: -1px !important; }
+
+/* New tab button */
+#TabsToolbar .tabs-newtab-button {
+  background: none;!important;
+  margin-left: -20px!important;
+  margin-top: 2px!important;
+}
+#TabsToolbar .tabs-newtab-button:hover {}
+  
+/* ========================= */
+/* ====== OTHER STUFF ====== */
+/* ========================= */
+
+/* Disable statusbar / URL popups at the bottom left corner */
+statuspanel {display:none!important;}
+
+/* Remove Context menu items */
+#context-selectall, #context-viewbgimage, #context-savepage {display:none!important;}

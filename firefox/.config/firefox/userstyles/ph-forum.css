@@ -1,0 +1,121 @@
+@-moz-document domain(logout.hu), domain(prohardver.hu), domain(itcafe.hu), domain(mobilarena.hu), domain(gamepod.hu) {
+
+
+/* Fejlecek */
+.adbox {
+  display:none!important;
+}
+.adbigtop {
+  display:none!important;
+}
+#network {
+  color:#DDD!important;
+}
+#network span {
+  color:#DDD!important;
+}
+#network li a{
+  color:#DDD!important;
+}
+#head {
+display:none! important;
+}
+.xabrebigtop, .xabrebox {
+display:none! important;
+}
+
+/* Kereso */
+#ssearch {
+  margin: 3px 0px 0px 0px !important;
+}
+
+/* Oldal hatter */
+body {
+  background: #202020!important;
+}
+
+/* Oldalkeret */
+#main  {
+  border: 1px solid #000!important;
+}
+  
+/* Ajanlo a forum temaban */
+/*div.anyagok {
+  display:none!important;
+}*/
+
+/* Forum fejlec */
+.forum th {
+  color: #480C0C!important;
+}  
+
+/* Oldalsav fejlec stb. */
+.boxs h4 {
+  color: #480C0C!important;
+  font-weight:bold!important;
+}
+
+/* Kedvencek lista: e-mail ikon */
+span.mod a:nth-child(3) {
+  display:none!important;
+}
+
+/* Kedvencek lista: torles es lista elejere sorolas ikonok */  
+span.mod a:nth-child(1), span.mod a:nth-child(2) {
+  display: none!important;
+}
+  
+/* Kedvencek lista: uj hsz jelzo */  
+a.msgs {
+ font-weight:bold!important;
+ font-size:12px!important;
+  background:#9d0000!important;
+  color:#fff!important;
+}
+a.msgs img {
+  display:none!important;
+}
+a.msgs::before {
+  content:"|";
+  background:#9d0000!important;
+  color:#9d0000!important;
+}  
+a.msgs::after {
+  content:"|";
+  background:#9d0000!important;
+  color:#9d0000!important;
+}
+
+/* HSZ doboz */
+.input {
+  border: 1px solid #8E8569;   
+}  
+
+
+/* HSZ kod formazas */
+.msgblk .text tt {
+  color: #570C0C!important;
+ /*
+  background:#C1B999!important;
+  margin:2px!important;
+  border-radius:3px!important;
+  border:1px solid #7A7462;
+ */
+}  
+  
+  
+/* Lablec */
+#foot {
+  display:none!important;
+}
+#thanks {
+  display: none!important;
+}  
+
+/* Tema osszefoglalo  */
+/* div.msg.flc.isnew { display:none!important; } */
+/* Ajanlo */
+/* div.msgblk > div.anyagok { display:none!important; } */
+  
+/* end of style */ 
+}  

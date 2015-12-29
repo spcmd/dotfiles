@@ -1,0 +1,44 @@
+@-moz-document domain(youtube.com) {
+
+/* top shit, side shit */
+.branded-page-v2-secondary-col,
+#masthead-appbar-container {
+   display:none!important;  
+}
+  
+#yt-masthead-container, #guide-container, .guide-flyout.guide-flyout-visibility,.yt-card,#footer-container {
+  background: #f1f1f1!important;
+}
+
+/* search field */
+#masthead-search-term {
+  background:#f8f8f8!important;
+  border:1px solid #999!important;
+}
+
+body {
+  background: #151515!important;
+}
+
+/* push subscription video's list up */
+.branded-page-v2-container-flex-width {
+
+}
+
+/* push channel banner down */
+#gh-banner {
+
+}
+  
+/* list title/text */
+.yt-ui-ellipsis {
+  background: transparent!important;
+}
+/* list item separator borders */
+.branded-page-box {
+  border-bottom:1px solid #ccc!important;
+}
+
+  
+/* end of style */
+}

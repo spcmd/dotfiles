@@ -1,0 +1,582 @@
+@namespace xul url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+/*                                     _
+*         ___ _ __   ___ _ __ ___   __| |
+*        / __| '_ \ / __| '_ ` _ \ / _` |
+*        \__ | |_) | (__| | | | | | (_| |
+*        |___| .__/ \___|_| |_| |_|\__,_|
+*             |_|
+*
+*       VimperatorFox Dark theme for Firefox
+*               Created by: spcmd
+*           http://spcmd.github.io
+*           https://github.com/spcmd
+*           https://gist.github.com/spcmd
+*
+*
+* A Firefox customization made for using with Vimperator.
+* Optimized for using under Linux & Openbox WM (with undecorated Firefox).
+* All animations need to be disabled in about:config
+* For example: browser.tabs.animate;false
+* Supported toolbar icons: downloads, bookmarks, Gmail Notifier (ignotifier)
+* Copy and paste this css into your userChrome.css or use it with Stylish.
+*
+* Download Vimperator: https://addons.mozilla.org/en-US/firefox/addon/vimperator/
+* Download Stylish https://addons.mozilla.org/en-us/firefox/addon/stylish/
+*
+* Icon sprite generated with: http://spritegen.website-performance.org/
+*
+* v1.3: ignotifer icon fix for newer versions of Firefox (>35)
+*
+* v1.2:
+*  - Removed: "nav-bar display:none", it caused problems with the Customize page. 
+*    The Proper way is to hide the nav-bar in the vimperatorrc: 
+*    set toolbars=nonavigation
+*  - Fixed: History/Bookmarks Organizer list highlight color.
+*
+*/
+
+/* ==================================== */
+/* ====== WINDOW, PANEL, TOOLBAR ====== */
+/* ==================================== */
+
+/* 
+  #content browser
+  Scrollbars cannot be styled via css, but
+  vertical scrollbar's size can be reduced.
+  If you want to hide the vertical scrollbar completely,
+  use -14px for the margin-right.
+  
+  WARNING: do NOT set 'display:none' here, because it will
+  hide the complete "window content frame" and Firefox will become
+  useless.
+*/
+/*
+#content browser {
+ margin-right: -6px !important;
+ overflow-y: scroll!important;
+ overflow-x: hidden!important;
+}
+*/
+
+/* Add border to the window (useful if Firefox is undecorated under Openbox WM) */
+/*
+#browser-panel {
+  border-top:1px solid #000!important;
+  border-left:1px solid #000!important;
+  border-right:1px solid #000!important;
+}
+*/
+
+/* Blank page color while loading pages 
+http://forums.mozillazine.org/viewtopic.php?f=38&t=571141&sid=c413eb487a7a83f16bb7b9b526a9dd9f
+*/
+ browser { background-color: #151515 !important; }
+
+/* Remove the 1px border under the top panel (remove 'display:none!important' if you want a separator border) */
+#navigator-toolbox::after {
+  background-color:#4CACC1!important;
+  display:none!important;  
+}
+
+/* Top panel background */
+#TabsToolbar {
+  -moz-appearance:none!important;
+  background-color:#151515!important;
+}
+
+/* Remove toolbarbuttons/icons padding */
+toolbarbutton { padding:0!important; }
+
+/* Remove the "hover effect" from toolbar buttons */
+:root {
+  --toolbarbutton-hover-background: none!important;
+  --toolbarbutton-hover-boxshadow: none!important;
+  --toolbarbutton-hover-bordercolor: transparent!important;
+
+  --toolbarbutton-active-boxshadow: none!important;
+  --toolbarbutton-active-bordercolor: transparent!important;
+  --toolbarbutton-active-background: none!important;
+
+  --toolbarbutton-checkedhover-backgroundcolor: none!important;
+
+  --toolbarbutton-combined-boxshadow: none!important;
+  --toolbarbutton-combined-backgroundimage: none!important;
+}
+
+/* ============================ */
+/* ====== DOWNLOAD STUFF ====== */
+/* ============================ */
+
+/* Download icon */
+#downloads-button > image {
+  background: url("http://i.imgur.com/heFELDX.png")!important;
+  background-position: -4px -4px!important;
+  width: 32px!important;
+  height: 31px!important;
+  list-style:none!important;
+}
+#downloads-button:hover {filter: brightness(150%);}
+#downloads-indicator-icon {
+  background: url("http://i.imgur.com/heFELDX.png")!important;
+  background-position: -10px -10px!important;
+  width: 18px!important;
+  height: 17px!important;
+  list-style:none!important;
+}
+#downloads-button:hover #downloads-indicator-icon {filter: brightness(150%);}
+
+/* Downloading: remaining time */
+#downloads-indicator-counter {
+  color: #57B5CA!important;
+  text-shadow:none!important;
+}
+/* Downloads popup list */
+#downloadsListBox {background:#151515!important;border:none!important;}
+/* Downloads popup list: 'Show All Downloads' button */
+#downloadsHistory {background:#2D6E7D!important;color:#fff!important;}
+
+/* ================================== */
+/* ====== GMAIL NOTIFIER STUFF ====== */
+/* ================================== */
+
+/* 
+  Gmail Notifier addon icon 
+  Download: https://addons.mozilla.org/en-US/firefox/addon/gmail-notifier-restartless
+*/
+toolbarbutton[id*='ignotifier'] {  
+  background: url("http://i.imgur.com/heFELDX.png")!important;
+  background-position: -42px 0px!important;
+  width: 19px!important;
+  height: 12px!important;
+}
+toolbarbutton[id*='ignotifier'] image {
+  visibility:hidden!important;
+}
+toolbarbutton[id*='ignotifier']:hover {filter: brightness(150%);}
+
+
+/* ================================= */
+/* ====== BOOKMARK ICON STUFF ====== */
+/* ================================= */
+
+/* Toolbar: Bookmark icon: remove star */
+.box-inherit.toolbarbutton-menubutton-button {display:none!important;}
+
+/* Toolbar: Bookmark list icon */
+#bookmarks-menu-button > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
+  list-style-image: none!important;
+}
+#bookmarks-menu-button {
+  background: url("http://i.imgur.com/heFELDX.png")!important;
+  background-position: -82px -4px!important;
+  width: 18px!important;
+  height: 17px!important;
+}
+#bookmarks-menu-button:hover {filter: brightness(150%);}
+
+/* ================================== */
+/* ====== BOOKMARKS LIST STUFF ====== */
+/* ================================== */
+
+/* Remove the arrow from the top of the list */
+.panel-arrowbox {display:none!important;}  
+  
+/* Bookmark main list */
+.panel-arrowcontent {
+  background: #151515!important;
+  color:#fff!important;
+  border:1px solid #2d2d2d!important;
+}
+/* Sub lists */
+.menu-iconic.bookmark-item.subviewbutton menupopup .popup-internal-box {
+  -moz-appearance:none!important;
+  background:#151515!important;
+  color:#fff!important;
+  border:1px solid #2d2d2d!important;
+}
+/* Remove system theme from Sub lists */
+.menu-iconic.bookmark-item.subviewbutton menupopup {
+  -moz-appearance:none!important;
+}
+/* Sub list: Open All in Tabs Button */
+.openintabs-menuitem.subviewbutton.panel-subview-footer {background:#1a1a1a!important;}
+.openintabs-menuitem.subviewbutton.panel-subview-footer:hover {background:#2D6E7D!important;} #2D6E7D
+
+  /* Hide Bookmark list top arrow */
+.panel-arrow {display:none!important;}
+
+/*
+   We can open the Bookmark Organizer with Ctrl+Shift+o
+   Thus we can clear some stuff from the Bookmarks menu
+*/
+
+/* Subscribe to this page */
+#BMB_subscribeToPageMenupopup,
+#BMB_subscribeToPageMenuitem {display:none!important;}
+
+/* Bookmarks Toolbar menu */
+#BMB_bookmarksToolbar {display:none!important;}
+
+/* Unsorted Bookmarks */
+#BMB_unsortedBookmarks {display:none!important;}
+
+/* Show all Bookmarks */
+#BMB_bookmarksShowAllTop {display:none!important;}
+
+/* View Bookmarks Sidebar */
+#BMB_viewBookmarksSidebar {display:none!important;}
+
+/* Show All Bookmarks */
+#BMB_bookmarksShowAll {display:none!important;}
+
+/* Separators in the bookmark list -> Not needed */
+menuseparator { display: none!important; }
+
+/* List items */
+.menuitem-iconic.bookmark-item.menuitem-with-favicon.subviewbutton:hover,
+.menu-iconic.bookmark-item.subviewbutton:hover {
+  background:#2D6E7D!important;
+}
+
+/*
+  List 'right arrows' are hidden
+  New css arrows generated with:
+  http://apps.eky.hk/css-triangle-generator/
+*/
+.menu-right {
+  list-style-image:none!important; /* hide default arrows */
+  width: 0!important;
+  height: 0!important;
+  border-style: solid!important;
+  border-width: 5px 0 5px 8.7px!important;
+  border-color: transparent transparent transparent #666!important;
+}
+
+/* List scroller */
+.autorepeatbutton-up,
+.autorepeatbutton-down {border:1px solid #666!important;}
+
+/* ================== */
+/* ====== TABS ====== */
+/* ================== */
+
+/* Tab width  */
+.tabbrowser-tab:not([pinned]) {
+  width:200px!important;
+  max-width:200px!important;
+  min-width:40px!important;
+}
+
+/* Tab style */
+#TabsToolbar .arrowscrollbox-scrollbox { padding: 4px!important; }
+#TabsToolbar .tabbrowser-tabs {min-height:30px!important;max-height:30px!important; }
+#TabsToolbar .tabbrowser-tab {
+  text-shadow: none !important;
+  background-clip: padding-box !important;
+  /*margin: 1px 1px 1px 0 !important;*/
+}
+
+#TabsToolbar .tabbrowser-tab:first-child {
+  border-left:solid 1px #2d2d2d!important;
+  -moz-border-left-colors: #2d2d2d !important;
+  -moz-border-top-colors: #2d2d2d !important;
+  -moz-border-right-colors: none !important;
+  -moz-border-bottom-colors: none !important;
+}
+
+#TabsToolbar .tabbrowser-tab:not(:first-child) {
+  -moz-border-top-colors: none !important;
+  -moz-border-left-colors: none !important;
+  -moz-border-right-colors: none !important;
+  -moz-border-bottom-colors: none !important;
+  border-left:solid 1px #2d2d2d!important;
+}
+#TabsToolbar .tabbrowser-tab:last-child { border-right:solid 1px #2d2d2d!important; }
+
+/* Selected Tab */
+#TabsToolbar .tabbrowser-tab[selected] { }
+
+/* Tab title/label */
+.tab-text {text-align:center!important;margin-top:1px!important;}
+.tabbrowser-tab:not([selected]) .tab-text.tab-label { color:#AFAFAF!important; }
+.tabbrowser-tab[selected] .tab-text.tab-label {color:#fff!important;border-bottom:2px solid #2D6E7D!important;}
+
+/* Hide Tab close button */
+.tab-close-button.close-icon {display:none!important;}
+
+/* Fixing the curved tab style */
+#TabsToolbar .tab-background {
+  margin: 0 !important;
+  background: transparent !important;
+}
+#TabsToolbar .tab-background-start,
+#TabsToolbar .tab-background-end { display: none !important; }
+#TabsToolbar .tab-background-middle {
+  margin: -4px -2px !important;
+  background: transparent !important;
+}
+#TabsToolbar .tabbrowser-tab:after,
+#TabsToolbar .tabbrowser-tab:before { display: none !important; }
+#TabsToolbar .tab-throbber:not([pinned]),
+#TabsToolbar .tab-icon-image:not([pinned]) { -moz-margin-start: -4px !important; }
+.tab-close-button:not([pinned]) { -moz-margin-end: -4px !important; }
+#TabsToolbar .toolbarbutton-1 { margin-bottom: -1px !important; }
+
+/* New tab button */
+#TabsToolbar .tabs-newtab-button {
+  background: url("http://i.imgur.com/heFELDX.png")!important;
+  background-position: -125px -5px!important;
+  width: 16px!important;
+  height: 16px!important;
+  list-style-image: none !important;
+  margin:-2px 4px 0 6px!important;
+}
+#TabsToolbar .tabs-newtab-button:hover {filter: brightness(150%);}
+
+/* ===================== */
+/* ====== SIDEBAR ====== */
+/* ===================== */
+  
+/* Border splits the sidebar from the content window */
+#sidebar-splitter {
+  -moz-appearance:none!important;
+  border-right:1px solid #2D6E7D!important;
+}  
+
+/* Header/title */
+#sidebar-header {
+  background:#151515!important;
+  color:#2D6E7D!important;
+  font-weight:bold!important;
+  padding-top:5px!important;
+  border-top:1px solid #2D6E7D!important;
+
+}
+/* Header close button */
+#sidebar-header .close-icon.tabbable:hover {
+  background-image: -moz-image-rect(url("chrome://global/skin/icons/close.svg"), 0, 16, 16, 0)!important;
+  filter: brightness(250%)!important; 
+}
+/* Search */
+#sidebar-search-container {
+  background:#151515!important;
+  color:#fff!important;
+  padding: 5px 2px!important;
+}
+#sidebar-search-container #search-box {
+  -moz-appearance:none!important;
+  background:#151515!important;
+  color:#fff!important;
+  border:1px solid #2D6E7D!important;
+}
+/* History sidebar - View button */
+#sidebar-search-container #viewButton {
+  -moz-appearance:none!important;
+  background:#2D6E7D!important;
+  color:#fff!important;
+  border:none!important;
+  padding:2px 4px!important;
+}
+/* History sidebar - View button arrow */
+#sidebar-search-container #viewButton .button-menu-dropmarker {display:none!important;}
+  
+.textbox-search-icons {
+  display:none!important;    
+}
+/* Tree / list */
+.sidebar-placesTree {
+ -moz-appearance:none!important;
+  border:none!important;
+}
+.sidebar-placesTree .tree-stack {
+  background:#151515!important;
+  color:#fff!important;
+}
+
+/* ========================= */
+/* ====== ADDONS PAGE ====== */
+/* ========================= */
+ 
+/* Page background */
+#addons-page {
+  background:#151515!important;
+}
+/* Navigation arrows */
+#addons-page .nav-button.header-button .toolbarbutton-icon {
+  background:#2d2d2d!important;
+} 
+#addons-page .nav-button.header-button{
+  -moz-appearance:none!important;
+} 
+/* Tools button */  
+#header-utils-btn:hover, #header-utils-btn:focus {
+  -moz-appearance:none!important;
+}
+#header-utils-btn .toolbarbutton-menu-dropmarker {
+  display:none!important;
+} 
+/* Addon search box */
+#header-search {
+  -moz-appearance:none!important;
+  background:#151515!important;
+  border:1px solid #2D6E7D!important;
+  color:#fff!important;
+} 
+/* Left side: selected item */
+#addons-page richlistitem[selected="true"] {
+  background:#2D6E7D!important;
+  border:1px solid #2D6E7D!important;
+} 
+/* Left side: list text color */
+#addons-page .category-name {
+  color:#fff!important;
+}
+
+/* Right side border/frame */
+#addons-page #view-port-container {
+  border:1px solid #2d2d2d!important;
+}
+/* Addon list, Userstyle list */
+#addon-list, .addon.addon-view, #userstyle-sorting, #addon-list-empty, .alert-container {
+  background:#151515!important;
+  color:#fff!important;
+  border:1px solid #2d2d2d!important;
+}
+
+/* Plugins */
+.view-header.global-info-container.plugin-info-container {
+  background: #151515!important;
+}
+/* Plugins: 'check up to date' link */
+.button-link.global-info-plugincheck {
+  color: #2D6E7D!important;
+}
+  
+/* 'More' link */
+.details.button-link {color:#2D6E7D!important;}
+
+/* Buttons */
+.addon-control, .addon-control.enable, .addon-control.disable, .addon-control.preferences, .addon-control.remove, #userstyle-sorting-status, #userstyle-sorting-name, #userstyle-sorting-type {
+  -moz-appearance:none!important;
+  background:#2d2d2d!important;
+  color:#fff!important;
+  border:none!important;
+  padding:4px!important;
+}
+.addon-control:hover, 
+.addon-control.preferences:hover {background:#00315F!important}
+
+.addon-control.enable:hover {background:#15591E!important}
+.addon-control.disable:hover {background:#DF7200!important}
+.addon-control.remove:hover {background:#B41B07!important}
+
+#new-userstyle:hover,
+#install-from-url:hover,
+#userstyle-sorting-status:hover,
+#userstyle-sorting-name:hover,
+#userstyle-sorting-type:hover {background:#2D6E7D!important;}
+
+#userstyle-footer {display:none!important;}  
+  
+/* Disabled items */
+richlistitem[active="false"] {opacity:0.25!important;}
+richlistitem[active="false"][selected="true"] {opacity:0.75!important;}  
+
+/* =========================================================== */
+/* ====== DOWNLOADS WINDOW & BOOKMARKS ORGANIZER WINDOW ====== */
+/* =========================================================== */
+
+/* Top toolbar */
+#placesToolbar {
+  -moz-appearance:none!important;
+  background:#151515!important;
+  color:#fff!important;
+}
+/* Navigation arrows */
+#placesToolbar #back-button .toolbarbutton-icon, #placesToolbar #forward-button .toolbarbutton-icon{
+  background:#2d2d2d!important;
+}
+/* Buttons: Organize, Clear Downloads, View, Import and Backup  */
+#organizeButton, #clearDownloadsButton, #viewMenu, #maintenanceButton {
+  -moz-appearance:none!important;
+  color:#fff!important;
+  padding-left:5px!important;
+} 
+/* Remove buttons hover bg */
+#organizeButton:hover, #viewMenu:hover, #maintenanceButton:hover {background:none!important;}
+
+/* Remove buttons dropdown arrow */  
+#organizeButton .menubar-right, #viewMenu .menubar-right, #maintenanceButton .menubar-right {display:none!important;} 
+
+/* Search box */
+#searchFilter {
+  -moz-appearance:none!important;
+  background:#151515!important;
+  border:1px solid #2D6E7D!important;
+  color:#fff!important;
+}
+
+/* List headers (right side) */
+#placesContentTitle, #placesContentTags, #placesContentUrl {
+  -moz-appearance:none!important;
+  background:#2D6E7D!important;
+  color:#fff!important;
+  border:none!important;
+  padding:4px!important;
+}
+  
+/* Left list, Right list: download list, history list */
+#placesList, #downloadsRichListBox, #placeContent {
+  -moz-appearance:none!important;
+  background:#151515!important;
+  color:#fff!important;
+}
+/* Remove different background colors in lists */
+#placeContent treechildren:not(.autocomplete-treebody)::-moz-tree-row(multicol, odd) {
+  background-color: #151515!important;
+}
+#placeContent treechildren:not(.autocomplete-treebody)::-moz-tree-row(selected) {
+  background-color: #2D6E7D!important;
+}
+
+/* Left and Right list splitter border */
+#placesView > splitter {
+  -moz-appearance:none!important;
+  border-right:1px solid #2D6E7D!important;
+}
+
+/* Bottom panels */
+#detailsDeck {
+  background:#151515!important;
+  color:#fff!important;
+  border-top:1px solid #2D6E7D!important;
+}
+#editBMPanel_namePicker, #editBMPanel_descriptionField, #editBMPanel_locationField, #editBMPanel_tagsField, #editBMPanel_keywordField, #editBMPanel_tagsSelector{
+  -moz-appearance:none!important;
+  background:#151515!important;
+  border:1px solid #2D6E7D!important;
+  color:#fff!important;
+}
+/* Fixing the checkbox: 'Load this bookmark in the sidebar' */
+#editBMPanel_loadInSidebarCheckbox:hover > .checkbox-label-center-box {
+
+  background:#151515!important;
+  color:#fff!important;
+}
+#infoBoxExpander, #editBMPanel_tagsSelectorExpander {
+  -moz-appearance:none!important;
+  border:none!important;
+  background: #2d2d2d!important;
+  padding: 4px!important;
+}
+  
+/* ========================= */
+/* ====== OTHER STUFF ====== */
+/* ========================= */
+
+/* Disable statusbar / URL popups at the bottom left corner */
+statuspanel {display:none!important;}
+
+/* Remove Context menu items */
+#context-selectall, #context-viewbgimage, #context-savepage {display:none!important;}

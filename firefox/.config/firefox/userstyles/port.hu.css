@@ -1,0 +1,74 @@
+@-moz-document url("http://www.port.hu/pls/tv/tv.prog?i_layout_id=1") {
+  
+  
+  /* Hide top shit & footer */
+  .port-2-header, #tv_mian_bar, div.separator,p.btxt,.port-2-footer {display:none!important}
+  
+  /* Body, Frame */
+  html, div#x_bodycontent {background:#333!important;}
+  table#event_box {border-spacing:0!important;}
+  #tvbox {border:none !important; font-family:sans-serif!important;margin: 0 0 0 24px !important;}
+  .main-container-100 {margin: -50px auto;}
+
+  /* Top margin fix */
+  div.x_pageholder {top: -88px!important;}
+  
+  /* Loading */
+  #tvbox #loading {background:#CA0307!important;opacity:0.8!important;}
+  #loading_text {color:#fff!important;font-size:36px;}
+
+  /* Popup info */
+  #tvbox #bubble {display:none!important;}
+  
+    /* Timeline */
+  div.timeline_up div.time_box {background:#222 !important;}
+  div.timeline_up div.time_box div.hour {color:#f8f8f8 !important;}
+  #timeline_timer {background:#ff0006!important;color:#fff!important;line-height:20px!important;border-radius:3px!important;}
+
+  /* Popup TOP, BOTTOM, SCROLLBAR */
+  #scroll_bubble {background:#ff0006!important;color:#fff!important;opacity:1!important;}
+  #scroll_bubble_up {background:#ff0006!important;color:#fff!important;opacity:1!important;}
+  #scroll_bubble_down {background:#ff0006!important;color:#fff!important;opacity:1!important;}
+
+  /* Top scroll PREV */
+  #time_scroll_bubble_prev2 div {background-color:#ff0006!important;color:#fff!important;}
+  #time_scroll_bubble_prev2 img {display:none!important;}
+
+  /* Top scroll NEXT */
+  #time_scroll_bubble_next2 div {background-color:#ff0006!important;color:#fff!important;}
+  #time_scroll_bubble_next2 img {display:none!important;}
+
+  /* Bottom scroll PREV */
+  #time_scroll_bubble_prev div {background-color:#ff0006!important;color:#fff!important;}
+  #time_scroll_bubble_prev img {display:none!important;}
+
+  /* Bottom scroll NEXT */
+  #time_scroll_bubble_next div {background-color:#ff0006!important;color:#fff!important;}
+  #time_scroll_bubble_next img {display:none!important;}
+
+  /* Bottom scroll center TIME */
+  #time_scroll_bubble div {background-color:#ff0006!important;color:#fff!important;}
+  #time_scroll_bubble img {display:none!important;}
+
+  /* Channel logo */
+  #tvchannels div.h1 {background:#666 !important;}
+  #tvchannels div.h1_line2 {background:#333 !important;}
+
+  /* Active tv programs */
+  #tvbox div.show_box, #tvbox .show_box {background:#fcfcfc !important;border-left:2px solid #ff0006 !important;}
+  #tvbox div.chanel_line2 div.show_box {background:#f5f5f5 !important;border-left:2px solid #ff0006 !important;}
+
+  /* Ended tv programs */
+  #tvbox div.show_box_old, #tvbox .show_box_old {background:#DDD !important;}
+  #tvbox div.chanel_line2 div.show_box_old {background:#c0c0c0 !important;}
+
+  #tvbox div.show_box strong {color:#000!important;}
+  div.icos em img {display:none!important;}
+  a.bubble_img_link img {display:none!important;}
+  #tvbox #timeline {background: #ff0006 !important;opacity:0.75 !important;}
+
+  /* Bell icons */
+  div.bell {display:none!important;}
+
+
+}
