@@ -1,0 +1,13 @@
+@-moz-document domain(wolframalpha.com) {
+
+#EUCookie,
+#sidebar,
+#headerad-pro,
+#feedback {display:none!important;}
+  
+header.common, #oauth_signin { background: transparent!important; }
+header.common a { color: #000!important; }
+#oauth_signin { border:none!important; }
+
+/* end of style */  
+}

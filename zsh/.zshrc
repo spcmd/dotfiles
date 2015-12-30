@@ -902,6 +902,7 @@ alias zzz='systemctl suspend'
 alias sss='systemctl poweroff'
 alias cal='cal -m'
 alias cal-next='cal -mn 2'
+alias octal='stat -c "%a %n"'
 
 # NetworkManager wifi switcher
 wifi() {
