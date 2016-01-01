@@ -912,7 +912,8 @@ wifi() {
             nmcli radio wifi on
             echo "==> Wifi switched ON"
             if [[ -f /bin/awesome ]]; then
-                awm-chkmail-on
+                echo "==> Waiting 4s before awm-chkmail-on"
+                sleep 4s && awm-chkmail-on
             fi
             ;;
         off)

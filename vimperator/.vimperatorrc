@@ -14,7 +14,7 @@
 " {{{   Settings
 "--------------------------------------------
 
-colorscheme dwm-blue
+colorscheme dark-yellow
 set hintchars=hjklasdfgrtzu
 set titlestring=
 set editor="urxvt -e vim"
@@ -48,6 +48,8 @@ nnoremap é :tabmove -1<CR>
 "History navigation
 nnoremap , :back<CR>
 nnoremap . :forward<CR>
+nnoremap H :back<CR>
+nnoremap L :forward<CR>
 
 "Quick select text in CARET/VISUAL mode: move to the beginning/end of line
 vnoremap H ^
@@ -56,14 +58,14 @@ vnoremap L $
 "Escape from focused textarea
 inoremap <C-e> <C-[>
 
-"Quick help
-nnoremap h :help<Space>
+"Quick new tab
+nmap h :tabnew<CR>
 
 "Quick Bookmarks
 nnoremap b :bmarks!<Space>
 
-"Context menu
-nnoremap cc ;c
+"Quick Downloads
+nnoremap D :downloads<CR>
 
 "Bookmarks toggle
 nnoremap <C-b> :ignorekeys<CR> :sidebar Bookmarks<CR>
@@ -99,7 +101,7 @@ nmap Y :phlinkformat<CR>
 
 "Search for the highlighted text on page & copy to the clipboard
 nmap <leader>f :js var selectedText = window.content.window.getSelection().toString(); window.content.window.find(selectedText); util.copyToClipboard(selectedText, true); liberator.echo("Searching for highlighted text: "+selectedText+" (copied to the clipboard)")<CR>
- 
+
 "Duckduckgo to Startpage (needs dddgtostartpage.js plugin for vimperator)
 nmap <leader>s :sp<CR>
 
@@ -128,11 +130,19 @@ nmap gP :tabopen http://www.port.hu/pls/tv/tv.prog?i_layout_id=1<CR>
 "--------------------------------------------
 
 command! x -description="Save the session and quit" :xall
+command! passwords -description="Password Manager" :tabopen chrome://passwordmgr/content/passwordManager.xul
+command! cookies -description="Cookie Manager" :tabopen chrome://browser/content/preferences/cookies.xul
+command! config -description="about:config" :tabopen about:config
+command! clear -description="Clear Private Data" :tabopen chrome://browser/content/sanitize.xul
+command! hist -description="History" :tabopen chrome://browser/content/history/history-panel.xul
+command! bookmarks -description="Bookmarks" :tabopen chrome://browser/content/bookmarks/bookmarksPanel.xul
+command! organize -description="Organize / Library" :tabopen chrome://browser/content/places/places.xul
+command! privacy -description="Privacy Settings" :tabopen about:preferences#privacy
+command! searchengines -description="Search engines" :tabopen about:preferences#search
 
-command! CC -description="Open the about:config" :tabopen about:config
-
-"Quick open Addons
-command! AA -description="Open addons page (custom command)" :tabopen about:addons
+command! AA -description="Addons" :tabopen about:addons
+command! CC -description="about:config" :tabopen about:config
+command! DD -description="Downloads" :downloads
 
 "Toggle userstyle (stylish.js plugin)
 command! ST -description="Toggle Stylish userstyle for this page (custom command)" :stylish toggle
@@ -187,7 +197,7 @@ autocmd LocationChange ^http:\/\/(itcafe|prohardver|mobilarena|gamepod).*\/tema\
 "Redirect Youtube main page to subscriptions page
 autocmd DOMLoad ^(http|https):\/\/(www)?.youtube.com\/?$ js window.content.window.location = "https://www.youtube.com/feed/subscriptions"
 
-"Reorder Logout.hu forum topics 
+"Reorder Logout.hu forum topics
 autocmd DOMLoad logout\.hu\/forum\/index\.html source ~/.vimperator/plugin/logout-forum-faradtgoz-listazas.js
 
 " }}}
