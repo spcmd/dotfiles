@@ -18,7 +18,7 @@ hi Normal background: #000; color:#fff;
 hi CmdLine background: #000; color:#fff;
 hi StatusLine color: #fff;
 
-hi InfoMsg background: #000; color: ; "info msg (yank-copied to clipboard)
+hi InfoMsg background: #000; color: #e7bf00; "info msg (yank, copied to clipboard)
 hi ErrorMsg background: #AE0600; color: #fff;
 hi WarningMsg background: #AE0600; color: #fff;
 
