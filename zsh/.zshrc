@@ -904,6 +904,14 @@ alias cal='cal -m'
 alias cal-next='cal -mn 2'
 alias octal='stat -c "%a %n"'
 
+# Create shell script
+mksh() {
+    touch $1
+    echo "#!/bin/bash" > $1
+    chmod +x $1
+    $EDITOR $1
+}
+
 # NetworkManager wifi switcher
 wifi() {
 
@@ -912,7 +920,7 @@ wifi() {
             nmcli radio wifi on
             echo "==> Wifi switched ON"
             if [[ -f /bin/awesome ]]; then
-                wait=8s
+                wait=10s
                 echo "==> Waiting $wait before awm-chkmail-on"
                 sleep $wait && awm-chkmail-on
             fi
