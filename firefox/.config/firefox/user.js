@@ -265,7 +265,8 @@ user_pref("browser.urlbar.trimURLs", false);
 user_pref("browser.sessionhistory.max_entries", 4);
 
 // 0810: disable css querying page history - css history leak - PRIVACY
-user_pref("layout.css.visited_links_enabled", false);
+    // false = won't use different coloring for visited links
+//user_pref("layout.css.visited_links_enabled", false);
 
 // 0811: disable displaying Javascript in history URLs - SECURITY
 user_pref("browser.urlbar.filter.javascript", true);
@@ -274,7 +275,7 @@ user_pref("browser.urlbar.filter.javascript", true);
    // can leak in cross-site forms AND be spoofed
    // http://kb.mozillazine.org/Signon.autofillForms
    // password will still be auto-filled after a user name is manually entered
-user_pref("signon.autofillForms", false);
+//user_pref("signon.autofillForms", false);
 
 
 
@@ -587,6 +588,9 @@ user_pref("browser.download.animateNotifications", false);
 user_pref("browser.panorama.animate_zoom", false);
 user_pref("browser.fullscreen.animateUp", 0);
 user_pref("browser.tabs.autoHide", false);
+
+// Toolbar tooltips
+user_pref("browser.chrome.toolbar_tips", false);
 
 //Text based zoom
 user_pref("browser.zoom.full", false);
