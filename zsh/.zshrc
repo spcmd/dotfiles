@@ -465,7 +465,7 @@ paclog(){
             grep 'downgraded' $LOGFILE | grep -v 'ALPM-SCRIPTLET' | less
 		    ;;
         -s) # Search in log
-			grep $2 $LOGFILE | less
+			grep -i $2 $LOGFILE | less
 		    ;;
 		-m) # Show messages
 			grep 'ALPM-SCRIPTLET' -B 1 $LOGFILE | less
@@ -814,59 +814,58 @@ TE() {
 # {{{   Dirbookmarks: mark directories & quick change dir from CLI (Based on: https://bbs.archlinux.org/viewtopic.php?pid=1318927#p1318927)
 # -----------------------------------------------------
 
-dirbookmarks() {
+FILE_DIRBOOKMARKS=$HOME/.dirbookmarks
+dm() {
     case "$1" in
-            -h|*)# Show help
-                echo "dirbookmarks are stored in ~/.dirbookmarks"
-                echo "Commands:"
-                echo ""
-                echo "\033[1;34m         markdir <bookmarkname>                                 \033[0m Add current directory to bookmarks with name <bookmarkname>"
-                echo "\033[1;34m         unmarkdir <bookmarkname> [anotherbookmarkname...]      \033[0m Remove <bookmarkname> from bookmarks. You can specify multiple names in one command."
-                echo "\033[1;34m         lsmarks                                                \033[0m List bookmarked directories."
-                echo "\033[1;34m         cdm <bookmarkname>                                     \033[0m Change to bookmarked directory."
+
+            -a|--add)
+                if [[ ! -z $2 ]]; then
+                    echo "$2|$(pwd)" >> $FILE_DIRBOOKMARKS
+                else
+                    echo "Error: you have to name the bookmark! Usage: $0 -a <bookmark name>"
+                fi
                 ;;
+
+            -r|--remove)
+                if [[ ! -z $2 ]]; then
+                    for marks in $@; do
+                        sed -i "/^$marks|/d" $FILE_DIRBOOKMARKS
+                    done
+                else
+                    echo -e "Error: you have to specify a bookmark name which you want to delete! Usage: $0 -r <bookmark name>"
+                fi
+                ;;
+
+            -l|--list)
+                echo -e "Listing directories saved to $FILE_DIRBOOKMARKS:\n"
+                awk -F "|" -v OFS="\033[0;36m ---> \033[0m" ' $1="\t\033[1;34m"$1 ' $FILE_DIRBOOKMARKS
+                ;;
+
+            -h|--help)
+                echo "dirbookmarks are stored in: $FILE_DIRBOOKMARKS"
+                echo "Usage: $0 [option] <bookmark name> [another bookmark name]"
+                echo ""
+                echo "Options:"
+                echo "        -a, --add <bookmark name>                                     Add current directory to bookmarks with name <bookmark name>"
+                echo "        -r, --remove <bookmark name> [another bookmark name...]       Remove <bookmark name> from bookmarks. You can specify multiple names in one command."
+                echo "        -l, --list                                                    List bookmarked directories."
+                echo "        <without option>                                              Change to bookmarked directory."
+                ;;
+
+            *)
+                dir=$(grep $1 $HOME/.dirbookmarks)
+                dir=${dir/*|/}
+                cd $dir
+                ;;
+
     esac
 }
 
-markdir() {
-    if [[ ! -z $1 ]] && [[ $1 != "-h" ]]; then
-        echo "$1|$(pwd)" >> $HOME/.dirbookmarks
-    elif [[ $1 = "-h" ]]; then
-        dirbookmarks # show help
-    else
-        echo "markdir Error: you have to name the bookmark! Usage:\033[1;34m markdir <bookmarkname>\033[0m"
-    fi
-}
-
-unmarkdir() {
-    if [[ ! -z $1 ]] && [[ $1 != "-h" ]]; then
-        for marks in $@; do
-            sed -i "/^$marks|/d" $HOME/.dirbookmarks
-        done
-    elif [[ $1 = "-h" ]]; then
-        dirbookmarks # show help
-    else
-        echo -e "unmarkdir Error: you have to specify a bookmark name which you want to delete! Usage: \033[1;34munmarkdir <bookmarkname> [anotherbookmarkname...]\033[0m \nFor listing, use the \033[1;34mlsmarks \033[0mcommand."
-    fi
-}
-
-lsmarks() {
-    echo -e "Listing directories saved to .dirbookmarks:\n"
-    awk -F "|" -v OFS="\033[0;36m ---> \033[0m" ' $1="\t\033[1;34m"$1 '  $HOME/.dirbookmarks
-}
-
-cdm() {
-	dir=$(grep $1 $HOME/.dirbookmarks)
-	dir=${dir/*|/}
-	cd $dir
-}
-
-# completion is zsh only!
+# ZSH completion
 function _completemarks {
-	reply=($(sed 's/\(.*\)|.*/\1/' $HOME/.dirbookmarks))
+	reply=($(sed 's/\(.*\)|.*/\1/' $FILE_DIRBOOKMARKS))
 }
-compctl -K _completemarks cdm
-compctl -K _completemarks unmarkdir
+compctl -K _completemarks dm # <-- function's name here
 
 # }}}
 # {{{  Other Aliases and Functions
@@ -874,7 +873,7 @@ compctl -K _completemarks unmarkdir
 
 alias q=' exit' # do not store the command in the history
 alias ls='ls --color=auto -A'
-alias lsl='ls -Alh --group-directories-first --color=auto'
+alias ll='ls -Alh --group-directories-first --color=auto'
 alias lf='ls -lA1p $@ | grep -v "\/$"' # list files only
 alias free='free -h'
 alias lsblkf='lsblk -o "NAME,SIZE,MOUNTPOINT,RO,FSTYPE,LABEL,UUID"'
