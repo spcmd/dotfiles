@@ -1,12 +1,13 @@
 # https://pwmt.org/projects/zathura/documentation/
 # https://www.mankier.com/5/zathurarc
 
-# primary: paste with middle mouse button | clipboard: paste with ctrl+v
-set selection-clipboard clipboard
-set show-v-scrollbar
+# Settings
+set selection-clipboard clipboard # primary: paste with middle mouse button | clipboard: paste with ctrl+v
+set statusbar-basename
 
-# keymap
+# Keymap
 map <C-j> scroll half-down
 map <C-k> scroll half-up
 map h zoom out
 map l zoom in
+map i set recolor

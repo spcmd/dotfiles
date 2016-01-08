@@ -116,7 +116,8 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ " term", "🌍 web", " files", " mus", " torr", " misc", " mail", " game" }, s, layouts[1])
+    tags[s] = awful.tag({ " term", "🌍 web", " files", " mus", " torr", " misc", " mail", "8" }, s, layouts[1])
+    --tags[s] = awful.tag({ " term", "🌍 web", " files", " mus", " torr", " misc", " mail", " game" }, s, layouts[1])
     --tags[s] = awful.tag({ " 1: ", "2:🌍 ", "3: ", "4: ", "5: ", "6: ", "7: ", "8: " }, s, layouts[1])
 end
 
@@ -585,6 +586,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(terminal .. " -name rTorrent -T rTorrent -e rtorrent") end),
     --awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -T mutt -e mutt -F ~/.mutt/account.1.muttrc") end),
     awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -name moc -T moc -e mocp") end),
+    awful.key({ modkey, "Mod1"    }, "n", function () awful.util.spawn(terminal .. " -name newsbeuter -T newsbeuter -e newsbeuter") end),
 
     -- Backlight
     awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --down") end),

@@ -67,6 +67,7 @@ ranger.iconFile: /home/spcmd/.icons/ranger.png
 rTorrent.iconFile: /home/spcmd/.icons/rtorrent.png
 mutt.iconFile: /home/spcmd/.icons/mutt.png
 moc.iconFile: /home/spcmd/.icons/moc.png
+newsbeuter.iconFile: /home/spcmd/.icons/newsbeuter.png
 
 ! ------------------------------------------
 ! Urxvt colors
@@ -150,3 +151,16 @@ ranger.color15: #f5f5f5
 ! background
 mutt.background: [100]#080808
 
+! ------------------------------------------
+! newsbeuter colors
+! ------------------------------------------
+
+! green
+newsbeuter.color2: #005a00
+newsbeuter.color10: #005a00
+! blue
+newsbeuter.color4: #005577
+newsbeuter.color12:#005577
+! magenta
+newsbeuter.color5: #9E9E9E
+newsbeuter.color13:#9E9E9E

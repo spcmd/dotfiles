@@ -11,7 +11,6 @@
 #           https://github.com/spcmd
 #           https://gist.github.com/spcmd
 
-
 # {{{   ZSH Basic config
 # -----------------------------------------------------
 
@@ -115,6 +114,11 @@ bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
 
 # }}}
+# {{{   Source External scripts/functions
+# -----------------------------------------------------
+# source $DIR_SCRIPTS/radioplayer.sh
+
+# }}}
 # {{{   Colors for functions
 # -----------------------------------------------------
 
@@ -198,102 +202,6 @@ compton-opacity() {
     else
         echo -e "$COLOR_HL1::$COLOR_TITLE Error! $compton_config doesn't exist. $COLOR_DEFAULT"
     fi
-}
-
-# Hint for compton opacity
-hint-compton() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE hint-compton >$COLOR_DEFAULT the current opacity-rule in compton.conf:"
-    awk 'NR==4' $HOME/.config/compton/compton.conf
-}
-
-# }}}
-# {{{   Mediaplayer / Radio
-# -----------------------------------------------------
-
-# mpv: list watch later dir's content and select from them
-if [[ -x $DIR_SCRIPTS/mpv-watch-later.sh ]]; then
-    alias mpv-watch-later='$DIR_SCRIPTS/mpv-watch-later.sh'
-fi
-
-# Online radios
-radio-classfm() { $MEDIAPLAYER "http://icast.connectmedia.hu/4784/live.mp3" }
-radio-radio1() { $MEDIAPLAYER "http://stream.radio1pecs.hu:8200/pecs.mp3" }
-radio-mr2petofi() { $MEDIAPLAYER "http://109.199.58.90/4738/mr2.mp3" }
-radio-rockradio-60s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/60srock.pls" }
-radio-rockradio-80s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/80srock.pls" }
-radio-rockradio-90s() { $MEDIAPLAYER "http://listen.rockradio.com/public1/90srock.pls" }
-radio-rockradio-bluesrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/bluesrock.pls" }
-radio-rockradio-classicrock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/classicrock.pls" }
-radio-rockradio-poprock() { $MEDIAPLAYER "http://listen.rockradio.com/public1/poprock.pls" }
-
-radioplayer() {
-
-    # Define radios
-    radio1="http://stream.radio1pecs.hu:8200/pecs.mp3"
-    classfm="http://icast.connectmedia.hu/4784/live.mp3"
-    mr2petofi="http://109.199.58.90/4738/mr2.mp3"
-
-    # Check if mpv is installed
-    if [[ ! -x /bin/mpv ]]; then
-        echo '>>> Error: mpv is not installed. Please install mpv first.<<<'
-        exit
-    fi
-
-    # Play
-    mpv --quiet $radio1 &
-    echo -e '                  _ _             _                       '
-    echo -e '                 | (_)           | |                      '
-    echo -e '    ____ ____  __| |_  ___  ____ | | ____ _   _  ___ ____ '
-    echo -e '   |  __/ _  |/ _` | |/ _ \|  _ \| |/ _  | | | |/ _ \  __|'
-    echo -e '   | | | (_| | (_| | | (_) | |_) | | (_| | |_| |  __/ |   '
-    echo -e '   |_|  \____|\____|_|\___/| ___/|_|\____|\___ |\___|_|   '
-    echo -e '                           | |             __/ |          '
-    echo -e '                           |_|            |___/           '
-    echo "$(tput setaf 4;tput bold)>>> Playing: Radio 1 <<<$(tput sgr0)"
-    echo "$(tput setaf 4;tput bold)>>> To switch channel, press a number (1-3) and hit Enter <<<$(tput sgr0)"
-    while true
-        do
-            read switch_to
-            if [[ $switch_to == "2" ]]; then
-                pkill mpv
-                echo -e '                  _ _             _                       '
-                echo -e '                 | (_)           | |                      '
-                echo -e '    ____ ____  __| |_  ___  ____ | | ____ _   _  ___ ____ '
-                echo -e '   |  __/ _  |/ _` | |/ _ \|  _ \| |/ _  | | | |/ _ \  __|'
-                echo -e '   | | | (_| | (_| | | (_) | |_) | | (_| | |_| |  __/ |   '
-                echo -e '   |_|  \____|\____|_|\___/| ___/|_|\____|\___ |\___|_|   '
-                echo -e '                           | |             __/ |          '
-                echo -e '                           |_|            |___/           '
-                echo "$(tput setaf 4;tput bold)>>> Switching to channel: Class FM <<<$(tput sgr0)"
-                mpv --quiet $classfm &
-            elif [[ $switch_to == "3" ]]; then
-                pkill mpv
-                echo -e '                  _ _             _                       '
-                echo -e '                 | (_)           | |                      '
-                echo -e '    ____ ____  __| |_  ___  ____ | | ____ _   _  ___ ____ '
-                echo -e '   |  __/ _  |/ _` | |/ _ \|  _ \| |/ _  | | | |/ _ \  __|'
-                echo -e '   | | | (_| | (_| | | (_) | |_) | | (_| | |_| |  __/ |   '
-                echo -e '   |_|  \____|\____|_|\___/| ___/|_|\____|\___ |\___|_|   '
-                echo -e '                           | |             __/ |          '
-                echo -e '                           |_|            |___/           '
-echo "$(tput setaf 4;tput bold)>>> Switching to channel: mr2 Petofi <<<$(tput sgr0)"
-                mpv --quiet $mr2petofi &
-            elif [[ $switch_to == "1" ]]; then
-                pkill mpv
-                echo -e '                  _ _             _                       '
-                echo -e '                 | (_)           | |                      '
-                echo -e '    ____ ____  __| |_  ___  ____ | | ____ _   _  ___ ____ '
-                echo -e '   |  __/ _  |/ _` | |/ _ \|  _ \| |/ _  | | | |/ _ \  __|'
-                echo -e '   | | | (_| | (_| | | (_) | |_) | | (_| | |_| |  __/ |   '
-                echo -e '   |_|  \____|\____|_|\___/| ___/|_|\____|\___ |\___|_|   '
-                echo -e '                           | |             __/ |          '
-                echo -e '                           |_|            |___/           '
-echo "$(tput setaf 4;tput bold)>>> Switching to channel: Radio1 <<<$(tput sgr0)"
-                mpv --quiet $radio1 &
-            elif [[ $switch_to == "q" ]]; then
-                pkill mpv
-            fi
-        done
 }
 
 # }}}
@@ -642,7 +550,6 @@ awm-note() {
 
 }
 
-
 # }}}
 # {{{ Note
 note() {
@@ -715,14 +622,14 @@ EOF
     esac
 }
 # }}}
-# {{{ Net utils / Web service related
+# {{{ Net utils (web service related)
 # -----------------------------------------------------
 
 # is this site down?
 isdown() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g;s/&#x2F;/\//g' }
 
 # what is my ip?
-myip()  { curl -s curl -s http://whatismyip.akamai.com | grep -o "[[:digit:].]\+" }
+myip()  { wget http://ipinfo.io/ip -qO - }
 
 # url shortener
 urlshort() { wget -qO - "http://is.gd/create.php?format=simple&url=$1" }
@@ -742,7 +649,7 @@ gthu() { trans :hu "$@" }
 gten() { trans hu:en "$@" }
 alias trans-update='wget -N -P ~/Scripts https://raw.githubusercontent.com/soimort/translate-shell/gh-pages/trans'
 
-# speedtest-cli (https://github.com/sivel/speedtest-cli | https://aur.archlinux.org/packages/speedtest-cli)
+# speedtest-cli
 if [[ -x /bin/speedtest-cli ]]; then
     speedtest(){
         case "$1" in
@@ -774,46 +681,9 @@ if [[ -x /bin/speedtest-cli ]]; then
 fi
 
 # }}}
-# {{{   Trashman: use trash from CLI (https://aur.archlinux.org/packages/trashman/)
+# {{{   Dirbookmarks
 # -----------------------------------------------------
-
-# trashman: list
-TL() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Listing Trash:"
-    trash --list
-}
-
-# trashman: put
-TP() {
-    trash $@
-    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Files have been put to Trash:"
-    printf '%s\n' "$@"
-}
-
-# trashman: restore
-TR() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Restore file from Trash:"
-    trash --list
-    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT To restore file(s), use the command: trash -r filename1 filename2 ..."
-    cd ~/.local/share/Trash/files
-}
-
-# trashman: empty
-TE() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Emptying Trash, are you sure? (y = yes)"
-    read answer_trash
-    if [[ $answer_trash == "y" ]] || [[ $answer_trash == "Y" ]]; then
-        trash --empty
-        echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Done! Trash is empty."
-    else
-        echo -e "$COLOR_HL1::$COLOR_TITLE trashman >$COLOR_DEFAULT Exit. Trash hasn't been emptied."
-    fi
-}
-
-# }}}
-# {{{   Dirbookmarks: mark directories & quick change dir from CLI (Based on: https://bbs.archlinux.org/viewtopic.php?pid=1318927#p1318927)
-# -----------------------------------------------------
-
+# Mark directories & quick change dir from CLI (Based on: https://bbs.archlinux.org/viewtopic.php?pid=1318927#p1318927)
 FILE_DIRBOOKMARKS=$HOME/.dirbookmarks
 dm() {
     case "$1" in
@@ -868,50 +738,19 @@ function _completemarks {
 compctl -K _completemarks dm # <-- function's name here
 
 # }}}
-# {{{  Other Aliases and Functions
+# {{{   Aliases & Functions: Network & Web service
 # -----------------------------------------------------
-
-alias q=' exit' # do not store the command in the history
-alias ls='ls --color=auto -A'
-alias ll='ls -Alh --group-directories-first --color=auto'
-alias lf='ls -lA1p $@ | grep -v "\/$"' # list files only
-alias free='free -h'
-alias lsblkf='lsblk -o "NAME,SIZE,MOUNTPOINT,RO,FSTYPE,LABEL,UUID"'
-alias dist-info='cat /etc/*-release'
-alias dist-name='cat /etc/*-release | grep -E "^NAME" | cut -c 6-'
-alias grep='grep --color'
-
-alias hdapm='sudo hdparm -I /dev/sda | grep level'
-alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
-alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
-alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
-alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
-alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 alias lscon='nmcli con show'
 alias pingg='ping google.com'
-alias kpass='kpcli --kdb'
-alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
-alias mutt1='mutt -F ~/.mutt/account.1.muttrc'
-alias mutt2='mutt -F ~/.mutt/account.2.muttrc'
 alias re-nm='sudo systemctl restart NetworkManager'
+alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
+
 alias lampp-start='sudo /opt/lampp/lampp start'
 alias lampp-stop='sudo /opt/lampp/lampp stop'
 alias lampp-restart='sudo /opt/lampp/lampp restart'
-alias zzz='systemctl suspend'
-alias sss='systemctl poweroff'
-alias cal='cal -m'
-alias cal-next='cal -mn 2'
-alias octal='stat -c "%a %n"'
 
-# Create shell script
-mksh() {
-    touch $1
-    echo "#!/bin/bash" > $1
-    chmod +x $1
-    $EDITOR $1
-}
+alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
 
-# NetworkManager wifi switcher
 wifi() {
 
     case "$1" in
@@ -937,18 +776,12 @@ wifi() {
     esac
 }
 
-# Load ISO to loop device and mount (for Games)
-iso-load() {
-    if [[ -z $1 ]]; then
-        echo "Error: no ISO file specified."
-        echo "Usage:"
-        echo -e "\t iso-load /path/to/file.iso"
-    else
-        udisksctl loop-setup -r -f $1 && sudo mount /dev/loop0 /media/ISO
-    fi
-}
-# Unmount and unload ISO
-iso-unload() { sudo umount /media/ISO && udisksctl loop-delete -b /dev/loop0 }
+# }}}
+# {{{   Aliases & Functions: E-mail
+# -----------------------------------------------------
+
+alias mutt1='mutt -F ~/.mutt/account.1.muttrc'
+alias mutt2='mutt -F ~/.mutt/account.2.muttrc'
 
 # Send mail using mutt cli
 mailthis() {
@@ -964,6 +797,55 @@ mailthis() {
     fi
 }
 
+
+#}}}
+# {{{   Aliases & Functions: Other, misc.
+# -----------------------------------------------------
+
+alias q=' exit' # do not store the command in the history
+alias ls='ls --color=auto -A'
+alias ll='ls -Alh --group-directories-first --color=auto'
+alias lf='ls -lA1p $@ | grep -v "\/$"' # list files only
+alias free='free -h'
+alias grep='grep --color'
+alias lsblkf='lsblk -o "NAME,SIZE,MOUNTPOINT,RO,FSTYPE,LABEL,UUID"'
+alias octal='stat -c "%a %n"'
+alias cal='cal -m'
+alias cal-next='cal -mn 2'
+alias dist-info='cat /etc/*-release'
+alias dist-name='cat /etc/*-release | grep -E "^NAME" | cut -c 6-'
+alias hdapm='sudo hdparm -I /dev/sda | grep level'
+alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
+alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
+alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
+alias kpass='kpcli --kdb'
+alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
+alias zzz='systemctl suspend'
+alias sss='systemctl poweroff'
+
+# Exract urls from OPML file (e.g.: youtube subscriptions)
+ompl-extract() { awk 'BEGIN{RS=FS}/^xmlUrl/{print $2}' FS='"' $1 }
+
+# Create shell script
+mksh() {
+    touch $1
+    echo "#!/bin/bash" > $1
+    chmod +x $1
+    $EDITOR $1
+}
+
+# Load ISO to loop device and mount (for Games)
+iso-load() {
+    if [[ -z $1 ]]; then
+        echo "Error: no ISO file specified."
+        echo "Usage:"
+        echo -e "\t iso-load /path/to/file.iso"
+    else
+        udisksctl loop-setup -r -f $1 && sudo mount /dev/loop0 /media/ISO
+    fi
+}
+# Unmount and unload ISO
+iso-unload() { sudo umount /media/ISO && udisksctl loop-delete -b /dev/loop0 }
 
 # vless (use vim as a pager)
 vless() { vim -u $HOME/.vimlessrc $1 }
@@ -994,11 +876,10 @@ if [[ -x /bin/rsync ]]; then
     }
 fi
 
-# Hint for watching dd progress
-hint-dd() {
-    echo -e "$COLOR_HL1::$COLOR_TITLE hint-dd >$COLOR_DEFAULT Use this command to watch the progress of the dd command:"
-    echo -e "\tdd bs=4M count=5 if=/dev/random of=/dev/null & pid=\$! ; watch -n 3 kill -USR1 \$pid"
-}
+# mpv: list watch later dir's content and select from them
+if [[ -x $DIR_SCRIPTS/mpv-watch-later.sh ]]; then
+    alias mpv-watch-later='$DIR_SCRIPTS/mpv-watch-later.sh'
+fi
 
 # List all custom function and alias names from this .zshrc
 lsmyfunc() {cat ~/.zshrc | cut -d "{" -f 1 | sed "s/ //g" | grep "()"}
