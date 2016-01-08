@@ -1,0 +1,80 @@
+#                                      _
+#         ___ _ __   ___ _ __ ___   __| |
+#        / __| '_ \ / __| '_ ` _ \ / _` |
+#        \__ | |_) | (__| | | | | | (_| |
+#        |___| .__/ \___|_| |_| |_|\__,_|
+#             |_|
+#
+#               newsbeuter config
+#               Created by: spcmd
+#           http://spcmd.github.io
+#           https://github.com/spcmd
+#           https://gist.github.com/spcmd
+#
+# Doc: http://newsbeuter.org/doc/newsbeuter.html
+# Example config: https://github.com/akrennmair/newsbeuter/blob/master/test/config-example
+
+# SETTINGS -------------------------------------------------------------------------------
+
+articlelist-format "%4i %f %D %6L  %?T?|%-17T|  ?%t"
+auto-reload yes
+browser ~/bin/firefox-esr/firefox
+#html-renderer "/usr/bin/lynx -display_charset=utf-8 -cfg ~/.config/lynx/lynx.cfg -dump"
+#confirm-exit yes
+#datetime-format %b %d
+display-article-progress yes
+feedlist-format "%4i %n %11u %t"
+goto-next-feed no
+history-limit 0
+max-items 20
+reload-time 15
+download-path "~/Downloads" #podbeuter
+save-path "~/Downloads"
+player "$MEDIAPLAYER" #podbeuter
+show-keymap-hint yes
+show-read-feeds yes
+show-read-articles yes
+suppress-first-reload no
+text-width 80
+
+# KEY BINDINGS --------------------------------------------------------------------------
+#unbind-key e
+unbind-key ^K
+unbind-key ^J
+
+bind-key j next
+bind-key k prev
+bind-key j down article
+bind-key k up article
+bind-key l open
+bind-key h quit
+bind-key J pagedown
+bind-key K pageup
+bind-key n reload
+bind-key ^N reload-all
+bind-key ; macro-prefix
+macro m set browser "$MEDIAPLAYER %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
+
+# COLORS --------------------------------------------------------------------------------
+# color <element> <foreground color> <background color> [<attribute> ...]
+
+color background white black
+color listnormal white black
+color listfocus  white blue 
+color listnormal_unread white black
+color listfocus_unread  white blue
+color info       black magenta bold
+color article    white black
+
+#highlight feedlist "Youtube" white red
+#highlight feedlist "Arch Linux" white blue
+highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:)" yellow black
+
+# light color scheme
+#color background black white
+#color listnormal black white
+#color listfocus  white black
+#color listnormal_unread black white
+#color listfocus_unread  white black
+#color info       black yellow
+#color article    black white
