@@ -196,7 +196,7 @@ menuseparator { display: none!important; }
 /* Tab title/label */
 .tab-text {text-align:center!important;margin-top:1px!important;}
 .tabbrowser-tab:not([selected]) .tab-text.tab-label { color:#888!important; }
-.tabbrowser-tab[selected] .tab-text.tab-label {  }
+.tabbrowser-tab[selected] .tab-text.tab-label { }
 
 /* Hide Tab close button */
 .tab-close-button.close-icon {display:none!important;}

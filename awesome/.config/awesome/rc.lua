@@ -115,10 +115,9 @@ end
 -- Tags
 tags = {}
 for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag({ " term", "🌍 web", " files", " mus", " torr", " misc", " mail", "8" }, s, layouts[1])
-    --tags[s] = awful.tag({ " term", "🌍 web", " files", " mus", " torr", " misc", " mail", " game" }, s, layouts[1])
-    --tags[s] = awful.tag({ " 1: ", "2:🌍 ", "3: ", "4: ", "5: ", "6: ", "7: ", "8: " }, s, layouts[1])
+    ---- Each screen has its own tag table.
+    tags[s] = awful.tag({ " term", "🌍 web", " files", " mus", " torr", " misc", " mail", " news" }, s, layouts[1])
+    --tags[s] = awful.tag({ " 1: ", "2:🌍 ", "3: ", "4: ", "5: ", "6: ", "7: ", "8: " }, s, layouts[1])
 end
 
 -- Menu
@@ -792,7 +791,7 @@ awful.rules.rules = {
         properties = { tag = tags[1][7] } },
 
      -- Tag 8 rules
-    { rule_any = { class = { "dosbox" }, name = { "WineGame" } },
+    { rule_any = { class = { "dosbox" }, name = { "WineGame", "newsbeuter" } },
         properties = { tag = tags[1][8] } },
 
 }

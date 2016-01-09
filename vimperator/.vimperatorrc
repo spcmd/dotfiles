@@ -180,6 +180,12 @@ command! yt -description="Lookup the selected text in youtube" js window.content
 "Lookup selected text in Urbandictionary
 command! urbandict -description="Lookup the selected text in urbandictionary" js window.content.window.open("http://www.urbandictionary.com/define.php?term="+window.content.window.getSelection().toString(), '_blank')
 
+"Add current (feed) url to newsbeuter
+"Usage: nb <feed title>
+command! nb -description="Add current (feed) url to newsbeuter. Usage: nb <feed title>" -nargs=* execute "!echo '"+window.content.window.location+" \"\~<args>\"' >> ~/.newsbeuter/urls && echo Done."
+"Add current (feed) url to newsbeuter (without title)
+command! nbu -description="Add current (feed) url to newsbeuter (without title)" execute "!echo '"+window.content.window.location+"' >> ~/.newsbeuter/urls && echo Done."
+
 " }}}
 " {{{   Autocommands
 "--------------------------------------------

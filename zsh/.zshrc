@@ -219,6 +219,7 @@ alias cfg-fstab='sudo $EDITOR /etc/fstab'
 alias cfg-grub='sudo $EDITOR /etc/default/grub'
 alias cfg-hosts='sudo $EDITOR /etc/hosts'
 alias cfg-muttrc='$EDITOR ~/.mutt/muttrc'
+alias cfg-newsbeuter='$EDITOR ~/.newsbeuter/config'
 alias cfg-pacman='sudo $EDITOR /etc/pacman.conf'
 alias cfg-pacmirror='sudo $EDITOR /etc/pacman.d/mirrorlist'
 alias cfg-ranger='$EDITOR ~/.config/ranger/rc.conf'
@@ -824,7 +825,7 @@ alias zzz='systemctl suspend'
 alias sss='systemctl poweroff'
 
 # Exract urls from OPML file (e.g.: youtube subscriptions)
-ompl-extract() { awk 'BEGIN{RS=FS}/^xmlUrl/{print $2}' FS='"' $1 }
+opml-extract() { awk 'BEGIN{RS=FS}/^xmlUrl/{print $2}' FS='"' $1 }
 
 # Create shell script
 mksh() {
