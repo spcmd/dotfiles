@@ -1,0 +1,50 @@
+@-moz-document domain(imdb.com) {
+
+body {background:#151515!important;}  
+
+/* header */
+#navbar {
+  margin: 0!important;
+  background:#151515!important;
+}
+.social.js_nav_item {display:none!important;}
+  
+/* share button */
+.launch-share-popover {display:none!important;}
+
+/* imdb pro link under the poster */
+.pro-title-link {display:none!important;}
+  
+/* videos */
+#combined-videos {display:none!important;}
+  
+/* people also liked... */
+#titleRecs {display:none!important;}
+  
+/* sidebar crap */
+#top_rhs,
+.ab_widget,
+#facebookWrapper,
+.poll-widget-rhs,
+.news_item,
+.see-more,
+#btf_rhs2_wrapper,
+.list-preview,
+#relatedListsWidget,
+div.mini-article h3,
+#ratingWidget,
+.aux-content-widget-2{display:none!important;}
+.mini-article {border-bottom:none!important;}
+  
+/* recently viewed -- Privacy */
+.recently-viewed {display:none!important;}
+  
+/* footer crap */
+#bottom_ad_wrapper,
+.footer-grid-wrapper,
+#amazon-affiliates,
+div.container:nth-child(6) {display:none!important;}
+
+  
+/* end of style */  
+}

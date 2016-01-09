@@ -1,0 +1,19 @@
+@-moz-document domain(body.builder.hu) {
+
+#div-gpt-ad-1408440564422-0,
+#div-gpt-ad-1382865755555-0,
+#div-gpt-ad-1382865755555-2,
+div.body_right_box:nth-child(7),
+div.body_right_box:nth-child(9),
+div.body_right_box:nth-child(11),
+div.body_right_box:nth-child(5),
+div.body_right_box:nth-child(13),
+div.body_right_box:nth-child(15),
+div.body_right_box:nth-child(17),
+.body_content_box {display:none!important;}
+  
+/* header */  
+#mainTable > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(1) > table:nth-child(1) {background: transparent!important;}
+  
+/* end of style */  
+}
