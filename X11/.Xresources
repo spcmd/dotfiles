@@ -36,7 +36,7 @@ URxvt.background: [90]#000000
 URxvt.foreground: #ffffff
 
 ! Fonts
-URxvt.font: xft:DejaVu Sans Mono:pixelsize=14:antialias=true:hinting=true,xft:FontAwesome:pixelsize=14
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=14:antialias=false:hinting=false,xft:FontAwesome:pixelsize=14
 URxvt.letterSpace: -2
 URxvt.lineSpace: 1
 
@@ -45,6 +45,10 @@ URxvt.scrollBar: false
 
 ! For Mutt to warn about new e-mails (and set this is the .muttrc: set beep_new)
 URxvt.urgentOnBell: true
+
+! Scroll in the pager itself (https://wiki.archlinux.org/index.php/Urxvt#Scrollback_buffer_in_secondary_screen)
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
 
 !------------------------------------------------
 ! URxvt Perl Extensions

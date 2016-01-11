@@ -112,6 +112,19 @@ a.msgs::after {
   display: none!important;
 }  
 
+/* mod/topikgazda */
+.msgblk .text p.mod {
+  /*
+  background:#C8BDA2!important;
+  margin-top: -12px!important;
+  */
+  color:#999!important;
+}
+.msgblk .text p.mod a { color: #999!important; }
+.msgblk .text p.mod a:hover { color: #A61F22!important; font-weight:bold!important; }
+span.floatl input { display:none!important;}
+span.floatl:hover > input{display: initial!important;}
+
 /* Tema osszefoglalo  */
 /* div.msg.flc.isnew { display:none!important; } */
 /* Ajanlo */
