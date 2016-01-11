@@ -166,11 +166,20 @@ set sidebar_format = '%B %! %> %S '
 #set sidebar_folderindent=yes
 
 # }}}
+# {{{   Address book (Aliases)
+# -----------------------------------------------------
+
+set alias_file = "~/.mutt/aliases"
+set sort_alias = alias
+set reverse_alias = no
+source $alias_file
+
+# }}}
 # {{{   Colors
 # -----------------------------------------------------
 
 color sidebar_new   default         default                     # Folders that contain new messages
-color hdrdefault    white           cyan                        # Header (in the pager)
+color hdrdefault    black           cyan                        # Header (in the pager)
 color attachment    white           green                       # Attachments (in the pager)
 
 color quoted        cyan            default                     # Quoted text in messages
@@ -180,29 +189,20 @@ color quoted3       magenta         default                     # Quoted text in
 
 color error         white           red                         # Error messages
 color message       white           default                     # Message  informational messages
-color indicator     brightblack     brightwhite                 # Selection highlight (on the current message)
-color status        white           cyan                        # "Window" color (statusbar)
+color indicator     white           brightblue                  # Selection highlight (on the current message)
+color status        black           cyan                        # "Window" color (statusbar)
 color tree          yellow          default                     # Tree indicator (of threads)
 color search        white           blue                        # Search matches found with search within the internal pager
 color markers       red             default                     # The markers indicate a wrapped line
 
 # Pattern modifiers: http://www.mutt.org/doc/devel/manual.html#tab-patterns
-color index         green          default '~O'                 # Old flagged messages
+color index         green           default '~O'                # Old flagged messages
 color index         white           red     '~N'                # New messages
 color index         red             yellow  '~F'                # Important (Starred) messages
 color index         brightred       black   '~D'                # Marked for deletion
 color index         brightyellow    default '~T'                # Tagged messages
-color body          yellow          default '.+\[cid.+\]'           # Inline content/image indicator when using html view with w3m
+color body          yellow          default '.+\[cid.+\]'       # Inline content/image indicator when using html view with w3m
 #color index        white green '~y LABELNAME'
-
-# }}}
-# {{{   Address book (Aliases)
-# -----------------------------------------------------
-
-set alias_file = "~/.mutt/aliases"
-set sort_alias = alias
-set reverse_alias = no
-source $alias_file
 
 # }}}
 # {{{   Accounts

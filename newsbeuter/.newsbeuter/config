@@ -20,7 +20,7 @@ articlelist-format "%4i %f %D %6L  %?T?|%-17T|  ?%t"
 auto-reload yes
 browser ~/bin/firefox-esr/firefox
 #html-renderer "/usr/bin/lynx -display_charset=utf-8 -cfg ~/.config/lynx/lynx.cfg -dump"
-confirm-exit yes
+#confirm-exit yes
 #datetime-format %b %d
 display-article-progress yes
 feedlist-format "%4i %n %11u %t"
@@ -48,11 +48,18 @@ bind-key k prev
 bind-key j down article
 bind-key k up article
 bind-key l open
-bind-key h quit
-bind-key J pagedown
-bind-key K pageup
-bind-key n reload
+bind-key h quit article
+bind-key h quit articlelist
 bind-key ^N reload-all
+bind-key F edit-flags
+bind-key o sort feedlist
+bind-key O rev-sort feedlist
+bind-key o open-in-browser articlelist
+bind-key o open-in-browser article
+bind-key n next-unread
+bind-key N prev-unread
+bind-key g pageup
+bind-key G pagedown
 bind-key ; macro-prefix
 macro m set browser "$MEDIAPLAYER %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
 
@@ -67,13 +74,15 @@ color listfocus_unread  color1 color3
 color info       color0 color2
 color article    color1 color0
 
+highlight feedlist "--Unread--" color0 color4
+highlight feedlist "--Flagged--" color0 color4
 highlight feedlist "Youtube" color1 color5
 highlight feedlist "Arch Linux" color1 color3
 highlight feedlist "IT/Tech" color0 color2
 highlight feedlist "Reddit" color3 color1
 highlight feedlist "Blog" color1 color7
 highlight feedlist "Podcast" color1 color7
-highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:)" color4 color0
+highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:|^Flags:)" color4 color0
 
 # light color scheme
 #color background black white

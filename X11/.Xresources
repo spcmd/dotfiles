@@ -170,6 +170,30 @@ ranger.color15: #f5f5f5
 ! ------------------------------------------
 ! background
 mutt.background: [100]#080808
+! black
+mutt.color0: #000000
+mutt.color8: #121212
+! red
+mutt.color1: #DC0000
+mutt.color9: #DC0000
+! green
+mutt.color2: #00AA00
+mutt.color10: #00AA00
+! yellow
+mutt.color3: #FAE56B
+mutt.color11: #FAE56B
+! blue
+mutt.color4: #005577
+mutt.color12:#005577
+! magenta
+mutt.color5: #FFA97A
+mutt.color13: #FFA97A
+! cyan
+mutt.color6: #9E9E9E
+mutt.color14: #9E9E9E
+! white
+mutt.color7: #ffffff
+mutt.color15: #f5f5f5
 
 ! ------------------------------------------
 ! newsbeuter colors

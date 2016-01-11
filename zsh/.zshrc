@@ -834,6 +834,13 @@ alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
 alias zzz='systemctl suspend'
 alias sss='systemctl poweroff'
 
+# Startx shortcut
+XX() {
+    if [[ -z $DISPLAY ]];then
+        startx
+    fi
+}
+
 # Exract urls from OPML file (e.g.: youtube subscriptions)
 opml-extract() { awk 'BEGIN{RS=FS}/^xmlUrl/{print $2}' FS='"' $1 }
 
