@@ -583,8 +583,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
     awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger") end),
     awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(terminal .. " -name rTorrent -T rTorrent -e rtorrent") end),
-    --awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -T mutt -e mutt -F ~/.mutt/account.1.muttrc") end),
-    awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -name moc -T moc -e mocp") end),
+    awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -T mutt -e mutt -F ~/.mutt/account.1.muttrc") end),
+    --awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -name moc -T moc -e mocp") end),
     awful.key({ modkey, "Mod1"    }, "n", function () awful.util.spawn(terminal .. " -name newsbeuter -T newsbeuter -e newsbeuter") end),
 
     -- Backlight

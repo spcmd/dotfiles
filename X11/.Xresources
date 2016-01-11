@@ -10,7 +10,7 @@
 !           http://spcmd.github.io
 !           https://github.com/spcmd
 !           https://gist.github.com/spcmd
-!
+
 ! ------------------------------------------
 ! Render setting for cairo -> pango -> gtk
 ! ------------------------------------------
@@ -22,7 +22,7 @@ Xft.rgba:       rgb
 Xft.hintstyle:  hintmedium
 
 ! ------------------------------------------
-! Urxvt settings
+! URxvt settings
 ! ------------------------------------------
 
 URxvt.termName: rxvt-unicode-256color
@@ -46,14 +46,33 @@ URxvt.scrollBar: false
 ! For Mutt to warn about new e-mails (and set this is the .muttrc: set beep_new)
 URxvt.urgentOnBell: true
 
-! Perl Extensions: copy/paste, url-selection
-URxvt.perl-ext-common: default,clipboard,matcher
-URxvt.url-launcher: /home/spcmd/bin/firefox-esr/firefox
-URxvt.matcher.button: 1
-URxvt.url-select-underline: true
-URxvt.iso14755: False
+!------------------------------------------------
+! URxvt Perl Extensions
+! -----------------------------------------------
+
+! load these extensions
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+
+! clipboard
 URxvt.keysym.Shift-Control-C: perl:clipboard:copy
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+
+! for the Ctrl+Shift bindings to work (https://wiki.archlinux.org/index.php/Urxvt#Changing_font_size_on_the_fly)
+URxvt.iso14755: False
+
+! keyboard-select
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+
+! url-select
+URxvt.keysym.M-f: perl:url-select:select_next
+URxvt.url-select.launcher: /home/spcmd/bin/firefox-esr/firefox
+URxvt.url-select.button: 1
+URxvt.url-select.underline: true
+
+! matcher
+!URxvt.url-launcher: /home/spcmd/bin/firefox-esr/firefox
+!URxvt.keysym.M-f: perl:matcher:select
+!URxvt.matcher.button: 1
 
 ! ------------------------------------------
 ! App icons
@@ -70,7 +89,7 @@ moc.iconFile: /home/spcmd/.icons/moc.png
 newsbeuter.iconFile: /home/spcmd/.icons/newsbeuter.png
 
 ! ------------------------------------------
-! Urxvt colors
+! URxvt colors
 ! ------------------------------------------
 ! black
 URxvt.color0: #000000

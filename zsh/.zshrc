@@ -14,6 +14,15 @@
 # {{{   ZSH Basic config
 # -----------------------------------------------------
 
+if [ "$TERM" = "linux" ]; then
+    _SEDCMD='s/.*\*color\([0-9]\{1,\}\).*#\([0-9a-fA-F]\{6\}\).*/\1 \2/p'
+    for i in $(sed -n "$_SEDCMD" $HOME/.Xresources | \
+               awk '$1 < 16 {printf "\\e]P%X%s", $1, $2}'); do
+        echo -en "$i"
+    done
+    clear
+fi
+
 # Dir for ZSH
 export ZSH=$HOME/.zsh
 
@@ -284,7 +293,7 @@ pacsize() { pacman -Qi "$@" | grep Size }
 paccachesize() { du -hs /var/cache/pacman }
 
 # pacman: list or search in cache
-pacpkg() {
+paccachelist() {
 
     cache_dir=/var/cache/pacman/pkg
     cache_dir_yaourt=/var/cache/pacman/pkg-yaourt
@@ -292,23 +301,23 @@ pacpkg() {
     # fi $1 is empty, then just list all the packages
     if [[ $1 == "" ]]; then
     echo "--------------------------------------------------------------------------"
-    echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Listing $cache_dir:"
+    echo -e "$COLOR_HL1::$COLOR_TITLE $0 >$COLOR_DEFAULT Listing $cache_dir:"
         ls -l $cache_dir
     echo "--------------------------------------------------------------------------"
         if [[ -d $cache_dir_yaourt ]]; then
-            echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Listing $cache_dir_yaourt:"
+            echo -e "$COLOR_HL1::$COLOR_TITLE $0 >$COLOR_DEFAULT Listing $cache_dir_yaourt:"
             ls -l $cache_dir_yaourt
             echo "--------------------------------------------------------------------------"
         fi
     # if $1 is NOT empty, then it's a search
     else
     echo "--------------------------------------------------------------------------"
-    echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Search results for $1 in $cache_dir:"
+    echo -e "$COLOR_HL1::$COLOR_TITLE $0 >$COLOR_DEFAULT Search results for $1 in $cache_dir:"
         ls -l $cache_dir | grep $1
 
         if [[ -d $cache_dir_yaourt ]]; then
             echo "--------------------------------------------------------------------------"
-            echo -e "$COLOR_HL1::$COLOR_TITLE pacpkg >$COLOR_DEFAULT Search results for $1 in $cache_dir_yaourt:"
+            echo -e "$COLOR_HL1::$COLOR_TITLE $0 >$COLOR_DEFAULT Search results for $1 in $cache_dir_yaourt:"
             ls -l $cache_dir_yaourt | grep $1
             echo "--------------------------------------------------------------------------"
         fi
@@ -396,12 +405,12 @@ pacfilesfinder() {
 paclastupg() { awk '/upgraded/ {line=$0;} END { $0=line; gsub(/[\[\]]/,"",$0); printf "\033[1;34mPacman > Last Upgraded:\033[0m %s %s\n",$1,$2; exit;}' /var/log/pacman.log }
 
 # show hints/reminders for my pacman alises and functions
-hint-pacman() {
+pachint() {
     echo "--------------------------------------------------------------------------"
-    echo -e "$COLOR_HL1::$COLOR_TITLE hint-pacman >$COLOR_DEFAULT Listing pacman aliases:"
+    echo -e "$COLOR_HL1::$COLOR_TITLE $0 >$COLOR_DEFAULT Listing pacman aliases:"
     lsmyalias | grep --color=never pac | grep -v 'lsmyalias' | grep -v 'echo'
     echo "--------------------------------------------------------------------------"
-    echo -e "$COLOR_HL1::$COLOR_TITLE hint-pacman >$COLOR_DEFAULT Listing pacman functions:"
+    echo -e "$COLOR_HL1::$COLOR_TITLE $0 >$COLOR_DEFAULT Listing pacman functions:"
     lsmyfunc | grep --color=never -E "^pac"
     echo "--------------------------------------------------------------------------"
 }
@@ -457,6 +466,7 @@ gitcheck() {
 alias gch='gitcheck'
 alias gst='git status'
 alias gadd='git add --all'
+alias gupd='git add --update' # Do not add untracked files, only update modified and deleted
 alias gpush='git push origin master'
 alias gcommit='git commit -m'
 alias gdiff='git diff'

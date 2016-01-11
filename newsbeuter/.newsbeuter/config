@@ -69,9 +69,10 @@ color article    color1 color0
 
 highlight feedlist "Youtube" color1 color5
 highlight feedlist "Arch Linux" color1 color3
-highlight feedlist "Blog" color1 color7
 highlight feedlist "IT/Tech" color0 color2
-highlight feedlist "Podcast" color0 color2
+highlight feedlist "Reddit" color3 color1
+highlight feedlist "Blog" color1 color7
+highlight feedlist "Podcast" color1 color7
 highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:)" color4 color0
 
 # light color scheme

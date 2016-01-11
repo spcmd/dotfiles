@@ -21,3 +21,5 @@ sudo cp ~/dotfiles/system_files/power-button-and-lid.conf /etc/systemd/logind.co
 sudo mkdir /media
 sudo cp ~/dotfiles/system_files/99-udisks2.rules /etc/udev/rules.d
 
+# Setup /etc/issue
+sudp cp issue /etc
