@@ -833,6 +833,7 @@ alias kpass='kpcli --kdb'
 alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
 alias zzz='systemctl suspend'
 alias sss='systemctl poweroff'
+alias xselpc='xsel -p | xsel -b' # primary to clipboard
 
 # Startx shortcut
 XX() {

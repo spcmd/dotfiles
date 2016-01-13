@@ -569,6 +569,10 @@ user_pref("full-screen-api.warning.timeout", 0);
 // 3005: disable autocopy default (use extensions autocopy 2 & copy plain text 2)
 user_pref("clipboard.autocopy", false);
 
+// Disable middle click paste/open
+user_pref("middlemouse.contentLoadURL", false);
+user_pref("middlemouse.openNewWindow", false);
+
 // 3007: open new windows in a new tab instead
    // This setting is under Options>General>Tabs
    // 1=current window, 2=new window, 3=most recent window

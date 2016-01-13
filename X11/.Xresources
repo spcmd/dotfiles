@@ -12,17 +12,7 @@
 !           https://gist.github.com/spcmd
 
 ! ------------------------------------------
-! Render setting for cairo -> pango -> gtk
-! ------------------------------------------
-
-Xft.dpi:        96
-Xft.antialias:  true
-Xft.hinting:    true
-Xft.rgba:       rgb
-Xft.hintstyle:  hintmedium
-
-! ------------------------------------------
-! URxvt settings
+!   URxvt settings
 ! ------------------------------------------
 
 URxvt.termName: rxvt-unicode-256color
@@ -51,11 +41,12 @@ URxvt.secondaryScreen: 1
 URxvt.secondaryScroll: 0
 
 !------------------------------------------------
-! URxvt Perl Extensions
+!   URxvt Perl Extensions
 ! -----------------------------------------------
 
 ! load these extensions
-URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.perl-lib: /home/spcmd/.urxvt
+URxvt.perl-ext-common: default,clipboard,url-select-plus,keyboard-select
 
 ! clipboard
 URxvt.keysym.Shift-Control-C: perl:clipboard:copy
@@ -67,11 +58,13 @@ URxvt.iso14755: False
 ! keyboard-select
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 
-! url-select
-URxvt.keysym.M-f: perl:url-select:select_next
-URxvt.url-select.launcher: /home/spcmd/bin/firefox-esr/firefox
-URxvt.url-select.button: 1
-URxvt.url-select.underline: true
+! url-select-plus
+URxvt.keysym.M-f: perl:url-select-plus:select_next
+URxvt.url-select-plus.launcher: /home/spcmd/bin/firefox-esr/firefox
+URxvt.url-select-plus.altlauncher: chromium
+URxvt.url-select-plus.mediaplayer: mpv
+URxvt.url-select-plus.button: 1
+URxvt.url-select-plus.underline: true
 
 ! matcher
 !URxvt.url-launcher: /home/spcmd/bin/firefox-esr/firefox
@@ -79,7 +72,7 @@ URxvt.url-select.underline: true
 !URxvt.matcher.button: 1
 
 ! ------------------------------------------
-! App icons
+!   Icons
 ! ------------------------------------------
 ! pixbuf enabled urxvt needed!
 ! Download at: https://aur.archlinux.org/packages/rxvt-unicode-pixbuf/
@@ -93,118 +86,9 @@ moc.iconFile: /home/spcmd/.icons/moc.png
 newsbeuter.iconFile: /home/spcmd/.icons/newsbeuter.png
 
 ! ------------------------------------------
-! URxvt colors
+!   Colors
 ! ------------------------------------------
-! black
-URxvt.color0: #000000
-URxvt.color8: #121212
-! red
-URxvt.color1: #DC0000
-URxvt.color9: #DC0000
-! green
-URxvt.color2: #00AA00
-URxvt.color10: #00AA00
-! yellow
-URxvt.color3: #FAE56B
-URxvt.color11: #FAE56B
-! blue
-!URxvt.color4: #71A6B7
-!URxvt.color12:#71A6B7
-!URxvt.color4: #41A0B9
-!URxvt.color12:#41A0B9
-URxvt.color4: #4E8EA7
-URxvt.color12:#4E8EA7
-! magenta
-URxvt.color5: #FFA97A
-URxvt.color13: #FFA97A
-!URxvt.color5: #BDA1C5
-!URxvt.color13: #BDA1C5
-! cyan
-URxvt.color6: #4D7A89
-URxvt.color14: #4D7A89
-!URxvt.color6: #2FC8C8
-!URxvt.color14: #2FC8C8
-! white
-URxvt.color7: #ffffff
-URxvt.color15: #f5f5f5
-
-! ------------------------------------------
-! Ranger colors
-! ------------------------------------------
-! background
-ranger.background: [100]#000000
-! black
-ranger.color0: #000000
-ranger.color8: #000000
-!ranger.color8: #080808
-! red
-ranger.color1: #FF434A
-ranger.color9: #FF434A
-! green
-ranger.color2: #46CB50
-ranger.color10: #46CB50
-! yellow
-ranger.color3: #FAE56B
-ranger.color11: #FAE56B
-! blue
-!ranger.color4: #71A6B7
-!ranger.color12:#71A6B7
-!ranger.color4: #41A0B9
-!ranger.color12:#41A0B9
-ranger.color4: #4E8EA7
-ranger.color12:#4E8EA7
-! magenta
-!ranger.color5: #BA86C9
-!ranger.color13: #BA86C9
-ranger.color5: #FFA97A
-ranger.color13: #FFA97A
-! cyan
-ranger.color6: #4D7A89
-ranger.color14: #4D7A89
-! white
-ranger.color7: #ffffff
-ranger.color15: #f5f5f5
-
-! ------------------------------------------
-! mutt colors
-! ------------------------------------------
-! background
-mutt.background: [100]#080808
-! black
-mutt.color0: #000000
-mutt.color8: #121212
-! red
-mutt.color1: #DC0000
-mutt.color9: #DC0000
-! green
-mutt.color2: #00AA00
-mutt.color10: #00AA00
-! yellow
-mutt.color3: #FAE56B
-mutt.color11: #FAE56B
-! blue
-mutt.color4: #005577
-mutt.color12:#005577
-! magenta
-mutt.color5: #FFA97A
-mutt.color13: #FFA97A
-! cyan
-mutt.color6: #9E9E9E
-mutt.color14: #9E9E9E
-! white
-mutt.color7: #ffffff
-mutt.color15: #f5f5f5
-
-! ------------------------------------------
-! newsbeuter colors
-! ------------------------------------------
-newsbeuter.color0: #000000
-newsbeuter.color1: #ffffff
-newsbeuter.color2: #9E9E9E
-newsbeuter.color3: #005577
-newsbeuter.color4: #FAE56B
-newsbeuter.color5: #CC181E
-newsbeuter.color6: #4B4C29
-newsbeuter.color7: #005a00
-!bold font
-newsbeuter.color9: #ffffff
+#include "/home/spcmd/.urxvt/Xresources.urxvt.colors-spcmd"
+#include "/home/spcmd/.mutt/Xresources.mutt.colors-spcmd"
+#include "/home/spcmd/.config/ranger/Xresources.ranger.colors-spcmd"
+#include "/home/spcmd/.newsbeuter/Xresources.newsbeuter.colors-spcmd"
