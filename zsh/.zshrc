@@ -14,15 +14,6 @@
 # {{{   ZSH Basic config
 # -----------------------------------------------------
 
-if [ "$TERM" = "linux" ]; then
-    _SEDCMD='s/.*\*color\([0-9]\{1,\}\).*#\([0-9a-fA-F]\{6\}\).*/\1 \2/p'
-    for i in $(sed -n "$_SEDCMD" $HOME/.Xresources | \
-               awk '$1 < 16 {printf "\\e]P%X%s", $1, $2}'); do
-        echo -en "$i"
-    done
-    clear
-fi
-
 # Dir for ZSH
 export ZSH=$HOME/.zsh
 
@@ -48,6 +39,24 @@ if [[ -f ~/.dircolors ]]; then
     eval $(dircolors ~/.dircolors)
     zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 fi
+
+# urxvt dynamic title (http://stackoverflow.com/a/20772424)
+case $TERM in
+  (*xterm* | *rxvt*)
+
+    # Write some info to terminal title.
+    # This is seen when the shell prompts for input.
+    function precmd {
+      print -Pn "\e]0;urxvt %(1j,%j job%(2j|s|); ,)%~\a"
+    }
+    # Write command and args to terminal title.
+    # This is seen while the shell waits for a command to complete.
+    function preexec {
+      printf "\033]0;%s\a" "$1"
+    }
+
+  ;;
+esac
 
 # }}}
 # {{{   ENV Variables
@@ -90,26 +99,43 @@ fi
 # {{{   Vi mode for Zsh
 # -----------------------------------------------------
 
-# Enable Vi/Vim mode
+# Enable Vi mode
 bindkey -v
 
 # No delay entering normal mode
-# https://coderwall.com/p/h63etq
-# https://github.com/pda/dotzsh/blob/master/keyboard.zsh#L10
-# 10ms for key sequences
 KEYTIMEOUT=1
 
-# Show vim status
-# http://zshwiki.org/home/examples/zlewidgets
+# Mode & Cursor
+# change cursor shape and color depending on the mode
+#   1 or 0 : blinking block
+#   2 : normal block
+#   3 : blinking underscore
+#   4 : normal underscore
+#   5 : blinking vertical bar
+#   6 : normal vertical bar
+
+cursor_type_vicmd='2'
+cursor_type_viins='2'
+cursor_color_vicmd='yellow'
+cursor_color_viins='cyan'
+
 function zle-line-init zle-keymap-select {
+    if [ $KEYMAP = vicmd ]; then
+        echo -ne "\033[$cursor_type_vicmd q"
+        echo -ne "\033]12;$cursor_color_vicmd\007"
+    else
+        echo -ne "\033[$cursor_type_viins q"
+        echo -ne "\033]12;$cursor_color_viins\007"
+    fi
     RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
     RPS2=$RPS1
     zle reset-prompt
 }
+
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-# Add missing vim hotkeys
+# Add missing hotkeys
 # fixes backspace deletion issues
 # http://zshwiki.org/home/zle/vi-mode
 bindkey -a u undo
@@ -117,10 +143,13 @@ bindkey -a '^R' redo
 bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
 
-# History search in vim mode
+# History search
 # http://zshwiki.org./home/zle/bindkeys#why_isn_t_control-r_working_anymore
+bindkey '^k' up-history
+bindkey '^j' down-history
 bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-search-backward
 
 # }}}
 # {{{   Source External scripts/functions
