@@ -33,12 +33,51 @@ vicious = require("vicious")
 blingbling = require("blingbling")
 
 -- }}}
+-- {{{  Applications & Variables
+-------------------------------------
+
+-- Applications
+terminal = "urxvtc"
+editor = os.getenv("EDITOR") or "nano"
+compton = "compton -b --config /home/spcmd/.config/compton/compton.conf"
+ranger = terminal .. " -name ranger -T ranger -e ranger"
+newsbeuter = terminal .. " -name newsbeuter -T newsbeuter -e newsbeuter"
+rtorrent = terminal .. " -name rTorrent -T rTorrent -e rtorrent"
+mutt = terminal .. " -name mutt -T mutt -e mutt -F ~/.mutt/account.1.muttrc"
+moc = terminal .. " -name moc -T moc -e mocp"
+firefox = "/home/spcmd/bin/firefox-esr/firefox"
+
+-- Default modkey.
+modkey = "Mod4"
+
+-- }}}
 -- {{{  Autostart
 --------------------------------------
 
 -- Enable compositing
---awful.util.spawn_with_shell("compton --backend glx --paint-on-overlay --vsync opengl-swc &")
-awful.util.spawn_with_shell("compton -b --config /home/spcmd/.config/compton/compton.conf")
+awful.util.spawn_with_shell(compton)
+
+-- Autorun applications (on the set display only)
+xdisplay = os.getenv("DISPLAY")
+runOnDisplay = ":0"
+autorun = true
+
+-- list of apps to auto run
+autorunApps =
+{
+    terminal,
+    ranger,
+    newsbeuter,
+    rtorrent,
+    firefox,
+}
+if autorun then
+    if xdisplay == runOnDisplay then
+       for app = 1, #autorunApps do
+           awful.util.spawn(autorunApps[app])
+       end
+    end
+end
 
 -- }}}
 -- {{{  Errors
@@ -67,17 +106,6 @@ do
         in_error = false
     end)
 end
-
--- }}}
--- {{{  Variables
--------------------------------------
-
--- Applications
-terminal = "urxvtc"
-editor = os.getenv("EDITOR") or "nano"
-
--- Default modkey.
-modkey = "Mod4"
 
 -- }}}
 -- {{{  Theme, Layout, Wallpaper, Tags, Menu, Launcher
@@ -560,13 +588,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Up", function () awful.util.spawn("amixer sset Master 2%+") vicious.force ({ volumewidget }) end),
     awful.key({ modkey,           }, "Down", function () awful.util.spawn ("amixer sset Master 2%-") vicious.force ({ volumewidget }) end),
 
-     -- Start several applications at the same time
-    awful.key({ modkey, "Mod1"    }, "1", function ()
-                                                awful.util.spawn("/home/spcmd/bin/firefox-esr/firefox")
-                                                awful.util.spawn("spotify")
-                                                awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger")
-                                                awful.util.spawn(terminal .. " -name rTorrent -T rTorrent -e rtorrent")
-                                          end),
     -- Check mail
     awful.key({ modkey, "Control" }, "m", function ()
         awful.util.spawn_with_shell("gmailcheck.sh")
@@ -577,15 +598,14 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control"    }, "z", function () awful.util.spawn("systemctl suspend") end),
 
     -- Run Applications
-    awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/firefox-esr/firefox") end),
-    --awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn("/home/spcmd/bin/icecat/icecat") end),
+    awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn(firefox) end),
     awful.key({ modkey, "Mod1"    }, "s", function () awful.util.spawn("spotify") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
-    awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(terminal .. " -name ranger -T ranger -e ranger") end),
-    awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(terminal .. " -name rTorrent -T rTorrent -e rtorrent") end),
-    awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -name mutt -T mutt -e mutt -F ~/.mutt/account.1.muttrc") end),
-    --awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(terminal .. " -name moc -T moc -e mocp") end),
-    awful.key({ modkey, "Mod1"    }, "n", function () awful.util.spawn(terminal .. " -name newsbeuter -T newsbeuter -e newsbeuter") end),
+    awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(ranger) end),
+    awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(rtorrent) end),
+    awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(mutt) end),
+    --awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(moc) end),
+    awful.key({ modkey, "Mod1"    }, "n", function () awful.util.spawn(newsbeuter) end),
 
     -- Backlight
     awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --down") end),

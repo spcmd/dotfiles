@@ -848,7 +848,7 @@ alias ll='ls -Alh --group-directories-first --color=auto'
 alias lf='ls -lA1p $@ | grep -v "\/$"' # list files only
 alias free='free -h'
 alias grep='grep --color'
-alias lsblkf='lsblk -o "NAME,SIZE,MOUNTPOINT,RO,FSTYPE,LABEL,UUID"'
+alias lsblkf='lsblk -o "NAME,SIZE,TYPE,MOUNTPOINT,RO,FSTYPE,LABEL,UUID"'
 alias octal='stat -c "%a %n"'
 alias cal='cal -m'
 alias cal-next='cal -mn 2'
