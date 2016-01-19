@@ -1,0 +1,8 @@
+@-moz-document domain(linux.die.net) {
+
+#content { font-family: monospace!important; font-size:14px!important;}
+#content b {color:darkblue!important;}
+#adbottom {display:none!important;}
+  
+/* end of style */  
+}
