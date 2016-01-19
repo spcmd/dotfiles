@@ -34,6 +34,10 @@ unsetopt nomatch        # Globbing
 # Load ZSH stuff (defaults, plugins, themes)
 source $ZSH/zsh-loader.sh
 
+# Customize syntax highlight
+#ZSH_HIGHLIGHT_STYLES[path]=''
+#ZSH_HIGHLIGHT_STYLES[path_prefix]=''
+
 # Load dircolors
 if [[ -f ~/.dircolors ]]; then
     eval $(dircolors ~/.dircolors)

@@ -17,6 +17,7 @@
 colorscheme dark-yellow
 set hintchars=hjklasdfgrtzu
 set titlestring=
+"urxvtc not working!
 set editor="urxvt -e vim"
 let mapleader = "-"
 
@@ -30,7 +31,7 @@ set newtab=all
 " {{{   Key mappings
 "--------------------------------------------
 
-"Do not paste&search
+"Do not paste
 map p <Nop>
 
 "Faster scrolling
@@ -54,6 +55,9 @@ nnoremap L :forward<CR>
 "Quick select text in CARET/VISUAL mode: move to the beginning/end of line
 vnoremap H ^
 vnoremap L $
+
+"Caret mode + cursor width
+nnoremap C :set! ui.caretWidth=4<CR> c
 
 "Escape from focused textarea
 inoremap <C-e> <C-[>
@@ -144,14 +148,20 @@ command! AA -description="Addons" :tabopen about:addons
 command! CC -description="about:config" :tabopen about:config
 command! DD -description="Downloads" :downloads
 
+" Set caret/cursor width
+command! caret -description="Set caret/cursor width" -nargs=1 :set! ui.caretWidth=<args>
+
+" Turn on/off addon signature requirement
+command! addonsignatures -description="Turn on/off addon signature requirement [true/false]" -nargs=1 :set! xpinstall.signatures.required=<args>
+
 "Toggle userstyle (stylish.js plugin)
-command! ST -description="Toggle Stylish userstyle for this page (custom command)" :stylish toggle
+command! ST -description="Toggle Stylish userstyle for this page" :stylish toggle
 
 "Open private window
-command! private -description="Open private window (custom command)" :normal i<C-S-p>
+command! private -description="Open private window" :normal i<C-S-p>
 
 "Source this config
-command! RR -description="Source .vimperatorrc (custom command)" source ~/.vimperatorrc
+command! RR -description="Source .vimperatorrc" source ~/.vimperatorrc
 
 "PH/Logout search integration
 command! ph -description="PH! Fórum kereső: keresés a topikban" -nargs=* js window.content.window.location = window.content.window.location.href.match( /^(http.+\/)[^\/]+$/ )[1] +'keres.php?type=-&stext=<args>';
@@ -179,6 +189,9 @@ command! yt -description="Lookup the selected text in youtube" js window.content
 
 "Lookup selected text in Urbandictionary
 command! urbandict -description="Lookup the selected text in urbandictionary" js window.content.window.open("http://www.urbandictionary.com/define.php?term="+window.content.window.getSelection().toString(), '_blank')
+
+"Lookup man page in linux.die.net
+command! man -description="Lookup man page in linux.die.net" -nargs=1 js window.content.window.open("http://linux.die.net/man/1/<args>", '_blank')
 
 "Add current (feed) url to newsbeuter
 "Usage: nb <feed title>

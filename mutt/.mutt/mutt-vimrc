@@ -17,7 +17,7 @@
 
 set formatoptions+=tcqaw
 set tw=100
-hi StatusLine ctermbg=white ctermfg=cyan
+hi StatusLine ctermbg=white ctermfg=blue
 set nocompatible
 set number
 set showcmd
@@ -162,6 +162,5 @@ nnoremap <leader><space> :set hlsearch!<CR>
 "Yank to system clipboard
 nnoremap y "+y
 vnoremap y "+y
-
 
 " vim: syntax=vim filetype=vim:

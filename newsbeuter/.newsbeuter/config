@@ -27,7 +27,7 @@ feedlist-format "%4i %n %11u %t"
 goto-next-feed no
 goto-first-unread no
 history-limit 0
-max-items 20
+max-items 35
 reload-time 15
 download-path "~/Downloads" #podbeuter
 save-path "~/Downloads"
@@ -42,6 +42,7 @@ search-highlight-colors color5 color4
 # KEY BINDINGS --------------------------------------------------------------------------
 unbind-key ^K
 unbind-key ^J
+unbind-key Q
 
 bind-key j next
 bind-key k prev
@@ -90,7 +91,9 @@ highlight feedlist "Blog" color1 color7
 highlight articlelist "Blog" color1 color7
 highlight feedlist "Podcast" color1 color7
 highlight articlelist "Podcast" color1 color7
-highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:|^Flags:)" color4 color0
+highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:|^Flags:)" color2 color0
+highlight article "https?://[^ ]+" color4 color0
+highlight article "\\[[0-9]{1,2}\]" color2 color0
 
 # light color scheme
 #color background black white

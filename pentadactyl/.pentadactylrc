@@ -2,7 +2,7 @@
 
 set hintkeys=hjklasdfgrtzu
 set titlestring=
-set editor="gvim -f"
+set editor="urxvtc -e vim"
 set scrollsteps=5
 set timeout
 set timeoutlen=10
@@ -13,7 +13,7 @@ set timeoutlen=10
 "use: nmap -ex <keys> command
 "See: https://www.reddit.com/r/vim/comments/2xnp6t/what_can_pentadactyl_do_that_vimperator_cant/cp2ds59
 
-"Do not paste&search
+"Do not paste
 map p <Nop>
 
 "Faster scrolling

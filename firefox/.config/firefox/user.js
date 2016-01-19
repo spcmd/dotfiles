@@ -561,6 +561,10 @@ user_pref("browser.urlbar.suggest.openpage", false);
 // Enable Backspace
 user_pref("browser.backspace_action", 0);
 
+// Caret / cursor
+user_pref("ui.caretWidth", 1);
+user_pref("ui.caretBlinkTime", 0);
+
 // 3001a disable warning when a domain requests full screen
    // https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Using_full_screen_mode
 user_pref("full-screen-api.warning.delay", 0);

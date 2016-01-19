@@ -1,3 +1,5 @@
+! underlined
+mutt.colorUL: #FAE56B
 ! background
 mutt.background: [100]#080808
 ! black
