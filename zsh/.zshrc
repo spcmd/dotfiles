@@ -518,13 +518,13 @@ if [[ -x $DIR_SCRIPTS/gitsiteup.sh ]]; then
 fi
 
 # copy preview images to img directories
-gitprevimg() {
-    for images in "$@"; do
-       cp $images ~/.xampp/spcmd/img
-       cp $images ~/.xampp/spcmd/_site/img
-       cp $images ~/git/spcmd.github.io/img
-   done
-}
+#gitprevimg() {
+    #for images in "$@"; do
+       #cp $images ~/.xampp/spcmd/img
+       #cp $images ~/.xampp/spcmd/_site/img
+       #cp $images ~/git/spcmd.github.io/img
+   #done
+#}
 
 # }}}
 # {{{ awesome WM
@@ -789,12 +789,25 @@ alias pingg='ping google.com'
 alias re-nm='sudo systemctl restart NetworkManager'
 alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 
+# lampp
 alias lampp-start='sudo /opt/lampp/lampp start'
 alias lampp-stop='sudo /opt/lampp/lampp stop'
 alias lampp-restart='sudo /opt/lampp/lampp restart'
 
-alias jekyllserve='cd ~/.xampp/spcmd && echo "Serving: $(pwd)" && jekyll serve -w'
+# Hugo
+DIR_HUGO=$HOME/.webdev/spcmd.github.io
+THEME_HUGO="spcmd"
+hugo-server() { hugo server -s $DIR_HUGO -t $THEME_HUGO }
+hugo-publish() {
+    if [[ -d $DIR_HUGO/public ]]; then
+        echo "==> Warning: Found existing Public directory, renamed to: public_autobackup_$(date +'%Y-%b-%d_%H-%M')"
+        mv $DIR_HUGO/public $DIR_HUGO/public_autobackup_$(date +'%Y-%b-%d_%H-%M')
+    fi
+    hugo -s $DIR_HUGO -t $THEME_HUGO
+}
+hugo-new() { hugo -s $DIR_HUGO new post/$1.md && vim $DIR_HUGO/content/post/$1.md }
 
+# Wifi switch
 wifi() {
 
     case "$1" in
@@ -867,6 +880,12 @@ alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
 alias zzz='systemctl suspend'
 alias sss='systemctl poweroff'
 alias xselpc='xsel -p | xsel -b' # primary to clipboard
+
+# ZSH completion for tvd
+function _tvchannels {
+	reply=($(cat $HOME/.tvchannels.txt))
+}
+compctl -K _tvchannels tvd # <-- function's name here
 
 # Startx shortcut
 XX() {
@@ -947,3 +966,4 @@ if [[ -x /usr/bin/apt-get ]]; then
 fi
 
 # }}}
+
