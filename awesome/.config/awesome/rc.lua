@@ -62,7 +62,7 @@ xdisplay = os.getenv("DISPLAY")
 runOnDisplay = ":0"
 autorun = true
 
--- list of apps to auto run
+-- list of apps to autorun
 autorunApps =
 {
     terminal,
@@ -71,13 +71,30 @@ autorunApps =
     rtorrent,
     firefox,
 }
-if autorun then
-    if xdisplay == runOnDisplay then
-       for app = 1, #autorunApps do
-           awful.util.spawn(autorunApps[app])
-       end
+
+-- Autorun apps only the fist time (after startx), but NOT when awesome restarts (mod+Ctrl+R)
+-- Check the autorun file
+function check_autorun()
+ local autorun_file = io.open("/tmp/awm_autorun", "r")
+     if autorun_file~=nil then
+         local autorun_state = autorun_file:read()
+         autorun_file:close()
+         return autorun_state
     end
 end
+
+-- Autorun apps if...
+if autorun and xdisplay == runOnDisplay and (check_autorun() ~= "false") then
+    for app = 1, #autorunApps do
+        awful.util.spawn(autorunApps[app])
+    end
+end
+
+-- End of autorun, disable it by writing "false" to a temp file
+-- This way we can avoid auto running apps when awesome restarts
+file_autorun = io.open("/tmp/awm_autorun", "w")
+file_autorun:write("false")
+file_autorun:close()
 
 -- }}}
 -- {{{  Errors
@@ -88,8 +105,8 @@ end
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
+    title = "Oops, there were errors during startup!",
+    text = awesome.startup_errors })
 end
 
 -- Handle runtime errors after startup
@@ -101,8 +118,8 @@ do
         in_error = true
 
         naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = err })
+        title = "Oops, an error happened!",
+        text = err })
         in_error = false
     end)
 end
