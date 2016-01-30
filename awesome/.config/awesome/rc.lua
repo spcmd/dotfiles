@@ -616,6 +616,7 @@ globalkeys = awful.util.table.join(
 
     -- Run Applications
     awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn(firefox) end),
+    awful.key({ modkey, "Mod1"    }, "u", function () awful.util.spawn("uzbl-tabbed") end),
     awful.key({ modkey, "Mod1"    }, "s", function () awful.util.spawn("spotify") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
     awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(ranger) end),
@@ -804,7 +805,7 @@ awful.rules.rules = {
     { rule = { class = "Gcolor2" }, properties = { floating = false } },
 
     -- Tag 2 rules
-    { rule_any = { class = { "Firefox", "Iceweasel", "Chromium", "Chrome", "IceCat", "Icecat" } },
+    { rule_any = { class = { "Firefox", "Iceweasel", "Chromium", "Chrome", "IceCat", "Icecat", "uzbl-tabbed", "qutebrowser" } },
         properties = { tag = tags[1][2] }},
 
     -- Tag 3 rules
@@ -866,10 +867,8 @@ client.connect_signal("manage", function (c, startup)
     local titlebars_enabled = true
     if titlebars_enabled and (
                               c.class == "mpv" or
-                              --c.class == "feh" or
                               c.class == "Gcolor2" or
                               c.class == "Gifview" or
-                              --c.class == "Zathura" or
                               c.class == "Wine" or
                               c.type == "dialog"
                              )
@@ -943,14 +942,6 @@ client.connect_signal("focus",
 
 --client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
-
--- Mutt urgent & Notify about new mail
--- http://netbuz.org/blog/2011/11/x-bells-and-urgency-hints/
---client.connect_signal("property::urgent", function(c)
-    --if c.urgent and c.name == "mutt" then
-        --awful.util.spawn_with_shell("echo '1' > ~/.newmail-awesome")
-    --end
---end)
 
 -- Disabled clients bo be urgent by default
 -- https://awesome.naquadah.org/wiki/FAQ#Why_are_new_clients_urgent_by_default.3F

@@ -23,7 +23,7 @@ browser { background-color: #151515 !important; }
 
 /* Browser "frame" */
 
-#tab-view-deck { 
+#tab-view-deck {
   border-top:1px solid #4a4a4a!important;
   border-left:1px solid #4a4a4a!important;
   border-right:1px solid #4a4a4a!important;
@@ -242,3 +242,6 @@ statuspanel {display:none!important;}
 
 /* Remove Context menu items */
 #context-selectall, #context-viewbgimage, #context-savepage {display:none!important;}
+
+/* Addons page */  
+#categories, #addon-list {font-size:12px!important;}

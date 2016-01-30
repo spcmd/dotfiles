@@ -56,7 +56,7 @@ body {
 }
 
 /* Kedvencek lista: e-mail ikon */
-span.mod a:nth-child(3) {
+span.mod img {
   display:none!important;
 }
 
