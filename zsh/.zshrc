@@ -794,11 +794,14 @@ wifi() {
     case "$1" in
         on)
             nmcli radio wifi on
+            file_newmail_count=$HOME/.mutt/newmail_count
             echo "==> Wifi switched ON"
+            echo "0" > $file_newmail_count
+            echo "==> wrote 0 to $file_newmail_count"
             if [[ -f /bin/awesome ]]; then
-                wait=10s
-                echo "==> Waiting $wait before awm-chkmail-on"
-                sleep $wait && awm-chkmail-on
+                seconds=10s
+                echo "==> Waiting $seconds before awm-chkmail-on"
+                sleep $seconds && awm-chkmail-on
             fi
             ;;
         off)
