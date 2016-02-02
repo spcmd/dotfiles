@@ -298,7 +298,7 @@ alias pacupg='sudo pacman -Syyu' # update & upgrade
 alias paclsup='sudo pacman -Syy && pacman -Qu' # show availabe updates
 alias paclspkg='pacman -Q' # list installed packages
 alias paclsaur='pacman -Qmq' #list AUR and manually installed packages
-alias paclsaurpkg='pacman -Qm' # list installed AUR packages
+alias paclsaurver='pacman -Qm' # list installed AUR packages
 alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
 alias cdyaourtpkg='cd /var/cache/pacman/pkg-yaourt' # change to yaourt cache dir
 
@@ -441,6 +441,12 @@ pachint() {
     echo -e "$COLOR_HL1::$COLOR_TITLE $0 >$COLOR_DEFAULT Listing pacman functions:"
     lsmyfunc | grep --color=never -E "^pac"
     echo "--------------------------------------------------------------------------"
+}
+
+# checkupdates + filter out ignored packages
+paccheck() {
+    ignorelist=$(awk '/IgnorePkg.+=/{for(i=1;i<3;i++) $i="";gsub(/^[ \t]+|[ \t]+$/,"");gsub(" ","|");print}' /etc/pacman.conf)
+    checkupdates | sed -r "/($ignorelist)/d"
 }
 
 # }}}
