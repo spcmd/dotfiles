@@ -446,7 +446,16 @@ pachint() {
 # checkupdates + filter out ignored packages
 paccheck() {
     ignorelist=$(awk '/IgnorePkg.+=/{for(i=1;i<3;i++) $i="";gsub(/^[ \t]+|[ \t]+$/,"");gsub(" ","|");print}' /etc/pacman.conf)
-    checkupdates | sed -r "/($ignorelist)/d"
+    packages=$(checkupdates | sed -r "/($ignorelist)/d")
+    count=$(echo "$packages" | wc -l)
+    if [[ $count -gt 0 ]]; then
+        echo -e "------------\033[1;33mC\033[0m o o o o o o o o"
+        echo -e "\033[1;33m$count\033[0m package update(s) availabe"
+        echo -e "------------------------------"
+        echo "$packages"
+    else
+        echo "No package updates availabe."
+    fi
 }
 
 # }}}
@@ -585,7 +594,8 @@ awm-note() {
 # {{{ Note
 note() {
 
-    FILE_NOTES=~/Documents/Notes
+    FILE_NOTES=$HOME/Documents/Notes
+    colorize_output(){ sed -r -e "s/\[.+\]/\o033[0;32m&\o033[0m/" -e "s/@.+/\o033[0;30;46;3m & \o033[0m/" }
 
     case "$1" in
 
@@ -607,17 +617,19 @@ note() {
                         fi
                         ;;
         -l|--list)
-                        tac $FILE_NOTES
+                        tac $FILE_NOTES | colorize_output
                         ;;
 
         -L|--list-oldest-first)
-                        cat $FILE_NOTES
+                        cat $FILE_NOTES | colorize_output
                         ;;
         -s|--search)
-                        grep -i "$2" $FILE_NOTES
+                        grep -i "$2" $FILE_NOTES | colorize_output
                         ;;
         -S|--search-case-sensitive)
-                        grep "$2" $FILE_NOTES
+                        grep "$2" $FILE_NOTES | colorize_output
+                        ;;
+        -e|--edit)      $EDITOR $FILE_NOTES
                         ;;
         -h|--help)
 cat <<EOF
@@ -625,9 +637,10 @@ Notes file's location: $FILE_NOTES
 Usage: note [option] <note|keyword>
 
 Options:
-    <note>                                      Add a note (you can add a note without using the -a or the --all option)
+    <note>                                      Add a note (you can add a note without using the -a or the --add option)
     -a, --add <note>                            Add a note
     -b, --backup                                Create a backup copy in the same directory
+    -e, --edit                                  Edit Notes file directory (with $EDITOR)
     -r, --remove <keyword>                      Remove note(s) by keyword (a keyword can be any word, tag, date or time)
     -R, --remove-all                            Remove ALL notes (emergency backup will be created in /tmp)
     -l, --list                                  List notes (show newer first)
@@ -647,8 +660,14 @@ EOF
         -a|--add)
                         echo "$(date +"[%Y-%b-%d %H:%M]") $2" >> $FILE_NOTES
                         ;;
+        -*)             echo "Invalid option. Use '$0 -h' for help."
+                        ;;
         *)
-                        echo "$(date +"[%Y-%b-%d %H:%M]") $1" >> $FILE_NOTES
+                        if [[ -z $1 ]]; then
+                            tac $FILE_NOTES | colorize_output
+                        else
+                            echo "$(date +"[%Y-%b-%d %H:%M]") $@" >> $FILE_NOTES
+                        fi
                         ;;
     esac
 }
