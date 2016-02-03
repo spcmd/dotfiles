@@ -596,10 +596,15 @@ globalkeys = awful.util.table.join(
     --~ Custom key bindings  ~~~
     --~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    -- Spotify: Play/Pause, Prev, Next
-    awful.key({ modkey,           }, "s", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end),
-    awful.key({ modkey,           }, "Left", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous") end),
-    awful.key({ modkey,           }, "Right", function () awful.util.spawn("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end),
+    -- Spotify control
+    awful.key({ modkey,           }, "s", function () awful.util.spawn("dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end),
+    awful.key({ modkey,           }, "Left", function () awful.util.spawn("dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous") end),
+    awful.key({ modkey,           }, "Right", function () awful.util.spawn("dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end),
+
+    -- mps-youtube control
+    awful.key({ modkey,     }, "y", function () awful.util.spawn("mpsyt-control play-pause") end),
+    awful.key({ modkey, "y" }, "Left", function () awful.util.spawn("mpsyt-control previous") end),
+    awful.key({ modkey, "y" }, "Right", function () awful.util.spawn("mpsyt-control next") end),
 
     -- Volume
     awful.key({ modkey,           }, "Up", function () awful.util.spawn("amixer sset Master 2%+") vicious.force ({ volumewidget }) end),
