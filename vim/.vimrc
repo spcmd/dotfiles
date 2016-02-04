@@ -231,7 +231,7 @@ nnoremap ú :bnext<CR>
 nnoremap ő :bprevious<CR>
 
 "Folding
-nnoremap <space> za
+nnoremap <space> za]z
 
 "Select ALL
 nnoremap <C-a> ggVG
