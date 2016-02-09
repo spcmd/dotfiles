@@ -871,7 +871,7 @@ mailthis() {
 alias q=' exit' # do not store the command in the history
 alias ls='ls --color=auto -A'
 alias ll='ls -Alh --group-directories-first --color=auto'
-alias lf='ls -lA1p $@ | grep -v "\/$"' # list files only
+alias lf='ls -l | egrep -v "^d"' # list files only
 alias free='free -h'
 alias grep='grep --color'
 alias lsblkf='lsblk -o "NAME,SIZE,TYPE,MOUNTPOINT,RO,FSTYPE,LABEL,UUID"'
@@ -887,11 +887,14 @@ alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by defau
 alias kpass='kpcli --kdb'
 alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
 alias zzz='systemctl suspend'
-alias sss='systemctl poweroff'
 alias xselpc='xsel -p | xsel -b' # primary to clipboard
 
-# TV info
-tvdc() { tvd $(cat $HOME/.tvd_channels) }
+# Shutdown gracefully
+sss() {
+    pkill -SIGTERM spotify &&
+    pkill -SIGTERM firefox &&
+    systemctl poweroff
+}
 
 # ZSH completion for tvd
 function _tvchannels {

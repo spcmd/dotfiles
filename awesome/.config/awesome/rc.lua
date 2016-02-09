@@ -46,6 +46,7 @@ rtorrent = terminal .. " -name rTorrent -T rTorrent -e rtorrent"
 mutt = terminal .. " -name mutt -T mutt -e mutt -F ~/.mutt/account.1.muttrc"
 moc = terminal .. " -name moc -T moc -e mocp"
 firefox = "/home/spcmd/bin/firefox-esr/firefox"
+dmenu = "dmenu_run -i -l 10 -fn 'Monospace-10'"
 
 -- Default modkey.
 modkey = "Mod4"
@@ -596,12 +597,16 @@ globalkeys = awful.util.table.join(
     --~ Custom key bindings  ~~~
     --~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    -- Spotify control
+    -- Spotify
     awful.key({ modkey,           }, "s", function () awful.util.spawn("dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause") end),
     awful.key({ modkey,           }, "Left", function () awful.util.spawn("dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous") end),
     awful.key({ modkey,           }, "Right", function () awful.util.spawn("dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end),
 
-    -- mps-youtube control
+
+    -- spotymenu
+    awful.key({ modkey,           }, "b", function () awful.util.spawn("spotymenu") end),
+
+    -- mps-youtube
     awful.key({ modkey,     }, "y", function () awful.util.spawn("mpsyt-control play-pause") end),
     awful.key({ modkey, "y" }, "Left", function () awful.util.spawn("mpsyt-control previous") end),
     awful.key({ modkey, "y" }, "Right", function () awful.util.spawn("mpsyt-control next") end),
@@ -620,15 +625,25 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control"    }, "z", function () awful.util.spawn("systemctl suspend") end),
 
     -- Run Applications
+    awful.key({ modkey,           }, "a", function () awful.util.spawn(dmenu) end),
     awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn(firefox) end),
     awful.key({ modkey, "Mod1"    }, "u", function () awful.util.spawn("uzbl-tabbed") end),
-    awful.key({ modkey, "Mod1"    }, "s", function () awful.util.spawn("spotify") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
     awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(ranger) end),
     awful.key({ modkey, "Mod1"    }, "t", function () awful.util.spawn(rtorrent) end),
     awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(mutt) end),
-    --awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(moc) end),
     awful.key({ modkey, "Mod1"    }, "n", function () awful.util.spawn(newsbeuter) end),
+    --awful.key({ modkey, "Mod1"    }, "m", function () awful.util.spawn(moc) end),
+    --awful.key({ modkey, "Mod1"    }, "s", function () awful.util.spawn("spotify") end),
+    awful.key({ modkey, "Mod1"    }, "s",
+                  function ()
+                        local screen = mouse.screen
+                        local tag = awful.tag.gettags(screen)[4]
+                        if tag then
+                           awful.tag.viewonly(tag)
+                        end
+                        awful.util.spawn("spotify")
+                  end),
 
     -- Backlight
     awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --down") end),
@@ -705,10 +720,10 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end),
+              end)
 
     -- Launcher bar
-    awful.key({ modkey }, "a", function() menubar.show() end)
+    --awful.key({ modkey }, "a", function() menubar.show() end)
 )
 
 -- Client keys

@@ -214,6 +214,7 @@ autocmd BufRead .vimperatorrc set filetype=vim
 autocmd BufRead .pentadactylrc set filetype=vim
 autocmd BufRead *.vimp set filetype=vim
 autocmd BufRead .xinitrc set filetype=sh
+autocmd BufRead *.todo nnoremap <space> za]z
 
 " }}}
 " {{{   Key mappings
@@ -231,7 +232,7 @@ nnoremap ú :bnext<CR>
 nnoremap ő :bprevious<CR>
 
 "Folding
-nnoremap <space> za]z
+nnoremap <space> za
 
 "Select ALL
 nnoremap <C-a> ggVG

@@ -34,6 +34,7 @@ set mark_old = no                                                           # Do
 set move = no                                                               # Stop asking to "move read messages to mbox"!
 #set imap_check_subscribed                                                  # Check all folder (Unset when using multiple accounts!)
 set auto_tag = yes                                                          # Auto apply tag prefix (;) when running a command on tagged messages
+set record = ""                                                             # Record (log) of the sent mails (default: ~/sent)
 
 set implicit_autoview = yes                                                 # Use autoview, if a "copiousoutput" is in mailcap
 auto_view text/html                                                         # Auto view html format
