@@ -95,10 +95,6 @@ if [[ -d $HOME/bin ]]; then
     PATH=$PATH:$HOME/bin
 fi
 
-if [[ -d $HOME/.gem/ruby/2.2.0/bin ]]; then
-    PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
-fi
-
 # }}}
 # {{{   Vi mode for Zsh
 # -----------------------------------------------------
@@ -270,6 +266,7 @@ alias cfg-xresources='$EDITOR ~/.Xresources'
 alias cfg-zshrc='$EDITOR ~/.zshrc'
 alias cfg-dmenu='$EDITOR ~/.dmenurc'
 alias cfg-dmenu-term-apps='$EDITOR ~/.dmenu_term_apps'
+alias cfg-spoty-albums='$EDITOR ~/.spoty_albums'
 
 # Reload config files
 alias rld-bashrc='source ~/.bashrc'
@@ -890,6 +887,19 @@ alias kpass='kpcli --kdb'
 alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
 alias zzz='systemctl suspend'
 alias xselpc='xsel -p | xsel -b' # primary to clipboard
+
+# Pass (https://www.passwordstore.org/)
+alias pass-gen='pass generate -i'
+alias pass-add='pass insert -m'
+
+# Speaker toggle
+speaker() {
+    case $1 in
+        on) amixer set Speaker unmute 100;;
+        off) amixer set Speaker mute 0;;
+        *) amixer sget Speaker | grep 'Playback' | tail -n 1
+    esac
+}
 
 # Shutdown gracefully
 sss() {

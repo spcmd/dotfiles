@@ -237,6 +237,9 @@ nnoremap <space> za
 "Select ALL
 nnoremap <C-a> ggVG
 
+"Toggle wrap (visual line break)
+nnoremap <C-w> :set nowrap!<CR>
+
 "Delete surrounding quotes, brackets etc.
 nnoremap <leader>d{ F{xf}x
 nnoremap <leader>d" F"x,x

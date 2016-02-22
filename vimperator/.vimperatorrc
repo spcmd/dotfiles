@@ -81,7 +81,7 @@ inoremap <C-a> <Ins><C-a><Ins>
 "vimpv.js (play videos with mpv)
 nnoremap m ;m
 
-"vimphelper.sh
+"vimphint.sh
 nmap ? :silent execute "!vimphint.sh"<CR>
 
 "Search highlight

@@ -1,3 +1,4 @@
+zsh/.zsh/plugins/zsh-syntax-highlighting
 mpv/.config/mpv/watch_later
 thunar/.config/Thunar/accels.scm
 *.swp

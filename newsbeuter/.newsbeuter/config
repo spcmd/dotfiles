@@ -64,6 +64,7 @@ bind-key G pagedown
 bind-key ; macro-prefix
 macro f edit-flags "f"
 macro F edit-flags ""
+macro u edit-flags ""
 macro m set browser "$MEDIAPLAYER %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
 
 # COLORS --------------------------------------------------------------------------------
