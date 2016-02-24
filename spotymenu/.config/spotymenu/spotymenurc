@@ -81,11 +81,3 @@ confirm_quit="yes"
 
 # API limit: results from the Spotify API (currently the max. number can be 50)
 api_limit=50
-
-#==================================
-# Applying style settings
-#==================================
-
-DMENU="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_bg -sf $selected_fg"
-DMENU_DELETE="dmenu -i -l $list_size -fn $font -nb $normal_bg -nf $normal_fg -sb $selected_delete_bg -sf $selected_delete_fg"
-
