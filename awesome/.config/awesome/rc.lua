@@ -604,7 +604,7 @@ globalkeys = awful.util.table.join(
 
 
     -- spotymenu
-    awful.key({ modkey,           }, "b", function () awful.util.spawn("spotymenu") end),
+    awful.key({ modkey,           }, "b", function () awful.util.spawn("spotymenu", false) end),
 
     -- mps-youtube
     awful.key({ modkey,     }, "y", function () awful.util.spawn("mpsyt-control play-pause") end),
@@ -625,7 +625,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control"    }, "z", function () awful.util.spawn("systemctl suspend") end),
 
     -- Run Applications
-    awful.key({ modkey,           }, "a", function () awful.util.spawn(dmenu) end),
+    awful.key({ modkey,           }, "a", function () awful.util.spawn(dmenu,false) end),
     awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn(firefox) end),
     awful.key({ modkey, "Mod1"    }, "u", function () awful.util.spawn("uzbl-tabbed") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),

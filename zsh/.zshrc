@@ -51,12 +51,13 @@ case $TERM in
     # Write some info to terminal title.
     # This is seen when the shell prompts for input.
     function precmd {
-      print -Pn "\e]0;urxvt %(1j,%j job%(2j|s|); ,)%~\a"
+        print -Pn "\e]0;urxvt %(1j,%j job%(2j|s|); ,)%~\a"
     }
     # Write command and args to terminal title.
     # This is seen while the shell waits for a command to complete.
     function preexec {
-      printf "\033]0;%s\a" "$1"
+        [[ $1 = "q" ]] && name="ranger" || name="$1" # fix title when switching to shell from ranger, then back to ranger (q is aliased to exit)
+        printf "\033]0;%s\a" "$name"
     }
 
   ;;
@@ -266,7 +267,8 @@ alias cfg-xresources='$EDITOR ~/.Xresources'
 alias cfg-zshrc='$EDITOR ~/.zshrc'
 alias cfg-dmenu='$EDITOR ~/.dmenurc'
 alias cfg-dmenu-term-apps='$EDITOR ~/.dmenu_term_apps'
-alias cfg-spoty-albums='$EDITOR ~/.spoty_albums'
+alias cfg-spoty-albums='$EDITOR ~/.spotymenu/album_list'
+alias cfg-spotymenu='$EDITOR ~/.config/spotymenu/spotymenurc'
 
 # Reload config files
 alias rld-bashrc='source ~/.bashrc'
@@ -294,7 +296,7 @@ alias pacqs='pacman -Qs' # search in installed packages
 alias pacsync='sudo pacman -Syy' # update repo lists
 alias pacupd='sudo pacman -Syyu' # update & upgrade
 alias pacupg='sudo pacman -Syyu' # update & upgrade
-alias paclsup='sudo pacman -Syy && pacman -Qu' # show availabe updates
+alias paclsup='sudo pacman -Syy && pacman -Qu' # show available updates
 alias paclspkg='pacman -Q' # list installed packages
 alias paclsaur='pacman -Qmq' #list AUR and manually installed packages
 alias paclsaurver='pacman -Qm' # list installed AUR packages
@@ -811,6 +813,11 @@ hugo-publish() {
     hugo -s $DIR_HUGO -t $THEME_HUGO
 }
 hugo-new() { hugo -s $DIR_HUGO new post/$1.md && vim $DIR_HUGO/content/post/$1.md }
+hugo-sync() {
+    if [[ -d $DIR_HUGO/public ]] && [[ -d $HOME/git/spcmd.github.io ]]; then
+        rsync -avr $DIR_HUGO/public/* $HOME/git/spcmd.github.io/
+    fi
+}
 
 # Wifi switch
 wifi() {
