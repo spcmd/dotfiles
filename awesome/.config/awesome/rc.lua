@@ -951,13 +951,13 @@ end)
 client.connect_signal("focus",
         function(c)
                 -- Disable focus highlight for Firefox
-                if c.class == "Firefox" then
-                        c.border_width = "0"
-                        c.border_color = beautiful.border_focus
-                else
+                --if c.class == "Firefox" then
+                        --c.border_width = "0"
+                        --c.border_color = beautiful.border_focus
+                --else
                         c.border_width = beautiful.border_width
                         c.border_color = beautiful.border_focus
-                end
+                --end
         end)
 
 --client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)

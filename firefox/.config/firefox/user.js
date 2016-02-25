@@ -523,7 +523,19 @@ user_pref("pdfjs.disabled", false);
    // http://www.squarefree.com/2004/07/01/race-conditions-in-security-dialogs/
 user_pref("security.dialog_enable_delay", 1000);
 
-
+/****************************************************************************/
+/*** Sync ***                                                               */
+/****************************************************************************/
+user_pref("services.sync.enabled", false);
+user_pref("services.sync.engine.addons", false);
+user_pref("services.sync.engine.bookmarks", false);
+user_pref("services.sync.engine.history", false);
+user_pref("services.sync.engine.passwords", false);
+user_pref("services.sync.engine.prefs", false);
+user_pref("services.sync.engine.tabs", false);
+user_pref("services.sync.registerEngines", "");
+user_pref("services.sync.serverURL", "http://127.0.0.1");
+user_pref("services.sync.registerEngines", "");
 
 /****************************************************************************/
 /*** PERSONAL PREFERENCES ***                                               */
