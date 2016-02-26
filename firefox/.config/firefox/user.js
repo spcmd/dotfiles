@@ -393,7 +393,7 @@ user_pref("browser.link.open_newwindow.restriction", 0);
    // WARNING: This will break some sites functionality such as pasting into Facebook
    // this applies to onCut, onCopy, onPaste events - i.e is you have to interact with
    // the website for it to look at the clipboard
-    // need to be 'true' if you are using Stylish and you want to copy&paste
+    // needs to be 'true' if you are using Stylish and you want to copy&paste
 user_pref("dom.event.clipboardevents.enabled", true);
 
 // 2405: https://wiki.mozilla.org/WebAPI/Security/WebTelephony

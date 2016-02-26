@@ -14,7 +14,7 @@ file_albumlist=$dir_spotymenu/album_list
 # File that contains the list of playlists
 file_playlists=$dir_spotymenu/playlists
 
-# Default file where the favorites saved to
+# File where the favorites are saved to
 file_favorite_tracks=$dir_spotymenu/favorite_tracks
 
 # Search history
@@ -62,7 +62,7 @@ use_tracklist_cache="yes"
 # Extra whitespace for seperating Artist and Title in the tracklist
 tl_separator_whitespace=1
 
-# Separator line character (for tracklist and the above the album list):
+# Separator line character (for the tracklist and the above the album list):
 # use a single character
 sep_line_char="-"
 
@@ -71,7 +71,7 @@ sep_line_char="-"
 # for reference: 170 is for 768 px wide screen and monospace-10 font
 sep_line_width=170
 
-# For Awesome WM: switch to spotify's tag after selecting or searching
+# For Awesome Window Manager: switch to Spotify's tag after selecting or searching
 awm_switch="no" # yes or no/empty
 awm_screen="1"
 awm_tag="4"
