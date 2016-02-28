@@ -1,0 +1,26 @@
+! background
+toxic.background: [100]#282d31
+! black
+toxic.color0: #282d31
+toxic.color8: #282d31
+! red
+toxic.color1: #E94B4B
+toxic.color9: #E94B4B
+! green
+toxic.color2: #5BA52C
+toxic.color10: #89e234
+! yellow
+toxic.color3: #FAE56B
+toxic.color11: #FDFF0F
+! blue
+toxic.color4: #729fcf
+toxic.color12:#729fcf
+! magenta
+toxic.color5: #D041C8
+toxic.color13: #D041C8
+! cyan
+toxic.color6: #34e2e2
+toxic.color14: #34e2e2
+! white
+toxic.color7: #ffffff
+toxic.color15: #f5f5f5
