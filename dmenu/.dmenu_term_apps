@@ -6,4 +6,5 @@ ranger -name ranger
 mocp -name moc
 newsbeuter -name newsbeuter
 rtorrent -name rTorrent
+toxic -name toxic
 tvd

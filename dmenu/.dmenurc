@@ -1,1 +1,1 @@
-DMENU='dmenu -i -l 10 -fn monospace-10'
+DMENU='dmenu -i -l 10 -fn monospace-10 -sb #0D497B'

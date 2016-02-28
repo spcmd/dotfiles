@@ -46,7 +46,7 @@ rtorrent = terminal .. " -name rTorrent -e rtorrent"
 mutt = terminal .. " -name mutt -e mutt -F ~/.mutt/account.1.muttrc"
 moc = terminal .. " -name moc -e mocp"
 firefox = "/home/spcmd/bin/firefox-esr/firefox"
-dmenu = "/home/spcmd/Scripts/dmenu_run -i -l 10 -fn 'Monospace-10'"
+dmenu = "/home/spcmd/Scripts/dmenu_run -i -l 10 -fn 'Monospace-10' -sb '#0D497B'"
 
 -- Default modkey.
 modkey = "Mod4"
@@ -130,7 +130,7 @@ end
 ------------------------------------------
 
 -- Theme
-beautiful.init("~/.config/awesome/themes/dwm-blue/theme.lua")
+beautiful.init("~/.config/awesome/themes/arch-spcmd/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =

@@ -93,3 +93,4 @@ newsbeuter.iconFile: /home/spcmd/.icons/newsbeuter.png
 #include "/home/spcmd/.mutt/Xresources.mutt.colors-spcmd"
 #include "/home/spcmd/.config/ranger/Xresources.ranger.colors-spcmd"
 #include "/home/spcmd/.newsbeuter/Xresources.newsbeuter.colors-spcmd"
+#include "/home/spcmd/.config/tox/Xresources.toxic.colors-spcmd"

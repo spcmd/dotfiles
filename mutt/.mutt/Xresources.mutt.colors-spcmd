@@ -15,8 +15,10 @@ mutt.color10: #00AA00
 mutt.color3: #FAE56B
 mutt.color11: #FAE56B
 ! blue
-mutt.color4: #005577
-mutt.color12:#005577
+!mutt.color4: #005577
+!mutt.color12:#005577
+mutt.color4: #0D497B
+mutt.color12:#0D497B
 ! magenta
 mutt.color5: #FFA97A
 mutt.color13: #FFA97A

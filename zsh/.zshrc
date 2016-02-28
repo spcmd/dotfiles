@@ -891,9 +891,16 @@ alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -
 alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
 alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
 alias kpass='kpcli --kdb'
-alias cpw='xsel -c && xsel -bc && echo "Clipboard cleared."'
 alias zzz='systemctl suspend'
 alias xselpc='xsel -p | xsel -b' # primary to clipboard
+
+# Clear Clipboard
+cpw() {
+    xsel -bc &&
+    echo "" | xsel -p &&
+    echo "Clipboard cleared."
+}
+alias CC='cpw'
 
 # Pass (https://www.passwordstore.org/)
 alias pass-gen='pass generate -i'
