@@ -89,8 +89,8 @@ newsbeuter.iconFile: /home/spcmd/.icons/newsbeuter.png
 !   Colors
 ! ------------------------------------------
 
-#include "/home/spcmd/.urxvt/Xresources.urxvt.colors-spcmd"
+#include "/home/spcmd/.urxvt/Xresources.urxvt.colors-spcmd2"
 #include "/home/spcmd/.mutt/Xresources.mutt.colors-spcmd"
-#include "/home/spcmd/.config/ranger/Xresources.ranger.colors-spcmd"
+#include "/home/spcmd/.config/ranger/Xresources.ranger.colors-spcmd2"
 #include "/home/spcmd/.newsbeuter/Xresources.newsbeuter.colors-spcmd"
 #include "/home/spcmd/.config/tox/Xresources.toxic.colors-spcmd"

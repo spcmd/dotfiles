@@ -23,7 +23,7 @@ use_search_history="yes"
 
 # Selected album id saved to this file
 # This way we can quickly access the id for the tracklist command
-file_saved_album_id=$dir_spotymenu/spotymenu_saved_album_id
+file_saved_album_id=/tmp/spotymenu_saved_album_id
 
 # Artist and Album Title separator in the displayed list
 # Don't use regex chars as a separator!
