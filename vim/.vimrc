@@ -326,4 +326,8 @@ nnoremap <silent> <leader>x :TodoCancel<CR>
 "Colorizer (https://github.com/chrisbra/Colorizer)
 nnoremap <silent> <leader>cz :ColorHighlight syntax<CR>
 
+" Replace X with x, so it will save and quit instead of showing the encryption prompt
+" (http://stackoverflow.com/questions/17792177/disable-encryption-with-x-in-vim/17794801#17794801)
+cnoreabbrev <expr> X (getcmdtype() is# ':' && getcmdline() is# 'X') ? 'x' : 'X'
+
 " }}}

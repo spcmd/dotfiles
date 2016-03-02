@@ -51,6 +51,7 @@ bind-key k up article
 bind-key l open
 bind-key h quit article
 bind-key h quit articlelist
+bind-key h quit tagselection
 bind-key ^N reload-all
 bind-key F edit-flags
 bind-key o sort feedlist

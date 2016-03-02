@@ -14,10 +14,10 @@
 " {{{   Settings
 "--------------------------------------------
 
-colorscheme dark-yellow
+colorscheme spcmd-arch
 set hintchars=hjklasdfgrtzu
 set titlestring=
-"urxvtc not working!
+"urxvtc doesn't work!
 set editor="urxvt -e vim"
 let mapleader = "-"
 

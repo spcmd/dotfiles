@@ -21,5 +21,8 @@ urxvtd &
 # Merge .Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
+# Redshift
+redshift -r -c ~/.config/redshift/redshift.conf &
+
 # Start X
 exec dbus-launch --exit-with-session --sh-syntax awesome
