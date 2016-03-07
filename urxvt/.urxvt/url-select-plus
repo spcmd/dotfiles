@@ -21,6 +21,7 @@
 #   URxvt.url-select-plus.launcher:     : Browser/command to open selected URL with
 #   URxvt.url-select-plus.altlauncher   : Alternative browser/command to open selected URL with
 #   URxvt.url-select-plus.mediaplayer   : Mediaplayer to open selected URL with
+#   URxvt.url-select-plus.imgviewer     : Image viewer to open selected URL with
 #   URxvt.url-select-plus.underline     : If set to true, all URLs get underlined
 
 # Key bindings:
@@ -29,6 +30,7 @@
 #   o/Return: Open selected URL in browser, Return: deactivate afterwards
 #   O:        Open selected URL in alternative browser
 #   m:        Open selected URL in mediaplayer (e.g.: mpv, mplayer)
+#   i:        Open selected URL in image viewer (e.g.: feh)
 #   y:        Copy (yank) selected URL and deactivate selection mode
 #   q/Escape: Deactivate URL selection mode
 
@@ -54,6 +56,9 @@ sub on_start {
 	}
     if ($self->x_resource('url-select-plus.mediaplayer')) {
 		@{$self->{mediap}} = split /\s+/, $self->x_resource('url-select-plus.mediaplayer');
+    }
+    if ($self->x_resource('url-select-plus.imgviewer')) {
+		@{$self->{imgv}} = split /\s+/, $self->x_resource('url-select-plus.imgviewer');
     }
     if ($self->x_resource('url-select-plus.underline') eq 'true') {
 		$self->enable(line_update => \&line_update);
@@ -176,7 +181,10 @@ sub key_press {
 		deactivate($self) unless $char eq 'O';
     } elsif ($keysym == 0x006d || $char eq 'm') {
 		$self->exec_async(@{$self->{mediap}}, ${$self->{found}[$self->{n}]}[4]);
-		deactivate($self) unless $char eq 'm';
+		deactivate($self);
+    } elsif ($keysym == 0x0069 || $char eq 'i') {
+		$self->exec_async(@{$self->{imgv}}, ${$self->{found}[$self->{n}]}[4]);
+		deactivate($self);
 	} elsif ($char eq 'y') {
 		my $found = $self->{found}[$self->{n}];
 		$self->selection_beg(${$found}[0], ${$found}[1]);

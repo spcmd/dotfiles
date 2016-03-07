@@ -76,6 +76,15 @@ export PDFER='zathura'
 export DIR_BACKUP=$HOME/Backup
 export DIR_SCRIPTS=$HOME/Scripts
 
+export XDG_DESKTOP_DIR="$HOME/Desktop"
+export XDG_DOCUMENTS_DIR="$HOME/Documents"
+export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+export XDG_MUSIC_DIR="$HOME/Music"
+export XDG_PICTURES_DIR="$HOME/Pictures"
+export XDG_PUBLICSHARE_DIR="$HOME/Public"
+export XDG_TEMPLATES_DIR="$HOME/.Templates"
+export XDG_VIDEOS_DIR="$HOME/Videos"
+
 # Stop ranger from loading the both the default and the custom config files
 if [[ -f /usr/bin/ranger ]]; then
     export RANGER_LOAD_DEFAULT_RC=FALSE
@@ -269,6 +278,7 @@ alias cfg-dmenu='$EDITOR ~/.dmenurc'
 alias cfg-dmenu-term-apps='$EDITOR ~/.dmenu_term_apps'
 alias cfg-spoty-albums='$EDITOR ~/.spotymenu/album_list'
 alias cfg-spotymenu='$EDITOR ~/.config/spotymenu/spotymenurc'
+alias cfg-uzbl='$EDITOR ~/.config/uzbl/config'
 
 # Reload config files
 alias rld-bashrc='source ~/.bashrc'

@@ -62,6 +62,7 @@ bind-key n next-unread
 bind-key N prev-unread
 bind-key g pageup
 bind-key G pagedown
+bind-key a mark-feed-read
 bind-key ; macro-prefix
 macro f edit-flags "f"
 macro F edit-flags ""
