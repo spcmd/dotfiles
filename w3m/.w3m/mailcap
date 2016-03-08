@@ -1,0 +1,5 @@
+# Images
+image/*; $IMAGER %s
+
+# PDFs
+application/pdf; $PDFER %s 
