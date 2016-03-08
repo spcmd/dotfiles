@@ -280,8 +280,8 @@ vnoremap <S-tab> <gv
 vnoremap <tab> >gv
 
 "Faster navigation
-nnoremap <C-j> <C-d>
-nnoremap <C-k> <C-u>
+nnoremap J <C-d>
+nnoremap K <C-u>
 
 "Select the whole line in Visual mode
 vnoremap j j$

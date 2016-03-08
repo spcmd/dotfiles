@@ -37,8 +37,8 @@ map p <Nop>
 "Faster scrolling
 nnoremap j 3j
 nnoremap k 3k
-nnoremap <C-j> <C-d>
-nnoremap <C-k> <C-u>
+nnoremap J <C-d>
+nnoremap K <C-u>
 
 "Tabs
 nnoremap ú :tabnext<CR>

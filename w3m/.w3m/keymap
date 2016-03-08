@@ -1,167 +1,101 @@
-
 # The 'M' modifier key is the Esc key!
 
 # Basic stuff
-keymap p OPTIONS
 keymap q QUIT
-keymap : GOTO
-keymap F TAB_LINK
-keymap T TAB_LINK
+keymap :q QUIT
+keymap :x ABORT
+keymap :o OPTIONS
+keymap :k LOAD ~/.w3m/keymap
+keymap :: COMMAND
 keymap r RELOAD
-keymap f LIST_MENU
 
-# Open link in external (GUI) browser
-keymap o EXTERN_LINK
-
-# Open current page in external (GUI) browser
-keymap O EXTERN
+# Go To
+keymap o GOTO
+keymap t TAB_GOTO
+keymap gh GOTO ~/.config/firefox/newtab/newtab.html
+keymap gH TAB_GOTO ~/.config/firefox/newtab/newtab.html
 
 # Move the cursor
-keymap	h	MOVE_LEFT
-keymap	j	MOVE_DOWN
-keymap	k	MOVE_UP
-keymap	l	MOVE_RIGHT
-
-keymap	b	PREV_WORD
-keymap	w	NEXT_WORD
+keymap h  MOVE_LEFT
+keymap j MOVE_DOWN
+keymap k MOVE_UP
+keymap l MOVE_RIGHT
+keymap b PREV_WORD
+keymap w NEXT_WORD
+keymap 0 LINE_BEGIN
+keymap $ LINE_END
 
 # Move (without moving the cursor)
-#keymap	J	UP
-#keymap	K	DOWN
-keymap	g	BEGIN
-keymap	G	END
-keymap	J	NEXT_PAGE
-keymap	K	PREV_PAGE
+#keymap J UP
+#keymap K DOWN
+keymap gg BEGIN
+keymap G END
+keymap J NEXT_PAGE
+keymap K PREV_PAGE
+
+# Scroll page left-right
+keymap M-h SHIFT_LEFT
+keymap M-l SHIFT_RIGHT
+
+# Follow links
+keymap f LIST_MENU
+keymap F TAB_LINK
+keymap C-l LIST
+keymap :l LIST
+keymap s LINK_BEGIN
 
 # Tabs
-keymap t NEW_TAB
+keymap T NEW_TAB
 keymap d CLOSE_TAB
 keymap , PREV_TAB
 keymap . NEXT_TAB
 
 # Bookmark
 keymap a ADD_BOOKMARK
-keymap C-b BOOKMARK
+keymap :b VIEW_BOOKMARK
+keymap C-b VIEW_BOOKMARK
 
-# Buffers and History
-keymap	H	BACK
-keymap	B	BACK
-keymap	s	SELECT_MENU
+# History
+keymap H PREV
+keymap L NEXT
+keymap B SELECT_MENU
+keymap :h HISTORY
 keymap C-h HISTORY
 
 # Search
-keymap	/	SEARCH
-keymap	?	SEARCH_BACK
-keymap	n	SEARCH_NEXT
-keymap	N	SEARCH_PREV
+keymap / SEARCH
+keymap ? SEARCH_BACK
+keymap n SEARCH_NEXT
+keymap N SEARCH_PREV
 
-# Peek / Info
-keymap	c	PEEK
-keymap	u	PEEK_LINK
-keymap	i	PEEK_IMG
-keymap	I	INFO
-keymap	C	COOKIE
+# Open current page in external application
+keymap O EXTERN
 
+# Open link in external application
+keymap -O EXTERN_LINK
 
-# ------------------
-# Default stuff
-# ------------------
-#keymap	C-@	MARK
-#keymap	C-a	LINE_BEGIN
-#keymap	C-b	MOVE_LEFT
-#keymap	C-e	LINE_END
-#keymap	C-f	MOVE_RIGHT
-#keymap	C-g	LINE_INFO
-#keymap	TAB	NEXT_LINK
-#keymap	C-j	GOTO_LINK
-#keymap	C-k	COOKIE
-#keymap	C-l	REDRAW
-#keymap	C-m	GOTO_LINK
-#keymap	C-n	MOVE_DOWN
-#keymap	C-p	MOVE_UP
-#keymap	C-q	CLOSE_TAB
-#keymap	C-r	ISEARCH_BACK
-#keymap	C-s	ISEARCH
-#keymap	C-u	PREV_LINK
-#keymap	C-v	NEXT_PAGE
-#keymap	C-w	WRAP_TOGGLE
-#keymap	C-z	SUSPEND
+# Show the current URL
+keymap c PEEK
 
-#keymap	SPC	NEXT_PAGE
-keymap	!	SHELL
-keymap	\"	REG_MARK
-keymap	#	PIPE_SHELL
-#keymap	$	LINE_END
-keymap	(	UNDO
-keymap	)	REDO
-#keymap	,	LEFT
-#keymap	.	RIGHT
-#keymap	:	MARK_URL
-#keymap	";"	MARK_WORD
-keymap	<	SHIFT_LEFT
-#keymap	=	INFO
-keymap	>	SHIFT_RIGHT
-keymap	@	READ_SHELL
-keymap	D	DOWNLOAD_LIST
-keymap	E	EDIT
-#keymap	F	FRAME
-#keymap	H	HELP
-#keymap	I	VIEW_IMAGE
-#keymap	L	LIST
-#keymap	Q	EXIT
-#keymap	R	RELOAD
-#keymap	S	SAVE_SCREEN
-keymap	V	LOAD
-keymap	Z	CENTER_H
-keymap	[	LINK_BEGIN
-keymap	]	LINK_END
-keymap	\^	LINE_BEGIN
-#keymap	a	SAVE_LINK
-keymap	m	MOUSE_TOGGLE
-#keymap	r	VERSION
-keymap	v	VIEW
-keymap	z	CENTER_V
-keymap	|	PIPE_BUF
+# Show link URL
+keymap u PEEK_LINK
 
-keymap	M-TAB	PREV_LINK
-keymap	M-C-j	SAVE_LINK
-keymap	M-C-m	SAVE_LINK
+# View image
+#keymap i PEEK_IMG
+keymap i VIEW_IMAGE
 
-#keymap	M-:	MARK_MID
-#keymap	M-<	BEGIN
-#keymap	M->	END
-#keymap	M-I	SAVE_IMAGE
-#keymap	M-M	EXTERN_LINK
-#keymap	M-W	DICT_WORD_AT
-#keymap	M-a	ADD_BOOKMARK
-#keymap	M-b	BOOKMARK
-#keymap	M-c	COMMAND
-#keymap	M-e	EDIT_SCREEN
-#keymap	M-g	GOTO_LINE
-#keymap	M-k	DEFINE_KEY
-#keymap	M-l	LIST_MENU
-#keymap	M-m	MOVE_LIST_MENU
-#keymap	M-n	NEXT_MARK
-#keymap	M-o	SET_OPTION
-#keymap	M-p	PREV_MARK
-#keymap	M-s	SAVE
-#keymap	M-t	TAB_MENU
-#keymap	M-u	GOTO_RELATIVE
-#keymap	M-v	PREV_PAGE
-#keymap	M-w	DICT_WORD
+# Page info / Cookie
+keymap :i INFO
+keymap :c COOKIE
 
-#keymap	UP	MOVE_UP
-#keymap	DOWN	MOVE_DOWN
-#keymap	RIGHT	MOVE_RIGHT
-#keymap	LEFT	MOVE_LEFT
+# Download / Save
+keymap C-s SAVE_LINK
+keymap S SAVE_SCREEN
+keymap :w SAVE_SCREEN
+keymap D DOWNLOAD_LIST
 
-#keymap	M-[E	MENU
-#keymap	M-[L	MENU
-#keymap	M-[Z	PREV_LINK
+# Edit screen content in EDITOR
+keymap :e EDIT_SCREEN
 
-#keymap	M-[1~	BEGIN
-#keymap	M-[2~	MENU
-#keymap	M-[4~	END
-#keymap	M-[5~	PREV_PAGE
-#keymap	M-[6~	NEXT_PAGE
-#keymap	M-[28~	MENU
+# Exec shell command
+keymap ! SHELL

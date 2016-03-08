@@ -2,8 +2,10 @@
 # lesskey -o ~/.less /path/to/lesskey
 
 # Key map
-^J        forw-screen
-^K        back-screen
+#^J        forw-screen
+#^K        back-screen
+J        forw-screen
+K        back-screen
 
 # Options
 # case-insensitive search by default (-i)

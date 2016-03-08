@@ -22,10 +22,10 @@ auto_detect 2
 document_charset UTF-8
 display_charset UTF-8
 cookie_avoid_wrong_number_of_dots 
-cookie_accept_domains 
+cookie_accept_domains
 cookie_reject_domains 
 accept_bad_cookie 0
-accept_cookie 1
+accept_cookie 0
 show_cookie 0
 use_cookie 1
 ssl_ca_file 
@@ -63,14 +63,14 @@ disable_secret_security_check 0
 passwd_file ~/.w3m/passwd
 use_lessopen 0
 bgextviewer 1
-extbrowser3 
-extbrowser2 
+extbrowser3 sh -c 'printf %s "$0" | xsel -b && notify-send "w3m" "URL yanked!"'
+extbrowser2 mpv
 extbrowser ~/bin/firefox
 mailer 
 mailto_options 1
-editor /usr/bin/vim
+editor vim
 urimethodmap ~/.w3m/urimethodmap, /usr/etc/w3m/urimethodmap
-mailcap ~/.w3m/mailcap, /usr/etc/w3m/mailcap
+mailcap ~/.w3m/mailcap
 mime_types ~/.mime.types, /usr/etc/mime.types
 index_file 
 cgi_bin 
@@ -99,9 +99,9 @@ history 100
 use_history 1
 pagerline 10000
 visited_color magenta
-visited_anchor 0
+visited_anchor 1
 active_color cyan
-active_style 0
+active_style 1
 bg_color terminal
 mark_color cyan
 form_color red
