@@ -805,6 +805,7 @@ alias lscon='nmcli con show'
 alias pingg='ping google.com'
 alias re-nm='sudo systemctl restart NetworkManager'
 alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
+alias w3m='w3m -v'
 
 # lampp
 alias lampp-start='sudo /opt/lampp/lampp start'
@@ -817,7 +818,7 @@ THEME_HUGO="spcmd"
 hugo-server() { hugo server -s $DIR_HUGO -t $THEME_HUGO }
 hugo-publish() {
     if [[ -d $DIR_HUGO/public ]]; then
-        echo "==> Warning: Found existing Public directory, renamed to: public_autobackup_$(date +'%Y-%b-%d_%H-%M')"
+        echo "==> Warning: Found existing Public directory, renamed to: public_autobackup_$(date +'%Y-%b-%d_%H%M')"
         mv $DIR_HUGO/public $DIR_HUGO/public_autobackup_$(date +'%Y-%b-%d_%H-%M')
     fi
     hugo -s $DIR_HUGO -t $THEME_HUGO

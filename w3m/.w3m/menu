@@ -1,0 +1,23 @@
+menu Main
+  func   " Back             "  PREV
+  func   " Forward          "  NEXT
+  func   " Reload           "  RELOAD
+  nop    " -----------------"
+  popup  " Select Buffer    "  Select
+  popup  " Select Tab       "  SelectTab
+  func   " Close Tab        "  CLOSE_TAB
+  nop    " -----------------"
+  func   " Open Link        "  GOTO_LINK
+  func   "   |-> in New Tab "  TAB_LINK
+  func   "   |-> in EXTERN  "  EXTERN_LINK
+  nop    " -----------------"
+  func   " View Page Source "  VIEW
+  func   " View Page Info   "  INFO
+  func   " Edit Screen      "  EDIT_SCREEN
+  nop    " ---------------- "
+  func   " Bookmarks        "  VIEW_BOOKMARK
+  func   " Settings         "  OPTIONS
+  func   " Help             "  HELP
+  nop    " ---------------- "
+  func   " Quit             "  QUIT
+end

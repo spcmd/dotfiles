@@ -5,15 +5,15 @@ keymap q QUIT
 keymap :q QUIT
 keymap :x ABORT
 keymap :o OPTIONS
-keymap :k LOAD ~/.w3m/keymap
+keymap :k TAB_GOTO ~/.w3m/keymap
 keymap :: COMMAND
 keymap r RELOAD
 
 # Go To
 keymap o GOTO
 keymap t TAB_GOTO
-keymap gh GOTO ~/.config/firefox/newtab/newtab.html
-keymap gH TAB_GOTO ~/.config/firefox/newtab/newtab.html
+keymap gh GOTO ~/.w3m/homepage.html
+keymap gH TAB_GOTO ~/.w3m/homepage.html
 
 # Move the cursor
 keymap h  MOVE_LEFT
@@ -45,7 +45,8 @@ keymap :l LIST
 keymap s LINK_BEGIN
 
 # Tabs
-keymap T NEW_TAB
+keymap T TAB_GOTO ~/.w3m/homepage.html
+keymap c NEW_TAB
 keymap d CLOSE_TAB
 keymap , PREV_TAB
 keymap . NEXT_TAB
@@ -75,7 +76,7 @@ keymap O EXTERN
 keymap -O EXTERN_LINK
 
 # Show the current URL
-keymap c PEEK
+keymap U PEEK
 
 # Show link URL
 keymap u PEEK_LINK
@@ -99,3 +100,13 @@ keymap :e EDIT_SCREEN
 
 # Exec shell command
 keymap ! SHELL
+
+# ---- Added commands (they work only with my patched w3m):
+
+# Yank url
+keymap y YANK_LINK
+keymap Y YANK_PAGE
+
+# Open url in mediaplayer
+keymap m MEDIAPLAYER_LINK
+keymap M MEDIAPLAYER_PAGE

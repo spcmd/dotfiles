@@ -1,1 +1,1 @@
-DMENU='dmenu -i -l 10 -fn monospace-10 -sb #0D497B'
+DMENU='dmenu -i -l 10 -fn '-misc-fixed-medium-r-normal--15-135-75-75-c-90-iso8859-1' -sb #0D497B'

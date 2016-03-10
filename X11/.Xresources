@@ -26,10 +26,15 @@ URxvt.background: [90]#000000
 URxvt.foreground: #ffffff
 
 ! Fonts
-!URxvt.font: 9x15
-URxvt.font: xft:DejaVu Sans Mono:pixelsize=14:antialias=false:hinting=false,xft:FontAwesome:pixelsize=14
-URxvt.letterSpace: -2
-URxvt.lineSpace: 1
+!URxvt.font: -misc-fixed-medium-r-normal--13-120-75-75-c-70-iso8859-15
+!URxvt.font: -misc-fixed-medium-r-normal--13-125-75-75-c-80-iso8859-1
+!URxvt.font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso8859-1
+URxvt.font: -misc-fixed-medium-r-normal--15-135-75-75-c-90-iso8859-1
+!URxvt.letterSpace: -1
+
+!URxvt.font: xft:DejaVu Sans Mono:pixelsize=14:antialias=false:hinting=false,xft:FontAwesome:pixelsize=14
+!URxvt.letterSpace: -2
+!URxvt.lineSpace: 1
 
 ! Disable scrollbar
 URxvt.scrollBar: false
@@ -43,7 +48,7 @@ URxvt.secondaryScroll: 0
 
 !------------------------------------------------
 !   URxvt Perl Extensions
-! -----------------------------------------------
+!------------------------------------------------
 
 ! load these extensions
 URxvt.perl-lib: /home/spcmd/.urxvt
@@ -55,6 +60,7 @@ URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 
 ! for the Ctrl+Shift bindings to work (https://wiki.archlinux.org/index.php/Urxvt#Changing_font_size_on_the_fly)
 URxvt.iso14755: False
+URxvt.iso14755_52: false
 
 ! keyboard-select
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
