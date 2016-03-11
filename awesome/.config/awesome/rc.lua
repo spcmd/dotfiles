@@ -46,7 +46,7 @@ rtorrent = terminal .. " -name rTorrent -e rtorrent"
 mutt = terminal .. " -name mutt -e mutt -F ~/.mutt/account.1.muttrc"
 moc = terminal .. " -name moc -e mocp"
 firefox = "/home/spcmd/bin/firefox-esr/firefox"
-dmenu = "/home/spcmd/Scripts/dmenu_run -i -l 10 -fn 'terminus' -sb '#0D497B'"
+dmenu = "/home/spcmd/Scripts/dmenu_run -i -l 10 -fn 'terminus' -sb '#0D497B' -nb '#121212'"
 
 -- Default modkey.
 modkey = "Mod4"
@@ -207,11 +207,17 @@ menubar.menu_gen.all_menu_dirs = {
 -------------------------------------------
 
 ----------------------------------------------------------------
+-- global variables for widgets
+----------------------------------------------------------------
+color_widget_separator = beautiful.bg_focus
+widget_separator = "<span color='"..color_widget_separator.."'>|</span>"
+
+----------------------------------------------------------------
 -- Vicious: Volume (unicode icons (ttf-symbola needed!): 🔊  ♫ )
 ----------------------------------------------------------------
 
-icon_volume = "| Vol:"
-icon_muted = "| <span color='#d80000'>Vol:</span>"
+icon_volume = widget_separator.." Vol:"
+icon_muted = widget_separator.."<span color='#d80000'> Vol:</span>"
 
 volumewidget = wibox.widget.textbox()
 
@@ -288,7 +294,7 @@ vicious.register(battwidget, vicious.widgets.bat, ' $1$2 ', 60, 'BAT0')
 -- symbols: 
 ----------------------------------------------------------------
 
-eth_icon = "| Eth: "
+eth_icon = widget_separator.." Eth: "
 
 function check_eth()
  local eth_file = io.open("/sys/class/net/ens3/operstate", "r")
@@ -301,9 +307,9 @@ eth_widget = wibox.widget.textbox()
 
 function eth_status()
     if (check_eth() == "up") then
-        eth_widget:set_text(eth_icon.."on ")
+        eth_widget:set_markup(eth_icon.."on ")
     else
-        eth_widget:set_text(eth_icon.."off ")
+        eth_widget:set_markup(eth_icon.."off ")
     end
 end
 eth_status()
@@ -317,7 +323,7 @@ eth_timer:start()
 -- symbols (unicode and fontawesome ttf): 📶      📶
 ----------------------------------------------------------------
 
-icon_wifi = "| Wifi: "
+icon_wifi = widget_separator.." Wifi: "
 
 function check_wls()
  local wls_file = io.open("/sys/class/net/wls2/operstate", "r")
@@ -330,9 +336,9 @@ wls_widget = wibox.widget.textbox()
 
 function wls_status()
     if (check_wls() == "up") then
-        wls_widget:set_text(icon_wifi.."on")
+        wls_widget:set_markup(icon_wifi.."on")
     else
-        wls_widget:set_text(icon_wifi.."off")
+        wls_widget:set_markup(icon_wifi.."off")
     end
 end
 wls_status()
@@ -393,7 +399,7 @@ function mail_status()
     elseif (mailchecker_set() ~= "off" and tonumber(newmail_count()) >= 1) then
         mail_widget:set_markup(icon_mail.."<span background='" ..beautiful.bg_urgent .. "' color='" ..beautiful.fg_urgent .. "'> "..tonumber(newmail_count()).."new </span> ")
     else
-        mail_widget:set_text(icon_mail.."0")
+        mail_widget:set_markup(icon_mail.."0")
     end
 end
 mail_status()
@@ -450,6 +456,7 @@ end)
 --  widget format also set by awm-note() function in the .zshrc
 ----------------------------------------------------------------
 
+
 note_widget = wibox.widget.textbox()
 
 function read_notes()
@@ -463,7 +470,8 @@ end
 
 function note_status()
     if (read_notes() ~= nil) then
-        note_widget:set_markup("<span font_weight='bold' color='#00fff0'> Notes</span> | ")
+        note_widget:set_markup("<span font_weight='bold' color='#00fff0'> Notes</span> <span color='" ..color_widget_separator.. "'>|</span> ")
+
     end
 end
 note_status()

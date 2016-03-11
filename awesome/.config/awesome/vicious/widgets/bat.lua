@@ -33,9 +33,9 @@ local function worker(format, warg)
     --local bat_discharging = "<span color='#d90000' weight='bold'> </span>"
     --local bat_full = " "
 
-    local bat_charging = "| <span color='#55BF47' weight='bold'>Bat: </span>"
-    local bat_discharging = "| Bat: "
-    local bat_full = "| Bat: "
+    local bat_charging = widget_separator.." Charging: </span>"
+    local bat_discharging = widget_separator.." Bat: "
+    local bat_full = widget_separator.." Bat: "
 
     local battery = helpers.pathtotable("/sys/class/power_supply/"..warg)
     local battery_state = {

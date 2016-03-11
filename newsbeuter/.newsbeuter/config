@@ -77,7 +77,7 @@ color listnormal color1 color0
 color listfocus  color1 color3
 color listnormal_unread color1 color0
 color listfocus_unread  color1 color3
-color info       color0 color2
+color info       color0 color6
 color article    color1 color0
 
 highlight feedlist "✗ Unread" color0 color4

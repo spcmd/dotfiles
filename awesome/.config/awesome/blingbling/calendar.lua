@@ -546,7 +546,7 @@ function calendar.new(args)
 
   --widget/statusbar
   --local calendarbutton = args.widget or awful.widget.textclock("   %a %b %d  %H:%M ") -- customized
-  local calendarbutton = args.widget or awful.widget.textclock("| %a %b %d. %H:%M ") -- customized
+  local calendarbutton = args.widget or awful.widget.textclock(widget_separator.." %a %b %d. %H:%M ") -- customized
   data[calendarbutton] = {}
 	--get days and month labels
 	if args.locale then
