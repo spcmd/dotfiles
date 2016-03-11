@@ -46,7 +46,7 @@ rtorrent = terminal .. " -name rTorrent -e rtorrent"
 mutt = terminal .. " -name mutt -e mutt -F ~/.mutt/account.1.muttrc"
 moc = terminal .. " -name moc -e mocp"
 firefox = "/home/spcmd/bin/firefox-esr/firefox"
-dmenu = "/home/spcmd/Scripts/dmenu_run -i -l 10 -fn '-misc-fixed-medium-r-normal--15-135-75-75-c-90-*' -sb '#0D497B'"
+dmenu = "/home/spcmd/Scripts/dmenu_run -i -l 10 -fn 'terminus' -sb '#0D497B'"
 
 -- Default modkey.
 modkey = "Mod4"
@@ -162,7 +162,9 @@ end
 tags = {}
 for s = 1, screen.count() do
     ---- Each screen has its own tag table.
-    tags[s] = awful.tag({ " term", "🌍 web", " files", " mus", " torr", " misc", " mail", " news" }, s, layouts[1])
+    --tags[s] = awful.tag({ "term", "web", "files", "mus", "torr", "misc", "mail", "news" }, s, layouts[1])
+    tags[s] = awful.tag({ " term", " web", " files", " mus", " torr", " misc", " mail", " news" }, s, layouts[1])
+    --tags[s] = awful.tag({ " term", "🌍 web", " files", "🎜 mus", " torr", " misc", " mail", " news" }, s, layouts[1])
     --tags[s] = awful.tag({ " 1: ", "2:🌍 ", "3: ", "4: ", "5: ", "6: ", "7: ", "8: " }, s, layouts[1])
 end
 
@@ -205,8 +207,12 @@ menubar.menu_gen.all_menu_dirs = {
 -------------------------------------------
 
 ----------------------------------------------------------------
--- Vicious: Volume (unicode icons (ttf-symbola needed!): 🔊  ♫ )
+-- Vicious: Volume (unicode icons (ttf-symbola needed!): 🔊  ♫ )
 ----------------------------------------------------------------
+
+icon_volume = "| Vol:"
+icon_muted = "| <span color='#d80000'>Vol:</span>"
+
 volumewidget = wibox.widget.textbox()
 
 local amixer =
@@ -253,8 +259,8 @@ volumewidget:buttons (awful.util.table.join (
 
 vicious.register(volumewidget, vicious.widgets.volume,
                  function(widget, args)
-                    local label = { ["♫"] = "", ["♩"] = "<span color='#d80000'> </span>" }
-                    return " " .. label[args[2]] .. " " .. args[1] .. " "
+                    local label = { ["♫"] = icon_volume, ["♩"] = icon_muted}
+                    return " " .. label[args[2]] .. " " .. args[1] .. ""
                  end, 300, "Master" -- 300 = 5 mins update time. We don't need fast widget refresh (low number/time) because the buttons will update the widget instantly.
                 )
 
@@ -277,7 +283,13 @@ battwidget:buttons (awful.util.table.join (
 
 vicious.register(battwidget, vicious.widgets.bat, ' $1$2 ', 60, 'BAT0')
 
+----------------------------------------------------------------
 -- Ethernet connection widget
+-- symbols: 
+----------------------------------------------------------------
+
+eth_icon = "| Eth: "
+
 function check_eth()
  local eth_file = io.open("/sys/class/net/ens3/operstate", "r")
  local eth_state = eth_file:read()
@@ -289,9 +301,9 @@ eth_widget = wibox.widget.textbox()
 
 function eth_status()
     if (check_eth() == "up") then
-        eth_widget:set_text("   on ")
+        eth_widget:set_text(eth_icon.."on ")
     else
-        eth_widget:set_text("   off ")
+        eth_widget:set_text(eth_icon.."off ")
     end
 end
 eth_status()
@@ -302,8 +314,11 @@ eth_timer:start()
 
 ----------------------------------------------------------------
 -- Wifi connection widget
--- symbols (unicode and fontawesome ttf): 📶     
+-- symbols (unicode and fontawesome ttf): 📶      📶
 ----------------------------------------------------------------
+
+icon_wifi = "| Wifi: "
+
 function check_wls()
  local wls_file = io.open("/sys/class/net/wls2/operstate", "r")
  local wls_state = wls_file:read()
@@ -315,9 +330,9 @@ wls_widget = wibox.widget.textbox()
 
 function wls_status()
     if (check_wls() == "up") then
-        wls_widget:set_text(" on ")
+        wls_widget:set_text(icon_wifi.."on")
     else
-        wls_widget:set_text(" off ")
+        wls_widget:set_text(icon_wifi.."off")
     end
 end
 wls_status()
@@ -331,10 +346,10 @@ wls_widget:buttons (awful.util.table.join (
 	awful.button ({}, 1, function()
         if (check_wls() == "down") then
 			awful.util.spawn("nmcli r wifi on")
-			wls_widget:set_text(" on ")
+			wls_widget:set_text(icon_wifi.."on")
 		else
 			awful.util.spawn("nmcli r wifi off")
-			wls_widget:set_text(" off ")
+			wls_widget:set_text(icon_wifi.."off")
 		end
 	end)
 ))
@@ -342,7 +357,11 @@ wls_widget:buttons (awful.util.table.join (
 
 ----------------------------------------------------------------
 -- Mail widget
+-- symbols: 
 ----------------------------------------------------------------
+
+icon_mail = "Mail: "
+
 mail_widget = wibox.widget.textbox()
 
 -- Mail checker (run mail checker script)
@@ -369,11 +388,12 @@ end
 
 function mail_status()
     if mailchecker_set() == "off" then
-        mail_widget:set_markup(" <span background='#E9AD00' color='" ..beautiful.bg_normal .. "'>OFF</span> ")
+        --mail_widget:set_markup(icon_mail.."<span background='#E9AD00' color='" ..beautiful.bg_normal .. "'>OFF</span> ")
+        mail_widget:set_markup(icon_mail.."<span color='#fff300'>OFF</span> ")
     elseif (mailchecker_set() ~= "off" and tonumber(newmail_count()) >= 1) then
-        mail_widget:set_markup(" <span background='" ..beautiful.bg_urgent .. "' color='" ..beautiful.fg_urgent .. "'>"..tonumber(newmail_count()).."new</span> ")
+        mail_widget:set_markup(icon_mail.."<span background='" ..beautiful.bg_urgent .. "' color='" ..beautiful.fg_urgent .. "'> "..tonumber(newmail_count()).."new </span> ")
     else
-        mail_widget:set_text(" 0 ")
+        mail_widget:set_text(icon_mail.."0")
     end
 end
 mail_status()
@@ -429,6 +449,7 @@ end)
 --  Note:
 --  widget format also set by awm-note() function in the .zshrc
 ----------------------------------------------------------------
+
 note_widget = wibox.widget.textbox()
 
 function read_notes()
@@ -442,7 +463,7 @@ end
 
 function note_status()
     if (read_notes() ~= nil) then
-        note_widget:set_markup(" <span font_weight='bold' color='red'>notes</span>")
+        note_widget:set_markup("<span font_weight='bold' color='#00fff0'> Notes</span> | ")
     end
 end
 note_status()
@@ -560,10 +581,10 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     --if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(mail_widget)
     right_layout:add(note_widget)
-    right_layout:add(eth_widget)
-    right_layout:add(wls_widget)
+    right_layout:add(mail_widget)
+    --right_layout:add(eth_widget)
+    --right_layout:add(wls_widget)
     right_layout:add(volumewidget)
     right_layout:add(battwidget)
     --right_layout:add(mytextclock)

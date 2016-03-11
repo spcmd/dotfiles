@@ -595,7 +595,7 @@ awm-note() {
         # Add note
         *)  echo "$1" >> $NOTE_FILE
             echo "added '$1' to $NOTE_FILE"
-            echo 'note_widget:set_markup(" <span font_weight=\"bold\" color=\"red\">notes</span>")' | awesome-client
+            echo 'note_widget:set_markup("<span font_weight=\"bold\" color=\"#00fff0\">Notes</span> | ")' | awesome-client
             ;;
     esac
 

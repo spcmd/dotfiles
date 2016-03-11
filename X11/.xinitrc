@@ -21,6 +21,9 @@ urxvtd &
 # Merge .Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
+# Font path
+xset +fp ~/.local/share/fonts/terminus
+
 # Redshift
 redshift -r -c ~/.config/redshift/redshift.conf &
 
