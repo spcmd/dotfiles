@@ -33,7 +33,7 @@ local function worker(format, warg)
     --local bat_discharging = "<span color='#d90000' weight='bold'> </span>"
     --local bat_full = " "
 
-    local bat_charging = widget_separator.." Charging: </span>"
+    local bat_charging = widget_separator.." Charging: "
     local bat_discharging = widget_separator.." Bat: "
     local bat_full = widget_separator.." Bat: "
 

@@ -783,6 +783,9 @@ dm() {
                 echo "        <without option>                                              Change to bookmarked directory."
                 ;;
 
+            "")
+                echo "empty command"
+                ;;
             *)
                 dir=$(grep $1 $HOME/.dirbookmarks)
                 dir=${dir/*|/}

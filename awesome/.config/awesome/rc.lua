@@ -163,7 +163,7 @@ tags = {}
 for s = 1, screen.count() do
     ---- Each screen has its own tag table.
     --tags[s] = awful.tag({ "term", "web", "files", "mus", "torr", "misc", "mail", "news" }, s, layouts[1])
-    tags[s] = awful.tag({ " term", " web", " files", " mus", " torr", " misc", " mail", " news" }, s, layouts[1])
+    tags[s] = awful.tag({ " term ", " web ", " files ", " mus ", " torr ", " misc ", " mail ", " news " }, s, layouts[1])
     --tags[s] = awful.tag({ " term", "🌍 web", " files", "🎜 mus", " torr", " misc", " mail", " news" }, s, layouts[1])
     --tags[s] = awful.tag({ " 1: ", "2:🌍 ", "3: ", "4: ", "5: ", "6: ", "7: ", "8: " }, s, layouts[1])
 end
@@ -574,7 +574,7 @@ for s = 1, screen.count() do
 
     -- Create a tasklist widget
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
-    mytasklist_margin = wibox.layout.margin(mytasklist[s],0,5,0,0)
+    mytasklist_margin = wibox.layout.margin(mytasklist[s],1,5,0,0)
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", height = 20, screen = s })
@@ -631,9 +631,11 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left", function () awful.util.spawn("dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous") end),
     awful.key({ modkey,           }, "Right", function () awful.util.spawn("dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next") end),
 
-
     -- spotymenu
     awful.key({ modkey,           }, "b", function () awful.util.spawn("spotymenu", false) end),
+
+    -- dwatch
+    awful.key({ modkey,           }, "w", function () awful.util.spawn("dwatch", false) end),
 
     -- mps-youtube
     awful.key({ modkey,     }, "y", function () awful.util.spawn("mpsyt-control play-pause") end),
