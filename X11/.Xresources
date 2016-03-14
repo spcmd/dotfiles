@@ -31,8 +31,10 @@ URxvt.foreground: #ffffff
 !URxvt.font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso8859-1
 !URxvt.font: -misc-fixed-medium-r-normal--15-135-75-75-c-90-iso8859-1
 !URxvt.font: -gohu-gohufont-medium-*-normal-*-14-*-100-100-c-80-*-*
+!URxvt.font: -*-gohufont-medium-r-*-*-14-*-*-*-*-*-*-*
 !URxvt.font: -*-raize-normal-r-normal-*-17-*-*-*-*-*-*-*
 !URxvt.font: -*-tamsyn-medium-r-*-*-16-*-*-*-*-*-*-*
+!URxvt.font: -*-tamzen-medium-*-*-*-17-*-*-*-*-*-*-*
 URxvt.font: -*-terminus-medium-r-normal-*-16-*-*-*-*-*-*-*
 !URxvt.letterSpace: -1
 

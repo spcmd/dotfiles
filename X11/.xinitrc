@@ -1,7 +1,5 @@
 # Num lock ON
-if [[ -e /usr/bin/numlockx ]]; then
-    /usr/bin/numlockx &
-fi
+[[ -x /usr/bin/numlockx ]] && /usr/bin/numlockx &
 
 # Source Xmodmap
 xmodmap ~/.Xmodmap &
@@ -19,13 +17,17 @@ xbacklight -set 20 &
 urxvtd &
 
 # Merge .Xresources
-[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources &
 
-# Font path
-xset +fp ~/.local/share/fonts/terminus
+# Set Font path
+xset +fp ~/.local/share/fonts/terminus &
+
+# Generate dwatch cache
+[[ -x ~/Scripts/dwatch ]] && sh ~/Scripts/dwatch update &
 
 # Redshift
 redshift -r -c ~/.config/redshift/redshift.conf &
 
 # Start X
-exec dbus-launch --exit-with-session --sh-syntax awesome
+#exec dbus-launch --exit-with-session --sh-syntax awesome
+exec awesome
