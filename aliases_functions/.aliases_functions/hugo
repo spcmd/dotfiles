@@ -1,0 +1,29 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+DIR_HUGO=$DIR_WEBDEV/spcmd.github.io
+THEME_HUGO="spcmd"
+
+hugo-server() { hugo server -s $DIR_HUGO -t $THEME_HUGO }
+hugo-publish() {
+    if [[ -d $DIR_HUGO/public ]]; then
+        echo "==> Warning: Found existing Public directory, renamed to: public_autobackup_$(date +'%Y-%b-%d_%H%M')"
+        mv $DIR_HUGO/public $DIR_HUGO/public_autobackup_$(date +'%Y-%b-%d_%H-%M')
+    fi
+    hugo -s $DIR_HUGO -t $THEME_HUGO
+}
+hugo-new() { hugo -s $DIR_HUGO new post/$1.md && vim $DIR_HUGO/content/post/$1.md }
+hugo-sync() {
+    if [[ -d $DIR_HUGO/public ]] && [[ -d $HOME/git/spcmd.github.io ]]; then
+        rsync -avr $DIR_HUGO/public/* $HOME/git/spcmd.github.io/
+    fi
+}
+
+# vim: set syntax=sh :

@@ -1,0 +1,54 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+alias cal='cal -m'
+alias cal-next='cal -mn 2'
+alias hdapm='sudo hdparm -I /dev/sda | grep level'
+alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
+alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
+alias w3m='w3m -v'
+
+# Clear Clipboard
+cpw() {
+    xsel -bc &&
+    echo "" | xsel -p &&
+    echo "Clipboard cleared."
+}
+
+# Create shell script
+mksh() {
+    if [[ ! -z $1 ]]; then
+        touch $1
+        echo "#!/bin/bash" > $1
+        chmod +x $1
+        $EDITOR $1
+    else
+        echo "Error: no filename was given."
+    fi
+}
+
+# stopwatch
+stopwatch() {
+    date1=$(date +%s)
+    while true; do
+       echo -ne "$(date -u --date @$(($(date +%s) - $date1)) +%H:%M:%S)\r";
+    done
+}
+
+# calculator
+calc() {
+    echo "Python calc (exit with Ctrl+D)"
+    python2 -ic "from __future__ import division; from math import *; from random import *"
+}
+
+# Exract urls from OPML file (e.g.: youtube subscriptions)
+opml-extract() { awk 'BEGIN{RS=FS}/^xmlUrl/{print $2}' FS='"' $1 }
+
+# vim: set syntax=sh :

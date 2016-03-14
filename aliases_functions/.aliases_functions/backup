@@ -1,0 +1,20 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+rsync-Documents() {
+    RACK_BACKUP_DIR='/media/320GB_Rack/00Backup_spcmd/'
+    if [[ -d $RACK_BACKUP_DIR ]]; then
+        rsync -avr $HOME/Documents/ $RACK_BACKUP_DIR/Documents/
+    else
+        echo "rsync-Documents Error! \033[1;34m$RACK_BACKUP_DIR \033[0mnot found. Is it mounted? Or has the directory changed?"
+    fi
+}
+
+# vim: set syntax=sh :

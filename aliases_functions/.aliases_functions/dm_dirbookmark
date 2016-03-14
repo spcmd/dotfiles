@@ -1,0 +1,66 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+# dirbookmark (dm)
+# Mark & quick change directories from CLI
+# Based on: https://bbs.archlinux.org/viewtopic.php?pid=1318927#p1318927
+# Usage: source this file in your ~/.bashrc or ~/.zshrc
+
+dm() {
+    file_dirbookmarks=$HOME/.dirbookmarks
+
+    case "$1" in 
+        -a|--add) if [[ ! -z $2 ]]; then
+                echo "$2|$(pwd)" >> "$file_dirbookmarks"
+            else
+                echo "Error: you have to name the bookmark! Usage: $0 -a <bookmark name>"
+            fi
+            ;;
+
+        -r|--remove)
+            if [[ ! -z $2 ]]; then
+                for marks in $@; do
+                    sed -i "/^$marks|/d" "$file_dirbookmarks"
+                done
+            else
+                echo -e "Error: you have to specify a bookmark name which you want to delete! Usage: $0 -r <bookmark name>"
+            fi
+            ;;
+
+        -l|--list)
+            echo -e "Listing directories saved to "$file_dirbookmarks":\n"
+            awk -F "|" -v OFS="\033[0;36m ---> \033[0m" ' $1="\t\033[1;34m"$1 ' "$file_dirbookmarks"
+            ;;
+
+        -h|--help)
+            echo "dirbookmarks are stored in: "$file_dirbookmarks""
+            echo "Usage: $0 [option] <bookmark name> [another bookmark name]"
+            echo ""
+            echo "Options:"
+            echo "        -a, --add <bookmark name>                                     Add current directory to bookmarks with name <bookmark name>"
+            echo "        -r, --remove <bookmark name> [another bookmark name...]       Remove <bookmark name> from bookmarks. You can specify multiple names in one command."
+            echo "        -l, --list                                                    List bookmarked directories."
+            echo "        <without option>                                              Change to bookmarked directory."
+            ;;
+
+        "")
+            echo "empty command"
+            ;;
+        *)
+            #dir=$(awk -F'|' '/'"$1"'/{print $2}' "$file_dirbookmarks")
+            dir=$(grep -i $1 "$file_dirbookmarks")
+            dir=${dir/*|/}
+            cd $dir
+            ;;
+
+    esac
+}
+
+# vim: set syntax=sh :

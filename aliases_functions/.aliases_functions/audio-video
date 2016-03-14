@@ -1,0 +1,24 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
+alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
+alias mpv-watch-later="$DIR_SCRIPTS/mpv-watch-later.sh" # mpv: list watch later dir's content and select from them
+
+# Speaker toggle
+speaker() {
+    case $1 in
+        on) amixer set Speaker unmute 100;;
+        off) amixer set Speaker mute 0;;
+        *) amixer sget Speaker | grep 'Playback' | tail -n 1
+    esac
+}
+
+# vim: set syntax=sh :

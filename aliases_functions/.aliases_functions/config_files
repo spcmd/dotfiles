@@ -1,0 +1,52 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+# Edit config files
+alias cfg-awesome='$EDITOR ~/.config/awesome/rc.lua'
+alias cfg-bashrc='$EDITOR ~/.bashrc'
+alias cfg-compton='$EDITOR ~/.config/compton/compton.conf'
+alias cfg-dircolors='$EDITOR ~/.dircolors'
+alias cfg-dirbookmarks='$EDITOR ~/.dirbookmarks'
+alias cfg-firefox='$EDITOR ~/.config/firefox/user.js'
+alias cfg-fstab='sudo $EDITOR /etc/fstab'
+alias cfg-grub='sudo $EDITOR /etc/default/grub'
+alias cfg-hosts='sudo $EDITOR /etc/hosts'
+alias cfg-mutt='$EDITOR ~/.mutt/muttrc'
+alias cfg-newsbeuter='$EDITOR ~/.newsbeuter/config'
+alias cfg-pacman='sudo $EDITOR /etc/pacman.conf'
+alias cfg-pacmirror='sudo $EDITOR /etc/pacman.d/mirrorlist'
+alias cfg-ranger='$EDITOR ~/.config/ranger/rc.conf'
+alias cfg-ranger-rifle='$EDITOR ~/.config/ranger/rifle.conf'
+alias cfg-rtorrent='$EDITOR ~/.rtorrent.rc'
+alias cfg-vim='$EDITOR ~/.vimrc'
+alias cfg-vim-root='sudo $EDITOR /root/.vimrc'
+alias cfg-vimperator='$EDITOR ~/.vimperatorrc'
+alias cfg-xinitrc='$EDITOR ~/.xinitrc'
+alias cfg-xresources='$EDITOR ~/.Xresources'
+alias cfg-zshrc='$EDITOR ~/.zshrc'
+alias cfg-dmenu='$EDITOR ~/.dmenurc'
+alias cfg-dmenu-term-apps='$EDITOR ~/.dmenu_term_apps'
+alias cfg-spoty-albums='$EDITOR ~/.spotymenu/album_list'
+alias cfg-spotymenu='$EDITOR ~/.config/spotymenu/spotymenurc'
+alias cfg-uzbl='$EDITOR ~/.config/uzbl/config'
+
+# Reload config files
+alias rld-bashrc='source ~/.bashrc'
+alias rld-gpg='echo RELOADAGENT | gpg-connect-agent'
+alias rld-xresources='xrdb -load ~/.Xresources && echo "reload .Xresources: done!"'
+alias rld-zshrc='source ~/.zshrc'
+alias RR='rld-zshrc'
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+rld-compton() { pkill compton && sleep 1s && compton -b --config ~/.config/compton/compton.conf ; }
+
+# To-do list
+alias todo='$EDITOR $HOME/Documents/TODO.todo'
+
+# vim: set syntax=sh :

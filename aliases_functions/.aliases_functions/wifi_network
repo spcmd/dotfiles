@@ -1,0 +1,43 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+alias rld-NetworkManager='sudo systemctl restart NetworkManager'
+alias lscon='nmcli con show'
+
+# Wifi switch
+wifi() {
+
+    case "$1" in
+        on)
+            nmcli radio wifi on
+            file_newmail_count=$HOME/.mutt/newmail_count
+            echo "==> Wifi switched ON"
+            echo "0" > $file_newmail_count
+            echo "==> wrote 0 to $file_newmail_count"
+            if [[ -f /bin/awesome ]]; then
+                seconds=10s
+                echo "==> Waiting $seconds before awm-chkmail-on"
+                sleep $seconds && awm-chkmail-on
+            fi
+            ;;
+        off)
+            nmcli radio wifi off
+            echo "==> Wifi switched OFF"
+            if [[ -f /bin/awesome ]]; then
+                awm-chkmail-off
+            fi
+            ;;
+        status)
+            nmcli radio wifi
+            ;;
+    esac
+}
+
+# vim: set syntax=sh :

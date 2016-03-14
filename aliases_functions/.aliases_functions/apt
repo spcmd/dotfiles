@@ -1,0 +1,17 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+apt-update() { sudo apt-get update && notify-send -i terminal "Update finished!" }
+apt-upgrade() { sudo apt-get upgrade && notify-send -i terminal "Upgrade finished!" }
+apt-install() { sudo apt-get install --no-install-recommends $@ && notify-send -i terminal "Finished installing $@" }
+alias apt-remove='sudo apt-get remove --purge'
+alias apt-ppa='sudo add-apt-repository'
+
+# vim: set syntax=sh :

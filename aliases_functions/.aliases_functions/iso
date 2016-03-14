@@ -1,0 +1,25 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+# Load ISO to loop device and mount (for Games)
+iso-load() {
+    if [[ -z $1 ]]; then
+        echo "Error: no ISO file specified."
+        echo "Usage:"
+        echo -e "\t iso-load /path/to/file.iso"
+    else
+        udisksctl loop-setup -r -f $1 && sudo mount /dev/loop0 /media/ISO
+    fi
+}
+
+# Unmount and unload ISO
+iso-unload() { sudo umount /media/ISO && udisksctl loop-delete -b /dev/loop0 }
+
+# vim: set syntax=sh :

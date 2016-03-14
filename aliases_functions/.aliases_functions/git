@@ -1,0 +1,39 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+alias gch='gitcheck'
+alias gst='git status'
+alias gadd='git add --all'
+alias gupd='git add --update' # Do not add untracked files, only update modified and deleted
+alias gpush='git push origin master'
+alias gcommit='git commit -m'
+alias gdiff='git diff'
+alias grm='git rm --cached' # Removes remote file copy only. (eg.: removing ignored files that are already pushed without removing the local copies)
+alias cdgit='cd ~/git'
+
+color_dir="\033[1;34m"
+color_reset="\033[0m"
+
+gitcheck() {
+    echo -e "\n"
+    echo "$color_dir==> Checking: ~/git/spcmd.github.io $color_reset"
+    git -C ~/git/spcmd.github.io status
+    echo -e "\n"
+    echo "$color_dir==> Checking: ~/git/themes $color_reset"
+    git -C ~/git/themes status
+    echo -e "\n"
+    echo "$color_dir==> Checking: $DIR_SCRIPTS $color_reset"
+    git -C $DIR_SCRIPTS status
+    echo -e "\n"
+    echo "$color_dir==> Checking: ~/dotfiles $color_reset"
+    git -C ~/dotfiles status
+}
+
+# vim: set syntax=sh :

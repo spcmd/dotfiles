@@ -1,0 +1,42 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+# speedtest-cli
+if [[ -x /bin/speedtest-cli ]]; then
+    speedtest(){
+        case "$1" in
+            -h)	# Show help
+                echo "Speedtest (a wrapper for speedtest-cli)"
+                echo "Usage: speedtest [-option]"
+                echo ""
+                echo "\033[1;34m         -l\033[0m Show hungarian servers."
+                echo "\033[1;34m         -a\033[0m Show All servers."
+                echo "\033[1;34m         -s <number>\033[0m Connect to a server with a number from the listed servers."
+                echo "\033[1;34m         -h\033[0m This help."
+                echo ""
+                echo "Without an option, the \033[1;34mspeedtest\033[0m command connects to server 3715 (DIGI)"
+                echo "For full feature, use the \033[1;34mspeedtest-cli \033[0mcommand, see \033[1;34mspeedtest-cli -h \033[0mfor help. "
+                ;;
+            -l) # Show hungarian servers
+                speedtest-cli --list | grep "Hungary"
+                ;;
+            -a) # Show All servers
+                speedtest-cli --list
+                ;;
+            -s) # Connect to a sever
+                speedtest-cli --server $2
+                ;;
+            *)  # Connect to DIGI server
+                speedtest-cli --server 3715
+            esac
+    }
+fi
+
+# vim: set syntax=sh :

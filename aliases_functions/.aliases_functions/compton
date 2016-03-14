@@ -1,0 +1,38 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+# Set urxvt's transparency in compton's config
+
+compton-opacity() {
+    compton_config=~/.config/compton/compton.conf
+    if [[ -e  $compton_config ]]; then
+        if [[ -z $1 ]]; then
+            VALUE=$(awk 'NR==4' $HOME/.config/compton/compton.conf)
+            echo "Error! Opacity value cannot be empty. You need to set a number."
+            echo "The current setting is: $VALUE"
+        else
+            # change the opacity value in the 4th line
+            sed -i "4s/[0-9][0-9]/$1/" $compton_config
+            echo "==> urxvt transparency in compton.conf has been set to: $1"
+            echo "==> Restart compton? (y = yes)"
+            read compton_restart
+            if [[ $compton_restart == "y" ]] || [[ $compton_restart == "Y" ]]; then
+                pkill compton &&
+                sleep 1s &&
+                compton -b --config $compton_config &&
+                echo "Compton restart: done!"
+            fi
+        fi
+    else
+        echo "==> Error: $compton_config doesn't exist."
+    fi
+}
+
+# vim: set syntax=sh :

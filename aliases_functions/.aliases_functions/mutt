@@ -1,0 +1,28 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+alias mutt1='mutt -F ~/.mutt/account.1.muttrc'
+alias mutt2='mutt -F ~/.mutt/account.2.muttrc'
+
+# Send mail using mutt cli
+mailthis() {
+    message=$1
+    subject=$2
+    to=$3
+    if [[ -z $message || -z $subject || -z $to ]]; then
+        echo "Error! You have to specify MESSAGE SUBJECT TO"
+        echo "For example:"
+        echo "mailthis \"This is a my message\" \"Subject\" somebody@domain.com"
+    else
+        echo "$message" | mutt -F ~/.mutt/account.1.muttrc -s "$subject" "$to"
+    fi
+}
+
+# vim: set syntax=sh :

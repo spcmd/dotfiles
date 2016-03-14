@@ -1,0 +1,75 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+# mailchecker switch
+awm-chkmail-off() {
+    echo 'off' > $HOME/.config/awesome/mailchecker &&
+    echo '==> awm checkmail OFF' &&
+    echo 'mail_widget_timer:connect_signal("timeout",mail_status)' | awesome-client
+}
+awm-chkmail-on() {
+    echo 'on' > $HOME/.config/awesome/mailchecker &&
+    echo '==> awm checkmail ON' &&
+    echo 'mail_widget_timer:connect_signal("timeout",mail_status)' | awesome-client
+}
+
+# note file for using with awesome WM widget
+# widget format should be the same as in awesome rc.lua
+awm-note() {
+
+    NOTE_FILE=$HOME/Documents/awm-note.txt
+
+    if [[ ! -e $NOTE_FILE ]]; then
+        touch $NOTE_FILE
+        echo "Note file created at $NOTE_FILE"
+    fi
+
+    case "$1" in
+
+        # Listing notes
+        -l) cat $NOTE_FILE
+            ;;
+        # Delete line from notes
+        -r) sed -i ${2}d $NOTE_FILE
+            echo "removed line $2 from $NOTE_FILE"
+            ;;
+        # Delete ALL notes (delete the file)
+        -R)
+            echo "Delete ALL notes? [yY/nN]"
+            read answer
+            if [[ $answer == "y" ]] || [[ $answer == "Y" ]]; then
+                #echo -n > $NOTE_FILE
+                rm $NOTE_FILE
+                echo 'note_widget:set_text("")' | awesome-client
+                echo "All notes was deleted."
+            else
+                echo "Cancelled. Nothing changed."
+            fi
+            ;;
+        # Help
+        ""|-h) echo "Usage: awm-note [OPTIONS]"
+            echo -e "\nTo add a note, use:"
+            echo -e "\t awm-note \"your note in qoutes\""
+            echo -e "\nOptions:"
+            echo -e "-l\t\t list notes"
+            echo -e "-r [number]\t delete note (by line number)"
+            echo -e "-R \t\t delete ALL notes (delete the file)"
+            echo -e "-h\t\t this help"
+            ;;
+        # Add note
+        *)  echo "$1" >> $NOTE_FILE
+            echo "added '$1' to $NOTE_FILE"
+            echo 'note_widget:set_markup("<span font_weight=\"bold\" color=\"#00fff0\">Notes</span> | ")' | awesome-client
+            ;;
+    esac
+
+}
+
+# vim: set syntax=sh :

@@ -1,0 +1,66 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+alias q=' exit' # do not store the command in the history
+alias ls='ls --color -A'
+alias ll='ls -Alh --group-directories-first --color'
+alias lf='ls -l | egrep -v "^d"' # list files only
+alias free='free -h'
+alias grep='grep --color'
+alias lsblkf='lsblk -o "NAME,SIZE,TYPE,MOUNTPOINT,RO,FSTYPE,LABEL,UUID"'
+alias octal='stat -c "%a %n"'
+
+# Always verbose core commands
+for command in cp rm mv mkdir chmod chown rename; do
+    alias $command="$command -v"
+done
+
+# History grep
+hist() {
+    if [[ "$1" != "" ]]; then
+        fc -l 1 | grep "$1"
+    else
+        fc -l 1
+    fi
+}
+
+# Create a backup copy in the current directory
+cpbak() { for files in "$@"; do cp $files $files.bak; done }
+
+# Create a backup copy in the Backup dir
+cpbakdir() { for files in "$@"; do cp $files $DIR_BACKUP; done }
+
+# Copy filename to clipboard, copy filepath to clipboard
+copyname() { echo -n $1 | xsel -b }
+copypath() { realpath $1 | xsel -b }
+
+# List and grep, usage: lsgrep <keyword>
+lsgrep() {
+	keyword=$(echo "$@" |  sed 's/ /.*/g')
+	ls -la | grep -iE --color=auto $keyword
+}
+
+# Man and grep. Usage: mangrep <command name> <keyword>
+mangrep() { man $1 | grep --color=auto $2 }
+
+# Colored man pages (https://wiki.archlinux.org/index.php/Man_page#Using_less_.28Recommended.29)
+# LESS_TERMCAP_so's last number is the highlight color (e.g.:3m is yellow, or 33m is blue)
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;31m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;74m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;3m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+    man "$@"
+}
+
+# vim: set syntax=sh :
