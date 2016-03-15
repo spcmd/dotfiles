@@ -1,67 +1,45 @@
-#                                      _
-#         ___ _ __   ___ _ __ ___   __| |
-#        / __| '_ \ / __| '_ ` _ \ / _` |
-#        \__ | |_) | (__| | | | | | (_| |
-#        |___| .__/ \___|_| |_| |_|\__,_|
-#             |_|
-#
-#                    .zshrc
-#               Created by: spcmd
-#           http://spcmd.github.io
-#           https://github.com/spcmd
-#           https://gist.github.com/spcmd
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
 
 # {{{   ZSH Basic config
 # -----------------------------------------------------
 
-# Dir for ZSH
-export ZSH=$HOME/.zsh
+DIR_ZSH=$HOME/.zsh
+DIR_ZSH_DEFAULTS=$DIR_ZSH/defaults
+DIR_ZSH_COMPLETIONS=$DIR_ZSH/completions
+DIR_ZSH_THEMES=$DIR_ZSH/themes
+FILE_ZSH_COMPDUMP="$HOME/.zcompdump"
 
-# Theme
+# Theme / Prompt
 ZSH_THEME="spcmd"
 
-# Plugins
-plugins=(zsh-syntax-highlighting)
+# Load defaults
+for default_config in $DIR_ZSH_DEFAULTS/*.zsh; do
+    . $default_config
+done
 
-# Options
-autoload -U colors && colors
-setopt auto_cd          # Change dir without the cd command
-setopt multios          # Perform implicit tees or cats when multiple redirections are attempted
-setopt cdablevars       # Try to expand the expression as if it were preceded by a ‘~’
-setopt prompt_subst     # Needed for prompt coloring (expasion)
-unsetopt nomatch        # Globbing
+# Load completions
+for completion in $DIR_ZSH_COMPLETIONS/*.zsh-completion; do
+    . $completion
+done
 
-# Load ZSH stuff (defaults, plugins, themes)
-source $ZSH/zsh-loader.sh
+# Load theme
+[[ -f $DIR_ZSH_THEMES/$ZSH_THEME.zsh-theme ]] && . $DIR_ZSH_THEMES/$ZSH_THEME.zsh-theme
 
-# Customize syntax highlight
-#ZSH_HIGHLIGHT_STYLES[path]=''
-#ZSH_HIGHLIGHT_STYLES[path_prefix]=''
+# Load plugins
+[[ -f $DIR_ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && . $DIR_ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Load dircolors
-if [[ -f ~/.dircolors ]]; then
-    eval $(dircolors ~/.dircolors)
-    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-fi
+# Load and run compinit (needed for completion)
+autoload -U compinit
+compinit -i -d "${FILE_ZSH_COMPDUMP}"
 
-# urxvt dynamic title (http://stackoverflow.com/a/20772424)
-case $TERM in
-  (*xterm* | *rxvt*)
-
-    # Write some info to terminal title.
-    # This is seen when the shell prompts for input.
-    function precmd {
-        print -Pn "\e]0;urxvt %(1j,%j job%(2j|s|); ,)%~\a"
-    }
-    # Write command and args to terminal title.
-    # This is seen while the shell waits for a command to complete.
-    function preexec {
-        [[ $1 = "q" ]] && name="ranger" || name="$1" # fix title when switching to shell from ranger, then back to ranger (q is aliased to exit)
-        printf "\033]0;%s\a" "$name"
-    }
-
-  ;;
-esac
 
 # }}}
 # {{{   ENV Variables / Dirs / Paths
@@ -73,6 +51,7 @@ export COLORTERM='rxvt-unicode-256color'
 export MEDIAPLAYER='mpv'
 export IMAGER='feh'
 export PDFER='zathura'
+
 export DIR_BACKUP=$HOME/Backup
 export DIR_SCRIPTS=$HOME/Scripts
 export DIR_ALIASES_FUNCTIONS=$HOME/.aliases_functions
@@ -96,80 +75,9 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/l
 [[ -d $HOME/bin ]] && PATH=$PATH:$HOME/bin
 
 # }}}
-# {{{   Vi mode for Zsh
+# {{{   Functions/Aliases
 # -----------------------------------------------------
 
-# Enable Vi mode
-bindkey -v
-
-# No delay entering normal mode
-KEYTIMEOUT=1
-
-# Mode & Cursor
-# change cursor shape and color depending on the mode
-#   1 or 0 : blinking block
-#   2 : normal block
-#   3 : blinking underscore
-#   4 : normal underscore
-#   5 : blinking vertical bar
-#   6 : normal vertical bar
-
-cursor_type_vicmd='2'
-cursor_type_viins='2'
-cursor_color_vicmd='yellow'
-cursor_color_viins='cyan'
-
-function zle-line-init zle-keymap-select {
-    if [ $KEYMAP = vicmd ]; then
-        echo -ne "\033[$cursor_type_vicmd q"
-        echo -ne "\033]12;$cursor_color_vicmd\007"
-    else
-        echo -ne "\033[$cursor_type_viins q"
-        echo -ne "\033]12;$cursor_color_viins\007"
-    fi
-    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-    RPS2=$RPS1
-    zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-# Add missing hotkeys
-# fixes backspace deletion issues
-# http://zshwiki.org/home/zle/vi-mode
-bindkey -a u undo
-bindkey -a '^R' redo
-bindkey '^?' backward-delete-char
-bindkey '^H' backward-delete-char
-
-# History search
-# http://zshwiki.org./home/zle/bindkeys#why_isn_t_control-r_working_anymore
-bindkey '^k' up-history
-bindkey '^j' down-history
-bindkey -M viins '^s' history-incremental-search-backward
-bindkey -M vicmd '^s' history-incremental-search-backward
-bindkey -M vicmd '/' history-incremental-search-backward
-
-# }}}
-# {{{  CLI Completions
-# -----------------------------------------------------
-
-# dm_dirbookmark
-function _dm_completion {
-	reply=($(sed 's/\(.*\)|.*/\1/' $HOME/.dirbookmarks))
-}
-compctl -K _dm_completion dm
-
-# tvd
-function _tvd_completion {
-	reply=($(cat $HOME/.tvd_channels))
-}
-compctl -K _tvd_completion tvd
-
-# }}}
-# {{{   Source external functions/aliases
-# -----------------------------------------------------
 [[ -f $DIR_ALIASES_FUNCTIONS/audio-video ]] && . $DIR_ALIASES_FUNCTIONS/audio-video
 [[ -f $DIR_ALIASES_FUNCTIONS/awesome_wm ]] && . $DIR_ALIASES_FUNCTIONS/awesome_wm
 [[ -f $DIR_ALIASES_FUNCTIONS/backup ]] && . $DIR_ALIASES_FUNCTIONS/backup
@@ -187,4 +95,5 @@ compctl -K _tvd_completion tvd
 [[ -f $DIR_ALIASES_FUNCTIONS/start-sleep-shutdown ]] && . $DIR_ALIASES_FUNCTIONS/start-sleep-shutdown
 [[ -f $DIR_ALIASES_FUNCTIONS/wifi-network ]] && . $DIR_ALIASES_FUNCTIONS/wifi-network
 [[ -f $DIR_ALIASES_FUNCTIONS/xampp-lampp ]] && . $DIR_ALIASES_FUNCTIONS/xampp-lampp
+
 # }}}

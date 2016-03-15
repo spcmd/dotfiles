@@ -9,8 +9,7 @@
 # https://github.com/spcmd
 
 # speedtest-cli
-if [[ -x /bin/speedtest-cli ]]; then
-    speedtest(){
+speedtest(){
         case "$1" in
             -h)	# Show help
                 echo "Speedtest (a wrapper for speedtest-cli)"
@@ -36,7 +35,6 @@ if [[ -x /bin/speedtest-cli ]]; then
             *)  # Connect to DIGI server
                 speedtest-cli --server 3715
             esac
-    }
-fi
+}
 
 # vim: set syntax=sh :

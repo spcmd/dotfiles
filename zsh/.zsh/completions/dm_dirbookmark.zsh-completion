@@ -1,0 +1,15 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+function _dm_completion {
+	reply=($(sed 's/\(.*\)|.*/\1/' $HOME/.dirbookmarks))
+}
+compctl -K _dm_completion dm
+
