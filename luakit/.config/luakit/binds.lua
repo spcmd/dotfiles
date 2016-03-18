@@ -105,6 +105,10 @@ add_binds("all", {
         function (w, m) w:scroll{ xrel =  scroll_step } end),
 })
 
+-------------------------------
+--- Normal mode Keybindings ---
+-------------------------------
+
 add_binds("normal", {
     -- Autoparse the `[count]` before a binding and re-call the hit function
     -- with the count removed and added to the opts table.
@@ -430,25 +434,43 @@ add_binds("normal", {
     buf("^ZQ$", "Quit and don't save the session.",
         function (w) w:close_win() end),
 
-    --buf("^D$",  "Quit and don't save the session.",
-        --function (w) w:close_win() end),
-
     -- Enter passthrough mode
     key({"Control"}, "z",
         "Enter `passthrough` mode, ignores all luakit keybindings.",
         function (w) w:set_mode("passthrough") end),
+
+------- Custom key bindings --------
+
+    buf("^D$",  "Show Downloads page",
+        function (w) w:new_tab("luakit://downloads") end),
+
+
+    buf("^B$",  "Show bookmarks page",
+        function (w) w:new_tab("luakit://bookmarks") end),
+
+
 })
+
+
+-------------------------------
+--- Insert mode Keybindings ---
+-------------------------------
 
 add_binds("insert", {
     key({"Control"}, "z",
         "Enter `passthrough` mode, ignores all luakit keybindings.",
         function (w) w:set_mode("passthrough") end),
 
-    ------- Custom key bindings --------
+})
 
+------------------------------------
+--- Added Keybindings for Follow ---
+------------------------------------
+
+-- Hint mode for playing videos with a mediaplayer (mpv)
+-- Source: https://bbs.archlinux.org/viewtopic.php?id=197393
 add_binds("ex-follow", {
-    -- Yank element uri to open in an external application
-    -- Source: https://bbs.archlinux.org/viewtopic.php?id=197393
+
     key({}, "m", [[Hint all links (as defined by the `follow.selectors.uri`
         selector) and set the primary selection to the matched elements URI,
         so that an external app can open it]],
@@ -471,11 +493,14 @@ add_binds("ex-follow", {
                 end
             })
         end),
+
+
 })
 
 
-    
-})
+ -------------------------------
+--- Readline Keybindings ---
+-------------------------------
 
 readline_bindings = {
     key({"Shift"}, "Insert",
@@ -523,6 +548,10 @@ for i=1,10 do
             function (w) w.tabs:switch(i) end))
 end
 add_binds("normal", mod1binds)
+
+-------------------------------
+--- Commands ---
+-------------------------------
 
 -- Command bindings which are matched in the "command" mode from text
 -- entered into the input bar.
@@ -638,7 +667,6 @@ add_cmds({
     -- Custom commands
     cmd({"RR"}, "Restart luakit / Reload config",
         function (w) w:restart() end),
-        --function (w) w:new_tab("https://archlinux.org") end),
 
 })
 

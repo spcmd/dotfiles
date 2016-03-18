@@ -1,12 +1,13 @@
 -- Global variables for luakit
 globals = {
-    homepage            = "file:///home/spcmd/.config/firefox/newtab/newtab.html",
+    homepage            = "file://" .. luakit.data_dir .. "/newtab/newtab.html",
     scroll_step         = 40,
     zoom_step           = 0.1,
     max_cmd_history     = 100,
     max_srch_history    = 100,
  -- http_proxy          = "http://example.com:3128",
     default_window_size = "800x600",
+    show_scrollbar      = true  -- ( scrollbar code defined in rc.lua )
 
  -- Disables loading of hostnames from /etc/hosts (for large host files)
  -- load_etc_hosts      = false,
@@ -50,43 +51,51 @@ soup.accept_policy = cookie_policy.always
 -- it to avoid collisions with lua's string.format characters.
 -- See: http://www.lua.org/manual/5.1/manual.html#pdf-string.format
 search_engines = {
-    duckduckgo  = "https://duckduckgo.com/?q=%s",
-    github      = "https://github.com/search?q=%s",
-    google      = "https://google.com/search?q=%s",
-    imdb        = "http://www.imdb.com/find?s=all&q=%s",
-    wikipedia   = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
+    ddg     = "https://duckduckgo.com/?q=%s",
+    github  = "https://github.com/search?q=%s",
+    g       = "https://google.com/search?q=%s",
+    imdb    = "http://www.imdb.com/find?s=all&q=%s",
+    wiki    = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
 }
 
--- Set google as fallback search engine
-search_engines.default = search_engines.duckduckgo
+-- Default search engine
+search_engines.default = search_engines.ddg
+
 -- Use this instead to disable auto-searching
 --search_engines.default = "%s"
 
 -- Per-domain webview properties
 -- See http://webkitgtk.org/reference/webkitgtk/stable/WebKitWebSettings.html
-domain_props = { --[[
-    ["all"] = {
-        enable_scripts          = false,
-        enable_plugins          = false,
-        enable_private_browsing = false,
-        user_stylesheet_uri     = "",
-    },
-    ["youtube.com"] = {
-        enable_scripts = true,
-        enable_plugins = true,
-    },
-    ["bbs.archlinux.org"] = {
-        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/dark.css",
-        enable_private_browsing = true,
-    }, ]]
+domain_props = {
 
-    ["logout.hu"] = {
-        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/logout.css",
+    ["all"] = {
+        --enable_scripts = false,
+        enable_spell_checking   = true,
+        spell_checking_languages = "hu_HU",
+    },
+
+    ["duckduckgo.com"] = {
+        --enable_scripts = true,
+    },
+
+    ["github.com"] = {
+        --enable_scripts = true,
     },
 
     ["imdb.com"] = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/imdb.css",
     },
+
+    ["logout.hu"] = {
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/logout.css",
+    },
+
+    ["youtube.com"] = {
+        --enable_scripts = true,
+        enable_private_browsing = true,
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/youtube.css",
+    },
+
 
 }
 

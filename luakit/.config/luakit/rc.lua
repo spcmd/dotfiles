@@ -102,6 +102,17 @@ require "downloads_chrome"
 
 downloads.default_dir = os.getenv("HOME") .. "/Downloads"
 
+-- Download to the default directory, do not ask where to save
+downloads.add_signal("download-location", function (uri, file)
+    if not file or file == "" then
+        file = (string.match(uri, "/([^/]+)$")
+            or string.match(uri, "^%w+://(.+)")
+            or string.gsub(uri, "/", "_")
+            or "untitled")
+    end
+    return downloads.default_dir .. "/" .. file
+end)
+
 -- Add ablock support
 require "adblock"
 require "adblock_chrome"
@@ -167,7 +178,9 @@ require "completion"
 -- `,ts` to toggle scripts, `,tp` to toggle plugins, `,tr` to reset.
 -- Remove all "enable_scripts" & "enable_plugins" lines from your
 -- domain_props table (in config/globals.lua) as this module will conflict.
---require "noscript"
+require "noscript"
+noscript.enable_scripts = false
+noscript.enable_plugins = false
 
 require "follow_selected"
 require "go_input"
@@ -175,12 +188,14 @@ require "go_next_prev"
 require "go_up"
 
 -----------------------------
--- Other Customizations --
+-- Customizations --
 -----------------------------
 
--- Enable scrollbar
-webview.init_funcs.show_scrollbars = function(view) 
-    view.show_scrollbars = true 
+-- Scrollbar
+if globals.show_scrollbar == true then
+    webview.init_funcs.show_scrollbars = function(view)
+        view.show_scrollbars = true
+    end
 end
 
 --Progress Indicator
