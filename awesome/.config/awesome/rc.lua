@@ -379,14 +379,14 @@ check_mail_timer:connect_signal("timeout",check_mail)
 check_mail_timer:start()
 
 function newmail_count()
- local newmail_count_file = io.open("/home/spcmd/.mutt/newmail_count", "r")
+ local newmail_count_file = io.open(os.getenv("HOME") .. "/.mutt/newmail_count", "r")
  local newmail_count_content = newmail_count_file:read()
  newmail_count_file:close()
  return newmail_count_content
 end
 
 function mailchecker_set()
-    local mailchecker_set_file = io.open("/home/spcmd/.config/awesome/mailchecker", "r")
+    local mailchecker_set_file = io.open(os.getenv("HOME") .. "/.config/awesome/mailchecker", "r")
     local mailchecker_set_content = mailchecker_set_file:read()
     mailchecker_set_file:close()
     return mailchecker_set_content
@@ -436,7 +436,7 @@ mail_widget:buttons (awful.util.table.join (
 
 ------ Mail list tooltip
 function newmail_list()
-    local newmail_list_file = io.open("/home/spcmd/.mutt/newmail_list")
+    local newmail_list_file = io.open(os.getenv("HOME") .. "/.mutt/newmail_list")
     newmail_list_content = newmail_list_file:read("*all")
     newmail_list_file:close()
     return newmail_list_content
@@ -460,7 +460,7 @@ end)
 note_widget = wibox.widget.textbox()
 
 function read_notes()
- local note_file = io.open("/home/spcmd/Documents/awm-note.txt")
+ local note_file = io.open(os.getenv("HOME") .. "/Documents/awm-note.txt")
  if note_file~=nil then
      local note_contents = note_file:read("*all")
      note_file:close()
