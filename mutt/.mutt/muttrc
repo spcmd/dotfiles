@@ -82,8 +82,8 @@ bind index G last-entry
 macro index h "<change-folder>+INBOX<enter>" "Go to INBOX"
 bind index l display-message
 bind pager h exit
-macro index \CJ "<next-entry><next-entry><next-entry>" "Move quickly down (3j)"
-macro index \CK "<previous-entry><previous-entry><previous-entry>" "Move quickly up (3k)"
+macro index J "<next-entry><next-entry><next-entry>" "Move quickly down (3j)"
+macro index K "<previous-entry><previous-entry><previous-entry>" "Move quickly up (3k)"
 bind index zm collapse-thread
 bind index zM collapse-all
 bind index <space> tag-entry
@@ -117,7 +117,9 @@ bind attach <return> view-mailcap
 bind attach l view-mailcap
 bind attach h exit
 bind attach <space> tag-entry
-macro attach s "<save-entry><bol>~/Downloads/<eol>" "Save attachmen to Downloads directory" # From Stackoverflow: http://goo.gl/zMjj68
+macro attach s "<save-entry><bol>~/Downloads/<eol>" "Save attachments to Downloads directory" # From Stackoverflow: http://goo.gl/zMjj68
+#macro attach s "<tag-prefix><save-entry>" "Save attachments"
+
 
 # Labels / Folders
 macro index c "<change-folder>?" "Select Folder/Label"
