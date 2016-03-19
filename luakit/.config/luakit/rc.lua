@@ -66,19 +66,26 @@ require "cookies"
 -- and blacklist at "$XDG_CONFIG_HOME/luakit/cookie.blacklist".
 -- Each domain must be on it's own line and you may use "*" as a
 -- wildcard character (I.e. "*google.com")
---require "cookie_blocking"
+require "cookie_blocking"
 
 -- Block all cookies by default (unless whitelisted)
---cookies.default_allow = false
+cookies.default_allow = false
+
+-- Store cookies on disk (save cookies)
+cookies.force_session_timeout = false
+cookies.store_session_cookies = true
+
+-- Cookie expiration
+cookies.session_timeout = 3600 * 24 * 7 * 4
 
 -- Add uzbl-like form filling
-require "formfiller"
+--require "formfiller"
 
 -- Add proxy support & manager
-require "proxy"
+--require "proxy"
 
 -- Add quickmarks support & manager
-require "quickmarks"
+--require "quickmarks"
 
 -- Add session saving/loading support
 require "session"

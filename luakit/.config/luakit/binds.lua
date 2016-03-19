@@ -11,8 +11,9 @@ local match, join = string.match, lousy.util.table.join
 local strip, split = lousy.util.string.strip, lousy.util.string.split
 
 -- Globals or defaults that are used in binds
-local scroll_step = globals.scroll_step or 20
-local zoom_step = globals.zoom_step or 0.1
+local scroll_step = 75
+local mouse_scroll_step = 75
+local zoom_step = 0.1
 local quick_scroll_step = 150
 local huge_scroll_step = 350
 
@@ -74,9 +75,9 @@ add_binds("all", {
                 local uri = w.view.hovered_uri
                 if uri then
                     w:new_tab(uri, false)
-                else -- Open selection in current tab
-                    uri = luakit.selection.primary
-                    if uri then w:navigate(w:search_open(uri)) end
+                --else -- Open selection in current tab
+                    --uri = luakit.selection.primary
+                    --if uri then w:navigate(w:search_open(uri)) end
                 end
             end
         end),
@@ -97,12 +98,28 @@ add_binds("all", {
     but({"Control"}, 5, "Reduce text zoom level.",
         function (w, m) w:zoom_out() end),
 
-    -- Horizontal mouse scroll binds
-    but({"Shift"}, 4, "Scroll left.",
-        function (w, m) w:scroll{ xrel = -scroll_step } end),
+    -- Mouse Scroll
+     but({}, 4, "Scroll up.",
+        function (w) w:scroll{ yrel = -mouse_scroll_step } end),
 
-    but({"Shift"}, 5, "Scroll right.",
-        function (w, m) w:scroll{ xrel =  scroll_step } end),
+    but({}, 5, "scroll down.",
+        function (w) w:scroll{ yrel = mouse_scroll_step } end),
+
+    -- Mouse Quick Scroll
+    but({"Shift"}, 4, "Quick Scroll up.",
+        function (w) w:scroll{ yrel = -quick_scroll_step } end),
+
+    but({"Shift"}, 5, "Quick scroll down.",
+        function (w) w:scroll{ yrel = quick_scroll_step } end),
+
+    -- Mouse Quick Scroll
+    but({"Control", "Shift"}, 4, "Huge Scroll up.",
+        function (w) w:scroll{ yrel = -huge_scroll_step } end),
+
+    but({"Control", "Shift"}, 5, "Huge scroll down.",
+        function (w) w:scroll{ yrel = huge_scroll_step } end),
+
+
 })
 
 -------------------------------

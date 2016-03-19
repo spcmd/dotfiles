@@ -1,14 +1,13 @@
 -- Global variables for luakit
 globals = {
     homepage            = "file://" .. luakit.data_dir .. "/newtab/newtab.html",
-    scroll_step         = 40,
-    zoom_step           = 0.1,
     max_cmd_history     = 100,
     max_srch_history    = 100,
- -- http_proxy          = "http://example.com:3128",
     default_window_size = "800x600",
-    show_scrollbar      = true  -- ( scrollbar code defined in rc.lua )
+    show_scrollbar      = true,  -- defined in rc.lua
+    show_tablist        = true,  -- defined in window.lua
 
+ -- http_proxy          = "http://example.com:3128",
  -- Disables loading of hostnames from /etc/hosts (for large host files)
  -- load_etc_hosts      = false,
  -- Disables checking if a filepath exists in search_open function

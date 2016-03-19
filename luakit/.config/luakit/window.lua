@@ -73,7 +73,9 @@ function window.build()
     w.win.child = w.ebox
 
     -- Pack tablist
-    w.layout:pack(w.tablist.widget)
+    if globals.show_tablist == true then
+        w.layout:pack(w.tablist.widget)
+    end
 
     -- Pack notebook
     w.layout:pack(w.tabs, { expand = true, fill = true })
