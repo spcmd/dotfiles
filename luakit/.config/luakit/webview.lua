@@ -213,12 +213,19 @@ webview.init_funcs = {
         view:add_signal("populate-popup", function (v)
             return {
                 true,
-                { "_Toggle Source", function () w:toggle_source() end },
-                { "_Zoom", {
-                    { "Zoom _In",    function () w:zoom_in()  end },
-                    { "Zoom _Out",   function () w:zoom_out() end },
+                { "🖹 Toggle Sour_ce", function () w:toggle_source() end },
+                true,
+                { "🖹 Toggle Cookie", function () w:toggle_domain_cookie() end },
+                { "‼ _Noscript", {
+                    { "Toggle _Scripts",    function () w:toggle_scripts()  end },
+                    { "Toggle _Plugins",   function () w:toggle_plugins() end },
                     true,
-                    { "Zoom _Reset", function () w:zoom_set() end }, }, },
+                    { "_Remove this domain", function () w:toggle_remove() end }, }, },
+                true,
+                { "🌊 Ma_gnet > rTorrent", function () w:magnet_load() end },
+                { "▶ Play with _mpv", function () w:mediaplayer() end },
+                true,
+                { "🔍 Search selected _text...", function () w:lookup_selection() end },
             }
         end)
     end,
@@ -283,6 +290,107 @@ webview.methods = {
     forward = function (view, w, n)
         view:go_forward(n or 1)
     end,
+
+    -- ADDED: Play link with mpv
+    mediaplayer = function (view, w)
+        local uri = w.view.hovered_uri or w.view.uri
+        if string.match(uri, "youtube") then
+            luakit.spawn(string.format("mpv %s", uri))
+            w:notify("Playing with mpv: " .. uri)
+        elseif string.match(uri, "vimeo") then
+            luakit.spawn(string.format("mpv %s", uri))
+            w:notify("Playing with mpv: " .. uri)
+        else
+            w:notify("Can't play this url with mpv.")
+        end
+    end,
+
+    -- ADDED: Lookup selected text with a search engine
+    lookup_selection = function (view, w)
+        -- replace spaces with '+' signs for the search string
+        local stext = string.gsub(luakit.selection.primary, " ", "+")
+        -- use the default search engine if it's set
+        if search_engines.default then
+            -- remove the '%s' from the end, because we use the selected text
+            search_engine = string.gsub(search_engines.default, "%%s", "")
+        else
+            search_engine = "https://duckduckgo.com/?q="
+        end
+        w:new_tab(search_engine..stext)
+    end,
+
+    -- ADDED: Load megnet links to rtorrent
+    magnet_load = function (wiew, w)
+        local uri = w.view.hovered_uri
+        if string.match(uri, "^magnet:") then
+            -- magnet2rtorrent is my shell script
+            luakit.spawn(string.format("magnet2rtorrent %s", uri))
+        else
+            w:notify("Error: this is not a magnet link.")
+        end
+    end,
+
+    -- ADDED: Add domain to / Remove domain from cookies whitelist
+    toggle_domain_cookie = function (view, w)
+        --local domain = w.view.uri:match("[%w%.]*%.(%w+%.%w+)")
+        --local subdomain = w.view.uri:match('^%w+://([^/]+)')
+        local domain = w.view.uri:match("(%w+%.%w+%.?%w*)")
+        local cookie_whitelist = '/home/spcmd/.config/luakit/cookie.whitelist'
+
+--[[
+        local whitelist = io.open(cookie_whitelist, "r")
+        local content = whitelist:read('*all')
+        whitelist:close()
+        if string.find(content, domain) then
+            os.execute("sed -i '/".. domain .. "/d'" .. cookie_whitelist .. "")
+            w:notify("Removed " .. domain .. " from cookies.whitelist")
+        else
+            os.execute("echo -e '" .. domain .. "' >>" .. cookie_whitelist)
+            w:notify("Added " .. domain .. " to cookies.whitelist")
+        end
+--]]
+--[[
+        local whitelist = io.open(cookie_whitelist, "r")
+        content = string.gsub(content, domain, "")
+        local whitelist = io.open(cookie_whitelist, "w")
+        whitelist:write(content)
+        whitelist:close()
+
+--]]
+        --[[
+        if string.find(content, domain) then
+            string.gsub(content, domain, "")
+            w:notify("Domain removed from cookie.whitelist")
+        else
+            w:notify("Domain added to cookie.whitelist")
+        end
+
+        whitelist:close()
+        --w:notify("DEBUG: "..domain)
+        --]]
+
+--[[
+	local lines = ""
+	while(true) do
+            local line = whitelist:read("*line")
+            if not line then break end
+            if not string.find(line, domain, 1) then
+		lines = line .. "\n" .. domain .. "\n"
+                w:notify("Domain added to cookie.whitelist")
+            else
+                w:notify("Domain removed from cookie.whitelist")
+            end
+        end
+        whitelist:close()
+	file = io.open("/home/spcmd/.config/luakit/cookie.whitelist", "a+")
+	file:write(lines)
+	file:close()
+        return true
+
+--]]
+
+    end,
+
 }
 
 function webview.methods.scroll(view, w, new)
