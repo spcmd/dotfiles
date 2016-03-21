@@ -510,10 +510,11 @@ window.methods = {
         end
     end,
 
+    -- MODIFIED
     update_hist = function (w)
         local hist = w.sbar.l.hist
         local back, forward = w.view:can_go_back(), w.view:can_go_forward()
-        local s = (back and "+" or "") .. (forward and "-" or "")
+        local s = (back and "←" or "") .. (forward and "→" or "")
         if s ~= "" then
             hist.text = '['..s..']'
             hist:show()
