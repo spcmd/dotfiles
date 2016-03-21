@@ -681,9 +681,15 @@ add_cmds({
             end
         end),
 
-    -- Custom commands
+    -- ADDED:
     cmd({"RR"}, "Restart luakit / Reload config",
         function (w) w:restart() end),
+
+    cmd({"cookie-blacklist"}, "Edit the cookie.blacklist",
+        function () luakit.spawn("urxvtc -e vim ".. cookies.blacklist_path) end),
+
+    cmd({"cookie-whitelist"}, "Edit the cookie.whitelist",
+        function () luakit.spawn("urxvtc -e vim ".. cookies.whitelist_path) end),
 
 })
 
