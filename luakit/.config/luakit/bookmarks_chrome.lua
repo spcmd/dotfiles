@@ -308,14 +308,16 @@ $(document).ready(function () { 'use strict'
     function show_edit(b) {
         b = b || {};
         var $e = $edit_dialog;
+
         $e.attr("bookmark_id", b.id);
         $e.attr("created", b.created);
         $e.find(".title").val(b.title);
         $e.find(".uri").val(b.uri);
         $e.find(".tags").val(b.tags);
         $e.find(".desc").val(b.desc);
-        $edit_view.fadeIn("fast", function () {
+        $edit_view.show(1, function () {
             $edit_dialog.find(".title").focus();
+            insert_mode(); //ADDED
         });
     }
 
@@ -337,10 +339,10 @@ $(document).ready(function () { 'use strict'
         for (var i = 0; i < results.length; i++)
             html += make_bookmark(results[i]);
 
-        $results.get(0).innerHTML = html;
-    };
+            $results.get(0).innerHTML = html;
+        };
 
-    /* input field callback */
+        /* input field callback */
     $search.keydown(function(ev) {
         if (ev.which == 13) { /* Return */
             search();
@@ -355,7 +357,7 @@ $(document).ready(function () { 'use strict'
         // delete bookmark from database
         bookmarks_remove(parseInt($b.attr("bookmark_id")));
         // remove/hide bookmark from list
-        $b.slideUp(function() { $b.remove(); });
+        $b.slideUp(50, function() { $b.remove(); });
     });
 
     $results.on("click", ".bookmark .tags a", function () {
@@ -391,20 +393,37 @@ $(document).ready(function () { 'use strict'
 
         search();
 
-        $edit_view.fadeOut("fast");
+        $edit_view.hide();
     };
 
+    //MODIFIED
     $edit_dialog.on("click", ".submit-button", function (e) {
         edit_submit();
+        //reset_mode();
+        close_tab();
+        notify("Bookmark saved");
     });
 
-    $edit_dialog.find('input[type="text"]').keydown(function(ev) {
-        if (ev.which == 13) /* Return */
+    //MODIFIED
+    $edit_dialog.find('input[type="text"]').keypress(function(ev) {
+        if (ev.which == 13) {
             edit_submit();
+            //reset_mode();
+            close_tab();
+            notify("Bookmark saved");
+        }
+    });
+
+    //ADDED: Esc key closes the box and/or the bookmarks page
+    $edit_dialog.find('input[type="text"]').keyup(function(ev) {
+        if (ev.keyCode == 27) {
+            $edit_view.hide();
+            //close_tab();
+        }
     });
 
     $edit_dialog.on("click", ".cancel-button", function (e) {
-        $edit_view.fadeOut("fast");
+        $edit_view.hide();
     });
 
     $("#new-button").click(function () {
@@ -522,6 +541,19 @@ chrome.add("bookmarks", function (view, meta)
 
         view:register_function("reset_mode", function ()
             meta.w:set_mode() -- HACK to unfocus search box
+        end)
+
+        -- ADDED:
+        view:register_function("insert_mode", function ()
+            meta.w:set_mode("insert")
+        end)
+
+        view:register_function("close_tab", function ()
+            meta.w:close_tab()
+        end)
+
+        view:register_function("notify", function (message)
+            meta.w:notify(message)
         end)
 
         -- Load jQuery JavaScript library

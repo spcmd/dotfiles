@@ -25,48 +25,48 @@ function add_binds(mode, binds, before)
         local mdata = get_mode(m)
         if mdata and before then
             mdata.binds = join(binds, mdata.binds or {})
-        elseif mdata then
-            mdata.binds = mdata.binds or {}
-            for _, b in ipairs(binds) do table.insert(mdata.binds, b) end
-        else
-            new_mode(m, { binds = binds })
+            elseif mdata then
+                mdata.binds = mdata.binds or {}
+                for _, b in ipairs(binds) do table.insert(mdata.binds, b) end
+            else
+                new_mode(m, { binds = binds })
+            end
         end
     end
-end
 
--- Add commands to command mode
-function add_cmds(cmds, before)
-    add_binds("command", cmds, before)
-end
+    -- Add commands to command mode
+    function add_cmds(cmds, before)
+        add_binds("command", cmds, before)
+    end
 
--- Adds the default menu widget bindings to a mode
-menu_binds = {
-    -- Navigate items
-    key({},          "j",       function (w) w.menu:move_down() end),
-    key({},          "k",       function (w) w.menu:move_up()   end),
-    key({},          "Down",    function (w) w.menu:move_down() end),
-    key({},          "Up",      function (w) w.menu:move_up()   end),
-    key({},          "Tab",     function (w) w.menu:move_down() end),
-    key({"Shift"},   "Tab",     function (w) w.menu:move_up()   end),
-}
+    -- Adds the default menu widget bindings to a mode
+    menu_binds = {
+        -- Navigate items
+        key({},          "j",       function (w) w.menu:move_down() end),
+        key({},          "k",       function (w) w.menu:move_up()   end),
+        key({},          "Down",    function (w) w.menu:move_down() end),
+        key({},          "Up",      function (w) w.menu:move_up()   end),
+        key({},          "Tab",     function (w) w.menu:move_down() end),
+        key({"Shift"},   "Tab",     function (w) w.menu:move_up()   end),
+    }
 
--- Add binds to special mode "all" which adds its binds to all modes.
-add_binds("all", {
-    key({}, "Escape", "Return to `normal` mode.",
+    -- Add binds to special mode "all" which adds its binds to all modes.
+    add_binds("all", {
+        key({}, "Escape", "Return to `normal` mode.",
         function (w) w:set_mode() end),
 
-    key({"Control"}, "[", "Return to `normal` mode.",
+        key({"Control"}, "[", "Return to `normal` mode.",
         function (w) w:set_mode() end),
 
-    -- Mouse bindings
-    but({}, 8, "Go back.",
+        -- Mouse bindings
+        but({}, 8, "Go back.",
         function (w) w:back() end),
 
-    but({}, 9, "Go forward.",
+        but({}, 9, "Go forward.",
         function (w) w:forward() end),
 
-    -- Open link in new tab or navigate to selection
-    but({}, 2, [[Open link under mouse cursor in new tab or navigate to the
+        -- Open link in new tab or navigate to selection
+        but({}, 2, [[Open link under mouse cursor in new tab or navigate to the
         contents of `luakit.selection.primary`.]],
         function (w, m)
             -- Ignore button 2 clicks in form fields
@@ -75,15 +75,15 @@ add_binds("all", {
                 local uri = w.view.hovered_uri
                 if uri then
                     w:new_tab(uri, false)
-                --else -- Open selection in current tab
+                    --else -- Open selection in current tab
                     --uri = luakit.selection.primary
                     --if uri then w:navigate(w:search_open(uri)) end
                 end
             end
         end),
 
-    -- Open link in new tab when Ctrl-clicked.
-    but({"Control"}, 1, "Open link under mouse cursor in new tab.",
+        -- Open link in new tab when Ctrl-clicked.
+        but({"Control"}, 1, "Open link under mouse cursor in new tab.",
         function (w, m)
             local uri = w.view.hovered_uri
             if uri then
@@ -91,219 +91,219 @@ add_binds("all", {
             end
         end),
 
-    -- Zoom binds
-    but({"Control"}, 4, "Increase text zoom level.",
+        -- Zoom binds
+        but({"Control"}, 4, "Increase text zoom level.",
         function (w, m) w:zoom_in() end),
 
-    but({"Control"}, 5, "Reduce text zoom level.",
+        but({"Control"}, 5, "Reduce text zoom level.",
         function (w, m) w:zoom_out() end),
 
-    -- Mouse Scroll
-     but({}, 4, "Scroll up.",
+        -- Mouse Scroll
+        but({}, 4, "Scroll up.",
         function (w) w:scroll{ yrel = -mouse_scroll_step } end),
 
-    but({}, 5, "scroll down.",
+        but({}, 5, "scroll down.",
         function (w) w:scroll{ yrel = mouse_scroll_step } end),
 
-    -- Mouse Quick Scroll
-    but({"Shift"}, 4, "Quick Scroll up.",
+        -- Mouse Quick Scroll
+        but({"Shift"}, 4, "Quick Scroll up.",
         function (w) w:scroll{ yrel = -quick_scroll_step } end),
 
-    but({"Shift"}, 5, "Quick scroll down.",
+        but({"Shift"}, 5, "Quick scroll down.",
         function (w) w:scroll{ yrel = quick_scroll_step } end),
 
-    -- Mouse Quick Scroll
-    but({"Control", "Shift"}, 4, "Huge Scroll up.",
+        -- Mouse Quick Scroll
+        but({"Control", "Shift"}, 4, "Huge Scroll up.",
         function (w) w:scroll{ yrel = -huge_scroll_step } end),
 
-    but({"Control", "Shift"}, 5, "Huge scroll down.",
+        but({"Control", "Shift"}, 5, "Huge scroll down.",
         function (w) w:scroll{ yrel = huge_scroll_step } end),
 
 
-})
+    })
 
--------------------------------
---- Normal mode Keybindings ---
--------------------------------
+    -------------------------------
+    --- Normal mode Keybindings ---
+    -------------------------------
 
-add_binds("normal", {
-    -- Autoparse the `[count]` before a binding and re-call the hit function
-    -- with the count removed and added to the opts table.
-    any([[Meta-binding to detect the `^[count]` syntax. The `[count]` is parsed
+    add_binds("normal", {
+        -- Autoparse the `[count]` before a binding and re-call the hit function
+        -- with the count removed and added to the opts table.
+        any([[Meta-binding to detect the `^[count]` syntax. The `[count]` is parsed
         and stripped from the internal buffer string and the value assigned to
         `state.count`. Then `lousy.bind.hit()` is re-called with the modified
         buffer string & original modifier state.
 
         #### Example binding
 
-            lousy.bind.key({}, "%", function (w, state)
-                w:scroll{ ypct = state.count }
-            end, { count = 0 })
+        lousy.bind.key({}, "%", function (w, state)
+            w:scroll{ ypct = state.count }
+        end, { count = 0 })
 
         This binding demonstrates several concepts. Firstly that you are able to
         specify per-binding default values of `count`. In this case if the user
         types `"%"` the document will be scrolled vertically to `0%` (the top).
 
         If the user types `"100%"` then the document will be scrolled to `100%`
-        (the bottom). All without the need to use `lousy.bind.buf` bindings
-        everywhere and or using a `^(%d*)` pattern prefix on every binding which
-        would like to make use of the `[count]` syntax.]],
-        function (w, m)
-            local count, buf
-            if m.buffer then
-                count = string.match(m.buffer, "^(%d+)")
-            end
-            if count then
-                buf = string.sub(m.buffer, #count + 1, (m.updated_buf and -2) or -1)
-                local opts = join(m, {count = tonumber(count)})
-                opts.buffer = (#buf > 0 and buf) or nil
-                if lousy.bind.hit(w, m.binds, m.mods, m.key, opts) then
-                    return true
+            (the bottom). All without the need to use `lousy.bind.buf` bindings
+            everywhere and or using a `^(%d*)` pattern prefix on every binding which
+            would like to make use of the `[count]` syntax.]],
+            function (w, m)
+                local count, buf
+                if m.buffer then
+                    count = string.match(m.buffer, "^(%d+)")
                 end
-            end
-            return false
-        end),
+                if count then
+                    buf = string.sub(m.buffer, #count + 1, (m.updated_buf and -2) or -1)
+                    local opts = join(m, {count = tonumber(count)})
+                    opts.buffer = (#buf > 0 and buf) or nil
+                    if lousy.bind.hit(w, m.binds, m.mods, m.key, opts) then
+                        return true
+                    end
+                end
+                return false
+            end),
 
-    key({}, "i", "Enter `insert` mode.",
-        function (w) w:set_mode("insert")  end),
+            key({}, "i", "Enter `insert` mode.",
+            function (w) w:set_mode("insert")  end),
 
-    key({}, ":", "Enter `command` mode.",
-        function (w) w:set_mode("command") end),
+            key({}, ":", "Enter `command` mode.",
+            function (w) w:set_mode("command") end),
 
-    -- Scrolling
-    key({}, "j", "Scroll document down.",
-        function (w) w:scroll{ yrel =  scroll_step } end),
+            -- Scrolling
+            key({}, "j", "Scroll document down.",
+            function (w) w:scroll{ yrel =  scroll_step } end),
 
-    key({}, "k", "Scroll document up.",
-        function (w) w:scroll{ yrel = -scroll_step } end),
+            key({}, "k", "Scroll document up.",
+            function (w) w:scroll{ yrel = -scroll_step } end),
 
-    key({}, "J", "Quick-Scroll document down.",
-        function (w) w:scroll{ yrel = quick_scroll_step } end),
+            key({}, "J", "Quick-Scroll document down.",
+            function (w) w:scroll{ yrel = quick_scroll_step } end),
 
-    key({}, "K", "Quick-Scroll document up.",
-        function (w) w:scroll{ yrel = -quick_scroll_step } end),
+            key({}, "K", "Quick-Scroll document up.",
+            function (w) w:scroll{ yrel = -quick_scroll_step } end),
 
-    key({"Control", "Shift"}, "J", "Huge-Scroll document down.",
-        function (w) w:scroll{ yrel = huge_scroll_step } end),
+            key({"Control", "Shift"}, "J", "Huge-Scroll document down.",
+            function (w) w:scroll{ yrel = huge_scroll_step } end),
 
-    key({"Control", "Shift"}, "K", "Huge-Scroll document up.",
-        function (w) w:scroll{ yrel = -huge_scroll_step } end),
+            key({"Control", "Shift"}, "K", "Huge-Scroll document up.",
+            function (w) w:scroll{ yrel = -huge_scroll_step } end),
 
-    key({}, "h", "Scroll document left.",
-        function (w) w:scroll{ xrel = -scroll_step } end),
+            key({}, "h", "Scroll document left.",
+            function (w) w:scroll{ xrel = -scroll_step } end),
 
-    key({}, "l", "Scroll document right.",
-        function (w) w:scroll{ xrel =  scroll_step } end),
+            key({}, "l", "Scroll document right.",
+            function (w) w:scroll{ xrel =  scroll_step } end),
 
-    key({}, "Down", "Scroll document down.",
-        function (w) w:scroll{ yrel =  scroll_step } end),
+            key({}, "Down", "Scroll document down.",
+            function (w) w:scroll{ yrel =  scroll_step } end),
 
-    key({}, "Up",   "Scroll document up.",
-        function (w) w:scroll{ yrel = -scroll_step } end),
+            key({}, "Up",   "Scroll document up.",
+            function (w) w:scroll{ yrel = -scroll_step } end),
 
-    key({}, "Left", "Scroll document left.",
-        function (w) w:scroll{ xrel = -scroll_step } end),
+            key({}, "Left", "Scroll document left.",
+            function (w) w:scroll{ xrel = -scroll_step } end),
 
-    key({}, "Right", "Scroll document right.",
-        function (w) w:scroll{ xrel =  scroll_step } end),
+            key({}, "Right", "Scroll document right.",
+            function (w) w:scroll{ xrel =  scroll_step } end),
 
-    key({}, "^", "Scroll to the absolute left of the document.",
-        function (w) w:scroll{ x =  0 } end),
+            key({}, "^", "Scroll to the absolute left of the document.",
+            function (w) w:scroll{ x =  0 } end),
 
-    key({}, "$", "Scroll to the absolute right of the document.",
-        function (w) w:scroll{ x = -1 } end),
+            key({}, "$", "Scroll to the absolute right of the document.",
+            function (w) w:scroll{ x = -1 } end),
 
-    key({}, "0", "Scroll to the absolute left of the document.",
-        function (w, m)
-            if not m.count then w:scroll{ y = 0 } else return false end
-        end),
+            key({}, "0", "Scroll to the absolute left of the document.",
+            function (w, m)
+                if not m.count then w:scroll{ y = 0 } else return false end
+            end),
 
-    key({"Control"}, "e", "Scroll document down.",
-        function (w) w:scroll{ yrel =  scroll_step } end),
+            key({"Control"}, "e", "Scroll document down.",
+            function (w) w:scroll{ yrel =  scroll_step } end),
 
-    key({"Control"}, "y", "Scroll document up.",
-        function (w) w:scroll{ yrel = -scroll_step } end),
+            key({"Control"}, "y", "Scroll document up.",
+            function (w) w:scroll{ yrel = -scroll_step } end),
 
-    key({"Control"}, "d", "Scroll half page down.",
-        function (w) w:scroll{ ypagerel =  0.5 } end),
+            key({"Control"}, "d", "Scroll half page down.",
+            function (w) w:scroll{ ypagerel =  0.5 } end),
 
-    key({"Control"}, "u", "Scroll half page up.",
-        function (w) w:scroll{ ypagerel = -0.5 } end),
+            key({"Control"}, "u", "Scroll half page up.",
+            function (w) w:scroll{ ypagerel = -0.5 } end),
 
-    key({"Control"}, "f", "Scroll page down.",
-        function (w) w:scroll{ ypagerel =  1.0 } end),
+            key({"Control"}, "f", "Scroll page down.",
+            function (w) w:scroll{ ypagerel =  1.0 } end),
 
-    key({"Control"}, "b", "Scroll page up.",
-        function (w) w:scroll{ ypagerel = -1.0 } end),
+            key({"Control"}, "b", "Scroll page up.",
+            function (w) w:scroll{ ypagerel = -1.0 } end),
 
-    key({}, "space", "Scroll page down.",
-        function (w) w:scroll{ ypagerel =  1.0 } end),
+            key({}, "space", "Scroll page down.",
+            function (w) w:scroll{ ypagerel =  1.0 } end),
 
-    key({"Shift"}, "space", "Scroll page up.",
-        function (w) w:scroll{ ypagerel = -1.0 } end),
+            key({"Shift"}, "space", "Scroll page up.",
+            function (w) w:scroll{ ypagerel = -1.0 } end),
 
-    key({}, "BackSpace", "Scroll page up.",
-        function (w) w:scroll{ ypagerel = -1.0 } end),
+            key({}, "BackSpace", "Scroll page up.",
+            function (w) w:scroll{ ypagerel = -1.0 } end),
 
-    key({}, "Page_Down", "Scroll page down.",
-        function (w) w:scroll{ ypagerel =  1.0 } end),
+            key({}, "Page_Down", "Scroll page down.",
+            function (w) w:scroll{ ypagerel =  1.0 } end),
 
-    key({}, "Page_Up", "Scroll page up.",
-        function (w) w:scroll{ ypagerel = -1.0 } end),
+            key({}, "Page_Up", "Scroll page up.",
+            function (w) w:scroll{ ypagerel = -1.0 } end),
 
-    key({}, "Home", "Go to the end of the document.",
-        function (w) w:scroll{ y =  0 } end),
+            key({}, "Home", "Go to the end of the document.",
+            function (w) w:scroll{ y =  0 } end),
 
-    key({}, "End", "Go to the top of the document.",
-        function (w) w:scroll{ y = -1 } end),
+            key({}, "End", "Go to the top of the document.",
+            function (w) w:scroll{ y = -1 } end),
 
-    -- Specific scroll
-    buf("^gg$", "Go to the top of the document.",
-        function (w, b, m) w:scroll{ ypct = m.count } end, {count=0}),
+            -- Specific scroll
+            buf("^gg$", "Go to the top of the document.",
+            function (w, b, m) w:scroll{ ypct = m.count } end, {count=0}),
 
-    buf("^G$", "Go to the bottom of the document.",
-        function (w, b, m) w:scroll{ ypct = m.count } end, {count=100}),
+            buf("^G$", "Go to the bottom of the document.",
+            function (w, b, m) w:scroll{ ypct = m.count } end, {count=100}),
 
-    buf("^%%$", "Go to `[count]` percent of the document.",
-        function (w, b, m) w:scroll{ ypct = m.count } end),
+            buf("^%%$", "Go to `[count]` percent of the document.",
+            function (w, b, m) w:scroll{ ypct = m.count } end),
 
-    -- Zooming
-    key({}, "+", "Enlarge text zoom of the current page.",
-        function (w, m) w:zoom_in(zoom_step * m.count) end, {count=1}),
+            -- Zooming
+            key({}, "+", "Enlarge text zoom of the current page.",
+            function (w, m) w:zoom_in(zoom_step * m.count) end, {count=1}),
 
-    key({}, "-", "Reduce text zom of the current page.",
-        function (w, m) w:zoom_out(zoom_step * m.count) end, {count=1}),
+            key({}, "-", "Reduce text zom of the current page.",
+            function (w, m) w:zoom_out(zoom_step * m.count) end, {count=1}),
 
-    key({}, "=", "Reset zoom level.",
-        function (w, m) w:zoom_set() end),
+            key({}, "=", "Reset zoom level.",
+            function (w, m) w:zoom_set() end),
 
-    buf("^z[iI]$", [[Enlarge text zoom of current page with `zi` or `zI` to
-        reduce full zoom.]],
-        function (w, b, m)
-            w:zoom_in(zoom_step  * m.count, b == "zI")
-        end, {count=1}),
+            buf("^z[iI]$", [[Enlarge text zoom of current page with `zi` or `zI` to
+            reduce full zoom.]],
+            function (w, b, m)
+                w:zoom_in(zoom_step  * m.count, b == "zI")
+            end, {count=1}),
 
-    buf("^z[oO]$", [[Reduce text zoom of current page with `zo` or `zO` to
-        reduce full zoom.]],
-        function (w, b, m)
-            w:zoom_out(zoom_step * m.count, b == "zO")
-        end, {count=1}),
+            buf("^z[oO]$", [[Reduce text zoom of current page with `zo` or `zO` to
+            reduce full zoom.]],
+            function (w, b, m)
+                w:zoom_out(zoom_step * m.count, b == "zO")
+            end, {count=1}),
 
-    -- Zoom reset or specific zoom ([count]zZ for full content zoom)
-    buf("^z[zZ]$", [[Set current page zoom to `[count]` percent with
-        `[count]zz`, use `[count]zZ` to set full zoom percent.]],
-        function (w, b, m)
-            w:zoom_set(m.count/100, b == "zZ")
-        end, {count=100}),
+            -- Zoom reset or specific zoom ([count]zZ for full content zoom)
+            buf("^z[zZ]$", [[Set current page zoom to `[count]` percent with
+            `[count]zz`, use `[count]zZ` to set full zoom percent.]],
+            function (w, b, m)
+                w:zoom_set(m.count/100, b == "zZ")
+            end, {count=100}),
 
-    -- Fullscreen
-    key({}, "F11", "Toggle fullscreen mode.",
-        function (w) w.win.fullscreen = not w.win.fullscreen end),
+            -- Fullscreen
+            key({}, "F11", "Toggle fullscreen mode.",
+            function (w) w.win.fullscreen = not w.win.fullscreen end),
 
-    -- Clipboard
-    --key({}, "p", [[Open a URL based on the current primary selection contents
-        --in the current tab.]],
-        --function (w)
+            -- Clipboard
+            --key({}, "p", [[Open a URL based on the current primary selection contents
+            --in the current tab.]],
+            --function (w)
             --local uri = luakit.selection.primary
             --if not uri then w:notify("No primary selection...") return end
             --w:navigate(w:search_open(uri))
@@ -486,7 +486,11 @@ add_binds("insert", {
 
 -- Hint mode for playing videos with a mediaplayer (mpv)
 -- Source: https://bbs.archlinux.org/viewtopic.php?id=197393
-add_binds("ex-follow", {
+-- if you want to use the ';' prefix key before the 'm' key
+-- like with the other follow modes, then use 'ex-follow'
+-- instead of 'normal" after the 'add_binds'
+
+add_binds("normal", {
 
     key({}, "m", [[Hint all links (as defined by the `follow.selectors.uri`
         selector) and set the primary selection to the matched elements URI,
@@ -690,6 +694,31 @@ add_cmds({
 
     cmd({"cookie-whitelist"}, "Edit the cookie.whitelist",
         function () luakit.spawn("urxvtc -e vim ".. cookies.whitelist_path) end),
+
+    cmd({"cookie-keepcookies"}, "Edit the keepcookies.list",
+        function () luakit.spawn("urxvtc -e vim ".. luakit.config_dir.."/keepcookies.list") end),
+
+    cmd({"cookie-clean"}, "Clean up the cookie database (keep only from keepcookies.list)",
+        function (w)
+            luakit.spawn("luakitwrapper -c")  -- uses my luakitwrapper script
+            w:notify("luakitwrapper: cookies have been cleaned")
+        end),
+
+    cmd({"noscript-list"}, "List domain from the noscript database",
+        function (w)
+            local _, list = luakit.spawn_sync("luakitwrapper -n") -- uses my luakitwrapper script
+            w:notify(list)
+        end),
+
+    cmd({"noscript-toogle-scripts"}, "Toggle javascript permission for this domain",
+        function (w) w:toggle_scripts() end),
+
+    cmd({"noscript-toogle-plugins"}, "Toggle plugins permission for this domain",
+        function (w) w:toggle_plugins() end),
+
+    cmd({"noscript-remove-rules"}, "Remove noscript rules for this domain",
+        function (w) w:toggle_remove() end),
+
 
 })
 
