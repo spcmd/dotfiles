@@ -30,7 +30,7 @@ local capi = {
 module("bookmarks.chrome")
 
 -- Display the bookmark uri and title.
-show_uri = false
+show_uri = true
 
 stylesheet = [===[
 .bookmark {
@@ -39,8 +39,6 @@ stylesheet = [===[
     margin: 0;
     left: 0;
     right: 0;
-    border: 1px solid #fff;
-    border-radius: 0.3em;
 }
 
 .bookmark .title, .bookmark .uri {
@@ -54,6 +52,7 @@ stylesheet = [===[
 }
 
 .bookmark .title a {
+    color: #45FFFF;
     font-weight: normal;
     font-size: 1.4em;
     text-decoration: none;
@@ -68,39 +67,26 @@ stylesheet = [===[
 }
 
 .bookmark .uri {
-    color: #aaa;
-}
-
-.bookmark .bottom {
-    white-space: nowrap;
-}
-
-.bookmark .bottom a {
-    text-decoration: none;
-    -webkit-user-select: none;
-    cursor: default;
-}
-
-.bookmark .bottom a:hover {
-    cursor: pointer;
+    color: #ccc;
 }
 
 .bookmark .tags a {
-    color: #666;
-    background-color: #f6f6f6;
+    color: #eee;
+    background-color: #0D497B;
     padding: 0.1em 0.4em;
     margin: 0 0.3em;
     -webkit-border-radius: 0.2em;
-    -webkit-box-shadow: 0 0.1em 0.1em #666;
 }
 
 .bookmark .tags a:hover {
-    color: #111;
+    background-color:#2D92DD;
+    color: #fff;
+    cursor: pointer;
 }
 
 .bookmark .desc {
-    color: #222;
-    border-left: 0.3em solid #ddd;
+    color: #ccc;
+    border-left: 0.2em solid #999;
     margin: 0 0 0.2em 0.5em;
     padding: 0 0 0 0.5em;
     max-width: 60em;
@@ -120,20 +106,21 @@ stylesheet = [===[
 }
 
 .bookmark .controls a {
-    color: #888;
+    color: #eee;
     padding: 0.1em 0.4em;
     margin: 0 0;
 }
 
 .bookmark .controls a:hover {
-    background-color: #fff;
+    color: #000;
+    background-color: #eee;
     -webkit-border-radius: 0.2em;
-    -webkit-box-shadow: 0 0.1em 0.1em #666;
+    cursor:pointer;
 }
 
 .bookmark .date {
-    color: #444;
-    margin-right: 0.2em;
+    color: #ccc;
+    margin-left: 0.2em;
 }
 
 #templates {
@@ -155,7 +142,7 @@ stylesheet = [===[
     position: fixed;
     z-index: 101;
     font-size: 1.3em;
-    font-weight: 100;
+    font-weight: bold;
 
     top: 6em;
     left: 50%;
@@ -164,9 +151,9 @@ stylesheet = [===[
     padding: 2em;
     width: 36em;
 
+    color: #000;
     background-color: #eee;
-    border-radius: 0.5em;
-    box-shadow: 0 0.5em 1em #000;
+    border-radius: 0.2em;
 }
 
 #edit-dialog td:first-child {
@@ -208,6 +195,26 @@ stylesheet = [===[
 #edit-view {
     display: none;
 }
+
+.separator {
+    color: #ccc;
+    margin: 0 0.5em 0 0.5em;
+}
+
+#taglist {
+    display:block;
+    position: relative;
+    top:60px;
+    background:#ccc;
+    color: #000;
+    padding: 10px;
+}
+#taglist a {
+    color: blue;
+    font-size: 1.4em;
+    text-decoration: none;
+}
+
 ]===]
 
 
@@ -233,7 +240,7 @@ local html = [==[
             <input type="button" class="button" id="new-button" value="New" />
         </div>
     </header>
-
+    <div id="taglist"></div>
     <div id="results" class="content-margin"></div>
 
     <div id="edit-view" stlye="position: absolute;">
@@ -255,20 +262,12 @@ local html = [==[
         </div>
     </div>
 
+
     <div id="templates" class="hidden">
         <div id="bookmark-skelly">
             <div class="bookmark">
-                <div class="title"><a></a></div>
-                <div class="uri"></div>
+                <span class="title"><a></a><span class="separator">|</span></span><span class="uri"></span><span class="separator">|</span><span class="tags"></span><span class="separator">|</span><span class="date"></span><span class="separator">|</span><span class="controls"><a class="edit-button">edit</a><a class="delete-button">delete</a></span>
                 <div class="desc"></div>
-                <div class="bottom">
-                    <span class="date"></span>
-                    <span class="tags"></span>
-                    <span class="controls">
-                        <a class="edit-button">edit</a>
-                        <a class="delete-button">delete</a>
-                    </span>
-                </div>
             </div>
         </div>
     </div>
@@ -298,11 +297,37 @@ $(document).ready(function () { 'use strict'
         if (b.tags) {
             var $tags = $b.find(".tags"), tags = b.tags.split(" "),
                 len = tags.length, i = 0;
-            for (; i < len;)
+            for (; i < len;) {
                 $tags.append($("<a></a>").text(tags[i++]));
+            }
         }
 
+        //ADDED: list unique tags
+        $("#taglist").append("<a href='#'>" + b.tags +"</a>");
+
+        $('#taglist a').replaceWith(function() {
+            var $this = $(this);
+
+            return $.map($this.text().split(' '), function(o, i) {
+                return $('<a>', {
+                    //id: $this.prop('id') + (i + 1),
+                    href: $this.prop('href'),
+                    text: o + " "
+                }).get(0);
+            });
+        });
+
+        var seen = {};
+        $('#taglist a').each(function() {
+            var txt = $(this).text();
+            if (seen[txt])
+                $(this).remove();
+            else
+                seen[txt] = true;
+        });
+
         return $b.prop("outerHTML");
+
     }
 
     function show_edit(b) {
@@ -362,6 +387,13 @@ $(document).ready(function () { 'use strict'
 
     $results.on("click", ".bookmark .tags a", function () {
         $search.val($(this).text());
+        search();
+    });
+
+    //ADDED
+    $("#taglist a").click(function() {
+        alert("Clicked!");
+        $search.val("linux");
         search();
     });
 
@@ -444,7 +476,10 @@ $(document).ready(function () { 'use strict'
     var values = new_bookmark_values();
     if (values)
         show_edit(values);
-});
+    });
+
+
+
 ]=]
 
 local new_bookmark_values
@@ -544,6 +579,7 @@ chrome.add("bookmarks", function (view, meta)
         end)
 
         -- ADDED:
+
         view:register_function("insert_mode", function ()
             meta.w:set_mode("insert")
         end)
