@@ -66,7 +66,7 @@ bind-key , macro-prefix
 macro f edit-flags "f"
 macro F edit-flags ""
 macro u edit-flags ""
-macro m set browser "urxvtc -e mpv %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
+macro m set browser "urxvtc -e $MEDIAPLAYER %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
 macro o set browser "w3m %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
 
 # COLORS --------------------------------------------------------------------------------

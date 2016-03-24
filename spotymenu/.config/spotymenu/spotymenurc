@@ -70,7 +70,7 @@ sep_line_char="-"
 # Separator line's width = number or characters
 # depends on screen resolution and the font size
 # for reference: 170 is for 768 px wide screen and monospace-10 font
-sep_line_width=170
+sep_line_width=169
 
 # For Awesome Window Manager: switch to Spotify's tag after selecting or searching
 awm_switch="no" # yes or no/empty
