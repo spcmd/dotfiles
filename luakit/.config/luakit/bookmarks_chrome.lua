@@ -68,6 +68,7 @@ stylesheet = [===[
 
 .bookmark .uri {
     color: #ccc;
+    font-size: 1.1em;
 }
 
 .bookmark .tags a {
@@ -204,15 +205,22 @@ stylesheet = [===[
 #taglist {
     display:block;
     position: relative;
-    top:60px;
-    background:#ccc;
+    top:58px;
+    background:#333;
     color: #000;
     padding: 10px;
 }
 #taglist a {
-    color: blue;
+    display:inline-block;
+    color: #fff;
+    background: #0D497B;
     font-size: 1.4em;
     text-decoration: none;
+    padding: 4px;
+    margin: 0.1em 0 0.1em 0.3em;
+    cursor: pointer;
+}
+#results {
 }
 
 ]===]
@@ -302,29 +310,55 @@ $(document).ready(function () { 'use strict'
             }
         }
 
-        //ADDED: list unique tags
-        $("#taglist").append("<a href='#'>" + b.tags +"</a>");
+        //ADDED: --- taglist
 
-        $('#taglist a').replaceWith(function() {
+        //taglist variable
+        var $taglist = $("#taglist");
+
+        //list unique tags
+        $taglist.append("<a href='#'>" + b.tags +"</a>");
+
+        $taglist.children('a').replaceWith(function() {
             var $this = $(this);
 
             return $.map($this.text().split(' '), function(o, i) {
                 return $('<a>', {
                     //id: $this.prop('id') + (i + 1),
-                    href: $this.prop('href'),
-                    text: o + " "
+                    //href: $this.prop('href'),
+                    text: o + " ".replace(/ /g,''),  //remove whitespace
                 }).get(0);
             });
         });
 
+        //remove duplicates from the taglist
         var seen = {};
-        $('#taglist a').each(function() {
+        $taglist.children('a').each(function() {
+
             var txt = $(this).text();
-            if (seen[txt])
+
+            if (seen[txt]) {
                 $(this).remove();
-            else
+            }
+            else {
                 seen[txt] = true;
+            }
+
         });
+
+        //remove undefined from the taglist (non-tagged)
+        $taglist.children('a:contains("undefined")').remove();
+
+        //sort tablist items alphabetically
+        var tags = $taglist.children('a').get();
+        tags.sort(function(a, b) {
+           var compA = $(a).text().toUpperCase();
+           var compB = $(b).text().toUpperCase();
+           return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+        })
+        $.each(tags, function(idx, itm) { $taglist.append(itm); });
+
+        //--- end of ADDED taglist
+
 
         return $b.prop("outerHTML");
 
@@ -390,11 +424,11 @@ $(document).ready(function () { 'use strict'
         search();
     });
 
-    //ADDED
-    $("#taglist a").click(function() {
-        alert("Clicked!");
-        $search.val("linux");
-        search();
+    //ADDED: make clickable tags in the taglist
+    //Note .live() is used because .on() didn't work!
+    $("#taglist a").live("click", function(){
+         $search.val($(this).text());
+         search();
     });
 
     $results.on("click", ".bookmark .controls .edit-button", function (e) {

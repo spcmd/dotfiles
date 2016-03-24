@@ -329,7 +329,6 @@ webview.methods = {
         end
     end,
 
-
 }
 
 function webview.methods.scroll(view, w, new)

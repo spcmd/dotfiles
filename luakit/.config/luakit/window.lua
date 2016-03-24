@@ -421,8 +421,8 @@ window.methods = {
     set_prompt = function (w, text, opts)
         local prompt, ebox, opts = w.ibar.prompt, w.ibar.ebox, opts or {}
         prompt:hide()
-        -- Set theme
-        fg, bg = opts.fg or theme.ibar_fg, opts.bg or theme.ibar_bg
+        -- MODIFIED: Set theme
+        fg, bg = theme.prompt_fg or theme.ibar_fg, theme.prompt_bg or theme.ibar_bg
         if prompt.fg ~= fg then prompt.fg = fg end
         if ebox.bg ~= bg then ebox.bg = bg end
         -- Set text or remain hidden

@@ -42,6 +42,7 @@ stylesheet = [===[
         border-bottom: 2px solid #333;
         overflow: hidden;
         white-space: nowrap;
+        z-index: 999;
     }
 
     header input {

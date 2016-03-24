@@ -719,6 +719,11 @@ add_cmds({
     cmd({"noscript-remove-rules"}, "Remove noscript rules for this domain",
         function (w) w:toggle_remove() end),
 
+    cmd({"scrollbars-hide"}, "Hide scrollbars (for this tab)",
+        function (w) w.view.show_scrollbars = false end),
+
+    cmd({"scrollbars-show"}, "Show scrollbars (for this tab)",
+        function (w) w.view.show_scrollbars = true end),
 
 })
 

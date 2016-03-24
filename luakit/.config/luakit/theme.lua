@@ -1,6 +1,3 @@
---------------------------
--- Default luakit theme --
---------------------------
 
 local theme = {}
 
@@ -16,21 +13,21 @@ theme.error_fg = "#FFF"
 theme.error_bg = "#F00"
 
 -- Warning colours
-theme.warning_fg = "#F00"
-theme.warning_bg = "#FFF"
+theme.warning_fg = "#ff0"
+theme.warning_bg = "#000"
 
 -- Notification colours
-theme.notif_fg = "#444"
-theme.notif_bg = "#FFF"
+theme.notif_fg = "#fff"
+theme.notif_bg = "#222"
 
 -- Menu colours
-theme.menu_fg                   = "#000"
-theme.menu_bg                   = "#fff"
-theme.menu_selected_fg          = "#000"
-theme.menu_selected_bg          = "#FF0"
-theme.menu_title_bg             = "#fff"
-theme.menu_primary_title_fg     = "#f00"
-theme.menu_secondary_title_fg   = "#666"
+theme.menu_fg                   = "#fff"
+theme.menu_bg                   = "#222"
+theme.menu_selected_fg          = "#222"
+theme.menu_selected_bg          = "#E6BF00"
+theme.menu_title_bg             = "#666"
+theme.menu_primary_title_fg     = "#fff"
+theme.menu_secondary_title_fg   = "#fff"
 
 -- Proxy manager
 theme.proxy_active_menu_fg      = '#000'
@@ -48,8 +45,12 @@ theme.dbar_bg         = "#000"
 theme.dbar_error_fg   = "#F00"
 
 -- Input bar specific
-theme.ibar_fg           = "#000"
-theme.ibar_bg           = "#fff"
+theme.ibar_fg           = "#fff"
+theme.ibar_bg           = "#000"
+
+-- ADDED: Prompt (INSERT, PASS THROUGH, Follow)
+theme.prompt_fg         = "#33AADD"
+theme.prompt_bg         = "#000"
 
 -- Tab label
 theme.tab_fg            = "#888"

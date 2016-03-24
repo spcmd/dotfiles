@@ -4,7 +4,7 @@ globals = {
     max_cmd_history     = 100,
     max_srch_history    = 100,
     default_window_size = "800x600",
-    show_scrollbar      = true,  -- defined in rc.lua
+    show_scrollbars     = true,  -- defined in rc.lua
     show_tablist        = true,  -- defined in window.lua
 
  -- http_proxy          = "http://example.com:3128",
@@ -69,16 +69,9 @@ domain_props = {
 
     ["all"] = {
         --enable_scripts = false,
+        --enable_private_browsing = true,
         enable_spell_checking   = true,
         spell_checking_languages = "hu_HU",
-    },
-
-    ["duckduckgo.com"] = {
-        --enable_scripts = true,
-    },
-
-    ["github.com"] = {
-        --enable_scripts = true,
     },
 
     ["imdb.com"] = {
@@ -90,8 +83,6 @@ domain_props = {
     },
 
     ["youtube.com"] = {
-        --enable_scripts = true,
-        enable_private_browsing = true,
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/youtube.css",
     },
 

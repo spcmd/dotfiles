@@ -113,9 +113,9 @@ downloads.default_dir = os.getenv("HOME") .. "/Downloads"
 downloads.add_signal("download-location", function (uri, file)
     if not file or file == "" then
         file = (string.match(uri, "/([^/]+)$")
-            or string.match(uri, "^%w+://(.+)")
-            or string.gsub(uri, "/", "_")
-            or "untitled")
+        or string.match(uri, "^%w+://(.+)")
+        or string.gsub(uri, "/", "_")
+        or "untitled")
     end
     return downloads.default_dir .. "/" .. file
 end)
@@ -199,7 +199,7 @@ require "go_up"
 -----------------------------
 
 -- Scrollbar
-if globals.show_scrollbar == true then
+if globals.show_scrollbars == true then
     webview.init_funcs.show_scrollbars = function(view)
         view.show_scrollbars = true
     end
