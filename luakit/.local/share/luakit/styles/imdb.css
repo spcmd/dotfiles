@@ -1,0 +1,87 @@
+body {background:#151515!important;}  
+
+/* header */
+#navbar {
+  margin: 0!important;
+  background:#151515!important;
+}
+.social.js_nav_item {display:none!important;}
+  
+/* share link */
+.launch-share-popover {display:none!important;}
+
+  
+/* 2016 design: info box */
+.vital {background:#f7f7f7!important;color:#000!important;}
+
+#quicklinksBar .quicklink,
+.title_bar_wrapper a,
+.title_wrapper .subtext,
+.star-rating-button button,
+.star-rating-subtext {color:#000!important;}
+
+.quicklinkSection {background:#f7f7f7!important;color:#000!important;}
+  
+/* 2016 design: title */
+.title_wrapper h1,
+.heroic-overview #titleYear {font-size: 24px!important;font-weight:bold!important;color:#000!important;}
+
+/* 2016 design: rating */
+.star-rating-star {
+  background: transparent url("http://ia.media-imdb.com/images/G/01/imdb/images/title/title_overview_sprite-2406345693._V_.png") no-repeat scroll -8px -156px!important;
+}
+span[itemprop="ratingValue"] {font-size:22px!important;}
+  
+/* 2016 design: watchlist dropdown */
+.wlb_message {
+  background:#eee!important;
+  color:#000!important;
+}
+.wlb_message:hover {
+  background:#136CB2!important;
+}
+
+/* 2016 design: poster */
+.poster {margin-left:5px!important;}
+  
+/* 2016 design: summary */
+.plot_summary_wrapper {
+    width:480px!important;
+    position:absolute!important;
+    margin-top:-280px!important;
+    margin-left:180px!important;
+    border-top:none!important;
+}  
+  
+/* 2016 design: video */
+.slate {display:none!important;}
+  
+/* videos */
+#combined-videos {display:none!important;}
+  
+/* people also liked... */
+#titleRecs {display:none!important;}
+  
+/* sidebar crap */
+#top_rhs,
+.ab_widget,
+#facebookWrapper,
+.poll-widget-rhs,
+.news_item,
+.see-more,
+#btf_rhs2_wrapper,
+.list-preview,
+#relatedListsWidget,
+div.mini-article h3,
+#ratingWidget,
+.aux-content-widget-2{display:none!important;}
+.mini-article {border-bottom:none!important;}
+  
+/* recently viewed -- Privacy */
+.recently-viewed {display:none!important;}
+  
+/* footer crap */
+#bottom_ad_wrapper,
+.footer-grid-wrapper,
+#amazon-affiliates,
+div.container:nth-child(6) {display:none!important;}
