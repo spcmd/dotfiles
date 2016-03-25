@@ -50,10 +50,16 @@ soup.accept_policy = cookie_policy.always
 -- it to avoid collisions with lua's string.format characters.
 -- See: http://www.lua.org/manual/5.1/manual.html#pdf-string.format
 search_engines = {
+    apkg    = "https://www.archlinux.org/packages/?q=%s",
+    aur     = "https://aur.archlinux.org/packages/?O=0&K=%s",
+    aw      = "https://wiki.archlinux.org/index.php?search=%s&go=Go",
     ddg     = "https://duckduckgo.com/?q=%s",
-    github  = "https://github.com/search?q=%s",
     g       = "https://google.com/search?q=%s",
+    gh      = "https://github.com/search?q=%s",
+    yt      = "https://www.youtube.com/results?search_query=%s",
     imdb    = "http://www.imdb.com/find?s=all&q=%s",
+    kat     = "https://kat.cr/usearch/?q=%s",
+    rarbg   = "https://rarbg.to/torrents.php?search=%s",
     wiki    = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
 }
 
@@ -68,22 +74,45 @@ search_engines.default = search_engines.ddg
 domain_props = {
 
     ["all"] = {
-        --enable_scripts = false,
-        --enable_private_browsing = true,
         enable_spell_checking   = true,
         spell_checking_languages = "hu_HU",
+        enable_html5_database = false,
+        enable_html5_local_storage = false,
+        enable_hyperlink_auditing = false,
+        enable_java_applet = false,
+        enable_media_stream = false,
+        enable_mediasource = false,
+        enable_offline_web_application_cache = false,
+        javascript_can_access_clipboard = false,
+        javascript_can_open_windows_automatically = false,
+    },
+
+    ["body.builder.hu"] = {
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/body_builder_hu.css",
     },
 
     ["imdb.com"] = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/imdb.css",
     },
 
+    ["imgur.com"] = {
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/imgur.css",
+    },
+
     ["logout.hu"] = {
-        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/logout.css",
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/logout_hu.css",
+    },
+
+    ["port.hu"] = {
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/port_hu.css",
     },
 
     ["youtube.com"] = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/youtube.css",
+    },
+
+    ["m.youtube.com"] = {
+        user_agent = "Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3",
     },
 
 

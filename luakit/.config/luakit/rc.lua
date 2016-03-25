@@ -205,24 +205,21 @@ if globals.show_scrollbars == true then
     end
 end
 
---Progress Indicator
---https://github.com/mason-larobina/luakit/wiki/Progress-indicator
+-- Redirect youtube.com to m.youtube.com
 --[[
-window.methods.update_progress = function (w)
-    local p = w.view.progress
-    if not p then p = w.view:get_prop("progress") end
-    local loaded = w.sbar.l.loaded
-    if not w.view:loading() or p == 1 then
-        loaded:hide()
-    else
-        loaded:show()
-        local pbar = {"-","-","-","-","-","-","-","-","-","-"}
-        for i=1,math.floor((p*10)) do pbar[i] ="█" end
-        local text = string.format("(%d%% %s)", p * 100, table.concat(pbar,""))
-        if loaded.text ~= text then loaded.text = text end
-    end
+webview.init_funcs.youtube_redirect = function (view, w)
+    view:add_signal("navigation-request", function (v, uri)
+        if string.match(uri, "^https://www%.youtube%.com/-$") then
+            v.uri = "https://m.youtube.com/?app=m"
+            return false
+        end
+        if string.match(uri, "www%.youtube%.com/watch%?v=") then
+            v.uri = uri:gsub("www","m"):gsub("&app=desktop","&app=m")
+            return false
+        end
+    end)
 end
-]]
+--]]
 
 -----------------------------
 -- End user script loading --

@@ -456,14 +456,31 @@ function add_binds(mode, binds, before)
         "Enter `passthrough` mode, ignores all luakit keybindings.",
         function (w) w:set_mode("passthrough") end),
 
-------- Custom key bindings --------
+    ------- ADDED key bindings --------
 
     buf("^D$",  "Show Downloads page",
         function (w) w:new_tab("luakit://downloads") end),
 
-
     buf("^B$",  "Show bookmarks page",
         function (w) w:new_tab("luakit://bookmarks") end),
+
+    buf("^gl$", "Go to logout.hu forum.",
+        function (w) w:navigate("http://logout.hu/forum/index.html") end),
+
+    buf("^gL$", "Go to logout.hu forum in a new tab.",
+        function (w) w:new_tab("http://logout.hu/forum/index.html") end),
+
+    buf("^gd$", "Go to my dotfiles repo",
+        function (w) w:navigate("https://github.com/spcmd/dotfiles") end),
+
+    buf("^gD$", "Go to my dotfiles repo in a new tab.",
+        function (w) w:new_tab("https://github.com/spcmd/dotfiles") end),
+
+    buf("^gs$", "Go to my Scripts repo",
+        function (w) w:navigate("https://github.com/spcmd/Scripts") end),
+
+    buf("^gS$", "Go to my Scripts repo in a new tab.",
+        function (w) w:new_tab("https://github.com/spcmd/Scripts") end),
 
 
 })
@@ -700,13 +717,13 @@ add_cmds({
 
     cmd({"cookie-clean"}, "Clean up the cookie database (keep only from keepcookies.list)",
         function (w)
-            luakit.spawn("luakitwrapper -c")  -- uses my luakitwrapper script
-            w:notify("luakitwrapper: cookies have been cleaned")
+            luakit.spawn("luakitwrapper -cc")  -- uses my luakitwrapper script
+            w:notify("Cookies have been cleaned")
         end),
 
     cmd({"noscript-list"}, "List domain from the noscript database",
         function (w)
-            local _, list = luakit.spawn_sync("luakitwrapper -n") -- uses my luakitwrapper script
+            local _, list = luakit.spawn_sync("luakitwrapper -ln") -- uses my luakitwrapper script
             w:notify(list)
         end),
 
@@ -724,6 +741,17 @@ add_cmds({
 
     cmd({"scrollbars-show"}, "Show scrollbars (for this tab)",
         function (w) w.view.show_scrollbars = true end),
+
+    cmd({"history-clear"}, "Clear History entries older than x days",
+        function (w, days)
+            if days then
+                local _, ch = luakit.spawn_sync("luakitwrapper -ch "..days) -- uses my luakitwrapper script
+                w:notify(ch)
+            else
+                local _, ch = luakit.spawn_sync("luakitwrapper -ch") -- uses my luakitwrapper script
+                w:notify(ch)
+            end
+        end),
 
 })
 
