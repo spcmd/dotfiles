@@ -218,33 +218,6 @@ function add_binds(mode, binds, before)
                 if not m.count then w:scroll{ y = 0 } else return false end
             end),
 
-            key({"Control"}, "e", "Scroll document down.",
-            function (w) w:scroll{ yrel =  scroll_step } end),
-
-            key({"Control"}, "y", "Scroll document up.",
-            function (w) w:scroll{ yrel = -scroll_step } end),
-
-            key({"Control"}, "d", "Scroll half page down.",
-            function (w) w:scroll{ ypagerel =  0.5 } end),
-
-            key({"Control"}, "u", "Scroll half page up.",
-            function (w) w:scroll{ ypagerel = -0.5 } end),
-
-            key({"Control"}, "f", "Scroll page down.",
-            function (w) w:scroll{ ypagerel =  1.0 } end),
-
-            key({"Control"}, "b", "Scroll page up.",
-            function (w) w:scroll{ ypagerel = -1.0 } end),
-
-            key({}, "space", "Scroll page down.",
-            function (w) w:scroll{ ypagerel =  1.0 } end),
-
-            key({"Shift"}, "space", "Scroll page up.",
-            function (w) w:scroll{ ypagerel = -1.0 } end),
-
-            key({}, "BackSpace", "Scroll page up.",
-            function (w) w:scroll{ ypagerel = -1.0 } end),
-
             key({}, "Page_Down", "Scroll page down.",
             function (w) w:scroll{ ypagerel =  1.0 } end),
 
@@ -357,6 +330,9 @@ function add_binds(mode, binds, before)
     key({}, "H", "Go back in the browser history `[count=1]` items.",
         function (w, m) w:back(m.count) end),
 
+    key({}, "BackSpace", "Go back in the browser history `[count=1]` items.",
+        function (w, m) w:back(m.count) end),
+
     key({}, "L", "Go forward in the browser history `[count=1]` times.",
         function (w, m) w:forward(m.count) end),
 
@@ -364,12 +340,6 @@ function add_binds(mode, binds, before)
         function (w, m) w:back(m.count) end),
 
     key({}, "XF86Forward", "Go forward in the browser history.",
-        function (w, m) w:forward(m.count) end),
-
-    key({"Control"}, "o", "Go back in the browser history.",
-        function (w, m) w:back(m.count) end),
-
-    key({"Control"}, "i", "Go forward in the browser history.",
         function (w, m) w:forward(m.count) end),
 
     -- Tab

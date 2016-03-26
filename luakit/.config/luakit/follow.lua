@@ -992,4 +992,21 @@ add_binds("ex-follow", {
             })
         end),
 
+    -- ADDED
+    -- Set command `:download <uri>`
+    key({}, "d", [[Hint all links (as defined by the `follow.selectors.uri`
+        selector) and generate a `:download` command with the elements URI.]],
+        function (w)
+            w:set_mode("follow", {
+                prompt = "download", selector = "uri", evaluator = "uri",
+                func = function (uri)
+                    assert(type(uri) == "string")
+                    w:enter_cmd(":download " .. uri)
+                    w:activate() -- don't wait for 'Enter'
+                    w:notify("Downloading: " .. uri)
+                end
+            })
+        end),
+
+
 })

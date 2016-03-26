@@ -120,6 +120,8 @@ downloads.add_signal("download-location", function (uri, file)
     return downloads.default_dir .. "/" .. file
 end)
 
+
+
 -- Add ablock support
 require "adblock"
 require "adblock_chrome"
@@ -176,6 +178,7 @@ require "taborder"
 require "history"
 require "history_chrome"
 
+-- Help page
 require "introspector"
 
 -- Add command completion
@@ -189,10 +192,17 @@ require "noscript"
 noscript.enable_scripts = false
 noscript.enable_plugins = false
 
+-- Follow selected text
 require "follow_selected"
+
+-- Go to the first input field (with 'gi' by default)
 require "go_input"
+
+-- Find prev/next links in pages and click them (quick navigation)
 require "go_next_prev"
-require "go_up"
+
+-- Go up in domain levels (quick navigation)
+--require "go_up"
 
 -----------------------------
 -- Customizations --
@@ -220,6 +230,19 @@ webview.init_funcs.youtube_redirect = function (view, w)
     end)
 end
 --]]
+
+-- Download mp3 rather than playing with the internal (embedded) player
+webview.init_funcs.download_mp3 = function (view, w)
+    view:add_signal("navigation-request", function (v, uri)
+        if string.match(uri, "^.*%.mp3$") then
+            w:enter_cmd(":download " .. uri) -- enter the download command
+            w:activate() -- hit 'Enter' on the command
+            w:close_tab() -- prevent playing with the internal player
+            return false
+        end
+    end)
+end
+
 
 -----------------------------
 -- End user script loading --
