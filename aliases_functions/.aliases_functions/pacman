@@ -156,14 +156,14 @@ paclastupg() { awk '/upgraded/ {line=$0;} END { $0=line; gsub(/[\[\]]/,"",$0); p
 paccheck() {
     ignorelist=$(awk '/IgnorePkg.+=/{for(i=1;i<3;i++) $i="";gsub(/^[ \t]+|[ \t]+$/,"");gsub(" ","|");print}' /etc/pacman.conf)
     packages=$(checkupdates | sed -r "/($ignorelist)/d")
-    count=$(echo "$packages" | wc -l)
+    count=$(echo -n "$packages" | wc -l)
     if [[ $count -gt 0 ]]; then
         echo -e "------------\033[1;33mC\033[0m o o o o o o o o"
-        echo -e "\033[1;33m$count\033[0m package update(s) availabe"
+        echo -e "\033[1;33m$count\033[0m package update(s) available"
         echo -e "------------------------------"
         echo "$packages"
     else
-        echo "No package updates availabe."
+        echo "No package updates available."
     fi
 }
 
