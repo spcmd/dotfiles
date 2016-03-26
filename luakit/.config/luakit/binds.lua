@@ -723,6 +723,14 @@ add_cmds({
             end
         end),
 
+    cmd({"userstyle-off"}, "Switch OFF userstyle (temporary for the current page)", -- works until page reload
+        function (w)
+            if w.view.user_stylesheet_uri ~= "" then
+                w.view.user_stylesheet_uri = ""
+            end
+        end),
+
+
 })
 
 -- vim: et:sw=4:ts=8:sts=4:tw=80
