@@ -52,7 +52,6 @@ set ttimeoutlen=10                                  "reduce timeout after <Esc>
 set splitbelow                                      "horizontal split: open below
 set splitright                                      "vertical split: open to the right
 set t_Co=256                                        "set terminal to 256 color
-"set lines=35 columns=120                            "set in ~/.gvimrc for GVim
 set rnu                                             "relative line numbering
 "set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline
@@ -71,10 +70,16 @@ set foldmethod=marker                               "folding with markers
 set foldenable                                      "auto fold
 let mapleader = "-"                                 "remap leader key, instead of using \
 
-"clear statusline (needed when reloading .vimrc)
-set statusline=
-"set custom statusline format
-set statusline+=%f%m%=%y\ [%{strlen(&fenc)?&fenc:'none'}]\ L:%l/%L\ C:%c\ (%P)
+set statusline=                                     "clear statusline (needed when reloading .vimrc)
+set statusline+=[buf:%n/%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]\   "buffers current/total
+set statusline+=%f                                  "file name
+set statusline+=%m                                  "modified flag
+set statusline+=%=                                  "left-right separator
+set statusline+=%y                                  "filetype
+set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}]   "file encoding
+set statusline+=\ L:%l/%L                           "cursor line / total lines
+set statusline+=\ C:%c                              "cursor column
+set statusline+=\ (%P)                              "percent through file
 
 " }}}
 " {{{   Plugin/Bundle specific settings
@@ -130,7 +135,7 @@ silent !echo -ne "\033]12;yellow\007"
 "Toggle Relative Line Numbering
 command! RL set rnu!
 
-"Remove Trailing White Space
+"Remove Trailing Whitespace
 command! RWS %s/\s\+$//|echo "Removing trailing white spaces"
 
 "Quick delete/close buffer
@@ -202,11 +207,8 @@ command! CfgZshrc :e ~/.zshrc
 " {{{   Autocommands
 "--------------------------------------------
 
-"Save all when Vim window lost focus
-autocmd FocusLost * silent! wa
-
-"Resize (terminal) window on quit
-"autocmd VimLeavePre * silent set lines=25 columns=90
+"Remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
 
 "Syntax highlight
 autocmd BufRead .rtorrent.rc set filetype=sh
