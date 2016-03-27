@@ -23,3 +23,6 @@ sudo cp ~/dotfiles/system_files/99-udisks2.rules /etc/udev/rules.d
 
 # Setup /etc/issue
 sudo cp issue /etc
+
+# Set swapiness
+sudo cp 99-sysctl.conf /etc/sysctl.d
