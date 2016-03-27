@@ -1,15 +1,12 @@
---                                      _
---         ___ _ __   ___ _ __ ___   __| |
---        / __| '_ \ / __| '_ ` _ \ / _` |
---        \__ | |_) | (__| | | | | | (_| |
---        |___| .__/ \___|_| |_| |_|\__,_|
---             |_|
---
---                    rc.lua
---               Created by: spcmd
---           http://spcmd.github.io
---           https://github.com/spcmd
---           https://gist.github.com/spcmd
+--                               _
+--  ___ _ __   ___ _ __ ___   __| |
+-- / __| '_ \ / __| '_ ` _ \ / _` |
+-- \__ | |_) | (__| | | | | | (_| |
+-- |___| .__/ \___|_| |_| |_|\__,_|
+--     |_|
+-- Created by: spcmd
+-- http://spcmd.github.io
+-- https://github.com/spcmd
 
 
 -- {{{  Load libraries
@@ -36,20 +33,25 @@ blingbling = require("blingbling")
 -- {{{  Applications & Variables
 -------------------------------------
 
+-- Default modkey.
+modkey = "Mod4"
+
+-- Directories
+HOME = os.getenv("HOME")
+
 -- Applications
 terminal = "urxvtc"
 editor = os.getenv("EDITOR") or "nano"
-compton = "compton -b --config /home/spcmd/.config/compton/compton.conf"
+
+compton = "compton -b --config "..HOME.."/.config/compton/compton.conf"
 ranger = terminal .. " -name ranger -e ranger"
 newsbeuter = terminal .. " -name newsbeuter -e newsbeuter"
 rtorrent = terminal .. " -name rTorrent -e rtorrent"
 mutt = terminal .. " -name mutt -e mutt -F ~/.mutt/account.1.muttrc"
 moc = terminal .. " -name moc -e mocp"
-firefox = "/home/spcmd/bin/firefox-esr/firefox"
-dmenu = "/home/spcmd/Scripts/dmenu_run -i -l 10 -fn 'terminus' -sb '#0D497B' -nb '#121212'"
+firefox = HOME.."/bin/firefox-esr/firefox"
+dmenu = HOME.."/Scripts/dmenu_run -i -l 10 -fn 'terminus' -sb '#0D497B' -nb '#121212'"
 
--- Default modkey.
-modkey = "Mod4"
 
 -- }}}
 -- {{{  Autostart
@@ -177,7 +179,7 @@ myawesomemenu = {
 mymainmenu = awful.menu({ items = {
                                     { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "terminal", terminal },
-                                    { "clear admin", "/home/spcmd/.local/share/applications/ClearAdmin.desktop" },
+                                    { "clear admin", HOME.."/.local/share/applications/ClearAdmin.desktop" },
                                     { "----------", "" },
                                     { "shutdown", "systemctl poweroff" }
                                   }
@@ -199,7 +201,7 @@ menubar.geometry = { height=25 }
 menubar.menu_gen.all_menu_dirs = {
   "/usr/share/applications",
   "/usr/local/share/applications",
-  "/home/spcmd/Games"
+  HOME.."/Games"
 }
 
 -- }}}
@@ -677,9 +679,9 @@ globalkeys = awful.util.table.join(
                   end),
 
     -- Backlight
-    awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --down") end),
-    awful.key({ modkey, "Control" }, "Right", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --up") end),
-    awful.key({ modkey, "Control" }, "#90", function () awful.util.spawn("/home/spcmd/Scripts/qxbacklight --default") end),
+    awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn(HOME.."/Scripts/qxbacklight --down") end),
+    awful.key({ modkey, "Control" }, "Right", function () awful.util.spawn(HOME.."/Scripts/qxbacklight --up") end),
+    awful.key({ modkey, "Control" }, "#90", function () awful.util.spawn(HOME.."/Scripts/qxbacklight --default") end),
 
     -- Set wallpaper with feh (useful when errors happen and Awesome falls back to the default wallpaper)
     awful.key({ modkey, "Mod1"    }, "w", function () awful.util.spawn_with_shell("sh ~/.fehbg") end),
