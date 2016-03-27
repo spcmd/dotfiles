@@ -32,425 +32,420 @@ function add_binds(mode, binds, before)
                 new_mode(m, { binds = binds })
             end
         end
-    end
+end
 
-    -- Add commands to command mode
-    function add_cmds(cmds, before)
-        add_binds("command", cmds, before)
-    end
+-- Add commands to command mode
+function add_cmds(cmds, before)
+    add_binds("command", cmds, before)
+end
 
-    -- Adds the default menu widget bindings to a mode
-    menu_binds = {
-        -- Navigate items
-        key({},          "j",       function (w) w.menu:move_down() end),
-        key({},          "k",       function (w) w.menu:move_up()   end),
-        key({},          "Down",    function (w) w.menu:move_down() end),
-        key({},          "Up",      function (w) w.menu:move_up()   end),
-        key({},          "Tab",     function (w) w.menu:move_down() end),
-        key({"Shift"},   "Tab",     function (w) w.menu:move_up()   end),
-    }
+-- Adds the default menu widget bindings to a mode
+menu_binds = {
+    -- Navigate items
+    key({},          "j",       function (w) w.menu:move_down() end),
+    key({},          "k",       function (w) w.menu:move_up()   end),
+    key({},          "Down",    function (w) w.menu:move_down() end),
+    key({},          "Up",      function (w) w.menu:move_up()   end),
+    key({},          "Tab",     function (w) w.menu:move_down() end),
+    key({"Shift"},   "Tab",     function (w) w.menu:move_up()   end),
+}
 
-    -- Add binds to special mode "all" which adds its binds to all modes.
-    add_binds("all", {
-        key({}, "Escape", "Return to `normal` mode.",
-        function (w) w:set_mode() end),
+-------------------------------
+--- All modes Keybindings ---
+-------------------------------
+add_binds("all", {
+    key({}, "Escape", "Return to `normal` mode.",
+    function (w) w:set_mode() end),
 
-        key({"Control"}, "[", "Return to `normal` mode.",
-        function (w) w:set_mode() end),
+    -- Mouse bindings
+    but({}, 8, "Go back.",
+    function (w) w:back() end),
 
-        -- Mouse bindings
-        but({}, 8, "Go back.",
-        function (w) w:back() end),
+    but({}, 9, "Go forward.",
+    function (w) w:forward() end),
 
-        but({}, 9, "Go forward.",
-        function (w) w:forward() end),
-
-        -- Open link in new tab or navigate to selection
-        but({}, 2, [[Open link under mouse cursor in new tab or navigate to the
-        contents of `luakit.selection.primary`.]],
-        function (w, m)
-            -- Ignore button 2 clicks in form fields
-            if not m.context.editable then
-                -- Open hovered uri in new tab
-                local uri = w.view.hovered_uri
-                if uri then
-                    w:new_tab(uri, false)
-                    --else -- Open selection in current tab
-                    --uri = luakit.selection.primary
-                    --if uri then w:navigate(w:search_open(uri)) end
-                end
-            end
-        end),
-
-        -- Open link in new tab when Ctrl-clicked.
-        but({"Control"}, 1, "Open link under mouse cursor in new tab.",
-        function (w, m)
+    -- Open link in new tab or navigate to selection
+    but({}, 2, [[Open link under mouse cursor in new tab or navigate to the
+    contents of `luakit.selection.primary`.]],
+    function (w, m)
+        -- Ignore button 2 clicks in form fields
+        if not m.context.editable then
+            -- Open hovered uri in new tab
             local uri = w.view.hovered_uri
             if uri then
                 w:new_tab(uri, false)
+                --else -- Open selection in current tab
+                --uri = luakit.selection.primary
+                --if uri then w:navigate(w:search_open(uri)) end
             end
+        end
+    end),
+
+    -- Open link in new tab when Ctrl-clicked.
+    but({"Control"}, 1, "Open link under mouse cursor in new tab.",
+    function (w, m)
+        local uri = w.view.hovered_uri
+        if uri then
+            w:new_tab(uri, false)
+        end
+    end),
+
+    -- Zoom binds
+    but({"Control"}, 4, "Increase text zoom level.",
+    function (w, m) w:zoom_in() end),
+
+    but({"Control"}, 5, "Reduce text zoom level.",
+    function (w, m) w:zoom_out() end),
+
+    -- Mouse Scroll
+    but({}, 4, "Scroll up.",
+    function (w) w:scroll{ yrel = -mouse_scroll_step } end),
+
+    but({}, 5, "scroll down.",
+    function (w) w:scroll{ yrel = mouse_scroll_step } end),
+
+    -- Mouse Quick Scroll
+    but({"Shift"}, 4, "Quick Scroll up.",
+    function (w) w:scroll{ yrel = -quick_scroll_step } end),
+
+    but({"Shift"}, 5, "Quick scroll down.",
+    function (w) w:scroll{ yrel = quick_scroll_step } end),
+
+    -- Mouse Quick Scroll
+    but({"Control", "Shift"}, 4, "Huge Scroll up.",
+    function (w) w:scroll{ yrel = -huge_scroll_step } end),
+
+    but({"Control", "Shift"}, 5, "Huge scroll down.",
+    function (w) w:scroll{ yrel = huge_scroll_step } end),
+
+
+})
+
+-------------------------------
+--- Normal mode Keybindings ---
+-------------------------------
+
+add_binds("normal", {
+    -- Autoparse the `[count]` before a binding and re-call the hit function
+    -- with the count removed and added to the opts table.
+    any([[Meta-binding to detect the `^[count]` syntax. The `[count]` is parsed
+    and stripped from the internal buffer string and the value assigned to
+    `state.count`. Then `lousy.bind.hit()` is re-called with the modified
+    buffer string & original modifier state.
+
+    #### Example binding
+
+    lousy.bind.key({}, "%", function (w, state)
+        w:scroll{ ypct = state.count }
+    end, { count = 0 })
+
+    This binding demonstrates several concepts. Firstly that you are able to
+    specify per-binding default values of `count`. In this case if the user
+    types `"%"` the document will be scrolled vertically to `0%` (the top).
+
+    If the user types `"100%"` then the document will be scrolled to `100%`
+        (the bottom). All without the need to use `lousy.bind.buf` bindings
+        everywhere and or using a `^(%d*)` pattern prefix on every binding which
+        would like to make use of the `[count]` syntax.]],
+        function (w, m)
+            local count, buf
+            if m.buffer then
+                count = string.match(m.buffer, "^(%d+)")
+            end
+            if count then
+                buf = string.sub(m.buffer, #count + 1, (m.updated_buf and -2) or -1)
+                local opts = join(m, {count = tonumber(count)})
+                opts.buffer = (#buf > 0 and buf) or nil
+                if lousy.bind.hit(w, m.binds, m.mods, m.key, opts) then
+                    return true
+                end
+            end
+            return false
         end),
 
-        -- Zoom binds
-        but({"Control"}, 4, "Increase text zoom level.",
-        function (w, m) w:zoom_in() end),
+        key({}, "i", "Enter `insert` mode.",
+        function (w) w:set_mode("insert")  end),
 
-        but({"Control"}, 5, "Reduce text zoom level.",
-        function (w, m) w:zoom_out() end),
+        key({}, ":", "Enter `command` mode.",
+        function (w) w:set_mode("command") end),
 
-        -- Mouse Scroll
-        but({}, 4, "Scroll up.",
-        function (w) w:scroll{ yrel = -mouse_scroll_step } end),
+        -- Scrolling
+        key({}, "j", "Scroll document down.",
+        function (w) w:scroll{ yrel =  scroll_step } end),
 
-        but({}, 5, "scroll down.",
-        function (w) w:scroll{ yrel = mouse_scroll_step } end),
+        key({}, "k", "Scroll document up.",
+        function (w) w:scroll{ yrel = -scroll_step } end),
 
-        -- Mouse Quick Scroll
-        but({"Shift"}, 4, "Quick Scroll up.",
-        function (w) w:scroll{ yrel = -quick_scroll_step } end),
-
-        but({"Shift"}, 5, "Quick scroll down.",
+        key({}, "J", "Quick-Scroll document down.",
         function (w) w:scroll{ yrel = quick_scroll_step } end),
 
-        -- Mouse Quick Scroll
-        but({"Control", "Shift"}, 4, "Huge Scroll up.",
-        function (w) w:scroll{ yrel = -huge_scroll_step } end),
+        key({}, "K", "Quick-Scroll document up.",
+        function (w) w:scroll{ yrel = -quick_scroll_step } end),
 
-        but({"Control", "Shift"}, 5, "Huge scroll down.",
+        key({"Control", "Shift"}, "J", "Huge-Scroll document down.",
         function (w) w:scroll{ yrel = huge_scroll_step } end),
 
+        key({"Control", "Shift"}, "K", "Huge-Scroll document up.",
+        function (w) w:scroll{ yrel = -huge_scroll_step } end),
 
-    })
+        key({}, "h", "Scroll document left.",
+        function (w) w:scroll{ xrel = -scroll_step } end),
 
-    -------------------------------
-    --- Normal mode Keybindings ---
-    -------------------------------
+        key({}, "l", "Scroll document right.",
+        function (w) w:scroll{ xrel =  scroll_step } end),
 
-    add_binds("normal", {
-        -- Autoparse the `[count]` before a binding and re-call the hit function
-        -- with the count removed and added to the opts table.
-        any([[Meta-binding to detect the `^[count]` syntax. The `[count]` is parsed
-        and stripped from the internal buffer string and the value assigned to
-        `state.count`. Then `lousy.bind.hit()` is re-called with the modified
-        buffer string & original modifier state.
+        key({}, "Down", "Scroll document down.",
+        function (w) w:scroll{ yrel =  scroll_step } end),
 
-        #### Example binding
+        key({}, "Up",   "Scroll document up.",
+        function (w) w:scroll{ yrel = -scroll_step } end),
 
-        lousy.bind.key({}, "%", function (w, state)
-            w:scroll{ ypct = state.count }
-        end, { count = 0 })
+        key({}, "Left", "Scroll document left.",
+        function (w) w:scroll{ xrel = -scroll_step } end),
 
-        This binding demonstrates several concepts. Firstly that you are able to
-        specify per-binding default values of `count`. In this case if the user
-        types `"%"` the document will be scrolled vertically to `0%` (the top).
+        key({}, "Right", "Scroll document right.",
+        function (w) w:scroll{ xrel =  scroll_step } end),
 
-        If the user types `"100%"` then the document will be scrolled to `100%`
-            (the bottom). All without the need to use `lousy.bind.buf` bindings
-            everywhere and or using a `^(%d*)` pattern prefix on every binding which
-            would like to make use of the `[count]` syntax.]],
-            function (w, m)
-                local count, buf
-                if m.buffer then
-                    count = string.match(m.buffer, "^(%d+)")
-                end
-                if count then
-                    buf = string.sub(m.buffer, #count + 1, (m.updated_buf and -2) or -1)
-                    local opts = join(m, {count = tonumber(count)})
-                    opts.buffer = (#buf > 0 and buf) or nil
-                    if lousy.bind.hit(w, m.binds, m.mods, m.key, opts) then
-                        return true
-                    end
-                end
-                return false
-            end),
+        key({}, "^", "Scroll to the absolute left of the document.",
+        function (w) w:scroll{ x =  0 } end),
 
-            key({}, "i", "Enter `insert` mode.",
-            function (w) w:set_mode("insert")  end),
+        key({}, "$", "Scroll to the absolute right of the document.",
+        function (w) w:scroll{ x = -1 } end),
 
-            key({}, ":", "Enter `command` mode.",
-            function (w) w:set_mode("command") end),
-
-            -- Scrolling
-            key({}, "j", "Scroll document down.",
-            function (w) w:scroll{ yrel =  scroll_step } end),
-
-            key({}, "k", "Scroll document up.",
-            function (w) w:scroll{ yrel = -scroll_step } end),
-
-            key({}, "J", "Quick-Scroll document down.",
-            function (w) w:scroll{ yrel = quick_scroll_step } end),
-
-            key({}, "K", "Quick-Scroll document up.",
-            function (w) w:scroll{ yrel = -quick_scroll_step } end),
-
-            key({"Control", "Shift"}, "J", "Huge-Scroll document down.",
-            function (w) w:scroll{ yrel = huge_scroll_step } end),
-
-            key({"Control", "Shift"}, "K", "Huge-Scroll document up.",
-            function (w) w:scroll{ yrel = -huge_scroll_step } end),
-
-            key({}, "h", "Scroll document left.",
-            function (w) w:scroll{ xrel = -scroll_step } end),
-
-            key({}, "l", "Scroll document right.",
-            function (w) w:scroll{ xrel =  scroll_step } end),
-
-            key({}, "Down", "Scroll document down.",
-            function (w) w:scroll{ yrel =  scroll_step } end),
-
-            key({}, "Up",   "Scroll document up.",
-            function (w) w:scroll{ yrel = -scroll_step } end),
-
-            key({}, "Left", "Scroll document left.",
-            function (w) w:scroll{ xrel = -scroll_step } end),
-
-            key({}, "Right", "Scroll document right.",
-            function (w) w:scroll{ xrel =  scroll_step } end),
-
-            key({}, "^", "Scroll to the absolute left of the document.",
-            function (w) w:scroll{ x =  0 } end),
-
-            key({}, "$", "Scroll to the absolute right of the document.",
-            function (w) w:scroll{ x = -1 } end),
-
-            key({}, "0", "Scroll to the absolute left of the document.",
-            function (w, m)
-                if not m.count then w:scroll{ y = 0 } else return false end
-            end),
-
-            key({}, "Page_Down", "Scroll page down.",
-            function (w) w:scroll{ ypagerel =  1.0 } end),
-
-            key({}, "Page_Up", "Scroll page up.",
-            function (w) w:scroll{ ypagerel = -1.0 } end),
-
-            key({}, "Home", "Go to the end of the document.",
-            function (w) w:scroll{ y =  0 } end),
-
-            key({}, "End", "Go to the top of the document.",
-            function (w) w:scroll{ y = -1 } end),
-
-            -- Specific scroll
-            buf("^gg$", "Go to the top of the document.",
-            function (w, b, m) w:scroll{ ypct = m.count } end, {count=0}),
-
-            buf("^G$", "Go to the bottom of the document.",
-            function (w, b, m) w:scroll{ ypct = m.count } end, {count=100}),
-
-            buf("^%%$", "Go to `[count]` percent of the document.",
-            function (w, b, m) w:scroll{ ypct = m.count } end),
-
-            -- Zooming
-            key({}, "+", "Enlarge text zoom of the current page.",
-            function (w, m) w:zoom_in(zoom_step * m.count) end, {count=1}),
-
-            key({}, "-", "Reduce text zom of the current page.",
-            function (w, m) w:zoom_out(zoom_step * m.count) end, {count=1}),
-
-            key({}, "=", "Reset zoom level.",
-            function (w, m) w:zoom_set() end),
-
-            buf("^z[iI]$", [[Enlarge text zoom of current page with `zi` or `zI` to
-            reduce full zoom.]],
-            function (w, b, m)
-                w:zoom_in(zoom_step  * m.count, b == "zI")
-            end, {count=1}),
-
-            buf("^z[oO]$", [[Reduce text zoom of current page with `zo` or `zO` to
-            reduce full zoom.]],
-            function (w, b, m)
-                w:zoom_out(zoom_step * m.count, b == "zO")
-            end, {count=1}),
-
-            -- Zoom reset or specific zoom ([count]zZ for full content zoom)
-            buf("^z[zZ]$", [[Set current page zoom to `[count]` percent with
-            `[count]zz`, use `[count]zZ` to set full zoom percent.]],
-            function (w, b, m)
-                w:zoom_set(m.count/100, b == "zZ")
-            end, {count=100}),
-
-            -- Fullscreen
-            key({}, "F11", "Toggle fullscreen mode.",
-            function (w) w.win.fullscreen = not w.win.fullscreen end),
-
-            -- Clipboard
-            --key({}, "p", [[Open a URL based on the current primary selection contents
-            --in the current tab.]],
-            --function (w)
-            --local uri = luakit.selection.primary
-            --if not uri then w:notify("No primary selection...") return end
-            --w:navigate(w:search_open(uri))
-        --end),
-
-    --key({}, "P", [[Open a URL based on the current primary selection contents
-        --in `[count=1]` new tab(s).]],
-        --function (w, m)
-            --local uri = luakit.selection.primary
-            --if not uri then w:notify("No primary selection...") return end
-            --for i = 1, m.count do w:new_tab(w:search_open(uri)) end
-        --end, {count = 1}),
-
-    -- Yanking
-    key({}, "y", "Yank current URI to primary selection.",
-        function (w)
-            local uri = string.gsub(w.view.uri or "", " ", "%%20")
-            --luakit.selection.primary = uri
-            luakit.selection.clipboard = uri
-            w:notify("Yanked uri: " .. uri)
+        key({}, "0", "Scroll to the absolute left of the document.",
+        function (w, m)
+            if not m.count then w:scroll{ y = 0 } else return false end
         end),
 
-    -- Commands
-    key({"Control"}, "a", "Increment last number in URL.",
-        function (w) w:navigate(w:inc_uri(1)) end),
+        key({}, "Page_Down", "Scroll page down.",
+        function (w) w:scroll{ ypagerel =  1.0 } end),
 
-    key({"Control"}, "x", "Decrement last number in URL.",
-        function (w) w:navigate(w:inc_uri(-1)) end),
+        key({}, "Page_Up", "Scroll page up.",
+        function (w) w:scroll{ ypagerel = -1.0 } end),
 
-    key({}, "o", "Open one or more URLs.",
-        function (w) w:enter_cmd(":open ") end),
+        key({}, "Home", "Go to the end of the document.",
+        function (w) w:scroll{ y =  0 } end),
 
-    key({}, "t", "Open one or more URLs in a new tab.",
-        function (w) w:enter_cmd(":tabopen ") end),
+        key({}, "End", "Go to the top of the document.",
+        function (w) w:scroll{ y = -1 } end),
 
-    key({}, "w", "Open one or more URLs in a new window.",
-        function (w) w:enter_cmd(":winopen ") end),
+        -- Specific scroll
+        buf("^gg$", "Go to the top of the document.",
+        function (w, b, m) w:scroll{ ypct = m.count } end, {count=0}),
 
-    key({}, "O", "Open one or more URLs based on current location.",
-        function (w) w:enter_cmd(":open " .. (w.view.uri or "")) end),
+        buf("^G$", "Go to the bottom of the document.",
+        function (w, b, m) w:scroll{ ypct = m.count } end, {count=100}),
 
-    key({}, "T",
-        "Open one or more URLs based on current location in a new tab.",
-        function (w) w:enter_cmd(":tabopen " .. (w.view.uri or "")) end),
+        buf("^%%$", "Go to `[count]` percent of the document.",
+        function (w, b, m) w:scroll{ ypct = m.count } end),
 
-    key({}, "W",
-        "Open one or more URLs based on current locaton in a new window.",
-        function (w) w:enter_cmd(":winopen " .. (w.view.uri or "")) end),
+        -- Zooming
+        key({}, "+", "Enlarge text zoom of the current page.",
+        function (w, m) w:zoom_in(zoom_step * m.count) end, {count=1}),
 
-    -- History
-    key({}, "H", "Go back in the browser history `[count=1]` items.",
-        function (w, m) w:back(m.count) end),
+        key({}, "-", "Reduce text zom of the current page.",
+        function (w, m) w:zoom_out(zoom_step * m.count) end, {count=1}),
 
-    key({}, "BackSpace", "Go back in the browser history `[count=1]` items.",
-        function (w, m) w:back(m.count) end),
+        key({}, "=", "Reset zoom level.",
+        function (w, m) w:zoom_set() end),
 
-    key({}, "L", "Go forward in the browser history `[count=1]` times.",
-        function (w, m) w:forward(m.count) end),
-
-    key({}, "XF86Back", "Go back in the browser history.",
-        function (w, m) w:back(m.count) end),
-
-    key({}, "XF86Forward", "Go forward in the browser history.",
-        function (w, m) w:forward(m.count) end),
-
-    -- Tab
-    key({"Control"}, "Page_Up", "Go to previous tab.",
-        function (w) w:prev_tab() end),
-
-    key({"Control"}, "Page_Down", "Go to next tab.",
-        function (w) w:next_tab() end),
-
-    key({"Control"}, "Tab", "Go to next tab.",
-        function (w) w:next_tab() end),
-
-    key({"Shift","Control"}, "Tab", "Go to previous tab.",
-        function (w) w:prev_tab() end),
-
-    buf("^ő$", "Go to previous tab.",
-        function (w) w:prev_tab() end),
-
-    buf("^ú$", "Go to next tab (or `[count]` nth tab).",
+        buf("^z[iI]$", [[Enlarge text zoom of current page with `zi` or `zI` to
+        reduce full zoom.]],
         function (w, b, m)
-            if not w:goto_tab(m.count) then w:next_tab() end
-        end, {count=0}),
-
-    buf("^g0$", "Go to first tab.",
-        function (w) w:goto_tab(1) end),
-
-    buf("^g$$", "Go to last tab.",
-        function (w) w:goto_tab(-1) end),
-
-    key({"Control"}, "t", "Open a new tab.",
-        function (w) w:new_tab(globals.homepage) end),
-
-    key({"Control"}, "w", "Close current tab.",
-        function (w) w:close_tab() end),
-
-    key({}, "d", "Close current tab (or `[count]` tabs).",
-        function (w, m) for i=1,m.count do w:close_tab() end end, {count=1}),
-
-    key({}, "é", "Reorder tab left `[count=1]` positions.",
-        function (w, m)
-            w.tabs:reorder(w.view, w.tabs:current() - m.count)
+            w:zoom_in(zoom_step  * m.count, b == "zI")
         end, {count=1}),
 
-    key({}, "á", "Reorder tab right `[count=1]` positions.",
-        function (w, m)
-            w.tabs:reorder(w.view,
-                (w.tabs:current() + m.count) % w.tabs:count())
+        buf("^z[oO]$", [[Reduce text zoom of current page with `zo` or `zO` to
+        reduce full zoom.]],
+        function (w, b, m)
+            w:zoom_out(zoom_step * m.count, b == "zO")
         end, {count=1}),
 
-    buf("^gH$", "Open homepage in new tab.",
-        function (w) w:new_tab(globals.homepage) end),
+        -- Zoom reset or specific zoom ([count]zZ for full content zoom)
+        buf("^z[zZ]$", [[Set current page zoom to `[count]` percent with
+        `[count]zz`, use `[count]zZ` to set full zoom percent.]],
+        function (w, b, m)
+            w:zoom_set(m.count/100, b == "zZ")
+        end, {count=100}),
 
-    buf("^gh$", "Open homepage.",
-        function (w) w:navigate(globals.homepage) end),
+        -- Fullscreen
+        key({}, "F11", "Toggle fullscreen mode.",
+        function (w) w.win.fullscreen = not w.win.fullscreen end),
 
-    buf("^gy$", "Duplicate current tab.",
-        function (w) w:new_tab(w.view.history or "") end),
+        -- Yanking
+        key({}, "y", "Yank current URI to primary selection.",
+            function (w)
+                local uri = string.gsub(w.view.uri or "", " ", "%%20")
+                --luakit.selection.primary = uri
+                luakit.selection.clipboard = uri
+                w:notify("Yanked uri: " .. uri)
+            end),
 
-    key({}, "r", "Reload current tab.",
-        function (w) w:reload() end),
+        -- commands
+        key({}, "o", "open one or more urls.",
+            function (w) w:enter_cmd(":open ") end),
 
-    key({}, "R", "Reload current tab (skipping cache).",
-        function (w) w:reload(true) end),
+        key({}, "t", "open one or more urls in a new tab.",
+            function (w) w:enter_cmd(":tabopen ") end),
 
-    key({}, "s", "Stop loading the current tab.",
-        function (w) w.view:stop() end),
+        key({}, "w", "open one or more urls in a new window.",
+            function (w) w:enter_cmd(":winopen ") end),
 
-    key({"Control", "Shift"}, "R", "Restart luakit (reloading configs).",
-        function (w) w:restart() end),
+        key({}, "o", "open one or more urls based on current location.",
+            function (w) w:enter_cmd(":open " .. (w.view.uri or "")) end),
 
-    -- Copy (Ctrl-C)
-    key({"Control"}, "c", "Copy (as-in control-c control-v)",
-    function (w) luakit.selection.clipboard = luakit.selection.primary end),
+        key({}, "t",
+            "open one or more urls based on current location in a new tab.",
+            function (w) w:enter_cmd(":tabopen " .. (w.view.uri or "")) end),
 
-    -- Window
-    buf("^ZZ$", "Quit and save the session.",
-        function (w) w:save_session() w:close_win() end),
+        key({}, "w",
+            "open one or more urls based on current locaton in a new window.",
+            function (w) w:enter_cmd(":winopen " .. (w.view.uri or "")) end),
 
-    buf("^ZQ$", "Quit and don't save the session.",
-        function (w) w:close_win() end),
+        -- history
+        key({}, "h", "go back in the browser history `[count=1]` items.",
+            function (w, m) w:back(m.count) end),
 
-    -- Enter passthrough mode
-    key({"Control"}, "z",
-        "Enter `passthrough` mode, ignores all luakit keybindings.",
-        function (w) w:set_mode("passthrough") end),
+        key({}, "backspace", "go back in the browser history `[count=1]` items.",
+            function (w, m) w:back(m.count) end),
 
-    ------- ADDED key bindings --------
+        key({}, "l", "go forward in the browser history `[count=1]` times.",
+            function (w, m) w:forward(m.count) end),
 
-    buf("^D$",  "Show Downloads page",
-        function (w) w:new_tab("luakit://downloads") end),
+        key({}, "xf86back", "go back in the browser history.",
+            function (w, m) w:back(m.count) end),
 
-    buf("^B$",  "Show bookmarks page",
-        function (w) w:new_tab("luakit://bookmarks") end),
+        key({}, "xf86forward", "go forward in the browser history.",
+            function (w, m) w:forward(m.count) end),
 
-    buf("^gl$", "Go to logout.hu forum.",
-        function (w) w:navigate("http://logout.hu/forum/index.html") end),
+        -- tab
+        key({"control"}, "page_up", "go to previous tab.",
+            function (w) w:prev_tab() end),
 
-    buf("^gL$", "Go to logout.hu forum in a new tab.",
-        function (w) w:new_tab("http://logout.hu/forum/index.html") end),
+        key({"control"}, "page_down", "go to next tab.",
+            function (w) w:next_tab() end),
 
-    buf("^gd$", "Go to my dotfiles repo",
-        function (w) w:navigate("https://github.com/spcmd/dotfiles") end),
+        key({"control"}, "tab", "go to next tab.",
+            function (w) w:next_tab() end),
 
-    buf("^gD$", "Go to my dotfiles repo in a new tab.",
-        function (w) w:new_tab("https://github.com/spcmd/dotfiles") end),
+        key({"shift","control"}, "tab", "go to previous tab.",
+            function (w) w:prev_tab() end),
 
-    buf("^gs$", "Go to my Scripts repo",
-        function (w) w:navigate("https://github.com/spcmd/Scripts") end),
+        buf("^ő$", "go to previous tab.",
+            function (w) w:prev_tab() end),
 
-    buf("^gS$", "Go to my Scripts repo in a new tab.",
-        function (w) w:new_tab("https://github.com/spcmd/Scripts") end),
+        buf("^ú$", "go to next tab (or `[count]` nth tab).",
+            function (w, b, m)
+                if not w:goto_tab(m.count) then w:next_tab() end
+            end, {count=0}),
+
+        buf("^g0$", "go to first tab.",
+            function (w) w:goto_tab(1) end),
+
+        buf("^g$$", "go to last tab.",
+            function (w) w:goto_tab(-1) end),
+
+        key({"control"}, "t", "open a new tab.",
+            function (w) w:new_tab(globals.homepage) end),
+
+        key({"control"}, "w", "close current tab.",
+            function (w) w:close_tab() end),
+
+        key({}, "d", "close current tab (or `[count]` tabs).",
+            function (w, m) for i=1,m.count do w:close_tab() end end, {count=1}),
+
+        key({}, "é", "reorder tab left `[count=1]` positions.",
+            function (w, m)
+                w.tabs:reorder(w.view, w.tabs:current() - m.count)
+            end, {count=1}),
+
+        key({}, "á", "reorder tab right `[count=1]` positions.",
+            function (w, m)
+                w.tabs:reorder(w.view,
+                    (w.tabs:current() + m.count) % w.tabs:count())
+            end, {count=1}),
+
+        buf("^gh$", "open homepage in new tab.",
+            function (w) w:new_tab(globals.homepage) end),
+
+        buf("^gh$", "open homepage.",
+            function (w) w:navigate(globals.homepage) end),
+
+        buf("^gy$", "duplicate current tab.",
+            function (w) w:new_tab(w.view.history or "") end),
+
+        key({}, "r", "reload current tab.",
+            function (w) w:reload() end),
+
+        key({}, "r", "reload current tab (skipping cache).",
+            function (w) w:reload(true) end),
+
+        key({}, "s", "stop loading the current tab.",
+            function (w) w.view:stop() end),
+
+        key({"control", "shift"}, "r", "restart luakit (reloading configs).",
+            function (w) w:restart() end),
+
+        -- copy (ctrl-c)
+        key({"control"}, "c", "copy (as-in control-c control-v)",
+        function (w) luakit.selection.clipboard = luakit.selection.primary end),
+
+        -- window
+        buf("^zz$", "quit and save the session.",
+            function (w) w:save_session() w:close_win() end),
+
+        buf("^zq$", "quit and don't save the session.",
+            function (w) w:close_win() end),
+
+        -- enter passthrough mode
+        key({"control"}, "z",
+            "enter `passthrough` mode, ignores all luakit keybindings.",
+            function (w) w:set_mode("passthrough") end),
+
+        ------- added key bindings --------
+
+        buf("^d$",  "show downloads page",
+            function (w) w:new_tab("luakit://downloads") end),
+
+        buf("^b$",  "show bookmarks page",
+            function (w) w:new_tab("luakit://bookmarks") end),
+
+        buf("^gl$", "go to logout.hu forum.",
+            function (w) w:navigate("http://logout.hu/forum/index.html") end),
+
+        buf("^gl$", "go to logout.hu forum in a new tab.",
+            function (w) w:new_tab("http://logout.hu/forum/index.html") end),
+
+        buf("^gd$", "go to my dotfiles repo",
+            function (w) w:navigate("https://github.com/spcmd/dotfiles") end),
+
+        buf("^gd$", "go to my dotfiles repo in a new tab.",
+            function (w) w:new_tab("https://github.com/spcmd/dotfiles") end),
+
+        buf("^gs$", "go to my scripts repo",
+            function (w) w:navigate("https://github.com/spcmd/scripts") end),
+
+        buf("^gs$", "go to my scripts repo in a new tab.",
+            function (w) w:new_tab("https://github.com/spcmd/scripts") end),
+
+        buf("^,t$", "Translate selected text (quick, first result)",
+            function (w)
+                w:enter_cmd(":translate-selected-quick")
+                w:activate()
+            end),
+
+        buf("^,T$", "Translate selected text (full, all results in terminal)",
+            function (w)
+                w:enter_cmd(":translate-selected-full")
+                w:activate()
+            end),
+
+        buf("y", "ph!: copy the current url and make a forum link tag from it",
+            function (w)
+                w:enter_cmd(":phlinkformat")
+                w:activate()
+            end),
+
 
 
 })
@@ -729,6 +724,67 @@ add_cmds({
                 w.view.user_stylesheet_uri = ""
             end
         end),
+
+    -- Translate Shell (https://github.com/soimort/translate-shell)
+    cmd({"translate-selected-quick"}, "Translate selected text (quick, first result)",
+        function (w)
+                local selected = luakit.selection.primary
+                if not selected then
+                    w:notify("Error: you didn't select any text.")
+                else
+                    local _, trans = luakit.spawn_sync("trans -b :hu "..selected)
+                    w:notify(trans)
+                end
+        end),
+
+    cmd({"translate-selected-full"}, "Translate selected text (full, all results in terminal)",
+        function (w)
+                local selected = luakit.selection.primary
+                if not selected then
+                    w:notify("Error: you didn't select any text.")
+                else
+                    local _, trans = luakit.spawn("urxvtc -hold -e trans :hu "..selected)
+                end
+        end),
+
+    -- PH! Forum
+    cmd({"phusercomment"}, "PH!: search user's comment [keyword] [username]",
+        function (w, q)
+            if q then
+                query = {}
+                for querystring in q:gmatch("%w+") do table.insert(query, querystring) end
+                local keyword = query[1]
+                local username = query[2]
+                local uri = w.view.uri
+                local search_sub = "keres%.php%?type=-&stext="..keyword.."&suser="..username
+                local search_uri = uri:gsub("hsz_.*%.html", search_sub):gsub("friss%.html", search_sub)
+                w:navigate(search_uri)
+            else
+                w:notify("Error: not enough parameters. 'keyword' and 'username' are needed!")
+            end
+        end),
+
+        cmd({"phmy"}, "PH!: search in my comments",
+            function (w, q)
+             if q then
+                local uri = w.view.uri
+                local keyword = q
+                local search_sub = "keres%.php%?type=-&stext="..keyword.."&suser=spammer"
+                local search_uri = uri:gsub("hsz_.*%.html", search_sub):gsub("friss%.html", search_sub)
+                w:navigate(search_uri)
+            else
+                w:notify("Error: keyword wasn't given.")
+            end
+        end),
+
+        cmd({"phlinkformat"}, "PH!: Copy the current url and make a forum link tag from it",
+            function (w)
+                local uri = w.view.uri
+                local title = w.win.title:gsub("-.*", "") -- remove page name/uri from the title
+                local linktag = "[L:"..uri.."]"..title.."[/L]"
+                luakit.selection.clipboard = linktag
+                w:notify("PH forum link tag copied to the clipboard.")
+            end),
 
 
 })

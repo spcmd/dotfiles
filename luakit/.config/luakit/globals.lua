@@ -74,6 +74,9 @@ search_engines.default = search_engines.ddg
 domain_props = {
 
     ["all"] = {
+        monospace_font_family       = "Liberation Mono",
+        sans_serif_font_family      = "Liberation Sans",
+        serif_font_family           = "Liberation Serif",
         enable_spell_checking   = true,
         spell_checking_languages = "hu_HU",
         enable_html5_database = false,
@@ -106,6 +109,10 @@ domain_props = {
 
     ["port.hu"] = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/port_hu.css",
+    },
+
+    ["sorozatjunkie.hu"] = {
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/sorozatjunkie_hu.css",
     },
 
     ["youtube.com"] = {
