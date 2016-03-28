@@ -645,8 +645,10 @@ local key, buf = lousy.bind.key, lousy.bind.buf
 add_binds("normal", {
     key({}, "a", "Shortcut to add a bookmark to the current URL",
         function(w)
-            new_bookmark_values = { uri = w.view.uri, title = w.view.title }
-            w:new_tab(chrome_page)
+            --new_bookmark_values = { uri = w.view.uri, title = w.view.title }
+            --w:new_tab(chrome_page)
+            w:enter_cmd(":bookmark")
+            w:activate()
         end),
 
     buf("^gb$", "Open bookmarks manager in the current tab.",
@@ -671,7 +673,7 @@ add_cmds({
         function (w, a)
             if not a then
                 new_bookmark_values = {
-                    uri = w.view.uri, title = w.view.title
+                    uri = w.view.uri, title = w.view.title, tags = "0tag" -- use a dummy tag by default (prevents empty tags)
                 }
             else
                 a = lousy.util.string.split(a)

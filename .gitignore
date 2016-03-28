@@ -1,6 +1,8 @@
 zsh/.zsh/plugins/zsh-syntax-highlighting
 mpv/.config/mpv/watch_later
 thunar/.config/Thunar/accels.scm
+luakit/.local/share/luakit/cookies.*
+luakit/.local/share/luakit/history.*
 *.swp
 *.swo
 __pycache__

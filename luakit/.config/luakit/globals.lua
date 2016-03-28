@@ -19,6 +19,7 @@ local _, arch = luakit.spawn_sync("uname -sm")
 -- Only use the luakit version if in date format (reduces identifiability)
 local lkv = string.match(luakit.version, "^(%d+.%d+.%d+)")
 globals.useragent = string.format("Mozilla/5.0 (%s) AppleWebKit/%s+ (KHTML, like Gecko) WebKitGTK+/%s luakit%s",
+--globals.useragent = string.format(" Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0",
     string.sub(arch, 1, -2), luakit.webkit_user_agent_version,
     luakit.webkit_version, (lkv and ("/" .. lkv)) or "")
 
@@ -53,6 +54,7 @@ search_engines = {
     apkg    = "https://www.archlinux.org/packages/?q=%s",
     aur     = "https://aur.archlinux.org/packages/?O=0&K=%s",
     aw      = "https://wiki.archlinux.org/index.php?search=%s&go=Go",
+    bh      = "http://bithumen.be/browse.php?search=%s",
     ddg     = "https://duckduckgo.com/?q=%s",
     g       = "https://google.com/search?q=%s",
     gh      = "https://github.com/search?q=%s",
