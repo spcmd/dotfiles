@@ -325,10 +325,12 @@ stylesheet = [===[
     position: absolute;
     background-color: #000088;
     border: 1px dashed #000;
+    padding: 1px;
+    letter-spacing: 2px;
     color: #fff;
-    font-size: 10px;
+    font-size: 14px;
     font-family: monospace, courier, sans-serif;
-    opacity: 0.4;
+    opacity: 0.8;
     z-index: 10002;
 }
 

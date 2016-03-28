@@ -273,159 +273,155 @@ add_binds("normal", {
         function (w) w.win.fullscreen = not w.win.fullscreen end),
 
         -- Yanking
-        key({}, "y", "Yank current URI to primary selection.",
+        key({}, "y", "Yank current URI to clipboard.",
             function (w)
                 local uri = string.gsub(w.view.uri or "", " ", "%%20")
-                --luakit.selection.primary = uri
                 luakit.selection.clipboard = uri
                 w:notify("Yanked uri: " .. uri)
             end),
 
-        -- commands
-        key({}, "o", "open one or more urls.",
+        -- Commands
+        key({}, "o", "Open one or more URLs.",
             function (w) w:enter_cmd(":open ") end),
 
-        key({}, "t", "open one or more urls in a new tab.",
+        key({}, "t", "Open one or more URLs in a new tab.",
             function (w) w:enter_cmd(":tabopen ") end),
 
-        key({}, "w", "open one or more urls in a new window.",
+        key({}, "w", "Open one or more URLs in a new window.",
             function (w) w:enter_cmd(":winopen ") end),
 
-        key({}, "o", "open one or more urls based on current location.",
+        key({}, "O", "Open one or more URLs based on current location.",
             function (w) w:enter_cmd(":open " .. (w.view.uri or "")) end),
 
-        key({}, "t",
-            "open one or more urls based on current location in a new tab.",
+        key({}, "T",
+            "Open one or more URLs based on current location in a new tab.",
             function (w) w:enter_cmd(":tabopen " .. (w.view.uri or "")) end),
 
-        key({}, "w",
-            "open one or more urls based on current locaton in a new window.",
+        key({}, "W",
+            "Open one or more URLs based on current locaton in a new window.",
             function (w) w:enter_cmd(":winopen " .. (w.view.uri or "")) end),
 
-        -- history
-        key({}, "h", "go back in the browser history `[count=1]` items.",
+        -- History
+        key({}, "H", "Go back in the browser history `[count=1]` items.",
             function (w, m) w:back(m.count) end),
 
-        key({}, "backspace", "go back in the browser history `[count=1]` items.",
+        key({}, "Backspace", "Go back in the browser history `[count=1]` items.",
             function (w, m) w:back(m.count) end),
 
-        key({}, "l", "go forward in the browser history `[count=1]` times.",
+        key({}, "L", "Go forward in the browser history `[count=1]` times.",
             function (w, m) w:forward(m.count) end),
 
-        key({}, "xf86back", "go back in the browser history.",
+        key({}, "XF86Back", "Go back in the browser history.",
             function (w, m) w:back(m.count) end),
 
-        key({}, "xf86forward", "go forward in the browser history.",
+        key({}, "XF86Forward", "Go forward in the browser history.",
             function (w, m) w:forward(m.count) end),
 
-        -- tab
-        key({"control"}, "page_up", "go to previous tab.",
+        -- Tab
+        key({"Control"}, "Page_Up", "Go to previous tab.",
             function (w) w:prev_tab() end),
 
-        key({"control"}, "page_down", "go to next tab.",
+        key({"Control"}, "Page_Down", "Go to next tab.",
             function (w) w:next_tab() end),
 
-        key({"control"}, "tab", "go to next tab.",
+        key({"Control"}, "Tab", "Go to next tab.",
             function (w) w:next_tab() end),
 
-        key({"shift","control"}, "tab", "go to previous tab.",
+        key({"Shift","Control"}, "Tab", "Go to previous tab.",
             function (w) w:prev_tab() end),
 
-        buf("^ő$", "go to previous tab.",
+        buf("^ő$", "Go to previous tab.",
             function (w) w:prev_tab() end),
 
-        buf("^ú$", "go to next tab (or `[count]` nth tab).",
+        buf("^ú$", "Go to next tab (or `[count]` nth tab).",
             function (w, b, m)
                 if not w:goto_tab(m.count) then w:next_tab() end
             end, {count=0}),
 
-        buf("^g0$", "go to first tab.",
+        buf("^g0$", "Go to first tab.",
             function (w) w:goto_tab(1) end),
 
-        buf("^g$$", "go to last tab.",
+        buf("^g$$", "Go to last tab.",
             function (w) w:goto_tab(-1) end),
 
-        key({"control"}, "t", "open a new tab.",
+        key({"Control"}, "t", "Open a new tab.",
             function (w) w:new_tab(globals.homepage) end),
 
-        key({"control"}, "w", "close current tab.",
-            function (w) w:close_tab() end),
-
-        key({}, "d", "close current tab (or `[count]` tabs).",
+        key({}, "d", "Close current tab (or `[count]` tabs).",
             function (w, m) for i=1,m.count do w:close_tab() end end, {count=1}),
 
-        key({}, "é", "reorder tab left `[count=1]` positions.",
+        key({}, "é", "Reorder tab left `[count=1]` positions.",
             function (w, m)
                 w.tabs:reorder(w.view, w.tabs:current() - m.count)
             end, {count=1}),
 
-        key({}, "á", "reorder tab right `[count=1]` positions.",
+        key({}, "á", "Reorder tab right `[count=1]` positions.",
             function (w, m)
                 w.tabs:reorder(w.view,
                     (w.tabs:current() + m.count) % w.tabs:count())
             end, {count=1}),
 
-        buf("^gh$", "open homepage in new tab.",
+        buf("^gH$", "Open homepage in new tab.",
             function (w) w:new_tab(globals.homepage) end),
 
-        buf("^gh$", "open homepage.",
+        buf("^gh$", "Open homepage.",
             function (w) w:navigate(globals.homepage) end),
 
-        buf("^gy$", "duplicate current tab.",
+        buf("^gy$", "Duplicate current tab.",
             function (w) w:new_tab(w.view.history or "") end),
 
-        key({}, "r", "reload current tab.",
+        key({}, "r", "Reload current tab.",
             function (w) w:reload() end),
 
-        key({}, "r", "reload current tab (skipping cache).",
+        key({}, "R", "Reload current tab (skipping cache).",
             function (w) w:reload(true) end),
 
-        key({}, "s", "stop loading the current tab.",
+        key({}, "s", "Stop loading the current tab.",
             function (w) w.view:stop() end),
 
-        key({"control", "shift"}, "r", "restart luakit (reloading configs).",
+        key({"Control", "Shift"}, "r", "Restart luakit (reloading configs).",
             function (w) w:restart() end),
 
-        -- copy (ctrl-c)
-        key({"control"}, "c", "copy (as-in control-c control-v)",
+        -- Copy (ctrl-c)
+        key({"Control"}, "c", "Copy (as-in control-c control-v)",
         function (w) luakit.selection.clipboard = luakit.selection.primary end),
 
-        -- window
-        buf("^zz$", "quit and save the session.",
+        -- Window
+        buf("^ZZ$", "Quit and save the session.",
             function (w) w:save_session() w:close_win() end),
 
-        buf("^zq$", "quit and don't save the session.",
+        buf("^ZQ$", "Quit and don't save the session.",
             function (w) w:close_win() end),
 
         -- enter passthrough mode
-        key({"control"}, "z",
-            "enter `passthrough` mode, ignores all luakit keybindings.",
+        key({"Control"}, "z",
+            "Enter `passthrough` mode, ignores all luakit keybindings.",
             function (w) w:set_mode("passthrough") end),
 
         ------- added key bindings --------
 
-        buf("^d$",  "show downloads page",
+        buf("^D$",  "Show downloads page",
             function (w) w:new_tab("luakit://downloads") end),
 
-        buf("^b$",  "show bookmarks page",
+        buf("^B$",  "Show bookmarks page",
             function (w) w:new_tab("luakit://bookmarks") end),
 
-        buf("^gl$", "go to logout.hu forum.",
+        buf("^gl$", "Go to logout.hu forum.",
             function (w) w:navigate("http://logout.hu/forum/index.html") end),
 
-        buf("^gl$", "go to logout.hu forum in a new tab.",
+        buf("^gL$", "Go to logout.hu forum in a new tab.",
             function (w) w:new_tab("http://logout.hu/forum/index.html") end),
 
-        buf("^gd$", "go to my dotfiles repo",
+        buf("^gd$", "Go to my dotfiles repo",
             function (w) w:navigate("https://github.com/spcmd/dotfiles") end),
 
-        buf("^gd$", "go to my dotfiles repo in a new tab.",
+        buf("^gD$", "Go to my dotfiles repo in a new tab.",
             function (w) w:new_tab("https://github.com/spcmd/dotfiles") end),
 
-        buf("^gs$", "go to my scripts repo",
+        buf("^gs$", "Go to my scripts repo",
             function (w) w:navigate("https://github.com/spcmd/scripts") end),
 
-        buf("^gs$", "go to my scripts repo in a new tab.",
+        buf("^gS$", "Go to my scripts repo in a new tab.",
             function (w) w:new_tab("https://github.com/spcmd/scripts") end),
 
         buf("^,t$", "Translate selected text (quick, first result)",
@@ -440,7 +436,7 @@ add_binds("normal", {
                 w:activate()
             end),
 
-        buf("y", "ph!: copy the current url and make a forum link tag from it",
+        buf("Y", "PH!: Copy the current url and make a forum link tag from it",
             function (w)
                 w:enter_cmd(":phlinkformat")
                 w:activate()
@@ -725,6 +721,23 @@ add_cmds({
             end
         end),
 
+    cmd({"mailthis"}, "Create a mailthis command from the url and the title",
+        function (w)
+            local uri = w.view.uri
+            local title = w.win.title:gsub("-.*", ""):gsub("^%s*(.-)%s*$", "%1") -- remove page name/uri and whitespaces from the title
+            luakit.selection.clipboard = "mailthis '"..uri.."' '"..title.."'"
+            w:notify("mailthis command copied to the clipboard.")
+        end),
+
+    cmd({"markdownlinkformat"}, "Create a markdown link format from the current uri and title",
+        function (w)
+            local uri = w.view.uri
+            local title = w.win.title:gsub("-.*", ""):gsub("^%s*(.-)%s*$", "%1") -- remove page name/uri and whitespaces from the title
+            local linktag = "["..title.."]("..uri..")"
+            luakit.selection.clipboard = linktag
+            w:notify("markdown link format copied to the clipboard.")
+        end),
+
     -- Translate Shell (https://github.com/soimort/translate-shell)
     cmd({"translate-selected-quick"}, "Translate selected text (quick, first result)",
         function (w)
@@ -748,6 +761,19 @@ add_cmds({
         end),
 
     -- PH! Forum
+    cmd({"ph"}, "PH!: search in the current topic",
+        function (w, q)
+            if q then
+                local uri = w.view.uri
+                local keyword = q
+                local search_sub = "keres%.php%?type=-&stext="..keyword
+                local search_uri = uri:gsub("hsz_.*%.html", search_sub):gsub("friss%.html", search_sub)
+                w:navigate(search_uri)
+            else
+                w:notify("Error: keyword wasn't given.")
+            end
+        end),
+
     cmd({"phusercomment"}, "PH!: search user's comment [keyword] [username]",
         function (w, q)
             if q then
@@ -764,27 +790,29 @@ add_cmds({
             end
         end),
 
-        cmd({"phmy"}, "PH!: search in my comments",
-            function (w, q)
-             if q then
-                local uri = w.view.uri
-                local keyword = q
-                local search_sub = "keres%.php%?type=-&stext="..keyword.."&suser=spammer"
-                local search_uri = uri:gsub("hsz_.*%.html", search_sub):gsub("friss%.html", search_sub)
-                w:navigate(search_uri)
-            else
-                w:notify("Error: keyword wasn't given.")
-            end
+    cmd({"phmy"}, "PH!: search in my comments",
+        function (w, q)
+         if q then
+            local uri = w.view.uri
+            local keyword = q
+            local search_sub = "keres%.php%?type=-&stext="..keyword.."&suser=spammer"
+            local search_uri = uri:gsub("hsz_.*%.html", search_sub):gsub("friss%.html", search_sub)
+            w:navigate(search_uri)
+        else
+            w:notify("Error: keyword wasn't given.")
+        end
+    end),
+
+    cmd({"phlinkformat"}, "PH!: Copy the current url and make a forum link tag from it",
+        function (w)
+            local uri = w.view.uri
+            local title = w.win.title:gsub("-.*", ""):gsub("^%s*(.-)%s*$", "%1") -- remove page name/uri and whitespaces from the title
+            local linktag = "[L:"..uri.."]"..title.."[/L]"
+            luakit.selection.clipboard = linktag
+            w:notify("PH forum link tag copied to the clipboard.")
         end),
 
-        cmd({"phlinkformat"}, "PH!: Copy the current url and make a forum link tag from it",
-            function (w)
-                local uri = w.view.uri
-                local title = w.win.title:gsub("-.*", "") -- remove page name/uri from the title
-                local linktag = "[L:"..uri.."]"..title.."[/L]"
-                luakit.selection.clipboard = linktag
-                w:notify("PH forum link tag copied to the clipboard.")
-            end),
+
 
 
 })

@@ -211,9 +211,16 @@ webview.init_funcs = {
     -- Use `true` for menu separators.
     populate_popup = function (view, w)
         view:add_signal("populate-popup", function (v)
+            -- ADDED: show selected text in the menu options
+            if not luakit.selection.primary then
+                highlighted = ""
+            else
+                highlighted = luakit.selection.primary
+            end
+            -- draw menu
             return {
                 true,
-                { "🖹 Toggle Sour_ce", function () w:toggle_source() end },
+                { "🖹 View Sour_ce", function () w:toggle_source() end },
                 true,
                 { "‼ _Noscript", {
                     { "Toggle _Scripts",    function () w:toggle_scripts()  end },
@@ -221,10 +228,14 @@ webview.init_funcs = {
                     true,
                     { "_Remove this domain", function () w:toggle_remove() end }, }, },
                 true,
-                { "🌊 Ma_gnet > rTorrent", function () w:magnet_load() end },
+                { "Translate (quick): "..highlighted, function () w:enter_cmd(":translate-selected-quick") w:activate() end },
+                { "Translate (full): "..highlighted, function () w:enter_cmd(":translate-selected-full") w:activate() end },
+                true,
+                { "🌊 Ma_gnet > _rTorrent", function () w:magnet_load() end },
                 { "▶ Play with _mpv", function () w:mediaplayer() end },
                 true,
-                { "🔍 Search selected _text...", function () w:lookup_selection() end },
+                { "+ _Tabopen: "..highlighted, function () w:open_text_uri() end },
+                { "🔍 _Search for: "..highlighted, function () w:lookup_selection() end },
             }
         end)
     end,
@@ -328,6 +339,17 @@ webview.methods = {
             w:notify("Error: this is not a magnet link.")
         end
     end,
+
+    --ADDED: open selected (highlighted) text uri (which are not links)
+    open_text_uri = function (view, w)
+        local uri = luakit.selection.primary
+        if string.match(uri, "^https*://.+%..+$") then
+            w:new_tab(uri)
+        else
+            w:notify("Error: Can't open, it's not a valid uri.")
+        end
+    end,
+
 
 }
 

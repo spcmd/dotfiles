@@ -135,6 +135,7 @@ require "adblock_chrome"
 -- Add vimperator-like link hinting & following
 require "follow"
 
+--[[
 follow.stylesheet = follow.stylesheet .. [===[
 
 #luakit_follow_overlay .hint_overlay {
@@ -145,7 +146,7 @@ follow.stylesheet = follow.stylesheet .. [===[
 
 #luakit_follow_overlay .hint_label {
     background-color: #d60a00;
-    font-family: monospace, courier, sans-serif;
+    font-family: "Terminus", monospace;
     font-size: 14px;
     color: #fff;
     opacity: 1;
@@ -157,6 +158,8 @@ follow.stylesheet = follow.stylesheet .. [===[
 }
 
 ]===]
+
+--]]
 
 -- Use a custom charater set for hint labels
 local s = follow.label_styles

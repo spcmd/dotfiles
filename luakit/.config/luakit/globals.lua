@@ -56,11 +56,12 @@ search_engines = {
     ddg     = "https://duckduckgo.com/?q=%s",
     g       = "https://google.com/search?q=%s",
     gh      = "https://github.com/search?q=%s",
-    yt      = "https://www.youtube.com/results?search_query=%s",
     imdb    = "http://www.imdb.com/find?s=all&q=%s",
     kat     = "https://kat.cr/usearch/?q=%s",
+    ph      = "http://logout.hu/temak/keres.php?type=-&stext=%s",
     rarbg   = "https://rarbg.to/torrents.php?search=%s",
     wiki    = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
+    yt      = "https://www.youtube.com/results?search_query=%s",
 }
 
 -- Default search engine

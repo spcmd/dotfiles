@@ -1,11 +1,11 @@
 /* top shit, side shit */
 .branded-page-v2-secondary-col,
-#masthead-appbar-container, 
+#masthead-appbar-container,
 .yt-consent
 {
-   display:none!important;  
+   display:none!important;
 }
-  
+
 #yt-masthead-container, #guide-container, .guide-flyout.guide-flyout-visibility,.yt-card,#footer-container {
   background: #f1f1f1!important;
 }
@@ -29,7 +29,7 @@ body {
 #gh-banner {
 
 }
-  
+
 /* list title/text */
 .yt-ui-ellipsis {
   background: transparent!important;
@@ -45,8 +45,12 @@ body {
 /* alert, choose language */
 .alerts-wrapper {display:none!important;}
 
-/* results */
+/* results fix */
+#results, .search-pager {
+  background: #f1f1f1!important;
+   margin-left:-200px!important;
+  text-align: left!important;
+}
 #page-container{
     margin-top:-50px!important;
-    margin-left:-200px!important;
 }

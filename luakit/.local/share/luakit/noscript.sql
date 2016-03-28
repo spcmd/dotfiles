@@ -15,4 +15,5 @@ INSERT INTO "by_domain" VALUES(13,'help',1,0);
 INSERT INTO "by_domain" VALUES(14,'www.youtube.com',1,0);
 INSERT INTO "by_domain" VALUES(15,'m.youtube.com',1,0);
 INSERT INTO "by_domain" VALUES(16,'www.imdb.com',1,0);
+INSERT INTO "by_domain" VALUES(17,'logout.hu',1,0);
 COMMIT;
