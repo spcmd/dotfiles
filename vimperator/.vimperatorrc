@@ -200,7 +200,7 @@ command! nb -description="Add current (feed) url to newsbeuter. Usage: nb <feed 
 command! nbu -description="Add current (feed) url to newsbeuter (without title)" execute "!echo '"+window.content.window.location+"' >> ~/.newsbeuter/urls && echo Done."
 
 "Mail current URL - copy url and title to the clipboard
-command! mailthis -description="Create a mailthis string from the url and the title" silent execute '!noglob echo mailthis \\"'+window.content.window.location+'\\" \\"'+window.content.document.title+'\\" | xsel -ib'
+command! mailthis -description="Create a mailthis command from the url and the title" silent execute '!noglob echo mailthis \\"'+window.content.window.location+'\\" \\"'+window.content.document.title+'\\" | xsel -ib'
 
 " }}}
 " {{{   Autocommands

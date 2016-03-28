@@ -332,4 +332,13 @@ nnoremap <silent> <leader>cz :ColorHighlight syntax<CR>
 " (http://stackoverflow.com/questions/17792177/disable-encryption-with-x-in-vim/17794801#17794801)
 cnoreabbrev <expr> X (getcmdtype() is# ':' && getcmdline() is# 'X') ? 'x' : 'X'
 
+" Disable uppercase/lowercase toggle
+noremap gu <Nop>
+noremap gU <Nop>
+noremap g~ <Nop>
+vnoremap ~ <Nop>
+vnoremap u <Nop>
+vnoremap U <Nop>
+
+
 " }}}
