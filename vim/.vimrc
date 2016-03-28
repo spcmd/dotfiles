@@ -132,11 +132,17 @@ silent !echo -ne "\033]12;yellow\007"
 " {{{   Commands & Functions
 "--------------------------------------------
 
-"Toggle Relative Line Numbering
+"Toggle relative line numbering
 command! RL set rnu!
 
-"Remove Trailing Whitespace
+"Remove trailing whitespace
 command! RWS %s/\s\+$//|echo "Removing trailing white spaces"
+
+"Remove leading whitespace
+command! RLWS %s/^\s\+
+
+"Remove blank/emtpy lines
+command! RBL g/^\s*$/d
 
 "Quick delete/close buffer
 command! QQ bd
