@@ -82,7 +82,7 @@ cookies.session_timeout = 3600 * 24 * 7 * 4
 --require "formfiller"
 
 -- Add proxy support & manager
---require "proxy"
+require "proxy"
 
 -- Add quickmarks support & manager
 --require "quickmarks"
@@ -120,11 +120,9 @@ downloads.add_signal("download-location", function (uri, file)
     return downloads.default_dir .. "/" .. file
 end)
 
-
-
 -- Add ablock support
-require "adblock"
-require "adblock_chrome"
+--require "adblock"
+--require "adblock_chrome"
 
 -- Example using xdg-open for opening downloads / showing download folders
 --downloads.add_signal("open-file", function (file, mime)

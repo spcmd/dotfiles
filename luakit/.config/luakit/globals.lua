@@ -7,7 +7,7 @@ globals = {
     show_scrollbars     = true,  -- defined in rc.lua
     show_tablist        = true,  -- defined in window.lua
 
- -- http_proxy          = "http://example.com:3128",
+--http_proxy          = "http://localhost:8118",
  -- Disables loading of hostnames from /etc/hosts (for large host files)
  -- load_etc_hosts      = false,
  -- Disables checking if a filepath exists in search_open function

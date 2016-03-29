@@ -738,6 +738,12 @@ add_cmds({
             w:notify("markdown link format copied to the clipboard.")
         end),
 
+    -- Privoxy
+    cmd({"privoxy-config"}, "Open Privoxy config", -- works until page reload
+        function (w)
+            w:new_tab("http://config.privoxy.org/show-status")
+        end),
+
     -- Translate Shell (https://github.com/soimort/translate-shell)
     cmd({"translate-selected-quick"}, "Translate selected text (quick, first result)",
         function (w)
@@ -774,13 +780,13 @@ add_cmds({
             end
         end),
 
-    cmd({"phusercomment"}, "PH!: search user's comment [keyword] [username]",
+    cmd({"phusercomment"}, "PH!: search user's comment [username] [keyword]",
         function (w, q)
             if q then
                 query = {}
                 for querystring in q:gmatch("%w+") do table.insert(query, querystring) end
-                local keyword = query[1]
-                local username = query[2]
+                local username = query[1]
+                local keyword = query[2]
                 local uri = w.view.uri
                 local search_sub = "keres%.php%?type=-&stext="..keyword.."&suser="..username
                 local search_uri = uri:gsub("hsz_.*%.html", search_sub):gsub("friss%.html", search_sub)
@@ -811,7 +817,6 @@ add_cmds({
             luakit.selection.clipboard = linktag
             w:notify("PH forum link tag copied to the clipboard.")
         end),
-
 
 
 
