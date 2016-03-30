@@ -20,4 +20,7 @@ INSERT INTO "by_domain" VALUES(18,'www.openmailbox.org',1,0);
 INSERT INTO "by_domain" VALUES(19,'privoxy.org',1,0);
 INSERT INTO "by_domain" VALUES(20,'github.com',1,0);
 INSERT INTO "by_domain" VALUES(21,'m.facebook.com',1,0);
+INSERT INTO "by_domain" VALUES(23,'whatnext.eu',1,0);
+INSERT INTO "by_domain" VALUES(24,'plus.google.com',1,0);
+INSERT INTO "by_domain" VALUES(31,'www.reddit.com',1,0);
 COMMIT;

@@ -18,8 +18,8 @@ globals = {
 local _, arch = luakit.spawn_sync("uname -sm")
 -- Only use the luakit version if in date format (reduces identifiability)
 local lkv = string.match(luakit.version, "^(%d+.%d+.%d+)")
-globals.useragent = string.format("Mozilla/5.0 (%s) AppleWebKit/%s+ (KHTML, like Gecko) WebKitGTK+/%s luakit%s",
---globals.useragent = string.format(" Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0",
+--globals.useragent = string.format("Mozilla/5.0 (%s) AppleWebKit/%s+ (KHTML, like Gecko) WebKitGTK+/%s luakit%s",
+globals.useragent = string.format(" Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0",
     string.sub(arch, 1, -2), luakit.webkit_user_agent_version,
     luakit.webkit_version, (lkv and ("/" .. lkv)) or "")
 
@@ -84,7 +84,7 @@ domain_props = {
         enable_spell_checking   = true,
         spell_checking_languages = "hu_HU",
         enable_html5_database = false,
-        enable_html5_local_storage = false,
+        --enable_html5_local_storage = false,  -- breaks reddit!
         enable_hyperlink_auditing = false,
         enable_java_applet = false,
         enable_media_stream = false,
@@ -122,11 +122,6 @@ domain_props = {
     ["youtube.com"] = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/youtube.css",
     },
-
-    ["m.youtube.com"] = {
-        user_agent = "Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3",
-    },
-
 
 }
 
