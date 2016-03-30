@@ -148,6 +148,9 @@ command! AA -description="Addons" :tabopen about:addons
 command! CC -description="about:config" :tabopen about:config
 command! DD -description="Downloads" :downloads
 
+" Privoxy
+command! privoxy -description="Open Privoxy config" :tabopen http://config.privoxy.org/show-status
+
 " Set caret/cursor width
 command! caret -description="Set caret/cursor width" -nargs=1 :set! ui.caretWidth=<args>
 

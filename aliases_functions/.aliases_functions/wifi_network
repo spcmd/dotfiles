@@ -10,6 +10,7 @@
 
 alias rld-NetworkManager='sudo systemctl restart NetworkManager'
 alias lscon='nmcli con show'
+alias rld-privoxy='sudo systemctl restart privoxy'
 
 # Wifi switch
 wifi() {
