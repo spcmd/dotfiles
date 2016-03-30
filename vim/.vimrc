@@ -346,5 +346,7 @@ vnoremap ~ <Nop>
 vnoremap u <Nop>
 vnoremap U <Nop>
 
+" Run current file (script) in shell
+nnoremap <C-x> :!%<CR>
 
 " }}}

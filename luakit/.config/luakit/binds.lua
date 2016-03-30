@@ -673,10 +673,10 @@ add_cmds({
     cmd({"cookie-whitelist"}, "Edit the cookie.whitelist",
         function () luakit.spawn("urxvtc -e vim ".. cookies.whitelist_path) end),
 
-    cmd({"cookie-keepcookies"}, "Edit the keepcookies.list",
-        function () luakit.spawn("urxvtc -e vim ".. luakit.config_dir.."/keepcookies.list") end),
+    cmd({"cookie-keeper"}, "Edit the cookie_keeper.list",
+        function () luakit.spawn("urxvtc -e vim ".. luakit.config_dir.."/cookie_keeper.list") end),
 
-    cmd({"cookie-clean"}, "Clean up the cookie database (keep only from keepcookies.list)",
+    cmd({"cookie-clean"}, "Clean up the cookie database (keep only from cookie_keeper.list)",
         function (w)
             luakit.spawn("luakitwrapper -cc")  -- uses my luakitwrapper script
             w:notify("Cookies have been cleaned")

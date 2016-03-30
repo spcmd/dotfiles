@@ -18,7 +18,8 @@
 
 articlelist-format "%4i %f %D %6L  %?T?|%-25T|  ?%t"
 auto-reload yes
-browser "~/bin/firefox-esr/firefox"
+#browser "~/bin/firefox-esr/firefox"
+browser "luakit"
 #confirm-exit yes
 #datetime-format %b %d
 display-article-progress yes
@@ -66,8 +67,11 @@ bind-key , macro-prefix
 macro f edit-flags "f"
 macro F edit-flags ""
 macro u edit-flags ""
-macro m set browser "urxvtc -e $MEDIAPLAYER %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
-macro o set browser "w3m %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
+#macro m set browser "urxvtc -e $MEDIAPLAYER %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
+#macro o set browser "w3m %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
+macro m set browser "urxvtc -e $MEDIAPLAYER %u"; open-in-browser ; set browser "luakit"
+macro o set browser "w3m %u"; open-in-browser ; set browser "luakit"
+
 
 # COLORS --------------------------------------------------------------------------------
 # color <element> <foreground color> <background color> [<attribute> ...]

@@ -77,6 +77,7 @@ search_engines.default = search_engines.ddg
 domain_props = {
 
     ["all"] = {
+        user_stylesheet_uri     = "",  -- reset stylesheet, deactivate userstyles left over from other domains.
         monospace_font_family       = "Liberation Mono",
         sans_serif_font_family      = "Liberation Sans",
         serif_font_family           = "Liberation Serif",

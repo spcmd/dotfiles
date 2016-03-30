@@ -38,8 +38,8 @@ no_cache 0
 noproxy_netaddr 1
 no_proxy
 ftp_proxy
-https_proxy
-http_proxy
+https_proxy http://127.0.0.1:8118
+http_proxy http://127.0.0.1:8118
 use_proxy 1
 max_news 50
 nntpmode
@@ -67,7 +67,7 @@ mediaplayercommand mpv
 yankcommand sh -c 'printf %s "$0" | xsel -b && notify-send "w3m" "URL yanked!"'
 extbrowser3
 extbrowser2 feh
-extbrowser ~/bin/firefox
+extbrowser luakit
 mailer
 mailto_options 1
 editor vim
