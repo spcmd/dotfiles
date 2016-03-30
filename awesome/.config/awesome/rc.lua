@@ -661,8 +661,8 @@ globalkeys = awful.util.table.join(
 
     -- Run Applications
     awful.key({ modkey,           }, "a", function () awful.util.spawn(dmenu,false) end),
-    awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn(firefox) end),
-    awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn(luakit) end),
+    awful.key({ modkey, "Mod1"    }, "f", function () awful.util.spawn(firefox, false) end),
+    awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn(luakit, false) end),
     awful.key({ modkey, "Mod1"    }, "u", function () awful.util.spawn("uzbl-tabbed") end),
     awful.key({ modkey, "Mod1"    }, "c", function () awful.util.spawn("gcolor2") end),
     awful.key({ modkey, "Mod1"    }, "r", function () awful.util.spawn(ranger) end),

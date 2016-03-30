@@ -180,7 +180,7 @@ require "go_next_prev"
 --require "go_up"
 
 -----------------------------
--- Customizations --
+-- ADDED Customizations --
 -----------------------------
 
 -- Scrollbar
@@ -217,6 +217,17 @@ webview.init_funcs.download_mp3 = function (view, w)
         end
     end)
 end
+
+-- IT Cafe forum redirect to logout domain
+webview.init_funcs.itcafe_to_logout = function (view, w)
+    view:add_signal("navigation-request", function (v, uri)
+        if string.match(uri, "http://itcafe.hu/tema/") then
+            v.uri = uri:gsub("itcafe","logout")
+            return false
+        end
+    end)
+end
+
 
 
 -----------------------------

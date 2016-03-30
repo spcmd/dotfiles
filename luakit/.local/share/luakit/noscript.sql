@@ -18,4 +18,6 @@ INSERT INTO "by_domain" VALUES(16,'www.imdb.com',1,0);
 INSERT INTO "by_domain" VALUES(17,'logout.hu',1,0);
 INSERT INTO "by_domain" VALUES(18,'www.openmailbox.org',1,0);
 INSERT INTO "by_domain" VALUES(19,'privoxy.org',1,0);
+INSERT INTO "by_domain" VALUES(20,'github.com',1,0);
+INSERT INTO "by_domain" VALUES(21,'m.facebook.com',1,0);
 COMMIT;
