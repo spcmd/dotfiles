@@ -120,6 +120,6 @@ end
 local buf = lousy.bind.buf
 add_binds("normal", {
     buf("^,s$", function (w) w:toggle_scripts() end),
-    buf("^,pp$", function (w) w:toggle_plugins() end),
+    buf("^,p$", function (w) w:toggle_plugins() end),
     buf("^,r$", function (w) w:toggle_remove()  end),
 })

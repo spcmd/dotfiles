@@ -18,10 +18,12 @@ globals = {
 local _, arch = luakit.spawn_sync("uname -sm")
 -- Only use the luakit version if in date format (reduces identifiability)
 local lkv = string.match(luakit.version, "^(%d+.%d+.%d+)")
+--[[
 globals.useragent = string.format("Mozilla/5.0 (%s) AppleWebKit/%s+ (KHTML, like Gecko) WebKitGTK+/%s luakit%s",
     string.sub(arch, 1, -2), luakit.webkit_user_agent_version,
     luakit.webkit_version, (lkv and ("/" .. lkv)) or "")
---globals.useragent = string.format("Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0")
+--]]
+globals.useragent = string.format("Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0")
 
 -- Search common locations for a ca file which is used for ssl connection validation.
 local ca_files = {
@@ -89,7 +91,7 @@ domain_props = {
         enable_java_applet = false,
         enable_media_stream = false,
         enable_mediasource = false,
-        enable_offline_web_application_cache = false,
+        --enable_offline_web_application_cache = false,
         javascript_can_access_clipboard = false,
         javascript_can_open_windows_automatically = false,
         media_playback_requires_user_gesture = true,

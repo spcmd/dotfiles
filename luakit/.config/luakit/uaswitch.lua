@@ -79,6 +79,7 @@ local cmd = lousy.bind.cmd
 add_cmds({
     cmd({"user-agent", "ua"}, function (w, a)
         switch_to(a)
+        w:notify("user-agent set to: "..a)
     end),
 })
 
