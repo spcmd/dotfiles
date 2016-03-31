@@ -442,7 +442,8 @@ pattern_styles = {
 }
 
 -- Default pattern style
-pattern_maker = pattern_styles.match_label_re_text
+--pattern_maker = pattern_styles.match_label_re_text
+pattern_maker = pattern_styles.match_label
 
 local function focus(w, step)
     local state = w.follow_state

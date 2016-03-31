@@ -220,16 +220,17 @@ webview.init_funcs = {
             -- draw menu
             return {
                 true,
+                { "🗔 Open this page in Chromium", function () w:open_in_alt_browser() end },
                 { "🖹 View Sour_ce", function () w:toggle_source() end },
                 true,
-                { "‼ _Noscript", {
+                { "⊘ _Noscript", {
                     { "Toggle _Scripts",    function () w:toggle_scripts()  end },
                     { "Toggle _Plugins",   function () w:toggle_plugins() end },
                     true,
                     { "_Remove this domain", function () w:toggle_remove() end }, }, },
                 true,
-                { "Translate (quick): "..highlighted, function () w:enter_cmd(":translate-selected-quick") w:activate() end },
-                { "Translate (full): "..highlighted, function () w:enter_cmd(":translate-selected-full") w:activate() end },
+                { "🕮 Translate (quick): "..highlighted, function () w:enter_cmd(":translate-selected-quick") w:activate() end },
+                { "🕮 Translate (full): "..highlighted, function () w:enter_cmd(":translate-selected-full") w:activate() end },
                 true,
                 { "🌊 Ma_gnet > _rTorrent", function () w:magnet_load() end },
                 { "▶ Play with _mpv", function () w:mediaplayer() end },
@@ -305,10 +306,10 @@ webview.methods = {
     mediaplayer = function (view, w)
         local uri = w.view.hovered_uri or w.view.uri
         if string.match(uri, "youtube") then
-            luakit.spawn(string.format("mpv %s", uri))
+            luakit.spawn(string.format("url2mpv.sh %s", uri))
             w:notify("Playing with mpv: " .. uri)
         elseif string.match(uri, "vimeo") then
-            luakit.spawn(string.format("mpv %s", uri))
+            luakit.spawn(string.format("url2mpv.sh %s", uri))
             w:notify("Playing with mpv: " .. uri)
         else
             w:notify("Can't play this url with mpv.")
@@ -348,6 +349,12 @@ webview.methods = {
         else
             w:notify("Error: Can't open, it's not a valid uri.")
         end
+    end,
+
+    --ADDED: open this page in an alternative browser
+    open_in_alt_browser = function (view, w)
+        local uri = w.view.uri
+        luakit.spawn(string.format("chromium %s", uri))
     end,
 
 

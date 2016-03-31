@@ -106,6 +106,10 @@ new_mode("insert", [[When clicking on form fields luakit will enter the insert
     end,
     -- Send key events to webview
     passthrough = true,
+    -- ADDED:
+    -- Don't exit mode when clicking outside of form fields
+    reset_on_focus = false,
+
 })
 
 new_mode("passthrough", [[Luakit will pass every key event to the WebView

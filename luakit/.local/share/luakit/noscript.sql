@@ -23,4 +23,6 @@ INSERT INTO "by_domain" VALUES(21,'m.facebook.com',1,0);
 INSERT INTO "by_domain" VALUES(23,'whatnext.eu',1,0);
 INSERT INTO "by_domain" VALUES(24,'plus.google.com',1,0);
 INSERT INTO "by_domain" VALUES(31,'www.reddit.com',1,0);
+INSERT INTO "by_domain" VALUES(32,'itcafe.hu',1,0);
+INSERT INTO "by_domain" VALUES(33,'imgur.com',1,0);
 COMMIT;

@@ -442,6 +442,19 @@ add_binds("normal", {
                 w:activate()
             end),
 
+        buf("^,ua$", "Toggle useragent string",
+            function (w)
+                local ua = globals.useragent
+                if not ua:match("Firefox") then
+                    w:enter_cmd(":ua firefox")
+                    w:activate()
+                    w:notify("user-agent set to: firefox")
+                else
+                    w:enter_cmd(":ua default")
+                    w:activate()
+                    w:notify("user-agent set to: default")
+                end
+            end),
 
 
 })
@@ -481,10 +494,10 @@ add_binds("normal", {
                     uri = string.gsub(uri, " ", "%%20")
                     luakit.selection.primary = uri
                     if string.match(uri, "youtube") then
-                        luakit.spawn(string.format("mpv %s", uri))
+                        luakit.spawn(string.format("url2mpv.sh %s", uri))
                         w:notify("Playing with mpv: " .. uri)
                     elseif string.match(uri, "vimeo") then
-                        luakit.spawn(string.format("mpv %s", uri))
+                        luakit.spawn(string.format("url2mpv.sh %s", uri))
                         w:notify("Playing with mpv: " .. uri)
                     else
                         w:notify("Can't play this url with mpv.")
