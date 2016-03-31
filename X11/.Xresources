@@ -73,7 +73,8 @@ URxvt.keysym.M-Escape: perl:keyboard-select:activate
 
 ! url-select-plus
 URxvt.keysym.M-f: perl:url-select-plus:select_next
-URxvt.url-select-plus.launcher: /home/spcmd/bin/firefox-esr/firefox
+!URxvt.url-select-plus.launcher: /home/spcmd/bin/firefox-esr/firefox
+URxvt.url-select-plus.launcher: luakit
 URxvt.url-select-plus.altlauncher: chromium
 URxvt.url-select-plus.mediaplayer: urxvtc -e mpv
 URxvt.url-select-plus.imgviewer: feh

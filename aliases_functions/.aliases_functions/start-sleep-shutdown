@@ -12,8 +12,8 @@ alias zzz='systemctl suspend'
 
 # Shutdown gracefully
 sss() {
-    pkill -SIGTERM spotify &&
-    pkill -SIGTERM firefox &&
+    #pkill -SIGTERM spotify &&
+    #pkill -SIGTERM firefox &&
     systemctl poweroff
 }
 
