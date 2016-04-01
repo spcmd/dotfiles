@@ -25,4 +25,5 @@ INSERT INTO "by_domain" VALUES(24,'plus.google.com',1,0);
 INSERT INTO "by_domain" VALUES(31,'www.reddit.com',1,0);
 INSERT INTO "by_domain" VALUES(32,'itcafe.hu',1,0);
 INSERT INTO "by_domain" VALUES(33,'imgur.com',1,0);
+INSERT INTO "by_domain" VALUES(34,'www.blu-ray.com',1,0);
 COMMIT;

@@ -116,9 +116,9 @@ downloads.add_signal("download-location", function (uri, file)
         or string.match(uri, "^%w+://(.+)")
         or string.gsub(uri, "/", "_")
         or "untitled")
-    -- ADDED: privoxy fix for youtube: prevent opening a save file dialog when
-    -- privoxy blocks some stuff
-    elseif file:match("^ads$") or file:match("tile=1") then
+    -- ADDED: privoxy fix for youtube, google and other sites:
+    -- prevent opening a save file dialog when privoxy blocks some tracking stuff
+    elseif file:match("^ads$") or file:match("tile=1") or file:match("usermatch") then
         return false
     end
     return downloads.default_dir .. "/" .. file

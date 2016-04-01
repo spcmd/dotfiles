@@ -705,7 +705,7 @@ add_binds("follow", {
 })
 
 selectors = {
-    clickable = 'a, area, textarea, select, input:not([type=hidden]), button',
+    clickable = 'a, area, textarea, select, input:not([type=hidden]), button, img[onclick]',
     focus = 'a, area, textarea, select, input:not([type=hidden]), button, body, applet, object',
     uri = 'a, area',
     desc = '*[title], img[alt], applet[alt], area[alt], input[alt]',
@@ -715,6 +715,11 @@ selectors = {
 
 evaluators = {
     click = [=[function (element) {
+
+        //ADDED: remove the taget attribute because the link doesn't get followed
+        // when target='blank' attribute is set.
+        element.removeAttribute("target");
+
         function click(element) {
             var mouse_event = document.createEvent("MouseEvent");
             mouse_event.initMouseEvent("click", true, true, window,
@@ -766,6 +771,7 @@ evaluators = {
 
 local buf = lousy.bind.buf
 add_binds("normal", {
+
     buf("^f$", [[Start `follow` mode. Hint all clickable elements
         (as defined by the `follow.selectors.clickable`
         selector) and open links in the current tab.]],
@@ -781,7 +787,7 @@ add_binds("normal", {
         `follow.selectors.uri` selector) and open links in a new tab.]],
         function (w)
             w:set_mode("follow", {
-                prompt = "background tab", selector = "uri", evaluator = "uri",
+                prompt = "new tab", selector = "uri", evaluator = "uri",
                 func = function (uri)
                     assert(type(uri) == "string")
                     w:new_tab(uri, false)

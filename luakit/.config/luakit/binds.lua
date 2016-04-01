@@ -287,8 +287,8 @@ add_binds("normal", {
         key({}, "t", "Open one or more URLs in a new tab.",
             function (w) w:enter_cmd(":tabopen ") end),
 
-        key({}, "w", "Open one or more URLs in a new window.",
-            function (w) w:enter_cmd(":winopen ") end),
+        --key({}, "w", "Open one or more URLs in a new window.",
+            --function (w) w:enter_cmd(":winopen ") end),
 
         key({}, "O", "Open one or more URLs based on current location.",
             function (w) w:enter_cmd(":open " .. (w.view.uri or "")) end),
@@ -297,9 +297,12 @@ add_binds("normal", {
             "Open one or more URLs based on current location in a new tab.",
             function (w) w:enter_cmd(":tabopen " .. (w.view.uri or "")) end),
 
-        key({}, "W",
-            "Open one or more URLs based on current locaton in a new window.",
-            function (w) w:enter_cmd(":winopen " .. (w.view.uri or "")) end),
+        --key({}, "W",
+            --"Open one or more URLs based on current locaton in a new window.",
+            --function (w) w:enter_cmd(":winopen " .. (w.view.uri or "")) end),
+
+        key({}, "w", "Toogle Web Inspector",
+            function (w) w:enter_cmd(":inspect!") w:activate() end),
 
         -- History
         key({}, "H", "Go back in the browser history `[count=1]` items.",
