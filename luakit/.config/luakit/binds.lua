@@ -446,8 +446,8 @@ add_binds("normal", {
         buf("^,ua$", "Toggle useragent string",
             function (w)
                 local ua = globals.useragent
-                if not ua:match("luakit") then
-                    w:enter_cmd(":ua luakit")
+                if not ua:match("Firefox") then
+                    w:enter_cmd(":ua firefox")
                     w:activate()
                 else
                     w:enter_cmd(":ua default")
