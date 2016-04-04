@@ -26,4 +26,8 @@ INSERT INTO "by_domain" VALUES(31,'www.reddit.com',1,0);
 INSERT INTO "by_domain" VALUES(32,'itcafe.hu',1,0);
 INSERT INTO "by_domain" VALUES(33,'imgur.com',1,0);
 INSERT INTO "by_domain" VALUES(34,'www.blu-ray.com',1,0);
+INSERT INTO "by_domain" VALUES(37,'accounts.google.com',1,0);
+INSERT INTO "by_domain" VALUES(38,'mail.google.com',1,0);
+INSERT INTO "by_domain" VALUES(40,'letterboxd.com',1,0);
+INSERT INTO "by_domain" VALUES(41,'docs.google.com',1,0);
 COMMIT;

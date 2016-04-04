@@ -31,8 +31,12 @@ function zle-line-init zle-keymap-select {
     zle reset-prompt
 }
 
+# Paste (based on: http://unix.stackexchange.com/questions/25765/pasting-from-clipboard-to-vi-enabled-zsh-or-bash-shell/25839#25839)
+vi-paste-from-clipboard () { RBUFFER=$(echo " $(xsel -o -b </dev/null)")$RBUFFER; }
+
 zle -N zle-line-init
 zle -N zle-keymap-select
+zle -N vi-paste-from-clipboard
 
 # Add missing hotkeys
 # fixes backspace deletion issues
@@ -49,3 +53,4 @@ bindkey '^j' down-history
 bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
 bindkey -M vicmd '/' history-incremental-search-backward
+bindkey -M vicmd 'p' vi-paste-from-clipboard

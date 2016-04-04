@@ -1001,7 +1001,7 @@ add_binds("ex-follow", {
             })
         end),
 
-    -- ADDED
+    -- ADDED:
     -- Set command `:download <uri>`
     key({}, "d", [[Hint all links (as defined by the `follow.selectors.uri`
         selector) and generate a `:download` command with the elements URI.]],
@@ -1016,6 +1016,20 @@ add_binds("ex-follow", {
                 end
             })
         end),
+
+    -- Peek URI
+    key({}, "u", [[Hint all links (as defined by the `follow.selectors.uri`
+        selector) and show hint's URI.]],
+        function (w)
+            w:set_mode("follow", {
+                prompt = "peek uri", selector = "uri", evaluator = "uri",
+                func = function (uri)
+                    assert(type(uri) == "string")
+                    w:notify(uri)
+                end
+            })
+        end),
+
 
 
 })

@@ -4,7 +4,7 @@ globals = {
     max_cmd_history     = 100,
     max_srch_history    = 100,
     default_window_size = "800x600",
-    show_scrollbars     = true,  -- defined in rc.lua
+    show_scrollbars     = false,  -- defined in rc.lua
     show_tablist        = true,  -- defined in window.lua
 
 --http_proxy          = "http://localhost:8118",
@@ -64,6 +64,7 @@ search_engines = {
     kat     = "https://kat.cr/usearch/?q=%s",
     ph      = "http://logout.hu/temak/keres.php?type=-&stext=%s",
     rarbg   = "https://rarbg.to/torrents.php?search=%s",
+    tpb     = "https://thepiratebay.se/search/%s",
     wiki    = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
     yt      = "https://www.youtube.com/results?search_query=%s",
 }

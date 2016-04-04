@@ -270,7 +270,7 @@ add_binds("normal", {
 
         -- Fullscreen
         key({}, "F11", "Toggle fullscreen mode.",
-        function (w) w.win.fullscreen = not w.win.fullscreen end),
+            function (w) w.win.fullscreen = not w.win.fullscreen end),
 
         -- Yanking
         key({}, "y", "Yank current URI to clipboard.",
@@ -293,8 +293,7 @@ add_binds("normal", {
         key({}, "O", "Open one or more URLs based on current location.",
             function (w) w:enter_cmd(":open " .. (w.view.uri or "")) end),
 
-        key({}, "T",
-            "Open one or more URLs based on current location in a new tab.",
+        key({}, "T", "Open one or more URLs based on current location in a new tab.",
             function (w) w:enter_cmd(":tabopen " .. (w.view.uri or "")) end),
 
         --key({}, "W",
@@ -387,7 +386,7 @@ add_binds("normal", {
 
         -- Copy (ctrl-c)
         key({"Control"}, "c", "Copy (as-in control-c control-v)",
-        function (w) luakit.selection.clipboard = luakit.selection.primary end),
+            function (w) luakit.selection.clipboard = luakit.selection.primary end),
 
         -- Window
         buf("^ZZ$", "Quit and save the session.",
@@ -397,8 +396,7 @@ add_binds("normal", {
             function (w) w:close_win() end),
 
         -- enter passthrough mode
-        key({"Control"}, "z",
-            "Enter `passthrough` mode, ignores all luakit keybindings.",
+        key({"Control"}, "z", "Enter `passthrough` mode, ignores all luakit keybindings.",
             function (w) w:set_mode("passthrough") end),
 
         ------- added key bindings --------
@@ -466,8 +464,7 @@ add_binds("normal", {
 -------------------------------
 
 add_binds("insert", {
-    key({"Control"}, "z",
-        "Enter `passthrough` mode, ignores all luakit keybindings.",
+    key({"Control"}, "z", "Enter `passthrough` mode, ignores all luakit keybindings.",
         function (w) w:set_mode("passthrough") end),
 
 })
@@ -511,13 +508,12 @@ add_binds("normal", {
 })
 
 
- -------------------------------
+-------------------------------
 --- Readline Keybindings ---
 -------------------------------
 
 readline_bindings = {
-    key({"Shift"}, "Insert",
-        "Insert contents of primary selection at cursor position.",
+    key({"Shift"}, "Insert", "Insert contents of primary selection at cursor position.",
         function (w) w:insert_cmd(luakit.selection.primary) end),
 
     key({"Control"}, "w", "Delete previous word.",
