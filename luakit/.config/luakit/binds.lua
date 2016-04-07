@@ -491,12 +491,12 @@ add_binds("normal", {
                     assert(type(uri) == "string")
                     uri = string.gsub(uri, " ", "%%20")
                     luakit.selection.primary = uri
-                    if string.match(uri, "youtube") then
+                    if string.match(uri, "youtube") or string.match(uri, "youtu.be") then
                         luakit.spawn(string.format("url2mpv.sh %s", uri))
-                        w:notify("Playing with mpv: " .. uri)
+                        --w:notify("Playing with mpv: " .. uri)
                     elseif string.match(uri, "vimeo") then
                         luakit.spawn(string.format("url2mpv.sh %s", uri))
-                        w:notify("Playing with mpv: " .. uri)
+                        --w:notify("Playing with mpv: " .. uri)
                     else
                         w:notify("Can't play this url with mpv.")
                     end

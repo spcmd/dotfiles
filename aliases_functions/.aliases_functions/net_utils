@@ -8,9 +8,6 @@
 # http://spcmd.github.io
 # https://github.com/spcmd
 
-# imgur (Bart's Bash Script Uploader, http://imgur.com/tools )
-alias imgur="$DIR_SCRIPTS/imgur-upload.sh"
-
 # bbtv.sh (https://github.com/spcmd/Scripts/blob/master/bbtv.sh)
 alias bbtv="$DIR_SCRIPTS/bbtv.sh"
 

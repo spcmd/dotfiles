@@ -23,6 +23,7 @@
 
 set editor = "vim -u ~/.mutt/mutt-vimrc"
 set send_charset="utf-8"
+set rfc2047_parameters = yes                                                # Decode attachment filenames
 set allow_8bit
 set mailcap_path = ~/.mutt/mailcap                                          # Mime type settings, open attachments with...
 set my_script_mailboxes = ~/.mutt/mailboxes.sh                              # Add/remove folder/label names to mailboxes in the account files
