@@ -92,6 +92,8 @@ highlight feedlist "Arch Linux" color1 color3
 highlight articlelist "Arch Linux" color1 color3
 highlight feedlist "IT/Tech" color0 color2
 highlight articlelist "IT/Tech" color0 color2
+highlight feedlist "Science" color0 color2
+highlight articlelist "Science" color0 color2
 highlight feedlist "Reddit" color3 color1
 highlight articlelist "Reddit" color3 color1
 highlight feedlist "Blog" color1 color7

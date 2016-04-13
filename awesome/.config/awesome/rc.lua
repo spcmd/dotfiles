@@ -166,7 +166,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     ---- Each screen has its own tag table.
-    --tags[s] = awful.tag({ "term", "web", "files", "mus", "torr", "misc", "mail", "news" }, s, layouts[1])
+    --tags[s] = awful.tag({ " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 " }, s, layouts[1])
     tags[s] = awful.tag({ " term ", " web ", " files ", " mus ", " torr ", " misc ", " mail ", " news " }, s, layouts[1])
     --tags[s] = awful.tag({ " term", "🌍 web", " files", "🎜 mus", " torr", " misc", " mail", " news" }, s, layouts[1])
     --tags[s] = awful.tag({ " 1: ", "2:🌍 ", "3: ", "4: ", "5: ", "6: ", "7: ", "8: " }, s, layouts[1])
@@ -213,7 +213,7 @@ menubar.menu_gen.all_menu_dirs = {
 ----------------------------------------------------------------
 -- global variables for widgets
 ----------------------------------------------------------------
-color_widget_separator = beautiful.bg_focus
+color_widget_separator = "#444"
 widget_separator = "<span color='"..color_widget_separator.."'>|</span>"
 
 ----------------------------------------------------------------
@@ -586,8 +586,9 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
     --left_layout:add(mylauncher)
-    left_layout:add(mylauncher_margin)
+    --left_layout:add(mylauncher_margin)
     left_layout:add(mytaglist[s])
+    --left_layout:add(mylayoutbox[s])
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right

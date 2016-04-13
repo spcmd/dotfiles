@@ -108,6 +108,10 @@ domain_props = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/imgur.css",
     },
 
+    ["filmbuzi.hu"] = {
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/filmbuzi_hu.css",
+    },
+
     ["logout.hu"] = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/logout_hu.css",
     },
