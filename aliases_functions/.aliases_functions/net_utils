@@ -28,4 +28,8 @@ gthu() { trans :hu "$@" }
 gten() { trans hu:en "$@" }
 alias gt-update="wget -N -P $DIR_SCRIPTS https://raw.githubusercontent.com/soimort/translate-shell/gh-pages/trans"
 
+# wttr (weather, a Web frontend for wego: https://github.com/chubin/wttr.in)
+wttr() { curl wttr.in/$1 }
+alias weather='wttr'
+
 # vim: set syntax=sh :
