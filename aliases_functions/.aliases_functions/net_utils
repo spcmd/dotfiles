@@ -8,6 +8,17 @@
 # http://spcmd.github.io
 # https://github.com/spcmd
 
+#bbradio checker
+bbradio() {
+    start_date=$(date)
+    num_days=5
+    for i in $(seq 1 $num_days)
+    do
+        date=$(date +"%y%m%d" -d "${start_date}+${i} days")
+        wget -P ~/Downloads http://video.builder.hu/bunny/bb.radio_$date.mp3
+    done
+}
+
 # bbtv.sh (https://github.com/spcmd/Scripts/blob/master/bbtv.sh)
 alias bbtv="$DIR_SCRIPTS/bbtv.sh"
 

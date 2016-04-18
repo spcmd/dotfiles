@@ -15,6 +15,11 @@ alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by defau
 alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 alias w3m='w3m -v'
 
+# Preview markdown files (convert to html and open is browser)
+pmd() {
+    cmark -t html $1 > /tmp/$1.html && $BROWSER /tmp/$1.html
+}
+
 # Clear Clipboard
 cpw() {
     xsel -bc &&
