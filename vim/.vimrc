@@ -209,6 +209,10 @@ command! CfgXinitrc :e ~/.xinitrc
 command! CfgXresources :e ~/.Xresources
 command! CfgZshrc :e ~/.zshrc
 
+"Preview markdown files in browser (requires cmark)
+"http://vim.wikia.com/wiki/Get_the_name_of_the_current_file
+command! MD !cmark -t html % > /tmp/%:t.html && $BROWSER /tmp/%:t.html
+
 "}}}
 " {{{   Autocommands
 "--------------------------------------------
