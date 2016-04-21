@@ -997,8 +997,11 @@ client.connect_signal("focus",
                 --end
         end)
 
---client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("unfocus",
+    function(c)
+        c.border_width = beautiful.border_unfocus_width or beautiful.border_width
+        c.border_color = beautiful.border_unfocus or beautiful.border_focus
+    end)
 
 -- Disabled clients bo be urgent by default
 -- https://awesome.naquadah.org/wiki/FAQ#Why_are_new_clients_urgent_by_default.3F

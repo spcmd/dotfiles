@@ -15,9 +15,18 @@ alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by defau
 alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 alias w3m='w3m -v'
 
+# Frambebuffer screenshot
+fbscrot() {
+    [[ ! -z $1 ]] && fbdump | pnm2png > $1 || echo "Error: no filename given."
+}
+
 # Preview markdown files (convert to html and open is browser)
-pmd() {
-    cmark -t html $1 > /tmp/$1.html && $BROWSER /tmp/$1.html
+MD() {
+    if [[ ! -z $1 ]]; then
+        cmark -t html $1 > /tmp/$1.html && $BROWSER /tmp/$1.html
+    else
+        echo "Error: no filename given."
+    fi
 }
 
 # Clear Clipboard
@@ -35,11 +44,11 @@ mksh() {
         chmod +x $1
         $EDITOR $1
     else
-        echo "Error: no filename was given."
+        echo "Error: no filename given."
     fi
 }
 
-# stopwatch
+# Stopwatch
 stopwatch() {
     date1=$(date +%s)
     while true; do
@@ -47,7 +56,7 @@ stopwatch() {
     done
 }
 
-# calculator
+# Calculator
 calc() {
     echo "Python calc (exit with Ctrl+D)"
     python2 -ic "from __future__ import division; from math import *; from random import *"

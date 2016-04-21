@@ -516,34 +516,22 @@ readline_bindings = {
     key({"Shift"}, "Insert", "Insert contents of primary selection at cursor position.",
         function (w) w:insert_cmd(luakit.selection.primary) end),
 
-    key({"Control"}, "w", "Delete previous word.",
+    key({"Control"}, "d", "Delete previous word.",
         function (w) w:del_word() end),
 
-    key({"Control"}, "u", "Delete until beginning of current line.",
+    key({"Control"}, "l", "Delete until beginning of current line.",
         function (w) w:del_line() end),
 
-    key({"Control"}, "h", "Delete character to the left.",
-        function (w) w:del_backward_char() end),
-
-    key({"Control"}, "d", "Delete character to the right.",
-        function (w) w:del_forward_char() end),
-
-    key({"Control"}, "a", "Move cursor to beginning of current line.",
+    key({"Control"}, "i", "Move cursor to beginning of current line.",
         function (w) w:beg_line() end),
 
-    key({"Control"}, "e", "Move cursor to end of current line.",
+    key({"Control"}, "a", "Move cursor to end of current line.",
         function (w) w:end_line() end),
 
-    key({"Control"}, "f", "Move cursor forward one character.",
-        function (w) w:forward_char() end),
-
-    key({"Control"}, "b", "Move cursor backward one character.",
-        function (w) w:backward_char() end),
-
-    key({"Mod1"}, "f", "Move cursor forward one word.",
+    key({"Control"}, "w", "Move cursor forward one word.",
         function (w) w:forward_word() end),
 
-    key({"Mod1"}, "b", "Move cursor backward one word.",
+    key({"Control"}, "b", "Move cursor backward one word.",
         function (w) w:backward_word() end),
 }
 

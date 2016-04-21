@@ -29,7 +29,11 @@ call plug#end()
 "--------------------------------------------"
 syntax on
 filetype plugin indent on
-colorscheme Tomorrow-Night-spcmd                    "color scheme
+if exists("$DISPLAY")
+        colorscheme Tomorrow-Night-spcmd
+    else
+        colorscheme default
+endif
 set nocompatible                                    "disable Vi compatibility
 set modeline                                        "enable modeline
 set modelines=5                                     "enable modeline

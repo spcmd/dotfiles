@@ -4,7 +4,28 @@
 #
 # Global Order: zshenv, zprofile, zshrc, zlogin
 
-# ENV Variables
+# Set colors for the console
+if [ "$TERM" = "linux" ]; then
+    echo -en "\e]P0000000" #black
+    echo -en "\e]P8202020" #darkgrey
+    echo -en "\e]P1ff434a" #darkred
+    echo -en "\e]P9de100c" #red
+    echo -en "\e]P200930C" #darkgreen
+    echo -en "\e]PA46cb50" #green
+    echo -en "\e]P3fae56b" #brown
+    echo -en "\e]PBfdff0f" #yellow
+    echo -en "\e]P42d92dd" #darkblue
+    echo -en "\e]PC2d92dd" #blue
+    echo -en "\e]P5d281ce" #darkmagenta
+    echo -en "\e]PDd281ce" #magenta
+    echo -en "\e]P600c1c1" #darkcyan
+    echo -en "\e]PE00f0f0" #cyan
+    echo -en "\e]P7ffffff" #white
+    echo -en "\e]PFE5E5E5" #lightgrey
+    clear #for background artifacting
+fi
+
+# Env Vars
 export BROWSER='luakit'
 export EDITOR='vim'
 export TERM='rxvt-unicode-256color'
