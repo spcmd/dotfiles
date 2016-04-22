@@ -26,3 +26,6 @@ sudo cp issue /etc
 
 # Set swapiness
 sudo cp 99-sysctl.conf /etc/sysctl.d
+
+# Disable cursor blink in TTY
+sudo cp disable-cursor-blink-tty.conf /etc/tmpfiles.d

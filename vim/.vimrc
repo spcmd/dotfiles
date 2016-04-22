@@ -22,6 +22,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdcommenter'
     Plug 'spcmd/vim-easy-todo', { 'for': 'todo' }
     Plug 'kristijanhusak/vim-multiple-cursors'
+    "Plug 'xolox/vim-misc'
+    "Plug 'xolox/vim-colorscheme-switcher'
+    "Plug 'chriskempson/base16-vim'
+    "Plug 'w0ng/vim-hybrid'
 
 call plug#end()
 " }}}
@@ -55,7 +59,7 @@ set ttimeout                                        "reduce timeout after <Esc>
 set ttimeoutlen=10                                  "reduce timeout after <Esc>
 set splitbelow                                      "horizontal split: open below
 set splitright                                      "vertical split: open to the right
-set t_Co=256                                        "set terminal to 256 color
+"set t_Co=256                                        "set terminal to 256 color
 set rnu                                             "relative line numbering
 "set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline
@@ -340,7 +344,10 @@ nnoremap <silent> <leader>x :TodoCancel<CR>
 "inoremap <silent> <leader>vc <Esc>:VCoolor<CR>a
 
 "Colorizer (https://github.com/chrisbra/Colorizer)
-nnoremap <silent> <leader>cz :ColorHighlight syntax<CR>
+"nnoremap <silent> <leader>cz :ColorHighlight syntax<CR>
+
+" Cycle through colorschemes
+"nnoremap <leader>n :NextColorScheme<CR>
 
 " Replace X with x, so it will save and quit instead of showing the encryption prompt
 " (http://stackoverflow.com/questions/17792177/disable-encryption-with-x-in-vim/17794801#17794801)
@@ -356,5 +363,6 @@ vnoremap U <Nop>
 
 " Run current file (script) in shell
 nnoremap <C-x> :!%<CR>
+
 
 " }}}

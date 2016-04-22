@@ -8,8 +8,8 @@
 if [ "$TERM" = "linux" ]; then
     echo -en "\e]P0000000" #black
     echo -en "\e]P8202020" #darkgrey
-    echo -en "\e]P1ff434a" #darkred
-    echo -en "\e]P9de100c" #red
+    echo -en "\e]P1de100c" #darkred
+    echo -en "\e]P9ff434a" #red
     echo -en "\e]P200930C" #darkgreen
     echo -en "\e]PA46cb50" #green
     echo -en "\e]P3fae56b" #brown
@@ -21,7 +21,7 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]P600c1c1" #darkcyan
     echo -en "\e]PE00f0f0" #cyan
     echo -en "\e]P7ffffff" #white
-    echo -en "\e]PFE5E5E5" #lightgrey
+    echo -en "\e]PFffffff" #lightgrey
     clear #for background artifacting
 fi
 
