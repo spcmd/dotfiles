@@ -1,3 +1,13 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
 # This file is sourced only for login shells (i.e. shells
 # invoked with "-" as the first character of argv[0], and
 # shells invoked with the -l flag.)
@@ -33,6 +43,7 @@ export COLORTERM='rxvt-unicode-256color'
 export MEDIAPLAYER='mpv'
 export IMAGER='feh'
 export PDFER='zathura'
+export FBFONT=/usr/share/kbd/consolefonts/ter-216b.psf.gz       # for FIM (http://www.nongnu.org/fbi-improved/)
 
 export DIR_BACKUP=$HOME/Backup
 export DIR_SCRIPTS=$HOME/Scripts

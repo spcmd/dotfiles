@@ -20,7 +20,7 @@ urxvtd &
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources &
 
 # Set Font path
-xset +fp ~/.local/share/fonts/terminus &
+#xset +fp ~/.local/share/fonts/terminus &
 
 # Generate dwatch cache
 [[ -x ~/Scripts/dwatch ]] && sh ~/Scripts/dwatch update &

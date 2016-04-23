@@ -72,6 +72,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/l
 [[ -f $DIR_ALIASES_FUNCTIONS/pacman ]] && . $DIR_ALIASES_FUNCTIONS/pacman
 [[ -f $DIR_ALIASES_FUNCTIONS/password ]] && . $DIR_ALIASES_FUNCTIONS/password
 [[ -f $DIR_ALIASES_FUNCTIONS/start-sleep-shutdown ]] && . $DIR_ALIASES_FUNCTIONS/start-sleep-shutdown
+[[ -f $DIR_ALIASES_FUNCTIONS/tmux ]] && . $DIR_ALIASES_FUNCTIONS/tmux
 [[ -f $DIR_ALIASES_FUNCTIONS/wifi-network ]] && . $DIR_ALIASES_FUNCTIONS/wifi-network
 [[ -f $DIR_ALIASES_FUNCTIONS/xampp-lampp ]] && . $DIR_ALIASES_FUNCTIONS/xampp-lampp
 
