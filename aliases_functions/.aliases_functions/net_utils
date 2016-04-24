@@ -25,6 +25,10 @@ alias bbtv="$DIR_SCRIPTS/bbtv.sh"
 # ping
 alias pingg='ping google.com'
 
+# clbin
+clbin() { curl -F 'clbin=<-' https://clbin.com }
+alias clibin=clbin
+
 # is this site down?
 isdown() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g;s/&#x2F;/\//g' }
 
