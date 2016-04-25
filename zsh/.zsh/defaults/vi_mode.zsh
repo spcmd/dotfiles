@@ -32,7 +32,7 @@ function zle-line-init zle-keymap-select {
 }
 
 # Paste (based on: http://unix.stackexchange.com/questions/25765/pasting-from-clipboard-to-vi-enabled-zsh-or-bash-shell/25839#25839)
-vi-paste-from-clipboard () { RBUFFER=$(echo " $(xsel -o -b </dev/null)")$RBUFFER; }
+vi-paste-from-clipboard () { RBUFFER=$(echo "$(xsel -o -b </dev/null)")$RBUFFER; }
 
 zle -N zle-line-init
 zle -N zle-keymap-select

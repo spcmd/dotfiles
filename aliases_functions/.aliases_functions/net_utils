@@ -8,6 +8,24 @@
 # http://spcmd.github.io
 # https://github.com/spcmd
 
+# Pastebin services
+sprunge() {
+    # http://sprunge.us/
+    syntax=$1
+    paste=$(curl --silent -F 'sprunge=<-' http://sprunge.us)
+    [[ $syntax ]] && echo "- SYNTAX HIGHLIGHTED:  $paste?$syntax"
+    echo "- RAW:  $paste"
+}
+
+clbin() {
+    # https://clbin.com/
+    paste=$(curl --silent -F 'clbin=<-' https://clbin.com)
+    echo "- SYNTAX HIGHLIGHTED:  $paste?hl"
+    echo "- RAW:  $paste"
+}
+
+lspastebin() { which sprunge clbin;}
+
 #bbradio checker
 bbradio() {
     start_date=$(date)
@@ -24,10 +42,6 @@ alias bbtv="$DIR_SCRIPTS/bbtv.sh"
 
 # ping
 alias pingg='ping google.com'
-
-# clbin
-clbin() { curl -F 'clbin=<-' https://clbin.com }
-alias clibin=clbin
 
 # is this site down?
 isdown() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g;s/&#x2F;/\//g' }
