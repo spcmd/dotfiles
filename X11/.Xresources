@@ -104,8 +104,35 @@ URxvt.url-select-plus.underline: true
 !   Colors
 ! ------------------------------------------
 
-#include "/home/spcmd/.urxvt/Xresources.urxvt.colors-spcmd2"
-#include "/home/spcmd/.mutt/Xresources.mutt.colors-spcmd"
-#include "/home/spcmd/.config/ranger/Xresources.ranger.colors-spcmd2"
-#include "/home/spcmd/.newsbeuter/Xresources.newsbeuter.colors-spcmd"
-#include "/home/spcmd/.config/tox/Xresources.toxic.colors-spcmd"
+! black
+URxvt.color0: #000000
+URxvt.color8: #000000
+! red
+URxvt.color1: #FF434A
+URxvt.color9: #CC181E
+! green
+URxvt.color2: #46CB50
+URxvt.color10: #005a00
+! yellow
+URxvt.color3: #FAE56B
+URxvt.color11: #FAC96B
+! blue
+URxvt.color4:#0d497b
+URxvt.color12: #2d92dd
+! magenta
+URxvt.color5: #D281CE
+URxvt.color13: #D281CE
+! cyan
+URxvt.color6: #00C1C1
+URxvt.color14: #00F0F0
+! white
+URxvt.color7: #ffffff
+URxvt.color15: #ccc
+
+! Specific colors
+! Not usign it anymore
+!#include "/home/spcmd/.urxvt/Xresources.urxvt.colors-spcmd2"
+!#include "/home/spcmd/.mutt/Xresources.mutt.colors-spcmd"
+!#include "/home/spcmd/.config/ranger/Xresources.ranger.colors-spcmd2"
+!#include "/home/spcmd/.newsbeuter/Xresources.newsbeuter.colors-spcmd"
+!#include "/home/spcmd/.config/tox/Xresources.toxic.colors-spcmd"

@@ -182,31 +182,44 @@ source $alias_file
 # {{{   Colors
 # -----------------------------------------------------
 
+# Defining colors with color numbers instead of names becasue with name the bright colors won't get applied properly
+# For example: 'color indicator brightlue' will only colorize parts of the UI elements (behind the text) and leaves other parts with the color blue (not bright)
+#
+# color pairs (normal and bright)
+# color 0, 8  = black
+# color 1, 9  = red
+# color 2, 10 = green
+# color 3, 11 = yellow
+# color 4, 12 = blue
+# color 5, 13 = magenta
+# color 6, 14 = cyan
+# color 7, 15 = white
+
 color sidebar_new   default         default                     # Folders that contain new messages
-color hdrdefault    black           cyan                        # Header (in the pager)
-color attachment    white           green                       # Attachments (in the pager)
+color hdrdefault    color0           color15                        # Header (in the pager)
+color attachment    color7           color2                       # Attachments (in the pager)
 
-color quoted        cyan            default                     # Quoted text in messages
-color quoted1       magenta         default                     # Quoted text in messages
-color quoted2       cyan            default                     # Quoted text in messages
-color quoted3       magenta         default                     # Quoted text in messages
+color quoted        color6            default                     # Quoted text in messages
+color quoted1       color5         default                     # Quoted text in messages
+color quoted2       color6            default                     # Quoted text in messages
+color quoted3       color5         default                     # Quoted text in messages
 
-color error         white           red                         # Error messages
-color message       white           default                     # Message  informational messages
-color indicator     white           brightblue                  # Selection highlight (on the current message)
-color status        black           cyan                        # "Window" color (statusbar)
-color tree          yellow          default                     # Tree indicator (of threads)
-color search        white           blue                        # Search matches found with search within the internal pager
-color markers       red             default                     # The markers indicate a wrapped line
+color error         color7           color9                         # Error messages
+color message       color7           default                     # Message  informational messages
+color indicator     color7           color4                  # Selection highlight (on the current message)
+color status        color0           color15                  # "Window" color (statusbar)
+color tree          color11          default                     # Tree indicator (of threads)
+color search        color7           color4                        # Search matches found with search within the internal page
+color markers       color9             default                     # The markers indicate a wrapped line
 
 # Pattern modifiers: http://www.mutt.org/doc/devel/manual.html#tab-patterns
-color index         green           default '~O'                # Old flagged messages
-color index         white           red     '~N'                # New messages
-color index         red             yellow  '~F'                # Important (Starred) messages
-color index         brightred       black   '~D'                # Marked for deletion
-color index         brightyellow    default '~T'                # Tagged messages
-color body          yellow          default '.+\[cid.+\]'       # Inline content/image indicator when using html view with w3m
-#color index        white green '~y LABELNAME'
+color index         color2           default '~O'                # Old flagged messages
+color index         color7           color9     '~N'                # New messages
+color index         color1             color11  '~F'                # Important (Starred) messages
+color index         color1       color0   '~D'                # Marked for deletion
+color index         color11    default '~T'                # Tagged messages
+color body          color11          default '.+\[cid.+\]'       # Inline content/image indicator when using html view with w3m
+#color index        color7 color2 '~y LABELNAME'
 
 # }}}
 # {{{   Accounts

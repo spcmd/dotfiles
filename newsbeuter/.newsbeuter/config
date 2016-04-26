@@ -76,33 +76,33 @@ macro o set browser "w3m %u"; open-in-browser ; set browser "$BROWSER"
 # COLORS --------------------------------------------------------------------------------
 # color <element> <foreground color> <background color> [<attribute> ...]
 
-color background color1 color0
-color listnormal color1 color0
-color listfocus  color1 color3
-color listnormal_unread color1 color0
-color listfocus_unread  color1 color3
-color info       color0 color6
-color article    color1 color0
+color background color7 color0
+color listnormal color7 color0
+color listnormal_unread color7 color0
+color listfocus  color7 color4
+color listfocus_unread  color7 color4
+color info       color0 color15
+color article    color7 color0
 
-highlight feedlist "✗ Unread" color0 color4
-highlight feedlist "⚑ Flagged" color0 color4
-highlight feedlist "Youtube" color1 color5
-highlight articlelist "Youtube" color1 color5
-highlight feedlist "Arch Linux" color1 color3
-highlight articlelist "Arch Linux" color1 color3
-highlight feedlist "IT/Tech" color0 color2
-highlight articlelist "IT/Tech" color0 color2
-highlight feedlist "Science" color0 color2
-highlight articlelist "Science" color0 color2
-highlight feedlist "Reddit" color3 color1
-highlight articlelist "Reddit" color3 color1
-highlight feedlist "Blog" color1 color7
-highlight articlelist "Blog" color1 color7
-highlight feedlist "Podcast" color1 color7
-highlight articlelist "Podcast" color1 color7
-highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:|^Flags:)" color2 color0
-highlight article "https?://[^ ]+" color4 color0
-highlight article "\\[[0-9]{1,2}\]" color2 color0
+highlight feedlist "✗ Unread" color0 color11
+highlight feedlist "⚑ Flagged" color0 color11
+highlight feedlist "Youtube" color7 color9
+highlight articlelist "Youtube" color7 color9
+highlight feedlist "Arch Linux" color7 color4
+highlight articlelist "Arch Linux" color7 color4
+highlight feedlist "IT/Tech" color0 color15
+highlight articlelist "IT/Tech" color0 color15
+highlight feedlist "Science" color0 color15
+highlight articlelist "Science" color0 color15
+highlight feedlist "Reddit" color4 color7
+highlight articlelist "Reddit" color4 color7
+highlight feedlist "Blog" color7 color10
+highlight articlelist "Blog" color7 color10
+highlight feedlist "Podcast" color7 color10
+highlight articlelist "Podcast" color7 color10
+highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:|^Flags:)" color11 color0
+highlight article "https?://[^ ]+" color11 color0
+highlight article "\\[[0-9]{1,2}\]" color15 color0
 
 # light color scheme
 #color background black white

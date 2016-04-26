@@ -16,7 +16,6 @@ alias gpush='git push origin master'
 alias gcommit='git commit -m'
 alias gdiff='git diff'
 alias grm='git rm --cached' # Removes remote file copy only. (eg.: removing ignored files that are already pushed without removing the local copies)
-alias cdgit='cd ~/git'
 
 color_dir="\033[1;34m"
 color_reset="\033[0m"
