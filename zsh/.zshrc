@@ -42,18 +42,6 @@ compinit -i -d "${FILE_ZSH_COMPDUMP}"
 
 
 # }}}
-# {{{   ENV Variables / Dirs / Paths
-# -----------------------------------------------------
-
-# Stop ranger from loading the both the default and the custom config files
-export RANGER_LOAD_DEFAULT_RC=FALSE
-
-# Setting the $PATH
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games"
-[[ -d $DIR_SCRIPTS ]] && PATH=$PATH:$DIR_SCRIPTS
-[[ -d $HOME/bin ]] && PATH=$PATH:$HOME/bin
-
-# }}}
 # {{{   Functions/Aliases
 # -----------------------------------------------------
 

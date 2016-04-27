@@ -22,6 +22,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdcommenter'
     Plug 'spcmd/vim-easy-todo', { 'for': 'todo' }
     Plug 'kristijanhusak/vim-multiple-cursors'
+    "Plug 'junegunn/fzf', { 'do': './install --all' }
+    "Plug 'junegunn/fzf.vim'
     "Plug 'xolox/vim-misc'
     "Plug 'xolox/vim-colorscheme-switcher'
     "Plug 'chriskempson/base16-vim'
@@ -36,7 +38,7 @@ filetype plugin indent on
 if exists("$DISPLAY")
         colorscheme Tomorrow-Night-spcmd
     else
-        colorscheme default
+        colorscheme slate
 endif
 set nocompatible                                    "disable Vi compatibility
 set modeline                                        "enable modeline
@@ -137,6 +139,21 @@ silent !echo -ne "\033]12;yellow\007"
 "autocmd VimLeave * silent !echo -ne "\033]12;white\007"
 
 " }}}
+" {{{   Autocommands
+"--------------------------------------------
+
+"Remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+"Syntax highlight
+autocmd BufRead .rtorrent.rc set filetype=sh
+autocmd BufRead .vimperatorrc set filetype=vim
+autocmd BufRead .pentadactylrc set filetype=vim
+autocmd BufRead *.vimp set filetype=vim
+autocmd BufRead .xinitrc set filetype=sh
+autocmd BufRead *.todo nnoremap <space> za]z
+
+" }}}
 " {{{   Commands & Functions
 "--------------------------------------------
 
@@ -221,22 +238,26 @@ command! CfgZshrc :e ~/.zshrc
 "http://vim.wikia.com/wiki/Get_the_name_of_the_current_file
 command! MD !cmark -t html % > /tmp/%:t.html && $BROWSER /tmp/%:t.html
 
+" Open files quickly with dmenu
+" http://leafo.net/posts/using_dmenu_to_open_quickly.html
+
+" Strip the newline from the end of a string
+function! Chomp(str)
+  return substitute(a:str, '\n$', '', '')
+endfunction
+
+" List files with dmenu
+function! DmenuOpen(cmd)
+  let fname = Chomp(system(' find ~/.aliases_functions ~/.dsnippet ~/.webdev ~/dotfiles ~/Scripts -type f ! -iregex ".*[/]\.git[/]?.*\|^.+\.png$\|^.+\.jpg$\|^.+\.psd$" | dmenu -fn Terminus -i -l 20 -p ' . a:cmd))
+  if empty(fname)
+    return
+  endif
+  execute a:cmd . " " . fname
+endfunction
+
+map <leader>o :call DmenuOpen("e")<cr>
+
 "}}}
-" {{{   Autocommands
-"--------------------------------------------
-
-"Remove trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
-
-"Syntax highlight
-autocmd BufRead .rtorrent.rc set filetype=sh
-autocmd BufRead .vimperatorrc set filetype=vim
-autocmd BufRead .pentadactylrc set filetype=vim
-autocmd BufRead *.vimp set filetype=vim
-autocmd BufRead .xinitrc set filetype=sh
-autocmd BufRead *.todo nnoremap <space> za]z
-
-" }}}
 " {{{   Key mappings
 "--------------------------------------------
 
@@ -327,7 +348,7 @@ nnoremap y "+y
 vnoremap y "+y
 
 "NERDTree (https://github.com/scrooloose/nerdtree)
-nmap <C-b> :NERDTreeToggle<CR>
+"nmap <C-b> :NERDTreeToggle<CR>
 
 "Neocomplete (https://github.com/Shougo/neocomplete.vim)
 "move to the next with Tab and to the previous with Shift-Tab
@@ -363,6 +384,5 @@ vnoremap U <Nop>
 
 " Run current file (script) in shell
 nnoremap <C-x> :!%<CR>
-
 
 " }}}

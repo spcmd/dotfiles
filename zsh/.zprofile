@@ -14,7 +14,9 @@
 #
 # Global Order: zshenv, zprofile, zshrc, zlogin
 
-# Set colors for the console
+# ------------------------------------
+# Colors for the console (linux term)
+# ------------------------------------
 if [ "$TERM" = "linux" ]; then
     echo -en "\e]P0000000" #black
     echo -en "\e]P8202020" #darkgrey
@@ -35,7 +37,11 @@ if [ "$TERM" = "linux" ]; then
     clear #for background artifacting
 fi
 
+# ------------------------------------
 # Env Vars
+# ------------------------------------
+
+# Applications
 export BROWSER='luakit'
 export EDITOR='vim'
 export TERM='rxvt-unicode-256color'
@@ -43,8 +49,17 @@ export COLORTERM='rxvt-unicode-256color'
 export MEDIAPLAYER='mpv'
 export IMAGER='feh'
 export PDFER='zathura'
-export FBFONT=/usr/share/kbd/consolefonts/ter-216b.psf.gz       # for FIM (http://www.nongnu.org/fbi-improved/)
 
+# FIM (http://www.nongnu.org/fbi-improved/)
+export FBFONT=/usr/share/kbd/consolefonts/ter-216b.psf.gz
+
+# Ranger: Don't load the default config
+export RANGER_LOAD_DEFAULT_RC=FALSE
+
+# fzf default options
+export FZF_DEFAULT_OPTS="--extended --exact --reverse --bind=tab:down,btab:up"
+
+# Directories
 export DIR_BACKUP=$HOME/Backup
 export DIR_SCRIPTS=$HOME/Scripts
 export DIR_ALIASES_FUNCTIONS=$HOME/.aliases_functions
@@ -58,6 +73,11 @@ export XDG_PICTURES_DIR="$HOME/Pictures"
 export XDG_PUBLICSHARE_DIR="$HOME/Public"
 export XDG_TEMPLATES_DIR="$HOME/.Templates"
 export XDG_VIDEOS_DIR="$HOME/Videos"
+
+# Path
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games"
+[[ -d $DIR_SCRIPTS ]] && PATH=$PATH:$DIR_SCRIPTS
+[[ -d $HOME/bin ]] && PATH=$PATH:$HOME/bin
 
 # Auto startx
 #[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
