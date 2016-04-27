@@ -35,7 +35,7 @@ function zle-line-init zle-keymap-select {
 vi-paste-from-clipboard () { RBUFFER=$(echo "$(xsel -o -b </dev/null)")$RBUFFER; }
 
 # Search history with fzf
-fzf-history () { RBUFFER=$(fc -ln -500 | fzf --tac --no-sort) $RBUFFER; }
+fzf-history () { RBUFFER=$(fc -ln -500 | fzf --tac --no-sort --color=prompt:166 --prompt "history> ") $RBUFFER; }
 
 zle -N zle-line-init
 zle -N zle-keymap-select

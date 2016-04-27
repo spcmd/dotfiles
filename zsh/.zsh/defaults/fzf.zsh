@@ -13,7 +13,7 @@
 
 fzf-vim-open() {
     dirs=(~/.aliases_functions ~/.dsnippet ~/.webdev ~/dotfiles ~/Scripts)
-    list=$(find "${dirs[@]}" -type f ! -iregex ".*[/]\.git[/]?.*\|^.+\.png$\|^.+\.jpg$\|^.+\.psd$" | fzf)
+    list=$(find "${dirs[@]}" -type f ! -iregex ".*[/]\.git[/]?.*\|^.+\.png$\|^.+\.jpg$\|^.+\.psd$" | fzf --color=prompt:155,pointer:155,hl:155,hl+:198 --prompt "fzf-vim-open> ")
     # Run Vim only if something was selected
     [[ ! -z $list ]] && echo "$list" | xargs bash -c '</dev/tty vim "$@"' ignoreme
 }
