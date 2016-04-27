@@ -12,8 +12,8 @@
 # xargs vim info: http://superuser.com/questions/336016/invoking-vi-through-find-xargs-breaks-my-terminal-why/427881#427881
 
 fzf-vim-open() {
-    dirs=(~/.aliases_functions ~/.dsnippet ~/.webdev ~/dotfiles ~/Scripts)
-    list=$(find "${dirs[@]}" -type f ! -iregex ".*[/]\.git[/]?.*\|^.+\.png$\|^.+\.jpg$\|^.+\.psd$" | fzf --color=prompt:155,pointer:155,hl:155,hl+:198 --prompt "fzf-vim-open> ")
+    dirs=(~/.aliases_functions ~/.dsnippet ~/.webdev ~/dotfiles ~/Documents ~/Scripts)
+    list=$(find "${dirs[@]}" -type f ! -iregex ".*[/]\.git[/]?.*\|^.+\.png$\|^.+\.jpg$\|^.+\.psd$\|^.+\.pdf$\|^.+\.odt$\|^.+\.ods$\|^.+\.docx?$\|^.+\.xlsx?$" | fzf --color=prompt:155,pointer:155,hl:155,hl+:198 --prompt "fzf-vim-open> ")
     # Run Vim only if something was selected
     [[ ! -z $list ]] && echo "$list" | xargs bash -c '</dev/tty vim "$@"' ignoreme
 }
