@@ -34,7 +34,7 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]PE00f0f0" #cyan
     echo -en "\e]P7ffffff" #white
     echo -en "\e]PFffffff" #lightgrey
-    clear #for background artifacting
+    #clear #for background artifacting
 fi
 
 # ------------------------------------
@@ -57,7 +57,7 @@ export FBFONT=/usr/share/kbd/consolefonts/ter-216b.psf.gz
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
 # fzf default options
-export FZF_DEFAULT_OPTS="--extended --exact --reverse --bind=tab:down,btab:up"
+export FZF_DEFAULT_OPTS="--extended --exact --reverse --bind=tab:down,btab:up,ctrl-j:page-down,ctrl-k:page-up --color=prompt:3"
 
 # Directories
 export DIR_BACKUP=$HOME/Backup

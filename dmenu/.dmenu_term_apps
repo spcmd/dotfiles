@@ -1,11 +1,12 @@
-vim
-htop
 alsamixer
-nmtui
+htop
+mocp
 mpsyt
-ranger -name ranger
-mocp -name moc
-newsbeuter -name newsbeuter
-rtorrent -name rTorrent
-toxic -name toxic
+newsbeuter
+nmtui
+ranger
+rtorrent
+rtv
+toxic
 tvd
+vim
