@@ -19,7 +19,7 @@
 # ------------------------------------
 if [ "$TERM" = "linux" ]; then
     echo -en "\e]P0000000" #black
-    echo -en "\e]P8202020" #darkgrey
+    echo -en "\e]P8555555" #darkgrey
     echo -en "\e]P1de100c" #darkred
     echo -en "\e]P9ff434a" #red
     echo -en "\e]P200930C" #darkgreen

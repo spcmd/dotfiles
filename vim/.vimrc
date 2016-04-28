@@ -38,7 +38,7 @@ filetype plugin indent on
 if exists("$DISPLAY")
         colorscheme Tomorrow-Night-spcmd
     else
-        colorscheme slate
+        colorscheme Tomorrow-Night-Eighties-TTY
 endif
 set nocompatible                                    "disable Vi compatibility
 set modeline                                        "enable modeline
