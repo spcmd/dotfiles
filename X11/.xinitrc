@@ -2,28 +2,28 @@
 [[ -x /usr/bin/numlockx ]] && /usr/bin/numlockx &
 
 # Source Xmodmap
-xmodmap ~/.Xmodmap &
+xmodmap ~/.Xmodmap
 
 # Set the wallpaper
-sh ~/.fehbg &
+sh ~/.fehbg
 
 # Set/Restore backlight
 xbacklight -set 20 &
 
 # Map caps lock to escape
-(sleep 1 && setxkbmap -option caps:escape) &
+(sleep 1 && setxkbmap -option caps:escape)
 
 # Start urxvt daemon
 urxvtd &
 
 # Merge .Xresources
-[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources &
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
 # Set Font path
 #xset +fp ~/.local/share/fonts/terminus &
 
 # Generate dwatch cache
-[[ -x ~/Scripts/dwatch ]] && sh ~/Scripts/dwatch update &
+#[[ -x ~/Scripts/dwatch ]] && sh ~/Scripts/dwatch update
 
 # Redshift
 redshift -r -c ~/.config/redshift/redshift.conf &
