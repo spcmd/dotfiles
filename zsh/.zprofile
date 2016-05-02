@@ -26,16 +26,17 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]PA46cb50" #green
     echo -en "\e]P3fae56b" #brown
     echo -en "\e]PBfdff0f" #yellow
-    echo -en "\e]P42d92dd" #darkblue
+    echo -en "\e]P40d497b" #darkblue
     echo -en "\e]PC2d92dd" #blue
     echo -en "\e]P5d281ce" #darkmagenta
     echo -en "\e]PDd281ce" #magenta
     echo -en "\e]P600c1c1" #darkcyan
     echo -en "\e]PE00f0f0" #cyan
     echo -en "\e]P7ffffff" #white
-    echo -en "\e]PFffffff" #lightgrey
+    echo -en "\e]PFcccccc" #lightgrey
     #clear #for background artifacting
 fi
+
 
 # ------------------------------------
 # Env Vars

@@ -53,13 +53,12 @@ keymap . NEXT_TAB
 
 # Bookmark
 keymap a ADD_BOOKMARK
-keymap :b VIEW_BOOKMARK
-keymap C-b VIEW_BOOKMARK
+keymap B VIEW_BOOKMARK
 
 # History
 keymap H PREV
 keymap L NEXT
-keymap B SELECT_MENU
+keymap :b SELECT_MENU
 keymap :h HISTORY
 keymap C-h HISTORY
 
@@ -104,9 +103,9 @@ keymap ! SHELL
 # ---- Added commands (they work only with my patched w3m):
 
 # Yank url
-keymap y YANK_LINK
-keymap Y YANK_PAGE
+#keymap y YANK_LINK
+#keymap Y YANK_PAGE
 
 # Open url in mediaplayer
-keymap m MEDIAPLAYER_LINK
-keymap M MEDIAPLAYER_PAGE
+#keymap m MEDIAPLAYER_LINK
+#keymap M MEDIAPLAYER_PAGE
