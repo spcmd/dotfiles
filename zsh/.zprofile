@@ -26,8 +26,8 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]PA46cb50" #green
     echo -en "\e]P3fae56b" #brown
     echo -en "\e]PBfdff0f" #yellow
-    echo -en "\e]P40d497b" #darkblue
     echo -en "\e]PC2d92dd" #blue
+    echo -en "\e]P42d92dd" #darkblue
     echo -en "\e]P5d281ce" #darkmagenta
     echo -en "\e]PDd281ce" #magenta
     echo -en "\e]P600c1c1" #darkcyan
@@ -37,28 +37,9 @@ if [ "$TERM" = "linux" ]; then
     #clear #for background artifacting
 fi
 
-
 # ------------------------------------
 # Env Vars
 # ------------------------------------
-
-# Applications
-export BROWSER='luakit'
-export EDITOR='vim'
-export TERM='rxvt-unicode-256color'
-export COLORTERM='rxvt-unicode-256color'
-export MEDIAPLAYER='mpv'
-export IMAGER='feh'
-export PDFER='zathura'
-
-# FIM (http://www.nongnu.org/fbi-improved/)
-export FBFONT=/usr/share/kbd/consolefonts/ter-216b.psf.gz
-
-# Ranger: Don't load the default config
-export RANGER_LOAD_DEFAULT_RC=FALSE
-
-# fzf default options
-export FZF_DEFAULT_OPTS="--extended --exact --reverse --bind=tab:down,btab:up,ctrl-j:page-down,ctrl-k:page-up --color=prompt:3"
 
 # Directories
 export DIR_BACKUP=$HOME/Backup
@@ -79,6 +60,25 @@ export XDG_VIDEOS_DIR="$HOME/Videos"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games"
 [[ -d $DIR_SCRIPTS ]] && PATH=$PATH:$DIR_SCRIPTS
 [[ -d $HOME/bin ]] && PATH=$PATH:$HOME/bin
+
+# Applications
+export BROWSER="$DIR_SCRIPTS/url_opener.sh"
+export EDITOR='vim'
+export TERM='rxvt-unicode-256color'
+export COLORTERM='rxvt-unicode-256color'
+export MEDIAPLAYER='mpv'
+export IMAGER='feh'
+export PDFER='zathura'
+
+# FIM (http://www.nongnu.org/fbi-improved/)
+export FBFONT=/usr/share/kbd/consolefonts/ter-216b.psf.gz
+
+# Ranger: Don't load the default config
+export RANGER_LOAD_DEFAULT_RC=FALSE
+
+# fzf default options
+export FZF_DEFAULT_OPTS="--extended --exact --reverse --bind=tab:down,btab:up,ctrl-j:page-down,ctrl-k:page-up --color=prompt:3"
+
 
 # Auto startx
 #[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx

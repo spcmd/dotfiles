@@ -682,10 +682,10 @@ globalkeys = awful.util.table.join(
                         awful.util.spawn("spotify")
                   end),
 
-    -- Backlight
-    awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn(HOME.."/Scripts/qxbacklight --down") end),
-    awful.key({ modkey, "Control" }, "Right", function () awful.util.spawn(HOME.."/Scripts/qxbacklight --up") end),
-    awful.key({ modkey, "Control" }, "#90", function () awful.util.spawn(HOME.."/Scripts/qxbacklight --default") end),
+    -- Backlight (https://github.com/haikarainen/light)
+    awful.key({ modkey, "Control" }, "Left", function () awful.util.spawn("light -U 2") end),
+    awful.key({ modkey, "Control" }, "Right", function () awful.util.spawn("light -A 2") end),
+    awful.key({ modkey, "Control" }, "#90", function () awful.util.spawn("light -S 20") end),
 
     -- Set wallpaper with feh (useful when errors happen and Awesome falls back to the default wallpaper)
     awful.key({ modkey, "Mod1"    }, "w", function () awful.util.spawn_with_shell("sh ~/.fehbg") end),

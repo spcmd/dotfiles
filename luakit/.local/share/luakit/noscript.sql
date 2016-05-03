@@ -34,4 +34,5 @@ INSERT INTO "by_domain" VALUES(45,'alpha.wallhaven.cc',1,0);
 INSERT INTO "by_domain" VALUES(49,'www.deviantart.com',1,0);
 INSERT INTO "by_domain" VALUES(51,'drive.google.com',1,0);
 INSERT INTO "by_domain" VALUES(52,'markdownlivepreview.com',1,0);
+INSERT INTO "by_domain" VALUES(53,'www.mostszol.hu',1,0);
 COMMIT;
