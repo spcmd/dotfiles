@@ -8,7 +8,8 @@ xmodmap ~/.Xmodmap
 sh ~/.fehbg
 
 # Set/Restore backlight
-xbacklight -set 20 &
+#xbacklight -set 20 &
+light -S 20
 
 # Map caps lock to escape
 (sleep 1 && setxkbmap -option caps:escape)
