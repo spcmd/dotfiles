@@ -8,11 +8,17 @@ super + Return
 
 # program launcher
 super + a
-	dmenu_run
+    $HOME/Scripts/dmenu_run -i -l 10 -fn 'terminus' -sb '#0D497B' -nb '#121212'
 
 # reload config files
 super + shift + r
-	pkill -USR1 -x sxhkd; sh ~/.config/bspwm/bspwmrc; notify-send -t 1000 "Config reloaded"
+	pkill -USR1 -x sxhkd; pkill panel; pkill lemonbar; ~/.config/bspwm/bspwmrc; notify-send -t 1000 "Config reloaded"
+
+# volume
+super + Up
+    ~/.config/bspwm/volume.sh up
+super + Down
+    ~/.config/bspwm/volume.sh down
 
 # -----------------------
 # bspwm hotkeys
@@ -130,3 +136,5 @@ super + button{1-3}
 # end move/resize
 super + @button{1-3}
 	bspc pointer -u
+
+

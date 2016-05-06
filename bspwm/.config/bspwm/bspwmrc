@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # general settings
 bspc config split_ratio             0.50
@@ -17,13 +17,20 @@ bspc config presel_feedback_color   "#0d497b"
 gap_size=0
 bspc config gapless_monocle         true
 bspc config window_gap              $gap_size
-bspc config top_padding             $gap_size
+bspc config top_padding             $PANEL_HEIGHT
 bspc config bottom_padding          $gap_size
 bspc config left_padding            $gap_size
 bspc config right_padding           $gap_size
 
 # tags
-bspc monitor -d 1 2 3 4 5 6 7 8 9
+bspc monitor -d 1term 2web 3files 4mus 5torr 6misc 7mail 8news
 
 # rules
 bspc rule -a chromium desktop=^2 focus=on follow=true
+bspc rule -a Leafpad desktop=^2 focus=on follow=true
+bspc rule -a *:tmux state=fullscreen
+
+# autostart
+#urxvtc -name tmux -e ~/Scripts/tmux-default-session.sh
+#leafpad
+~/.config/bspwm/panel &

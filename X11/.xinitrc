@@ -15,19 +15,16 @@ light -S 20
 (sleep 1 && setxkbmap -option caps:escape)
 
 # Start urxvt daemon
-urxvtd &
+[[ ! $(pgrep urxvtd) ]] && urxvtd &
 
 # Merge .Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
-
-# Set Font path
-#xset +fp ~/.local/share/fonts/terminus &
 
 # Generate dwatch cache
 #[[ -x ~/Scripts/dwatch ]] && sh ~/Scripts/dwatch update
 
 # Redshift
-redshift -r -c ~/.config/redshift/redshift.conf &
+[[ ! $(pgrep redshift) ]] && redshift -r -c ~/.config/redshift/redshift.conf &
 
 # Start X
 #exec dbus-launch --exit-with-session --sh-syntax awesome
