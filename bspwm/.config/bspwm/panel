@@ -1,0 +1,74 @@
+#!/bin/bash
+
+if xdo id -a "$PANEL_WM_NAME" > /dev/null ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+bspc config top_padding $PANEL_HEIGHT
+bspc subscribe report > "$PANEL_FIFO" &
+xtitle -sf 'T%s' > "$PANEL_FIFO" &
+#clock -sf 'S%a %b %d, %H:%M:%S' > "$PANEL_FIFO" &
+
+# --- ADDED:
+
+# Refresh widgets in:
+refresh_interval="60s"
+
+# Mail widget
+mail_widget() {
+    while true; do
+        echo "M$(cat ~/.mutt/newmail_count)"
+        sleep $refresh_interval
+    done
+}
+mail_widget > "$PANEL_FIFO" &
+
+# Volume widget
+volume_widget() {
+    while true; do
+        echo "V$(amixer -M get Master | awk '/%/{gsub( /[][%]/,"" );print $5}' | head -n1)"
+        sleep $refresh_interval
+    done
+}
+volume_widget > "$PANEL_FIFO" &
+
+# Battery widget
+battery_widget() {
+    while true; do
+        echo "B$(cat /sys/class/power_supply/BAT0/capacity) ($(cat /sys/class/power_supply/BAT0/status))"
+        sleep $refresh_interval
+    done
+}
+battery_widget > "$PANEL_FIFO" &
+
+# Date and time widget
+datetime_widget() {
+    while true; do
+        echo "S$(date +'%a %b %d, %H:%M')"
+        sleep $refresh_interval
+    done
+}
+datetime_widget > "$PANEL_FIFO" &
+
+# ---
+
+. ~/.config/bspwm/panel_colors
+
+~/.config/bspwm/panel_bar < "$PANEL_FIFO" | lemonbar -a 32 -n "$PANEL_WM_NAME" -g x$PANEL_HEIGHT -f "$PANEL_FONT" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
+
+wid=$(xdo id -a "$PANEL_WM_NAME")
+tries_left=20
+while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
+	sleep 0.05
+	wid=$(xdo id -a "$PANEL_WM_NAME")
+	tries_left=$((tries_left - 1))
+done
+[ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
+
+wait
