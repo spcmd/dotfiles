@@ -27,10 +27,14 @@ bspc monitor -d 1term 2web 3files 4mus 5torr 6misc 7mail 8news
 
 # rules
 bspc rule -a chromium desktop=^2 focus=on follow=true
-bspc rule -a Leafpad desktop=^2 focus=on follow=true
-bspc rule -a *:tmux state=fullscreen
+bspc rule -a Gcolor2 state=tiled
+bspc rule -a newsbeuter desktop=^8
+bspc rule -a mutt desktop=^7
+bspc rule -a *:ranger desktop=^3
+bspc rule -a rtorrent desktop=^5
+#bspc rule -a *:tmux state=fullscreen
 
 # autostart
 #urxvtc -name tmux -e ~/Scripts/tmux-default-session.sh
-#leafpad
+xsetroot -cursor_name left_ptr
 ~/.config/bspwm/panel &
