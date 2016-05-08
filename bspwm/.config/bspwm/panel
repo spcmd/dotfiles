@@ -11,33 +11,8 @@ PANEL_FONT="-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*"
 
 export PANEL_HEIGHT PANEL_FONT
 
-# ------------------------------------------------------
-# Colors
-# ------------------------------------------------------
-COLOR_DEFAULT_FG="#aaaaaa"
-COLOR_DEFAULT_BG="#151515"
-COLOR_MONITOR_FG="#8dbcdf"
-COLOR_MONITOR_BG="#151515"
-COLOR_FOCUSED_MONITOR_FG="#b1d0e8"
-COLOR_FOCUSED_MONITOR_BG="#144b6c"
-COLOR_FREE_FG="#444444"
-COLOR_FREE_BG="#151515"
-COLOR_FOCUSED_FREE_FG="#ffffff"
-COLOR_FOCUSED_FREE_BG="#0d497b"
-COLOR_OCCUPIED_FG="#aaaaaa"
-COLOR_OCCUPIED_BG="#151515"
-COLOR_FOCUSED_OCCUPIED_FG="#ffffff"
-COLOR_FOCUSED_OCCUPIED_BG="#0d497b"
-COLOR_URGENT_FG="#ffffff"
-COLOR_URGENT_BG="#c90303"
-COLOR_FOCUSED_URGENT_FG="#ffffff"
-COLOR_FOCUSED_URGENT_BG="#c90303"
-COLOR_STATE_FG="#999"
-COLOR_STATE_BG="#151515"
-COLOR_TITLE_FG="#aaaaaa"
-COLOR_TITLE_BG="#151515"
-COLOR_SYS_FG="#aaaaaa"
-COLOR_SYS_BG="#151515"
+# panel colors
+. ~/.config/bspwm/panel_colors/spcmd-arch
 
 # ------------------------------------------------------
 # Panel
@@ -86,7 +61,24 @@ volume_widget > "$PANEL_FIFO" &
 # Battery widget
 battery_widget() {
     while true; do
-        echo "B$(cat /sys/class/power_supply/BAT0/capacity)% ($(cat /sys/class/power_supply/BAT0/status))"
+        capacity=$(cat /sys/class/power_supply/BAT0/capacity)
+        status=$(cat /sys/class/power_supply/BAT0/status)
+
+        if [[ $capacity -le 30 ]]; then
+            widget_cap="%{F#ffe490}$capacity"
+        elif [[ $capacity -le 20 ]]; then
+            widget_cap="%{F#ff3b3b}$capacity"
+        else
+            widget_cap=$capacity
+        fi
+
+        if [[ $status = "Charging" ]]; then
+            widget_status="Charging"
+        else
+            widget_status="Bat"
+        fi
+
+        echo "B${widget_status}: ${widget_cap}%"
         sleep $refresh_interval
     done
 }
@@ -190,9 +182,10 @@ panel_bar() {
                             esac
                             wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc desktop -f ${name}:} ${name} %{A}%{B-}%{F-}"
                             ;;
-                        [LTG]*)
+                        #[LTG]*)
+                        [L]*)
                             # layout, state and flags
-                            #wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG} ${name} %{B-}%{F-}"
+                            wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG} [${name}] %{B-}%{F-}"
                             ;;
                     esac
                     shift
@@ -200,7 +193,10 @@ panel_bar() {
                 ;;
         esac
         # Panel Bar formatting
-        printf "%s\n" "%{l}${wm}%{c}${title}%{r}Mail:${mail}| Vol:${volume}| Bat:${bat}|${sys}"
+        printf "%s\n" \
+            "%{l}${wm} \
+            %{c}${title} \
+            %{r}Mail:${mail}%{F${COLOR_WIDGET_SEPARATOR}}|%{F} %{A:~/.config/bspwm/volume.sh toggle:}Vol:${volume}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{F}${bat}%{F${COLOR_WIDGET_SEPARATOR}}|%{F}%{A:urxvtc -geometry 22x10 -name cal -hold -e cal -m:}${sys}%{A}"
 
     done
 }
