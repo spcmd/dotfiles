@@ -6,13 +6,15 @@
 # other settings (FIFO, name) are exported in .zprofile
 # to be available system-wide all the time.
 
+DIR_BSPWM=~/.config/bspwm
 PANEL_HEIGHT=20
 PANEL_FONT="-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*"
 
-export PANEL_HEIGHT PANEL_FONT
+# export the panel's height for bspwmrc
+export PANEL_HEIGHT
 
-# panel colors
-. ~/.config/bspwm/panel_colors/spcmd-arch
+# source the panel colors
+. $DIR_BSPWM/panel_colors/spcmd-arch
 
 # ------------------------------------------------------
 # Panel
@@ -43,7 +45,13 @@ refresh_interval="60s"
 # Mail widget
 mail_widget() {
     while true; do
-        echo "M$(cat ~/.mutt/newmail_count)"
+        mail_count=$(cat ~/.mutt/newmail_count)
+        if [[ $mail_count -gt 0 ]]; then
+            mail_count="%{F#ff3b3b}${mail_count}new"
+        else
+            mail_count=$mail_count
+        fi
+        echo "M$mail_count"
         sleep $refresh_interval
     done
 }
@@ -52,7 +60,14 @@ mail_widget > "$PANEL_FIFO" &
 # Volume widget
 volume_widget() {
     while true; do
-        echo "V$(amixer -M get Master | awk '/%/{gsub( /[][%]/,"" );print $5}' | head -n1)"
+        level=$(amixer -M get Master | awk '/%/{gsub( /[][%]/,"" );print $5}' | head -n1)
+        state=$(amixer -M get Master | awk '/\[on|off\]/{gsub("[\\[\\]]","");print $NF}' | head -n1)
+        if [[ $state = "off" ]]; then
+            level="%{F#ff3b3b}$level"
+        else
+            level=$level
+        fi
+        echo "V$level"
         sleep $refresh_interval
     done
 }
@@ -64,9 +79,9 @@ battery_widget() {
         capacity=$(cat /sys/class/power_supply/BAT0/capacity)
         status=$(cat /sys/class/power_supply/BAT0/status)
 
-        if [[ $capacity -le 30 ]]; then
+        if [[ $status -ne "Charging" && $capacity -le 30 && $capacity -gt 20 ]]; then
             widget_cap="%{F#ffe490}$capacity"
-        elif [[ $capacity -le 20 ]]; then
+        elif [[ $status -ne "Charging" && $capacity -le 20 ]]; then
             widget_cap="%{F#ff3b3b}$capacity"
         else
             widget_cap=$capacity
@@ -92,6 +107,17 @@ datetime_widget() {
     done
 }
 datetime_widget > "$PANEL_FIFO" &
+
+# ------------------------------------------------------
+# Widget commands (when clicking on them)
+# ------------------------------------------------------
+
+wcmd_volume_toggle="$DIR_BSPWM/volume.sh toggle"
+wcmd_volume_up="$DIR_BSPWM/volume.sh up"
+wcmd_volume_down="$DIR_BSPWM/volume.sh down"
+wcmd_volume_max="$DIR_BSPWM/volume.sh max"
+wcmd_open_alsamixer="urxvtc -e alsamixer"
+wcmd_open_calendar="$DIR_BSPWM/cal.sh"
 
 # ------------------------------------------------------
 # Panel Bar (get information and format the widgets)
@@ -196,7 +222,7 @@ panel_bar() {
         printf "%s\n" \
             "%{l}${wm} \
             %{c}${title} \
-            %{r}Mail:${mail}%{F${COLOR_WIDGET_SEPARATOR}}|%{F} %{A:~/.config/bspwm/volume.sh toggle:}Vol:${volume}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{F}${bat}%{F${COLOR_WIDGET_SEPARATOR}}|%{F}%{A:urxvtc -geometry 22x10 -name cal -hold -e cal -m:}${sys}%{A}"
+            %{r}Mail:${mail}%{F${COLOR_WIDGET_SEPARATOR}}|%{F} %{A:$wcmd_volume_toggle:}%{A2:$wcmd_open_alsamixer:}%{A3:$wcmd_volume_max:}%{A4:$wcmd_volume_down:}%{A5:$wcmd_volume_up:}Vol:${volume}%{A}%{A}%{A}%{A}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{F}${bat}%{F${COLOR_WIDGET_SEPARATOR}}|%{F}%{A:$wcmd_open_calendar:}${sys}%{A}"
 
     done
 }

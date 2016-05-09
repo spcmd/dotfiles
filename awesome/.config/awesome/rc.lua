@@ -370,6 +370,9 @@ wls_widget:buttons (awful.util.table.join (
 -- symbols: 
 ----------------------------------------------------------------
 
+file_newmail_count = "/tmp/newmail_count"
+file_newmail_list = "/tmp/newmail_list"
+
 icon_mail = "Mail: "
 
 mail_widget = wibox.widget.textbox()
@@ -383,7 +386,7 @@ check_mail_timer:connect_signal("timeout",check_mail)
 check_mail_timer:start()
 
 function newmail_count()
- local newmail_count_file = io.open(os.getenv("HOME") .. "/.mutt/newmail_count", "r")
+ local newmail_count_file = io.open(file_newmail_count, "r")
  local newmail_count_content = newmail_count_file:read()
  newmail_count_file:close()
  return newmail_count_content
@@ -440,7 +443,7 @@ mail_widget:buttons (awful.util.table.join (
 
 ------ Mail list tooltip
 function newmail_list()
-    local newmail_list_file = io.open(os.getenv("HOME") .. "/.mutt/newmail_list")
+    local newmail_list_file = io.open(file_newmail_list)
     newmail_list_content = newmail_list_file:read("*all")
     newmail_list_file:close()
     return newmail_list_content
