@@ -370,8 +370,8 @@ wls_widget:buttons (awful.util.table.join (
 -- symbols: 
 ----------------------------------------------------------------
 
-file_newmail_count = "/tmp/newmail_count"
-file_newmail_list = "/tmp/newmail_list"
+file_newmail_count = os.getenv("HOME") .. "/.mutt/newmail_count"
+file_newmail_list = os.getenv("HOME") .. "/.mutt/newmail_list"
 
 icon_mail = "Mail: "
 
