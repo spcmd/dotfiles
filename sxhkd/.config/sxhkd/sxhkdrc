@@ -1,18 +1,38 @@
 # -----------------------
-# wm independent hotkeys
+# Programs and Scripts
 # -----------------------
 
 # terminal emulator
 super + Return
 	urxvtc
 
-# program launcher
+# dmenu
 super + a
-    $HOME/Scripts/dmenu_run -i -l 10 -fn 'terminus' -sb '#0D497B' -nb '#121212'
+    $DIR_SCRIPTS/dmenu_run -i -l 10 -fn 'terminus' -sb '#0D497B' -nb '#121212'
 
-# reload config files
-super + shift + r
-	pkill -USR1 -x sxhkd; pkill panel; pkill lemonbar; ~/.config/bspwm/bspwmrc; notify-send -t 1000 "Config reloaded"
+# Gcolor2
+super + alt + c
+    gcolor2
+
+# mutt
+super + alt + m
+    urxvtc -name mutt -e mutt -F ~/.mutt/account.1.muttrc
+
+# newsbeuter
+super + alt + n
+    urxvtc -name newsbeuter -e newsbeuter
+
+# ranger
+super + alt + r
+    urxvtc -name ranger -e ranger
+
+# rtorrent
+super + alt + t
+    urxvtc -name rtorrent -e rtorrent
+
+# newmail_list
+super + ctrl + m
+    urxvtc -hold -e cat ~/.mutt/newmail_list
 
 # volume
 super + Up
@@ -24,9 +44,13 @@ super + Down
 # bspwm hotkeys
 # -----------------------
 
+# reload config files
+super + shift + r
+	pkill -USR1 -x sxhkd; pkill panel; pkill lemonbar; ~/.config/bspwm/bspwmrc
+
 # quit bspwm normally
 super + shift + q
-	bspc quit
+    pkill panel; pkill lemonbar; bspc quit
 
 # close window
 super + q
@@ -36,24 +60,26 @@ super + q
 super + m
 	bspc desktop -l next
 
-# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
-super + y
-	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+# rotate
+super + ctrl + space
+    bspc node @focused:/ --rotate 90
 
-# swap the current node and the biggest node
-super + g
-	bspc node -s biggest
+# resize: expand the tiled space in the given direction
+super + alt + {h,j,k,l}
+    ~/.config/bspwm/resize.sh {left,down,up,right}
+	#bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
 
-
-# --- state/flags ---
+# move a floating window
+super + alt + {Left,Down,Up,Right}
+	xdo move {-x -20,-y +20,-y -20,-x +20}
 
 # set the window state
-super + {t,shift + t,s,f}
+super + {t,shift + t,f,s}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
-super + ctrl + {x,y,z}
-	bspc node -g {locked,sticky,private}
+#super + ctrl + {x,y,z}
+	#bspc node -g {locked,sticky,private}
 
 
 # --- focus/swap/switch ---
@@ -62,23 +88,14 @@ super + ctrl + {x,y,z}
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
-# focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
-
-# focus the next/previous node
-super + {_,shift + }c
+# focus the next/previous node (cycle)
+#super + {_,shift +}c
+super + {_,shift+}space
 	bspc node -f {next,prev}
 
-# focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
-
-# focus the older or newer node in the focus history
-#super + {o,i}
-	#bspc wm -h off; \
-	#bspc node {older,newer} -f; \
-	#bspc wm -h on
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest
 
 # switch tags (desktop)
 super + {odoubleacute,uacute}
@@ -87,7 +104,6 @@ super + {odoubleacute,uacute}
 # jump to tag (desktop)
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
-
 
 # --- preselect ---
 
@@ -100,27 +116,12 @@ super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
-super + ctrl + space
+super + Escape
 	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
-super + ctrl + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
-
-# --- resize tiled/floating ---
-
-# expand the tiled space in the given direction
-super + alt + {h,j,k,l}
-	bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
-
-# contract the tiled space in the given direction
-super + alt + shift + {h,j,k,l}
-	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
-
-# move a floating window
-super + {Left,Down,Up,Right}
-	xdo move {-x -20,-y +20,-y -20,-x +20}
+#super + ctrl + shift + space
+	#bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 
 # --- mouse focus/move/resize ---
@@ -136,5 +137,4 @@ super + button{1-3}
 # end move/resize
 super + @button{1-3}
 	bspc pointer -u
-
 

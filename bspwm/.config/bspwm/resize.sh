@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env dash
 
 case $1 in
 	left)

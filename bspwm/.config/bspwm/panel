@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env dash
 
 # ------------------------------------------------------
 # Settings
@@ -46,7 +46,7 @@ refresh_interval="60s"
 mail_widget() {
     while true; do
         mail_count=$(cat ~/.mutt/newmail_count)
-        if [[ $mail_count -gt 0 ]]; then
+        if [ "$mail_count" -gt 0 ]; then
             mail_count="%{F#ff3b3b}${mail_count}new"
         else
             mail_count=$mail_count
@@ -62,7 +62,7 @@ volume_widget() {
     while true; do
         level=$(amixer -M get Master | awk '/%/{gsub( /[][%]/,"" );print $5}' | head -n1)
         state=$(amixer -M get Master | awk '/\[on|off\]/{gsub("[\\[\\]]","");print $NF}' | head -n1)
-        if [[ $state = "off" ]]; then
+        if [ "$state" = "off" ]; then
             level="%{F#ff3b3b}$level"
         else
             level=$level
@@ -79,15 +79,15 @@ battery_widget() {
         capacity=$(cat /sys/class/power_supply/BAT0/capacity)
         status=$(cat /sys/class/power_supply/BAT0/status)
 
-        if [[ $status -ne "Charging" && $capacity -le 30 && $capacity -gt 20 ]]; then
+        if [ "$status" -ne "Charging" -a "$capacity" -le 30 -a "$capacity" -gt 20 ]; then
             widget_cap="%{F#ffe490}$capacity"
-        elif [[ $status -ne "Charging" && $capacity -le 20 ]]; then
+        elif [ "$status" -ne "Charging" -a "$capacity" -le 20 ]; then
             widget_cap="%{F#ff3b3b}$capacity"
         else
             widget_cap=$capacity
         fi
 
-        if [[ $status = "Charging" ]]; then
+        if [ "$status" = "Charging" ]; then
             widget_status="Charging"
         else
             widget_status="Bat"
@@ -108,6 +108,21 @@ datetime_widget() {
 }
 datetime_widget > "$PANEL_FIFO" &
 
+
+# Notes/reminder widget
+notes_widget() {
+    while true; do
+        file_notes=~/Documents/bspwm_panel_notes.txt
+        if [ -e "$file_notes" ]; then
+            echo "N%{F#00fff0}notes %{F${COLOR_WIDGET_SEPARATOR}}|"
+        else
+            echo "N"
+        fi
+        sleep $refresh_interval
+    done
+}
+notes_widget > "$PANEL_FIFO" &
+
 # ------------------------------------------------------
 # Widget commands (when clicking on them)
 # ------------------------------------------------------
@@ -118,6 +133,9 @@ wcmd_volume_down="$DIR_BSPWM/volume.sh down"
 wcmd_volume_max="$DIR_BSPWM/volume.sh max"
 wcmd_open_alsamixer="urxvtc -e alsamixer"
 wcmd_open_calendar="$DIR_BSPWM/cal.sh"
+wcmd_open_notes="urxvtc -hold -e cat ~/Documents/bspwm_panel_notes.txt"
+#wcmd_battery_time='notify-send "$(~/.config/bspwm/bat_acpi.sh timeleft)"'
+wcmd_battery_time="urxvtc -hold -e $DIR_BSPWM/bat_acpi.sh timeleft"
 
 # ------------------------------------------------------
 # Panel Bar (get information and format the widgets)
@@ -129,20 +147,24 @@ panel_bar() {
     while read -r line ; do
         case $line in
             S*)
-                # clock output
+                # clock
                 sys="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
                 ;;
             B*)
-                # battery output
+                # battery
                 bat="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
                 ;;
             M*)
-                # email output
+                # email
                 mail="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
                 ;;
             V*)
-                # volume output
+                # volume
                 volume="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
+                ;;
+            N*)
+                # note/reminder
+                note="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
                 ;;
             T*)
                 # xtitle output
@@ -222,7 +244,7 @@ panel_bar() {
         printf "%s\n" \
             "%{l}${wm} \
             %{c}${title} \
-            %{r}Mail:${mail}%{F${COLOR_WIDGET_SEPARATOR}}|%{F} %{A:$wcmd_volume_toggle:}%{A2:$wcmd_open_alsamixer:}%{A3:$wcmd_volume_max:}%{A4:$wcmd_volume_down:}%{A5:$wcmd_volume_up:}Vol:${volume}%{A}%{A}%{A}%{A}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{F}${bat}%{F${COLOR_WIDGET_SEPARATOR}}|%{F}%{A:$wcmd_open_calendar:}${sys}%{A}"
+            %{r}%{A:$wcmd_open_notes:}${note}%{A}Mail:${mail}%{F${COLOR_WIDGET_SEPARATOR}}|%{F} %{A:$wcmd_volume_toggle:}%{A2:$wcmd_open_alsamixer:}%{A3:$wcmd_volume_max:}%{A4:$wcmd_volume_down:}%{A5:$wcmd_volume_up:}Vol:${volume}%{A}%{A}%{A}%{A}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{A:$wcmd_battery_time:}${bat}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{A:$wcmd_open_calendar:}${sys}%{A}"
 
     done
 }
@@ -232,18 +254,5 @@ panel_bar() {
 # ------------------------------------------------------
 
 panel_bar < "$PANEL_FIFO" | lemonbar -a 32 -n "$PANEL_WM_NAME" -g x$PANEL_HEIGHT -f "$PANEL_FONT" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
-
-# ------------------------------------------------------
-# Panel
-# ------------------------------------------------------
-
-wid=$(xdo id -a "$PANEL_WM_NAME")
-tries_left=20
-while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
-	sleep 0.05
-	wid=$(xdo id -a "$PANEL_WM_NAME")
-	tries_left=$((tries_left - 1))
-done
-[ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
 
 wait

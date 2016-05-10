@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env dash
 
 case $1 in
     up)
@@ -11,7 +11,7 @@ case $1 in
         amixer sset Master toggle
         level=$(amixer -M get Master | awk '/%/{gsub( /[][%]/,"" );print $5}' | head -n1)
         state=$(amixer -M get Master | awk '/\[on|off\]/{gsub("[\\[\\]]","");print $NF}' | head -n1)
-        if [[ $state = "off" ]]; then
+        if [ "$state" = "off" ]; then
             level="%{F#ff3b3b}$level"
         else
             level=$level
