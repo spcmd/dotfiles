@@ -1,0 +1,61 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+. ~/.config/bspwm/panel_colors/spcmd-arch
+
+panel-note() {
+
+    NOTE_FILE=$HOME/Documents/bspwm_panel_notes.txt
+
+    if [[ ! -e $NOTE_FILE ]]; then
+        touch $NOTE_FILE
+        echo "Note file created at $NOTE_FILE"
+    fi
+
+    case "$1" in
+
+        # Listing notes
+        -l) cat $NOTE_FILE
+            ;;
+        # Delete line from notes
+        -r) sed -i ${2}d $NOTE_FILE
+            echo "removed line $2 from $NOTE_FILE"
+            ;;
+        # Delete ALL notes (delete the file)
+        -R)
+            echo "Delete ALL notes? [yY/nN]"
+            read answer
+            if [[ $answer == "y" ]] || [[ $answer == "Y" ]]; then
+                rm $NOTE_FILE
+                echo 'N' > "$PANEL_FIFO"
+                echo "All notes was deleted."
+            else
+                echo "Cancelled. Nothing changed."
+            fi
+            ;;
+        # Help
+        ""|-h) echo "Usage: $0 [OPTION]"
+            echo -e "\nTo add a note, use:"
+            echo -e "\t $0 \"your note in qoutes\""
+            echo -e "\nOptions:"
+            echo -e "-l\t\t list notes"
+            echo -e "-r [NUMBER]\t delete note (by line number)"
+            echo -e "-R \t\t delete ALL notes (delete the file)"
+            echo -e "-h\t\t this help"
+            ;;
+        # Add note
+        *)  echo "$1" >> $NOTE_FILE
+            echo "added '$1' to $NOTE_FILE"
+            echo "N%{F#00fff0}notes %{F${COLOR_WIDGET_SEPARATOR}}|" > "$PANEL_FIFO"
+            ;;
+    esac
+}
+
+# vim: set syntax=sh :
