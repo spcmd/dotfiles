@@ -60,8 +60,8 @@ mail_widget > "$PANEL_FIFO" &
 # Volume widget
 volume_widget() {
     while true; do
-        level=$(amixer -M get Master | awk '/%/{gsub( /[][%]/,"" );print $5}' | head -n1)
-        state=$(amixer -M get Master | awk '/\[on|off\]/{gsub("[\\[\\]]","");print $NF}' | head -n1)
+        level=$(amixer -M get Master | awk '/%/{gsub( /[][%]/,"" );print $(NF-2)}')
+        state=$(amixer -M get Master | awk '/\[on|off\]/{gsub("[\\[\\]]","");print $NF}')
         if [ "$state" = "off" ]; then
             level="%{F#ff3b3b}$level"
         else
@@ -79,9 +79,9 @@ battery_widget() {
         capacity=$(cat /sys/class/power_supply/BAT0/capacity)
         status=$(cat /sys/class/power_supply/BAT0/status)
 
-        if [ "$status" -ne "Charging" -a "$capacity" -le 30 -a "$capacity" -gt 20 ]; then
+        if [ "$status" != "Charging" -a "$capacity" -le 30 -a "$capacity" -gt 20 ]; then
             widget_cap="%{F#ffe490}$capacity"
-        elif [ "$status" -ne "Charging" -a "$capacity" -le 20 ]; then
+        elif [ "$status" != "Charging" -a "$capacity" -le 20 ]; then
             widget_cap="%{F#ff3b3b}$capacity"
         else
             widget_cap=$capacity
@@ -136,6 +136,9 @@ wcmd_open_calendar="$DIR_BSPWM/cal.sh"
 wcmd_open_notes="urxvtc -hold -e cat ~/Documents/bspwm_panel_notes.txt"
 #wcmd_battery_time='notify-send "$(~/.config/bspwm/bat_acpi.sh timeleft)"'
 wcmd_battery_time="urxvtc -hold -e $DIR_BSPWM/bat_acpi.sh timeleft"
+wcmd_mail_open_mutt1="urxvtc -name mutt -e mutt -F ~/.mutt/account.1.muttrc; bspc desktop -f ^7"
+wcmd_mail_open_mutt2="urxvtc -name mutt -e mutt -F ~/.mutt/account.2.muttrc; bspc desktop -f ^7"
+wcmd_mail_gmailcheck="notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'"
 
 # ------------------------------------------------------
 # Panel Bar (get information and format the widgets)
@@ -244,7 +247,7 @@ panel_bar() {
         printf "%s\n" \
             "%{l}${wm} \
             %{c}${title} \
-            %{r}%{A:$wcmd_open_notes:}${note}%{A}Mail:${mail}%{F${COLOR_WIDGET_SEPARATOR}}|%{F} %{A:$wcmd_volume_toggle:}%{A2:$wcmd_open_alsamixer:}%{A3:$wcmd_volume_max:}%{A4:$wcmd_volume_down:}%{A5:$wcmd_volume_up:}Vol:${volume}%{A}%{A}%{A}%{A}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{A:$wcmd_battery_time:}${bat}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{A:$wcmd_open_calendar:}${sys}%{A}"
+            %{r}%{A:$wcmd_open_notes:}${note}%{A}%{A:$wcmd_mail_open_mutt1:}%{A2:$wcmd_mail_gmailcheck:}%{A3:$wcmd_mail_open_mutt2:}Mail:${mail}%{A}%{A}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{F} %{A:$wcmd_volume_toggle:}%{A2:$wcmd_open_alsamixer:}%{A3:$wcmd_volume_max:}%{A4:$wcmd_volume_down:}%{A5:$wcmd_volume_up:}Vol:${volume}%{A}%{A}%{A}%{A}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{A:$wcmd_battery_time:}${bat}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{A:$wcmd_open_calendar:}${sys}%{A}"
 
     done
 }
@@ -255,4 +258,20 @@ panel_bar() {
 
 panel_bar < "$PANEL_FIFO" | lemonbar -a 32 -n "$PANEL_WM_NAME" -g x$PANEL_HEIGHT -f "$PANEL_FONT" -F "$COLOR_DEFAULT_FG" -B "$COLOR_DEFAULT_BG" | sh &
 
+# ------------------------------------------------------
+# Takes care of fullscreen programs, prevents the panel
+# to be above them.
+# ------------------------------------------------------
+
+wid=$(xdo id -a "$PANEL_WM_NAME")
+tries_left=20
+while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
+	sleep 0.05
+	wid=$(xdo id -a "$PANEL_WM_NAME")
+	tries_left=$((tries_left - 1))
+done
+[ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
+
 wait
+
+# vim: set syntax=sh filetype=sh :

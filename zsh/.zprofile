@@ -60,6 +60,7 @@ export XDG_VIDEOS_DIR="$HOME/Videos"
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games"
 [[ -d $DIR_SCRIPTS ]] && PATH=$PATH:$DIR_SCRIPTS
 [[ -d $HOME/bin ]] && PATH=$PATH:$HOME/bin
+[[ -d /usr/bin/core_perl ]] && PATH=$PATH:/usr/bin/core_perl
 
 # Applications
 export BROWSER="$DIR_SCRIPTS/url_opener.sh"
@@ -79,6 +80,10 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 # fzf default options
 export FZF_DEFAULT_OPTS="--extended --exact --reverse --bind=tab:down,btab:up,ctrl-j:page-down,ctrl-k:page-up --color=prompt:3"
 
+# bspwm panel
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_WM_NAME=bspwm_panel
+export PANEL_FIFO PANEL_WM_NAME
 
 # Auto startx
 #[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx

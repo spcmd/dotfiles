@@ -1,4 +1,14 @@
 #!/usr/bin/env dash
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
 
 wid=$1
 class=$2
@@ -6,6 +16,8 @@ instance=$3
 
 # Move calendar to the top right corner
 # TODO: set 'x' and 'y' depending on the screen resolution
-if [ $class = "cal" -o $instance = "cal" ] ; then
+if [ "$class" = "cal" -o "$instance" = "cal" ] ; then
     xdo move -n cal -x +1175 -y 20
 fi
+
+# vim: set syntax=sh filetype=sh :

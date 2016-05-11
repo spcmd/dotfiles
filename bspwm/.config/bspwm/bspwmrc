@@ -7,7 +7,7 @@
 bspc config split_ratio             0.50
 bspc config focus_by_distance       true
 bspc config history_aware_focus     true
-bspc config pointer_follows_focus   true
+bspc config pointer_follows_focus   false
 
 # ------------------------------------------------------------
 # Window settings
@@ -30,6 +30,9 @@ bspc config left_padding            $gap_size
 bspc config right_padding           $gap_size
 bspc config external_rules_command  ~/.config/bspwm/external_rules
 
+# Ignore EWMH focus requests coming from applications
+bspc config ignore_ewmh_focus       true
+
 # ------------------------------------------------------------
 # Workspaces
 # ------------------------------------------------------------
@@ -39,18 +42,48 @@ bspc monitor -d 1term 2web 3files 4mus 5torr 6misc 7mail 8news
 # Rules
 # ------------------------------------------------------------
 
-bspc rule -a chromium desktop=^2 focus=on follow=true
+bspc rule -a luakit desktop=^2
+bspc rule -a Firefox desktop=^2
+bspc rule -a chromium desktop=^2
 bspc rule -a Gcolor2 state=tiled
-bspc rule -a newsbeuter desktop=^8
-bspc rule -a mutt desktop=^7
+bspc rule -a *:VirtualBox desktop=^6
+bspc rule -a *:libreoffice desktop=^6
+bspc rule -a Gimp desktop=^6
+bspc rule -a Inkscape desktop=^6
+bspc rule -a Gtkpod desktop=^6
+bspc rule -a *:Szamlazo.exe desktop=^6
+bspc rule -a *:newsbeuter desktop=^8
+bspc rule -a *:mutt desktop=^7
 bspc rule -a *:ranger desktop=^3
-bspc rule -a rtorrent desktop=^5
+bspc rule -a *:rtorrent desktop=^5
 bspc rule -a *:cal state=floating # +external_rules
-#bspc rule -a *:tmux state=fullscreen
 
 # ------------------------------------------------------------
 # Autostart
 # ------------------------------------------------------------
 
+gmailcheck() {
+    while true; do
+        ~/Scripts/gmailcheck.sh
+        sleep 60s
+    done
+}
+
+# always run/restart these programs
 xsetroot -cursor_name left_ptr
 ~/.config/bspwm/panel &
+compton -b --config ~/.config/compton/compton.conf
+dunst &
+gmailcheck &
+
+# start these programs only once
+if [ ! -e /tmp/bspwm_autorun ]; then
+    luakitwrapper &
+    urxvtc &
+    urxvtc -name ranger -e ranger &
+    urxvtc -name rtorrent -e rtorrent &
+    urxvtc -name newsbeuter -e newsbeuter &
+    echo "false" > /tmp/bspwm_autorun
+fi
+
+# vim: set syntax=sh filetype=sh :

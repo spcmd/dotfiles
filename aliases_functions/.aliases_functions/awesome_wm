@@ -54,9 +54,9 @@ awm-note() {
             fi
             ;;
         # Help
-        ""|-h) echo "Usage: awm-note [OPTIONS]"
+        ""|-h) echo "Usage: $0 [OPTIONS]"
             echo -e "\nTo add a note, use:"
-            echo -e "\t awm-note \"your note in qoutes\""
+            echo -e "\t $0 \"your note in qoutes\""
             echo -e "\nOptions:"
             echo -e "-l\t\t list notes"
             echo -e "-r [number]\t delete note (by line number)"

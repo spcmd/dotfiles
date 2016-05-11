@@ -28,4 +28,6 @@ light -S 20
 
 # Start X
 #exec dbus-launch --exit-with-session --sh-syntax awesome
-exec awesome
+#exec awesome
+sxhkd &
+exec bspwm

@@ -6,9 +6,13 @@
 super + Return
 	urxvtc
 
+# browser
+super + alt + f
+    luakitwrapper
+
 # dmenu
 super + a
-    $DIR_SCRIPTS/dmenu_run -i -l 10 -fn 'terminus' -sb '#0D497B' -nb '#121212'
+    $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#121212'
 
 # Gcolor2
 super + alt + c
@@ -30,9 +34,43 @@ super + alt + r
 super + alt + t
     urxvtc -name rtorrent -e rtorrent
 
-# newmail_list
+# spotify
+super + alt + s
+    bspc desktop -f ^4; spotify
+super + s
+    dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+super + Left
+    dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+super + Right
+    dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+
+# spotymenu
+super + b
+    $DIR_SCRIPTS/spotymenu
+
+# mps-youtube
+super + y
+    $DIR_SCRIPTS/mpsyt-control play-pause
+
+# scrot
+Print
+    scrot ~/Pictures/scrot_%Y-%m-%d_%T.png
+super + Print
+    sleep 1s && scrot -s ~/Pictures/scrot_%Y-%m-%d_%T.png
+
+# gmailcheck
 super + ctrl + m
-    urxvtc -hold -e cat ~/.mutt/newmail_list
+   notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'
+
+# newmail_list
+super + shift + m
+    notify-send "$(cat ~/.mutt/newmail_list)"
+
+# backlight
+super + ctrl + Left
+    light -U 2
+super + ctrl + Right
+    light -A 2
 
 # volume
 super + Up
@@ -40,17 +78,21 @@ super + Up
 super + Down
     ~/.config/bspwm/volume.sh down
 
+# suspend
+super + ctrl + z
+    systemctl suspend
+
 # -----------------------
 # bspwm hotkeys
 # -----------------------
 
 # reload config files
 super + shift + r
-	pkill -USR1 -x sxhkd; pkill panel; pkill lemonbar; ~/.config/bspwm/bspwmrc
+	pkill -USR1 -x sxhkd; pkill panel; pkill lemonbar; pkill dash; ~/.config/bspwm/bspwmrc
 
 # quit bspwm normally
 super + shift + q
-    pkill panel; pkill lemonbar; bspc quit
+    pkill panel; pkill lemonbar; pkill dash; bspc quit
 
 # close window
 super + q
@@ -67,19 +109,36 @@ super + ctrl + space
 # resize: expand the tiled space in the given direction
 super + alt + {h,j,k,l}
     ~/.config/bspwm/resize.sh {left,down,up,right}
-	#bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
 
 # move a floating window
 super + alt + {Left,Down,Up,Right}
 	xdo move {-x -20,-y +20,-y -20,-x +20}
 
-# set the window state
-super + {t,shift + t,f,s}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+# toggle the window state
+super + ctrl + f
+    if [ -z "$(bspc query -N -n focused.floating)" ]; then \
+        bspc node focused -t floating; \
+    else \
+        bspc node focused -t tiled; \
+    fi
+
+super + ctrl + c
+    if [ -z "$(bspc query -N -n focused.fullscreen)" ]; then \
+        bspc node focused -t fullscreen; \
+    else \
+        bspc node focused -t tiled; \
+    fi
+
+super + ctrl + t
+    if [ -z "$(bspc query -N -n focused.pseudo_tiled)" ]; then \
+        bspc node focused -t pseudo_tiled; \
+    else \
+        bspc node focused -t tiled; \
+    fi
 
 # set the node flags
-#super + ctrl + {x,y,z}
-	#bspc node -g {locked,sticky,private}
+super + ctrl + {x,s,p}
+    bspc node -g {locked,sticky,private}
 
 
 # --- focus/swap/switch ---
@@ -97,13 +156,17 @@ super + {_,shift+}space
 super + g
 	bspc node -s biggest
 
-# switch tags (desktop)
+# switch desktop
 super + {odoubleacute,uacute}
 	bspc desktop -f {prev,next}
 
-# jump to tag (desktop)
+# focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# jump to urgent desktop
+super + u
+    bspc desktop -f last.urgent || bspc desktop -f last
 
 # --- preselect ---
 
