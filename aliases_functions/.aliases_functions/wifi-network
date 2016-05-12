@@ -15,25 +15,44 @@ alias rld-privoxy='sudo systemctl restart privoxy'
 # Wifi switch
 wifi() {
 
+    # gmailcheck_off
+    file_gmailcheck_off=/tmp/gmailcheck_off
+
     case "$1" in
         on)
+
             nmcli radio wifi on
-            file_newmail_count=$HOME/.mutt/newmail_count
             echo "==> Wifi switched ON"
-            echo "0" > $file_newmail_count
-            echo "==> wrote 0 to $file_newmail_count"
+
             if [[ $(pgrep awesome) ]]; then
+                file_newmail_count=$HOME/.mutt/newmail_count
+                echo "0" > $file_newmail_count
+                echo "==> wrote 0 to $file_newmail_count"
                 seconds=10s
                 echo "==> Waiting $seconds before awm-chkmail-on"
                 sleep $seconds && awm-chkmail-on
             fi
+
+            if [[ $(pgrep bspwm) ]]; then
+                rm $file_gmailcheck_off
+                echo "==> Removed: $file_gmailcheck_off , gmailcheck is ON."
+            fi
+
             ;;
         off)
+
             nmcli radio wifi off
             echo "==> Wifi switched OFF"
+
             if [[ $(pgrep awesome) ]]; then
                 awm-chkmail-off
             fi
+
+            if [[ $(pgrep bspwm) ]]; then
+                echo "OFF" > $file_gmailcheck_off
+                echo "==> Created: $file_gmailcheck_off , gmailcheck is OFF."
+            fi
+
             ;;
         status)
             nmcli radio wifi
@@ -41,4 +60,4 @@ wifi() {
     esac
 }
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

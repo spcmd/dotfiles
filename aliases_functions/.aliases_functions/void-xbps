@@ -32,4 +32,4 @@ xbps-pkgver() { xbps-query --property=pkgver "$1" }
 xbps-pkgdep() { xbps-query -x "$1" }
 
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

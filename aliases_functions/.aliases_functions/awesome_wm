@@ -72,4 +72,4 @@ awm-note() {
 
 }
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

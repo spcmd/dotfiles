@@ -68,4 +68,4 @@ calc() {
 # Exract urls from OPML file (e.g.: youtube subscriptions)
 opml-extract() { awk 'BEGIN{RS=FS}/^xmlUrl/{print $2}' FS='"' $1 }
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

@@ -15,7 +15,6 @@ alias pacqs='pacman -Qs' # search in installed packages
 alias pacsync='sudo pacman -Syy' # update repo lists
 alias pacupd='sudo pacman -Syyu' # update & upgrade
 alias pacupg='sudo pacman -Syyu' # update & upgrade
-alias paclsup='sudo pacman -Syy && pacman -Qu' # show available updates
 alias paclspkg='pacman -Q' # list installed packages
 alias paclsaur='pacman -Qmq' #list AUR and manually installed packages
 alias paclsaurver='pacman -Qm' # list installed AUR packages
@@ -73,15 +72,15 @@ paccachelist() {
 }
 
 # removed orphaned
-pacrmo() { 
+pacrmo() {
     echo "==> Remove orphaned package(s)"
-    sudo pacman -Rns $(pacman -Qdtq) 
+    sudo pacman -Rns $(pacman -Qdtq)
 }
 
 # remove packages
-pacrm() { 
+pacrm() {
     echo "==> Remove package(s) with their configuration files and unneeded dependencies"
-    sudo pacman -Rns "$@" 
+    sudo pacman -Rns "$@"
 }
 
 # switch to the new mirrorlist
@@ -167,4 +166,4 @@ paccheck() {
     fi
 }
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

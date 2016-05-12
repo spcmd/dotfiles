@@ -65,7 +65,7 @@ bspc rule -a *:cal state=floating # +external_rules
 gmailcheck() {
     while true; do
         ~/Scripts/gmailcheck.sh
-        sleep 60s
+        sleep 3m
     done
 }
 

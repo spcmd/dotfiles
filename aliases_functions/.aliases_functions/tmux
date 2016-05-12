@@ -13,3 +13,5 @@ alias tm='tmux'
 alias ta='tmux attach'
 alias tmls='tmux list-sessions'
 alias tmlw='tmux list-windows'
+
+# vim: set syntax=sh filetype=sh :

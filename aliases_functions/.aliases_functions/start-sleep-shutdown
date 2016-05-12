@@ -24,4 +24,4 @@ XX() {
     fi
 }
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

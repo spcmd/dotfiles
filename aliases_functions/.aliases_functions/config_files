@@ -54,4 +54,4 @@ rld-compton() { pkill compton && sleep 1s && compton -b --config ~/.config/compt
 # To-do list
 alias todo='$EDITOR $HOME/Documents/TODO.todo'
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

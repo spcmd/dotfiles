@@ -16,7 +16,7 @@
 dm() {
     file_dirbookmarks=$HOME/.dirbookmarks
 
-    case "$1" in 
+    case "$1" in
         -a|--add) if [[ ! -z $2 ]]; then
                 echo "$2|$(pwd)" >> "$file_dirbookmarks"
             else
@@ -63,4 +63,4 @@ dm() {
     esac
 }
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

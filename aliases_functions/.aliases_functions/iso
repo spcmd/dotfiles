@@ -22,4 +22,4 @@ iso-load() {
 # Unmount and unload ISO
 iso-unload() { sudo umount /media/ISO && udisksctl loop-delete -b /dev/loop0 }
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

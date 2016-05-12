@@ -14,4 +14,4 @@ apt-install() { sudo apt-get install --no-install-recommends $@ && notify-send -
 alias apt-remove='sudo apt-get remove --purge'
 alias apt-ppa='sudo add-apt-repository'
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

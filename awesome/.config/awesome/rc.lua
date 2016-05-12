@@ -418,7 +418,7 @@ mail_widget_timer:start()
 ------ Mail widget mouse button action
 mail_widget:buttons (awful.util.table.join (
     awful.button ({}, 1, function()
-        awful.util.spawn(terminal .. " -name mutt -e run_once.sh mutt -F ~/.mutt/account.1.muttrc")
+        awful.util.spawn(terminal .. " -name mutt -e mutt -F ~/.mutt/account.1.muttrc")
         -- jump to mail tag
         local screen = mouse.screen
         local tag = awful.tag.gettags(screen)[7]
@@ -431,7 +431,7 @@ mail_widget:buttons (awful.util.table.join (
         naughty.notify({ title = "awesome Mailchecker", text = "Check done!" })
     end),
     awful.button ({}, 3, function()
-        awful.util.spawn(terminal .. " -name mutt -e run_once.sh mutt -F ~/.mutt/account.2.muttrc")
+        awful.util.spawn(terminal .. " -name mutt -e mutt -F ~/.mutt/account.2.muttrc")
         -- jump to mail tag
         local screen = mouse.screen
         local tag = awful.tag.gettags(screen)[7]

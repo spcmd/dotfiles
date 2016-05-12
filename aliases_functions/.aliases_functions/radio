@@ -89,4 +89,4 @@ echo "$(tput setaf 4;tput bold)>>> Switching to channel: Radio1 <<<$(tput sgr0)"
         done
 }
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

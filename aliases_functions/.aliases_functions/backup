@@ -8,13 +8,25 @@
 # http://spcmd.github.io
 # https://github.com/spcmd
 
-rsync-Documents() {
+rsync-320GB_Rack() {
     RACK_BACKUP_DIR='/media/320GB_Rack/00Backup_spcmd/'
     if [[ -d $RACK_BACKUP_DIR ]]; then
         rsync -avr $HOME/Documents/ $RACK_BACKUP_DIR/Documents/
+        rsync -avr $HOME/.password-store/ $RACK_BACKUP_DIR/.password-store
+        rsync -avr $HOME/.spotymenu/ $RACK_BACKUP_DIR/.spotymenu
     else
-        echo "rsync-Documents Error! \033[1;34m$RACK_BACKUP_DIR \033[0mnot found. Is it mounted? Or has the directory changed?"
+        echo "==> Error: \033[1;34m$RACK_BACKUP_DIR \033[0mnot found. Is it mounted? Or has the directory changed?"
     fi
 }
 
-# vim: set syntax=sh :
+rsync-Pendrive() {
+    PENDRIVE='/media/PENDRIVE1GB'
+    if [[ -d $PENDRIVE ]]; then
+        rsync -avr $HOME/.password-store/ $PENDRIVE/.password-store
+        rsync -avr $HOME/.spotymenu/ $PENDRIVE/.spotymenu
+    else
+        echo "==> Error: \033[1;34m$PENDRIVE \033[0mnot found. Is it mounted? Or has the name changed?"
+    fi
+}
+
+# vim: set syntax=sh filetype=sh :

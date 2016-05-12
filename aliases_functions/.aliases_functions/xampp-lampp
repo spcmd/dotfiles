@@ -12,4 +12,4 @@ alias lampp-start='sudo /opt/lampp/lampp start'
 alias lampp-stop='sudo /opt/lampp/lampp stop'
 alias lampp-restart='sudo /opt/lampp/lampp restart'
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

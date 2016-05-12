@@ -28,6 +28,11 @@ lspastebin() { which sprunge clbin;}
 
 #bbradio checker
 bbradio() {
+    # yesterday
+    date=$(date +"%y%m%d" -d "-1 days")
+    wget -P ~/Downloads http://video.builder.hu/bunny/bb.radio_$date.mp3
+
+    # today and the next few days
     start_date=$(date)
     num_days=5
     for i in $(seq 0 $num_days)
@@ -37,8 +42,18 @@ bbradio() {
     done
 }
 
-# bbtv.sh (https://github.com/spcmd/Scripts/blob/master/bbtv.sh)
-alias bbtv="$DIR_SCRIPTS/bbtv.sh"
+bbtv() {
+    case $1 in
+        -w) [[ ! -z $2 ]] && mpv http://www.bbtv.hu/bbtv-$2 || echo "Error: no episode number given." ;;
+        -h) echo "Usage: $0 [option]"
+            echo "  Options:"
+            echo "           -w <number>    Watch/Stream episode."
+            echo "           -h             This help."
+            echo "Without an option it will download the episode."
+            ;;
+        *) [[ ! -z $1 ]] && youtube-dl -o "~/Downloads/%(title)s.%(ext)s" http://www.bbtv.hu/bbtv-$1 || echo "Error: no episode number given." ;;
+    esac
+}
 
 # ping
 alias pingg='ping google.com'
@@ -55,10 +70,9 @@ urlshort() { wget -qO - "http://is.gd/create.php?format=simple&url=$1" }
 # translate shell (google translate) (https://github.com/soimort/translate-shell)
 gthu() { trans :hu "$@" }
 gten() { trans hu:en "$@" }
-alias gt-update="wget -N -P $DIR_SCRIPTS https://raw.githubusercontent.com/soimort/translate-shell/gh-pages/trans"
+alias update-translate-shell="wget -N -P ~/bin https://raw.githubusercontent.com/soimort/translate-shell/gh-pages/trans"
 
 # wttr (weather, a Web frontend for wego: https://github.com/chubin/wttr.in)
 wttr() { curl wttr.in/$1 }
-alias weather='wttr'
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :

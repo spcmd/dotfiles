@@ -10,7 +10,6 @@
 
 alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
 alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
-alias mpv-watch-later="$DIR_SCRIPTS/mpv-watch-later.sh" # mpv: list watch later dir's content and select from them
 
 # Speaker toggle
 speaker() {
@@ -21,4 +20,4 @@ speaker() {
     esac
 }
 
-# vim: set syntax=sh :
+# vim: set syntax=sh filetype=sh :
