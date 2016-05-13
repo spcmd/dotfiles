@@ -1,36 +1,38 @@
-!                                      _
-!         ___ _ __   ___ _ __ ___   __| |
-!        / __| '_ \ / __| '_ ` _ \ / _` |
-!        \__ | |_) | (__| | | | | | (_| |
-!        |___| .__/ \___|_| |_| |_|\__,_|
-!             |_|
-!
-!                  .Xresources
-!               Created by: spcmd
-!           http://spcmd.github.io
-!           https://github.com/spcmd
-!           https://gist.github.com/spcmd
-
-! ------------------------------------------
-!   URxvt settings
-! ------------------------------------------
+!                               _
+!  ___ _ __   ___ _ __ ___   __| |
+! / __| '_ \ / __| '_ ` _ \ / _` |
+! \__ | |_) | (__| | | | | | (_| |
+! |___| .__/ \___|_| |_| |_|\__,_|
+!     |_|
+! Created by: spcmd
+! http://spcmd.github.io
+! https://github.com/spcmd
 
 URxvt.termName: rxvt-unicode-256color
 URxvt.terminalName: rxvt-unicode-256color
 
-! Background: True transparency - Ranger w3m image display will not work when enabled -- using compton setting instead
-!URxvt.depth: 32
-URxvt.background: [90]#000000
-
-! Foreground
-URxvt.foreground: #ffffff
+! Source colors
+#include "/home/spcmd/.urxvt/colors/spcmd-arch"
+*background: bg
+*foreground: fg
+*color0: black
+*color8: brightblack
+*color1: red
+*color9: brightred
+*color2: green
+*color10: brightgreen
+*color3: yellow
+*color11: brightyellow
+*color4: blue
+*color12: brightblue
+*color5: magenta
+*color13: brightmagenta
+*color6: cyan
+*color14: brightcyan
+*color7: white
+*color15: brightwhite
 
 ! Fonts
-!URxvt.font: -misc-fixed-medium-r-normal--13-120-75-75-c-70-iso8859-15
-!URxvt.font: -misc-fixed-medium-r-normal--13-125-75-75-c-80-iso8859-1
-!URxvt.font: -misc-fixed-medium-r-normal--13-120-75-75-c-80-iso8859-1
-!URxvt.font: -misc-fixed-medium-r-normal--15-135-75-75-c-90-iso8859-1
-!URxvt.font: -gohu-gohufont-medium-*-normal-*-14-*-100-100-c-80-*-*
 !URxvt.font: -*-gohufont-medium-r-*-*-14-*-*-*-*-*-*-*
 !URxvt.font: -*-raize-normal-r-normal-*-17-*-*-*-*-*-*-*
 !URxvt.font: -*-tamsyn-medium-r-*-*-16-*-*-*-*-*-*-*
@@ -38,7 +40,7 @@ URxvt.foreground: #ffffff
 URxvt.font: -*-terminus-medium-r-normal-*-16-*-*-*-*-*-*-*
 !URxvt.letterSpace: -1
 
-!URxvt.font: xft:DejaVu Sans Mono:pixelsize=14:antialias=false:hinting=false,xft:FontAwesome:pixelsize=14
+!URxvt.font: xft:DejaVu Sans Mono:pixelsize=14:antialias=false:hinting=false
 !URxvt.letterSpace: -2
 !URxvt.lineSpace: 1
 
@@ -73,66 +75,9 @@ URxvt.keysym.M-Escape: perl:keyboard-select:activate
 
 ! url-select-plus
 URxvt.keysym.M-f: perl:url-select-plus:select_next
-!URxvt.url-select-plus.launcher: /home/spcmd/bin/firefox-esr/firefox
 URxvt.url-select-plus.launcher: /home/spcmd/Scripts/url_opener.sh
 URxvt.url-select-plus.altlauncher: chromium
 URxvt.url-select-plus.mediaplayer: urxvtc -e mpv
 URxvt.url-select-plus.imgviewer: feh
 URxvt.url-select-plus.button: 1
 URxvt.url-select-plus.underline: true
-
-! matcher
-!URxvt.url-launcher: /home/spcmd/bin/firefox-esr/firefox
-!URxvt.keysym.M-f: perl:matcher:select
-!URxvt.matcher.button: 1
-
-! ------------------------------------------
-!   Icons
-! ------------------------------------------
-! pixbuf enabled urxvt needed!
-! Download at: https://aur.archlinux.org/packages/rxvt-unicode-pixbuf/
-! If fonts are messed up, disable the font width and/or line spacing patches in the PKGBUILD
-
-!URxvt.iconFile: /home/spcmd/.icons/urxvt.png
-!ranger.iconFile: /home/spcmd/.icons/ranger.png
-!rTorrent.iconFile: /home/spcmd/.icons/rtorrent.png
-!mutt.iconFile: /home/spcmd/.icons/mutt.png
-!moc.iconFile: /home/spcmd/.icons/moc.png
-!newsbeuter.iconFile: /home/spcmd/.icons/newsbeuter.png
-
-! ------------------------------------------
-!   Colors
-! ------------------------------------------
-
-! black
-URxvt.color0: #000000
-URxvt.color8: #000000
-! red
-URxvt.color1: #FF434A
-URxvt.color9: #CC181E
-! green
-URxvt.color2: #46CB50
-URxvt.color10: #005a00
-! yellow
-URxvt.color3: #FAE56B
-URxvt.color11: #FAC96B
-! blue
-URxvt.color4:#0d497b
-URxvt.color12: #2d92dd
-! magenta
-URxvt.color5: #D281CE
-URxvt.color13: #D281CE
-! cyan
-URxvt.color6: #00C1C1
-URxvt.color14: #00F0F0
-! white
-URxvt.color7: #ffffff
-URxvt.color15: #ccc
-
-! Specific colors
-! Not usign it anymore
-!#include "/home/spcmd/.urxvt/Xresources.urxvt.colors-spcmd2"
-!#include "/home/spcmd/.mutt/Xresources.mutt.colors-spcmd"
-!#include "/home/spcmd/.config/ranger/Xresources.ranger.colors-spcmd2"
-!#include "/home/spcmd/.newsbeuter/Xresources.newsbeuter.colors-spcmd"
-!#include "/home/spcmd/.config/tox/Xresources.toxic.colors-spcmd"

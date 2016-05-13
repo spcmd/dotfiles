@@ -134,8 +134,8 @@ wcmd_volume_max="$DIR_BSPWM/volume.sh max"
 wcmd_open_alsamixer="urxvtc -e alsamixer"
 wcmd_open_calendar="$DIR_BSPWM/cal.sh"
 wcmd_open_notes='notify-send "$(cat ~/Documents/bspwm_panel_notes.txt)"'
-#wcmd_battery_time='notify-send "$(~/.config/bspwm/bat_acpi.sh timeleft)"'
-wcmd_battery_time="urxvtc -hold -e $DIR_BSPWM/bat_acpi.sh timeleft"
+wcmd_battery_time='notify-send "$(~/.config/bspwm/bat_acpi.sh timeleft)"'
+#wcmd_battery_time="urxvtc -hold -e $DIR_BSPWM/bat_acpi.sh timeleft"
 wcmd_mail_open_mutt1="urxvtc -name mutt -e mutt -F ~/.mutt/account.1.muttrc; bspc desktop -f ^7"
 wcmd_mail_open_mutt2="urxvtc -name mutt -e mutt -F ~/.mutt/account.2.muttrc; bspc desktop -f ^7"
 wcmd_mail_gmailcheck="notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'"
@@ -235,9 +235,16 @@ panel_bar() {
                             ;;
                         #[LTG]*)
                         [L]*)
-                            # layout, state and flags
+                            # layout (tile, monocle)
                             wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG} [${name}] %{B-}%{F-}"
                             ;;
+                        [G]*)
+                            # flags (sticky, private, locked)
+                            if [ "$name" ]; then
+                                wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG}[${name}]%{B-}%{F-}"
+                            fi
+                            ;;
+
                     esac
                     shift
                 done

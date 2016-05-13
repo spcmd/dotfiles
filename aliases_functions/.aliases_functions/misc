@@ -12,7 +12,7 @@ alias cal='cal -m'
 alias cal-next='cal -mn 2'
 alias hdapm='sudo hdparm -I /dev/sda | grep level'
 alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
-alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
+#alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 alias w3m='w3m -v'
 
 # w3m imagedisplay
@@ -66,6 +66,6 @@ calc() {
 }
 
 # Exract urls from OPML file (e.g.: youtube subscriptions)
-opml-extract() { awk 'BEGIN{RS=FS}/^xmlUrl/{print $2}' FS='"' $1 }
+#opml-extract() { awk 'BEGIN{RS=FS}/^xmlUrl/{print $2}' FS='"' $1 }
 
 # vim: set syntax=sh filetype=sh :

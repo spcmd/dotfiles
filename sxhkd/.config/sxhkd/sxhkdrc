@@ -140,7 +140,6 @@ super + ctrl + t
 super + ctrl + {x,s,p}
     bspc node -g {locked,sticky,private}
 
-
 # --- focus/swap/switch ---
 
 # focus the node in the given direction
@@ -186,6 +185,16 @@ super + Escape
 #super + ctrl + shift + space
 	#bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
+# create a grid layout
+super + ctrl + g
+    urxvtc ; \
+    urxvtc ; \
+    bspc node -p south ; \
+    urxvtc ; \
+    sleep 0.2 ; \
+    bspc node -f east ; \
+    bspc node -p east ; \
+    urxvtc
 
 # --- mouse focus/move/resize ---
 
