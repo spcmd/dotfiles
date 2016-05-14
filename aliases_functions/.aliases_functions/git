@@ -21,12 +21,13 @@ color_dir="\033[1;34m"
 color_reset="\033[0m"
 
 gitcheck() {
+    GIT_DIR=~/Git
     echo -e "\n"
-    echo "$color_dir==> Checking: ~/git/spcmd.github.io $color_reset"
-    git -C ~/git/spcmd.github.io status
+    echo "$color_dir==> Checking: $GIT_DIR/spcmd.github.io $color_reset"
+    git -C $GIT_DIR/spcmd.github.io status
     echo -e "\n"
-    echo "$color_dir==> Checking: ~/git/themes $color_reset"
-    git -C ~/git/themes status
+    echo "$color_dir==> Checking: $GIT_DIR/themes $color_reset"
+    git -C $GIT_DIR/themes status
     echo -e "\n"
     echo "$color_dir==> Checking: $DIR_SCRIPTS $color_reset"
     git -C $DIR_SCRIPTS status

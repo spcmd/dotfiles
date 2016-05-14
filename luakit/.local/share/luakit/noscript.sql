@@ -35,4 +35,5 @@ INSERT INTO "by_domain" VALUES(49,'www.deviantart.com',1,0);
 INSERT INTO "by_domain" VALUES(51,'drive.google.com',1,0);
 INSERT INTO "by_domain" VALUES(52,'markdownlivepreview.com',1,0);
 INSERT INTO "by_domain" VALUES(53,'i.imgur.com',1,0);
+INSERT INTO "by_domain" VALUES(54,'blog.codezen.org',1,0);
 COMMIT;

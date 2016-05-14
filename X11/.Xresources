@@ -13,24 +13,24 @@ URxvt.terminalName: rxvt-unicode-256color
 
 ! Source colors
 #include "/home/spcmd/.urxvt/colors/spcmd-arch"
-*background: bg
-*foreground: fg
-*color0: black
-*color8: brightblack
-*color1: red
-*color9: brightred
-*color2: green
-*color10: brightgreen
-*color3: yellow
-*color11: brightyellow
-*color4: blue
-*color12: brightblue
-*color5: magenta
-*color13: brightmagenta
-*color6: cyan
-*color14: brightcyan
-*color7: white
-*color15: brightwhite
+URxvt.background: bg
+URxvt.foreground: fg
+URxvt.color0: black
+URxvt.color8: brightblack
+URxvt.color1: red
+URxvt.color9: brightred
+URxvt.color2: green
+URxvt.color10: brightgreen
+URxvt.color3: yellow
+URxvt.color11: brightyellow
+URxvt.color4: blue
+URxvt.color12: brightblue
+URxvt.color5: magenta
+URxvt.color13: brightmagenta
+URxvt.color6: cyan
+URxvt.color14: brightcyan
+URxvt.color7: white
+URxvt.color15: brightwhite
 
 ! Fonts
 !URxvt.font: -*-gohufont-medium-r-*-*-14-*-*-*-*-*-*-*
