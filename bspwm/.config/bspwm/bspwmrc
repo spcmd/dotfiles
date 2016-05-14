@@ -36,7 +36,8 @@ bspc config ignore_ewmh_focus       true
 # ------------------------------------------------------------
 # Workspaces
 # ------------------------------------------------------------
-bspc monitor -d 1term 2web 3files 4mus 5torr 6misc 7mail 8news
+#bspc monitor -d 1term 2web 3files 4mus 5torr 6misc 7mail 8news
+bspc monitor -d term web files mus torr misc mail news
 
 # ------------------------------------------------------------
 # Rules

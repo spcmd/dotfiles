@@ -140,6 +140,13 @@ super + ctrl + t
 super + ctrl + {x,s,p}
     bspc node -g {locked,sticky,private}
 
+# (un)minimize / (un)hide
+super + ctrl + n
+    bspc node -g hidden
+
+super + shift + ctrl + n
+    bspc node $(bspc query -N -n .hidden | tail -n 1) -g hidden=off
+
 # --- focus/swap/switch ---
 
 # focus the node in the given direction
@@ -166,6 +173,10 @@ super + {_,shift + }{1-9,0}
 # jump to urgent desktop
 super + u
     bspc desktop -f last.urgent || bspc desktop -f last
+
+# switch monitor
+super + {udiaeresis,oacute}
+	bspc monitor -f {prev,next}
 
 # --- preselect ---
 

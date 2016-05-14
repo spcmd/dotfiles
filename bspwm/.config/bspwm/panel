@@ -1,4 +1,4 @@
-#!/usr/bin/env dash
+#!/bin/bash
 
 # ------------------------------------------------------
 # Settings
@@ -127,6 +127,9 @@ notes_widget > "$PANEL_FIFO" &
 # Widget commands (when clicking on them)
 # ------------------------------------------------------
 
+wcmd_titlebar_hide="$DIR_BSPWM/hide.sh hide"
+wcmd_titlebar_unhide="$DIR_BSPWM/hide.sh unhide"
+wcmd_titlebar_list_hidden="$DIR_BSPWM/hide.sh list"
 wcmd_volume_toggle="$DIR_BSPWM/volume.sh toggle"
 wcmd_volume_up="$DIR_BSPWM/volume.sh up"
 wcmd_volume_down="$DIR_BSPWM/volume.sh down"
@@ -145,6 +148,8 @@ wcmd_mail_gmailcheck="notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/
 # ------------------------------------------------------
 
 num_mon=$(bspc query -M | wc -l)
+
+wm_info_array=("" "" "" "" "")
 
 panel_bar() {
     while read -r line ; do
@@ -174,87 +179,102 @@ panel_bar() {
                 title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
                 ;;
             W*)
-                # bspwm's state
-                wm=""
+               # bspwm internal state
+                wm_infos=""
+                cur_mon=-1
+                desktop_num=1
+
                 IFS=':'
                 set -- ${line#?}
                 while [ $# -gt 0 ] ; do
                     item=$1
                     name=${item#?}
+
+                    # desktop name prefix format
+                    # use:  ${desktop_num}  for automatic numbering
+                    desktop_name_prefix="${desktop_num}"
+
                     case $item in
-                        [mM]*)
-                            [ $num_mon -lt 2 ] && shift && continue
-                            case $item in
-                                m*)
-                                    # monitor
-                                    FG=$COLOR_MONITOR_FG
-                                    BG=$COLOR_MONITOR_BG
-                                    ;;
-                                M*)
-                                    # focused monitor
-                                    FG=$COLOR_FOCUSED_MONITOR_FG
-                                    BG=$COLOR_FOCUSED_MONITOR_BG
-                                    ;;
-                            esac
-                            wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc monitor -f ${name}:} ${name} %{A}%{B-}%{F-}"
+                        M*)
+                            # active monitor
+                            cur_mon=$((cur_mon + 1))
+                            wm_infos=""
+                            if [ $num_mon -gt 1 ] ; then
+                                wm_infos="$wm_infos %{F$COLOR_ACTIVE_MONITOR_FG}%{B$COLOR_ACTIVE_MONITOR_BG} ${name} %{B-}%{F-}  "
+                            fi
                             ;;
-                        [fFoOuU]*)
-                            case $item in
-                                f*)
-                                    # free desktop
-                                    FG=$COLOR_FREE_FG
-                                    BG=$COLOR_FREE_BG
-                                    ;;
-                                F*)
-                                    # focused free desktop
-                                    FG=$COLOR_FOCUSED_FREE_FG
-                                    BG=$COLOR_FOCUSED_FREE_BG
-                                    ;;
-                                o*)
-                                    # occupied desktop
-                                    FG=$COLOR_OCCUPIED_FG
-                                    BG=$COLOR_OCCUPIED_BG
-                                    ;;
-                                O*)
-                                    # focused occupied desktop
-                                    FG=$COLOR_FOCUSED_OCCUPIED_FG
-                                    BG=$COLOR_FOCUSED_OCCUPIED_BG
-                                    ;;
-                                u*)
-                                    # urgent desktop
-                                    FG=$COLOR_URGENT_FG
-                                    BG=$COLOR_URGENT_BG
-                                    ;;
-                                U*)
-                                    # focused urgent desktop
-                                    FG=$COLOR_FOCUSED_URGENT_FG
-                                    BG=$COLOR_FOCUSED_URGENT_BG
-                                    ;;
-                            esac
-                            wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc desktop -f ${name}:} ${name} %{A}%{B-}%{F-}"
+                        m*)
+                            # inactive monitor
+                            cur_mon=$((cur_mon + 1))
+                            wm_infos=""
+                            if [ $num_mon -gt 1 ] ; then
+                                wm_infos="$wm_infos %{F$COLOR_INACTIVE_MONITOR_FG}%{B$COLOR_INACTIVE_MONITOR_BG} ${name} %{B-}%{F-}  "
+                            fi
                             ;;
-                        #[LTG]*)
-                        [L]*)
+                        O*)
+                            # focused occupied desktop
+                            wm_infos="$wm_infos%{F$COLOR_FOCUSED_OCCUPIED_FG}%{B$COLOR_FOCUSED_OCCUPIED_BG}%{A:bspc desktop -f ${name}:} ${desktop_name_prefix}${name} %{A}%{B-}%{F-}"
+                            desktop_num=$((desktop_num + 1))
+                            ;;
+                        F*)
+                            # focused free desktop
+                            wm_infos="$wm_infos%{F$COLOR_FOCUSED_FREE_FG}%{B$COLOR_FOCUSED_FREE_BG}%{A:bspc desktop -f ${name}:} ${desktop_name_prefix}${name} %{A}%{B-}%{F-}"
+                            desktop_num=$((desktop_num + 1))
+                            ;;
+                        U*)
+                            # focused urgent desktop
+                            wm_infos="$wm_infos%{F$COLOR_FOCUSED_URGENT_FG}%{B$COLOR_FOCUSED_URGENT_BG}%{A:bspc desktop -f ${name}:} ${desktop_name_prefix}${name} %{A}%{B-}%{F-}"
+                            desktop_num=$((desktop_num + 1))
+                            ;;
+                        o*)
+                            # occupied desktop
+                            wm_infos="$wm_infos%{F$COLOR_OCCUPIED_FG}%{B$COLOR_OCCUPIED_BG}%{A:bspc desktop -f ${name}:} ${desktop_name_prefix}${name} %{A}%{B-}%{F-}"
+                            desktop_num=$((desktop_num + 1))
+                            ;;
+                        f*)
+                            # free desktop
+                            wm_infos="$wm_infos%{F$COLOR_FREE_FG}%{B$COLOR_FREE_BG}%{A:bspc desktop -f ${name}:} ${desktop_name_prefix}${name} %{A}%{B-}%{F-}"
+                            desktop_num=$((desktop_num + 1))
+                            ;;
+                        u*)
+                            # urgent desktop
+                            wm_infos="$wm_infos%{F$COLOR_URGENT_FG}%{B$COLOR_URGENT_BG}%{A:bspc desktop -f ${name}:} ${desktop_name_prefix}${name} %{A}%{B-}%{F-}"
+                            desktop_num=$((desktop_num + 1))
+                            ;;
+                        L*)
                             # layout (tile, monocle)
-                            wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG} [${name}] %{B-}%{F-}"
+                            wm_infos="$wm_infos %{F$COLOR_LAYOUT_FG}%{B$COLOR_LAYOUT_BG}[${name}]%{B-}%{F-}"
                             ;;
-                        [G]*)
+                        G*)
                             # flags (sticky, private, locked)
                             if [ "$name" ]; then
-                                wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG}[${name}]%{B-}%{F-}"
+                                wm_infos="$wm_infos %{F$COLOR_LAYOUT_FG}%{B$COLOR_LAYOUT_BG}[${name}]%{B-}%{F-}"
                             fi
                             ;;
 
                     esac
                     shift
+                    wm_info_array[cur_mon]="$wm_infos"
                 done
                 ;;
         esac
-        # Panel Bar formatting
-        printf "%s\n" \
-            "%{l}${wm} \
-            %{c}${title} \
+
+        # first monitor (default / laptop display)
+        m1panel="%{l}${wm_info_array[0]} \
+            %{c}%{A:$wcmd_titlebar_hide:}%{A2:$wcmd_titlebar_list_hidden:}%{A3:$wcmd_titlebar_unhide:}${title}%{A}%{A}%{A} \
             %{r}%{A:$wcmd_open_notes:}${note}%{A}%{A:$wcmd_mail_open_mutt1:}%{A2:$wcmd_mail_gmailcheck:}%{A3:$wcmd_mail_open_mutt2:}Mail:${mail}%{A}%{A}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{F} %{A:$wcmd_volume_toggle:}%{A2:$wcmd_open_alsamixer:}%{A3:$wcmd_volume_max:}%{A4:$wcmd_volume_down:}%{A5:$wcmd_volume_up:}Vol:${volume}%{A}%{A}%{A}%{A}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{A:$wcmd_battery_time:}${bat}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{A:$wcmd_open_calendar:}${sys}%{A}"
+
+        # second monitor (external)
+        m2panel="%{S+}%{l}${wm_info_array[1]} \
+            %{c}%{A:$wcmd_titlebar_hide:}%{A2:$wcmd_titlebar_list_hidden:}%{A3:$wcmd_titlebar_unhide:}${title}%{A}%{A}%{A} \
+            %{r}${sys}"
+
+        # check monitor number and print the stuff
+        if [ "$num_mon" -eq 1 ]; then
+            printf "%s\n" "${m1panel}"
+        else
+            printf "%s\n" "${m1panel}${m2panel}"
+        fi
 
     done
 }
