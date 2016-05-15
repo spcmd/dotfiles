@@ -14,7 +14,7 @@ PANEL_FONT="-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*"
 export PANEL_HEIGHT
 
 # source the panel colors
-. $DIR_BSPWM/panel_colors/spcmd-arch
+. "$DIR_BSPWM/panel_colors/spcmd-arch"
 
 # ------------------------------------------------------
 # Panel
@@ -79,9 +79,9 @@ battery_widget() {
         capacity=$(cat /sys/class/power_supply/BAT0/capacity)
         status=$(cat /sys/class/power_supply/BAT0/status)
 
-        if [ "$status" != "Charging" -a "$capacity" -le 30 -a "$capacity" -gt 20 ]; then
+        if [ "$status" != "Charging" ] && [ "$capacity" -le 30 ] && [ "$capacity" -gt 20 ]; then
             widget_cap="%{F#ffe490}$capacity"
-        elif [ "$status" != "Charging" -a "$capacity" -le 20 ]; then
+        elif [ "$status" != "Charging" ] && [ "$capacity" -le 20 ]; then
             widget_cap="%{F#ff3b3b}$capacity"
         else
             widget_cap=$capacity
@@ -138,7 +138,6 @@ wcmd_open_alsamixer="urxvtc -e alsamixer"
 wcmd_open_calendar="$DIR_BSPWM/cal.sh"
 wcmd_open_notes='notify-send "$(cat ~/Documents/bspwm_panel_notes.txt)"'
 wcmd_battery_time='notify-send "$(~/.config/bspwm/bat_acpi.sh timeleft)"'
-#wcmd_battery_time="urxvtc -hold -e $DIR_BSPWM/bat_acpi.sh timeleft"
 wcmd_mail_open_mutt1="urxvtc -name mutt -e mutt -F ~/.mutt/account.1.muttrc; bspc desktop -f ^7"
 wcmd_mail_open_mutt2="urxvtc -name mutt -e mutt -F ~/.mutt/account.2.muttrc; bspc desktop -f ^7"
 wcmd_mail_gmailcheck="notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'"
@@ -199,16 +198,16 @@ panel_bar() {
                             # active monitor
                             cur_mon=$((cur_mon + 1))
                             wm_infos=""
-                            if [ $num_mon -gt 1 ] ; then
-                                wm_infos="$wm_infos %{F$COLOR_ACTIVE_MONITOR_FG}%{B$COLOR_ACTIVE_MONITOR_BG} ${name} %{B-}%{F-}  "
+                            if [ "$num_mon" -gt 1 ] ; then
+                                wm_infos="$wm_infos%{F$COLOR_FOCUSED_MONITOR_FG}%{B$COLOR_FOCUSED_MONITOR_BG} ${name}> %{B-}%{F-}"
                             fi
                             ;;
                         m*)
                             # inactive monitor
                             cur_mon=$((cur_mon + 1))
                             wm_infos=""
-                            if [ $num_mon -gt 1 ] ; then
-                                wm_infos="$wm_infos %{F$COLOR_INACTIVE_MONITOR_FG}%{B$COLOR_INACTIVE_MONITOR_BG} ${name} %{B-}%{F-}  "
+                            if [ "$num_mon" -gt 1 ] ; then
+                                wm_infos="$wm_infos%{F$COLOR_MONITOR_FG}%{B$COLOR_MONITOR_BG} ${name}> %{B-}%{F-}"
                             fi
                             ;;
                         O*)
@@ -292,7 +291,7 @@ panel_bar < "$PANEL_FIFO" | lemonbar -a 32 -n "$PANEL_WM_NAME" -g x$PANEL_HEIGHT
 
 wid=$(xdo id -a "$PANEL_WM_NAME")
 tries_left=20
-while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
+while [ -z "$wid" ] && [ "$tries_left" -gt 0 ] ; do
 	sleep 0.05
 	wid=$(xdo id -a "$PANEL_WM_NAME")
 	tries_left=$((tries_left - 1))

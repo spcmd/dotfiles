@@ -54,9 +54,9 @@ super + y
 
 # scrot
 Print
-    scrot ~/Pictures/scrot_%Y-%m-%d_%T.png
+    scrot ~/Pictures/scrot_%Y-%m-%d_%T.png ; notify-send "Screenshot taken"
 super + Print
-    sleep 1s && scrot -s ~/Pictures/scrot_%Y-%m-%d_%T.png
+    sleep 1s && scrot -s ~/Pictures/scrot_%Y-%m-%d_%T.png ; notify-send "Screenshot taken"
 
 # gmailcheck
 super + ctrl + m
@@ -107,8 +107,14 @@ super + ctrl + space
     bspc node @focused:/ --rotate 90
 
 # resize: expand the tiled space in the given direction
-super + alt + {h,j,k,l}
-    ~/.config/bspwm/resize.sh {left,down,up,right}
+super + alt + h
+    bspc node @east -r -25 || bspc node @west -r -25
+super + alt + j
+    bspc node @south -r +25 || bspc node @north -r +25
+super + alt + k
+    bspc node @north -r -25 || bspc node @south -r -25
+super + alt + l
+    bspc node @west -r +25 || bspc node @east -r +25
 
 # move a floating window
 super + alt + {Left,Down,Up,Right}
@@ -174,23 +180,23 @@ super + {_,shift + }{1-9,0}
 super + u
     bspc desktop -f last.urgent || bspc desktop -f last
 
+# jump back and forth between the previous/last dekstop and the current
+super + Escape
+    bspc desktop -f last
+
 # switch monitor
 super + {udiaeresis,oacute}
 	bspc monitor -f {prev,next}
 
 # --- preselect ---
 
-# preselect the direction
+# preselect the direction (toggle)
 super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
+	bspc node -p '~{west,south,north,east}'
 
 # preselect the ratio
 super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
-
-# cancel the preselection for the focused node
-super + Escape
-	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
 #super + ctrl + shift + space

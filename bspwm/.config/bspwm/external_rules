@@ -9,14 +9,13 @@
 # http://spcmd.github.io
 # https://github.com/spcmd
 
-
 wid=$1
 class=$2
 instance=$3
 
 # Move calendar to the top right corner
 # TODO: set 'x' and 'y' depending on the screen resolution
-if [ "$class" = "cal" -o "$instance" = "cal" ] ; then
+if [ "$class" = "cal" ] || [ "$instance" = "cal" ]; then
     xdo move -n cal -x +1175 -y 20
 fi
 
