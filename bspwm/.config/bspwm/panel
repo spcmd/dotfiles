@@ -30,7 +30,6 @@ trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
 
-bspc config top_padding $PANEL_HEIGHT
 bspc subscribe report > "$PANEL_FIFO" &
 
 # ------------------------------------------------------
@@ -141,6 +140,7 @@ wcmd_battery_time='notify-send "$(~/.config/bspwm/bat_acpi.sh timeleft)"'
 wcmd_mail_open_mutt1="urxvtc -name mutt -e mutt -F ~/.mutt/account.1.muttrc; bspc desktop -f ^7"
 wcmd_mail_open_mutt2="urxvtc -name mutt -e mutt -F ~/.mutt/account.2.muttrc; bspc desktop -f ^7"
 wcmd_mail_gmailcheck="notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'"
+wcmd_unhide_window="$DIR_BSPWM/hide.sh unhide"
 
 # ------------------------------------------------------
 # Panel Bar (get information and format the widgets)
@@ -174,8 +174,12 @@ panel_bar() {
                 note="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
                 ;;
             T*)
-                # xtitle output
+                # xtitle
                 title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
+                ;;
+            H*)
+                # hidden window indicator
+                hidden="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
                 ;;
             W*)
                # bspwm internal state
@@ -259,12 +263,12 @@ panel_bar() {
         esac
 
         # first monitor (default / laptop display)
-        m1panel="%{l}${wm_info_array[0]} \
+        m1panel="%{l}${wm_info_array[0]}%{A:$wcmd_unhide_window:}${hidden}%{A} \
             %{c}%{A:$wcmd_titlebar_hide:}%{A2:$wcmd_titlebar_list_hidden:}%{A3:$wcmd_titlebar_unhide:}${title}%{A}%{A}%{A} \
             %{r}%{A:$wcmd_open_notes:}${note}%{A}%{A:$wcmd_mail_open_mutt1:}%{A2:$wcmd_mail_gmailcheck:}%{A3:$wcmd_mail_open_mutt2:}Mail:${mail}%{A}%{A}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{F} %{A:$wcmd_volume_toggle:}%{A2:$wcmd_open_alsamixer:}%{A3:$wcmd_volume_max:}%{A4:$wcmd_volume_down:}%{A5:$wcmd_volume_up:}Vol:${volume}%{A}%{A}%{A}%{A}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{A:$wcmd_battery_time:}${bat}%{A}%{F${COLOR_WIDGET_SEPARATOR}}|%{A:$wcmd_open_calendar:}${sys}%{A}"
 
         # second monitor (external)
-        m2panel="%{S+}%{l}${wm_info_array[1]} \
+        m2panel="%{S+}%{l}${wm_info_array[1]}%{A:$wcmd_unhide_window:}${hidden}%{A} \
             %{c}%{A:$wcmd_titlebar_hide:}%{A2:$wcmd_titlebar_list_hidden:}%{A3:$wcmd_titlebar_unhide:}${title}%{A}%{A}%{A} \
             %{r}${sys}"
 

@@ -148,10 +148,10 @@ super + ctrl + {x,s,p}
 
 # (un)minimize / (un)hide
 super + ctrl + n
-    bspc node -g hidden
+    ~/.config/bspwm/hide.sh hide
 
 super + shift + ctrl + n
-    bspc node $(bspc query -N -n .hidden | tail -n 1) -g hidden=off
+   ~/.config/bspwm/hide.sh unhide
 
 # --- focus/swap/switch ---
 

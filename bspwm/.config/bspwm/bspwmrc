@@ -4,19 +4,14 @@
 # General Settings
 # ------------------------------------------------------------
 
+bspc config external_rules_command  ~/.config/bspwm/external_rules
 bspc config split_ratio             0.50
 bspc config focus_by_distance       true
 bspc config history_aware_focus     true
-bspc config pointer_follows_focus   false
+bspc config click_to_focus          true
 
-# remove disabled/unplugged monitors and move their
-# desktops to the first monitor (laptop display)
-bspc config remove_disabled_monitors true
-bspc config remove_unplugged_monitors true
-
-# ------------------------------------------------------------
-# Window settings
-# ------------------------------------------------------------
+# ignore EWMH focus requests coming from applications
+bspc config ignore_ewmh_focus       true
 
 # window borders / fill
 bspc config borderless_monocle      false
@@ -26,17 +21,17 @@ bspc config normal_border_color     "#333333"
 bspc config presel_feedback_color   "#0d497b"
 
 # gap / padding
-gap_size=0
 bspc config gapless_monocle         true
-bspc config window_gap              $gap_size
+bspc config window_gap              0
 bspc config top_padding             $PANEL_HEIGHT
-bspc config bottom_padding          $gap_size
-bspc config left_padding            $gap_size
-bspc config right_padding           $gap_size
-bspc config external_rules_command  ~/.config/bspwm/external_rules
+bspc config bottom_padding          0
+bspc config left_padding            0
+bspc config right_padding           0
 
-# Ignore EWMH focus requests coming from applications
-bspc config ignore_ewmh_focus       true
+# remove disabled/unplugged monitors and move their
+# desktops to the first monitor (laptop display)
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
 
 # ------------------------------------------------------------
 # Desktops

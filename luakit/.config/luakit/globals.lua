@@ -62,6 +62,7 @@ search_engines = {
     kat     = "https://kat.cr/usearch/?q=%s",
     ph      = "http://logout.hu/temak/keres.php?type=-&stext=%s",
     rarbg   = "https://rarbg.to/torrents.php?search=%s",
+    sztaki  = "http://szotar.sztaki.hu/search?fromlang=all&tolang=all&searchWord=%s",
     tpb     = "https://thepiratebay.se/search/%s",
     wiki    = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
     yt      = "https://www.youtube.com/results?search_query=%s",
@@ -120,8 +121,16 @@ domain_props = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/port_hu.css",
     },
 
+    ["reddit.com"] = {
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/reddit.css",
+    },
+
     ["sorozatjunkie.hu"] = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/sorozatjunkie_hu.css",
+    },
+
+    ["szotar.sztaki.hu"] = {
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/sztaki-szotar.css",
     },
 
     ["youtube.com"] = {

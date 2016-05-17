@@ -14,12 +14,12 @@ compton-opacity() {
     compton_config=~/.config/compton/compton.conf
     if [[ -e  $compton_config ]]; then
         if [[ -z $1 ]]; then
-            VALUE=$(awk 'NR==4' $HOME/.config/compton/compton.conf)
+            VALUE=$(awk 'NR==5' $HOME/.config/compton/compton.conf)
             echo "Error! Opacity value cannot be empty. You need to set a number."
             echo "The current setting is: $VALUE"
         else
             # change the opacity value in the 4th line
-            sed -i "4s/[0-9][0-9]/$1/" $compton_config
+            sed -ri "5s/[0-9][0-9][0-9]?/$1/" $compton_config
             echo "==> urxvt transparency in compton.conf has been set to: $1"
             echo "==> Restart compton? (y = yes)"
             read compton_restart
