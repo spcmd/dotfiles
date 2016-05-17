@@ -1,0 +1,27 @@
+/* Origo felso sav */
+#top_navbar {display:none!important;}
+
+/* Felso reklam banner */
+.goAdverticum, #ad1 {display:none!important;}
+
+/* Felso menu */
+#top_func {display:none!important;}
+
+/* Noscript */
+noscript {display:none!important;}
+
+/* 'Csatlakozom' gomb */
+*[id^='hubla-dictjoin-button-form'] {display:none!important;}
+
+/* Visszajelzes jobb oldalt */
+.feedbackButton {display:none!important;}
+
+/* Kerdojel oldalt */
+.tutorialOpen {display:none!important;}
+
+/* Vissza a regi sztaki szotarra gomb */
+.oldDictButton {display:none!important;}
+
+/* Lablec */
+#footer-region {display:none!important;}
+#pratikabuSTTDiv {display:none!important;}
