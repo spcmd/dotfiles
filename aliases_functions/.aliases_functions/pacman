@@ -19,7 +19,7 @@ alias paclspkg='pacman -Q' # list installed packages
 alias paclsaur='pacman -Qmq' #list AUR and manually installed packages
 alias paclsaurver='pacman -Qm' # list installed AUR packages
 alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
-alias cdyaourtpkg='cd /var/cache/pacman/pkg-yaourt' # change to yaourt cache dir
+alias cdaurpkg='cd /var/cache/pacman/pkg-aur' # change to yaourt cache dir
 
 #pacman: show package info
 pacinfo() {

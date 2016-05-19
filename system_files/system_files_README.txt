@@ -29,3 +29,10 @@ sudo cp 99-sysctl.conf /etc/sysctl.d
 
 # Disable cursor blink in TTY
 sudo cp disable-cursor-blink-tty.conf /etc/tmpfiles.d
+
+# Console keymap
+sudo mkdir -p /usr/local/share/kbd/keymaps
+sudo cp personal.map /usr/local/share/kbd/keymaps
+
+# Console settings
+sudo cp vconsole.conf /etc

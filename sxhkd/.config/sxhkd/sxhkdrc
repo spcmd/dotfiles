@@ -51,6 +51,10 @@ super + b
 # mps-youtube
 super + y
     $DIR_SCRIPTS/mpsyt-control play-pause
+super + alt + Left
+    $DIR_SCRIPTS/mpsyt-control previous
+super + alt + Right
+    $DIR_SCRIPTS/mpsyt-control next
 
 # scrot
 Print
@@ -159,14 +163,13 @@ super + shift + ctrl + n
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
-# focus the next/previous node (cycle)
-#super + {_,shift +}c
+# focus the next/previous node (cycle) in the current desktop
 super + {_,shift+}space
-	bspc node -f {next,prev}
+	bspc node -f {next,prev}.local
 
-# swap the current node and the biggest node
+# swap the current node and the biggest node in the current desktop
 super + g
-	bspc node -s biggest
+	bspc node -s biggest.local
 
 # switch desktop
 super + {odoubleacute,uacute}

@@ -34,9 +34,8 @@ MD() {
 
 # Clear Clipboard
 cpw() {
-    xsel -bc &&
-    echo "" | xsel -p &&
-    echo "Clipboard cleared."
+    xsel -bc && echo "" | xsel -p
+    #echo "Clipboard cleared."
 }
 
 # Create shell script
