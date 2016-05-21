@@ -1,0 +1,27 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+# pane border colors
+set -g pane-border-fg colour7
+set -g pane-border-bg colour0
+set -g pane-active-border-fg colour7
+set -g pane-active-border-bg colour4
+
+# statusbar color
+set -g status-fg colour7
+set -g status-bg colour235
+
+# window title colors
+# formatting:
+# I: window number
+# W: window name
+# F: window flags
+setw -g window-status-current-format "#[bg=colour4,fg=colour7]#I:#W"
+setw -g window-status-format "#[bg=default,fg=colour7]#I:#W"
