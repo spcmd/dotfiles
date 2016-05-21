@@ -49,8 +49,8 @@ theme.ibar_fg           = "#fff"
 theme.ibar_bg           = "#000"
 
 -- ADDED: Prompt (INSERT, PASS THROUGH, Follow)
-theme.prompt_fg         = "#33AADD"
-theme.prompt_bg         = "#000"
+theme.prompt_fg         = "#ffffff"
+theme.prompt_bg         = "#001257"
 
 -- Tab label
 theme.tab_fg            = "#888"

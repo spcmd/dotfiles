@@ -80,9 +80,10 @@ domain_props = {
 
     ["all"] = {
         user_stylesheet_uri     = "",  -- reset stylesheet, deactivate userstyles left over from other domains.
-        monospace_font_family       = "Liberation Mono",
-        sans_serif_font_family      = "Liberation Sans",
-        serif_font_family           = "Liberation Serif",
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/global.css", -- input/textare fix for dark GTK themes
+        monospace_font_family   = "Liberation Mono",
+        sans_serif_font_family  = "Liberation Sans",
+        serif_font_family       = "Liberation Serif",
         enable_spell_checking   = true,
         spell_checking_languages = "hu_HU",
         enable_html5_database = false,
