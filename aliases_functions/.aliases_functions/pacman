@@ -16,8 +16,9 @@ alias pacsync='sudo pacman -Syy' # update repo lists
 alias pacupd='sudo pacman -Syyu' # update & upgrade
 alias pacupg='sudo pacman -Syyu' # update & upgrade
 alias paclspkg='pacman -Q' # list installed packages
-alias paclsaur='pacman -Qmq' #list AUR and manually installed packages
-alias paclsaurver='pacman -Qm' # list installed AUR packages
+alias paclsexplicit='pacman -Qqen' # list explicitly installed packages
+alias paclsaur='pacman -Qmq' #list AUR and makepkg packages
+alias paclsaurver='pacman -Qm' # list AUR and packages with version numbers
 alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
 alias cdaurpkg='cd /var/cache/pacman/pkg-aur' # change to yaourt cache dir
 

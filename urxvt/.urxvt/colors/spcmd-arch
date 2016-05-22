@@ -7,8 +7,8 @@
 #define red #FF434A
 #define brightred #CC181E
 #define green #46CB50
-#define brightgreen #46CB50
-!#define brightgreen #005a00
+!#define brightgreen #46CB50
+#define brightgreen #005a00
 #define yellow #FAE56B
 #define brightyellow #FAC96B
 #define blue #0d497b

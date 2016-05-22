@@ -56,6 +56,7 @@ require "binds"
 -- Optional user script loading --
 ----------------------------------
 
+-- Web Inspector tool
 require "webinspector"
 
 -- Add sqlite3 cookiejar
@@ -97,7 +98,7 @@ require "undoclose"
 require "tabhistory"
 
 -- Add greasemonkey-like javascript userscript support
-require "userscripts"
+--require "userscripts"
 
 -- Add bookmarks support
 require "bookmarks"
@@ -158,7 +159,7 @@ require "history"
 require "history_chrome"
 
 -- Help page
-require "introspector"
+--require "introspector"
 
 -- Add command completion
 require "completion"
@@ -183,7 +184,8 @@ require "go_next_prev"
 -- Go up in domain levels (quick navigation)
 --require "go_up"
 
-require "uaswitch"
+-- User-Agent Switcher
+--require "uaswitch"
 
 -----------------------------
 -- ADDED Customizations --

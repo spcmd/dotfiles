@@ -1,4 +1,19 @@
+/*
+ * fix for AdwaitaDark GTK theme
+ * http://gnome-look.org/content/show.php/AdwaitaDark?content=175933
+*/
+
+/*
 input, textarea, select {
 	background: #393F3F!important;
+	color: #ffffff!important;
+}
+*/
+
+/*
+ * fix for Add-Waiter GTK theme
+ * http://gnome-look.org/content/show.php/Add-Waiter?content=170664
+*/
+select {
 	color: #ffffff!important;
 }
