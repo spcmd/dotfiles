@@ -13,10 +13,10 @@ alias cal-next='cal -mn 2'
 alias hdapm='sudo hdparm -I /dev/sda | grep level'
 alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
 #alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
-alias w3m='w3m -v'
 
-# w3m imagedisplay
-w3mimg() { /usr/lib/w3m/w3mimgdisplay $1 ; }
+# w3m
+alias w3m='w3m -v'
+w3mimg() { w3m -o imgdisplay=/usr/lib/w3m/w3mimgdisplay $1 ; }
 
 # Frambebuffer screenshot
 fbscrot() {

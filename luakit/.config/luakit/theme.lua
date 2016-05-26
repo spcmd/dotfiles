@@ -46,7 +46,7 @@ theme.dbar_error_fg   = "#F00"
 
 -- Input bar specific
 theme.ibar_fg           = "#fff"
-theme.ibar_bg           = "#000"
+theme.ibar_bg           = "#222"
 
 -- ADDED: Prompt (INSERT, PASS THROUGH, Follow)
 theme.prompt_fg         = "#ffffff"

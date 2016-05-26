@@ -15,7 +15,8 @@ light -S 20
 (sleep 1 && setxkbmap -option caps:escape)
 
 # Start urxvt daemon
-[[ ! $(pgrep urxvtd) ]] && urxvtd &
+#[[ ! $(pgrep urxvtd) ]] && urxvtd &
+urxvtd -q -f -o
 
 # Merge .Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
