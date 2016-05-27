@@ -37,7 +37,7 @@ session = ~/.rtorrent-session
 
 # Watch a directory for new torrents, and stop those that have been
 # deleted.
-schedule = watch_directory,5,5,load_start=~/Downloads/.rtorrent_autoload/*.torrent
+#schedule = watch_directory,5,5,load_start=~/Downloads/.rtorrent_autoload/*.torrent
 #schedule = untied_directory,5,5,stop_untied=
 
 # Close torrents when diskspace is low.
@@ -63,7 +63,7 @@ port_random = no
 #check_hash = no
 
 # Set whether the client should try to connect to UDP trackers.
-use_udp_trackers = yes
+#use_udp_trackers = yes
 
 # Alternative calls to bind and ip that should handle dynamic ip's.
 #schedule = ip_tick,0,1800,ip=rakshasa
@@ -89,33 +89,112 @@ dht = on
 dht_port = 50500
 
 # Enable peer exchange (for torrents not marked private)
-peer_exchange = yes
+#peer_exchange = yes
 
 # Preallocate files; reduces defragmentation on filesystems.
-system.file_allocate.set = yes
+#system.file_allocate.set = yes
 
 # Set colors
-# Options: color_inactive_fg, color_inactive_bg, color_dead_fg, color_dead_bg,
-#          color_active_fg, color_active_bg, color_finished_fg, color_finished_bg,
-# Colors: 0 = black 1 = red 2 = green 3 = yellow 4 = blue 5 = magenta 6 = cyan 7 = white
-#
-# Nice example-config:   color_inactive_fg = 4
-#                        color_dead_fg = 1
-#                        color_active_fg = 3
-#                        color_finished_fg = 2
-#
-# Explanation:
+#   Colors: 0 = black 1 = red 2 = green 3 = yellow 4 = blue 5 = magenta 6 = cyan 7 = white
 #   Inactive: Deactivated torrent
 #   Dead:     Active but can't find seeders
 #   Active:   Active and downloading
 #   Finished: Download done
 #   If the torrent is highlighted (using bold text) you're uploading data
 
-color_inactive_bg = 3
-color_inactive_fg = 0
-color_active_bg = 4
-color_active_fg = 7
-color_finished_bg = 2
-color_finished_fg = 0
-color_dead_bg = 7
-color_dead_fg = 0
+#color_inactive_bg = 3
+#color_inactive_fg = 0
+#color_active_bg = 4
+#color_active_fg = 7
+#color_finished_bg = 2
+#color_finished_fg = 0
+#color_dead_bg = 7
+#color_dead_fg = 0
+
+# --------------------------------------------------------------------------------------
+# rTorrent-ps settings
+# --------------------------------------------------------------------------------------
+
+# Set "pyro.extended" to 1 to activate rTorrent-PS features!
+# LEAVE THIS AT 0 IF YOU RUN A VANILLA rTorrent!
+method.insert = pyro.extended, value|const, 1
+
+# Set "pyro.extended.ch" to 1 to activate rTorrent-PS-CH features!
+# LEAVE THIS AT 0 IF YOU DO NOT RUN IT!
+method.insert = pyro.extended.ch, value|const, 1
+
+# Set "pyro.bin_dir" to the "bin" directory where you installed the pyrocore tools!
+# Make sure you end it with a "/"; if this is left empty, then the shell's path is searched.
+method.insert = pyro.bin_dir, string|const, "$cat=~/bin/"
+
+# Helper method to import specified conf file as a parameter from ~/.pyroscope/ directory.
+#method.insert = import.pyro.rc, simple, "import=\"$cat=~/.pyroscope/,$argument.0=\""
+
+# Imports main pyroscope conf file
+#import.pyro.rc = "$cat=rtorrent-ps-,\"$system.client_version=\",.rc"
+
+# Show collapsed view by default
+branch=pyro.extended=,"view.collapsed.toggle=main"
+branch=pyro.extended=,"view.collapsed.toggle=name"
+branch=pyro.extended=,"view.collapsed.toggle=started"
+branch=pyro.extended=,"view.collapsed.toggle=stopped"
+branch=pyro.extended=,"view.collapsed.toggle=complete"
+branch=pyro.extended=,"view.collapsed.toggle=incomplete"
+branch=pyro.extended=,"view.collapsed.toggle=seeding"
+branch=pyro.extended=,"view.collapsed.toggle=active"
+
+# View: sort by uploaded data
+view.add = uploadeddata
+branch=pyro.extended=,"view.collapsed.toggle=uploadeddata"
+branch=pyro.extended=,false=,"view.sort_current = uploadeddata,greater=d.up.total="
+branch=pyro.extended=,"view.sort_current = uploadeddata,\"compare=+-,d.throttle_name=,d.up.total=\""
+view.sort = uploadeddata
+branch=pyro.extended=,"schedule = bind_uploadeddata,0,0,\"ui.bind_key=download_list,u,ui.current_view.set=uploadeddata\""
+
+# View: sort by data size
+view.add = datasize
+branch=pyro.extended=,"view.collapsed.toggle=datasize"
+branch=pyro.extended=,false=,"view.sort_current = datasize,greater=d.size_bytes="
+branch=pyro.extended=,"view.sort_current = datasize,\"compare=+-,d.throttle_name=,d.size_bytes=\""
+view.sort = datasize
+branch=pyro.extended=,"schedule = bind_datasize,0,0,\"ui.bind_key=download_list,z,ui.current_view.set=datasize\""
+
+# View: sort by ratio
+view.add = ratio
+branch=pyro.extended=,"view.collapsed.toggle=ratio"
+branch=pyro.extended=,false=,"view.sort_current = ratio,greater=d.ratio="
+branch=pyro.extended=,"view.sort_current = ratio,\"compare=+-,d.throttle_name=,d.ratio=\""
+view.sort = ratio
+branch=pyro.extended=,"schedule = bind_ratio,0,0,\"ui.bind_key=download_list,r,ui.current_view.set=ratio\""
+
+# Key bindings
+schedule = bind_collapse,0,0,"ui.bind_key=download_list,0040,view.collapsed.toggle="
+schedule = bind_start_all,0,0,"ui.bind_key=download_list,S,\"d.multicall2=,d.start=\""
+schedule = bind_stop,0,0,"ui.bind_key=download_list,^d,d.stop="
+schedule = bind_stop_all,0,0,"ui.bind_key=download_list,D,\"d.multicall2=,d.stop=\""
+schedule = bind_delete,0,0,"ui.bind_key=download_list,R,d.erase="
+
+# Colors
+ui.color.alarm.set="bold white on red"
+ui.color.even.set=""
+ui.color.odd.set=""
+ui.color.focus.set="reverse"
+ui.color.info.set="white"
+ui.color.label.set="white"
+ui.color.title.set="bold white on blue"
+ui.color.footer.set="bold bright cyan on blue"
+
+ui.color.seeding.set="green"
+ui.color.leeching.set="bold bright blue"
+ui.color.stopped.set="yellow"
+ui.color.incomplete.set="white"
+ui.color.complete.set="bright green"
+
+ui.color.progress0.set="red"
+ui.color.progress20.set="bold bright red"
+ui.color.progress40.set="bold bright magenta"
+ui.color.progress60.set="yellow"
+ui.color.progress80.set="bold bright yellow"
+ui.color.progress100.set="green"
+ui.color.progress120.set="green"
+ui.color.queued.set="magenta"
