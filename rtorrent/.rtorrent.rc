@@ -86,7 +86,7 @@ encryption = allow_incoming,try_outgoing,enable_retry
 dht = on
 
 # UDP port to use for DHT.
-dht_port = 50500
+#dht_port = 50500
 
 # Enable peer exchange (for torrents not marked private)
 #peer_exchange = yes
@@ -133,7 +133,14 @@ method.insert = pyro.bin_dir, string|const, "$cat=~/bin/"
 # Imports main pyroscope conf file
 #import.pyro.rc = "$cat=rtorrent-ps-,\"$system.client_version=\",.rc"
 
-# Show collapsed view by default
+# Encryption options (encryption), set to none (default) or any combination of the following: allow_incoming, try_outgoing, require, require_RC4, enable_retry, prefer_plaintext
+# The example value allows incoming encrypted connections, starts unencrypted outgoing connections but retries with encryption if they fail, preferring plaintext to RC4 encryption after the encrypted handshake
+protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+
+# Watch directories and autoload torrents for them
+branch=pyro.extended=,"schedule = watch_dir_1, 5, 10, \"load.start=~/Downloads/.rtorrent_autoload/*.torrent\""
+
+# View: show collapsed view by default
 branch=pyro.extended=,"view.collapsed.toggle=main"
 branch=pyro.extended=,"view.collapsed.toggle=name"
 branch=pyro.extended=,"view.collapsed.toggle=started"
@@ -167,34 +174,50 @@ branch=pyro.extended=,"view.sort_current = ratio,\"compare=+-,d.throttle_name=,d
 view.sort = ratio
 branch=pyro.extended=,"schedule = bind_ratio,0,0,\"ui.bind_key=download_list,r,ui.current_view.set=ratio\""
 
+# View: tagged
+# <space> = toggle focused item between tagged and untagged (0040 is the <space> key)
+# t = show tagged items view
+# T = clear all tags
+view.add = tagged
+view.persistent = tagged
+branch=pyro.extended=,view.collapsed.toggle=tagged
+method.insert = view.toggle_visible,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0="
+method.insert = pyro.view_tagged_clear,simple|private,"view.filter=tagged,false= ;d.multicall2=main,d.views.remove=tagged"
+branch=pyro.extended=,"schedule = bind_tag_toggle,0,0,\"ui.bind_key=download_list,0040,view.toggle_visible=tagged\""
+branch=pyro.extended=,"schedule = bind_tag_clear,0,0,\"ui.bind_key=download_list,T,pyro.view_tagged_clear=\""
+branch=pyro.extended=,"schedule = bind_tag_show,0,0,\"ui.bind_key=download_list,t,ui.current_view.set=tagged\""
+
 # Key bindings
-schedule = bind_collapse,0,0,"ui.bind_key=download_list,0040,view.collapsed.toggle="
+schedule = bind_collapse,0,0,"ui.bind_key=download_list,*,view.collapsed.toggle="
 schedule = bind_start_all,0,0,"ui.bind_key=download_list,S,\"d.multicall2=,d.start=\""
 schedule = bind_stop,0,0,"ui.bind_key=download_list,^d,d.stop="
 schedule = bind_stop_all,0,0,"ui.bind_key=download_list,D,\"d.multicall2=,d.stop=\""
 schedule = bind_delete,0,0,"ui.bind_key=download_list,R,d.erase="
+schedule = bind_home,0,0,"ui.bind_key=download_list,g,ui.focus.home="
+schedule = bind_end, 0,0,"ui.bind_key=download_list,G,ui.focus.end="
 
-# Colors
-ui.color.alarm.set="bold white on red"
+# Colors & Style
+ui.color.alarm.set="red"
 ui.color.even.set=""
 ui.color.odd.set=""
 ui.color.focus.set="reverse"
 ui.color.info.set="white"
 ui.color.label.set="white"
-ui.color.title.set="bold white on blue"
-ui.color.footer.set="bold bright cyan on blue"
+ui.color.title.set="white on blue"
+ui.color.footer.set="white on blue"
 
 ui.color.seeding.set="green"
 ui.color.leeching.set="bold bright blue"
-ui.color.stopped.set="yellow"
-ui.color.incomplete.set="white"
+ui.color.stopped.set="bright white"
+ui.color.incomplete.set="red"
 ui.color.complete.set="bright green"
+ui.color.queued.set="cyan"
 
+ui.style.progress.set=2
 ui.color.progress0.set="red"
 ui.color.progress20.set="bold bright red"
-ui.color.progress40.set="bold bright magenta"
-ui.color.progress60.set="yellow"
-ui.color.progress80.set="bold bright yellow"
+ui.color.progress40.set="yellow"
+ui.color.progress60.set="bright yellow"
+ui.color.progress80.set="bright green"
 ui.color.progress100.set="green"
 ui.color.progress120.set="green"
-ui.color.queued.set="magenta"
