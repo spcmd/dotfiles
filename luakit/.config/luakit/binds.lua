@@ -455,6 +455,11 @@ add_binds("normal", {
                 end
             end),
 
+        buf("^cc$", "Clean cookies",
+            function (w)
+                luakit.spawn("luakitwrapper -cc")  -- uses my luakitwrapper script
+                w:notify("Cookies have been cleaned")
+            end),
 
 })
 
