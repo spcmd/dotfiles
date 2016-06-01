@@ -15,7 +15,7 @@ KEYTIMEOUT=1
 
 cursor_type_vicmd='2'
 cursor_type_viins='2'
-cursor_color_vicmd='yellow'
+cursor_color_vicmd='white'
 cursor_color_viins='cyan'
 
 function zle-line-init zle-keymap-select {
