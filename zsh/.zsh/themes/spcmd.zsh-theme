@@ -7,9 +7,15 @@
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 # http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
-PROMPT='%B%F{40}%~\
-$(git_prompt_info)\
-%B%F{40}> \
+#PROMPT='%B%F{40}%~\
+#$(git_prompt_info)\
+#%B%F{40}> \
+#%{$reset_color%}'
+
+PROMPT='%B%F{40}%n@%m \
+%F{4}%~\
+$(git_prompt_info) \
+%F{40}$ \
 %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{255}("
