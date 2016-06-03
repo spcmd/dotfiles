@@ -6,7 +6,10 @@
 # ==================================
 
 # Setup root's minimal .vimrc
-sudo cp ~/dotfiles/system_files/root-vimrc /root/.vimrc
+sudo cp ~/dotfiles/system_files/root-vimrc /root
+
+# Setup root's bashrc
+sudo cp ~/dotfiles/system_files/root-bashrc /root
 
 # Setup hdparm
 sudo cp ~/dotfiles/system_files/set-hdparm.service /etc/systemd/system

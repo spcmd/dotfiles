@@ -354,7 +354,7 @@ webview.methods = {
     --ADDED: open this page in an alternative browser
     open_in_alt_browser = function (view, w)
         local uri = w.view.uri
-        luakit.spawn(string.format("chromium %s", uri))
+        luakit.spawn(string.format("chromium --incognito %s", uri))
     end,
 
 
