@@ -22,6 +22,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdcommenter'
     Plug 'spcmd/vim-easy-todo', { 'for': 'todo' }
     Plug 'kristijanhusak/vim-multiple-cursors'
+    Plug 'rust-lang/rust.vim'
     "Plug 'junegunn/fzf', { 'do': './install --all' }
     "Plug 'junegunn/fzf.vim'
     "Plug 'xolox/vim-misc'

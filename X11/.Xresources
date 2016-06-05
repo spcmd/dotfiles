@@ -11,7 +11,10 @@
 URxvt.termName: rxvt-unicode-256color
 URxvt.terminalName: rxvt-unicode-256color
 
-! Source colors
+!URxvt.background: #000000
+!URxvt.foreground: #f5f5f5
+
+!Source colors
 #include "/home/spcmd/.urxvt/colors/spcmd-arch"
 URxvt.background: bg
 URxvt.foreground: fg
@@ -76,7 +79,7 @@ URxvt.keysym.M-Escape: perl:keyboard-select:activate
 ! url-select-plus
 URxvt.keysym.M-f: perl:url-select-plus:select_next
 URxvt.url-select-plus.launcher: /home/spcmd/Scripts/url_opener.sh
-URxvt.url-select-plus.altlauncher: chromium
+URxvt.url-select-plus.altlauncher: inox --incognito --proxy-server=localhost:8118
 URxvt.url-select-plus.mediaplayer: urxvtc -e mpv
 URxvt.url-select-plus.imgviewer: feh
 URxvt.url-select-plus.button: 1
