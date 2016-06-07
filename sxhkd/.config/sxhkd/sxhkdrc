@@ -215,19 +215,3 @@ super + ctrl + g
     bspc node -f east ; \
     bspc node -p east ; \
     urxvtc
-
-# --- mouse focus/move/resize ---
-
-# focus
-~button1
-	bspc node pointed -f
-	#bspc pointer -g focus
-
-# start move/resize
-super + button{1-3}
-	; bspc pointer -g {move,resize_side,resize_corner}
-
-# end move/resize
-super + @button{1-3}
-	bspc pointer -u
-
