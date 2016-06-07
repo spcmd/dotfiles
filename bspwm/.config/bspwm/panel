@@ -36,7 +36,7 @@ bspc subscribe report > "$PANEL_FIFO" &
 #  Widgets for the Panel Bar
 # ------------------------------------------------------
 
-xtitle -sf 'T%s' > "$PANEL_FIFO" &
+xtitle -t 90 -sf 'T%s' > "$PANEL_FIFO" &
 
 # Refresh widgets in:
 refresh_interval="60s"
