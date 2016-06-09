@@ -14,6 +14,7 @@ rsync-320GB_Rack() {
         rsync -avr $HOME/Documents/ $RACK_BACKUP_DIR/Documents/
         rsync -avr $HOME/.password-store/ $RACK_BACKUP_DIR/.password-store
         rsync -avr $HOME/.spotymenu/ $RACK_BACKUP_DIR/.spotymenu
+        rsync -avr $HOME/.dsnippet/ $PENDRIVE/.dsnippet
     else
         echo "==> Error: \033[1;34m$RACK_BACKUP_DIR \033[0mnot found. Is it mounted? Or has the directory changed?"
     fi
@@ -24,6 +25,10 @@ rsync-Pendrive() {
     if [[ -d $PENDRIVE ]]; then
         rsync -avr $HOME/.password-store/ $PENDRIVE/.password-store
         rsync -avr $HOME/.spotymenu/ $PENDRIVE/.spotymenu
+        rsync -avr $HOME/.dsnippet/ $PENDRIVE/.dsnippet
+        rsync -avr $HOME/Documents/tuxwiki $PENDRIVE
+        rsync -avr $HOME/Documents/Notes $PENDRIVE
+        rsync -avr $HOME/Documents/TODO.todo $PENDRIVE
     else
         echo "==> Error: \033[1;34m$PENDRIVE \033[0mnot found. Is it mounted? Or has the name changed?"
     fi

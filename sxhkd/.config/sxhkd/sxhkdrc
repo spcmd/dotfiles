@@ -20,7 +20,7 @@ super + alt + c
 
 # mutt
 super + alt + m
-    urxvtc -name mutt -e mutt -F ~/.mutt/account.1.muttrc
+    urxvtc -name mutt -e mutt -F ~/.mutt/account.1.muttrc; bspc desktop -f ^7
 
 # newsbeuter
 super + alt + n
