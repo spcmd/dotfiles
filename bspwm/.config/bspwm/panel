@@ -14,7 +14,7 @@ PANEL_FONT="-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*"
 export PANEL_HEIGHT
 
 # source the panel colors
-. "$DIR_BSPWM/panel_colors/spcmd-arch"
+. "$DIR_BSPWM/panel_colors/spcmd-gentoo"
 
 # ------------------------------------------------------
 # Panel

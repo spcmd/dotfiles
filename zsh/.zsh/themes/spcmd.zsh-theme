@@ -7,11 +7,20 @@
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 # http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
+# green minimal
 #PROMPT='%B%F{40}%~\
 #$(git_prompt_info)\
 #%B%F{40}> \
 #%{$reset_color%}'
 
+# grey host
+#PROMPT='%B%F{7}%n@%m \
+#%F{4}%~\
+#$(git_prompt_info) \
+#%F{7}> \
+#%{$reset_color%}'
+
+# green host
 PROMPT='%B%F{40}%n@%m \
 %F{4}%~\
 $(git_prompt_info) \

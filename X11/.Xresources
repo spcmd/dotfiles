@@ -15,7 +15,7 @@ URxvt.terminalName: rxvt-unicode-256color
 !URxvt.foreground: #f5f5f5
 
 !Source colors
-#include "/home/spcmd/.urxvt/colors/spcmd-arch"
+#include "/home/spcmd/.urxvt/colors/spcmd-gentoo"
 URxvt.background: bg
 URxvt.foreground: fg
 URxvt.color0: black

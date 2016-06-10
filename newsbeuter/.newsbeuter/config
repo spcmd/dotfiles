@@ -80,8 +80,10 @@ macro u edit-flags ""
 color background color7 color0
 color listnormal color7 color0
 color listnormal_unread color7 color0
-color listfocus  color7 color4
-color listfocus_unread  color7 color4
+#color listfocus  color7 color4
+#color listfocus_unread  color7 color4
+color listfocus  color7 color5
+color listfocus_unread  color7 color5
 color info       color0 color15
 color article    color7 color0
 

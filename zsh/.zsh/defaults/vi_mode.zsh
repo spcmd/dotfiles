@@ -15,8 +15,8 @@ KEYTIMEOUT=1
 
 cursor_type_vicmd='2'
 cursor_type_viins='2'
-cursor_color_vicmd='white'
-cursor_color_viins='cyan'
+cursor_color_vicmd='15'
+cursor_color_viins='12'
 
 function zle-line-init zle-keymap-select {
     if [ $KEYMAP = vicmd ]; then

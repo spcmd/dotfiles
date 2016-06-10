@@ -1,1 +1,2 @@
-DMENU='dmenu -i -l 10 -fn Terminus -sb #0D497B -nb #121212'
+#DMENU='dmenu -i -l 10 -fn Terminus -sb #0D497B -nb #121212'
+DMENU='dmenu -i -l 10 -fn Terminus -sb #4D4270 -nb #121212'
