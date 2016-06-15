@@ -17,18 +17,18 @@ call plug#begin('~/.vim/plugged')
 
     "Plug 'ap/vim-buftabline'
     "Plug 'chrisbra/Colorizer', { 'on': 'ColorHighlight' }
+   "Plug 'junegunn/fzf', { 'do': './install --all' }
+    "Plug 'junegunn/fzf.vim'
+    "Plug 'xolox/vim-misc'
+    "Plug 'xolox/vim-colorscheme-switcher'
+    "Plug 'w0ng/vim-hybrid'
     Plug 'lilydjwg/colorizer'
     Plug 'Shougo/neocomplete.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'spcmd/vim-easy-todo', { 'for': 'todo' }
     Plug 'kristijanhusak/vim-multiple-cursors'
     Plug 'rust-lang/rust.vim'
-    "Plug 'junegunn/fzf', { 'do': './install --all' }
-    "Plug 'junegunn/fzf.vim'
-    "Plug 'xolox/vim-misc'
-    "Plug 'xolox/vim-colorscheme-switcher'
-    "Plug 'chriskempson/base16-vim'
-    "Plug 'w0ng/vim-hybrid'
+    Plug 'scrooloose/syntastic'
 
 call plug#end()
 " }}}
@@ -63,7 +63,7 @@ set ttimeoutlen=10                                  "reduce timeout after <Esc>
 set splitbelow                                      "horizontal split: open below
 set splitright                                      "vertical split: open to the right
 "set t_Co=256                                        "set terminal to 256 color
-set rnu                                             "relative line numbering
+"set rnu                                             "relative line numbering
 "set cursorline                                      "highlight current line
 set laststatus=2                                    "always show statusline/airline
 set listchars=tab:▸\ ,eol:¬                         "tab and EOL chars
@@ -79,7 +79,7 @@ set backupdir=~/.vim/backup                         "put backup to backup dir
 set directory=~/.vim/backup                         "put swap to backup dir
 set foldmethod=marker                               "folding with markers
 set foldenable                                      "auto fold
-let mapleader = "-"                                 "remap leader key, instead of using \
+let mapleader = ","                                 "remap leader key, instead of using \
 
 set statusline=                                     "clear statusline (needed when reloading .vimrc)
 set statusline+=[buf:%n/%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]\   "buffers current/total
@@ -91,6 +91,12 @@ set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}]   "file encoding
 set statusline+=\ L:%l/%L                           "cursor line / total lines
 set statusline+=\ C:%c                              "cursor column
 set statusline+=\ (%P)                              "percent through file
+
+"syntastic plugin sytax check
+set statusline+=\ %#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 
 " }}}
 " {{{   Plugin/Bundle specific settings
@@ -117,8 +123,15 @@ let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
 "let g:airline_section_c = "%F"                      "show the full path of the file in section c
 "let g:airline_powerline_fonts = 1                   "load patched powerline fonts
 "let g:airline_theme="spcmd"                         "set airline theme
-"let g:vcoolor_disable_mappings = 1                  "disable VCoolor's default mappings
-"let g:vcoolor_lowercase = 1                         "use lowercase color codes by default
+
+"syntastic plugin sytax check
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height = 5
+highlight SyntasticWarning ctermbg=226 ctermfg=196
+highlight SyntasticError ctermbg=9 ctermfg=11
 
 " }}}
 " {{{   Terminal cursor settings
@@ -143,7 +156,7 @@ silent !echo -ne "\033]12;15\007"
 " {{{   Autocommands
 "--------------------------------------------
 
-"Remove trailing whitespace
+"Remove trailing whitespace before saving the buffer
 autocmd BufWritePre * :%s/\s\+$//e
 
 "Syntax highlight
@@ -219,45 +232,18 @@ command! Q q
 "Reload .vimrc (save & source)
 command! RR write|source ~/.vimrc
 
-"Quick Open configs
-cnoreabbrev cfg Cfg
-command! CfgAwesome :e ~/.config/awesome/rc.lua
-command! CfgBashrc :e ~/.bashrc
-command! CfgCompton :e ~/.config/compton/compton.conf
-command! CfgDircolors :e ~/.dircolors
-command! CfgFirefox :e ~/.config/firefox/user.js
-command! CfgMuttrc :e ~/.mutt/muttrc
-command! CfgRanger :e ~/.config/ranger/rc.conf
-command! CfgRangerRifle :e ~/.config/ranger/rifle.conf
-command! CfgRtorrent :e ~/.rtorrent.rc
-command! CfgVimrc :e ~/.vimrc
-command! CfgVimperatorrc :e ~/.vimperatorrc
-command! CfgXinitrc :e ~/.xinitrc
-command! CfgXresources :e ~/.Xresources
-command! CfgZshrc :e ~/.zshrc
-
-"Preview markdown files in browser (requires cmark)
-"http://vim.wikia.com/wiki/Get_the_name_of_the_current_file
-command! MD !cmark -t html % > /tmp/%:t.html && $BROWSER /tmp/%:t.html
-
-" Open files quickly with dmenu
-" http://leafo.net/posts/using_dmenu_to_open_quickly.html
-
-" Strip the newline from the end of a string
-function! Chomp(str)
-  return substitute(a:str, '\n$', '', '')
+" Syntastic - Toggle Error Window
+"http://stackoverflow.com/a/17515778
+function! ToggleErrors()
+    if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
+         " No location/quickfix list shown, open syntastic error location panel
+         Errors
+    else
+        lclose
+    endif
 endfunction
 
-" List files with dmenu
-function! DmenuOpen(cmd)
-  let fname = Chomp(system(' find ~/.aliases_functions ~/.dsnippet ~/.webdev ~/dotfiles ~/Scripts -type f ! -iregex ".*[/]\.git[/]?.*\|^.+\.png$\|^.+\.jpg$\|^.+\.psd$" | dmenu -fn Terminus -i -l 20 -p ' . a:cmd))
-  if empty(fname)
-    return
-  endif
-  execute a:cmd . " " . fname
-endfunction
-
-map <leader>o :call DmenuOpen("e")<cr>
+nnoremap <silent> <leader>e :<C-u>call ToggleErrors()<CR>
 
 "}}}
 " {{{   Key mappings
@@ -334,16 +320,16 @@ let hlstate=0
 nnoremap <leader><space> :set hlsearch!<CR>
 
 "Split window resize
-nnoremap <C-Up> :resize -5<CR>
-nnoremap <C-Down> :resize +5<CR>
-nnoremap <C-Left> :vertical resize +5<CR>
-nnoremap <C-Right> :vertical resize -5<CR>
+nnoremap <leader>j :resize +5<CR>
+nnoremap <leader>k :resize -5<CR>
+nnoremap <leader>h :vertical resize -5<CR>
+nnoremap <leader>l :vertical resize +5<CR>
 
 "Split window navigation
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 "Yank to system clipboard
 nnoremap y "+y
@@ -361,13 +347,6 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 nnoremap <silent> <leader>d :TodoDone<CR>
 nnoremap <silent> <leader>u :TodoUndone<CR>
 nnoremap <silent> <leader>x :TodoCancel<CR>
-
-"VCoolor (https://github.com/KabbAmine/vCoolor.vim)
-"nnoremap <silent> <leader>vc :VCoolor<CR>
-"inoremap <silent> <leader>vc <Esc>:VCoolor<CR>a
-
-"Colorizer (https://github.com/chrisbra/Colorizer)
-"nnoremap <silent> <leader>cz :ColorHighlight syntax<CR>
 
 " Cycle through colorschemes
 "nnoremap <leader>n :NextColorScheme<CR>

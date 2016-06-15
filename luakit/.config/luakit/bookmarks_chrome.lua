@@ -466,7 +466,7 @@ $(document).ready(function () { 'use strict'
     $edit_dialog.on("click", ".submit-button", function (e) {
         edit_submit();
         //reset_mode();
-        close_tab();
+        //close_tab();
         notify("Bookmark saved");
     });
 
@@ -475,7 +475,7 @@ $(document).ready(function () { 'use strict'
         if (ev.which == 13) {
             edit_submit();
             //reset_mode();
-            close_tab();
+            //close_tab();
             notify("Bookmark saved");
         }
     });

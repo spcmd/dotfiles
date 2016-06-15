@@ -10,5 +10,9 @@ if [ "$id" ]; then
     xdo close -n cal
 # else open the calendar
 else
-    urxvtc -hold -geometry 22x10 -cr black -name cal -e cal -m
+    case "$1" in
+        current) urxvtc -hold -geometry 22x10 -cr black -name cal -e cal -m ;;
+        next) urxvtc -hold -geometry 22x10 -cr black -name cal -e sh -c "cal -m -3 | cut -c 45-64" ;;
+        prev) urxvtc -hold -geometry 22x10 -cr black -name cal -e sh -c "cal -m -3 | cut -c 1-20" ;;
+    esac
 fi

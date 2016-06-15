@@ -50,18 +50,26 @@ mksh() {
     fi
 }
 
-# Stopwatch
-stopwatch() {
-    date1=$(date +%s)
-    while true; do
-       echo -ne "$(date -u --date @$(($(date +%s) - $date1)) +%H:%M:%S)\r";
-    done
-}
-
 # Calculator
 calc() {
     echo "Python calc (exit with Ctrl+D)"
     python2 -ic "from __future__ import division; from math import *; from random import *"
+}
+
+# countdown and stopwatch (http://superuser.com/a/611582)
+function countdown(){
+   date1=$((`date +%s` + $1));
+   while [ "$date1" -ge `date +%s` ]; do
+     echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
+     sleep 1 # don't stress the CPU
+   done
+}
+function stopwatch(){
+  date1=`date +%s`;
+   while true; do
+    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
+    sleep 1 # don't stress the CPU
+   done
 }
 
 # Exract urls from OPML file (e.g.: youtube subscriptions)

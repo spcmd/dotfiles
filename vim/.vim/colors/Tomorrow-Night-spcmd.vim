@@ -1,4 +1,5 @@
 "                                      _
+"
 "         ___ _ __   ___ _ __ ___   __| |
 "        / __| '_ \ / __| '_ ` _ \ / _` |
 "        \__ | |_) | (__| | | | | | (_| |
@@ -32,7 +33,7 @@ let s:aqua = "8abeb7"
 let s:blue = "81a2be"
 let s:purple = "b294bb"
 let s:window = "4d5057"
-let s:searchhl = "C259C5"
+let s:searchhl = "CEB52D"
 
 " Console 256 Colours
 if !has("gui_running")

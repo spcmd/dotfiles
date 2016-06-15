@@ -50,7 +50,7 @@ URxvt.font: -*-terminus-medium-r-normal-*-16-*-*-*-*-*-*-*
 ! Disable scrollbar
 URxvt.scrollBar: false
 
-! For Mutt to warn about new e-mails (and set this is the .muttrc: set beep_new)
+! For Mutt to warn about new e-mails (and set this in the .muttrc: set beep_new)
 URxvt.urgentOnBell: true
 
 ! Scroll in the pager itself (https://wiki.archlinux.org/index.php/Urxvt#Scrollback_buffer_in_secondary_screen)
