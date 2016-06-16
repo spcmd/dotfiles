@@ -17,11 +17,12 @@ call plug#begin('~/.vim/plugged')
 
     "Plug 'ap/vim-buftabline'
     "Plug 'chrisbra/Colorizer', { 'on': 'ColorHighlight' }
-   "Plug 'junegunn/fzf', { 'do': './install --all' }
+    "Plug 'junegunn/fzf', { 'do': './install --all' }
     "Plug 'junegunn/fzf.vim'
     "Plug 'xolox/vim-misc'
     "Plug 'xolox/vim-colorscheme-switcher'
     "Plug 'w0ng/vim-hybrid'
+    "Plug 'chriskempson/base16-vim'
     Plug 'lilydjwg/colorizer'
     Plug 'Shougo/neocomplete.vim'
     Plug 'scrooloose/nerdcommenter'
@@ -29,6 +30,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'kristijanhusak/vim-multiple-cursors'
     Plug 'rust-lang/rust.vim'
     Plug 'scrooloose/syntastic'
+    "Plug 'racer-rust/vim-racer'
 
 call plug#end()
 " }}}
@@ -92,27 +94,29 @@ set statusline+=\ L:%l/%L                           "cursor line / total lines
 set statusline+=\ C:%c                              "cursor column
 set statusline+=\ (%P)                              "percent through file
 
-"syntastic plugin sytax check
-set statusline+=\ %#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
+let base16colorspace=256
 
 " }}}
-" {{{   Plugin/Bundle specific settings
+" {{{   Plugin settings
 "--------------------------------------------
+
+"====== [ buftabline ] ============================================
+
+"let g:buftabline_indicators = 1                     "indicate modified state of the buffer
+
+
+"====== [ NERDTree ] ============================================
+
+"let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
+"let NERDTreeShowHidden=1                            "show hidden files by default (needed for dotfiles)
+
+
+"====== [ Airline ] ============================================
 
 " if !exists('g:airline_symbols')
     "let g:airline_symbols = {}
 "endif
 
-"let g:buftabline_indicators = 1                     "indicate modified state of the buffer
-"let NERDTreeShowBookmarks=1                         "show NERDTree Bookmarks
-"let NERDTreeShowHidden=1                            "show hidden files by default (needed for dotfiles)
-"let g:session_autosave="yes"                        "autosave session
-"let g:session_autoload="yes"                        "autoload session
-let g:neocomplete#enable_at_startup = 1             "enable Neocomplete
-let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
 "let g:airline_left_sep = ""                         "no arrows
 "let g:airline_right_sep = ""                        "no arrows
 "let g:airline_left_alt_sep = ""                     "no buffer/tab arrows
@@ -124,7 +128,9 @@ let g:neocomplete#enable_smart_case = 1             "smartcase for Neocomplete
 "let g:airline_powerline_fonts = 1                   "load patched powerline fonts
 "let g:airline_theme="spcmd"                         "set airline theme
 
-"syntastic plugin sytax check
+
+"====== [ Syntastic ] ============================================
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -132,6 +138,50 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_loc_list_height = 5
 highlight SyntasticWarning ctermbg=226 ctermfg=196
 highlight SyntasticError ctermbg=9 ctermfg=11
+
+" Don't check PKGBUILD files by default
+autocmd BufRead,BufNewFile PKGBUILD :silent SyntasticToggleMode
+
+" toggle error window (http://stackoverflow.com/a/17515778)
+function! ToggleErrors()
+    if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
+         " No location/quickfix list shown, open syntastic error location panel
+         Errors
+    else
+        lclose
+    endif
+endfunction
+
+" add to the statusline
+set statusline+=\ %#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+
+"====== [ Neocomplete ] ============================================
+
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+
+" fix the conflict with Neocomplete (slow performance)
+" https://github.com/kristijanhusak/vim-multiple-cursors
+" https://github.com/terryma/vim-multiple-cursors/issues/51#issuecomment-32344711
+function! Multiple_cursors_before()
+    exe 'NeoCompleteLock'
+    echo 'Disabled autocomplete'
+endfunction
+
+function! Multiple_cursors_after()
+    exe 'NeoCompleteUnlock'
+    echo 'Enabled autocomplete'
+endfunction
+
+
+"====== [ Racer (rust completion) ] ============================================
+
+"let g:racer_cmd = "/home/spcmd/bin/racer"
+"let $RUST_SRC_PATH="/home/spcmd/bin/rustc-source/src"
+
 
 " }}}
 " {{{   Terminal cursor settings
@@ -169,7 +219,7 @@ autocmd BufRead *.todo nnoremap <space> za]z
 autocmd BufRead *.sh set syntax=sh
 
 " }}}
-" {{{   Commands & Functions
+" {{{   Custom commands & functions
 "--------------------------------------------
 
 "Toggle relative line numbering
@@ -187,6 +237,18 @@ command! RBL g/^\s*$/d
 "Quick delete/close buffer
 command! QQ bd
 
+"Fix accidentally shifted commands
+command! WQ wq
+command! Wq wq
+command! W w
+command! Q q
+
+"Reload .vimrc (save & source)
+command! RR write|source ~/.vimrc
+
+"Create new buffer and save it automatically
+command! BB enew|exec 'w ~/.vim/backup/autosave'.strftime('%Y%m%d%H%M%S')
+
 "Quick delete file and buffer
 function! QuickDFCheck()
     if expand("%:t") == match(expand('%:t'),'.vimrc\|.gvimrc\|.vimperatorrc\|TODO\|vimdump\|.zshrc\|.bashrc\|.rtorrent.rc')
@@ -196,9 +258,6 @@ function! QuickDFCheck()
     endif
 endfunction
 command! DF :call QuickDFCheck()
-
-"Create new buffer and save it automatically
-command! BB enew|exec 'w ~/.vim/backup/autosave'.strftime('%Y%m%d%H%M%S')
 
 "DumpDelete (dump unused stuff to another file > save for later) + Open Dump
 let DUMPFILE = "~/.vim/backup/vimdump.vim"
@@ -210,44 +269,12 @@ else
     command! -range DD echo "ERROR: Dump file doesn't exist."
 endif
 
-" Fix the conflict with Neocomplete (slow performance)
-" https://github.com/kristijanhusak/vim-multiple-cursors
-" https://github.com/terryma/vim-multiple-cursors/issues/51#issuecomment-32344711
-function! Multiple_cursors_before()
-    exe 'NeoCompleteLock'
-    echo 'Disabled autocomplete'
-endfunction
-
-function! Multiple_cursors_after()
-    exe 'NeoCompleteUnlock'
-    echo 'Enabled autocomplete'
-endfunction
-
-"Fix accidentally shifted commands
-command! WQ wq
-command! Wq wq
-command! W w
-command! Q q
-
-"Reload .vimrc (save & source)
-command! RR write|source ~/.vimrc
-
-" Syntastic - Toggle Error Window
-"http://stackoverflow.com/a/17515778
-function! ToggleErrors()
-    if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
-         " No location/quickfix list shown, open syntastic error location panel
-         Errors
-    else
-        lclose
-    endif
-endfunction
-
-nnoremap <silent> <leader>e :<C-u>call ToggleErrors()<CR>
 
 "}}}
 " {{{   Key mappings
 "--------------------------------------------
+
+"====== [ Basic key mappings ] ============================================
 
 "Paste from clipboard
 inoremap űű <Esc>"+p
@@ -331,25 +358,13 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Location window / Error window
+nnoremap . :lprevious<CR>
+nnoremap - :lnext<CR>
+
 "Yank to system clipboard
 nnoremap y "+y
 vnoremap y "+y
-
-"NERDTree (https://github.com/scrooloose/nerdtree)
-"nmap <C-b> :NERDTreeToggle<CR>
-
-"Neocomplete (https://github.com/Shougo/neocomplete.vim)
-"move to the next with Tab and to the previous with Shift-Tab
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
-"Vim Easy TODO (https://github.com/spcmd/vim-easy-todo)
-nnoremap <silent> <leader>d :TodoDone<CR>
-nnoremap <silent> <leader>u :TodoUndone<CR>
-nnoremap <silent> <leader>x :TodoCancel<CR>
-
-" Cycle through colorschemes
-"nnoremap <leader>n :NextColorScheme<CR>
 
 " Replace X with x, so it will save and quit instead of showing the encryption prompt
 " (http://stackoverflow.com/questions/17792177/disable-encryption-with-x-in-vim/17794801#17794801)
@@ -363,7 +378,33 @@ vnoremap ~ <Nop>
 vnoremap u <Nop>
 vnoremap U <Nop>
 
-" Run current file (script) in shell
-nnoremap <C-x> :!%<CR>
+" Open Shell
+nnoremap <S-s> :shell<CR>
+
+" Cargo / Rust
+nnoremap <S-c> :!clear && cargo run<CR>
+
+
+"====== [ Plugin specific key mappings ] ============================================
+
+"NERDTree (https://github.com/scrooloose/nerdtree)
+"nmap <C-b> :NERDTreeToggle<CR>
+
+"Colorschemes Switcher (https://github.com/xolox/vim-colorscheme-switcher)
+"nnoremap <leader>n :NextColorScheme<CR>
+
+"Vim Easy TODO (https://github.com/spcmd/vim-easy-todo)
+nnoremap <silent> <leader>d :TodoDone<CR>
+nnoremap <silent> <leader>u :TodoUndone<CR>
+nnoremap <silent> <leader>x :TodoCancel<CR>
+
+"Neocomplete (https://github.com/Shougo/neocomplete.vim)
+"move to the next with Tab and to the previous with Shift-Tab
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+"Syntastic (https://github.com/scrooloose/syntastic)
+"nnoremap <silent> <leader>e :<C-u>call ToggleErrors()<CR>
+nnoremap <leader>e :SyntasticToggleMode<CR>
 
 " }}}
