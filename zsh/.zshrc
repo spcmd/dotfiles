@@ -40,6 +40,9 @@ done
 autoload -U compinit
 compinit -i -d "${FILE_ZSH_COMPDUMP}"
 
+# Base16 Shell (https://github.com/chriskempson/base16-shell)
+#BASE16_SHELL="$HOME/.config/base16-shell/base16-twilight.dark.sh"
+#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # }}}
 # {{{   Functions/Aliases
