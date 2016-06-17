@@ -30,8 +30,14 @@ for completion in $DIR_ZSH_COMPLETIONS/*.zsh-completion; do
     . $completion
 done
 
-# Load theme
-[[ -f $DIR_ZSH_THEMES/$ZSH_THEME.zsh-theme ]] && . $DIR_ZSH_THEMES/$ZSH_THEME.zsh-theme
+# Prompt / Theme
+# if opening a shell from Vim, indicate it in the prompt
+if [[ $VIM ]]; then
+    . $DIR_ZSH_THEMES/$ZSH_THEME.zsh-theme
+    PROMPT="${PROMPT}(Vim) "
+else
+    . $DIR_ZSH_THEMES/$ZSH_THEME.zsh-theme
+fi
 
 # Load plugins
 [[ -f $DIR_ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && . $DIR_ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

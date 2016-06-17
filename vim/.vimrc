@@ -94,8 +94,6 @@ set statusline+=\ L:%l/%L                           "cursor line / total lines
 set statusline+=\ C:%c                              "cursor column
 set statusline+=\ (%P)                              "percent through file
 
-let base16colorspace=256
-
 " }}}
 " {{{   Plugin settings
 "--------------------------------------------
@@ -194,7 +192,7 @@ endfunction
 " 4 : normal underscore
 " 5 : blinking vertical bar
 " 6 : normal vertical bar
-let &t_SI = "\033]12;cyan\x7"
+let &t_SI = "\033]12;12\x7"
 let &t_EI = "\033]12;15\x7"
 let &t_SI .= "\033[6 q"
 let &t_EI .= "\033[2 q"

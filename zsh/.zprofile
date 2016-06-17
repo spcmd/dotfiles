@@ -85,5 +85,12 @@ PANEL_FIFO=/tmp/panel-fifo
 PANEL_WM_NAME=bspwm_panel
 export PANEL_FIFO PANEL_WM_NAME
 
+# ------------------------------------
+# Settings
+# ------------------------------------
+
+# Disable XON/XOFF flow control (Ctrl+S pause in terminal)
+stty -ixon
+
 # Auto startx
 #[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx

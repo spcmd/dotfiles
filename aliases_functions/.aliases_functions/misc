@@ -14,19 +14,27 @@ alias hdapm='sudo hdparm -I /dev/sda | grep level'
 alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
 #alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 
+# neofetch
+alias neofetch="neofetch \
+                    --ascii \
+                    --ascii_colors 12 12 \
+                    --underline off \
+                    --disable title font \
+                    --color_blocks off"
+
 # w3m
 alias w3m='w3m -v'
-w3mimg() { w3m -o imgdisplay=/usr/lib/w3m/w3mimgdisplay $1 ; }
+w3mimg() { w3m -o imgdisplay=/usr/lib/w3m/w3mimgdisplay "$1" ; }
 
 # Frambebuffer screenshot
 fbscrot() {
-    [[ ! -z $1 ]] && fbdump | pnm2png > $1 || echo "Error: no filename given."
+    [[ ! -z $1 ]] && fbdump | pnm2png > "$1" || echo "Error: no filename given."
 }
 
 # Preview markdown files (convert to html and open is browser)
 MD() {
     if [[ ! -z $1 ]]; then
-        cmark -t html $1 > /tmp/$1.html && $BROWSER /tmp/$1.html
+        cmark -t html "$1" > /tmp/$1.html && $BROWSER /tmp/$1.html
     else
         echo "Error: no filename given."
     fi
@@ -41,10 +49,10 @@ cpw() {
 # Create shell script
 mksh() {
     if [[ ! -z $1 ]]; then
-        touch $1
-        echo "#!/bin/bash" > $1
-        chmod +x $1
-        $EDITOR $1
+        touch "$1"
+        echo "#!/bin/bash" > "$1"
+        chmod +x "$1"
+        $EDITOR "$1"
     else
         echo "Error: no filename given."
     fi
