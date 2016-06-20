@@ -1,18 +1,18 @@
 # Num lock ON
 [[ -x /usr/bin/numlockx ]] && /usr/bin/numlockx &
 
-# Source Xmodmap
-xmodmap ~/.Xmodmap
-
 # Set the wallpaper
 sh ~/.fehbg
 
 # Set/Restore backlight
-#xbacklight -set 20 &
 light -S 20
 
 # Map caps lock to escape
-(sleep 1 && setxkbmap -option caps:escape)
+#  note: this doesn't work with ~/.Xmodmap
+(sleep 0.2 && setxkbmap -option caps:escape)
+
+# Source Xmodmap
+xmodmap ~/.Xmodmap
 
 # Start urxvt daemon
 #[[ ! $(pgrep urxvtd) ]] && urxvtd &

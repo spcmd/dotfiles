@@ -31,6 +31,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'rust-lang/rust.vim'
     Plug 'scrooloose/syntastic'
     "Plug 'racer-rust/vim-racer'
+    "Plug 'morhetz/gruvbox'
 
 call plug#end()
 " }}}
@@ -179,7 +180,6 @@ endfunction
 
 "let g:racer_cmd = "/home/spcmd/bin/racer"
 "let $RUST_SRC_PATH="/home/spcmd/bin/rustc-source/src"
-
 
 " }}}
 " {{{   Terminal cursor settings

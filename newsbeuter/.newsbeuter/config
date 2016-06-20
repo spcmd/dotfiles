@@ -77,15 +77,15 @@ macro u edit-flags ""
 # COLORS --------------------------------------------------------------------------------
 # color <element> <foreground color> <background color> [<attribute> ...]
 
-color background color7 color0
-color listnormal color7 color0
-color listnormal_unread color7 color0
+color background color7 default
+color listnormal color7 default
+color listnormal_unread color7 default
 #color listfocus  color7 color4
 #color listfocus_unread  color7 color4
 color listfocus  color7 color5
 color listfocus_unread  color7 color5
 color info       color0 color15
-color article    color7 color0
+color article    color7 default
 
 highlight feedlist "✗ Unread" color0 color11
 highlight feedlist "⚑ Flagged" color0 color11
@@ -104,8 +104,8 @@ highlight articlelist "Blog" color7 color10
 highlight feedlist "Podcast" color7 color10
 highlight articlelist "Podcast" color7 color10
 highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:|^Flags:)" color11 color0
-highlight article "https?://[^ ]+" color11 color0
-highlight article "\\[[0-9]{1,2}\]" color15 color0
+highlight article "https?://[^ ]+" color11 default
+highlight article "\\[[0-9]{1,2}\]" color15 default
 
 # light color scheme
 #color background black white

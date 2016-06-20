@@ -13,6 +13,7 @@ COLOR_CYAN = 6
 COLOR_WHITE = 7
 COLOR_BLACK = 8
 COLOR_YELLOW = 11
+COLOR_DEFAULT = default
 
 class Default(ColorScheme):
     progress_bar_color = COLOR_CYAN
@@ -24,12 +25,12 @@ class Default(ColorScheme):
             return default_colors
 
         elif context.in_browser:
-            bg = COLOR_BLACK
+            bg = COLOR_DEFAULT
             fg = COLOR_WHITE
             if context.selected:
                 attr = reverse
             else:
-                bg = COLOR_BLACK
+                bg = COLOR_DEFAULT
                 fg = COLOR_WHITE
                 attr = normal
             if context.empty or context.error:
@@ -47,7 +48,7 @@ class Default(ColorScheme):
                 #attr |= bold
             if context.directory:
                 attr |= bold
-                bg = COLOR_BLACK
+                bg = COLOR_DEFAULT
                 fg = COLOR_BLUE
             elif context.executable and not \
                     any((context.media, context.container,
@@ -73,7 +74,7 @@ class Default(ColorScheme):
                 #fg = black
                 #attr |= bold
             if context.main_column:
-                bg = COLOR_BLACK
+                bg = COLOR_DEFAULT
                 if context.selected:
                     attr |= bold
                 if context.marked:
@@ -86,7 +87,7 @@ class Default(ColorScheme):
                     fg = magenta
 
         elif context.in_titlebar:
-            bg = COLOR_BLACK
+            bg = COLOR_DEFAULT
             fg = COLOR_WHITE
             attr |= bold
             if context.hostname:
@@ -96,13 +97,13 @@ class Default(ColorScheme):
                 fg = COLOR_WHITE
             elif context.tab:
                 if context.good:
-                    fg = COLOR_BLACK
+                    fg = COLOR_DEFAULT
                     bg = COLOR_YELLOW
             elif context.link:
                 fg = COLOR_CYAN
 
         elif context.in_statusbar:
-            bg = COLOR_BLACK
+            bg = COLOR_DEFAULT
             fg = COLOR_WHITE
             if context.permissions:
                 if context.good:
