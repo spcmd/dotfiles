@@ -1,0 +1,20 @@
+!color definitions for .Xresources
+
+#define bg #181818
+#define fg #f5f5f5
+#define black #101010
+#define brightblack #101010
+#define red #E83432
+#define brightred #E83432
+#define green #46CB50
+#define brightgreen #008800
+#define yellow #FAE56B
+#define brightyellow #FAC96B
+#define blue #0d497b
+#define brightblue #50A9E7
+#define magenta #4D4270
+#define brightmagenta #9C84DB
+#define cyan #00C1C1
+#define brightcyan #00F0F0
+#define white #f5f5f5
+#define brightwhite #ffffff
