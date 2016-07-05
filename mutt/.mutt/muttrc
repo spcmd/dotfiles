@@ -207,7 +207,7 @@ color quoted3       color5          default                 # Quoted text in mes
 color error         color7          color9                  # Error messages
 color message       color7          default                 # Message  informational messages
 #color indicator     color7         color4                  # Selection highlight (on the current message)
-color indicator     color7          color5                  # Selection highlight (on the current message)
+color indicator     color7          color4                  # Selection highlight (on the current message)
 color status        color0          color15                 # "Window" color (statusbar)
 color tree          color11         default                 # Tree indicator (of threads)
 color search        color7          color4                  # Search matches found with search within the internal page

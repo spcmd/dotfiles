@@ -82,8 +82,8 @@ color listnormal color7 default
 color listnormal_unread color7 default
 #color listfocus  color7 color4
 #color listfocus_unread  color7 color4
-color listfocus  color7 color5
-color listfocus_unread  color7 color5
+color listfocus  color7 color4
+color listfocus_unread  color7 color4
 color info       color0 color15
 color article    color7 default
 

@@ -12,8 +12,8 @@ super + alt + f
 
 # dmenu
 super + a
-    $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#4D4270' -nb '#121212'
-    #$DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#121212'
+    $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#121212'
+    #$DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#4D4270' -nb '#121212'
 
 # Gcolor2
 super + alt + c

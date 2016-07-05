@@ -11,9 +11,12 @@
 #define yellow #FAE56B
 #define brightyellow #FAC96B
 #define blue #0d497b
-#define brightblue #2d92dd
-#define magenta #D281CE
-#define brightmagenta #D281CE
+#define brightblue #2581CE
+!#define brightblue #2d92dd
+#define magenta #4D4270
+#define brightmagenta #9C84DB
+!#define magenta #D281CE
+!#define brightmagenta #D281CE
 #define cyan #00C1C1
 #define brightcyan #00F0F0
 #define white #ffffff
