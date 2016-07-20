@@ -15,6 +15,7 @@ rsync-320GB_Rack() {
         rsync -avr $HOME/.password-store/ $RACK_BACKUP_DIR/.password-store
         rsync -avr $HOME/.spotymenu/ $RACK_BACKUP_DIR/.spotymenu
         rsync -avr $HOME/.dsnippet/ $RACK_BACKUP_DIR/.dsnippet
+        rsync -avr $HOME/Calibre\ Library/ $RACK_BACKUP_DIR/Calibre\ Library
     else
         echo "==> Error: \033[1;34m$RACK_BACKUP_DIR \033[0mnot found. Is it mounted? Or has the directory changed?"
     fi

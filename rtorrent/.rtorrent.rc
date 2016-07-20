@@ -13,15 +13,15 @@
 
 
 # Maximum and minimum number of peers to connect to per torrent.
-min_peers = 1
-max_peers = 100
+min_peers = 20
+max_peers = 200
 
 # Same as above but for seeding completed torrents (-1 = same as downloading)
 min_peers_seed = -1
 max_peers_seed = -1
 
 # Maximum number of simultanious uploads per torrent.
-max_uploads = 30
+max_uploads = 50
 
 # Global upload and download rate in KiB. "0" for unlimited.
 download_rate = 0
@@ -211,7 +211,7 @@ ui.color.footer.set="white on blue"
 ui.color.seeding.set="green"
 ui.color.leeching.set="bold bright blue"
 ui.color.stopped.set="bright white"
-ui.color.incomplete.set="red"
+ui.color.incomplete.set="bright yellow"
 ui.color.complete.set="bright green"
 ui.color.queued.set="cyan"
 

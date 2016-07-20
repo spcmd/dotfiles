@@ -65,6 +65,7 @@ search_engines = {
     sztaki  = "http://szotar.sztaki.hu/search?fromlang=all&tolang=all&searchWord=%s",
     tpb     = "https://thepiratebay.se/search/%s",
     wiki    = "https://en.wikipedia.org/wiki/Special:Search?search=%s",
+    wikihu  = "https://hu.wikipedia.org/wiki/Special:Search?search=%s",
     yt      = "https://www.youtube.com/results?search_query=%s",
 }
 

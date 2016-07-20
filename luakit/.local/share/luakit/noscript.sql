@@ -37,4 +37,6 @@ INSERT INTO "by_domain" VALUES(52,'markdownlivepreview.com',1,0);
 INSERT INTO "by_domain" VALUES(53,'i.imgur.com',1,0);
 INSERT INTO "by_domain" VALUES(54,'hu.lichess.org',1,0);
 INSERT INTO "by_domain" VALUES(55,'doc.rust-lang.org',1,0);
+INSERT INTO "by_domain" VALUES(56,'nyilvanosvetites.hu',1,0);
+INSERT INTO "by_domain" VALUES(58,'moly.hu',1,0);
 COMMIT;
