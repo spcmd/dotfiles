@@ -127,6 +127,8 @@ downloads.add_signal("download-location", function (uri, file)
            file:match("iframe") or
            file:match(".js") or
            file:match(".php") or
+           file:match("ns.html") or
+           file:match("tags") or
            file:match("xd_arbiter")
     then
         return false

@@ -119,6 +119,10 @@ domain_props = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/logout_hu.css",
     },
 
+["moly.hu"] = {
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/moly_hu.css",
+    },
+
     --["port.hu"] = {
         --user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/port_hu.css",
     --},
