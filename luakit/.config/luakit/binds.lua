@@ -404,6 +404,10 @@ add_binds("normal", {
         buf("^D$",  "Show downloads page",
             function (w) w:new_tab("luakit://downloads") end),
 
+        buf("^b$",  "Show bookmarks page",
+            function (w) w:new_tab("luakit://bookmarks") end),
+
+
         buf("^B$",  "Show bookmarks page",
             function (w) w:new_tab("luakit://bookmarks") end),
 

@@ -66,7 +66,6 @@ span[itemprop="ratingValue"] {font-size:22px!important;}
 
 /* sidebar crap */
 #top_rhs,
-.ab_widget,
 #facebookWrapper,
 .poll-widget-rhs,
 .news_item,
@@ -76,7 +75,7 @@ span[itemprop="ratingValue"] {font-size:22px!important;}
 #relatedListsWidget,
 div.mini-article h3,
 #ratingWidget,
-.aux-content-widget-2{display:none!important;}
+.aux-content-widget-2 {display:none!important;}
 .mini-article {border-bottom:none!important;}
 
 /* recently viewed -- Privacy */

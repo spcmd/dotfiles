@@ -240,7 +240,7 @@ end
 -- IT Cafe forum redirect to logout domain
 webview.init_funcs.itcafe_to_logout = function (view, w)
     view:add_signal("navigation-request", function (v, uri)
-        if string.match(uri, "http://itcafe.hu/tema/") then
+        if string.match(uri, "https://itcafe.hu/tema/") then
             v.uri = uri:gsub("itcafe","logout")
             return false
         end
