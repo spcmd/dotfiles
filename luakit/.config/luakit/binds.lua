@@ -412,10 +412,10 @@ add_binds("normal", {
             function (w) w:new_tab("luakit://bookmarks") end),
 
         buf("^gl$", "Go to logout.hu forum.",
-            function (w) w:navigate("http://logout.hu/forum/index.html") end),
+            function (w) w:navigate("https://logout.hu/forum/index.html") end),
 
         buf("^gL$", "Go to logout.hu forum in a new tab.",
-            function (w) w:new_tab("http://logout.hu/forum/index.html") end),
+            function (w) w:new_tab("https://logout.hu/forum/index.html") end),
 
         buf("^gd$", "Go to my dotfiles repo",
             function (w) w:navigate("https://github.com/spcmd/dotfiles") end),

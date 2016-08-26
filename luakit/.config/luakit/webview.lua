@@ -220,7 +220,7 @@ webview.init_funcs = {
             -- draw menu
             return {
                 true,
-                { "🗔 Open this page in Inox", function () w:open_in_alt_browser() end },
+                { "🗔 Open this page in Chromium", function () w:open_in_alt_browser() end },
                 { "🖹 View Sour_ce", function () w:toggle_source() end },
                 true,
                 { "⊘ _Noscript", {
@@ -354,7 +354,7 @@ webview.methods = {
     --ADDED: open this page in an alternative browser
     open_in_alt_browser = function (view, w)
         local uri = w.view.uri
-        luakit.spawn(string.format("inox --incognito --proxy-server=localhost:8118 %s", uri))
+        luakit.spawn(string.format("chromium --incognito --proxy-server=localhost:8118 %s", uri))
     end,
 
 
