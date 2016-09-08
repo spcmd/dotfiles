@@ -123,7 +123,9 @@ a.msgs::after {
 .msgblk .text p.mod a { color: #999!important; }
 .msgblk .text p.mod a:hover { color: #A61F22!important; font-weight:bold!important; }
 span.floatl input { display:none!important;}
+span.floatl label { display:none!important;}
 span.floatl:hover > input{display: initial!important;}
+span.floatl:hover > label{display: initial!important;}
 
 /* Tema osszefoglalo  */
 /* div.msg.flc.isnew { display:none!important; } */
