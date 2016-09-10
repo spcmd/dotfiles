@@ -55,6 +55,9 @@ body {
   font-weight:bold!important;
 }
 
+/* Tovabbi opciok */
+.listmenu {display:none!important;}
+
 /* Kedvencek lista: e-mail ikon */
 span.mod img {
   display:none!important;
@@ -131,5 +134,9 @@ span.floatl:hover > label{display: initial!important;}
 /* div.msg.flc.isnew { display:none!important; } */
 /* Ajanlo */
 /* div.msgblk > div.anyagok { display:none!important; } */
+
+/* ads */
+/* -- logout fooldal, blogtermes */
+div#right.flc > div:nth-child(1){display:none!important;}
 
 /* end of style */
