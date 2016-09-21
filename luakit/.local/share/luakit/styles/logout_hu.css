@@ -20,9 +20,14 @@ display:none! important;
 .xabrebigtop, .xabrebox {
 display:none! important;
 }
-/*div#page > div:first-child {*/
-    /*display: none!important;*/
-/*}*/
+
+/*
+ block ad:
+ #page > dinamikusan generalt xabre... > dinamikusan generalt div
+*/
+div#page > div > div:nth-child(2) {
+    display: none!important;
+}
 
 /* Kereso */
 #ssearch {
@@ -56,7 +61,7 @@ body {
 }
 
 /* Tovabbi opciok */
-.listmenu {display:none!important;}
+.listmenu:nth-child(2) {display:none!important;}
 
 /* Kedvencek lista: e-mail ikon */
 span.mod img {
@@ -137,6 +142,6 @@ span.floatl:hover > label{display: initial!important;}
 
 /* ads */
 /* -- logout fooldal, blogtermes */
-div#right.flc > div:nth-child(1){display:none!important;}
+/*div#right.flc > div:nth-child(1){display:none!important;}*/
 
 /* end of style */
