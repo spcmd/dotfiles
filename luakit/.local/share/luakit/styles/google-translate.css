@@ -1,0 +1,32 @@
+/* top shit */
+div#gb,
+div#gba,
+div#gt-appbar
+{display: none!important;}
+
+
+/* bottom shit */
+div#gt-ft-res,
+div.gt-ft-promos
+{display: none!important;}
+
+/* dark style */
+body,
+#gt-text-c,
+#gt-apb-main
+{background: #121212!important; }
+
+.gt-cd-tl,
+.gt-cd-cl,
+.gt-cd-pos,
+.gt-def-row,
+.gt-def-example,
+.gt-def-synonym,
+.gt-def-synonym-title,
+.gt-card-ttl-txt,
+.gt-syn-span,
+.gt-syn-row,
+.gt-ex-text,
+.cd-expand-label,
+.gt-baf-back
+{color:#fff!important; font-size: 115%!important;}
