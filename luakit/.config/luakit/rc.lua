@@ -129,6 +129,7 @@ downloads.add_signal("download-location", function (uri, file)
            file:match(".php") or
            file:match("ns.html") or
            file:match("tags") or
+           file:match("aff_ad") or
            file:match("xd_arbiter")
     then
         return false
