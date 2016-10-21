@@ -29,7 +29,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'spcmd/vim-easy-todo', { 'for': 'todo' }
     Plug 'kristijanhusak/vim-multiple-cursors'
     Plug 'rust-lang/rust.vim'
-    Plug 'scrooloose/syntastic'
+    "Plug 'scrooloose/syntastic'
     "Plug 'racer-rust/vim-racer'
     "Plug 'morhetz/gruvbox'
 
@@ -152,9 +152,9 @@ function! ToggleErrors()
 endfunction
 
 " add to the statusline
-set statusline+=\ %#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=\ %#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 
 "====== [ Neocomplete ] ============================================
