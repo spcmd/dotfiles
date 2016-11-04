@@ -127,6 +127,10 @@ domain_props = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/port_hu.css",
     },
 
+    ["est.hu"] = {
+        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/est_hu.css",
+    },
+
     ["reddit.com"] = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/reddit.css",
     },

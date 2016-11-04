@@ -98,7 +98,7 @@ require "undoclose"
 require "tabhistory"
 
 -- Add greasemonkey-like javascript userscript support
---require "userscripts"
+require "userscripts"
 
 -- Add bookmarks support
 require "bookmarks"

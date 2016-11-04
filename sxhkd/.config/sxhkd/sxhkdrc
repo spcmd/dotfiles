@@ -49,6 +49,10 @@ super + Right
 super + b
     $DIR_SCRIPTS/spotymenu
 
+# calibre
+super + c
+    $DIR_SCRIPTS/dcalibre
+
 # mps-youtube
 super + y
     $DIR_SCRIPTS/mpsyt-control play-pause
