@@ -57,6 +57,7 @@ document.body.innerHTML = document.body.innerHTML
 .replace(/Mulholland Drive/g, '<span class="highlight">Mulholland Drive</span>')
 .replace(/Ponyvaregény/g, '<span class="highlight">Ponyvaregény</span>')
 .replace(/Social Network/g, '<span class="highlight">Social Network</span>')
+.replace(/Sin City/g, '<span class="highlight">Sin City</span>')
 .replace(/Számkivetett/g, '<span class="highlight">Számkivetett</span>')
 .replace(/Terminál/g, '<span class="highlight">Terminál</span>')
 .replace(/Terminátor/g, '<span class="highlight">Terminátor</span>')

@@ -291,6 +291,12 @@ nnoremap <space> za
 "Select ALL
 nnoremap <C-a> ggVG
 
+"Increment/decrement number
+nnoremap <C-u> <C-a>
+nnoremap <C-d> <C-x>
+vnoremap <C-u> <C-a>
+vnoremap <C-d> <C-x>
+
 "Toggle wrap (visual line break)
 nnoremap <C-w> :set nowrap!<CR>
 
