@@ -3,6 +3,7 @@ mpv/.config/mpv/watch_later
 thunar/.config/Thunar/accels.scm
 luakit/.local/share/luakit/cookies.*
 luakit/.local/share/luakit/history.*
+luakit/.local/share/luakit/noscript.sql
 rtv/.config/rtv/refresh-token
 rtv/.config/rtv/history.log
 *cookie*
