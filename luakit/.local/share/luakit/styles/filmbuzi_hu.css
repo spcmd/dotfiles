@@ -1,1 +1,10 @@
 body { background: #202020!important; }
+#elsofront {height:55px!important;}
+
+#header,
+.discl,
+#right h2,
+#right > img:nth-child(1),
+#right > br:nth-child(3) {display:none!important;}
+
+#sidebar-1 {margin-top:-80px!important;}

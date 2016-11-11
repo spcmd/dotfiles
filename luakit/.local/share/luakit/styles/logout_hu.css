@@ -21,13 +21,8 @@ display:none! important;
 display:none! important;
 }
 
-/*
- block ad:
- #page > dinamikusan generalt xabre... > dinamikusan generalt div
-*/
-div#page > div > div:nth-child(2) {
-    display: none!important;
-}
+/* Lapcsalád ajánló az oldal tetején*/
+.xabre-responsive-980px-139px{display:none!important;}
 
 /* Kereso */
 #ssearch {
@@ -60,8 +55,22 @@ body {
   font-weight:bold!important;
 }
 
+/* Opciók: adataim, beállításaim stb. */
+.usopts h4:first-child,
+.usopts ul li:first-child,
+.usopts ul li:nth-child(2),
+.usopts ul li:nth-child(3),
+.usopts ul li:nth-child(4),
+.usopts ul li:nth-child(6) {display: none!important;}
+
 /* Tovabbi opciok */
 .listmenu:nth-child(2) {display:none!important;}
+
+/* Privát üzeneteim menüpont kiemelése */
+.usopts ul li:nth-child(5) {font-weight: bold!important;background:#b9aa8d;}
+
+/* Kedvencek: fórumtémák fejléc */
+  .usfavs div.box h4:first-child {display: none!important;}
 
 /* Kedvencek lista: e-mail ikon */
 span.mod img {

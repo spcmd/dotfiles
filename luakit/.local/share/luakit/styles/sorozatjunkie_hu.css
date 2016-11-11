@@ -1,7 +1,17 @@
 body { background: #202020!important; }
 
-#giganagy {margin: 0 auto!important;}
+#giganagy {
+  margin: -50px auto!important;
+ background-position: -10px -2px!important;
+  }
 
 div.fb-like {display: none!important;}
 
 h2, h2 a { font: bold 16px/18px sans-serif !important;}
+
+#keresoelhelyezes {
+  position: absolute!important;
+  margin-top: 40px!important;
+  margin-left: 40px!important;
+}
+.menu {margin: 0 0 25px 0px!important;}
