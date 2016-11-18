@@ -27,6 +27,10 @@ urxvtd -q -f -o
 # Redshift
 [[ ! $(pgrep redshift) ]] && redshift -r -c ~/.config/redshift/redshift.conf &
 
+# Disable screen blanking/screensaver
+xset -dpms
+xset s off
+
 # Start X
 #exec dbus-launch --exit-with-session --sh-syntax awesome
 #exec awesome
