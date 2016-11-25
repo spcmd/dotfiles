@@ -14,11 +14,24 @@ panel-note() {
 
     NOTE_FILE=$HOME/Documents/bspwm_panel_notes.txt
 
+    # create note file if it doesn't exist
     if [[ ! -e $NOTE_FILE ]]; then
         touch $NOTE_FILE
         echo "Note file created at $NOTE_FILE"
     fi
 
+    # count notes and update the widget
+    update_note_widget() {
+        note_lines=$(cat "$NOTE_FILE" | wc -l)
+        if [ "$note_lines" -eq 1 ]; then
+            note_text="note"
+        else
+            note_text="notes"
+        fi
+        echo "N%{F#00fff0}$note_lines $note_text %{F${COLOR_WIDGET_SEPARATOR}}|" > "$PANEL_FIFO"
+    }
+
+    # do the stuff
     case "$1" in
 
         # Listing notes
@@ -27,6 +40,7 @@ panel-note() {
         # Delete line from notes
         -r) sed -i ${2}d $NOTE_FILE
             echo "removed line $2 from $NOTE_FILE"
+            update_note_widget;
             ;;
         # Delete ALL notes (delete the file)
         -R)
@@ -53,7 +67,7 @@ panel-note() {
         # Add note
         *)  echo "$1" >> $NOTE_FILE
             echo "added '$1' to $NOTE_FILE"
-            echo "N%{F#00fff0}notes %{F${COLOR_WIDGET_SEPARATOR}}|" > "$PANEL_FIFO"
+            update_note_widget;
             ;;
     esac
 }

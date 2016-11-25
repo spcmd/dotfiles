@@ -113,7 +113,13 @@ notes_widget() {
     while true; do
         file_notes=~/Documents/bspwm_panel_notes.txt
         if [ -e "$file_notes" ]; then
-            echo "N%{F#00fff0}notes %{F${COLOR_WIDGET_SEPARATOR}}|"
+            note_lines=$(cat "$file_notes" | wc -l)
+            if [ "$note_lines" -eq 1 ]; then
+                note_text="note"
+            else
+                note_text="notes"
+            fi
+            echo "N%{F#00fff0}$note_lines $note_text %{F${COLOR_WIDGET_SEPARATOR}}|"
         else
             echo "N"
         fi

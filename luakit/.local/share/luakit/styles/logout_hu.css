@@ -22,7 +22,8 @@ display:none! important;
 }
 
 /* Lapcsalád ajánló az oldal tetején*/
-.xabre-responsive-980px-139px{display:none!important;}
+.xabre-responsive-970px-90px,
+.xabre-responsive-980px-139px,
 .xabre-responsive-970px-250px{display:none!important;}
 
 /* Kereso */
