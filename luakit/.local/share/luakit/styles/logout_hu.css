@@ -24,6 +24,7 @@ display:none! important;
 /* Lapcsalád ajánló az oldal tetején*/
 .xabre-responsive-970px-90px,
 .xabre-responsive-980px-139px,
+.xabre-responsive-300px-250px,
 .xabre-responsive-970px-250px{display:none!important;}
 
 /* Kereso */
@@ -110,7 +111,6 @@ a.msgs::after {
   border: 1px solid #8E8569;
 }
 
-
 /* HSZ kod formazas */
 .msgblk .text tt {
   color: #00306D!important;
@@ -148,11 +148,9 @@ span.floatl:hover > label{display: initial!important;}
 
 /* Tema osszefoglalo  */
 /* div.msg.flc.isnew { display:none!important; } */
+
 /* Ajanlo */
 /* div.msgblk > div.anyagok { display:none!important; } */
 
-/* ads */
-/* -- logout fooldal, blogtermes */
-/*div#right.flc > div:nth-child(1){display:none!important;}*/
 
 /* end of style */
