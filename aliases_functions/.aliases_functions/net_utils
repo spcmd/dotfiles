@@ -8,6 +8,11 @@
 # http://spcmd.github.io
 # https://github.com/spcmd
 
+# Currency converter (Google)
+cconv() {
+  wget -qO- "http://www.google.com/finance/converter?a=$1&from=$2&to=$3" |  sed '/res/!d;s/<[^>]*>//g';
+}
+
 # Pastebin services
 sprunge() {
     # http://sprunge.us/
@@ -26,7 +31,7 @@ clbin() {
 
 lspastebin() { which sprunge clbin;}
 
-#bbradio checker
+# bbradio checker
 bbradio() {
     # yesterday
     date=$(date +"%y%m%d" -d "-1 days")

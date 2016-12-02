@@ -773,6 +773,40 @@ add_cmds({
                 end
         end),
 
+    -- Convert Currency
+    cmd({"convert-EUR-HUF"}, "Convert Currency EUR->HUF",
+        function (w)
+                local selected = luakit.selection.primary
+                if not selected then
+                    w:notify("Error: you didn't select any text.")
+                else
+                    local _, currconv = luakit.spawn_sync("sh -c \"wget -qO- 'http://www.google.com/finance/converter?a="..selected.."&from=eur&to=huf' | sed '/res/!d;s/<[^>]*>//g'\"")
+                    w:notify(currconv)
+                end
+        end),
+
+    cmd({"convert-GBP-HUF"}, "Convert Currency GBP->HUF",
+        function (w)
+                local selected = luakit.selection.primary
+                if not selected then
+                    w:notify("Error: you didn't select any text.")
+                else
+                    local _, currconv = luakit.spawn_sync("sh -c \"wget -qO- 'http://www.google.com/finance/converter?a="..selected.."&from=gbp&to=huf' | sed '/res/!d;s/<[^>]*>//g'\"")
+                    w:notify(currconv)
+                end
+        end),
+
+    cmd({"convert-USD-HUF"}, "Convert Currency USD->HUF",
+        function (w)
+                local selected = luakit.selection.primary
+                if not selected then
+                    w:notify("Error: you didn't select any text.")
+                else
+                    local _, currconv = luakit.spawn_sync("sh -c \"wget -qO- 'http://www.google.com/finance/converter?a="..selected.."&from=usd&to=huf' | sed '/res/!d;s/<[^>]*>//g'\"")
+                    w:notify(currconv)
+                end
+        end),
+
     -- PH! Forum
     cmd({"ph"}, "PH!: search in the current topic",
         function (w, q)
