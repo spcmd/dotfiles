@@ -465,6 +465,19 @@ add_binds("normal", {
                 w:notify("Cookies have been cleaned")
             end),
 
+        key({"Control"}, "s", "Searh this query with startpage",
+            function (w)
+                w:enter_cmd(":startpage-this-query")
+                w:activate()
+            end),
+
+        key({"Control"}, "g", "Searh this query with google",
+            function (w)
+                w:enter_cmd(":google-this-query")
+                w:activate()
+            end),
+
+
 })
 
 
@@ -772,6 +785,23 @@ add_cmds({
                     local _, trans = luakit.spawn("urxvtc -hold -e trans :hu "..selected)
                 end
         end),
+
+    -- Duckduckgo -> Startpage
+    cmd({"startpage-this-query"}, "Search this query with startpage",
+        function (w)
+            local uri = w.view.uri
+            local search_uri = uri:gsub("duckduckgo.com/%?q", "startpage.com/do/metasearch.pl%?query") -- '?'s are escaped with '%'
+            w:navigate(search_uri)
+        end),
+
+    -- Duckduckgo -> Google
+    cmd({"google-this-query"}, "Search this query with google",
+        function (w)
+            local uri = w.view.uri
+            local search_uri = uri:gsub("duckduckgo.com/%?q", "google.com/search?q") -- '?'s are escaped with '%'
+            w:navigate(search_uri)
+        end),
+
 
     -- Convert Currency
     cmd({"convert-EUR-HUF"}, "Convert Currency EUR->HUF",
