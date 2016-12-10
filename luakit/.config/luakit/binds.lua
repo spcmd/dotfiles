@@ -790,7 +790,7 @@ add_cmds({
     cmd({"startpage-this-query"}, "Search this query with startpage",
         function (w)
             local uri = w.view.uri
-            local search_uri = uri:gsub("duckduckgo.com/%?q", "startpage.com/do/metasearch.pl%?query") -- '?'s are escaped with '%'
+            local search_uri = uri:gsub("duckduckgo.com/%?q", "startpage.com/do/metasearch.pl?query")
             w:navigate(search_uri)
         end),
 
@@ -798,7 +798,7 @@ add_cmds({
     cmd({"google-this-query"}, "Search this query with google",
         function (w)
             local uri = w.view.uri
-            local search_uri = uri:gsub("duckduckgo.com/%?q", "google.com/search?q") -- '?'s are escaped with '%'
+            local search_uri = uri:gsub("duckduckgo.com/%?q", "google.com/search%?q")
             w:navigate(search_uri)
         end),
 
