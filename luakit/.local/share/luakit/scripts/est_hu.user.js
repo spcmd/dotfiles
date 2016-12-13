@@ -43,6 +43,7 @@ document.body.innerHTML = document.body.innerHTML
 .replace(/Elemi ösztön/g, '<span class="highlight">Elemi ösztön</span>')
 .replace(/Erőszakik/g, '<span class="highlight">Erőszakik</span>')
 .replace(/Felkoppintva/g, '<span class="highlight">Felkoppintva</span>')
+.replace(/Fegyvernepper/g, '<span class="highlight">Fegyvernepper</span>')
 .replace(/Fogságban/g, '<span class="highlight">Fogságban</span>')
 .replace(/Good Will Hunting/g, '<span class="highlight">Good Will Hunting</span>')
 .replace(/Halálos Fegyver/g, '<span class="highlight">Halálos Fegyver</span>')

@@ -59,7 +59,7 @@ search_engines = {
     g       = "https://google.com/search?q=%s",
     gh      = "https://github.com/search?q=%s",
     imdb    = "http://www.imdb.com/find?s=all&q=%s",
-    kat     = "https://kat.cr/usearch/?q=%s",
+    moly    = "https://moly.hu/kereses?q=%s",
     ph      = "http://logout.hu/temak/keres.php?type=-&stext=%s",
     rarbg   = "https://rarbg.to/torrents.php?search=%s",
     sztaki  = "http://szotar.sztaki.hu/search?fromlang=all&tolang=all&searchWord=%s",

@@ -63,7 +63,7 @@ compinit -i -d "${FILE_ZSH_COMPDUMP}"
 [[ -f $DIR_ALIASES_FUNCTIONS/coreutils ]] && . $DIR_ALIASES_FUNCTIONS/coreutils
 [[ -f $DIR_ALIASES_FUNCTIONS/dm_dirbookmark ]] && . $DIR_ALIASES_FUNCTIONS/dm_dirbookmark
 [[ -f $DIR_ALIASES_FUNCTIONS/git ]] && . $DIR_ALIASES_FUNCTIONS/git
-[[ -f $DIR_ALIASES_FUNCTIONS/hugo ]] && . $DIR_ALIASES_FUNCTIONS/hugo
+#[[ -f $DIR_ALIASES_FUNCTIONS/hugo ]] && . $DIR_ALIASES_FUNCTIONS/hugo
 [[ -f $DIR_ALIASES_FUNCTIONS/misc ]] && . $DIR_ALIASES_FUNCTIONS/misc
 [[ -f $DIR_ALIASES_FUNCTIONS/mutt ]] && . $DIR_ALIASES_FUNCTIONS/mutt
 [[ -f $DIR_ALIASES_FUNCTIONS/net_utils ]] && . $DIR_ALIASES_FUNCTIONS/net_utils
