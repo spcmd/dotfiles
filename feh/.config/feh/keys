@@ -38,3 +38,15 @@ toggle_menu
 #image manipulation
 mirror m
 flip f
+
+#unset the 'r' key
+reload_image
+
+#rotate clockwise
+orient_1 r
+
+#scroll
+scroll_up K
+scroll_down J
+scroll_left H
+scroll_right L

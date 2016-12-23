@@ -131,6 +131,7 @@ downloads.add_signal("download-location", function (uri, file)
            file:match("tags") or
            file:match("aff_ad") or
            file:match("iu3") or
+           file:match("pd") or
            file:match("xd_arbiter")
     then
         return false
