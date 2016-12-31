@@ -6,8 +6,11 @@ set selection-clipboard clipboard # primary: paste with middle mouse button | cl
 set statusbar-basename
 
 # Keymap
+unmap <Space>
 map J scroll half-down
 map K scroll half-up
 map h zoom out
 map l zoom in
+map H scroll left
+map L scroll right
 map i set recolor

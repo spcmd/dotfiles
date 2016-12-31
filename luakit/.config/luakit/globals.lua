@@ -58,6 +58,7 @@ search_engines = {
     ddg     = "https://duckduckgo.com/?q=%s",
     g       = "https://google.com/search?q=%s",
     gh      = "https://github.com/search?q=%s",
+    gr      = "https://www.goodreads.com/search?query=%s",
     imdb    = "http://www.imdb.com/find?s=all&q=%s",
     moly    = "https://moly.hu/kereses?q=%s",
     ph      = "http://logout.hu/temak/keres.php?type=-&stext=%s",
