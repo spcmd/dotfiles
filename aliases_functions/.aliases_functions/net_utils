@@ -80,10 +80,8 @@ gthu() {
     separator=" : "
     # loop is required for multiple arguments to work properly
     for word in "$@"; do
-        translation=$(trans -no-ansi -show-translation-phonetics n  -show-translation-phonetics n -show-languages n --show-original n -show-prompt-message n -show-alternatives n en:hu "$word" | sed 's/adjective//;s/noun//;s/verb//;/^$/d;3~2d;s/^[ \t]*//' | uniq | paste -sd ',' | sed 's/,/, /g')
-        echo "${word}${separator}${translation}"
-        # check whether the word is already added to the file, if not, then append it to the file
-        grep -q "$word" "$file_wordlist" || echo "${word}${separator}${translation}" >> "$file_wordlist"
+        # grep the word from the file (check whether it's already added), if it's not, translate and add/append it to the file
+        grep --color=never "^${word}${separator}" "$file_wordlist" || (translation="$(trans -no-ansi -show-translation-phonetics n  -show-translation-phonetics n -show-languages n --show-original n -show-prompt-message n -show-alternatives n en:hu "$word" | sed 's/adjective//;s/noun//;s/verb//;/^$/d;3~2d;s/^[ \t]*//' | uniq | paste -sd ',' | sed 's/,/, /g')"; echo "${word}${separator}${translation}" | tee --append "$file_wordlist")
     done
 }
 gten() {
@@ -93,10 +91,8 @@ gten() {
     separator=" : "
     # loop is required for multiple arguments to work properly
     for word in "$@"; do
-        translation=$(trans -no-ansi -show-translation-phonetics n  -show-translation-phonetics n -show-languages n --show-original n -show-prompt-message n -show-alternatives n hu:en "$word" | sed 's/adjective//;s/noun//;s/verb//;/^$/d;3~2d;s/^[ \t]*//' | uniq | paste -sd ',' | sed 's/,/, /g')
-        echo "${word}${separator}${translation}"
-        # check whether the word is already added to the file, if not, then append it to the file
-        grep -q "$word" "$file_wordlist" || echo "${word}${separator}${translation}" >> "$file_wordlist"
+        # grep the word from the file (check whether it's already added), if it's not, translate and add/append it to the file
+        grep --color=never "^${word}${separator}" "$file_wordlist" || (translation="$(trans -no-ansi -show-translation-phonetics n  -show-translation-phonetics n -show-languages n --show-original n -show-prompt-message n -show-alternatives n hu:en "$word" | sed 's/adjective//;s/noun//;s/verb//;/^$/d;3~2d;s/^[ \t]*//' | uniq | paste -sd ',' | sed 's/,/, /g')"; echo "${word}${separator}${translation}" | tee --append "$file_wordlist")
     done
 }
 alias update-translate-shell="wget -N -P ~/bin https://raw.githubusercontent.com/soimort/translate-shell/gh-pages/trans"
