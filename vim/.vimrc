@@ -28,7 +28,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdcommenter'
     Plug 'spcmd/vim-easy-todo', { 'for': 'todo' }
     Plug 'kristijanhusak/vim-multiple-cursors'
-    Plug 'rust-lang/rust.vim'
+    "Plug 'rust-lang/rust.vim'
+    Plug 'junegunn/goyo.vim'
     "Plug 'scrooloose/syntastic'
     "Plug 'racer-rust/vim-racer'
     "Plug 'morhetz/gruvbox'
@@ -410,5 +411,8 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "Syntastic (https://github.com/scrooloose/syntastic)
 "nnoremap <silent> <leader>e :<C-u>call ToggleErrors()<CR>
 nnoremap <leader>e :SyntasticToggleMode<CR>
+
+"Goyo (Distraction Free mode)
+nnoremap <C-g> :Goyo<CR>
 
 " }}}

@@ -478,6 +478,13 @@ add_binds("normal", {
             end),
 
 
+        key({"Control"}, "h", "Open History",
+            function (w)
+                w:enter_cmd(":history")
+                w:activate()
+            end),
+
+
 })
 
 

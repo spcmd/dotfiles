@@ -2,8 +2,9 @@
 # https://www.mankier.com/5/zathurarc
 
 # Settings
-set selection-clipboard clipboard # primary: paste with middle mouse button | clipboard: paste with ctrl+v
+set selection-clipboard clipboard
 set statusbar-basename
+set page-padding 15
 
 # Keymap
 unmap <Space>
