@@ -53,6 +53,10 @@ super + b
 super + c
     $DIR_SCRIPTS/dcalibre
 
+# comics
+super + shift + c
+    $DIR_SCRIPTS/dcomics
+
 # mps-youtube
 super + y
     $DIR_SCRIPTS/mpsyt-control play-pause

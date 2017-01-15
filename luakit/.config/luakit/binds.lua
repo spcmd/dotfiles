@@ -778,7 +778,7 @@ add_cmds({
                 if not selected then
                     w:notify("Error: you didn't select any text.")
                 else
-                    local _, trans = luakit.spawn_sync("trans -b :hu "..selected)
+                    local _, trans = luakit.spawn_sync("gdict "..selected)
                     w:notify(trans)
                 end
         end),

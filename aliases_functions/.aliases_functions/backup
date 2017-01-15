@@ -19,6 +19,7 @@ rsync-320GB_Rack() {
         rsync -avr --delete $HOME/.dsnippet/ $RACK_BACKUP_DIR/.dsnippet
         rsync -avr --delete $HOME/.webdev/ $RACK_BACKUP_DIR/.webdev
         rsync -avr --delete $HOME/Calibre\ Library/ $RACK_BACKUP_DIR/Calibre\ Library
+        rsync -avr --delete $HOME/Comics/ $RACK_BACKUP_DIR/Comics
     else
         echo "==> Error: \033[1;34m$RACK_BACKUP_DIR \033[0mnot found. Is it mounted? Or has the directory changed?"
     fi
