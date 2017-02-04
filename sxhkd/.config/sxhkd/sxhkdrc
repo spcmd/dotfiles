@@ -99,6 +99,10 @@ super + ctrl + z
 super + p
     $DIR_SCRIPTS/dpass
 
+# wifi switch
+super + F3
+    $DIR_SCRIPTS/wifi-switch.sh
+
 # -----------------------
 # bspwm hotkeys
 # -----------------------

@@ -54,3 +54,7 @@ body {
 #page-container{
     margin-top:-50px!important;
 }
+/* remove video and other shit from the channel homepage */
+div.branded-page-box {
+    display:none!important;
+}
