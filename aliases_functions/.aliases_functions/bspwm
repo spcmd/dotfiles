@@ -54,6 +54,10 @@ panel-note() {
                 echo "Cancelled. Nothing changed."
             fi
             ;;
+        # Edit
+        -e)
+            ${EDITOR:-vim} $NOTE_FILE
+            ;;
         # Help
         ""|-h) echo "Usage: $0 [OPTION]"
             echo -e "\nTo add a note, use:"
@@ -62,6 +66,7 @@ panel-note() {
             echo -e "-l\t\t list notes"
             echo -e "-r [NUMBER]\t delete note (by line number)"
             echo -e "-R \t\t delete ALL notes (delete the file)"
+            echo -e "-e \t\t edit notes"
             echo -e "-h\t\t this help"
             ;;
         # Add note

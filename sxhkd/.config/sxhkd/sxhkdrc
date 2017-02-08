@@ -103,6 +103,21 @@ super + p
 super + F3
     $DIR_SCRIPTS/wifi-switch.sh
 
+# special characters
+control + mod5 + c
+    $DIR_SCRIPTS/eo_chars.sh c
+control + mod5 + g
+    $DIR_SCRIPTS/eo_chars.sh g
+control + mod5 + h
+    $DIR_SCRIPTS/eo_chars.sh h
+control + mod5 + j
+    $DIR_SCRIPTS/eo_chars.sh j
+control + mod5 + s
+    $DIR_SCRIPTS/eo_chars.sh s
+control + mod5 + u
+    $DIR_SCRIPTS/eo_chars.sh u
+
+
 # -----------------------
 # bspwm hotkeys
 # -----------------------
