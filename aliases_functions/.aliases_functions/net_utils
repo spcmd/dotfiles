@@ -95,6 +95,15 @@ gten() {
         grep --color=never "^${word}${separator}" "$file_wordlist" || (translation="$(trans -no-ansi -show-translation-phonetics n  -show-translation-phonetics n -show-languages n --show-original n -show-prompt-message n -show-alternatives n hu:en "$word" | sed 's/adjective//;s/noun//;s/verb//;/^$/d;3~2d;s/^[ \t]*//' | uniq | paste -sd ',' | sed 's/,/, /g')"; echo "${word}${separator}${translation}" | tee --append "$file_wordlist")
     done
 }
+gteo() {
+    # separate the original word from the translations with this
+    separator=" : "
+    # loop is required for multiple arguments to work properly
+    for word in "$@"; do
+        translation="$(trans -no-ansi -show-translation-phonetics n  -show-translation-phonetics n -show-languages n --show-original n -show-prompt-message n -show-alternatives n eo:en "$word" | sed 's/adjective//;s/noun//;s/verb//;/^$/d;3~2d;s/^[ \t]*//' | uniq | paste -sd ',' | sed 's/,/, /g')"
+        echo "${word}${separator}${translation}"
+    done
+}
 alias update-translate-shell="wget -N -P ~/bin https://raw.githubusercontent.com/soimort/translate-shell/gh-pages/trans"
 
 # wttr (weather, a Web frontend for wego: https://github.com/chubin/wttr.in)
