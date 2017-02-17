@@ -140,9 +140,9 @@ domain_props = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/sorozatjunkie_hu.css",
     },
 
-    ["translate.google.com"] = {
-        user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/google-translate.css",
-    },
+    --[[["translate.google.com"] = {]]
+        --user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/google-translate.css",
+    --[[},]]
 
     ["szotar.sztaki.hu"] = {
         user_stylesheet_uri     = "file://" .. luakit.data_dir .. "/styles/sztaki-szotar.css",
