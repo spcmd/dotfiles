@@ -78,7 +78,7 @@ hdr_order from: to: cc: date: subject:                                      # sh
 # -----------------------------------------------------
 
 # Basic
-macro index,pager,compose,browser -r "<enter-command>source ~/.mutt/muttrc<enter>" "Source muttrc"
+macro index,pager,compose,browser \CL "<enter-command>source ~/.mutt/muttrc<enter>" "Source muttrc"
 bind index gg first-entry
 bind index G last-entry
 macro index h "<change-folder>+INBOX<enter>" "Go to INBOX"
@@ -93,7 +93,7 @@ bind index p recall-message
 bind index \CR recall-message
 bind index \CN imap-fetch-mail
 bind index x sync-mailbox
-macro index,pager \CL "<refresh><redraw-screen>" "Refresh and Redraw screen"
+#macro index,pager \CL "<refresh><redraw-screen>" "Refresh and Redraw screen"
 bind index,pager N search-opposite
 macro index \CF "<search>~B " "Search in the messages' body" #  / is searching in the To: and Subject: fields only!
 macro index f "<search>~B " "Search in the messages' body" #  / is searching in the To: and Subject: fields only!

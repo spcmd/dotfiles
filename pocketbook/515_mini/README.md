@@ -14,4 +14,4 @@ copy **cr3.ini** to: `system/profiles/yourProfileName/config/cr3`
 ### Modified quickmenu in the skin for my keymaps.ini (changed the rotate to cite/note)
 copy **spcmd.cr3skin** to: `system/share/cr3/skins`
 
-*note: **cr3skin** is just a renamed **zip** file*
+*note: cr3skin is just a renamed zip file*

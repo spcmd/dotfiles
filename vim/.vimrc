@@ -216,6 +216,7 @@ autocmd BufRead *.vimp set filetype=vim
 autocmd BufRead .xinitrc set filetype=sh
 autocmd BufRead *.todo nnoremap <space> za]z
 autocmd BufRead *.sh set syntax=sh
+autocmd BufRead *.muttrc set syntax=muttrc filetype=muttrc
 
 " }}}
 " {{{   Custom commands & functions
