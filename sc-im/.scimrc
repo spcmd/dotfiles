@@ -1,0 +1,104 @@
+#                               _
+#  ___ _ __   ___ _ __ ___   __| |
+# / __| '_ \ / __| '_ ` _ \ / _` |
+# \__ | |_) | (__| | | | | | (_| |
+# |___| .__/ \___|_| |_| |_|\__,_|
+#     |_|
+# Created by: spcmd
+# http://spcmd.github.io
+# https://github.com/spcmd
+
+# --------------------------------------------------------------------------
+# Settings
+# --------------------------------------------------------------------------
+
+# Number key behaviour
+# 1 = number keys will start writing a numeric value to the cell
+# 0 = act as a command multiplier (e.g.: 4j will go down 4 cells)
+set numeric=1
+
+# zero key will start writing a 0 numeric value to the cell
+set numeric_zero=1
+
+# Recalculate values automatically (don't wait until pressing the @ key)
+set autocalc=1
+
+# Move the cursor down after an entry
+set newline_action=j
+
+# --------------------------------------------------------------------------
+# Auto commands
+# --------------------------------------------------------------------------
+
+# Auto-resize the column or column range to fit their contents.
+autojus A:Z
+
+# --------------------------------------------------------------------------
+# Key mappings
+# --------------------------------------------------------------------------
+
+# help
+nnoremap "?" ":help<CR>"
+
+# edit text value (cursor at the end)
+nnoremap "A" "Ea"
+
+# edit text value (cursor at the beginning)
+nnoremap "I" "E0i"
+
+# quick movement
+nnoremap "J" "<C-f>"
+nnoremap "K" "<C-b>"
+nnoremap "H" "0"
+nnoremap "L" "$"
+
+# --------------------------------------------------------------------------
+# Color definitons
+# --------------------------------------------------------------------------
+
+# Redefine colors - use this instead of the default ncurses colors (this will also change the colors in the current terminal window!)
+# Info: http://stackoverflow.com/questions/28401332/ncurses-why-is-the-rgb-color-value-range-from-0-1000
+REDEFINE_COLOR "RED" 700 100 100
+REDEFINE_COLOR "GREEN" 0 500 120
+
+# DARK THEME
+color "type=DEFAULT fg=WHITE bg=BLACK"
+color "type=HEADINGS fg=WHITE bg=BLUE"
+color "type=WELCOME fg=BLUE bg=BLACK bold=1"
+color "type=CELL_SELECTION fg=BLACK bg=WHITE bold=1"
+color "type=CELL_SELECTION_SC fg=BLACK bg=WHITE"
+color "type=NUMB fg=WHITE bg=BLACK"
+color "type=STRG fg=WHITE bg=BLACK"
+color "type=DATEF fg=CYAN bg=BLACK"
+color "type=EXPRESSION fg=CYAN bg=BLACK"
+color "type=INFO_MSG fg=GREEN bg=BLACK"
+color "type=ERROR_MSG fg=RED bg=BLACK"
+color "type=MODE fg=WHITE bg=BLACK"
+color "type=CELL_ID fg=GREEN bg=BLACK"
+color "type=CELL_FORMAT fg=WHITE bg=BLACK bold=1"
+color "type=CELL_CONTENT fg=GREEN bg=BLACK bold=1"
+color "type=INPUT fg=WHITE bg=BLACK"
+color "type=NORMAL fg=WHITE bg=BLACK"
+color "type=CELL_ERROR fg=RED bg=BLACK"
+color "type=CELL_NEGATIVE fg=GREEN bg=BLACK"
+
+# WHITE THEME
+#color "type=DEFAULT fg=BLACK bg=WHITE"
+#color "type=HEADINGS fg=WHITE bg=BLUE"
+#color "type=WELCOME fg=BLUE bg=WHITE bold=1"
+#color "type=CELL_SELECTION fg=BLACK bg=YELLOW bold=1"
+#color "type=CELL_SELECTION_SC fg=WHITE bg=BLUE"
+#color "type=NUMB fg=BLACK bg=WHITE"
+#color "type=STRG fg=BLACK bg=WHITE"
+#color "type=DATEF fg=MAGENTA bg=WHITE"
+#color "type=EXPRESSION fg=MAGENTA bg=WHITE"
+#color "type=INFO_MSG fg=GREEN bg=WHITE"
+#color "type=ERROR_MSG fg=RED bg=WHITE"
+#color "type=MODE fg=BLUE bg=WHITE"
+#color "type=CELL_ID fg=BLUE bg=WHITE"
+#color "type=CELL_FORMAT fg=BLACK bg=WHITE bold=1"
+#color "type=CELL_CONTENT fg=GREEN bg=WHITE bold=1"
+#color "type=INPUT fg=BLACK bg=WHITE"
+#color "type=NORMAL fg=BLACK bg=WHITE"
+#color "type=CELL_ERROR fg=RED bg=WHITE"
+#color "type=CELL_NEGATIVE fg=GREEN bg=WHITE"
