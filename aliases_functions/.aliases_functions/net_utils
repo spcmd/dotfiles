@@ -104,7 +104,6 @@ gteo() {
         echo "${word}${separator}${translation}"
     done
 }
-alias update-translate-shell="wget -N -P ~/bin https://raw.githubusercontent.com/soimort/translate-shell/gh-pages/trans"
 
 # wttr (weather, a Web frontend for wego: https://github.com/chubin/wttr.in)
 wttr() { curl wttr.in/$1 }

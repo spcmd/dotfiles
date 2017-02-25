@@ -140,7 +140,7 @@ highlight SyntasticWarning ctermbg=226 ctermfg=196
 highlight SyntasticError ctermbg=9 ctermfg=11
 
 " Don't check PKGBUILD files by default
-autocmd BufRead,BufNewFile PKGBUILD :silent SyntasticToggleMode
+"autocmd BufRead,BufNewFile PKGBUILD :silent SyntasticToggleMode
 
 " toggle error window (http://stackoverflow.com/a/17515778)
 function! ToggleErrors()

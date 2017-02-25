@@ -39,3 +39,6 @@ sudo cp personal.map /usr/local/share/kbd/keymaps
 
 # Console settings
 sudo cp vconsole.conf /etc
+
+# Powertop (For the Acer ES1-512 laptop)
+sudo cp powertop_es1-512.conf /etc/tmpfiles.d/powertop.conf

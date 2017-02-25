@@ -97,7 +97,7 @@ class Default(ColorScheme):
                 fg = COLOR_WHITE
             elif context.tab:
                 if context.good:
-                    fg = COLOR_DEFAULT
+                    fg = COLOR_BLACK
                     bg = COLOR_YELLOW
             elif context.link:
                 fg = COLOR_CYAN

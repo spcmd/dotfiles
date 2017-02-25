@@ -8,8 +8,8 @@
 # http://spcmd.github.io
 # https://github.com/spcmd
 
-alias lampp-start='sudo /opt/lampp/lampp start'
-alias lampp-stop='sudo /opt/lampp/lampp stop'
-alias lampp-restart='sudo /opt/lampp/lampp restart'
+alias lampp-start='sudo /opt/lampp/lampp startapache'
+alias lampp-stop='sudo /opt/lampp/lampp stopapache'
+alias lampp-restart='sudo /opt/lampp/lampp restartapache'
 
 # vim: set syntax=sh filetype=sh :

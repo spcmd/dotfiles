@@ -111,6 +111,9 @@ dht = on
 #color_dead_bg = 7
 #color_dead_fg = 0
 
+# Notify when a download is finished
+method.set_key = event.download.finished,notify_me,"execute=rtorrent-notify.sh"
+
 # --------------------------------------------------------------------------------------
 # rTorrent-ps settings
 # --------------------------------------------------------------------------------------
