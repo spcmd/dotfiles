@@ -11,8 +11,8 @@ light -S 20
 #  note: this doesn't work with ~/.Xmodmap
 (sleep 0.2 && setxkbmap -option caps:escape)
 
-# Source Xmodmap
-xmodmap ~/.Xmodmap
+# Source Xmodmap (not needed anymore, using libinput.conf instead)
+#xmodmap ~/.Xmodmap
 
 # Start urxvt daemon
 #[[ ! $(pgrep urxvtd) ]] && urxvtd &
