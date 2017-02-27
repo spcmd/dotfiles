@@ -6,7 +6,6 @@ luakit/.local/share/luakit/history.*
 luakit/.local/share/luakit/noscript.sql
 rtv/.config/rtv/refresh-token
 rtv/.config/rtv/history.log
-*cookie*
 *.log
 *.swp
 *.swo
