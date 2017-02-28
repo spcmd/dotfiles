@@ -112,7 +112,7 @@ dht = on
 #color_dead_fg = 0
 
 # Notify when a download is finished
-method.set_key = event.download.finished,notify_me,"execute=rtorrent-notify.sh"
+method.set_key = event.download.finished,notify_me,"execute=notify-send,\"rTorrent finished downloading\",$d.name="
 
 # --------------------------------------------------------------------------------------
 # rTorrent-ps settings

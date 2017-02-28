@@ -11,9 +11,9 @@
 rsync-320GB_Rack() {
     RACK_BACKUP_DIR='/media/320GB_Rack/00Backup_spcmd/'
     if [[ -d $RACK_BACKUP_DIR ]]; then
-        rsync -avr $HOME/Documents/ $RACK_BACKUP_DIR/Documents/
-        rsync -avr $HOME/Pictures/ $RACK_BACKUP_DIR/Pictures/
-        rsync -avr $HOME/Music/ $RACK_BACKUP_DIR/Music/
+        rsync -avr --delete $HOME/Documents/ $RACK_BACKUP_DIR/Documents/
+        rsync -avr --delete $HOME/Pictures/ $RACK_BACKUP_DIR/Pictures/
+        rsync -avr --delete $HOME/Music/ $RACK_BACKUP_DIR/Music/
         rsync -avr --delete $HOME/.password-store/ $RACK_BACKUP_DIR/.password-store
         rsync -avr --delete $HOME/.spotymenu/ $RACK_BACKUP_DIR/.spotymenu
         rsync -avr --delete $HOME/.dsnippet/ $RACK_BACKUP_DIR/.dsnippet
