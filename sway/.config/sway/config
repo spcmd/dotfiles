@@ -1,0 +1,234 @@
+# vim: set syntax=sh filetype=sh :
+
+# -----------------------------------------------------------------------------------
+# Autorun
+# -----------------------------------------------------------------------------------
+
+# Load Xresources
+exec xrdb -merge ~/.Xresources
+
+# Notification daemon
+exec dunst &
+
+# -----------------------------------------------------------------------------------
+# Sway
+# -----------------------------------------------------------------------------------
+
+# Settings
+focus_follows_mouse no
+
+# Default wallpaper (more resolutions are available in /usr/share/sway/)
+output * bg /usr/share/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+
+# Enable natural scroll for the mouse
+input "7511:64096:Compx_2.4G_Re" {
+       natural_scroll enabled
+}
+
+# Variables
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term urxvtc
+set $menu $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#121212'
+
+### Key bindings
+#
+# Basics:
+#
+    # start a terminal
+    bindsym $mod+Return exec $term
+
+    # kill focused window
+    bindsym $mod+q kill
+
+    # start your launcher
+    bindsym $mod+a exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # reload the configuration file
+    bindsym $mod+Shift+r reload
+
+    # exit sway (logs you out of your wayland session)
+    bindsym $mod+Shift+q exit
+
+    # system stuff
+    bindsym $mod+ctrl+z exec systemctl suspend
+
+    # network
+    bindsym $mod+F3 exec $DIR_SCRIPTS/wifi-switch.sh
+
+    # screenshot
+    bindsym Print exec swaygrab ~/Pictures/swaygrab_$(date +'%Y-%m-%d_%T').png
+
+    # quick launch
+    bindsym $mod+alt+f exec luakitwrapper
+    bindsym $mod+alt+r exec urxvtc -e ranger
+    bindsym $mod+alt+t exec urxvtc -e rtorrent
+    bindsym $mod+alt+m exec urxvtc -name mutt -e mutt -F ~/.mutt/account.1.muttrc
+    bindsym $mod+alt+n exec urxvtc -e newsbeuter
+
+    # spotify
+    bindsym $mod+alt+s exec spotify
+    bindsym $mod+s exec dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+    bindsym $mod+Left exec dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+    bindsym $mod+Right exec dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+
+    # mps-youtube
+    bindsym $mod+y $DIR_SCRIPTS/mpsyt-control play-pause
+    bindsym $mod+alt+Left $DIR_SCRIPTS/mpsyt-control previous
+    bindsym $mod+alt+Right $DIR_SCRIPTS/mpsyt-control next
+
+    # backlight
+    bindsym $mod+ctrl+Left exec light -U 2
+    bindsym $mod+ctrl+Right exec light -A 2
+
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+
+    # _move_ the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+
+#
+# Workspaces:
+#
+    set $wp_name_1 "1:term"
+    set $wp_name_2 "2:web"
+    set $wp_name_3 "3:files"
+    set $wp_name_4 "4:mus"
+    set $wp_name_5 "5:torr"
+    set $wp_name_6 "6:misc"
+    set $wp_name_7 "7:mail"
+    set $wp_name_8 "8:news"
+    set $wp_name_9 "9:misc"
+    set $wp_name_10 "10:misc"
+
+    # switch to workspace
+    bindsym $mod+1 workspace $wp_name_1
+    bindsym $mod+2 workspace $wp_name_2
+    bindsym $mod+3 workspace $wp_name_3
+    bindsym $mod+4 workspace $wp_name_4
+    bindsym $mod+5 workspace $wp_name_5
+    bindsym $mod+6 workspace $wp_name_6
+    bindsym $mod+7 workspace $wp_name_7
+    bindsym $mod+8 workspace $wp_name_8
+    bindsym $mod+9 workspace $wp_name_9
+    bindsym $mod+0 workspace $wp_name_10
+
+    bindsym $mod+Escape workspace back_and_forth
+
+    # move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace $wp_name_1
+    bindsym $mod+Shift+2 move container to workspace $wp_name_2
+    bindsym $mod+Shift+3 move container to workspace $wp_name_3
+    bindsym $mod+Shift+4 move container to workspace $wp_name_4
+    bindsym $mod+Shift+5 move container to workspace $wp_name_5
+    bindsym $mod+Shift+6 move container to workspace $wp_name_6
+    bindsym $mod+Shift+7 move container to workspace $wp_name_7
+    bindsym $mod+Shift+8 move container to workspace $wp_name_8
+    bindsym $mod+Shift+9 move container to workspace $wp_name_9
+    bindsym $mod+Shift+0 move container to workspace $wp_name_10
+
+    # move between Workspaces (prev-next)
+    bindsym $mod+odoubleacute workspace prev
+    bindsym $mod+uacute workspace next
+
+    # rules
+    for_window [class = "luakit" ] move container to workspace $wp_name_2
+    for_window [title = "ranger" ] move container to workspace $wp_name_3
+    for_window [title = "spotify" ] move container to workspace $wp_name_4
+    for_window [title = "rtorrent" ] move container to workspace $wp_name_5
+    for_window [title = "mutt" ] move container to workspace $wp_name_7
+    for_window [title = "newsbeuter" ] move container to workspace $wp_name_8
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+control+l splith
+    bindsym $mod+control+j splitv
+
+    # Switch the current container between different layout styles
+    #bindsym $mod+m layout tabbed
+    bindsym $mod+m layout stacking
+    bindsym $mod+t layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    #bindsym $mod+space focus mode_toggle
+
+    # move focus to the parent container
+    #bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+#mode "resize" {
+    #bindsym $left resize shrink width 10 px or 10 ppt
+    #bindsym $down resize grow height 10 px or 10 ppt
+    #bindsym $up resize shrink height 10 px or 10 ppt
+    #bindsym $right resize grow width 10 px or 10 ppt
+
+    # return to default mode
+    #bindsym Return mode "default"
+    #bindsym Escape mode "default"
+#}
+#bindsym $mod+r mode "resize"
+
+bindsym $mod+Alt+$left resize shrink width 10 px
+bindsym $mod+Alt+$down resize grow height 10 px
+bindsym $mod+Alt+$up resize shrink height 10 px
+bindsym $mod+Alt+$right resize grow width 10 px
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+    #status_command while true; do date; sleep 1; done
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #323232 #323232 #ffffff
+    }
+
+}
+
+
+# include default stuff
+include /etc/sway/config.d/*
