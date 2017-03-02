@@ -1,0 +1,6 @@
+xkb_symbols "MyCustomLayout" {
+    // Base keyboard layout: /usr/share/X11/xkb/symbols/hu
+    include "hu"
+    // change caps to escape
+    key <CAPS> { [ Escape ] };
+};

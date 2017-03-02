@@ -32,7 +32,7 @@ fbscrot() {
 }
 
 # Preview markdown files (convert to html and open is browser)
-MD() {
+markdown-view-html() {
     if [[ ! -z $1 ]]; then
         cmark -t html "$1" > /tmp/$1.html && $BROWSER /tmp/$1.html
     else

@@ -29,8 +29,6 @@ clbin() {
     echo "- RAW:  $paste"
 }
 
-lspastebin() { which sprunge clbin;}
-
 # bbradio checker
 bbradio() {
     # yesterday

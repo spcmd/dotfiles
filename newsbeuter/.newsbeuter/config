@@ -46,12 +46,10 @@ unbind-key Q
 
 bind-key j next
 bind-key k prev
-bind-key j down article
-bind-key k up article
+bind-key j down
+bind-key k up
 bind-key l open
-bind-key h quit article
-bind-key h quit articlelist
-bind-key h quit tagselection
+bind-key h quit
 bind-key ^N reload-all
 bind-key F edit-flags
 bind-key o sort feedlist

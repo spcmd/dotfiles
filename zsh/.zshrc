@@ -61,7 +61,7 @@ stty -ixon
 #[[ -f $DIR_ALIASES_FUNCTIONS/awesome_wm ]] && . $DIR_ALIASES_FUNCTIONS/awesome_wm
 [[ -f $DIR_ALIASES_FUNCTIONS/backup ]] && . $DIR_ALIASES_FUNCTIONS/backup
 [[ -f $DIR_ALIASES_FUNCTIONS/bspwm ]] && . $DIR_ALIASES_FUNCTIONS/bspwm
-[[ -f $DIR_ALIASES_FUNCTIONS/compton ]] && . $DIR_ALIASES_FUNCTIONS/compton
+#[[ -f $DIR_ALIASES_FUNCTIONS/compton ]] && . $DIR_ALIASES_FUNCTIONS/compton
 [[ -f $DIR_ALIASES_FUNCTIONS/config_files ]] && . $DIR_ALIASES_FUNCTIONS/config_files
 [[ -f $DIR_ALIASES_FUNCTIONS/coreutils ]] && . $DIR_ALIASES_FUNCTIONS/coreutils
 [[ -f $DIR_ALIASES_FUNCTIONS/dm_dirbookmark ]] && . $DIR_ALIASES_FUNCTIONS/dm_dirbookmark

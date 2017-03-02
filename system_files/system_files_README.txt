@@ -45,3 +45,6 @@ sudo cp powertop_es1-512.conf /etc/tmpfiles.d/powertop.conf
 
 # Input devices (libinput): mouse and touchpad; natural scroll
 sudo cp 40-libinput.conf /etc/X11/xorg.conf.d
+
+# XKB layout (caps:esc switched for Wayland/Sway)
+sudo cp xkb_spcmd_layout /usr/share/X11/xkb/symbols/spcmd_layout

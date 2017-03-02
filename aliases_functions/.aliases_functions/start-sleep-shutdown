@@ -12,18 +12,4 @@ alias zzz='systemctl suspend'
 alias sss='systemctl poweroff'
 alias XX='startx'
 
-# Shutdown gracefully
-#sss() {
-    #pkill -SIGTERM spotify &&
-    #pkill -SIGTERM firefox &&
-    #systemctl poweroff
-#}
-
-# Startx shortcut
-#XX() {
-    #if [[ -z $DISPLAY ]];then
-        #startx
-    #fi
-#}
-
 # vim: set syntax=sh filetype=sh :
