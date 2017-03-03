@@ -15,12 +15,7 @@ alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by defau
 #alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 
 # neofetch
-alias neofetch="neofetch \
-                    --ascii \
-                    --ascii_colors 12 12 \
-                    --underline off \
-                    --disable title font \
-                    --color_blocks off"
+alias neofetch="neofetch --ascii --ascii_colors 12 12 --underline off --disable title font --color_blocks off"
 
 # w3m
 alias w3m='w3m -v'

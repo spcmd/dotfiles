@@ -1,8 +1,8 @@
 # vim: set syntax=sh filetype=sh :
 
-# -----------------------------------------------------------------------------------
-# Autorun
-# -----------------------------------------------------------------------------------
+# -----------------------
+# Auto start
+# -----------------------
 
 # Load Xresources
 exec xrdb -merge ~/.Xresources
@@ -10,11 +10,14 @@ exec xrdb -merge ~/.Xresources
 # Notification daemon
 exec dunst &
 
-# -----------------------------------------------------------------------------------
-# Sway
-# -----------------------------------------------------------------------------------
+# Mail checker
+exec ~/.config/sway/check_mail.sh &
 
+# -----------------------
 # Settings
+# -----------------------
+
+# Mouse focus
 focus_follows_mouse no
 
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
@@ -25,7 +28,10 @@ input "7511:64096:Compx_2.4G_Re" {
        natural_scroll enabled
 }
 
+# -----------------------
 # Variables
+# -----------------------
+
 set $mod Mod4
 set $left h
 set $down j
@@ -34,10 +40,13 @@ set $right l
 set $term urxvtc
 set $menu $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#121212'
 
-### Key bindings
-#
-# Basics:
-#
+
+# -----------------------
+# Key bindings
+# -----------------------
+
+# Basics
+
     # start a terminal
     bindsym $mod+Return exec $term
 
@@ -67,13 +76,30 @@ set $menu $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#12
     bindsym $mod+F3 exec $DIR_SCRIPTS/wifi-switch.sh
 
     # screenshot
-    bindsym Print exec swaygrab ~/Pictures/swaygrab_$(date +'%Y-%m-%d_%T').png
+    bindsym Print exec swaygrab ~/Pictures/swaygrab_$(date +'%Y-%m-%d_%T').png; exec notify-send "Screenshot taken"
+    bindsym $mod+Print exec swaygrab -f ~/Pictures/swaygrab_$(date +'%Y-%m-%d_%T').png; exec notify-send "Screenshot taken"
 
-    # quick launch
+    # backlight
+    bindsym $mod+ctrl+Left exec light -U 2
+    bindsym $mod+ctrl+Right exec light -A 2
+
+    # volume
+    bindsym $mod+Down exec $HOME/.config/sway/i3blocks_volume.sh down
+    bindsym $mod+Up exec $HOME/.config/sway/i3blocks_volume.sh up
+
+    # mail check
+    bindsym $mod+ctrl+m exec $DIR_SCRIPTS/gmailcheck.sh; exec notify-send 'gmailcheck' 'Check done.'
+    bindsym $mod+Shift+m exec notify-send "$(cat ~/.mutt/newmail_list)"
+
+    # pass
+    bindsym $mod+p exec $DIR_SCRIPTS/dpass
+
+    # other quick launch
     bindsym $mod+alt+f exec luakitwrapper
     bindsym $mod+alt+r exec urxvtc -e ranger
     bindsym $mod+alt+t exec urxvtc -e rtorrent
     bindsym $mod+alt+m exec urxvtc -name mutt -e mutt -F ~/.mutt/account.1.muttrc
+    bindsym $mod+alt+Shift+m exec urxvtc -name mutt -e mutt -F ~/.mutt/account.2.muttrc
     bindsym $mod+alt+n exec urxvtc -e newsbeuter
 
     # spotify
@@ -81,19 +107,19 @@ set $menu $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#12
     bindsym $mod+s exec dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
     bindsym $mod+Left exec dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
     bindsym $mod+Right exec dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+    bindsym $mod+b exec $DIR_SCRIPTS/spotymenu
 
     # mps-youtube
-    bindsym $mod+y $DIR_SCRIPTS/mpsyt-control play-pause
-    bindsym $mod+alt+Left $DIR_SCRIPTS/mpsyt-control previous
-    bindsym $mod+alt+Right $DIR_SCRIPTS/mpsyt-control next
+    bindsym $mod+y exec $DIR_SCRIPTS/mpsyt-control play-pause
+    bindsym $mod+alt+Left exec $DIR_SCRIPTS/mpsyt-control previous
+    bindsym $mod+alt+Right exec $DIR_SCRIPTS/mpsyt-control next
 
-    # backlight
-    bindsym $mod+ctrl+Left exec light -U 2
-    bindsym $mod+ctrl+Right exec light -A 2
+    # ebooks/comics
+    bindsym $mod+c exec $DIR_SCRIPTS/dcalibre
+    bindsym $mod+Shift+c exec $DIR_SCRIPTS/dcomics
 
-#
 # Moving around:
-#
+
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -106,9 +132,9 @@ set $menu $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#12
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
 
-#
+
 # Workspaces:
-#
+
     set $wp_name_1 "1:term"
     set $wp_name_2 "2:web"
     set $wp_name_3 "3:files"
@@ -157,14 +183,13 @@ set $menu $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#12
     for_window [title = "rtorrent" ] move container to workspace $wp_name_5
     for_window [title = "mutt" ] move container to workspace $wp_name_7
     for_window [title = "newsbeuter" ] move container to workspace $wp_name_8
-#
+
 # Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
+
+    # Select split
     bindsym $mod+control+l splith
     bindsym $mod+control+j splitv
+    bindsym $mod+control+k splitv
 
     # Switch the current container between different layout styles
     #bindsym $mod+m layout tabbed
@@ -175,16 +200,16 @@ set $menu $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#12
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+control+f floating toggle
 
     # Swap focus between the tiling area and the floating area
     #bindsym $mod+space focus mode_toggle
 
     # move focus to the parent container
     #bindsym $mod+a focus parent
-#
+
 # Scratchpad:
-#
+
     # Sway has a "scratchpad", which is a bag of holding for windows.
     # You can send windows there and get them back later.
 
@@ -194,9 +219,9 @@ set $menu $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#12
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
-#
+
 # Resizing containers:
-#
+
 #mode "resize" {
     #bindsym $left resize shrink width 10 px or 10 ppt
     #bindsym $down resize grow height 10 px or 10 ppt
@@ -207,20 +232,22 @@ set $menu $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#12
     #bindsym Return mode "default"
     #bindsym Escape mode "default"
 #}
-#bindsym $mod+r mode "resize"
+    #bindsym $mod+r mode "resize"
 
-bindsym $mod+Alt+$left resize shrink width 10 px
-bindsym $mod+Alt+$down resize grow height 10 px
-bindsym $mod+Alt+$up resize shrink height 10 px
-bindsym $mod+Alt+$right resize grow width 10 px
+    bindsym $mod+Alt+$left resize shrink width 10 px
+    bindsym $mod+Alt+$down resize grow height 10 px
+    bindsym $mod+Alt+$up resize shrink height 10 px
+    bindsym $mod+Alt+$right resize grow width 10 px
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
+
+# -----------------------
+# Status Bar
+# -----------------------
+
 bar {
     position top
-    #status_command while true; do date; sleep 1; done
+    pango_markup enabled
+    status_command i3blocks
     colors {
         statusline #ffffff
         background #323232
@@ -230,5 +257,8 @@ bar {
 }
 
 
-# include default stuff
+# -----------------------
+# Includes
+# -----------------------
+
 include /etc/sway/config.d/*

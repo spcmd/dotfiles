@@ -26,6 +26,9 @@ set autocalc=1
 # Move the cursor down after an entry
 set newline_action=j
 
+# Case insensitive search
+set ignorecase
+
 # --------------------------------------------------------------------------
 # Auto commands
 # --------------------------------------------------------------------------
