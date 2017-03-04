@@ -5,12 +5,12 @@
 #        |___| .__/ \___|_| |_| |_|\__,_|
 #             |_|
 #
-#                  .rtorrent.rc
 #               Created by: spcmd
-#           http://spcmd.github.io
 #           https://github.com/spcmd
-#           https://gist.github.com/spcmd
 
+# --------------------------------------------------------------------------------------
+# rTorrent
+# --------------------------------------------------------------------------------------
 
 # Maximum and minimum number of peers to connect to per torrent.
 min_peers = 20
@@ -34,14 +34,6 @@ directory = ~/Downloads
 # of rtorrent using the same session directory. Perhaps using a
 # relative path?
 session = ~/.rtorrent-session
-
-# Watch a directory for new torrents, and stop those that have been
-# deleted.
-#schedule = watch_directory,5,5,load_start=~/Downloads/.rtorrent_autoload/*.torrent
-#schedule = untied_directory,5,5,stop_untied=
-
-# Close torrents when diskspace is low.
-#schedule = low_diskspace,5,60,close_low_diskspace=100M
 
 # The ip address reported to the tracker.
 #ip = 127.0.0.1
@@ -115,26 +107,41 @@ dht = on
 method.set_key = event.download.finished,notify_me,"execute=notify-send,\"rTorrent finished downloading\",$d.name="
 
 # --------------------------------------------------------------------------------------
-# rTorrent-ps settings
+# rTorrent-ps
 # --------------------------------------------------------------------------------------
 
 # Set "pyro.extended" to 1 to activate rTorrent-PS features!
 # LEAVE THIS AT 0 IF YOU RUN A VANILLA rTorrent!
 method.insert = pyro.extended, value|const, 1
 
-# Set "pyro.extended.ch" to 1 to activate rTorrent-PS-CH features!
-# LEAVE THIS AT 0 IF YOU DO NOT RUN IT!
-method.insert = pyro.extended.ch, value|const, 1
-
 # Set "pyro.bin_dir" to the "bin" directory where you installed the pyrocore tools!
 # Make sure you end it with a "/"; if this is left empty, then the shell's path is searched.
-method.insert = pyro.bin_dir, string|const, "$cat=~/bin/"
+#method.insert = pyro.bin_dir, string|const, "$cat=~/bin/"
+method.insert = pyro.bin_dir, string|const, ~/.pyroscope/
+
+# Remove the ".default" if you want to change something (else your changes
+# get over-written on update, when you put them into ``*.default`` files).
+#import = ~/.pyroscope/rtorrent-pyro.rc.default
+
+# TORQUE: Daemon watchdog schedule
+# Must be activated by touching the "~/.pyroscope/run/pyrotorque" file!
+# Set the second argument to "-v" or "-q" to change log verbosity.
+#schedule = pyro_watchdog,30,300,"pyro.watchdog=~/.pyroscope,"
 
 # Helper method to import specified conf file as a parameter from ~/.pyroscope/ directory.
 #method.insert = import.pyro.rc, simple, "import=\"$cat=~/.pyroscope/,$argument.0=\""
 
 # Imports main pyroscope conf file
 #import.pyro.rc = "$cat=rtorrent-ps-,\"$system.client_version=\",.rc"
+
+# pyrocore / pyroscope socket
+network.scgi.open_local = /tmp/.rtorrent.sock
+session.path = ~/.rtorrent-session
+
+# VIEW: Use rtcontrol filter (^X s=KEYWORD, ^X t=TRACKER, ^X f="FILTER")
+#method.insert = s,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,\"$cat=*,$argument.0=,*\""
+#method.insert = t,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,\"$cat=\\\"alias=\\\",$argument.0=\""
+#method.insert = f,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,$argument.0="
 
 # Encryption options (encryption), set to none (default) or any combination of the following: allow_incoming, try_outgoing, require, require_RC4, enable_retry, prefer_plaintext
 # The example value allows incoming encrypted connections, starts unencrypted outgoing connections but retries with encryption if they fail, preferring plaintext to RC4 encryption after the encrypted handshake
@@ -143,7 +150,11 @@ protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 # Watch directories and autoload torrents for them
 branch=pyro.extended=,"schedule = watch_dir_1, 5, 10, \"load.start=~/Downloads/.rtorrent_autoload/*.torrent\""
 
-# View: show collapsed view by default
+# -----------------------
+#  Views
+# -----------------------
+
+# show collapsed views by default
 branch=pyro.extended=,"view.collapsed.toggle=main"
 branch=pyro.extended=,"view.collapsed.toggle=name"
 branch=pyro.extended=,"view.collapsed.toggle=started"
@@ -153,44 +164,106 @@ branch=pyro.extended=,"view.collapsed.toggle=incomplete"
 branch=pyro.extended=,"view.collapsed.toggle=seeding"
 branch=pyro.extended=,"view.collapsed.toggle=active"
 
-# View: sort by uploaded data
-view.add = uploadeddata
-branch=pyro.extended=,"view.collapsed.toggle=uploadeddata"
-branch=pyro.extended=,false=,"view.sort_current = uploadeddata,greater=d.up.total="
-branch=pyro.extended=,"view.sort_current = uploadeddata,\"compare=+-,d.throttle_name=,d.up.total=\""
-view.sort = uploadeddata
-branch=pyro.extended=,"schedule = bind_uploadeddata,0,0,\"ui.bind_key=download_list,u,ui.current_view.set=uploadeddata\""
+# view: sort by uploaded data
+#view.add = uploadeddata
+#branch=pyro.extended=,"view.collapsed.toggle=uploadeddata"
+#branch=pyro.extended=,false=,"view.sort_current = uploadeddata,greater=d.up.total="
+#branch=pyro.extended=,"view.sort_current = uploadeddata,\"compare=+-,d.throttle_name=,d.up.total=\""
+#view.sort = uploadeddata
+#branch=pyro.extended=,"schedule = bind_uploadeddata,0,0,\"ui.bind_key=download_list,u,ui.current_view.set=uploadeddata\""
 
-# View: sort by data size
-view.add = datasize
-branch=pyro.extended=,"view.collapsed.toggle=datasize"
-branch=pyro.extended=,false=,"view.sort_current = datasize,greater=d.size_bytes="
-branch=pyro.extended=,"view.sort_current = datasize,\"compare=+-,d.throttle_name=,d.size_bytes=\""
-view.sort = datasize
-branch=pyro.extended=,"schedule = bind_datasize,0,0,\"ui.bind_key=download_list,z,ui.current_view.set=datasize\""
+# view: sort by data size
+#view.add = datasize
+#branch=pyro.extended=,"view.collapsed.toggle=datasize"
+#branch=pyro.extended=,false=,"view.sort_current = datasize,greater=d.size_bytes="
+#branch=pyro.extended=,"view.sort_current = datasize,\"compare=+-,d.throttle_name=,d.size_bytes=\""
+#view.sort = datasize
+#branch=pyro.extended=,"schedule = bind_datasize,0,0,\"ui.bind_key=download_list,z,ui.current_view.set=datasize\""
 
-# View: sort by ratio
+# view: sort by ratio
 view.add = ratio
 branch=pyro.extended=,"view.collapsed.toggle=ratio"
 branch=pyro.extended=,false=,"view.sort_current = ratio,greater=d.ratio="
 branch=pyro.extended=,"view.sort_current = ratio,\"compare=+-,d.throttle_name=,d.ratio=\""
 view.sort = ratio
-branch=pyro.extended=,"schedule = bind_ratio,0,0,\"ui.bind_key=download_list,r,ui.current_view.set=ratio\""
+branch=pyro.extended=,"schedule = bind_ratio,0,0,\"ui.bind_key=download_list,9,ui.current_view.set=ratio\""
 
-# View: tagged
+# view: tagged
 # <space> = toggle focused item between tagged and untagged (0040 is the <space> key)
 # t = show tagged items view
 # T = clear all tags
-view.add = tagged
-view.persistent = tagged
-branch=pyro.extended=,view.collapsed.toggle=tagged
-method.insert = view.toggle_visible,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0="
-method.insert = pyro.view_tagged_clear,simple|private,"view.filter=tagged,false= ;d.multicall2=main,d.views.remove=tagged"
-branch=pyro.extended=,"schedule = bind_tag_toggle,0,0,\"ui.bind_key=download_list,0040,view.toggle_visible=tagged\""
-branch=pyro.extended=,"schedule = bind_tag_clear,0,0,\"ui.bind_key=download_list,T,pyro.view_tagged_clear=\""
-branch=pyro.extended=,"schedule = bind_tag_show,0,0,\"ui.bind_key=download_list,t,ui.current_view.set=tagged\""
+#view.add = tagged
+#view.persistent = tagged
+#branch=pyro.extended=,view.collapsed.toggle=tagged
+#method.insert = view.toggle_visible,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0="
+#method.insert = pyro.view_tagged_clear,simple|private,"view.filter=tagged,false= ;d.multicall2=main,d.views.remove=tagged"
+#branch=pyro.extended=,"schedule = bind_tag_toggle,0,0,\"ui.bind_key=download_list,0040,view.toggle_visible=tagged\""
+#branch=pyro.extended=,"schedule = bind_tag_clear,0,0,\"ui.bind_key=download_list,T,pyro.view_tagged_clear=\""
+#branch=pyro.extended=,"schedule = bind_tag_show,0,0,\"ui.bind_key=download_list,t,ui.current_view.set=tagged\""
 
-# Key bindings
+# view: comics
+view.add=comics
+view.persistent=comics
+view.collapsed.toggle=comics
+method.insert = view.tag_comics,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0=;execute=notify-send,\"rTorrent toggled tag: comics\",$d.name="
+method.insert = view.comics_clear,simple,"view.filter=comics,false= ;d.multicall2=main,d.views.remove=comics;execute=notify-send,\"rTorrent cleared all comics tag\""
+schedule = bind.comics_toggle,0,0,"ui.bind_key=download_list,c,view.tag_comics=comics"
+schedule = bind.comics_clear,0,0,"ui.bind_key=download_list,C,view.comics_clear="
+
+# view: ebooks
+view.add=ebooks
+view.persistent=ebooks
+view.collapsed.toggle=ebooks
+method.insert = view.tag_ebooks,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0=;execute=notify-send,\"rTorrent toggled tag: ebooks\",$d.name="
+method.insert = view.ebooks_clear,simple,"view.filter=ebooks,false= ;d.multicall2=main,d.views.remove=ebooks;execute=notify-send,\"rTorrent cleared ebooks tag\""
+schedule = bind.ebooks_toggle,0,0,"ui.bind_key=download_list,e,view.tag_ebooks=ebooks"
+schedule = bind.ebooks_clear,0,0,"ui.bind_key=download_list,E,view.ebooks_clear="
+
+# view: tv
+view.add=tv
+view.persistent=tv
+view.collapsed.toggle=tv
+method.insert = view.tag_tv,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0=;execute=notify-send,\"rTorrent toggled tag: tv\",$d.name="
+method.insert = view.tv_clear,simple,"view.filter=tv,false= ;d.multicall2=main,d.views.remove=tv;execute=notify-send,\"rTorrent cleared tv tag\""
+schedule = bind.tv_toggle,0,0,"ui.bind_key=download_list,t,view.tag_tv=tv"
+schedule = bind.tv_clear,0,0,"ui.bind_key=download_list,T,view.tv_clear="
+
+# view: movies
+view.add=movies
+view.persistent=movies
+view.collapsed.toggle=movies
+method.insert = view.tag_movies,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0=;execute=notify-send,\"rTorrent toggled tag: movies\",$d.name="
+method.insert = view.movies_clear,simple,"view.filter=movies,false= ;d.multicall2=main,d.views.remove=movies;execute=notify-send,\"rTorrent cleared movies tag\""
+schedule = bind.movies_toggle,0,0,"ui.bind_key=download_list,m,view.tag_movies=movies"
+schedule = bind.movies_clear,0,0,"ui.bind_key=download_list,M,view.movies_clear="
+
+# view: flagged
+view.add=flagged
+view.persistent=flagged
+view.collapsed.toggle=flagged
+method.insert = view.tag_flagged,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0=;execute=notify-send,\"rTorrent toggled tag: flagged\",$d.name="
+method.insert = view.flagged_clear,simple,"view.filter=flagged,false= ;d.multicall2=main,d.views.remove=flagged;execute=notify-send,\"rTorrent cleared flagged tag\""
+schedule = bind.flagged_toggle,0,0,"ui.bind_key=download_list,f,view.tag_flagged=flagged"
+schedule = bind.flagged_clear,0,0,"ui.bind_key=download_list,F,view.flagged_clear="
+
+# -----------------------
+#  Key bindings
+# -----------------------
+
+# views
+schedule = bind_view_name_q,0,0,"ui.bind_key=download_list,q,ui.current_view.set=name"
+schedule = bind_view_name,0,0,"ui.bind_key=download_list,0,ui.current_view.set=name"
+schedule = bind_view_started,0,0,"ui.bind_key=download_list,1,ui.current_view.set=started"
+schedule = bind_view_complete,0,0,"ui.bind_key=download_list,2,ui.current_view.set=complete"
+schedule = bind_view_seeding,0,0,"ui.bind_key=download_list,3,ui.current_view.set=seeding"
+
+schedule = bind_view_tv,0,0,"ui.bind_key=download_list,4,ui.current_view.set=tv"
+schedule = bind_view_movies,0,0,"ui.bind_key=download_list,5,ui.current_view.set=movies"
+schedule = bind_view_comics,0,0,"ui.bind_key=download_list,6,ui.current_view.set=comics"
+schedule = bind_view_ebooks,0,0,"ui.bind_key=download_list,7,ui.current_view.set=ebooks"
+schedule = bind_view_flagged,0,0,"ui.bind_key=download_list,8,ui.current_view.set=flagged"
+
+# moves & controls
 schedule = bind_collapse,0,0,"ui.bind_key=download_list,*,view.collapsed.toggle="
 schedule = bind_start_all,0,0,"ui.bind_key=download_list,S,\"d.multicall2=,d.start=\""
 schedule = bind_stop,0,0,"ui.bind_key=download_list,^d,d.stop="
@@ -198,6 +271,13 @@ schedule = bind_stop_all,0,0,"ui.bind_key=download_list,D,\"d.multicall2=,d.stop
 schedule = bind_delete,0,0,"ui.bind_key=download_list,R,d.erase="
 schedule = bind_home,0,0,"ui.bind_key=download_list,g,ui.focus.home="
 schedule = bind_end, 0,0,"ui.bind_key=download_list,G,ui.focus.end="
+
+# -----------------------
+#  Other Settings
+# -----------------------
+
+# Select name view by default
+schedule = set_name_view, 0,0,"ui.current_view.set=name"
 
 # Colors & Style
 ui.color.alarm.set="red"
