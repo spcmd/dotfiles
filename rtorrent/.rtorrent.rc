@@ -139,9 +139,9 @@ network.scgi.open_local = /tmp/.rtorrent.sock
 session.path = ~/.rtorrent-session
 
 # VIEW: Use rtcontrol filter (^X s=KEYWORD, ^X t=TRACKER, ^X f="FILTER")
-#method.insert = s,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,\"$cat=*,$argument.0=,*\""
+method.insert = s,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,\"$cat=*,$argument.0=,*\""
 #method.insert = t,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,\"$cat=\\\"alias=\\\",$argument.0=\""
-#method.insert = f,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,$argument.0="
+method.insert = f,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,$argument.0="
 
 # Encryption options (encryption), set to none (default) or any combination of the following: allow_incoming, try_outgoing, require, require_RC4, enable_retry, prefer_plaintext
 # The example value allows incoming encrypted connections, starts unencrypted outgoing connections but retries with encryption if they fail, preferring plaintext to RC4 encryption after the encrypted handshake
@@ -201,14 +201,44 @@ branch=pyro.extended=,"schedule = bind_ratio,0,0,\"ui.bind_key=download_list,9,u
 #branch=pyro.extended=,"schedule = bind_tag_clear,0,0,\"ui.bind_key=download_list,T,pyro.view_tagged_clear=\""
 #branch=pyro.extended=,"schedule = bind_tag_show,0,0,\"ui.bind_key=download_list,t,ui.current_view.set=tagged\""
 
+
 # view: comics
 view.add=comics
 view.persistent=comics
 view.collapsed.toggle=comics
-method.insert = view.tag_comics,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0=;execute=notify-send,\"rTorrent toggled tag: comics\",$d.name="
-method.insert = view.comics_clear,simple,"view.filter=comics,false= ;d.multicall2=main,d.views.remove=comics;execute=notify-send,\"rTorrent cleared all comics tag\""
-schedule = bind.comics_toggle,0,0,"ui.bind_key=download_list,c,view.tag_comics=comics"
-schedule = bind.comics_clear,0,0,"ui.bind_key=download_list,C,view.comics_clear="
+
+# add tag: comics
+method.insert = tag_add.comics,simple,\
+    "execute=rtc,--add-tag,$d.name=,$argument.0=;\
+    view.set_visible=$argument.0=;\
+    print=\"----------------------------------------------------------------------------------------\";\
+    print=\"rtcontrol> Set tag: '\",\"$cat=,$argument.0=\",\"' --> \",$d.name=;\
+    print=\"----------------------------------------------------------------------------------------\""
+
+# remove tag: comics
+method.insert = tag_remove.comics,simple,\
+    "execute=rtc,--remove-tag,$d.name=,$argument.0=;\
+    d.views.remove=$argument.0=;\
+    view.set_not_visible=$argument.0=;\
+    print=\"----------------------------------------------------------------------------------------\";\
+    print=\"rtcontrol> Removed tag: '\",\"$cat=,$argument.0=\",\"' --> \",$d.name=;\
+    print=\"----------------------------------------------------------------------------------------\""
+
+# remove ALL tags: comics
+method.insert = tag_removeAll.comics,simple,\
+    "execute=rtc,--remove-tag-all,$d.name=,$argument.0=;\
+    view.filter=$argument.0=,false=;\
+    d.multicall2=main,\
+    d.views.remove=$argument.0=;\
+    print=\"----------------------------------------------------------------------------------------\";\
+    print=\"rtorrent> Removed all: '\",\"$cat=,$argument.0=\",\"' tag\";\
+    print=\"----------------------------------------------------------------------------------------\""
+
+# key bindings: comics
+schedule = bind.comics_toggle,0,0,"ui.bind_key=download_list,c,tag_add.comics=comics"
+schedule = bind.comics_clear,0,0,"ui.bind_key=download_list,C,tag_remove.comics=comics"
+
+
 
 # view: ebooks
 view.add=ebooks
