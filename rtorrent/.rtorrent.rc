@@ -139,9 +139,9 @@ network.scgi.open_local = /tmp/.rtorrent.sock
 session.path = ~/.rtorrent-session
 
 # VIEW: Use rtcontrol filter (^X s=KEYWORD, ^X t=TRACKER, ^X f="FILTER")
-method.insert = s,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,\"$cat=*,$argument.0=,*\""
+#method.insert = s,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,\"$cat=*,$argument.0=,*\""
 #method.insert = t,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,\"$cat=\\\"alias=\\\",$argument.0=\""
-method.insert = f,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,$argument.0="
+#method.insert = f,simple|private,"execute.nothrow=rtcontrol,--detach,-qV,$argument.0="
 
 # Encryption options (encryption), set to none (default) or any combination of the following: allow_incoming, try_outgoing, require, require_RC4, enable_retry, prefer_plaintext
 # The example value allows incoming encrypted connections, starts unencrypted outgoing connections but retries with encryption if they fail, preferring plaintext to RC4 encryption after the encrypted handshake
@@ -154,7 +154,7 @@ branch=pyro.extended=,"schedule = watch_dir_1, 5, 10, \"load.start=~/Downloads/.
 #  Views
 # -----------------------
 
-# show collapsed views by default
+# collapse all default views
 branch=pyro.extended=,"view.collapsed.toggle=main"
 branch=pyro.extended=,"view.collapsed.toggle=name"
 branch=pyro.extended=,"view.collapsed.toggle=started"
@@ -201,22 +201,41 @@ branch=pyro.extended=,"schedule = bind_ratio,0,0,\"ui.bind_key=download_list,9,u
 #branch=pyro.extended=,"schedule = bind_tag_clear,0,0,\"ui.bind_key=download_list,T,pyro.view_tagged_clear=\""
 #branch=pyro.extended=,"schedule = bind_tag_show,0,0,\"ui.bind_key=download_list,t,ui.current_view.set=tagged\""
 
-
-# view: comics
+# custom views
 view.add=comics
 view.persistent=comics
 view.collapsed.toggle=comics
 
-# add tag: comics
-method.insert = tag_add.comics,simple,\
+view.add=ebooks
+view.persistent=ebooks
+view.collapsed.toggle=ebooks
+
+view.add=tv
+view.persistent=tv
+view.collapsed.toggle=tv
+
+view.add=movies
+view.persistent=movies
+view.collapsed.toggle=movies
+
+view.add=flagged
+view.persistent=flagged
+view.collapsed.toggle=flagged
+
+# --------------------------------------------------------------------
+#  Tagging (using a custom shell script which uses pyrocore/rtcontrol)
+# --------------------------------------------------------------------
+
+# add tag
+method.insert = tag.add,simple,\
     "execute=rtc,--add-tag,$d.name=,$argument.0=;\
     view.set_visible=$argument.0=;\
     print=\"----------------------------------------------------------------------------------------\";\
     print=\"rtcontrol> Set tag: '\",\"$cat=,$argument.0=\",\"' --> \",$d.name=;\
     print=\"----------------------------------------------------------------------------------------\""
 
-# remove tag: comics
-method.insert = tag_remove.comics,simple,\
+# remove tag
+method.insert = tag.remove,simple,\
     "execute=rtc,--remove-tag,$d.name=,$argument.0=;\
     d.views.remove=$argument.0=;\
     view.set_not_visible=$argument.0=;\
@@ -224,8 +243,8 @@ method.insert = tag_remove.comics,simple,\
     print=\"rtcontrol> Removed tag: '\",\"$cat=,$argument.0=\",\"' --> \",$d.name=;\
     print=\"----------------------------------------------------------------------------------------\""
 
-# remove ALL tags: comics
-method.insert = tag_removeAll.comics,simple,\
+# remove ALL tags
+method.insert = tag.removeAll,simple,\
     "execute=rtc,--remove-tag-all,$d.name=,$argument.0=;\
     view.filter=$argument.0=,false=;\
     d.multicall2=main,\
@@ -234,64 +253,26 @@ method.insert = tag_removeAll.comics,simple,\
     print=\"rtorrent> Removed all: '\",\"$cat=,$argument.0=\",\"' tag\";\
     print=\"----------------------------------------------------------------------------------------\""
 
-# key bindings: comics
-schedule = bind.comics_toggle,0,0,"ui.bind_key=download_list,c,tag_add.comics=comics"
-schedule = bind.comics_clear,0,0,"ui.bind_key=download_list,C,tag_remove.comics=comics"
-
-
-
-# view: ebooks
-view.add=ebooks
-view.persistent=ebooks
-view.collapsed.toggle=ebooks
-method.insert = view.tag_ebooks,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0=;execute=notify-send,\"rTorrent toggled tag: ebooks\",$d.name="
-method.insert = view.ebooks_clear,simple,"view.filter=ebooks,false= ;d.multicall2=main,d.views.remove=ebooks;execute=notify-send,\"rTorrent cleared ebooks tag\""
-schedule = bind.ebooks_toggle,0,0,"ui.bind_key=download_list,e,view.tag_ebooks=ebooks"
-schedule = bind.ebooks_clear,0,0,"ui.bind_key=download_list,E,view.ebooks_clear="
-
-# view: tv
-view.add=tv
-view.persistent=tv
-view.collapsed.toggle=tv
-method.insert = view.tag_tv,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0=;execute=notify-send,\"rTorrent toggled tag: tv\",$d.name="
-method.insert = view.tv_clear,simple,"view.filter=tv,false= ;d.multicall2=main,d.views.remove=tv;execute=notify-send,\"rTorrent cleared tv tag\""
-schedule = bind.tv_toggle,0,0,"ui.bind_key=download_list,t,view.tag_tv=tv"
-schedule = bind.tv_clear,0,0,"ui.bind_key=download_list,T,view.tv_clear="
-
-# view: movies
-view.add=movies
-view.persistent=movies
-view.collapsed.toggle=movies
-method.insert = view.tag_movies,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0=;execute=notify-send,\"rTorrent toggled tag: movies\",$d.name="
-method.insert = view.movies_clear,simple,"view.filter=movies,false= ;d.multicall2=main,d.views.remove=movies;execute=notify-send,\"rTorrent cleared movies tag\""
-schedule = bind.movies_toggle,0,0,"ui.bind_key=download_list,m,view.tag_movies=movies"
-schedule = bind.movies_clear,0,0,"ui.bind_key=download_list,M,view.movies_clear="
-
-# view: flagged
-view.add=flagged
-view.persistent=flagged
-view.collapsed.toggle=flagged
-method.insert = view.tag_flagged,simple,"branch=d.views.has=$argument.0=,view.set_not_visible=$argument.0=,view.set_visible=$argument.0=;execute=notify-send,\"rTorrent toggled tag: flagged\",$d.name="
-method.insert = view.flagged_clear,simple,"view.filter=flagged,false= ;d.multicall2=main,d.views.remove=flagged;execute=notify-send,\"rTorrent cleared flagged tag\""
-schedule = bind.flagged_toggle,0,0,"ui.bind_key=download_list,f,view.tag_flagged=flagged"
-schedule = bind.flagged_clear,0,0,"ui.bind_key=download_list,F,view.flagged_clear="
-
 # -----------------------
 #  Key bindings
 # -----------------------
 
 # views
-schedule = bind_view_name_q,0,0,"ui.bind_key=download_list,q,ui.current_view.set=name"
-schedule = bind_view_name,0,0,"ui.bind_key=download_list,0,ui.current_view.set=name"
-schedule = bind_view_started,0,0,"ui.bind_key=download_list,1,ui.current_view.set=started"
-schedule = bind_view_complete,0,0,"ui.bind_key=download_list,2,ui.current_view.set=complete"
-schedule = bind_view_seeding,0,0,"ui.bind_key=download_list,3,ui.current_view.set=seeding"
+schedule = bind_view.name_q,0,0,"ui.bind_key=download_list,q,ui.current_view.set=name"
+schedule = bind_view.name,0,0,"ui.bind_key=download_list,0,ui.current_view.set=name"
+schedule = bind_view.started,0,0,"ui.bind_key=download_list,1,ui.current_view.set=started"
+schedule = bind_view.complete,0,0,"ui.bind_key=download_list,2,ui.current_view.set=complete"
+schedule = bind_view.seeding,0,0,"ui.bind_key=download_list,3,ui.current_view.set=seeding"
 
-schedule = bind_view_tv,0,0,"ui.bind_key=download_list,4,ui.current_view.set=tv"
-schedule = bind_view_movies,0,0,"ui.bind_key=download_list,5,ui.current_view.set=movies"
-schedule = bind_view_comics,0,0,"ui.bind_key=download_list,6,ui.current_view.set=comics"
-schedule = bind_view_ebooks,0,0,"ui.bind_key=download_list,7,ui.current_view.set=ebooks"
-schedule = bind_view_flagged,0,0,"ui.bind_key=download_list,8,ui.current_view.set=flagged"
+schedule = bind_view.tv,0,0,"ui.bind_key=download_list,4,ui.current_view.set=tv"
+schedule = bind_view.movies,0,0,"ui.bind_key=download_list,5,ui.current_view.set=movies"
+schedule = bind_view.comics,0,0,"ui.bind_key=download_list,6,ui.current_view.set=comics"
+schedule = bind_view.ebooks,0,0,"ui.bind_key=download_list,7,ui.current_view.set=ebooks"
+schedule = bind_view.flagged,0,0,"ui.bind_key=download_list,8,ui.current_view.set=flagged"
+
+# tagging
+schedule = bind_tag_add.comics,0,0,"ui.bind_key=download_list,c,tag.add=comics"
+schedule = bind_tag_remove.comics,0,0,"ui.bind_key=download_list,C,tag.remove=comics"
 
 # moves & controls
 schedule = bind_collapse,0,0,"ui.bind_key=download_list,*,view.collapsed.toggle="
@@ -301,6 +282,8 @@ schedule = bind_stop_all,0,0,"ui.bind_key=download_list,D,\"d.multicall2=,d.stop
 schedule = bind_delete,0,0,"ui.bind_key=download_list,R,d.erase="
 schedule = bind_home,0,0,"ui.bind_key=download_list,g,ui.focus.home="
 schedule = bind_end, 0,0,"ui.bind_key=download_list,G,ui.focus.end="
+schedule = bind_pgdn, 0,0,"ui.bind_key=download_list,J,ui.focus.pgdn="
+schedule = bind_pgup,0,0,"ui.bind_key=download_list,K,ui.focus.pgup="
 
 # -----------------------
 #  Other Settings
@@ -308,6 +291,9 @@ schedule = bind_end, 0,0,"ui.bind_key=download_list,G,ui.focus.end="
 
 # Select name view by default
 schedule = set_name_view, 0,0,"ui.current_view.set=name"
+
+# Jump this number of items when using pgdn, pgup keys
+ui.focus.page_size.set=3
 
 # Colors & Style
 ui.color.alarm.set="red"
