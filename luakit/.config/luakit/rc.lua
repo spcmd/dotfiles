@@ -228,6 +228,33 @@ webview.init_funcs.youtube_redirect = function (view, w)
 end
 --]]
 
+-- Play youtube video links with mpv
+--[[
+webview.init_funcs.youtube_to_mpv = function (view, w)
+    view:add_signal("navigation-request", function (v, uri)
+        --if string.match(uri, "www%.youtube%.com/watch%?v=") then
+        if string.match(uri, "/watch%?v=") then
+            luakit.spawn(string.format("%s %q", "url2mpv.sh", uri))
+            --if not string.match(v.uri, "^https://www%.youtube%.com/") then
+                --w:close_tab()
+            --end
+            return false
+        end
+    end)
+end
+--]]
+
+-- Viewtube (http://isebaro.com/viewtube/)
+--webview.init_funcs.viewtube_hook = function (view, w)
+    --view:add_signal("navigation-request", function (v, uri)
+        --if string.match(string.lower(uri), "^viewtube:") then
+            --luakit.spawn(string.format("%s %q", "viewtube.sh", uri))
+            --return false
+        --end
+    --end)
+--end
+
+
 -- Download mp3 rather than playing with the internal (embedded) player
 webview.init_funcs.download_mp3 = function (view, w)
     view:add_signal("navigation-request", function (v, uri)
@@ -250,7 +277,16 @@ webview.init_funcs.itcafe_to_logout = function (view, w)
     end)
 end
 
-
+-- Open magnet links with rtorrent (pyrocore/mktor)
+webview.init_funcs.magnet_hook = function (view, w)
+    view:add_signal("navigation-request", function (v, uri)
+        if string.match(string.lower(uri), "^magnet:") then
+            luakit.spawn(string.format("%s %q", "mktor", uri))
+            w:notify("magnet link sent to rTorrent by mktor")
+            return false
+        end
+    end)
+end
 
 -----------------------------
 -- End user script loading --

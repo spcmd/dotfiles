@@ -18,7 +18,8 @@ alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by defau
 alias neofetch="neofetch --ascii --ascii_colors 12 12 --underline off --disable title font --color_blocks off"
 
 # w3m
-alias w3m='w3m -v'
+#alias w3m='w3m -v'
+alias w3m='w3m ~/.w3m/bookmark.html'
 w3mimg() { w3m -o imgdisplay=/usr/lib/w3m/w3mimgdisplay "$1" ; }
 
 # Frambebuffer screenshot

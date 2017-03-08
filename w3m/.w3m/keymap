@@ -4,8 +4,8 @@
 keymap q QUIT
 keymap :q QUIT
 keymap :x ABORT
-keymap :o OPTIONS
-keymap :k TAB_GOTO ~/.w3m/keymap
+keymap P OPTIONS
+keymap ? TAB_GOTO ~/.w3m/keymap
 keymap :: COMMAND
 keymap r RELOAD
 
@@ -64,7 +64,7 @@ keymap C-h HISTORY
 
 # Search
 keymap / SEARCH
-keymap ? SEARCH_BACK
+#keymap ? SEARCH_BACK
 keymap n SEARCH_NEXT
 keymap N SEARCH_PREV
 
