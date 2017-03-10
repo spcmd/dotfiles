@@ -70,11 +70,11 @@ preserve_timestamp 1
 keymap_file keymap
 document_root
 personal_document_root
-cgi_bin
+cgi_bin ~/.w3m/cgi-bin
 index_file
 mime_types ~/.mime.types, /usr/etc/mime.types
 mailcap ~/.w3m/mailcap
-urimethodmap ~/.w3m/urimethodmap, /usr/etc/w3m/urimethodmap
+urimethodmap ~/.w3m/urimethodmap
 editor vim
 mailto_options 1
 mailer

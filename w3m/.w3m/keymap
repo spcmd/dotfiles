@@ -10,7 +10,7 @@ keymap :: COMMAND
 keymap r RELOAD
 
 # Go To
-keymap O GOTO
+keymap o GOTO
 keymap t TAB_GOTO
 keymap gh GOTO ~/.w3m/homepage.html
 keymap gH TAB_GOTO ~/.w3m/homepage.html
@@ -72,7 +72,7 @@ keymap N SEARCH_PREV
 #keymap O EXTERN
 
 # Open link in external application
-keymap o EXTERN_LINK
+keymap O EXTERN_LINK
 
 # Show the current URL
 keymap U PEEK

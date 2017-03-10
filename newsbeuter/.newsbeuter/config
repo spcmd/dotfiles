@@ -68,7 +68,7 @@ macro u edit-flags ""
 #macro m set browser "urxvtc -e $MEDIAPLAYER %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
 #macro o set browser "w3m %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
 #macro m set browser "urxvtc -e $MEDIAPLAYER %u"; open-in-browser ; set browser "$BROWSER"
-#macro o set browser "w3m %u"; open-in-browser ; set browser "$BROWSER"
+macro o set browser "w3m %u"; open-in-browser ; set browser "$BROWSER"
 #macro o set browser "w3m %u"; open-in-browser ; set browser "$BROWSER"
 
 
@@ -77,13 +77,13 @@ macro u edit-flags ""
 
 color background color7 default
 color listnormal color7 default
-color listnormal_unread color7 default
+color listnormal_unread color1 default
 #color listfocus  color7 color4
 #color listfocus_unread  color7 color4
 color listfocus  color7 color4
 color listfocus_unread  color7 color4
-color info       color0 color15
-color article    color7 default
+color info       color0 color15 bold
+#color article    color7 default
 
 highlight feedlist "✗ Unread" color0 color11
 highlight feedlist "⚑ Flagged" color0 color11
@@ -103,7 +103,7 @@ highlight feedlist "Podcast" color7 color10
 highlight articlelist "Podcast" color7 color10
 highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:|^Flags:)" color11 color0
 highlight article "https?://[^ ]+" color11 default
-highlight article "\\[[0-9]{1,2}\]" color15 default
+highlight article "\\[[0-9]{1,2}\]" color11 default
 
 # light color scheme
 #color background black white

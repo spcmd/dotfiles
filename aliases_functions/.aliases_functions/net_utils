@@ -8,6 +8,12 @@
 # http://spcmd.github.io
 # https://github.com/spcmd
 
+# Helyesiras MTA
+helyesiras() {
+    text=$(echo "$@" | sed 's/ /+/g')
+    w3m -o use_cookie=0 -dump http://www.helyesiras.mta.hu/helyesiras/default/suggest?q=$text | awk '/Mehet/{flag=1;next}/megosztás/{flag=0}flag'
+}
+
 # Currency converter (Google)
 cconv() {
   wget -qO- "http://www.google.com/finance/converter?a=$1&from=$2&to=$3" |  sed '/res/!d;s/<[^>]*>//g';

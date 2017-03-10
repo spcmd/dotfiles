@@ -793,6 +793,18 @@ add_cmds({
                 end
         end),
 
+    cmd({"helyesiras-MTA-w3m-dump"}, "helyesiras MTA with w3m dump",
+        function (w)
+                local selected = luakit.selection.primary
+                if not selected then
+                    w:notify("Error: you didn't select any text.")
+                else
+                    --local _, helyesirasMTA = luakit.spawn_sync("sh -c \"wget -qO- 'http://www.google.com/finance/converter?a="..selected.."&from=eur&to=huf' | sed '/res/!d;s/<[^>]*>//g'\"")
+                    local _, helyesirasMTA = luakit.spawn_sync("sh -c \"w3m -o use_cookie=0 -dump 'http://www.helyesiras.mta.hu/helyesiras/default/suggest?q="..selected.."' | awk '/Mehet/{flag=1;next}/megosztás/{flag=0}flag'\"")
+                    w:notify(helyesirasMTA)
+                end
+        end),
+
     -- Duckduckgo -> Startpage
     cmd({"startpage-this-query"}, "Search this query with startpage",
         function (w)

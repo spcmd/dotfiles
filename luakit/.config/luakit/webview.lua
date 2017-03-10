@@ -235,8 +235,10 @@ webview.init_funcs = {
                 true,
                 { "🕮 Translate (gdict): "..highlighted, function () w:enter_cmd(":translate-selected-quick") w:activate() end },
                 --{ "🕮 Translate (full): "..highlighted, function () w:enter_cmd(":translate-selected-full") w:activate() end },
+                --{ "🕮 Helyesiras (MTA): "..highlighted, function () w:helyesiras_MTA() end },
+                { "🕮 Helyesiras-MTA (w3m dump): "..highlighted, function () w:enter_cmd(":helyesiras-MTA-w3m-dump") w:activate() end },
                 true,
-                { "🌊 Ma_gnet > _rTorrent", function () w:magnet_load() end },
+                --{ "🌊 Ma_gnet > _rTorrent", function () w:magnet_load() end },
                 { "▶ Play with _mpv", function () w:mediaplayer() end },
                 true,
                 { "+ _Tabopen: "..highlighted, function () w:open_text_uri() end },
@@ -361,6 +363,13 @@ webview.methods = {
         luakit.spawn(string.format("chromium --incognito --proxy-server=localhost:8118 %s", uri))
     end,
 
+    -- ADDED: helyesiras MTA
+    helyesiras_MTA = function (view, w)
+        -- replace spaces with '+' signs for the search string
+        local stext = string.gsub(luakit.selection.primary, " ", "+")
+        MTA = "http://www.helyesiras.mta.hu/helyesiras/default/suggest?q="
+        w:new_tab(MTA..stext)
+    end,
 
 }
 

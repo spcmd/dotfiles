@@ -8,7 +8,8 @@ COLOR_RED = 1
 COLOR_GREEN = 2
 COLOR_BLUE = 4
 COLOR_BLUE_BRIGHT = 12
-COLOR_MAGENTA = 13
+COLOR_MAGENTA_BRIGHT = 13
+COLOR_MAGENTA = 5
 COLOR_CYAN = 6
 COLOR_WHITE = 7
 COLOR_BLACK = 8
@@ -40,9 +41,9 @@ class Default(ColorScheme):
                 fg = COLOR_BLUE
             if context.media:
                 if context.image:
-                    fg = COLOR_MAGENTA
+                    fg = COLOR_MAGENTA_BRIGHT
                 else:
-                    fg = COLOR_MAGENTA
+                    fg = COLOR_MAGENTA_BRIGHT
             if context.container:
                 fg = COLOR_RED
                 #attr |= bold
@@ -63,7 +64,7 @@ class Default(ColorScheme):
                 if context.device:
                     attr |= bold
             if context.link:
-                fg = context.good and COLOR_CYAN
+                fg = COLOR_CYAN if context.good else COLOR_MAGENTA
             if context.tag_marker and not context.selected:
                 attr |= bold
                 if fg in (red, magenta):
@@ -120,10 +121,10 @@ class Default(ColorScheme):
             if context.loaded:
                 bg = self.progress_bar_color
             if context.vcsinfo:
-                fg = COLOR_MAGENTA
+                fg = COLOR_MAGENTA_BRIGHT
                 #attr &= ~bold
             if context.vcscommit:
-                fg = COLOR_MAGENTA
+                fg = COLOR_MAGENTA_BRIGHT
                 #attr &= ~bold
 
 
