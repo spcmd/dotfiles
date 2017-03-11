@@ -95,7 +95,8 @@ keymap :w SAVE_SCREEN
 keymap D DOWNLOAD_LIST
 
 # Edit screen content in EDITOR
-keymap :e EDIT_SCREEN
+keymap E EDIT
+keymap C-e EDIT_SCREEN
 
 # Exec shell command
 keymap ! SHELL

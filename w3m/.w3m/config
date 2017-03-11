@@ -124,7 +124,7 @@ ssl_ca_path
 ssl_ca_file
 use_cookie 1
 show_cookie 1
-accept_cookie 1
+accept_cookie 0
 accept_bad_cookie 0
 cookie_reject_domains
 cookie_accept_domains logout.hu
