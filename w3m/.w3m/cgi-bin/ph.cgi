@@ -17,7 +17,8 @@ if ($_) {
 print <<EOF;
 w3m-control: GOTO $url
 w3m-control: DELETE_PREVBUF
-w3m-control: GOTO_LINE 142
+w3m-control: SEARCH Fórumtémák
+w3m-control: SEARCH_NEXT
 w3m-control: MOVE_RIGHT
 ${input}
 
