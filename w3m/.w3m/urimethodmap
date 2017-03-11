@@ -1,0 +1,5 @@
+g: file:/cgi-bin/google.cgi?%s
+d: file:/cgi-bin/ddg.cgi?%s
+ddg: file:/cgi-bin/ddg.cgi?%s
+ph: file:/cgi-bin/ph.cgi?%s
+h: file:/cgi-bin/helyesiras_MTA.cgi?%s
