@@ -1,5 +1,11 @@
-g: file:/cgi-bin/google.cgi?%s
-d: file:/cgi-bin/ddg.cgi?%s
-ddg: file:/cgi-bin/ddg.cgi?%s
-ph: file:/cgi-bin/ph.cgi?%s
-h: file:/cgi-bin/helyesiras_MTA.cgi?%s
+aur: file:/cgi-bin/aur.sh?%s
+apkg: file:/cgi-bin/apkg.sh?%s
+aw: file:/cgi-bin/aw.sh?%s
+d: file:/cgi-bin/ddg.sh?%s
+ddg: file:/cgi-bin/ddg.sh?%s
+g: file:/cgi-bin/google.sh?%s
+google: file:/cgi-bin/google.sh?%s
+h: file:/cgi-bin/helyesiras_MTA.sh?%s
+ph: file:/cgi-bin/ph.sh?%s
+wiki: file:/cgi-bin/wikipedia.sh?%s
+yt: file:/cgi-bin/yt.sh?%s
