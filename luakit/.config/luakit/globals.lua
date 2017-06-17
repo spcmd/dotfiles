@@ -52,8 +52,8 @@ soup.accept_policy = cookie_policy.always
 -- See: http://www.lua.org/manual/5.1/manual.html#pdf-string.format
 search_engines = {
     apkg    = "https://www.archlinux.org/packages/?q=%s",
-    aur     = "https://aur.archlinux.org/packages/?O=0&K=%s",
-    aw      = "https://wiki.archlinux.org/index.php?search=%s&go=Go",
+    aur     = "https://aur.archlinux.org/packages/?K=%s",
+    aw      = "https://wiki.archlinux.org/index.php?search=%s",
     bh      = "http://bithumen.be/browse.php?search=%s",
     ddg     = "https://duckduckgo.com/?q=%s",
     g       = "https://google.com/search?q=%s",

@@ -384,6 +384,11 @@ vnoremap ~ <Nop>
 vnoremap u <Nop>
 vnoremap U <Nop>
 
+" Disable Alt+x remove
+" For this special map, use  Ctrl-V and Ctrl-[ to get the  character
+" http://vim.wikia.com/wiki/Get_Alt_key_to_work_in_terminal
+map x <Nop>
+
 " Open Shell
 nnoremap <S-s> :shell<CR>
 

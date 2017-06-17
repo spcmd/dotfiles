@@ -54,8 +54,7 @@ bind-key ^N reload-all
 bind-key F edit-flags
 bind-key o sort feedlist
 bind-key O rev-sort feedlist
-bind-key o open-in-browser articlelist
-bind-key o open-in-browser article
+bind-key o open-in-browser-and-mark-read
 bind-key n next-unread
 bind-key N prev-unread
 bind-key g pageup
@@ -84,6 +83,7 @@ color listfocus  color7 color4
 color listfocus_unread  color7 color4
 color info       color0 color15 bold
 #color article    color7 default
+search-highlight-colors color7 color1
 
 highlight feedlist "✗ Unread" color0 color11
 highlight feedlist "⚑ Flagged" color0 color11
