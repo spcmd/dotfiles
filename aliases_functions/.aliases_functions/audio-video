@@ -11,6 +11,16 @@
 alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
 alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
 
+# podcast duration info
+podcast-duration() {
+    duration=$(for file in *.mp3; do echo -n "$file ...... " && ffprobe -i $file  -show_entries format=duration -v quiet -of csv="p=0" -sexagesimal | awk -F':' '{print $1":"$2}'; done)
+    total_duration_sec=$(find . -maxdepth 1 -iname '*.mp3' -exec ffprobe -v quiet -of csv=p=0 -show_entries format=duration {} \; | paste -sd+ -| bc)
+    echo "$duration"
+    printf 'TOTAL: %dh:%dm:%ds\n' $(($total_duration_sec/3600)) $(($total_duration_sec%3600/60)) $(($total_duration_sec%60))
+    #echo | awk '{print "TOTAL: " strftime("%H:%M:%S", '"$total_duration_sec"')}'
+}
+
+
 # Speaker toggle
 speaker() {
     case $1 in
