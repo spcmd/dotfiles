@@ -41,8 +41,8 @@ set record = ""                                                             # Re
 set implicit_autoview = yes                                                 # Use autoview, if a "copiousoutput" is in mailcap
 auto_view text/html                                                         # Auto view html format
 #alternative_order text/enriched text/plain text/html text
-#set display_filter="sed '/^.*\\[-- .*--]$/d'"                           # Remove Attachments and Auto view blocks from message body
-set display_filter="sed -e '/^.*\\[-- .*--]$/d;/cid/d'"                           # Remove Attachments and Auto view blocks from message body
+#set display_filter="sed '/^.*\\[-- .*--]$/d'"                          # Remove Attachments and Auto view blocks from message body
+set display_filter="sed -e '/^.*\\[-- .*--]$/d;/cid/d'"                 # Remove Attachments and Auto view blocks from message body
 #set display_filter="sed '/^.*\\[-- Autoview using .* --]$/d'"
 #set edit_headers
 
@@ -84,8 +84,8 @@ bind index G last-entry
 macro index h "<change-folder>+INBOX<enter>" "Go to INBOX"
 bind index l display-message
 bind pager h exit
-macro index J "<next-entry><next-entry><next-entry>" "Move quickly down (3j)"
-macro index K "<previous-entry><previous-entry><previous-entry>" "Move quickly up (3k)"
+macro index J "<next-entry><next-entry><next-entry><next-entry><next-entry><next-entry>" "Move quickly down"
+macro index K "<previous-entry><previous-entry><previous-entry><previous-entry><previous-entry><previous-entry>" "Move quickly up"
 bind index zm collapse-thread
 bind index zM collapse-all
 bind index <space> tag-entry
@@ -145,7 +145,7 @@ bind editor <space> noop
 # Sidebar
 bind index,pager <up> sidebar-prev
 bind index,pager <down> sidebar-next
-bind index,pager <right> sidebar-open
+bind index,pager <return> sidebar-open
 macro index \CB "<enter-command>toggle sidebar_visible<enter><refresh>"
 macro pager \CB "<enter-command>toggle sidebar_visible<enter><redraw-screen>"
 
@@ -154,7 +154,8 @@ macro pager \CB "<enter-command>toggle sidebar_visible<enter><redraw-screen>"
 # -----------------------------------------------------
 
 set date_format="%Y %b %d %R"
-set index_format = "%4C [%Z]  %D  %-18.18F [%-20.20y] %?X?[%X]&   ?%?M?+& ?%1M %s"
+#set index_format = "%4C [%Z]  %D  %-18.18F [%-20.20y] %?X?[%X]&   ?%?M?+& ?%1M %s"  # FOR X-GM-LABELS
+set index_format = "%4C [%Z]  %D | %-25.25F | %?X?[%X]&   ?%?M?+& ?%1M| %s"
 set to_chars = "  TCSL"
 set status_chars = "-MRA"
 set status_on_top
@@ -164,11 +165,12 @@ set pager_format = "Reading e-mail %C of %m |%>────%lL [%P]"
 # Sidebar (http://www.lunar-linux.org/mutt-sidebar)
 set sidebar_width=25
 set sidebar_visible=yes
-set sidebar_delim='|'
-set sidebar_sort=no
-set sidebar_shortpath=yes
+set sidebar_divider_char="|"
+#set sidebar_delim='|'
+#set sidebar_sort=no
+set sidebar_short_path=yes
 set sidebar_format = '%B %! %> %S '
-#set sidebar_folderindent=yes
+set sidebar_folder_indent=no
 
 # }}}
 # {{{   Address book (Aliases)
@@ -197,6 +199,7 @@ source $alias_file
 # color 7, 15 = white
 
 color sidebar_new   default         default                 # Folders that contain new messages
+color sidebar_highlight   color4         color7             # Cursor to select a mailbox
 color hdrdefault    color0          color15                 # Header (in the pager)
 color attachment    color7          color2                  # Attachments (in the pager)
 
@@ -207,7 +210,6 @@ color quoted3       color5          default                 # Quoted text in mes
 
 color error         color7          color9                  # Error messages
 color message       color7          default                 # Message  informational messages
-#color indicator     color7         color4                  # Selection highlight (on the current message)
 color indicator     color7          color4                  # Selection highlight (on the current message)
 color status        color0          color15                 # "Window" color (statusbar)
 color tree          color11         default                 # Tree indicator (of threads)
