@@ -34,7 +34,7 @@ set timeout = 300                                                           # Ti
 set wait_key = no                                                           # Do not wait for key press (when shell escape, etc.)
 set mark_old = no                                                           # Do not mark old unread mail from the last session
 set move = no                                                               # Stop asking to "move read messages to mbox"!
-#set imap_check_subscribed                                                  # Check all folder (Unset when using multiple accounts!)
+set imap_check_subscribed                                                   # Check all folder (Unset when using multiple accounts!)
 set auto_tag = yes                                                          # Auto apply tag prefix (;) when running a command on tagged messages
 set record = ""                                                             # Record (log) of the sent mails (default: ~/sent)
 
@@ -95,8 +95,12 @@ bind index \CN imap-fetch-mail
 bind index x sync-mailbox
 #macro index,pager \CL "<refresh><redraw-screen>" "Refresh and Redraw screen"
 bind index,pager N search-opposite
+macro index f "<flag-message>" "Mark as flagged/important"
 macro index \CF "<search>~B " "Search in the messages' body" #  / is searching in the To: and Subject: fields only!
-macro index f "<search>~B " "Search in the messages' body" #  / is searching in the To: and Subject: fields only!
+macro index F "<limit> " "Filter messages"
+#macro index Fa "<limit>~A<enter>" "Show all messages"
+#macro index Ff "<limit>~f " "Filter messages :from"
+#macro index Fs "<limit>~s " "Filter messages :subject"
 #macro index,pager q "<sync-mailbox><shell-escape>gmailcheck.sh<enter><quit>" "update local mail counter and quit"
 
 # Pager
@@ -125,7 +129,7 @@ macro attach s "<save-entry><bol>~/Downloads/<eol>" "Save attachments to Downloa
 
 # Labels / Folders
 macro index c "<change-folder>?" "Select Folder/Label"
-macro index L "<copy-message>?3<enter>" "Add label (copy to folder)"
+macro index L "<change-folder>?" "Select Folder/Label"
 macro index yy "<copy-message>?3<enter>" "Add label (copy to folder)"
 
 # File Browser
@@ -135,7 +139,7 @@ bind browser <space> tag-entry
 macro browser h "<exit><shell-escape>xdotool Ctrl+g<enter><refresh>" "Quit file browser" # http://unix.stackexchange.com/a/126715
 bind browser dd delete-mailbox
 bind browser cw rename-mailbox
-
+bind browser a create-mailbox
 
 # Tab Completion
 bind editor <Tab> complete
