@@ -84,7 +84,7 @@ gmailcheck &
 
 # start these programs only once
 if [ ! -e /tmp/bspwm_autorun ]; then
-    #luakitwrapper &
+    luakitwrapper &
     urxvtc &
     urxvtc -name ranger -e ranger &
     #urxvtc -name rtorrent -e rtorrent &

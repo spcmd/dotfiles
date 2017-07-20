@@ -222,6 +222,9 @@ autocmd BufRead *.muttrc set syntax=muttrc filetype=muttrc
 " {{{   Custom commands & functions
 "--------------------------------------------
 
+"Convert UPPERCASE to Capital First Letter
+command! UpperToCapital %s/\<\(\w\)\(\S*\)/\u\1\L\2/g | set hlsearch!
+
 "Toggle relative line numbering
 command! RL set rnu!
 
