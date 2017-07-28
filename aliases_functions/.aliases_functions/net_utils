@@ -38,11 +38,11 @@ clbin() {
 # bbradio checker
 bbradio() {
     # past days
-    #date=$(date +"%y%m%d" -d "-5 days")
-    #wget -P ~/Downloads http://video.builder.hu/bunny/bb.radio_$date.mp3
+    date=$(date +"%y%m%d" -d "-5 days")
+    wget -P ~/Downloads http://video.builder.hu/bunny/bb.radio_$date.mp3
 
-    #date=$(date +"%y%m%d" -d "-4 days")
-    #wget -P ~/Downloads http://video.builder.hu/bunny/bb.radio_$date.mp3
+    date=$(date +"%y%m%d" -d "-4 days")
+    wget -P ~/Downloads http://video.builder.hu/bunny/bb.radio_$date.mp3
 
     date=$(date +"%y%m%d" -d "-3 days")
     wget -P ~/Downloads http://video.builder.hu/bunny/bb.radio_$date.mp3

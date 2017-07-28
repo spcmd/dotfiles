@@ -5,7 +5,7 @@
 #        |___| .__/ \___|_| |_| |_|\__,_|
 #             |_|
 #
-#                   .neomuttrc
+#                   neomuttrc
 #               Created by: spcmd
 #           https://github.com/spcmd
 
@@ -71,8 +71,8 @@ unignore from: to: cc: date: subject:                                       # Sh
 unhdr_order *                                                               # Ignore default header order
 hdr_order from: to: cc: date: subject:                                      # show headers in this order
 
-#set keywords_legacy = yes                                                   # Should Mutt save the keywords to whatever keyword it came from?
-#set keywords_standard = no                                                 # Should Mutt use the "Keywords:" header?
+set keywords_legacy = yes                                                   # Should Mutt save the keywords to whatever keyword it came from?
+set keywords_standard = yes                                                 # Should Mutt use the "Keywords:" header?
 set mail_check_stats
 
 # }}}
@@ -101,7 +101,8 @@ bind index <space> tag-entry
 bind index p recall-message
 bind index \CR recall-message
 bind index \CN imap-fetch-mail
-bind index x sync-mailbox
+#bind index x sync-mailbox
+bind index,pager x noop
 #macro index,pager \CL "<refresh><redraw-screen>" "Refresh and Redraw screen"
 bind index,pager N search-opposite
 macro index f "<flag-message>" "Mark as flagged/important"

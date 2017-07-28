@@ -5,6 +5,9 @@
 set selection-clipboard clipboard
 set statusbar-basename
 set page-padding 15
+set adjust-open width
+set adjust_window width
+set show-v-scrollbar true
 
 # Keymap
 unmap <Space>

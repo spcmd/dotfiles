@@ -222,6 +222,14 @@ autocmd BufRead *.muttrc set syntax=muttrc filetype=muttrc
 " {{{   Custom commands & functions
 "--------------------------------------------
 
+"Increment number (based on https://stackoverflow.com/a/4951590)
+let g:incr = 0
+
+fu! Incr()
+  let g:incr = g:incr + 1
+  return g:incr
+endfu
+
 "Convert UPPERCASE to Capital First Letter
 command! UpperToCapital %s/\<\(\w\)\(\S*\)/\u\1\L\2/g | set hlsearch!
 

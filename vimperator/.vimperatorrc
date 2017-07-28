@@ -7,9 +7,7 @@
 "
 "                 .vimperatorrc
 "               Created by: spcmd
-"           http://spcmd.github.io
 "           https://github.com/spcmd
-"           https://gist.github.com/spcmd
 
 " {{{   Settings
 "--------------------------------------------
@@ -26,6 +24,9 @@ set toolbars=nonavigation
 
 "Load all Firefox page and help page in new tab
 set newtab=all
+
+"Hide scrollbars
+set noscrollbars
 
 " }}}
 " {{{   Key mappings
@@ -120,15 +121,13 @@ nmap gh :tabnew<CR>
 nmap gl :open logout.hu/forum/index.html<CR>
 nmap gd :open github.com/spcmd/dotfiles<CR>
 nmap gs :open github.com/spcmd/Scripts<CR>
-nmap gy :open youtube.com/feed/subscriptions<CR>
-nmap gp :open http://www.port.hu/pls/tv/tv.prog?i_layout_id=1<CR>
 
+nmap gH :tabnew<CR>
 nmap gL :tabopen logout.hu/forum/index.html<CR>
 nmap gD :tabopen github.com/spcmd/dotfiles<CR>
 nmap gS :tabopen github.com/spcmd/Scripts<CR>
-nmap gY :tabopen youtube.com/feed/subscriptions<CR>
-nmap gP :tabopen http://www.port.hu/pls/tv/tv.prog?i_layout_id=1<CR>
 
+nmap B :bookmarks<CR>
 " }}}
 " {{{   Commands
 "--------------------------------------------

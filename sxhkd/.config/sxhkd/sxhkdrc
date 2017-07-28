@@ -8,7 +8,7 @@ super + Return
 
 # browser
 super + alt + f
-    luakitwrapper
+    firefox
 
 # dmenu
 super + a
