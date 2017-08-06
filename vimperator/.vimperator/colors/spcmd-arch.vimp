@@ -46,16 +46,3 @@ hi HintImage opacity: .5;
 
 "Bookmarks
 hi URL text-decoration: none;
-
-"Etc
-"hi Tag color: #005F87;
-"hi Null color: #005F87;
-"hi Number color: #005F87;
-"hi Indicator color: #AE0600;
-"hi MoreMsg background: #000; color: ;
-"
-"style -name statusbar chrome://* <<EOM
-    "#liberator-statusline { font-family: terminus ! important; }
- "EOM
-
-

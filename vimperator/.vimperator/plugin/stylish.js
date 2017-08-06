@@ -158,15 +158,16 @@ function StylishVimperator() {
       return cmd(args);
     },
 
-    _completer: function(context){
-      var commands = [];
-      for (var name in sv){
-        if (name.indexOf('_') !== 0 && sv.hasOwnProperty(name)){
-          commands.push(name);
-        }
-      }
-      context.completions = [[c, ''] for each (c in commands)];
-    }
+    /* Commented out: vimperator source error temporary FIX */
+    /*_completer: function(context){*/
+      //var commands = [];
+      //for (var name in sv){
+        //if (name.indexOf('_') !== 0 && sv.hasOwnProperty(name)){
+          //commands.push(name);
+        //}
+      //}
+      //context.completions = [[c, ''] for each (c in commands)];
+    /*}*/
   };
 }
 
