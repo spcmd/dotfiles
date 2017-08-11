@@ -357,13 +357,14 @@ sub status_area {
 	my $row = $self->{row} < 0 ?
 			$self->{row} - $self->top_row : abs($self->top_row) + $self->{row};
 	my $text = sprintf("%d,%d ", $row + 1, $self->{n} + 1);
+    my $keyhints = sprintf("%s", "Keys: o/Enter=browser; O=alternative browser; m=mediaplayer; i=image viewer; y=yank");
 
 	if ($self->top_row == 0) {
-		$text .= "All";
+		$text = $keyhints ." | " . $text ."All";
 	} elsif ($self->view_start() == $self->top_row) {
-		$text .= "Top";
+		$text = $keyhints ." | " . $text ."Top";
 	} elsif ($self->view_start() == 0) {
-		$text .= "Bot";
+		$text = $keyhints ." | " . $text ."Bot";
 	} else {
 		$text .= sprintf("%2d%",
 				($self->top_row - $self->view_start) * 100 / $self->top_row);
