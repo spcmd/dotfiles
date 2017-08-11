@@ -58,8 +58,11 @@ bspc rule -a Gimp desktop=^6
 bspc rule -a Inkscape desktop=^6
 bspc rule -a Gtkpod desktop=^6
 bspc rule -a *:Szamlazo.exe desktop=^6
-#bspc rule -a *:wineconsole.exe desktop=^1
 bspc rule -a *:scummvm.exe desktop=^6
+bspc rule -a *:sdlmame desktop=^6 state=floating
+bspc rule -a *:zsnes desktop=^6 state=floating
+bspc rule -a *:hiro desktop=^6 state=floating
+bspc rule -a *:mupen64plus desktop=^6 state=floating
 bspc rule -a *:newsbeuter desktop=^8
 bspc rule -a *:mutt desktop=^7
 bspc rule -a *:ranger desktop=^3

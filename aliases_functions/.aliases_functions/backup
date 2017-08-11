@@ -21,6 +21,13 @@ rsync-320GB_Rack() {
         rsync -avr --delete $HOME/Calibre\ Library/ $RACK_BACKUP_DIR/Calibre\ Library
         rsync -avr --delete $HOME/Comics/ $RACK_BACKUP_DIR/Comics
         rsync -avr --delete $HOME/Games/ $RACK_BACKUP_DIR/Games
+        # mame emulator save states
+        rsync -avr --delete $HOME/.mame/sta $RACK_BACKUP_DIR/.mame/sta
+        # zsnes emulator save states
+        rsync -avr --delete $HOME/.zsnes/*.zst $RACK_BACKUP_DIR/.zsnes
+        # mupen64plus emulator save states
+        rsync -avr --delete $HOME/.mupen64plus $RACK_BACKUP_DIR/.mupen64plus
+
     else
         echo "==> Error: \033[1;34m$RACK_BACKUP_DIR \033[0mnot found. Is it mounted? Or has the directory changed?"
     fi
