@@ -1,0 +1,24 @@
+let hintcharacters = "hjklasdfgrtzu"
+let barposition = "bottom"
+let completionengines = ['google', 'duckduckgo', 'youtube', 'wikipedia']
+
+let searchengine aw = "https://wiki.archlinux.org/index.php?search=%s"
+let searchengine yt = "https://www.youtube.com/results?search_query=%s"
+
+map <C-r> :source /home/spcmd/.cvimrc<CR>
+map d :quit<CR>
+map u :undo<CR>
+map gH :tabnew file:///home/spcmd/.config/browser-newtab/newtab.html<CR>
+map gh :tabnew file:///home/spcmd/.config/browser-newtab/newtab.html<CR>
+map J :call scrollPageDown<CR>
+map K :call scrollPageUp<CR>
+
+map ú :call nextTab<CR>
+map ő :call previousTab<CR>
+map é :call moveTabLeft<CR>
+map á :call moveTabRight<CR>
+
+map A :call createBookmark<CR>
+map B :tabnew chrome://bookmarks<CR>
+map E :tabnew chrome://extensions<CR>
+map D :tabnew chrome://downloads<CR>
