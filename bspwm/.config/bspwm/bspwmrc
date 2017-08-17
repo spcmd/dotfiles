@@ -68,6 +68,7 @@ bspc rule -a *:mutt desktop=^7
 bspc rule -a *:ranger desktop=^3
 bspc rule -a *:rtorrent desktop=^5
 bspc rule -a *:cal state=floating # +external_rules
+bspc rule -a *:pinentry state=floating
 
 # ------------------------------------------------------------
 # Autostart

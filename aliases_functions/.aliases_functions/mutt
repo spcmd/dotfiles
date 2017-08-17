@@ -10,6 +10,7 @@
 
 alias mutt1='mutt -F ~/.mutt/account.1.muttrc'
 alias mutt2='mutt -F ~/.mutt/account.2.muttrc'
+alias mutt3='mutt -F ~/.mutt/account.3.muttrc'
 
 # Send mail using mutt cli
 mailthis() {

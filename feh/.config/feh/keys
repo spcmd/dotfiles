@@ -43,7 +43,7 @@ flip f
 reload_image
 
 #rotate clockwise
-orient_1 r
+orient_3 r
 
 #scroll
 scroll_up K

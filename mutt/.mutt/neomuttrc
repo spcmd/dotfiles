@@ -101,8 +101,7 @@ bind index <space> tag-entry
 bind index p recall-message
 bind index \CR recall-message
 bind index \CN imap-fetch-mail
-#bind index x sync-mailbox
-bind index,pager x noop
+bind index x sync-mailbox
 #macro index,pager \CL "<refresh><redraw-screen>" "Refresh and Redraw screen"
 bind index,pager N search-opposite
 macro index f "<flag-message>" "Mark as flagged/important"

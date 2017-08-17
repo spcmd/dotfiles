@@ -32,8 +32,8 @@ xset -dpms
 xset s off
 
 # Autocutsel (Sync PRIMARY and CLIPBOARD selection)
-autocutsel -fork &
-autocutsel -selection PRIMARY -fork &
+#autocutsel -fork &
+#autocutsel -selection PRIMARY -fork &
 
 # Start X
 #exec dbus-launch --exit-with-session --sh-syntax awesome
