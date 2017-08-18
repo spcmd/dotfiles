@@ -39,9 +39,10 @@ rsync-Pendrive() {
         rsync -avr --delete $HOME/.password-store/ $PENDRIVE/.password-store
         rsync -avr --delete $HOME/.spotymenu/ $PENDRIVE/.spotymenu
         rsync -avr --delete $HOME/.dsnippet/ $PENDRIVE/.dsnippet
-        rsync -avr --delete $HOME/Documents/tuxwiki $PENDRIVE
-        rsync -avr $HOME/Documents/Notes $PENDRIVE
-        rsync -avr $HOME/Documents/TODO.todo $PENDRIVE
+        rsync -avr --delete $HOME/Documents/tuxwiki $PENDRIVE/Documents
+        rsync -avr $HOME/Documents/Notes $PENDRIVE/Documents
+        rsync -avr $HOME/Documents/TODO.todo $PENDRIVE/Documents
+        rsync -avr $HOME/.mutt/account.*.muttrc $PENDRIVE/.mutt
     else
         echo "==> Error: \033[1;34m$PENDRIVE \033[0mnot found. Is it mounted? Or has the name changed?"
     fi
