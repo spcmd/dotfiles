@@ -58,9 +58,11 @@ bspc rule -a Gimp desktop=^6
 bspc rule -a Inkscape desktop=^6
 bspc rule -a Gtkpod desktop=^6
 bspc rule -a *:Szamlazo.exe desktop=^6
+bspc rule -a *:dosbox desktop=^6 state=floating
 bspc rule -a *:scummvm.exe desktop=^6
 bspc rule -a *:sdlmame desktop=^6 state=floating
 bspc rule -a *:zsnes desktop=^6 state=floating
+bspc rule -a *:fceux desktop=^6 state=floating
 bspc rule -a *:hiro desktop=^6 state=floating
 bspc rule -a *:mupen64plus desktop=^6 state=floating
 bspc rule -a *:newsbeuter desktop=^8
@@ -86,7 +88,6 @@ xsetroot -cursor_name left_ptr
 ~/.config/bspwm/panel &
 compton -b --config ~/.config/compton/compton.conf
 dunst &
-gmailcheck &
 
 # start these programs only once
 if [ ! -e /tmp/bspwm_autorun ]; then
@@ -98,5 +99,7 @@ if [ ! -e /tmp/bspwm_autorun ]; then
     #urxvtc -name newsbeuter -e newsbeuter &
     echo "false" > /tmp/bspwm_autorun
 fi
+
+gmailcheck &
 
 # vim: set syntax=sh filetype=sh :

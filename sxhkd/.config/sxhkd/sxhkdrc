@@ -8,7 +8,7 @@ super + Return
 
 # browser
 super + alt + f
-    firefox
+    ~/bin/chromium-prvivoxy.sh
 
 # dmenu
 super + a

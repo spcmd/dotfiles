@@ -25,6 +25,9 @@ rsync-320GB_Rack() {
         rsync -avr --delete $HOME/.mame/sta $RACK_BACKUP_DIR/.mame/sta
         # zsnes emulator save states
         rsync -avr --delete $HOME/.zsnes/*.zst $RACK_BACKUP_DIR/.zsnes
+        # fceux emulator save states
+        rsync -avr --delete $HOME/.fceux/fcs $RACK_BACKUP_DIR/.fceux
+        rsync -avr --delete $HOME/.fceux/sav $RACK_BACKUP_DIR/.fceux
         # mupen64plus emulator save states
         rsync -avr --delete $HOME/.mupen64plus $RACK_BACKUP_DIR/.mupen64plus
 

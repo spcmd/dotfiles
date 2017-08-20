@@ -1,23 +1,34 @@
 let hintcharacters = "hjklasdfgrtzu"
 let barposition = "bottom"
 let completionengines = ['google', 'duckduckgo', 'youtube', 'wikipedia']
-
+let searchengine apkg = "https://www.archlinux.org/packages/?q=%s"
+let searchengine aur = "https://aur.archlinux.org/packages/?K=%s"
 let searchengine aw = "https://wiki.archlinux.org/index.php?search=%s"
+let searchengine bh = "http://bithumen.be/browse.php?search=%s"
+let searchengine ddg = "https://duckduckgo.com/?q=%s"
+let searchengine g = "https://google.com/search?q=%s"
+let searchengine gh = "https://github.com/search?q=%s"
+let searchengine imdb = "http://www.imdb.com/find?s=all&q=%s"
+let searchengine j = "https://www.jofogas.hu/magyarorszag?q=%s"
+let searchengine moly = "https://moly.hu/kereses?q=%s"
+let searchengine ph = "http://logout.hu/temak/keres.php?type=-&stext=%s"
+let searchengine rarbg = "https://rarbg.to/torrents.php?search=%s"
+let searchengine tpb = "https://thepiratebay.se/search/%s"
+let searchengine wiki = "https://en.wikipedia.org/wiki/Special:Search?search=%s"
+let searchengine wikihu = "https://hu.wikipedia.org/wiki/Special:Search?search=%s"
 let searchengine yt = "https://www.youtube.com/results?search_query=%s"
-
+let searchengine v = "http://www.vatera.hu/listings/index.php?q=%s"
 map <C-r> :source /home/spcmd/.cvimrc<CR>
 map d :quit<CR>
 map u :undo<CR>
 map gH :tabnew file:///home/spcmd/.config/browser-newtab/newtab.html<CR>
-map gh :tabnew file:///home/spcmd/.config/browser-newtab/newtab.html<CR>
+map gh :open file:///home/spcmd/.config/browser-newtab/newtab.html<CR>
 map J :call scrollPageDown<CR>
 map K :call scrollPageUp<CR>
-
 map ú :call nextTab<CR>
 map ő :call previousTab<CR>
 map é :call moveTabLeft<CR>
 map á :call moveTabRight<CR>
-
 map A :call createBookmark<CR>
 map B :tabnew chrome://bookmarks<CR>
 map E :tabnew chrome://extensions<CR>
