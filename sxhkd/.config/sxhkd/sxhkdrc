@@ -8,7 +8,7 @@ super + Return
 
 # browser
 super + alt + f
-    ~/bin/chromium-prvivoxy.sh
+    ~/bin/chromium-privoxy.sh
 
 # dmenu
 super + a

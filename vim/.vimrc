@@ -432,4 +432,7 @@ nnoremap <leader>e :SyntasticToggleMode<CR>
 "Goyo (Distraction Free mode)
 nnoremap <C-g> :Goyo<CR>
 
+"Disable Ex mode
+nnoremap Q <Nop>
+
 " }}}

@@ -49,11 +49,13 @@ bspc monitor -d term web files mus torr misc mail news
 # ------------------------------------------------------------
 
 bspc rule -a luakit desktop=^2
+bspc rule -a *:chromium desktop=^2
 bspc rule -a Firefox desktop=^2
 bspc rule -a Gcolor2 state=tiled split_ratio=0.6
 bspc rule -a *:zathura state=tiled
 bspc rule -a *:VirtualBox desktop=^6
-bspc rule -a *:libreoffice desktop=^6 state=tiled
+bspc rule -a *:libreoffice desktop=^6
+bspc rule -a *:libreoffice-calc desktop=^6
 bspc rule -a Gimp desktop=^6
 bspc rule -a Inkscape desktop=^6
 bspc rule -a Gtkpod desktop=^6
@@ -92,7 +94,8 @@ dunst &
 # start these programs only once
 if [ ! -e /tmp/bspwm_autorun ]; then
     #luakitwrapper &
-    firefox &
+    #firefox &
+    ~/bin/chromium-privoxy.sh &
     urxvtc &
     urxvtc -name ranger -e ranger &
     #urxvtc -name rtorrent -e rtorrent &
