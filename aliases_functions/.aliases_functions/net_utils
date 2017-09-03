@@ -8,6 +8,33 @@
 # http://spcmd.github.io
 # https://github.com/spcmd
 
+# google calendar cli (gcalcli)
+gcal() {
+
+    # name of the calendar
+    calendar=default
+
+    case $1 in
+        w|week)  if [[ ! -z $2 ]]; then
+                    gcalcli --calendar "$calendar" calw "$2"
+                 else
+                    gcalcli --calendar "$calendar" calw
+                fi
+                ;;
+        m|month) gcalcli --calendar "$calendar" calm;;
+        a|add) gcalcli --calendar "$calendar" quick "$2";;
+        d|delete) gcalcli --calendar "$calendar" delete "$2";;
+        l|list) gcalcli --calendar "$calendar" agenda;;
+        e|edit) gcalcli --calendar "$calendar" edit "$2";;
+        f|full) echo ""
+                echo "*** Google Calendar ($calendar) ***"
+                gcalcli --calendar "$calendar" agenda
+                gcalcli --calendar "$calendar" calm
+                ;;
+        "") gcalcli --calendar "$calendar" calm;;
+    esac
+}
+
 # Helyesiras MTA
 helyesiras() {
     text=$(echo "$@" | sed 's/ /+/g')

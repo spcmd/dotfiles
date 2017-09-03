@@ -14,6 +14,17 @@ alias hdapm='sudo hdparm -I /dev/sda | grep level'
 alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
 #alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 
+# rename files with ascending numbering
+renamePhotoAsc() {
+    n=1;
+    name=$1
+    if [[ ! -z $name ]]; then
+        for file in *.JPG; do mv "$file" "${name}_$n.jpg" && n=$((n+1)); done
+    else
+        echo "Error: No name was given."
+    fi
+}
+
 # neofetch
 alias neofetch="neofetch --ascii --ascii_colors 12 12 --underline off --disable title font --color_blocks off"
 
