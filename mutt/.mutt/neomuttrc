@@ -161,6 +161,11 @@ bind index,pager <return> sidebar-open
 macro index \CB "<enter-command>toggle sidebar_visible<enter><refresh>"
 macro pager \CB "<enter-command>toggle sidebar_visible<enter><redraw-screen>"
 
+# URL handler (urlscan, urlview, extract url)
+#macro pager \CU <pipe-entry>'urlview'<enter> 'Follow links with urlview'
+macro index,pager \CU "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
 # }}}
 # {{{   Layout (index, status, pager, sidebar)
 # -----------------------------------------------------
