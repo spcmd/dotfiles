@@ -42,7 +42,7 @@ bspc config pointer_modifier        mod4
 # Desktops
 # ------------------------------------------------------------
 
-bspc monitor -d term web files mus torr misc mail news
+bspc monitor -d term web files mail torr misc mus news
 
 # ------------------------------------------------------------
 # Rules
@@ -68,7 +68,8 @@ bspc rule -a *:fceux desktop=^6 state=floating
 bspc rule -a *:hiro desktop=^6 state=floating
 bspc rule -a *:mupen64plus desktop=^6 state=floating
 bspc rule -a *:newsbeuter desktop=^8
-bspc rule -a *:mutt desktop=^7
+bspc rule -a *:mutt desktop=^4
+bspc rule -a *:neomutt desktop=^4
 bspc rule -a *:ranger desktop=^3
 bspc rule -a *:rtorrent desktop=^5
 bspc rule -a *:cal state=floating # +external_rules
@@ -82,6 +83,12 @@ bspc rule -a *:barrydesktop desktop=^6 state=tiled
 gmailcheck() {
     while true; do
         ~/Scripts/gmailcheck.sh
+        sleep 5m
+    done
+}
+jofogas() {
+    while true; do
+        ~/bin/jofogas.sh
         sleep 5m
     done
 }
@@ -105,5 +112,6 @@ if [ ! -e /tmp/bspwm_autorun ]; then
 fi
 
 gmailcheck &
+jofogas &
 
 # vim: set syntax=sh filetype=sh :
