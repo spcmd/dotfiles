@@ -82,7 +82,7 @@ bspc rule -a *:barrydesktop desktop=^6 state=tiled
 
 gmailcheck() {
     while true; do
-        ~/Scripts/gmailcheck.sh
+        $DIR_SCRIPTS/gmailcheck.sh
         sleep 5m
     done
 }
@@ -91,6 +91,10 @@ jofogas() {
         ~/bin/jofogas.sh
         sleep 5m
     done
+}
+
+tvmusor() {
+    $DIR_SCRIPTS/tvm -g | gist -u 258bad5f3ca1995fc3d595cf359a36c3 -p -f "TV musor"
 }
 
 # always run/restart these programs
@@ -113,5 +117,6 @@ fi
 
 gmailcheck &
 jofogas &
+tvmusor &
 
 # vim: set syntax=sh filetype=sh :

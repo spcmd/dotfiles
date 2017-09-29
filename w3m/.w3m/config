@@ -124,10 +124,10 @@ ssl_ca_path
 ssl_ca_file 
 use_cookie 1
 show_cookie 1
-accept_cookie 1
+accept_cookie 0
 accept_bad_cookie 0
 cookie_reject_domains 
-cookie_accept_domains 
+cookie_accept_domains moly.hu
 cookie_avoid_wrong_number_of_dots 
 display_charset UTF-8
 document_charset UTF-8
