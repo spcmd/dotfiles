@@ -68,8 +68,6 @@ macro u edit-flags ""
 #macro o set browser "w3m %u"; open-in-browser ; set browser "~/bin/firefox-esr/firefox"
 #macro m set browser "urxvtc -e $MEDIAPLAYER %u"; open-in-browser ; set browser "$BROWSER"
 macro o set browser "w3m %u"; open-in-browser ; set browser "$BROWSER"
-#macro o set browser "w3m %u"; open-in-browser ; set browser "$BROWSER"
-
 
 # COLORS --------------------------------------------------------------------------------
 # color <element> <foreground color> <background color> [<attribute> ...]

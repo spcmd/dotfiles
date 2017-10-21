@@ -116,7 +116,7 @@ if [ ! -e /tmp/bspwm_autorun ]; then
 fi
 
 gmailcheck &
-jofogas &
+#jofogas &
 tvmusor &
 
 # vim: set syntax=sh filetype=sh :
