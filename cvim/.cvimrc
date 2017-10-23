@@ -33,3 +33,4 @@ map A :call createBookmark<CR>
 map B :tabnew chrome://bookmarks<CR>
 map E :tabnew chrome://extensions<CR>
 map D :tabnew chrome://downloads<CR>
+map p <Noop>
