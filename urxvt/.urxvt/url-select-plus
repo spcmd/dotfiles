@@ -357,7 +357,7 @@ sub status_area {
 	my $row = $self->{row} < 0 ?
 			$self->{row} - $self->top_row : abs($self->top_row) + $self->{row};
 	my $text = sprintf("%d,%d ", $row + 1, $self->{n} + 1);
-    my $keyhints = sprintf("%s", "Keys: o/Enter=browser; O=alternative browser; m=mediaplayer; i=image viewer; y=yank");
+    my $keyhints = sprintf("%s", "Keys: o/Enter=launcher; O=alternative launcher; m=mediaplayer; i=image viewer; y=yank");
 
 	if ($self->top_row == 0) {
 		$text = $keyhints ." | " . $text ."All";
