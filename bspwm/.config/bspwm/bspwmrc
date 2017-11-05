@@ -94,7 +94,7 @@ jofogas() {
 }
 
 tvmusor() {
-    $DIR_SCRIPTS/tvm -g | gist -u 258bad5f3ca1995fc3d595cf359a36c3 -p -f "TV musor"
+    $DIR_SCRIPTS/tvm -G | gist -u 258bad5f3ca1995fc3d595cf359a36c3 -p -f "TV musor"
 }
 
 # always run/restart these programs
