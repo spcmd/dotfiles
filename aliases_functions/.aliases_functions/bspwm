@@ -49,7 +49,7 @@ panel-note() {
             if [[ $answer == "y" ]] || [[ $answer == "Y" ]]; then
                 rm $NOTE_FILE
                 echo 'N' > "$PANEL_FIFO"
-                echo "All notes was deleted."
+                echo "All notes were deleted."
             else
                 echo "Cancelled. Nothing changed."
             fi
