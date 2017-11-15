@@ -22,11 +22,17 @@ body {background:#000!important;}
 #root_menu > ul > table > tbody > tr > td:nth-child(2) > ul > li:nth-child(1) > a {color:#fddc64!important;}
 #root_menu > ul > table > tbody > tr > td:nth-child(2) > ul > li:nth-child(10) > a {color:#fddc64!important;}
 
+.like_count {background:#0b4e92!important;}
+.molyity, .counter {background:#0b4e92!important;}
+
+
+/* DARK SIDEBAR */
+/*
 .sidebox {background-color:#0b4e92!important;}
 
 .sidemenu li > a.highlight {background-color:#474747!important;}
 ul.sidemenu li > a, .sidemenu ul li > a, .sidelinks li > a, .sidebox p > a.tooltip {color:#fff!important;}
 ul.sidemenu li > a:hover, .sidemenu ul li > a:hover, .sidelinks li > a:hover, .sidebox p > a.tooltip:hover {background:#474747!important;}
 .sidemenu li > a span.counter {background:#fddc64!important;color:#000!important;}
+*/
 
-.like_count {background:#0b4e92!important;}
