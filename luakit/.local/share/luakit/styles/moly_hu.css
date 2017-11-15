@@ -4,6 +4,29 @@
 #side,
 #eu,
 .b250,
-.adsbygoogle {display:none!important;}
+.adsbygoogle,
+.commercial336,
+.b336,
+#nyolcperc-image{display:none!important;}
 
-body {background:#09243E!important;}
+body {background:#000!important;}
+
+#header {background:#144e88!important;}
+.topmenu.menu a {color:#f4f4f4!important;}
+.topmenu > li > ul a {background-color:#0b4e92!important;}
+.topmenu > li > ul a:hover {background:#474747!important;}
+
+#user_menu > ul > li:nth-child(3) > a {color:#fddc64!important;}
+#user_menu > ul > li:nth-child(5) > a {color:#fddc64!important;}
+#dashboard_menu > ul > li:nth-child(7) > a {color:#fddc64!important;}
+#root_menu > ul > table > tbody > tr > td:nth-child(2) > ul > li:nth-child(1) > a {color:#fddc64!important;}
+#root_menu > ul > table > tbody > tr > td:nth-child(2) > ul > li:nth-child(10) > a {color:#fddc64!important;}
+
+.sidebox {background-color:#0b4e92!important;}
+
+.sidemenu li > a.highlight {background-color:#474747!important;}
+ul.sidemenu li > a, .sidemenu ul li > a, .sidelinks li > a, .sidebox p > a.tooltip {color:#fff!important;}
+ul.sidemenu li > a:hover, .sidemenu ul li > a:hover, .sidelinks li > a:hover, .sidebox p > a.tooltip:hover {background:#474747!important;}
+.sidemenu li > a span.counter {background:#fddc64!important;color:#000!important;}
+
+.like_count {background:#0b4e92!important;}
