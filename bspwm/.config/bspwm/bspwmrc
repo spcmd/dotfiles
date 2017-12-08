@@ -49,6 +49,7 @@ bspc monitor -d term web files mail torr misc mus news
 # ------------------------------------------------------------
 
 bspc rule -a luakit desktop=^2
+bspc rule -a *:ÁNYK desktop=^6
 bspc rule -a *:chromium desktop=^2
 bspc rule -a *:calibre desktop=^6
 bspc rule -a Firefox desktop=^2
@@ -116,8 +117,8 @@ if [ ! -e /tmp/bspwm_autorun ]; then
     echo "false" > /tmp/bspwm_autorun
 fi
 
-gmailcheck &
 #jofogas &
 tvmusor &
+gmailcheck &
 
 # vim: set syntax=sh filetype=sh :

@@ -42,9 +42,24 @@ helyesiras() {
 }
 
 # Currency converter (Google)
+c-eur(){
+    w3m -dump "https://finance.google.com/finance/converter?a=$1&from=eur&to=huf" | awk 'END{$NF="";print}'
+}
+c-gbp(){
+    w3m -dump "https://finance.google.com/finance/converter?a=$1&from=gbp&to=huf" | awk 'END{$NF="";print}'
+}
+c-usd(){
+    w3m -dump "https://finance.google.com/finance/converter?a=$1&from=usd&to=huf" | awk 'END{$NF="";print}'
+}
+
 cconv() {
- w3m -dump "https://finance.google.com/finance/converter?a=$1&from=$2&to=$3" | awk 'END{$NF="";print}'
-  #wget -qO- "http://www.google.com/finance/converter?a=$1&from=$2&to=$3" |  sed '/res/!d;s/<[^>]*>//g';
+    if [[ $3 != "" ]]; then
+         w3m -dump "https://finance.google.com/finance/converter?a=$1&from=$2&to=$3" | awk 'END{$NF="";print}'
+    else
+         w3m -dump "https://finance.google.com/finance/converter?a=$1&from=$2&to=huf" | awk 'END{$NF="";print}'
+    fi
+
+     #wget -qO- "http://www.google.com/finance/converter?a=$1&from=$2&to=$3" |  sed '/res/!d;s/<[^>]*>//g';
 }
 
 # Pastebin services
