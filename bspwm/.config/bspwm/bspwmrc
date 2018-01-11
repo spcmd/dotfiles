@@ -61,7 +61,7 @@ bspc rule -a *:libreoffice-calc desktop=^6 state=tiled
 bspc rule -a Gimp desktop=^6
 bspc rule -a Inkscape desktop=^6
 bspc rule -a Gtkpod desktop=^6
-bspc rule -a *:Szamlazo.exe desktop=^6
+bspc rule -a *:szamlazo.exe desktop=^6
 bspc rule -a *:dosbox desktop=^6 state=floating
 bspc rule -a *:scummvm.exe desktop=^6
 bspc rule -a *:sdlmame desktop=^6 state=floating
@@ -88,12 +88,6 @@ gmailcheck() {
         sleep 5m
     done
 }
-jofogas() {
-    while true; do
-        ~/bin/jofogas.sh
-        sleep 5m
-    done
-}
 
 tvmusor() {
     $DIR_SCRIPTS/tvm -G | gist -u 258bad5f3ca1995fc3d595cf359a36c3 -p -f "TV musor"
@@ -107,9 +101,8 @@ dunst &
 
 # start these programs only once
 if [ ! -e /tmp/bspwm_autorun ]; then
-    #luakitwrapper &
-    #firefox &
     ~/bin/chromium-privoxy.sh &
+    urxvtc -name play-with-mpv -e play-with-mpv &
     urxvtc &
     urxvtc -name ranger -e ranger &
     #urxvtc -name rtorrent -e rtorrent &
@@ -117,7 +110,6 @@ if [ ! -e /tmp/bspwm_autorun ]; then
     echo "false" > /tmp/bspwm_autorun
 fi
 
-#jofogas &
 tvmusor &
 gmailcheck &
 
