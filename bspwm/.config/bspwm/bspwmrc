@@ -77,6 +77,8 @@ bspc rule -a *:rtorrent desktop=^5
 bspc rule -a *:cal state=floating # +external_rules
 bspc rule -a *:pinentry state=floating
 bspc rule -a *:barrydesktop desktop=^6 state=tiled
+bspc rule -a mpv split_ratio=0.7 split_dir=west
+bspc rule -a *:play-with-mpv split_ratio=0.7
 
 # ------------------------------------------------------------
 # Autostart
@@ -102,8 +104,8 @@ dunst &
 # start these programs only once
 if [ ! -e /tmp/bspwm_autorun ]; then
     ~/bin/chromium-privoxy.sh &
-    urxvtc -name play-with-mpv -e play-with-mpv &
     urxvtc &
+    urxvtc -name play-with-mpv -e play-with-mpv &
     urxvtc -name ranger -e ranger &
     #urxvtc -name rtorrent -e rtorrent &
     #urxvtc -name newsbeuter -e newsbeuter &

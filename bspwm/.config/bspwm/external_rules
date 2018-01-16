@@ -19,4 +19,7 @@ if [ "$class" = "cal" ] || [ "$instance" = "cal" ]; then
     xdo move -n cal -x +1175 -y 20
 fi
 
+# debug
+#echo "$@" >> /tmp/bspwm_rules_debug.log
+
 # vim: set syntax=sh filetype=sh :
