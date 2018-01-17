@@ -105,10 +105,10 @@ dunst &
 if [ ! -e /tmp/bspwm_autorun ]; then
     ~/bin/chromium-privoxy.sh &
     urxvtc &
-    urxvtc -name play-with-mpv -e play-with-mpv &
     urxvtc -name ranger -e ranger &
     #urxvtc -name rtorrent -e rtorrent &
     #urxvtc -name newsbeuter -e newsbeuter &
+    play-with-mpv &
     echo "false" > /tmp/bspwm_autorun
 fi
 

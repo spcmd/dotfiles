@@ -85,23 +85,8 @@ pacrm() {
     sudo pacman -Rns "$@"
 }
 
-# switch to the new mirrorlist
-pacmirror() {
-    echo "==> Use the new pacman mirrorlist as the default mirrorlist and create a backup of the current mirrorlist? (y = yes)"
-    read answer_list
-    if [[ $answer_list == "y" ]] || [[ $answer_list == "Y" ]]; then
-        sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-        sudo mv /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist
-        echo "==> New mirrorlist: done!"
-        echo "==> Opening the new mirrorlist for editing."
-        sudo vim /etc/pacman.d/mirrorlist
-    else
-        echo "==> pacmirror stopped. Nothing changed."
-    fi
-}
-
 # generate and download a new mirrorlist from https://www.archlinux.org/mirrorlist
-pacgetmirrorlist() {
+pacmirror() {
     generated_mirrorlist=/tmp/mirrorlist
     echo "=> Downloading the generated mirrorlist..."
     #wget --quiet --show-progress 'https://www.archlinux.org/mirrorlist/?country=AT&country=HU&protocol=http&protocol=https&ip_version=4&use_mirror_status=on' -O "$generated_mirrorlist"
