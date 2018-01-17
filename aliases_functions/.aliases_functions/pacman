@@ -101,10 +101,11 @@ pacmirror() {
 }
 
 # generate and download a new mirrorlist from https://www.archlinux.org/mirrorlist
-getmirrorlist() {
+pacgetmirrorlist() {
     generated_mirrorlist=/tmp/mirrorlist
     echo "=> Downloading the generated mirrorlist..."
-    wget --quiet --show-progress 'https://www.archlinux.org/mirrorlist/?country=AT&country=HU&protocol=http&protocol=https&ip_version=4&use_mirror_status=on' -O "$generated_mirrorlist"
+    #wget --quiet --show-progress 'https://www.archlinux.org/mirrorlist/?country=AT&country=HU&protocol=http&protocol=https&ip_version=4&use_mirror_status=on' -O "$generated_mirrorlist"
+    wget --quiet --show-progress 'https://www.archlinux.org/mirrorlist/?country=HU&protocol=http&protocol=https&ip_version=4&use_mirror_status=on' -O "$generated_mirrorlist"
     echo "=> Uncommenting the servers in the mirrorlist"
     sed -i 's/^#Server/Server/' "$generated_mirrorlist"
     echo "=> Creating a backup of the original mirrorlist"
