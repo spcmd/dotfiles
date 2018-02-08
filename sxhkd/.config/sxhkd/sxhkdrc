@@ -23,6 +23,10 @@ super + alt + c
 super + alt + m
     urxvtc -name neomutt -e neomutt -F ~/.mutt/account.1.muttrc; bspc desktop -f ^4
 
+# geary
+super + alt + g
+    bspc desktop -f ^4; geary-light-theme.sh
+
 # newsbeuter
 super + alt + n
     urxvtc -name newsbeuter -e newsbeuter

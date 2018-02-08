@@ -71,8 +71,8 @@ unignore from: to: cc: date: subject:                                       # Sh
 unhdr_order *                                                               # Ignore default header order
 hdr_order from: to: cc: date: subject:                                      # show headers in this order
 
-set keywords_legacy = yes                                                   # Should Mutt save the keywords to whatever keyword it came from?
-set keywords_standard = yes                                                 # Should Mutt use the "Keywords:" header?
+#set keywords_legacy = yes                                                   # Should Mutt save the keywords to whatever keyword it came from?
+#set keywords_standard = yes                                                 # Should Mutt use the "Keywords:" header?
 set mail_check_stats
 
 # }}}
@@ -144,6 +144,7 @@ bind index,pager L edit-label
 
 # File Browser
 bind browser l select-entry
+bind browser p noop
 bind browser pp select-entry
 bind browser <space> tag-entry
 macro browser h "<exit><shell-escape>xdotool Ctrl+g<enter><refresh>" "Quit file browser" # http://unix.stackexchange.com/a/126715

@@ -35,6 +35,11 @@ xset s off
 #autocutsel -fork &
 #autocutsel -selection PRIMARY -fork &
 
+# Gnome keyring (needed for mailspring)
+dbus-update-activation-environment --systemd DISPLAY
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
+
 # Start X
 #exec dbus-launch --exit-with-session --sh-syntax awesome
 #exec awesome
