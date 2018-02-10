@@ -111,9 +111,9 @@ if [ ! -e /tmp/bspwm_autorun ]; then
     #urxvtc -name newsbeuter -e newsbeuter &
     play-with-mpv &
     echo "false" > /tmp/bspwm_autorun
+    tvmusor &
 fi
 
-tvmusor &
 gmailcheck &
 
 # vim: set syntax=sh filetype=sh :
