@@ -1,4 +1,3 @@
-
 # Account file SAMPLE for gmail
 # English and Hungarian version (different folder names)
 # Set chmod 600 on this file!
@@ -7,11 +6,17 @@
 #  Account Settings
 # -----------------------------------------------------------------
 
-source "gpg2 -dq PASSWORDS.gpg |"
+# Password method 1: passwords in GPG files
+#source "gpg2 -dq PASSWORDS.gpg |"
+
+# Password method 2: passwords in the Gnome keyring (requires gkeyring: https://aur.archlinux.org/packages/gkeyring)
+set my_PASSWORD_NAME = `gkeyring --name PASSWORD_NAME_IN_GNOME_KEYRING -1`
+
+# Account Setup
 set imap_user = "USERNAME@gmail.com"
-set imap_pass = $PASSWORD_FROM_GPG_FILE
+set imap_pass = $my_PASSWORD_NAME
 set smtp_url = "smtp://USERNAME@smtp.gmail.com:587/"
-set smtp_pass = $PASSWORD_FROM_GPG_FILE
+set smtp_pass = $my_PASSWORD_NAME
 set from = "USERNAME@gmail.com"
 set realname = "USERNAME"
 set folder = "imaps://imap.gmail.com:993"
