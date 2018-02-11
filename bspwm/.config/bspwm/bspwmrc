@@ -109,7 +109,6 @@ if [ ! -e /tmp/bspwm_autorun ]; then
     urxvtc -name ranger -e ranger &
     #urxvtc -name rtorrent -e rtorrent &
     #urxvtc -name newsbeuter -e newsbeuter &
-    play-with-mpv &
     echo "false" > /tmp/bspwm_autorun
     tvmusor &
 fi

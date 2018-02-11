@@ -21,9 +21,6 @@ urxvtd -q -f -o
 # Merge .Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-# Generate dwatch cache
-#[[ -x ~/Scripts/dwatch ]] && sh ~/Scripts/dwatch update
-
 # Redshift
 [[ ! $(pgrep redshift) ]] && redshift -r -c ~/.config/redshift/redshift.conf &
 
@@ -39,6 +36,12 @@ xset s off
 dbus-update-activation-environment --systemd DISPLAY
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
+
+# Udiskie (Automount removable drives)
+udiskie &
+
+# Play-with-mpv (https://github.com/Thann/play-with-mpv)
+play-with-mpv &
 
 # Start X
 #exec dbus-launch --exit-with-session --sh-syntax awesome
