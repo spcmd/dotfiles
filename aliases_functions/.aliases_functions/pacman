@@ -22,6 +22,7 @@ alias paclsaurver='pacman -Qm' # list AUR and packages with version numbers
 alias cdpacpkg='cd /var/cache/pacman/pkg' # change to pacman cache dir
 alias cdaurpkg='cd /var/cache/pacman/pkg-aur' # change to yaourt cache dir
 alias pacCleanAURcache='paccache -r -k 1 -c /var/cache/pacman/pkg-aur' # clean up AUR pkg cache, keep only the last version
+alias paclsfiles='pacman -Ql' # list installed files by a package
 
 #pacman: show package info
 pacinfo() {

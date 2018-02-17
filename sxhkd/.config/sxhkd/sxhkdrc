@@ -16,9 +16,13 @@ super + a
     #$DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#0D497B' -nb '#121212'
     #$DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#4D4270' -nb '#121212'
 
-# Gcolor2
+# Calculator
 super + alt + c
-    gcolor2
+    mate-calc
+
+# gromit-mpx (screen draw / highlighter)
+super + alt + q
+    notify-send -t 3000 "gromit-mpx keybindings:" " F9:        toggle\n SHIFT-F9:  clear screen\n F10:       undo\n SHIFT-F10: redo\n ALT-F9:    quit" && gromit-mpx --active
 
 # mutt
 super + alt + m
@@ -30,7 +34,7 @@ super + alt + g
 
 # newsbeuter
 super + alt + n
-    urxvtc -name newsbeuter -e newsbeuter
+    urxvtc -name newsboat -e newsboat
 
 # ranger
 super + alt + r
