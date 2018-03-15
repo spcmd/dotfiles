@@ -36,7 +36,7 @@ bspc subscribe report > "$PANEL_FIFO" &
 #  Widgets for the Panel Bar
 # ------------------------------------------------------
 
-xtitle -t 90 -sf 'T%s' > "$PANEL_FIFO" &
+xtitle -t 90 -sf 'T%s\n' > "$PANEL_FIFO" &
 
 # Refresh widgets in:
 refresh_interval="60s"
@@ -158,6 +158,118 @@ wcmd_unhide_window="$DIR_BSPWM/hide.sh unhide"
 num_mon=$(bspc query -M | wc -l)
 
 wm_info_array=("" "" "" "" "")
+
+panel_bar()
+while read -r line ; do
+	case $line in
+		S*)
+			# clock output
+			sys="%{F$COLOR_SYS_FG}%{B$COLOR_SYS_BG} ${line#?} %{B-}%{F-}"
+			;;
+		T*)
+			# xtitle output
+			title="%{F$COLOR_TITLE_FG}%{B$COLOR_TITLE_BG} ${line#?} %{B-}%{F-}"
+			;;
+		W*)
+			# bspwm's state
+			wm=
+			IFS=':'
+			set -- ${line#?}
+			while [ $# -gt 0 ] ; do
+				item=$1
+				name=${item#?}
+				case $item in
+					[mM]*)
+						case $item in
+							m*)
+								# monitor
+								FG=$COLOR_MONITOR_FG
+								BG=$COLOR_MONITOR_BG
+								on_focused_monitor=
+								;;
+							M*)
+								# focused monitor
+								FG=$COLOR_FOCUSED_MONITOR_FG
+								BG=$COLOR_FOCUSED_MONITOR_BG
+								on_focused_monitor=1
+								;;
+						esac
+						[ $num_mon -lt 2 ] && shift && continue
+						wm="${wm}%{F${FG}}%{B${BG}}%{A:bspc monitor -f ${name}:} ${name} %{A}%{B-}%{F-}"
+						;;
+					[fFoOuU]*)
+						case $item in
+							f*)
+								# free desktop
+								FG=$COLOR_FREE_FG
+								BG=$COLOR_FREE_BG
+								UL=$BG
+								;;
+							F*)
+								if [ "$on_focused_monitor" ] ; then
+									# focused free desktop
+									FG=$COLOR_FOCUSED_FREE_FG
+									BG=$COLOR_FOCUSED_FREE_BG
+									UL=$BG
+								else
+									# active free desktop
+									FG=$COLOR_FREE_FG
+									BG=$COLOR_FREE_BG
+									UL=$COLOR_FOCUSED_FREE_BG
+								fi
+								;;
+							o*)
+								# occupied desktop
+								FG=$COLOR_OCCUPIED_FG
+								BG=$COLOR_OCCUPIED_BG
+								UL=$BG
+								;;
+							O*)
+								if [ "$on_focused_monitor" ] ; then
+									# focused occupied desktop
+									FG=$COLOR_FOCUSED_OCCUPIED_FG
+									BG=$COLOR_FOCUSED_OCCUPIED_BG
+									UL=$BG
+								else
+									# active occupied desktop
+									FG=$COLOR_OCCUPIED_FG
+									BG=$COLOR_OCCUPIED_BG
+									UL=$COLOR_FOCUSED_OCCUPIED_BG
+								fi
+								;;
+							u*)
+								# urgent desktop
+								FG=$COLOR_URGENT_FG
+								BG=$COLOR_URGENT_BG
+								UL=$BG
+								;;
+							U*)
+								if [ "$on_focused_monitor" ] ; then
+									# focused urgent desktop
+									FG=$COLOR_FOCUSED_URGENT_FG
+									BG=$COLOR_FOCUSED_URGENT_BG
+									UL=$BG
+								else
+									# active urgent desktop
+									FG=$COLOR_URGENT_FG
+									BG=$COLOR_URGENT_BG
+									UL=$COLOR_FOCUSED_URGENT_BG
+								fi
+								;;
+						esac
+						wm="${wm}%{F${FG}}%{B${BG}}%{U${UL}}%{+u}%{A:bspc desktop -f ${name}:} ${name} %{A}%{B-}%{F-}%{-u}"
+						;;
+					[LTG]*)
+						# layout, state and flags
+						wm="${wm}%{F$COLOR_STATE_FG}%{B$COLOR_STATE_BG} ${name} %{B-}%{F-}"
+						;;
+				esac
+				shift
+			done
+			;;
+	esac
+	printf "%s\n" "%{l}${wm}%{c}${title}%{r}${sys}"
+done
 
 panel_bar() {
     while read -r line ; do
@@ -302,12 +414,13 @@ panel_bar < "$PANEL_FIFO" | lemonbar -a 32 -n "$PANEL_WM_NAME" -g x$PANEL_HEIGHT
 # to be above them.
 # ------------------------------------------------------
 
-wid=$(xdo id -a "$PANEL_WM_NAME")
+wid=$(xdo id -m -a "$PANEL_WM_NAME")
+
 tries_left=20
 while [ -z "$wid" ] && [ "$tries_left" -gt 0 ] ; do
-	sleep 0.05
-	wid=$(xdo id -a "$PANEL_WM_NAME")
-	tries_left=$((tries_left - 1))
+    sleep 0.05
+    wid=$(xdo id -m -a "$PANEL_WM_NAME")
+    tries_left=$((tries_left - 1))
 done
 [ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
 

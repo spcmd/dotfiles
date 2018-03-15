@@ -46,5 +46,6 @@ play-with-mpv &
 # Start X
 #exec dbus-launch --exit-with-session --sh-syntax awesome
 #exec awesome
+#exec i3
 sxhkd &
 exec bspwm
