@@ -18,7 +18,10 @@ super + a
 
 # Calculator
 super + alt + c
-    mate-calc
+        mate-calc
+
+XF86Calculator
+        mate-calc
 
 # gromit-mpx (screen draw / highlighter)
 super + alt + q
@@ -31,6 +34,9 @@ super + alt + m
 # geary
 super + alt + g
     bspc desktop -f ^4; geary-light-theme.sh
+
+XF86Mail
+    [[ ! $(pgrep geary) ]] && bspc desktop -f ^4; geary-light-theme.sh
 
 # newsbeuter
 super + alt + n

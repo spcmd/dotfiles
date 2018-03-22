@@ -11,6 +11,9 @@ light -S 20
 #  note: this doesn't work with ~/.Xmodmap
 (sleep 0.2 && setxkbmap -option caps:escape)
 
+# Map Home to Ctrl (external keyboard Home key fix)
+sleep 0.5 && xmodmap -e "keycode 110 = Control_L"
+
 # Source Xmodmap (not needed anymore, using libinput.conf instead)
 #xmodmap ~/.Xmodmap
 

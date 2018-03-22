@@ -44,7 +44,7 @@ bspc config pointer_modifier        mod4
 # Desktops
 # ------------------------------------------------------------
 
-bspc monitor -d term web files mail torr misc mus news
+bspc monitor -d term web files mail torr desk deskb deskc
 
 # ------------------------------------------------------------
 # Rules
@@ -106,11 +106,12 @@ dunst &
 
 # start these programs only once
 if [ ! -e /tmp/bspwm_autorun ]; then
-    ~/bin/chromium-privoxy.sh &
     urxvtc &
     urxvtc -name ranger -e ranger &
     #urxvtc -name rtorrent -e rtorrent &
     #urxvtc -name newsbeuter -e newsbeuter &
+    geary-light-theme.sh &
+    sleep 30s && ~/bin/chromium-privoxy.sh &
     echo "false" > /tmp/bspwm_autorun
     sleep 4m && tvmusor &
 fi

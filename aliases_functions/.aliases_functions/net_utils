@@ -43,20 +43,25 @@ helyesiras() {
 
 # Currency converter (Google)
 c-eur(){
-    w3m -dump "https://finance.google.com/finance/converter?a=$1&from=eur&to=huf" | awk 'END{$NF="";print}'
+    #w3m -dump "https://finance.google.com/finance/converter?a=$1&from=eur&to=huf" | awk 'END{$NF="";print}'
+    curl -sA "Mozilla/5.0" "https://finance.google.com/finance/converter?a=$1&from=eur&to=huf" | awk -F '<|>' '/result/ {print $5}'
 }
 c-gbp(){
-    w3m -dump "https://finance.google.com/finance/converter?a=$1&from=gbp&to=huf" | awk 'END{$NF="";print}'
+    #w3m -dump "https://finance.google.com/finance/converter?a=$1&from=gbp&to=huf" | awk 'END{$NF="";print}'
+    curl -sA "Mozilla/5.0" "https://finance.google.com/finance/converter?a=$1&from=gbp&to=huf" | awk -F '<|>' '/result/ {print $5}'
 }
 c-usd(){
-    w3m -dump "https://finance.google.com/finance/converter?a=$1&from=usd&to=huf" | awk 'END{$NF="";print}'
+    #w3m -dump "https://finance.google.com/finance/converter?a=$1&from=usd&to=huf" | awk 'END{$NF="";print}'
+    curl -sA "Mozilla/5.0" "https://finance.google.com/finance/converter?a=$1&from=usd&to=huf" | awk -F '<|>' '/result/ {print $5}'
 }
 
 cconv() {
     if [[ $3 != "" ]]; then
-         w3m -dump "https://finance.google.com/finance/converter?a=$1&from=$2&to=$3" | awk 'END{$NF="";print}'
+         #w3m -dump "https://finance.google.com/finance/converter?a=$1&from=$2&to=$3" | awk 'END{$NF="";print}'
+         curl -sA "Mozilla/5.0" "https://finance.google.com/finance/converter?a=$1&from=$2&to=$3" | awk -F '<|>' '/result/ {print $5}'
     else
-         w3m -dump "https://finance.google.com/finance/converter?a=$1&from=$2&to=huf" | awk 'END{$NF="";print}'
+         #w3m -dump "https://finance.google.com/finance/converter?a=$1&from=$2&to=huf" | awk 'END{$NF="";print}'
+         curl -sA "Mozilla/5.0" "https://finance.google.com/finance/converter?a=$1&from=$2&to=huf" | awk -F '<|>' '/result/ {print $5}'
     fi
 
      #wget -qO- "http://www.google.com/finance/converter?a=$1&from=$2&to=$3" |  sed '/res/!d;s/<[^>]*>//g';
