@@ -14,6 +14,9 @@ light -S 20
 # Map Home to Ctrl (external keyboard Home key fix)
 sleep 0.5 && xmodmap -e "keycode 110 = Control_L"
 
+# Mouse speed (for the USB mouse)
+xset m 2/1 6
+
 # Source Xmodmap (not needed anymore, using libinput.conf instead)
 #xmodmap ~/.Xmodmap
 
