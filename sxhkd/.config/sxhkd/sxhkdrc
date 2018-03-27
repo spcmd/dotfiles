@@ -100,6 +100,10 @@ super + ctrl + Left
 super + ctrl + Right
     light -A 2
 
+# screen off (external keyboard)
+XF86Sleep
+    sleep 0.5s; xset dpms force off
+
 # volume
 super + Up
     ~/.config/bspwm/volume.sh up
