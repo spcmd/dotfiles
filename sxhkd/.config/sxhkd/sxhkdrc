@@ -25,7 +25,7 @@ XF86Calculator
 
 # gromit-mpx (screen draw / highlighter)
 super + alt + q
-    notify-send -t 3000 "gromit-mpx keybindings:" " F9:        toggle\n SHIFT-F9:  clear screen\n F10:       undo\n SHIFT-F10: redo\n ALT-F9:    quit" && gromit-mpx --active
+    notify-send -t 999999 "gromit-mpx keybindings:" " F9:        toggle\n SHIFT-F9:  clear screen\n F10:       undo\n SHIFT-F10: redo\n ALT-F9:    quit" && gromit-mpx --active
 
 # mutt
 super + alt + m

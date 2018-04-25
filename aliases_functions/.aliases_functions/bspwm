@@ -10,6 +10,10 @@
 
 . ~/.config/bspwm/panel_colors/spcmd-arch
 
+autorun-off() {
+    echo 'false' > /tmp/bspwm_autorun
+}
+
 panel-note() {
 
     NOTE_FILE=$HOME/Documents/bspwm_panel_notes.txt

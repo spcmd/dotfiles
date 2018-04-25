@@ -44,7 +44,7 @@ bspc config pointer_modifier        mod4
 # Desktops
 # ------------------------------------------------------------
 
-bspc monitor -d term web files mail torr desk deskb deskc
+bspc monitor -d term web files mail torr deskA deskB deskC
 
 # ------------------------------------------------------------
 # Rules
