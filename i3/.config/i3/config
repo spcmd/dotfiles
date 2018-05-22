@@ -36,10 +36,10 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # Select split
-    bindsym $mod+Ctrl+h splith
-    bindsym $mod+Ctrl+l splith
-    bindsym $mod+Ctrl+j splitv
-    bindsym $mod+Ctrl+k splitv
+bindsym $mod+Ctrl+h splith
+bindsym $mod+Ctrl+l splith
+bindsym $mod+Ctrl+j splitv
+bindsym $mod+Ctrl+k splitv
 
 
 # enter fullscreen mode for the focused container
@@ -47,6 +47,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
+bindsym $mod+m layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+space layout toggle split
 
@@ -60,11 +61,11 @@ set $ws2 "2:web"
 set $ws3 "3:files"
 set $ws4 "4:mail"
 set $ws5 "5:torr"
-set $ws6 "6:deskA"
-set $ws7 "7:deskB"
-set $ws8 "8:deskC"
-set $ws9 "9deskD"
-set $ws10 "10:deskE"
+set $ws6 "6:desk"
+set $ws7 "7:desk"
+set $ws8 "8:desk"
+set $ws9 "9:desk"
+set $ws10 "10:desk"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -94,7 +95,9 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+odiaeresis move container to workspace $ws10
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+#bindsym $mod+Shift+r restart
+# reload config
+bindsym $mod+Shift+r reload
 
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -102,11 +105,11 @@ bindsym $mod+Shift+q exec "i3-msg exit"
 
 # resize windows
 bindsym $mod+Mod1+h resize shrink width 3 px or 3 ppt
-bindsym $mod+Mod1+Up resize grow height 3 px or 3 ppt
-bindsym $mod+Mod1+Down resize shrink height 3 px or 3 ppt
+bindsym $mod+Mod1+j resize grow height 3 px or 3 ppt
+bindsym $mod+Mod1+k resize shrink height 3 px or 3 ppt
 bindsym $mod+Mod1+l resize grow width 3 px or 3 ppt
 
-# apps
+# apps and controls
 bindsym $mod+Mod1+f exec "~/bin/chromium-privoxy.sh"
 bindsym $mod+Mod1+c exec "mate-calc"
 bindsym XF86Calculator exec "mate-calc"
@@ -118,27 +121,30 @@ bindsym $mod+c exec "$DIR_SCRIPTS/dcalibre"
 bindsym $mod+Shift+c exec "$DIR_SCRIPTS/dcomics"
 bindsym Print exec "scrot ~/Pictures/scrot_%Y-%m-%d_%T.png ; notify-send 'Screenshot taken'"
 bindsym $mod+Print exec "sleep 1s && scrot -s ~/Pictures/scrot_%Y-%m-%d_%T.png ; notify-send 'Screenshot taken'"
-bindsym $mod+Ctrl+m exec "notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'"
+bindsym $mod+Ctrl+m exec "notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'; pkill -RTMIN+2 i3blocks"
 bindsym $mod+Shift+m exec notify-send "$(cat ~/.mutt/newmail_list)"
 bindsym $mod+Ctrl+Left exec "light -U 2"
 bindsym $mod+Ctrl+Right exec "light -A 2"
 bindsym XF86Sleep exec "sleep 0.5s; xset dpms force off"
-
 bindsym $mod+Ctrl+z exec "systemctl suspend"
 bindsym $mod+p exec "$DIR_SCRIPTS/dpass"
-
 bindsym $mod+Down exec $HOME/.config/i3blocks/i3blocks_volume.sh down
 bindsym $mod+Up exec $HOME/.config/i3blocks/i3blocks_volume.sh up
 
 # rules
+for_window [class="[.]*"] move left
 for_window [class = "Chromium" ] move container to workspace $ws2
+for_window [class = "calibre" ] move container to workspace $ws6
+for_window [class = "Wine" ] move container to workspace $ws6
+for_window [class = "Gimp" ] move container to workspace $ws6
 for_window [title = "ranger" ] move container to workspace $ws3
 for_window [title = "spotify" ] move container to workspace $ws4
 for_window [title = "rtorrent" ] move container to workspace $ws5
-for_window [title = "neomutt" ] move container to workspace $ws4; focus
+for_window [title = "neomutt" ] move container to workspace $ws4, focus
 for_window [title = "Geary" ] move container to workspace $ws4
 for_window [title = "newsboat" ] move container to workspace $ws8
-for_window [class = "Mate-calc" ] floating disable
+for_window [class = "Mate-calc" ] floating disable, move left
+for_window [class = "mpv" ] resize grow width 12 px or 12 ppt
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status

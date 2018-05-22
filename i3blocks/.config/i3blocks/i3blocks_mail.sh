@@ -13,6 +13,6 @@ echo "$mail_count"
 # mouse button clicks
 case $BLOCK_BUTTON in
     1) i3-msg exec "urxvtc -name neomutt -e neomutt -F ~/.mutt/account.1.muttrc" ;;
-    2) i3-msg exec "notify-send 'gmailcheck' 'Checking mail...' && $DIR_SCRIPTS/gmailcheck.sh && notify-send 'gmailcheck' 'Check done.'" ;;
+    2) i3-msg exec "notify-send 'gmailcheck' 'Checking mail...' && $DIR_SCRIPTS/gmailcheck.sh && notify-send 'gmailcheck' 'Check done.'&& pkill -RTMIN+2 i3blocks" ;;
     3) i3-msg exec "urxvtc -name neomutt -e neomutt -F ~/.mutt/account.2.muttrc" ;;
 esac
