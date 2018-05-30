@@ -47,7 +47,7 @@ export SSH_AUTH_SOCK
 udiskie &
 
 # Play-with-mpv (https://github.com/Thann/play-with-mpv)
-play-with-mpv &
+#play-with-mpv &
 
 # Start X
 #exec dbus-launch --exit-with-session --sh-syntax awesome

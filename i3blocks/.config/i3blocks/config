@@ -36,6 +36,7 @@ interval=once
 signal=1
 
 [battery]
+markup=pango
 command=$HOME/.config/i3blocks/i3blocks_battery.sh
 interval=300
 

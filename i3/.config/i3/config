@@ -134,7 +134,7 @@ bindsym $mod+Up exec $HOME/.config/i3blocks/i3blocks_volume.sh up
 # rules
 for_window [class="[.]*"] move left
 for_window [class = "Chromium" ] move container to workspace $ws2
-for_window [class = "calibre" ] move container to workspace $ws6
+#for_window [class = "calibre" ] move container to workspace $ws6
 for_window [class = "Wine" ] move container to workspace $ws6
 for_window [class = "Gimp" ] move container to workspace $ws6
 for_window [title = "ranger" ] move container to workspace $ws3
@@ -144,7 +144,8 @@ for_window [title = "neomutt" ] move container to workspace $ws4, focus
 for_window [title = "Geary" ] move container to workspace $ws4
 for_window [title = "newsboat" ] move container to workspace $ws8
 for_window [class = "Mate-calc" ] floating disable, move left
-for_window [class = "mpv" ] resize grow width 12 px or 12 ppt
+for_window [class = "mpv" ] resize grow width 14 px or 14 ppt
+for_window [class = "Soffice" ] move container to workspace $ws6
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
