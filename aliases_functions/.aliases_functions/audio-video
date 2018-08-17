@@ -6,12 +6,14 @@
 #     |_|
 # Created by: spcmd
 
-switch-to-display(){
+hdmi-off(){
     xrandr --output HDMI1 --off --output eDP1 --auto
+    sed -i 's/device 3/device 0/' ~/.asoundrc
 }
 
-switch-to-hdmi(){
+hdmi-on(){
     xrandr --output eDP1 --off --output HDMI1 --auto
+    sed -i 's/device 0/device 3/' ~/.asoundrc
 }
 
 alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
