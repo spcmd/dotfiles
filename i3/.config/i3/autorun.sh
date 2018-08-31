@@ -22,7 +22,7 @@ if [ ! -e /tmp/i3_autorun ]; then
     geary-light-theme.sh &
     sleep 30s && ~/bin/chromium-privoxy.sh &
     echo "false" > /tmp/i3_autorun
-    sleep 4m && tvmusor &
+    #sleep 4m && tvmusor &
 fi
 
 gmailcheck &
