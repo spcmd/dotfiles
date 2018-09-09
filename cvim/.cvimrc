@@ -12,6 +12,7 @@ let searchengine ddg = "https://duckduckgo.com/?q=%s"
 let searchengine g = "https://google.com/search?q=%s"
 let searchengine gh = "https://github.com/search?q=%s"
 let searchengine gr = "https://www.goodreads.com/search?utf8=✓&query=%s"
+let searchengine gc = "https://getcomics.info/?s=%s"
 let searchengine ebay = "https://www.ebay.com/sch/i.html?_nkw=%s&LH_BIN=1"
 let searchengine imdb = "http://www.imdb.com/find?s=all&q=%s"
 let searchengine j = "https://www.jofogas.hu/magyarorszag?q=%s"
@@ -22,6 +23,7 @@ let searchengine tpb = "https://thepiratebay.org/search/%s"
 let searchengine wiki = "https://en.wikipedia.org/wiki/Special:Search?search=%s"
 let searchengine wikihu = "https://hu.wikipedia.org/wiki/Special:Search?search=%s"
 let searchengine yt = "https://www.youtube.com/results?search_query=%s"
+let searchengine diy = "https://www.youtube.com/results?search_query=diy %s"
 let searchengine v = "http://www.vatera.hu/listings/index.php?q=%s"
 map <C-r> :source /home/spcmd/.cvimrc<CR>
 map d :quit<CR>
@@ -38,3 +40,12 @@ map A :call createBookmark<CR>
 map B :tabnew chrome://bookmarks<CR>
 map E :tabnew chrome://extensions<CR>
 map D :tabnew chrome://downloads<CR>
+
+" Create a code block named clearTweetdeck
+clearTweetdeck -> {{
+  // We are now in JavaScript mode
+  javascript:(function(){c=document.getElementsByClassName('js-chirp-container');for(i=0;i<c.length;i++)c[i].innerHTML=""})();
+}}
+
+" Run the JavaScript block
+map C :call clearTweetdeck<CR>
