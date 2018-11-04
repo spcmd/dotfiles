@@ -117,6 +117,7 @@ bindsym $mod+Mod1+m exec "urxvtc -name neomutt -e neomutt -F ~/.mutt/account.1.m
 bindsym XF86Mail exec "[[ ! $(pgrep geary) ]] && geary-light-theme.sh"; workspace $ws4
 bindsym $mod+Mod1+r exec "urxvtc -name ranger -e ranger"
 bindsym $mod+Mod1+t exec "urxvtc -name rtorrent -e rtorrent"
+bindsym $mod+Mod1+n exec "urxvtc -name newsboat -e newsboat"
 bindsym $mod+c exec "$DIR_SCRIPTS/dcalibre"
 bindsym $mod+Shift+c exec "$DIR_SCRIPTS/dcomics"
 bindsym Print exec "scrot ~/Pictures/scrot_%Y-%m-%d_%T.png ; notify-send 'Screenshot taken'"
@@ -130,6 +131,12 @@ bindsym $mod+Ctrl+z exec "systemctl suspend"
 bindsym $mod+p exec "$DIR_SCRIPTS/dpass"
 bindsym $mod+Down exec $HOME/.config/i3blocks/i3blocks_volume.sh down
 bindsym $mod+Up exec $HOME/.config/i3blocks/i3blocks_volume.sh up
+bindsym XF86AudioRaiseVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh down
+bindsym XF86AudioLowerVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh up
+bindsym XF86AudioStop exec "mocp -G"
+bindsym XF86AudioPlay exec "mocp -G"
+bindsym XF86AudioPrev exec "mocp --prev"
+bindsym XF86AudioNext exec "mocp --next"
 
 # rules
 for_window [class="[.]*"] move left
@@ -143,7 +150,7 @@ for_window [title = "^rtorrent" ] move container to workspace $ws5
 for_window [title = "^neomutt" ] move container to workspace $ws4, focus
 for_window [title = "^Geary$" ] move container to workspace $ws4
 for_window [title = "^newsboat" ] move container to workspace $ws7
-for_window [class = "Mate-calc" ] floating disable, move left
+for_window [class = "Mate-calc" ] floating disable, move left, resize shrink width 24 px or 24 ppt
 for_window [class = "mpv" ] resize grow width 14 px or 14 ppt
 for_window [class = "Soffice" ] move container to workspace $ws6
 

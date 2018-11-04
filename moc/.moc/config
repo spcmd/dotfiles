@@ -74,7 +74,7 @@ FormatString = "%(n:%n :)%(a:%a - :)%(t:%t:)"
 # OSS output settings.
 #OSSDevice = /dev/dsp
 #OSSMixerDevice = /dev/mixer
-OSSMixerChannel1 = master             # 'pcm', 'master' or 'speaker'
+OSSMixerChannel1 = pcm             # 'pcm', 'master' or 'speaker'
 #OSSMixerChannel2 = pcm          # 'pcm', 'master' or 'speaker'
 
 # ALSA output settings.  If you need to dump the audio produced by MOC
@@ -84,7 +84,7 @@ OSSMixerChannel1 = master             # 'pcm', 'master' or 'speaker'
 #    ALSADevice=tee:hw,'/tmp/out.wav',wav
 #
 #ALSADevice = default
-ALSAMixer1 = Master
+ALSAMixer1 = PCM
 #ALSAMixer2 = PCM
 
 # Save software mixer state?
@@ -399,9 +399,9 @@ Keymap = keymap
 #             and the directory menu at the bottom.  Playlist will
 #             occupy 10 lines and the directory menu the rest.
 #
-#Layout1 = directory(0,0,50%,100%):playlist(50%,0,FILL,100%)
-#Layout2 = directory(0,0,100%,100%):playlist(0,0,100%,100%)
-#Layout3 = ""
+Layout1  = directory(0,0,30%,100%):playlist(30%,0,FILL,100%)
+Layout2 = directory(0,0,100%,10):playlist(0,10,100%,FILL)
+Layout3 = directory(0,0,100%,100%)
 
 # When the song changes, should the menu be scrolled so that the currently
 # played file is visible?
@@ -411,7 +411,7 @@ Keymap = keymap
 # something from the playlist?  If CanStartInPlaylist is set to 'yes', the
 # interface will switch to the playlist.  When set to 'no' it will start
 # from the last directory.
-#CanStartInPlaylist = yes
+CanStartInPlaylist = yes
 
 # Executing external commands (1 - 10) invoked with key commands (F1 - F10
 # by default).

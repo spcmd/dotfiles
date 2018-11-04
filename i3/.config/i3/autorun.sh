@@ -17,10 +17,10 @@ tvmusor() {
 if [ ! -e /tmp/i3_autorun ]; then
     urxvtc &
     urxvtc -name ranger -e ranger &
+    urxvtc -name newsboat -e newsboat &
     #urxvtc -name rtorrent -e rtorrent &
-    #urxvtc -name newsbeuter -e newsbeuter &
-    geary-light-theme.sh &
-    sleep 30s && ~/bin/chromium-privoxy.sh &
+    ~/bin/chromium-privoxy.sh &
+    sleep 5s && geary-light-theme.sh &
     echo "false" > /tmp/i3_autorun
     #sleep 4m && tvmusor &
 fi

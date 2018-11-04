@@ -68,10 +68,10 @@ quit                  = q
 go                    = ENTER l
 menu_down             = j
 menu_up               = k
-menu_page_down        = ^l
-menu_page_up          = ^k
-menu_first_item       = HOME
-menu_last_item        = END
+#menu_page_down        = ^b
+#menu_page_up          = ^n
+menu_first_item       = HOME g
+menu_last_item        = END G
 search_menu           = /
 toggle_read_tags      = f
 toggle_show_time      = ^t
@@ -79,7 +79,7 @@ toggle_show_format    = ^f
 toggle_menu           = TAB
 toggle_layout         = p
 toggle_hidden_files   = H
-next_search           = ^n
+#next_search           = ^n
 show_lyrics           = L
 theme_menu            = T
 #help                  = h
@@ -131,7 +131,7 @@ go_to_fast_dir7       = &
 go_to_fast_dir8       = *
 go_to_fast_dir9       = (
 go_to_fast_dir10      = )
-go_to_playing_file    = g
+#go_to_playing_file    = g
 go_up                 = h
 
 # Playlist specific keys:
@@ -159,13 +159,13 @@ cancel                = ^x ESCAPE
 hide_message          = M
 
 # Softmixer specific keys:
-toggle_softmixer      = w
-toggle_make_mono      = J
+#toggle_softmixer      = w
+#toggle_make_mono      = J
 
 # Equalizer specific keys:
 #toggle_equalizer      = E
 #equalizer_refresh     = e
-#equalizer_prev        = K
+#equalizer_prev        = k
 #equalizer_next        = k
 
 # External commands:
