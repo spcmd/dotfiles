@@ -62,8 +62,8 @@ set $ws3 "3:files"
 set $ws4 "4:mail"
 set $ws5 "5:torr"
 set $ws6 "6:desk"
-set $ws7 "7:desk"
-set $ws8 "8:desk"
+set $ws7 "7:rss"
+set $ws8 "8:music"
 set $ws9 "9:desk"
 set $ws10 "10:desk"
 
@@ -153,6 +153,7 @@ for_window [title = "^newsboat" ] move container to workspace $ws7
 for_window [class = "Mate-calc" ] floating disable, move left, resize shrink width 24 px or 24 ppt
 for_window [class = "mpv" ] resize grow width 14 px or 14 ppt
 for_window [class = "Soffice" ] move container to workspace $ws6
+for_window [title = "^MOC" ] move container to workspace $ws8
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status

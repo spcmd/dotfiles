@@ -445,7 +445,7 @@ CanStartInPlaylist = yes
 # Examples:   ExecCommand1 = "cp %f /mnt/usb_drive"
 #             ExecCommand2 = "/home/joe/now_playing %I"
 #
-#ExecCommand1 =
+ExecCommand1 = "/home/spcmd/bin/mocp-quit-client.sh"
 #ExecCommand2 =
 #ExecCommand3 =
 #ExecCommand4 =

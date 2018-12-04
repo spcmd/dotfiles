@@ -61,8 +61,8 @@
 # Default key configuration for MOC (and a list of all available commands):
 
 # MOC control keys:
-quit_client           = Q
-quit                  = q
+quit_client           = F1
+quit                  = Q
 
 # Menu and interface control keys:
 go                    = ENTER l
@@ -171,7 +171,7 @@ hide_message          = M
 # External commands:
 mark_start            = '
 mark_end              = "
-exec_command1         = F1
+exec_command1         = q
 exec_command2         = F2
 exec_command3         = F3
 exec_command4         = F4

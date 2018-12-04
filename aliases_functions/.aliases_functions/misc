@@ -14,6 +14,16 @@ alias hdapm='sudo hdparm -I /dev/sda | grep level'
 alias gifview='gifview -aU' #gifsicle gifview: animated and unoptimized by default
 #alias sshx='ssh -X -C -c blowfish-cbc,arcfour' # SSH with X (to run GUI apps)
 
+pic-resize(){
+    percent=$1
+    if [[ -z $percent ]]; then
+        percent=50
+    fi
+    echo "resizing images to ${percent}%"
+    for file in *.{jpg,JPG}; do convert $file -resize ${percent}% $file; done
+    echo "done resizing images."
+}
+
 i3-autorun() {
     echo 'false' > /tmp/i3_autorun
 }
