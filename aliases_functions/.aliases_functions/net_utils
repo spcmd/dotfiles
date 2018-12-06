@@ -139,7 +139,7 @@ urlshort() { wget -qO - "http://is.gd/create.php?format=simple&url=$1" }
 # translate shell (google translate) (https://github.com/soimort/translate-shell)
 gthu() {
     # save translated words to this file (dictionary)
-    file_wordlist="$HOME/Documents/kiszotarazott.txt"
+    file_wordlist="$HOME/Documents/gt-dict.txt"
     # separate the original word from the translations with this
     separator=" : "
     # loop is required for multiple arguments to work properly
@@ -150,7 +150,7 @@ gthu() {
 }
 gten() {
     # save translated words to this file (dictionary)
-    file_wordlist="$HOME/Documents/kiszotarazott.txt"
+    file_wordlist="$HOME/Documents/gt-dict.txt"
     # separate the original word from the translations with this
     separator=" : "
     # loop is required for multiple arguments to work properly
