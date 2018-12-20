@@ -112,31 +112,43 @@ bindsym $mod+Mod1+l resize grow width 3 px or 3 ppt
 # apps and controls
 bindsym $mod+Mod1+f exec "~/bin/chromium-privoxy.sh"
 bindsym $mod+Mod1+c exec "mate-calc"
-bindsym XF86Calculator exec "mate-calc"
 bindsym $mod+Mod1+m exec "urxvtc -name neomutt -e neomutt -F ~/.mutt/account.1.muttrc"; workspace $ws4
-bindsym XF86Mail exec "[[ ! $(pgrep geary) ]] && geary-light-theme.sh"; workspace $ws4
 bindsym $mod+Mod1+r exec "urxvtc -name ranger -e ranger"
 bindsym $mod+Mod1+t exec "urxvtc -name rtorrent -e rtorrent"
 bindsym $mod+Mod1+n exec "urxvtc -name newsboat -e newsboat"
-bindsym $mod+c exec "$DIR_SCRIPTS/dcalibre"
-bindsym $mod+Shift+c exec "$DIR_SCRIPTS/dcomics"
+bindsym $mod+p exec "$DIR_SCRIPTS/dpass"
+bindsym $mod+Ctrl+z exec "systemctl suspend"
+
 bindsym Print exec "scrot ~/Pictures/scrot_%Y-%m-%d_%T.png ; notify-send 'Screenshot taken'"
 bindsym $mod+Print exec "sleep 1s && scrot -s ~/Pictures/scrot_%Y-%m-%d_%T.png ; notify-send 'Screenshot taken'"
+
+bindsym $mod+c exec "$DIR_SCRIPTS/dcalibre"
+bindsym $mod+Shift+c exec "$DIR_SCRIPTS/dcomics"
+
 bindsym $mod+Ctrl+m exec "notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'; pkill -RTMIN+2 i3blocks"
 bindsym $mod+Shift+m exec notify-send "$(cat ~/.mutt/newmail_list)"
+
 bindsym $mod+Ctrl+Left exec "light -U 2"
 bindsym $mod+Ctrl+Right exec "light -A 2"
-bindsym XF86Sleep exec "sleep 0.5s; xset dpms force off"
-bindsym $mod+Ctrl+z exec "systemctl suspend"
-bindsym $mod+p exec "$DIR_SCRIPTS/dpass"
+
 bindsym $mod+Down exec $HOME/.config/i3blocks/i3blocks_volume.sh down
 bindsym $mod+Up exec $HOME/.config/i3blocks/i3blocks_volume.sh up
+bindsym Menu exec "$DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#285577' -nb '#121212'"
+
+# media/extra keys (external keyboard)
+bindsym XF86HomePage exec "notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'; pkill -RTMIN+2 i3blocks"
+bindsym XF86Mail exec "[[ ! $(pgrep geary) ]] && geary-light-theme.sh"; workspace $ws4
+bindsym XF86Calculator exec "mate-calc"
 bindsym XF86AudioRaiseVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh down
 bindsym XF86AudioLowerVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh up
 bindsym XF86AudioStop exec "mocp -G"
 bindsym XF86AudioPlay exec "mocp -G"
 bindsym XF86AudioPrev exec "mocp --prev"
 bindsym XF86AudioNext exec "mocp --next"
+#bindsym XF86AudioMute exec ""
+bindsym XF86Sleep exec "systemctl suspend"
+bindsym XF86Back exec "sleep 0.5s; xset dpms force off"
+
 
 # rules
 for_window [class="[.]*"] move left
