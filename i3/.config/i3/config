@@ -135,6 +135,8 @@ bindsym $mod+Down exec $HOME/.config/i3blocks/i3blocks_volume.sh down
 bindsym $mod+Up exec $HOME/.config/i3blocks/i3blocks_volume.sh up
 bindsym Menu exec "$DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#285577' -nb '#121212'"
 
+bindsym $mod+F1 exec "$DIR_SCRIPTS/rotate-display.sh"
+
 # media/extra keys (external keyboard)
 bindsym XF86HomePage exec "notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'; pkill -RTMIN+2 i3blocks"
 bindsym XF86Mail exec "[[ ! $(pgrep geary) ]] && geary-light-theme.sh"; workspace $ws4
@@ -156,6 +158,7 @@ for_window [class = "Chromium" ] move container to workspace $ws2
 #for_window [class = "calibre" ] move container to workspace $ws6
 for_window [class = "Wine" ] move container to workspace $ws6
 for_window [class = "Gimp" ] move container to workspace $ws6
+for_window [class = "Anki" ] move container to workspace $ws6
 for_window [title = "^ranger$" ] move container to workspace $ws3
 for_window [class = "spotify" ] move container to workspace $ws4
 for_window [title = "^rtorrent" ] move container to workspace $ws5

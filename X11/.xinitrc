@@ -49,6 +49,12 @@ udiskie &
 # Play-with-mpv (https://github.com/Thann/play-with-mpv)
 #play-with-mpv &
 
+# fcitx input method
+fcitx &
+
+# Natural scroll xinput ("id" might be updated)
+xinput set-button-map 10 1 2 3 5 4 6 7 8 9
+
 # Start X
 #exec dbus-launch --exit-with-session --sh-syntax awesome
 #exec awesome

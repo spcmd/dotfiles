@@ -7,13 +7,21 @@
 # Created by: spcmd
 
 hdmi-off(){
-    xrandr --output HDMI1 --off --output eDP1 --auto
-    sed -i 's/device 3/device 0/' ~/.asoundrc
+    if [[ ! -e ~/.asoundrc ]]; then
+        echo "Can't find ~/.asoundrc. Is it renamed?"
+    else
+        xrandr --output HDMI1 --off --output eDP1 --auto
+        sed -i 's/device 3/device 0/' ~/.asoundrc
+    fi
 }
 
 hdmi-on(){
-    xrandr --output eDP1 --off --output HDMI1 --auto
-    sed -i 's/device 0/device 3/' ~/.asoundrc
+    if [[ ! -e ~/.asoundrc ]]; then
+        echo "Can't find ~/.asoundrc. Is it renamed?"
+    else
+        xrandr --output eDP1 --off --output HDMI1 --auto
+        sed -i 's/device 0/device 3/' ~/.asoundrc
+    fi
 }
 
 alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
