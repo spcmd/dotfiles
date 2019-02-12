@@ -21,15 +21,15 @@ rsync-320GB_Rack() {
         rsync -avr --delete $HOME/Calibre\ Library/ $RACK_BACKUP_DIR/Calibre\ Library
         rsync -avr --delete $HOME/Comics/ $RACK_BACKUP_DIR/Comics
         rsync -avr --delete $HOME/Games/ $RACK_BACKUP_DIR/Games
-        # mame emulator save states
-        rsync -avr --delete $HOME/.mame/sta $RACK_BACKUP_DIR/.mame/sta
-        # zsnes emulator save states
-        rsync -avr --delete $HOME/.zsnes/*.zst $RACK_BACKUP_DIR/.zsnes
-        # fceux emulator save states
-        rsync -avr --delete $HOME/.fceux/fcs $RACK_BACKUP_DIR/.fceux
-        rsync -avr --delete $HOME/.fceux/sav $RACK_BACKUP_DIR/.fceux
-        # mupen64plus emulator save states
-        rsync -avr --delete $HOME/.mupen64plus $RACK_BACKUP_DIR/.mupen64plus
+        rsync -avr --delete $HOME/Learning/ $RACK_BACKUP_DIR/Learning
+        rsync -avr "$HOME/.wine/drive_c/Program Files (x86)/Clear Admin Szamlazo/DB" $RACK_BACKUP_DIR/ClearAdmin_BACKUP
+
+        # emulator save states
+        #rsync -avr --delete $HOME/.mame/sta $RACK_BACKUP_DIR/.mame/sta
+        #rsync -avr --delete $HOME/.zsnes/*.zst $RACK_BACKUP_DIR/.zsnes
+        #rsync -avr --delete $HOME/.fceux/fcs $RACK_BACKUP_DIR/.fceux
+        #rsync -avr --delete $HOME/.fceux/sav $RACK_BACKUP_DIR/.fceux
+        #rsync -avr --delete $HOME/.mupen64plus $RACK_BACKUP_DIR/.mupen64plus
 
     else
         echo "==> Error: \033[1;34m$RACK_BACKUP_DIR \033[0mnot found. Is it mounted? Or has the directory changed?"
@@ -39,12 +39,11 @@ rsync-320GB_Rack() {
 rsync-Pendrive() {
     PENDRIVE='/media/PENDRIVE1GB'
     if [[ -d $PENDRIVE ]]; then
+        rsync -avr --delete $HOME/Documents/ $PENDRIVE/Documents
+        rsync -avr "$HOME/.wine/drive_c/Program Files (x86)/Clear Admin Szamlazo/DB" $PENDRIVE/ClearAdmin_BACKUP
         rsync -avr --delete $HOME/.password-store/ $PENDRIVE/.password-store
         rsync -avr --delete $HOME/.spotymenu/ $PENDRIVE/.spotymenu
         rsync -avr --delete $HOME/.dsnippet/ $PENDRIVE/.dsnippet
-        rsync -avr --delete $HOME/Documents/tuxwiki $PENDRIVE/Documents
-        rsync -avr $HOME/Documents/Notes $PENDRIVE/Documents
-        rsync -avr $HOME/Documents/TODO.todo $PENDRIVE/Documents
         rsync -avr $HOME/.mutt/account.*.muttrc $PENDRIVE/.mutt
     else
         echo "==> Error: \033[1;34m$PENDRIVE \033[0mnot found. Is it mounted? Or has the name changed?"
