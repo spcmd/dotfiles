@@ -8,8 +8,8 @@
 #define brightred #CC181E
 #define green #0A7612
 #define brightgreen #1F831F
-#define yellow #ffaf00
-#define brightyellow #ffaf00
+#define yellow #d75f00
+#define brightyellow #d75f00
 #define blue #084271
 #define brightblue #084271
 #define magenta #4D4270
