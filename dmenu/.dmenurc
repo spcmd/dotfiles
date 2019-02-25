@@ -1,3 +1,4 @@
-DMENU='dmenu -i -l 10 -fn Terminus -sb #285577 -nb #121212'
+DMENU="dmenu -i -l 10 -fn \'Droid Sans 11\' -sb #000000 -nb #D0D9DA -nf #000000"
+#DMENU='dmenu -i -l 10 -fn Terminus -sb #285577 -nb #121212'
 #DMENU='dmenu -i -l 10 -fn Terminus -sb #0D497B -nb #121212'
 #DMENU='dmenu -i -l 10 -fn Terminus -sb #4D4270 -nb #121212'

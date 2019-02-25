@@ -14,9 +14,10 @@ KEYTIMEOUT=1
 #   6 : normal vertical bar
 
 cursor_type_vicmd='2'
-cursor_type_viins='2'
+cursor_type_viins='6'
 cursor_color_vicmd='15'
-cursor_color_viins='12'
+#cursor_color_viins='12'
+cursor_color_viins='0'
 
 function zle-line-init zle-keymap-select {
     if [ $KEYMAP = vicmd ]; then

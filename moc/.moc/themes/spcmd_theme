@@ -1,12 +1,12 @@
 background		= default	default
 frame			= blue		default
-window_title		= white	 default
+window_title		= black	 default
 directory		= blue		default	bold
 selected_directory	= white		blue
-playlist		= white		default	bold
+playlist		= black		default	bold
 selected_playlist	= black		blue
-    file			= white		default
-selected_file		= white		blue
+    file			= black		default
+selected_file		= black		blue
 marked_file		= green		default
 marked_selected_file	= black		green	bold
 info			= white		default

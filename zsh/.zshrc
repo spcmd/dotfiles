@@ -18,7 +18,7 @@ DIR_ZSH_THEMES=$DIR_ZSH/themes
 FILE_ZSH_COMPDUMP="$HOME/.zcompdump"
 
 # Theme / Prompt
-ZSH_THEME="spcmd"
+ZSH_THEME="spcmd_light"
 
 # Load defaults
 for default_config in $DIR_ZSH_DEFAULTS/*.zsh; do

@@ -20,8 +20,9 @@ bindsym $mod+Return exec urxvtc
 # kill focused window
 bindsym $mod++q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+a exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#285577' -nb '#121212'
+# start dmenu
+#bindsym $mod+a exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#285577' -nb '#121212'
+bindsym $mod+a exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'Droid Sans 11' -sb '#000000' -nb '#D0D9DA' -nf '#000000'
 
 # change focus
 bindsym $mod+h focus left
@@ -133,13 +134,15 @@ bindsym $mod+Ctrl+Right exec "light -A 2"
 
 bindsym $mod+Down exec $HOME/.config/i3blocks/i3blocks_volume.sh down
 bindsym $mod+Up exec $HOME/.config/i3blocks/i3blocks_volume.sh up
-bindsym Menu exec "$DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#285577' -nb '#121212'"
+#bindsym Menu exec "$DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#285577' -nb '#121212'"
+bindsym Menu exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'Droid Sans 11' -sb '#000000' -nb '#D0D9DA' -nf '#000000'
 
-bindsym $mod+F1 exec "$DIR_SCRIPTS/rotate-display.sh"
+#bindsym $mod+F1 exec "$DIR_SCRIPTS/rotate-display.sh"
 
 # media/extra keys (external keyboard)
 bindsym XF86HomePage exec "notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'; pkill -RTMIN+2 i3blocks"
-bindsym XF86Mail exec "[[ ! $(pgrep geary) ]] && geary-light-theme.sh"; workspace $ws4
+#bindsym XF86Mail exec "[[ ! $(pgrep geary) ]] && geary-light-theme.sh"; workspace $ws4
+bindsym XF86Mail exec "[[ ! $(pgrep thunderbird) ]] && $HOME/bin/thunderbird"; workspace $ws4
 bindsym XF86Calculator exec "mate-calc"
 bindsym XF86AudioRaiseVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh down
 bindsym XF86AudioLowerVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh up
@@ -164,12 +167,23 @@ for_window [class = "spotify" ] move container to workspace $ws4
 for_window [title = "^rtorrent" ] move container to workspace $ws5
 for_window [title = "^neomutt" ] move container to workspace $ws4, focus
 for_window [title = "^Geary$" ] move container to workspace $ws4
+for_window [class = "Thunderbird" ] move container to workspace $ws4
 for_window [title = "^newsboat" ] move container to workspace $ws7
 for_window [class = "Mate-calc" ] floating disable, move left, resize shrink width 24 px or 24 ppt
 for_window [class = "mpv" ] resize grow width 14 px or 14 ppt
 for_window [class = "Soffice" ] move container to workspace $ws6
 for_window [title = "^MOC" ] move container to workspace $ws8
 
+# colors
+# class                 border  backgr. text    indicator child_border
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused          #E3E1D9 #D0D9DA #000000 #000000   #D0D9DA
+client.focused_inactive  #E3E1D9 #D0D9DA #888888 #000000   #D0D9DA
+client.unfocused          #E3E1D9 #D0D9DA #888888 #000000   #D0D9DA
+#client.unfocused          #3B4145 #3B4145 #E3E1D9 #000000   #3B4145
+
+# fonts
+font pango:Droid Sans 10
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -177,6 +191,13 @@ bar {
         status_command i3blocks
         position top
         #separator_symbol " | "
+        font pango:Droid Sans 10
+    colors {
+        background #D0D9DA
+        focused_workspace  #D0D9DA #D0D9DA #000000
+        active_workspace   #D0D9DA #D0D9DA #999999
+        inactive_workspace #D0D9DA #D0D9DA #999999
+    }
 }
 
 # Autorun

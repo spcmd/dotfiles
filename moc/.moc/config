@@ -144,7 +144,7 @@ ShowTimePercent = yes
 #
 # Example:    Theme = laras_theme
 #
-Theme = spcmd_theme
+Theme = spcmd_light_theme
 
 # The theme used when running on an xterm.
 #
@@ -445,7 +445,7 @@ CanStartInPlaylist = yes
 # Examples:   ExecCommand1 = "cp %f /mnt/usb_drive"
 #             ExecCommand2 = "/home/joe/now_playing %I"
 #
-ExecCommand1 = "/home/spcmd/bin/mocp-quit-client.sh"
+ExecCommand1 = "/home/spcmd/Scripts/mocp-quit-client.sh
 #ExecCommand2 =
 #ExecCommand3 =
 #ExecCommand4 =

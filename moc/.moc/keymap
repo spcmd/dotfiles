@@ -89,8 +89,8 @@ reload                = r
 # Audio playing and positioning keys:
 seek_forward          = RIGHT
 seek_backward         = LEFT
-seek_forward_fast     = ]
-seek_backward_fast    = [
+seek_forward_fast     = ^l
+seek_backward_fast    = ^h
 pause                 = SPACE
 stop                  = s
 next                  = n

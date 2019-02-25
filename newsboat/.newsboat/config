@@ -64,16 +64,27 @@ macro o set browser "w3m %u"; open-in-browser ; set browser "$BROWSER"
 # COLORS --------------------------------------------------------------------------------
 # color <element> <foreground color> <background color> [<attribute> ...]
 
-color background color7 default
-color listnormal color7 default
-color listnormal_unread color1 default
+# dark theme
+#color background color7 default
+#color listnormal color7 default
+#color listnormal_unread color1 default
 #color listfocus  color7 color4
 #color listfocus_unread  color7 color4
-color listfocus  color7 color4
-color listfocus_unread  color7 color4
-color info       color0 color15 bold
+#color info       color0 color15 bold
+#search-highlight-colors color7 color1
+
+#light theme
+color background color0 default
+color listnormal color0 default
+color listnormal_unread color1 default
+#color listfocus  color7 color0
+#color listfocus_unread  color7 color0
+color listfocus  color7 color0
+color listfocus_unread  color7 color0
+color info       color7 color0
 #color article    color7 default
 search-highlight-colors color7 color1
+
 
 highlight feedlist "✗ Unread" color0 color11
 highlight feedlist "⚑ Flagged" color0 color11

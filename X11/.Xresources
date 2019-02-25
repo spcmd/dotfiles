@@ -15,7 +15,7 @@ URxvt.terminalName: rxvt-unicode-256color
 !URxvt.foreground: #f5f5f5
 
 !Source colors
-#include "/home/spcmd/.urxvt/colors/spcmd-arch-i3"
+#include "/home/spcmd/.urxvt/colors/spcmd-light_theme"
 URxvt.background: bg
 URxvt.foreground: fg
 URxvt.color0: black
@@ -40,12 +40,13 @@ URxvt.color15: brightwhite
 !URxvt.font: -*-raize-normal-r-normal-*-17-*-*-*-*-*-*-*
 !URxvt.font: -*-tamsyn-medium-r-*-*-16-*-*-*-*-*-*-*
 !URxvt.font: -*-tamzen-medium-*-*-*-17-*-*-*-*-*-*-*
-URxvt.font: -*-terminus-medium-r-normal-*-16-*-*-*-*-*-*-*
+!URxvt.font: -*-terminus-medium-r-normal-*-16-*-*-*-*-*-*-*
 !URxvt.letterSpace: -1
 
+URxvt.font: xft:Droid Sans Mono:pixelsize=14:antialias=false:hinting=false
 !URxvt.font: xft:DejaVu Sans Mono:pixelsize=14:antialias=false:hinting=false
 !URxvt.letterSpace: -2
-!URxvt.lineSpace: 1
+URxvt.lineSpace: 1
 
 ! Disable scrollbar
 URxvt.scrollBar: false

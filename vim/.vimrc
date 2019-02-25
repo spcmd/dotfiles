@@ -19,8 +19,8 @@ call plug#begin('~/.vim/plugged')
     "Plug 'chrisbra/Colorizer', { 'on': 'ColorHighlight' }
     "Plug 'junegunn/fzf', { 'do': './install --all' }
     "Plug 'junegunn/fzf.vim'
-    "Plug 'xolox/vim-misc'
-    "Plug 'xolox/vim-colorscheme-switcher'
+    Plug 'xolox/vim-misc'
+    Plug 'xolox/vim-colorscheme-switcher'
     "Plug 'w0ng/vim-hybrid'
     "Plug 'chriskempson/base16-vim'
     Plug 'lilydjwg/colorizer'
@@ -41,7 +41,8 @@ call plug#end()
 syntax on
 filetype plugin indent on
 if exists("$DISPLAY")
-        colorscheme Tomorrow-Night-spcmd
+        colorscheme editplus-spcmd
+        "colorscheme Tomorrow-Night-spcmd
     else
         colorscheme Tomorrow-Night-Eighties-TTY
 endif
@@ -413,7 +414,7 @@ nnoremap <S-c> :!clear && cargo run<CR>
 "nmap <C-b> :NERDTreeToggle<CR>
 
 "Colorschemes Switcher (https://github.com/xolox/vim-colorscheme-switcher)
-"nnoremap <leader>n :NextColorScheme<CR>
+nnoremap <leader>n :NextColorScheme<CR>
 
 "Vim Easy TODO (https://github.com/spcmd/vim-easy-todo)
 nnoremap <silent> <leader>d :TodoDone<CR>

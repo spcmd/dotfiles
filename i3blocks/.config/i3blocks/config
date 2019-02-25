@@ -20,6 +20,7 @@
 # Each block command defaults to the script name to avoid boilerplate.
 command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
+color=#000000
 
 [mail]
 label=Mail:

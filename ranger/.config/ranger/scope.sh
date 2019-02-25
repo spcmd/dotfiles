@@ -105,7 +105,9 @@ case "$mimetype" in
             pygmentize_format=terminal
             highlight_format=ansi
         fi
-        try safepipe highlight --config-file=/home/spcmd/.config/highlight/themes/Tommorrow-Night-ranger.theme --out-format=${highlight_format} "$path" && { dump | trim; exit 5; }
+        # themes: https://github.com/tajmone/highlight/tree/master/themes
+        #try safepipe highlight --config-file=/home/spcmd/.config/highlight/themes/Tommorrow-Night-ranger.theme --out-format=${highlight_format} "$path" && { dump | trim; exit 5; }
+        try safepipe highlight --config-file=/home/spcmd/.config/highlight/themes/zellner.theme --out-format=${highlight_format} "$path" && { dump | trim; exit 5; }
         #try safepipe highlight --out-format=${highlight_format} "$path" && { dump | trim; exit 5; }
         #try safepipe pygmentize -f ${pygmentize_format} "$path" && { dump | trim; exit 5; }
         exit 2;;
