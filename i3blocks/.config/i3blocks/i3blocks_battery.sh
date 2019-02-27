@@ -14,11 +14,9 @@ else
 fi
 
 if [ "$status" = "Charging" ]; then
-        widget_status="Charging"
+        widget_status=""
 else
-        widget_status="Bat"
+        widget_status=""
 fi
 
-echo "${widget_status}: ${widget_cap}"
-
-
+echo "${widget_status} ${widget_cap}"

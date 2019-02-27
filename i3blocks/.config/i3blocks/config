@@ -23,14 +23,14 @@ separator_block_width=15
 color=#000000
 
 [mail]
-label=Mail:
+label=
 markup=pango
 command=$HOME/.config/i3blocks/i3blocks_mail.sh
 interval=60
 signal=2
 
 [volume]
-label=Vol:
+label=
 markup=pango
 command=$HOME/.config/i3blocks/i3blocks_volume.sh
 interval=once

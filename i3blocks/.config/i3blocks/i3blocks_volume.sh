@@ -13,7 +13,7 @@ case $1 in
         level=$(amixer -M get Master | awk '/%/{gsub( /[][%]/,"" );print $(NF-2)}')
         state=$(amixer -M get Master | awk '/\[on|off\]/{gsub("[\\[\\]]","");print $NF}')
         if [ "$state" = "off" ]; then
-            level="<span foreground='red'>OFF</span>"
+            level="<span foreground='#de0404'>MUTE</span>"
         else
             level=$level
         fi
@@ -27,7 +27,7 @@ esac
 level=$(amixer -M get Master | awk '/%/{gsub( /[][%]/,"" );print $(NF-2)}')
 state=$(amixer -M get Master | awk '/\[on|off\]/{gsub("[\\[\\]]","");print $NF}')
 if [ "$state" = "off" ]; then
-    level="<span foreground='red'>OFF</span>"
+    level="<span foreground='#de0404'>MUTE</span>"
 else
     level=$level
 fi

@@ -53,7 +53,9 @@ udiskie &
 fcitx &
 
 # Natural scroll xinput ("id" might be updated)
-xinput set-button-map 10 1 2 3 5 4 6 7 8 9
+# rewrite 8 9 to 0 0 to disable side buttons
+#xinput set-button-map 10 1 2 3 5 4 6 7 8 9
+xinput set-button-map 10 1 2 3 5 4 6 7 0 0
 
 # Start X
 #exec dbus-launch --exit-with-session --sh-syntax awesome

@@ -4,8 +4,6 @@
 # \__ | |_) | (__| | | | | | (_| |
 # |___| .__/ \___|_| |_| |_|\__,_|
 #     |_|
-# Created by: spcmd
-# http://spcmd.github.io
 # https://github.com/spcmd
 
 # --------------------------------------------------------------------------
@@ -61,47 +59,51 @@ nnoremap "L" "$"
 
 # Redefine colors - use this instead of the default ncurses colors (this will also change the colors in the current terminal window!)
 # Info: http://stackoverflow.com/questions/28401332/ncurses-why-is-the-rgb-color-value-range-from-0-1000
+# https://stackoverflow.com/questions/43710131/how-does-ncurses-init-color-function-translate-to-traditional-rbg-colors
+# (n) * 1000 / 256
+# white is hex:f5f5f5 = rgb:245 245 245 = ncurses:957 957 957
 REDEFINE_COLOR "RED" 700 100 100
 REDEFINE_COLOR "GREEN" 0 500 120
+REDEFINE_COLOR "WHITE" 957 957 957
 
 # DARK THEME
-color "type=DEFAULT fg=WHITE bg=BLACK"
-color "type=HEADINGS fg=WHITE bg=BLUE"
-color "type=WELCOME fg=BLUE bg=BLACK bold=1"
-color "type=CELL_SELECTION fg=BLACK bg=WHITE bold=1"
-color "type=CELL_SELECTION_SC fg=BLACK bg=WHITE"
-color "type=NUMB fg=WHITE bg=BLACK"
-color "type=STRG fg=WHITE bg=BLACK"
-color "type=DATEF fg=CYAN bg=BLACK"
-color "type=EXPRESSION fg=CYAN bg=BLACK"
-color "type=INFO_MSG fg=GREEN bg=BLACK"
-color "type=ERROR_MSG fg=RED bg=BLACK"
-color "type=MODE fg=WHITE bg=BLACK"
-color "type=CELL_ID fg=GREEN bg=BLACK"
-color "type=CELL_FORMAT fg=WHITE bg=BLACK bold=1"
-color "type=CELL_CONTENT fg=GREEN bg=BLACK bold=1"
-color "type=INPUT fg=WHITE bg=BLACK"
-color "type=NORMAL fg=WHITE bg=BLACK"
-color "type=CELL_ERROR fg=RED bg=BLACK"
-color "type=CELL_NEGATIVE fg=GREEN bg=BLACK"
+#color "type=DEFAULT fg=WHITE bg=BLACK"
+#color "type=HEADINGS fg=WHITE bg=BLUE"
+#color "type=WELCOME fg=BLUE bg=BLACK bold=1"
+#color "type=CELL_SELECTION fg=BLACK bg=WHITE bold=1"
+#color "type=CELL_SELECTION_SC fg=BLACK bg=WHITE"
+#color "type=NUMB fg=WHITE bg=BLACK"
+#color "type=STRG fg=WHITE bg=BLACK"
+#color "type=DATEF fg=CYAN bg=BLACK"
+#color "type=EXPRESSION fg=CYAN bg=BLACK"
+#color "type=INFO_MSG fg=GREEN bg=BLACK"
+#color "type=ERROR_MSG fg=RED bg=BLACK"
+#color "type=MODE fg=WHITE bg=BLACK"
+#color "type=CELL_ID fg=GREEN bg=BLACK"
+#color "type=CELL_FORMAT fg=WHITE bg=BLACK bold=1"
+#color "type=CELL_CONTENT fg=GREEN bg=BLACK bold=1"
+#color "type=INPUT fg=WHITE bg=BLACK"
+#color "type=NORMAL fg=WHITE bg=BLACK"
+#color "type=CELL_ERROR fg=RED bg=BLACK"
+#color "type=CELL_NEGATIVE fg=GREEN bg=BLACK"
 
 # WHITE THEME
 #color "type=DEFAULT fg=BLACK bg=WHITE"
 #color "type=HEADINGS fg=WHITE bg=BLUE"
-#color "type=WELCOME fg=BLUE bg=WHITE bold=1"
-#color "type=CELL_SELECTION fg=BLACK bg=YELLOW bold=1"
-#color "type=CELL_SELECTION_SC fg=WHITE bg=BLUE"
-#color "type=NUMB fg=BLACK bg=WHITE"
-#color "type=STRG fg=BLACK bg=WHITE"
+#color "type=WELCOME fg=BLACK bg=WHITE bold=1"
+color "type=CELL_SELECTION fg=WHITE bg=GREEN"
+color "type=CELL_SELECTION_SC fg=WHITE bg=GREEN"
+color "type=NUMB fg=BLUE bg=WHITE"
+color "type=STRG fg=BLACK bg=WHITE bold=0"
 #color "type=DATEF fg=MAGENTA bg=WHITE"
 #color "type=EXPRESSION fg=MAGENTA bg=WHITE"
 #color "type=INFO_MSG fg=GREEN bg=WHITE"
 #color "type=ERROR_MSG fg=RED bg=WHITE"
-#color "type=MODE fg=BLUE bg=WHITE"
-#color "type=CELL_ID fg=BLUE bg=WHITE"
-#color "type=CELL_FORMAT fg=BLACK bg=WHITE bold=1"
-#color "type=CELL_CONTENT fg=GREEN bg=WHITE bold=1"
-#color "type=INPUT fg=BLACK bg=WHITE"
+#color "type=MODE fg=BLACK bg=WHITE"
+#color "type=CELL_ID fg=BLACK bg=WHITE"
+#color "type=CELL_FORMAT fg=BLACK bg=WHITE"
+#color "type=CELL_CONTENT fg=GREEN bg=WHITE"
+color "type=INPUT fg=BLACK bg=WHITE"
 #color "type=NORMAL fg=BLACK bg=WHITE"
 #color "type=CELL_ERROR fg=RED bg=WHITE"
 #color "type=CELL_NEGATIVE fg=GREEN bg=WHITE"
