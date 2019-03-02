@@ -77,17 +77,17 @@ macro o set browser "w3m %u"; open-in-browser ; set browser "$BROWSER"
 color background color0 default
 color listnormal color0 default
 color listnormal_unread color1 default
-#color listfocus  color7 color0
-#color listfocus_unread  color7 color0
+color listfocus  color7 color0
+color listfocus_unread  color7 color0
 color listfocus  color7 color0
 color listfocus_unread  color7 color0
 color info       color7 color0
-#color article    color7 default
+color article    color0 default
 search-highlight-colors color7 color1
 
 
-highlight feedlist "✗ Unread" color0 color11
-highlight feedlist "⚑ Flagged" color0 color11
+highlight feedlist " Unread" color7 color11
+highlight feedlist " Flagged" color7 color11
 highlight feedlist "Youtube" color7 color9
 highlight articlelist "Youtube" color7 color9
 highlight feedlist "Arch Linux" color7 color4
@@ -104,15 +104,6 @@ highlight feedlist "Podcast" color7 color91
 highlight articlelist "Podcast" color7 color91
 highlight feedlist "Twitter" color7 color33
 highlight articlelist "Twitter" color7 color33
-highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:|^Flags:)" color11 color0
+highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:|^Flags:)" color11 default
 highlight article "https?://[^ ]+" color11 default
-highlight article "\\[[0-9]{1,2}\]" color11 default
-
-# light color scheme
-#color background black white
-#color listnormal black white
-#color listfocus  white black
-#color listnormal_unread black white
-#color listfocus_unread  white black
-#color info       black yellow
-#color article    black white
+highlight article "\\[[0-9]{1,2}\]" color0 default

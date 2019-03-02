@@ -14,7 +14,7 @@ else
 fi
 
 if [ "$status" = "Charging" ]; then
-        widget_status=""
+        widget_status=""
 else
         widget_status=""
 fi

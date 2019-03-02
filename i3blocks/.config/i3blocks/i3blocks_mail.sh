@@ -4,9 +4,11 @@ mail_count=$(cat ~/.mutt/newmail_count)
 
 if [ "$mail_count" -gt 0 ]; then
     #mail_count="<span foreground='#ff0000'>${mail_count}new</span>"
-    mail_count="<span foreground='#DE0404'>${mail_count}new</span>"
+    #mail_count="<span foreground='#DE0404'>${mail_count}new</span>"
+    mail_count="<span foreground='#DE0404'> ${mail_count}</span>"
 else
-    mail_count=$mail_count
+    #mail_count=$mail_count
+    mail_count=
 fi
 
 echo "$mail_count"
