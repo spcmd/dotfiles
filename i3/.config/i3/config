@@ -57,16 +57,27 @@ bindsym $mod+Shift+space floating toggle
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:term"
-set $ws2 "2:web"
-set $ws3 "3:files"
-set $ws4 "4:mail"
-set $ws5 "5:torr"
-set $ws6 "6:desk"
-set $ws7 "7:rss"
-set $ws8 "8:music"
-set $ws9 "9:desk"
-set $ws10 "10:desk"
+#set $ws1 "1:term"
+#set $ws2 "2:web"
+#set $ws3 "3:files"
+#set $ws4 "4:mail"
+#set $ws5 "5:torr"
+#set $ws6 "6:desk"
+#set $ws7 "7:rss"
+#set $ws8 "8:music"
+#set $ws9 "9:desk"
+#set $ws10 "10:desk"
+
+set $ws1 "1:ターミナル"
+set $ws2 "2:インターネット"
+set $ws3 "3:ファイル"
+set $ws4 "4:電子メール"
+set $ws5 "5:トレント"
+set $ws6 "6:机"
+set $ws7 "7:ニュース"
+set $ws8 "8:音楽"
+set $ws9 "9:机"
+set $ws10 "10:机"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -139,6 +150,10 @@ bindsym Menu exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'Droid Sans 11' -sb '#000
 
 #bindsym $mod+F1 exec "$DIR_SCRIPTS/rotate-display.sh"
 
+
+#fcitx+mozc (clear the textbox and toggle input method)
+bindsym Mod1+space exec "sleep 0.2 && xdotool key Ctrl+a && xdotool key Delete && fcitx-remote -t"
+
 # media/extra keys (external keyboard)
 bindsym XF86HomePage exec "notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'; pkill -RTMIN+2 i3blocks"
 #bindsym XF86Mail exec "[[ ! $(pgrep geary) ]] && geary-light-theme.sh"; workspace $ws4
@@ -153,7 +168,7 @@ bindsym XF86AudioNext exec "mocp --next"
 #bindsym XF86AudioMute exec ""
 bindsym XF86Sleep exec "systemctl suspend"
 bindsym XF86Back exec "sleep 0.5s; xset dpms force off"
-
+#bindsym XF86Tools exec "clog $(xsel -p) && notify-send \\"cLOGed: $(xsel -p)\\""
 
 # rules
 for_window [class="[.]*"] move left
@@ -177,7 +192,7 @@ for_window [title = "^MOC" ] move container to workspace $ws8
 # colors
 # class                 border  backgr. text    indicator child_border
 #client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused          #E3E1D9 #D0D9DA #000000 #000000   #D0D9DA
+client.focused          #E3E1D9 #AAB8BA #000000 #000000   #D0D9DA
 client.focused_inactive  #E3E1D9 #D0D9DA #888888 #000000   #D0D9DA
 client.unfocused          #E3E1D9 #D0D9DA #888888 #000000   #D0D9DA
 #client.unfocused          #3B4145 #3B4145 #E3E1D9 #000000   #3B4145

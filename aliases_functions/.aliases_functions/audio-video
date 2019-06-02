@@ -24,9 +24,6 @@ hdmi-on(){
     fi
 }
 
-alias ytdla='youtube-dl --extract-audio --audio-format="mp3" --audio-quality=0 -o "~/Downloads/%(title)s.%(ext)s"'
-alias ytdl='youtube-dl -f "best[height=720]" -o "~/Downloads/%(title)s.%(ext)s"'
-
 # AV duration info
 get-duration() {
     duration=$(for file in *; do echo -n "$file ...... " && ffprobe -i $file  -show_entries format=duration -v quiet -of csv="p=0" -sexagesimal | awk -F':' '{print $1":"$2}'; done)
