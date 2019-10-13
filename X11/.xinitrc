@@ -52,6 +52,9 @@ udiskie &
 # fcitx input method
 fcitx &
 
+# blueman (bluetooth)
+blueman-applet &
+
 # Natural scroll xinput ("id" might be updated)
 # rewrite 8 9 to 0 0 to disable side buttons
 #xinput set-button-map 10 1 2 3 5 4 6 7 8 9

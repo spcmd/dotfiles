@@ -73,11 +73,11 @@ set $ws2 "2:インターネット"
 set $ws3 "3:ファイル"
 set $ws4 "4:電子メール"
 set $ws5 "5:トレント"
-set $ws6 "6:机"
+set $ws6 "6:デスクトップ"
 set $ws7 "7:ニュース"
 set $ws8 "8:音楽"
-set $ws9 "9:机"
-set $ws10 "10:机"
+set $ws9 "9:デスクトップ"
+set $ws10 "10:デスクトップ"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1

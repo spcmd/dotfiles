@@ -4,8 +4,15 @@
 # \__ | |_) | (__| | | | | | (_| |
 # |___| .__/ \___|_| |_| |_|\__,_|
 #     |_|
-# Created by: spcmd
 
+# Convert to mp3
+convert-to-mp3(){
+    for file in "$@"; do
+        ffmpeg -i $file -ab 320k -map_metadata 0 -id3v2_version 3 ${file%.*}.mp3
+    done
+}
+
+# HDMI switcher
 hdmi-off(){
     if [[ ! -e ~/.asoundrc ]]; then
         echo "Can't find ~/.asoundrc. Is it renamed?"
