@@ -22,6 +22,14 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 color=#000000
 
+[mocnowplaying]
+markup=pango
+command=$HOME/.config/i3blocks/i3blocks_moc_now_playing.sh
+#align=center
+#min_width=680
+interval=once
+signal=3
+
 [mail]
 #label=
 markup=pango

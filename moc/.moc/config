@@ -230,8 +230,8 @@ Keymap = keymap
 
 # How fast to seek (in number of seconds per keystroke).  The first
 # option is for normal seek and the second for silent seek.
-#SeekTime = 1
-#SilentSeekTime = 5
+SeekTime = 1
+SilentSeekTime = 5
 
 # PreferredDecoders allows you to specify which decoder should be used
 # for any given audio format.  It is a colon-separated list in which
@@ -445,8 +445,8 @@ CanStartInPlaylist = yes
 # Examples:   ExecCommand1 = "cp %f /mnt/usb_drive"
 #             ExecCommand2 = "/home/joe/now_playing %I"
 #
-ExecCommand1 = "/home/spcmd/Scripts/mocp-quit-client.sh
-#ExecCommand2 =
+ExecCommand1 = "/home/spcmd/Scripts/mocp-quit-client.sh"
+ExecCommand2 = "/home/spcmd/Scripts/moc-lyrics"
 #ExecCommand3 =
 #ExecCommand4 =
 #ExecCommand5 =
@@ -590,7 +590,7 @@ PlaylistFullPaths = no
 #
 # Example:    OnSongChange = "/home/jack/.moc/myscript %a %r"
 #
-#OnSongChange =
+OnSongChange = "/home/spcmd/.config/i3blocks/i3blocks_moc_now_playing.sh"
 
 # If RepeatSongChange is 'yes' then MOC will execute the command every time
 # a song starts playing regardless of whether or not it is just repeating.
@@ -600,7 +600,7 @@ PlaylistFullPaths = no
 
 # Run the OnStop command (full path, no arguments) when MOC changes state
 # to stopped (i.e., when user stopped playing or changes a song).
-#OnStop = "/home/jack/.moc/myscript_on_stop"
+OnStop = "/home/spcmd/.config/i3blocks/i3blocks_moc_now_playing.sh"
 
 # This option determines which song to play after finishing all the songs
 # in the queue.  Setting this to 'yes' causes MOC to play the song which
