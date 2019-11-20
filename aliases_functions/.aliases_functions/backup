@@ -46,7 +46,7 @@ rsync-Pendrive() {
         rsync -avr --delete $HOME/.spotymenu/ $PENDRIVE/.spotymenu
         rsync -avr --delete $HOME/.dsnippet/ $PENDRIVE/.dsnippet
         rsync -avr $HOME/.mutt/account.*.muttrc $PENDRIVE/.mutt
-        rsync -avr --delete $HOME/.moc/lyrics_cache $RACK_BACKUP_DIR/.moc/lyrics_cache
+        rsync -avr --delete $HOME/.moc/lyrics_cache $PENDRIVE/.moc/lyrics_cache
     else
         echo "==> Error: \033[1;34m$PENDRIVE \033[0mnot found. Is it mounted? Or has the name changed?"
     fi

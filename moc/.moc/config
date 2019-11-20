@@ -590,7 +590,8 @@ PlaylistFullPaths = no
 #
 # Example:    OnSongChange = "/home/jack/.moc/myscript %a %r"
 #
-OnSongChange = "/home/spcmd/.config/i3blocks/i3blocks_moc_now_playing.sh"
+#OnSongChange = "/home/spcmd/.config/i3blocks/i3blocks_moc_now_playing.sh"
+OnSongChange = "/home/spcmd/Scripts/moc-onsongchange.sh"
 
 # If RepeatSongChange is 'yes' then MOC will execute the command every time
 # a song starts playing regardless of whether or not it is just repeating.

@@ -18,7 +18,7 @@ bindsym $mod+Return exec urxvtc
 #bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym $mod++q kill
+bindsym $mod+q kill
 
 # start dmenu
 #bindsym $mod+a exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#285577' -nb '#121212'
@@ -169,6 +169,10 @@ bindsym XF86AudioNext exec "mocp --next"
 bindsym XF86Sleep exec "systemctl suspend"
 bindsym XF86Back exec "sleep 0.5s; xset dpms force off"
 #bindsym XF86Tools exec "clog $(xsel -p) && notify-send \\"cLOGed: $(xsel -p)\\""
+bindsym XF86Favorites exec "spotifywebcontrol.sh"
+bindsym $mod+e exec "$HOME/bin/elado"
+
+
 
 # rules
 for_window [class="[.]*"] move left
@@ -188,6 +192,11 @@ for_window [class = "Mate-calc" ] floating disable, move left, resize shrink wid
 for_window [class = "mpv" ] resize grow width 14 px or 14 ppt
 for_window [class = "Soffice" ] move container to workspace $ws6
 for_window [title = "^MOC" ] move container to workspace $ws8
+for_window [class = "Xboard" ] floating enable, move container to workspace $ws9
+
+# for moc albumart
+for_window [workspace=8 class="feh"] move right, resize shrink width 24 px or 24 ppt
+no_focus [workspace=8 class="feh"]
 
 # colors
 # class                 border  backgr. text    indicator child_border
