@@ -20,13 +20,13 @@ call plug#begin('~/.vim/plugged')
     "Plug 'junegunn/fzf', { 'do': './install --all' }
     "Plug 'junegunn/fzf.vim'
     Plug 'xolox/vim-misc'
-    Plug 'xolox/vim-colorscheme-switcher'
+    "Plug 'xolox/vim-colorscheme-switcher'
     "Plug 'w0ng/vim-hybrid'
     "Plug 'chriskempson/base16-vim'
-    Plug 'lilydjwg/colorizer'
+    "Plug 'lilydjwg/colorizer'
     Plug 'Shougo/neocomplete.vim'
     Plug 'scrooloose/nerdcommenter'
-    Plug 'spcmd/vim-easy-todo', { 'for': 'todo' }
+    "Plug 'spcmd/vim-easy-todo', { 'for': 'todo' }
     Plug 'kristijanhusak/vim-multiple-cursors'
     "Plug 'rust-lang/rust.vim'
     Plug 'junegunn/goyo.vim'
@@ -183,6 +183,12 @@ endfunction
 "let g:racer_cmd = "/home/spcmd/bin/racer"
 "let $RUST_SRC_PATH="/home/spcmd/bin/rustc-source/src"
 
+"====== [ Easy TODO ] =========================================
+let g:easy_todo_list_title_color_cterm=12
+let g:easy_todo_list_title_color_gui='#0000ff'
+let g:easy_todo_done_checkmark_color_cterm=28
+let g:easy_todo_done_checkmark_color_gui='#008700'
+
 " }}}
 " {{{   Terminal cursor settings
 "--------------------------------------------
@@ -288,6 +294,10 @@ endif
 
 "====== [ Basic key mappings ] ============================================
 
+"Yank to system clipboard
+nnoremap y "+y
+vnoremap y "+y
+
 "Paste from clipboard
 inoremap űű <Esc>"+p
 
@@ -380,9 +390,6 @@ nnoremap <C-l> <C-w>l
 nnoremap . :lprevious<CR>
 nnoremap - :lnext<CR>
 
-"Yank to system clipboard
-nnoremap y "+y
-vnoremap y "+y
 
 " Replace X with x, so it will save and quit instead of showing the encryption prompt
 " (http://stackoverflow.com/questions/17792177/disable-encryption-with-x-in-vim/17794801#17794801)

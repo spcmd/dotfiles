@@ -76,7 +76,7 @@ set $ws5 "5:トレント"
 set $ws6 "6:デスクトップ"
 set $ws7 "7:ニュース"
 set $ws8 "8:音楽"
-set $ws9 "9:デスクトップ"
+set $ws9 "9:ノート"
 set $ws10 "10:デスクトップ"
 
 # switch to workspace
@@ -122,7 +122,8 @@ bindsym $mod+Mod1+k resize shrink height 3 px or 3 ppt
 bindsym $mod+Mod1+l resize grow width 3 px or 3 ppt
 
 # apps and controls
-bindsym $mod+Mod1+f exec "~/bin/chromium-privoxy.sh"
+bindsym $mod+Mod1+f exec "firefox"
+#bindsym $mod+Mod1+f exec "~/bin/brave-privoxy.sh"
 bindsym $mod+Mod1+c exec "mate-calc"
 bindsym $mod+Mod1+m exec "urxvtc -name neomutt -e neomutt -F ~/.mutt/account.1.muttrc"; workspace $ws4
 bindsym $mod+Mod1+r exec "urxvtc -name ranger -e ranger"
@@ -152,7 +153,7 @@ bindsym Menu exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'Droid Sans 11' -sb '#000
 
 
 #fcitx+mozc (clear the textbox and toggle input method)
-bindsym Mod1+space exec "sleep 0.2 && xdotool key Ctrl+a && xdotool key Delete && fcitx-remote -t"
+#bindsym Mod1+space exec "sleep 0.2 && xdotool key Ctrl+a && xdotool key Delete && fcitx-remote -t"
 
 # media/extra keys (external keyboard)
 bindsym XF86HomePage exec "notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCRIPTS/gmailcheck.sh; notify-send 'gmailcheck' 'Check done.'; pkill -RTMIN+2 i3blocks"
@@ -169,15 +170,16 @@ bindsym XF86AudioNext exec "mocp --next"
 bindsym XF86Sleep exec "systemctl suspend"
 bindsym XF86Back exec "sleep 0.5s; xset dpms force off"
 #bindsym XF86Tools exec "clog $(xsel -p) && notify-send \\"cLOGed: $(xsel -p)\\""
-bindsym XF86Favorites exec "spotifywebcontrol.sh"
-bindsym $mod+e exec "$HOME/bin/elado"
-
-
+bindsym XF86Tools exec "$DIR_SCRIPTS/vim-notepad.sh"
+bindsym $mod+x exec "notify-send 'Playing with mpv...' && mpv $(xsel -b)"
+bindsym --whole-window $mod+button2 exec "notify-send 'Playing with mpv...' && mpv $(xsel -b)"
 
 # rules
 for_window [class="[.]*"] move left
 for_window [class = "Chromium" ] move container to workspace $ws2
-#for_window [class = "calibre" ] move container to workspace $ws6
+for_window [class = "firefox" ] move container to workspace $ws2
+for_window [class = "Brave-browser" ] move container to workspace $ws2
+for_window [class = "calibre" ] move container to workspace $ws6
 for_window [class = "Wine" ] move container to workspace $ws6
 for_window [class = "Gimp" ] move container to workspace $ws6
 for_window [class = "Anki" ] move container to workspace $ws6
@@ -193,6 +195,7 @@ for_window [class = "mpv" ] resize grow width 14 px or 14 ppt
 for_window [class = "Soffice" ] move container to workspace $ws6
 for_window [title = "^MOC" ] move container to workspace $ws8
 for_window [class = "Xboard" ] floating enable, move container to workspace $ws9
+for_window [title = "^gshogi" ] floating enable, move container to workspace $ws9
 
 # for moc albumart
 for_window [workspace=8 class="feh"] move right, resize shrink width 24 px or 24 ppt

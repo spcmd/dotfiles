@@ -38,7 +38,7 @@ interval=60
 signal=2
 
 [volume]
-label=<span size='medium'></span>
+label=<span size='medium'> </span>
 markup=pango
 command=$HOME/.config/i3blocks/i3blocks_volume.sh
 interval=once

@@ -46,14 +46,11 @@ export SSH_AUTH_SOCK
 # Udiskie (Automount removable drives)
 udiskie &
 
-# Play-with-mpv (https://github.com/Thann/play-with-mpv)
-#play-with-mpv &
-
 # fcitx input method
 fcitx &
 
 # blueman (bluetooth)
-blueman-applet &
+#blueman-applet &
 
 # Natural scroll xinput ("id" might be updated)
 # rewrite 8 9 to 0 0 to disable side buttons

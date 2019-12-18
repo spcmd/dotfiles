@@ -141,6 +141,9 @@ myip()  { wget http://ipinfo.io/ip -qO - }
 urlshort() { wget -qO - "http://is.gd/create.php?format=simple&url=$1" }
 
 # translate shell (google translate) (https://github.com/soimort/translate-shell)
+
+alias gtja="urxvtc -hold -fn 'xft:Droid Sans Mono:pixelsize=18:antialias=false:hinting=false' -e sh -c 'trans -I ja:en'"
+
 gthu() {
     # save translated words to this file (dictionary)
     file_wordlist="$HOME/Documents/gt-dict.txt"

@@ -20,7 +20,7 @@ rsync-320GB_Rack() {
         rsync -avr --delete $HOME/.webdev/ $RACK_BACKUP_DIR/.webdev
         rsync -avr --delete $HOME/.moc/lyrics_cache $RACK_BACKUP_DIR/.moc/lyrics_cache
         rsync -avr --delete $HOME/Calibre\ Library/ $RACK_BACKUP_DIR/Calibre\ Library
-        rsync -avr --delete $HOME/Comics/ $RACK_BACKUP_DIR/Comics
+        #rsync -avr --delete $HOME/Comics/ $RACK_BACKUP_DIR/Comics
         rsync -avr --delete $HOME/Games/ $RACK_BACKUP_DIR/Games
         rsync -avr --delete $HOME/Learning/ $RACK_BACKUP_DIR/Learning
         rsync -avr "$HOME/.wine/drive_c/Program Files (x86)/Clear Admin Szamlazo/DB" $RACK_BACKUP_DIR/ClearAdmin_BACKUP
