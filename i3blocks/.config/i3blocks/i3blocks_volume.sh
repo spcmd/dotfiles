@@ -21,6 +21,15 @@ case $1 in
         ;;
     max)
         amixer sset Master 100; pkill -RTMIN+1 i3blocks
+        ;;
+    lvl20)
+        # this is level 20
+        amixer sset Master 41; pkill -RTMIN+1 i3blocks
+        ;;
+    lvl40)
+        # this is level 40
+        amixer sset Master 59; pkill -RTMIN+1 i3blocks
+        ;;
 esac
 
 # i3blocks volume status

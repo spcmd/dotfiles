@@ -22,7 +22,10 @@ bindsym $mod+q kill
 
 # start dmenu
 #bindsym $mod+a exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#285577' -nb '#121212'
-bindsym $mod+a exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'Droid Sans 11' -sb '#000000' -nb '#D0D9DA' -nf '#000000'
+#bindsym $mod+a exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'Droid Sans 11' -sb '#000000' -nb '#D0D9DA' -nf '#000000'
+
+#bindsym Menu exec "$DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#285577' -nb '#121212'"
+bindsym Menu exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'Droid Sans 11' -sb '#f5f5f5' -sf '#252525' -nb '#252525' -nf '#f5f5f5'
 
 # change focus
 bindsym $mod+h focus left
@@ -76,7 +79,7 @@ set $ws5 "5:トレント"
 set $ws6 "6:デスクトップ"
 set $ws7 "7:ニュース"
 set $ws8 "8:音楽"
-set $ws9 "9:ノート"
+set $ws9 "9:デスクトップ"
 set $ws10 "10:デスクトップ"
 
 # switch to workspace
@@ -146,8 +149,6 @@ bindsym $mod+Ctrl+Right exec "light -A 2"
 
 bindsym $mod+Down exec $HOME/.config/i3blocks/i3blocks_volume.sh down
 bindsym $mod+Up exec $HOME/.config/i3blocks/i3blocks_volume.sh up
-#bindsym Menu exec "$DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'terminus' -sb '#285577' -nb '#121212'"
-bindsym Menu exec $DIR_SCRIPTS/dmenu_run -i -p '>' -fn 'Droid Sans 11' -sb '#000000' -nb '#D0D9DA' -nf '#000000'
 
 #bindsym $mod+F1 exec "$DIR_SCRIPTS/rotate-display.sh"
 
@@ -160,8 +161,10 @@ bindsym XF86HomePage exec "notify-send 'gmailcheck' 'Checking mail...'; $DIR_SCR
 #bindsym XF86Mail exec "[[ ! $(pgrep geary) ]] && geary-light-theme.sh"; workspace $ws4
 bindsym XF86Mail exec "[[ ! $(pgrep thunderbird) ]] && $HOME/bin/thunderbird"; workspace $ws4
 bindsym XF86Calculator exec "mate-calc"
-bindsym XF86AudioRaiseVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh down
-bindsym XF86AudioLowerVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh up
+#bindsym XF86AudioRaiseVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh down
+#bindsym XF86AudioLowerVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh up
+bindsym XF86AudioRaiseVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh lvl20
+bindsym XF86AudioLowerVolume exec $HOME/.config/i3blocks/i3blocks_volume.sh lvl40
 bindsym XF86AudioStop exec "mocp -G"
 bindsym XF86AudioPlay exec "mocp -G"
 bindsym XF86AudioPrev exec "mocp --prev"
@@ -204,13 +207,21 @@ no_focus [workspace=8 class="feh"]
 # colors
 # class                 border  backgr. text    indicator child_border
 #client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused          #E3E1D9 #AAB8BA #000000 #000000   #D0D9DA
-client.focused_inactive  #E3E1D9 #D0D9DA #888888 #000000   #D0D9DA
-client.unfocused          #E3E1D9 #D0D9DA #888888 #000000   #D0D9DA
 #client.unfocused          #3B4145 #3B4145 #E3E1D9 #000000   #3B4145
 
+#light theme
+#client.focused          #E3E1D9 #AAB8BA #000000 #000000   #D0D9DA
+#client.focused_inactive  #E3E1D9 #D0D9DA #888888 #000000   #D0D9DA
+#client.unfocused          #E3E1D9 #D0D9DA #888888 #000000   #D0D9DA
+
+#dark theme
+client.focused          #424242 #424242 #ffffff #ccc   #424242
+client.focused_inactive  #252525 #252525 #ccc #ccc   #000000
+client.unfocused          #252525 #252525 #ccc #ccc   #000000
+
+
 # fonts
-font pango:Droid Sans 10
+font pango:Droid Sans 11
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -218,12 +229,20 @@ bar {
         status_command i3blocks
         position top
         #separator_symbol " | "
-        font pango:Droid Sans 10
+        font pango:Droid Sans 11
     colors {
-        background #D0D9DA
-        focused_workspace  #D0D9DA #D0D9DA #000000
-        active_workspace   #D0D9DA #D0D9DA #999999
-        inactive_workspace #D0D9DA #D0D9DA #999999
+        #light
+        #background #D0D9DA
+        #focused_workspace  #D0D9DA #D0D9DA #000000
+        #active_workspace   #D0D9DA #D0D9DA #999999
+        #inactive_workspace #D0D9DA #D0D9DA #999999
+
+        #dark
+        background #252525
+        focused_workspace  #252525 #252525 #ffffff
+        active_workspace   #252525 #252525 #acacac
+        inactive_workspace #252525 #252525 #acacac
+
     }
 }
 
