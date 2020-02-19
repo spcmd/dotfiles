@@ -72,11 +72,11 @@ bindsym $mod+Shift+space floating toggle
 #set $ws10 "10:desk"
 
 set $ws1 "1:ターミナル"
-set $ws2 "2:インターネット"
+set $ws2 "2:ブラウザ "
 set $ws3 "3:ファイル"
 set $ws4 "4:電子メール"
 set $ws5 "5:トレント"
-set $ws6 "6:デスクトップ"
+set $ws6 "6: 仕事"
 set $ws7 "7:ニュース"
 set $ws8 "8:音楽"
 set $ws9 "9:デスクトップ"
