@@ -200,12 +200,12 @@ let g:easy_todo_done_checkmark_color_gui='#008700'
 " 4 : normal underscore
 " 5 : blinking vertical bar
 " 6 : normal vertical bar
-let &t_SI = "\033]12;12\x7"
-let &t_EI = "\033]12;15\x7"
+let &t_SI = "\033]12;orange\x7"
+let &t_EI = "\033]12;red\x7"
+silent !echo -ne "\033]12;red\007"
 let &t_SI .= "\033[6 q"
 let &t_EI .= "\033[2 q"
 autocmd VimEnter * silent !echo -ne "\033[2 q"
-silent !echo -ne "\033]12;15\007"
 "autocmd VimLeave * silent !echo -ne "\033]12;15\007"
 
 " }}}

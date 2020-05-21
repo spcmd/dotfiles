@@ -125,7 +125,7 @@ bindsym $mod+Mod1+k resize shrink height 3 px or 3 ppt
 bindsym $mod+Mod1+l resize grow width 3 px or 3 ppt
 
 # apps and controls
-bindsym $mod+Mod1+f exec "firefox"
+bindsym $mod+Mod1+f exec "chromium"
 #bindsym $mod+Mod1+f exec "~/bin/brave-privoxy.sh"
 bindsym $mod+Mod1+c exec "mate-calc"
 bindsym $mod+Mod1+m exec "urxvtc -name neomutt -e neomutt -F ~/.mutt/account.1.muttrc"; workspace $ws4

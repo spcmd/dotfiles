@@ -12,7 +12,7 @@ rsync-320GB_Rack() {
     RACK_BACKUP_DIR='/media/320GB_Rack/00Backup_spcmd/'
     if [[ -d $RACK_BACKUP_DIR ]]; then
         rsync -avr --delete $HOME/Documents/ $RACK_BACKUP_DIR/Documents/
-        rsync -avr --delete $HOME/Projects/ $RACK_BACKUP_DIR/Projects/
+        rsync --exclude='.git/' -avr --delete $HOME/Projects/ $RACK_BACKUP_DIR/Projects/
         rsync -avr --delete $HOME/Pictures/ $RACK_BACKUP_DIR/Pictures/
         rsync -avr --delete $HOME/Music/ $RACK_BACKUP_DIR/Music/
         rsync -avr --delete $HOME/.password-store/ $RACK_BACKUP_DIR/.password-store
@@ -40,9 +40,10 @@ rsync-320GB_Rack() {
 
 rsync-Pendrive-8GB() {
     PENDRIVE='/media/usbdrive8GB'
+    #PENDRIVE='/media/51D24E9627F2010D'
     if [[ -d $PENDRIVE ]]; then
         rsync -avr --delete $HOME/Documents/ $PENDRIVE/Documents
-        rsync -avr --delete $HOME/Projects/ $PENDRIVE/Projects
+        rsync --exclude='.git/' -avr --delete $HOME/Projects/ $PENDRIVE/Projects
         rsync -avr "$HOME/.wine/drive_c/Program Files (x86)/Clear Admin Szamlazo/DB" $PENDRIVE/ClearAdmin_BACKUP
         rsync -avr --delete $HOME/.password-store/ $PENDRIVE/.password-store
         rsync -avr --delete $HOME/.spotymenu/ $PENDRIVE/.spotymenu
